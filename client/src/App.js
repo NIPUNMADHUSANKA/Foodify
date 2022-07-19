@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Box } from '@mui/material';
+import Footer from './components/Footer';
 
 import './App.css';
 
@@ -19,9 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element = {<Landing/>} />
         </Routes>
-
+        <Footer/>
       </BrowserRouter>
-
     </Box>
   )
 }
