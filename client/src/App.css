@@ -20,6 +20,21 @@ body{
     height: 400px;
     margin-top: -330px;  
   }
+  .footer-image{
+    position: absolute;
+    top: 40px;
+    width: 200px;
+    height: 60px;
+  }
+
+  .social-media-image{
+    position: absolute;
+    top: 40px;
+    right:80px;
+    width: 180px;
+    height: 45px; 
+  }
+
 
   .food-card {
     transform: scale(1, 1);
