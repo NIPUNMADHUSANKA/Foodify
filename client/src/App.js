@@ -7,22 +7,24 @@ import Footer from './components/Footer';
 import './App.css';
 
 import Navbar from './components/Navbar';
-
+import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
 
 function App() {
   return (
     <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
        
-       <BrowserRouter>
+       
       
         <Navbar />
 
         <Routes>
+        
           <Route path="/" element = {<Landing/>} />
+          <Route path="/restaurant" element = {<Restaurant/>} />
         </Routes>
         <Footer/>
-      </BrowserRouter>
+      
     </Box>
   )
 }
