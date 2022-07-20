@@ -64,8 +64,8 @@ const btnstyle={margin:'8px 0'}
                             </Typography>
 
                             <Typography style={{ marginTop: 16, marginLeft:120 }} >
-                            <img src={Facebook} alt="Logo" />
-                            <img src={Google} alt="Logo" />
+                            <img src={Facebook} alt="Logo" className='social-icons-fb' />
+                            <img src={Google} alt="Logo" className='social-icons-gg' />
                             </Typography>
 
                         </Paper>
