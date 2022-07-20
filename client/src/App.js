@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import './App.css';
 
 import Navbar from './components/Navbar';
-
+import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
 
 function App() {
