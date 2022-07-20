@@ -10,9 +10,10 @@ body{
 .hero-banner-img {
     position: absolute;
     right: 0px;
-    top: 70%;
-    max-width: 60%;
+    top: 58%;
+    max-width: 55%;
     margin-top: -330px;  
+    z-index: -5;
   }
 
   .hero-aboutus-img{
