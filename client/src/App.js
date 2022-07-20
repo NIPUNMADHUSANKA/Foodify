@@ -14,8 +14,15 @@ import Landing from './pages/Landing';
 function App() {
   return (
     <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
+       
+       
+      
+        <Navbar />
+
         <Routes>
-          <Route path="/" element = {<Login/>} />
+        
+          <Route path="/" element = {<Landing/>} />
+          <Route path="/restaurant" element = {<Restaurant/>} />
         </Routes>
         <Footer/>
       
