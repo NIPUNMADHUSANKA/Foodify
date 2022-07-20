@@ -6,6 +6,9 @@ import Footer from './components/Footer';
 
 
 // import Navbar from './components/Navbar';
+import './App.css';
+
+import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
 
@@ -18,8 +21,10 @@ function App() {
         {/* <Navbar /> */}
 
         <Routes>
+        
           <Route path="/" element = {<Landing/>} />
           <Route path="/Home" element = {<Home/>} />
+          <Route path="/restaurant" element = {<Restaurant/>} />
         </Routes>
         <Footer/>
       
