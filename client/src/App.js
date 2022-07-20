@@ -4,12 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Box } from '@mui/material';
 import Footer from './components/Footer';
 
-import './App.css';
 
 // import Navbar from './components/Navbar';
-
 import Landing from './pages/Landing';
 import Home from './pages/Home';
+
+import './App.css';
 
 function App() {
   return (

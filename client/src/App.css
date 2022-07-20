@@ -1,7 +1,7 @@
 body{
     background-color: #3E3E3E;
+    font-family: 'Poppins', sans-serif !important;
 }
-
 .hero-banner-img {
     position: absolute;
     right: 0px;
