@@ -41,7 +41,7 @@ const LoginMain=()=>{const paperStyle={padding :40,height:'70vh',width:380, marg
                     }
                     label="Remember me"
                  />
-                <Button style={{ marginTop: 16 }} type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Button  type='submit' color='primary' variant="contained" style={{btnstyle,marginTop: 16}} fullWidth>Sign in</Button>
                 <Typography style={{ marginTop: 16 }} >
                      <Link href="#" >
                         Forgot password ?
