@@ -10,19 +10,22 @@ import Navbar from './components/Navbar';
 
 import Landing from './pages/Landing';
 
+import Signup from './pages/Register/Signup';
+
 function App() {
   return (
     <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
        
-       <BrowserRouter>
+       {/* <BrowserRouter> */}
       
         <Navbar />
 
         <Routes>
           <Route path="/" element = {<Landing/>} />
+          <Route path="/Signup" element = {<Signup/>} />
         </Routes>
         <Footer/>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </Box>
   )
 }
