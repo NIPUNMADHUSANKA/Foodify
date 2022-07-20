@@ -1,28 +1,27 @@
-
 import React from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Box } from '@mui/material';
 import Footer from './components/Footer';
 
-import './App.css';
+import './assets/css/Main_App.css';
 
 import Navbar from './components/Navbar';
 
 import Landing from './pages/Landing';
+import Restaurant from './pages/Restaurant';
 
 function App() {
   return (
     <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
        
-       <BrowserRouter>
-      
         <Navbar />
 
         <Routes>
           <Route path="/" element = {<Landing/>} />
+          <Route path="/Restaurant" element = {<Restaurant/>} />
         </Routes>
         <Footer/>
-      </BrowserRouter>
+      
     </Box>
   )
 }

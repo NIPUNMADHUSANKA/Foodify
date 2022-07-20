@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography, Button } from '@mui/material';
-import FOODIFY_BANNER from '../assets/foodify-banner.png';
+import FOODIFY_BANNER from '../assets/images/foodify-banner.png';
 
 function FoodufyBanner() {
   return (

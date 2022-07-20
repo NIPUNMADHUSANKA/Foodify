@@ -1,6 +1,6 @@
 import React from 'react'
 import {Stack, Typography, Button} from '@mui/material';
-import LatestIcon from '../assets/latest_food.png';
+import LatestIcon from '../assets/images/latest_food.png';
 
 
 function FoodCard() {

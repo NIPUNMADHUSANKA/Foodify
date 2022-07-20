@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material';
-import FOODIFY_ABOUTUS from '../assets/foodify-logo.png';
-import SOCIAL_ICONS from '../assets/Social media links.png'
+import FOODIFY_ABOUTUS from '../assets/icons/foodify-logo.png';
+import SOCIAL_ICONS from '../assets/images/Social media links.png'
 
 
 function ContactUs() {
