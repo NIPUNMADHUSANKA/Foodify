@@ -1,0 +1,83 @@
+body{
+    background-color: #3E3E3E;
+}
+
+.hero-banner-img {
+    position: absolute;
+    right: 0px;
+    top: 200px;
+    width: 850px;
+    height: 600px;
+    margin-top: -330px;  
+  }
+
+  .hero-aboutus-img{
+    position: absolute;
+    right: 0px;
+    left:-65px;
+    top: 180px;
+    width: 550px;
+    height: 400px;
+    margin-top: -330px;  
+  }
+  .footer-image{
+    position: absolute;
+    top: 40px;
+    width: 200px;
+    height: 60px;
+  }
+
+  .social-media-image{
+    position: absolute;
+    top: 40px;
+    right:80px;
+    width: 180px;
+    height: 45px; 
+  }
+
+
+  .food-card {
+    transform: scale(1, 1);
+    transition: 0.3s all ease-in-out;
+  }
+  
+  .food-card:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  .right-arrow,
+  .left-arrow {
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF2625;
+    font-size: 25px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -20px;
+    right: 80px;
+    transform: scale(1, 1);
+    transition: 0.3s all ease-in-out;
+  }
+  
+  .right-arrow {
+    right: 140px;
+  }
+  
+  .right-arrow:hover,
+  .left-arrow:hover {
+    transform: scale(1.3, 1.3);
+  }
+  
+  .react-horizontal-scrolling-menu--wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+
+  
