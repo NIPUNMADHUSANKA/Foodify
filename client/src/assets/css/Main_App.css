@@ -2,12 +2,17 @@
 
 body{
     background-color: #3E3E3E;
+    font-family: 'Poppins', sans-serif !important;
     padding: 0;
     margin: 0;
     font-family: 'Ubuntu', sans-serif;
 }
+<<<<<<< HEAD:client/src/assets/css/Main_App.css
 
   .hero-banner-img {
+=======
+.hero-banner-img {
+>>>>>>> main:client/src/App.css
     position: absolute;
     right: 0px;
     top: 58%;

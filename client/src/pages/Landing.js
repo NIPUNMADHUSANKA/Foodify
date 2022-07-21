@@ -5,6 +5,7 @@ import FoodBanner from '../components/FoodufyBanner';
 import HorizontalBar from '../components/HorizontalBar';
 import AboutUs from '../components/AboutUs2';
 import ContactUs from '../components/ContactUs';
+import Navbar from '../components/Navbar';
 
 import FOODIFY_ABOUTUS from '../assets/images/golden-cutlery.jpg';
 
@@ -17,12 +18,14 @@ const details = {
 function Landing() {
   return (
     <Box>
+        <Navbar />
         <FoodBanner />
         <HorizontalBar />
         <AboutUs AboutImage = {FOODIFY_ABOUTUS}  details = {details} />
         <ContactUs />
        
     </Box>
+
   )
 }
 
