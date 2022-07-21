@@ -5,9 +5,6 @@ import { useTheme } from '@emotion/react';
 
 import '../assets/css/App.css';
 
-
-
-
 // -------using props to put random images using props------------------------
 const RestaurantAbout = (props) => {
   return (

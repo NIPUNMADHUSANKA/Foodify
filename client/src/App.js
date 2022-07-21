@@ -8,6 +8,7 @@ import './assets/css/Main_App.css';
 import Navbar from './components/Navbar';
 import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
+import Complaints from './pages/Complaints';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         
           <Route path="/" element = {<Landing/>} />
           <Route path="/restaurant" element = {<Restaurant/>} />
+          <Route path="/Complaints" element = {<Complaints/>} />
 
         </Routes>
         <Footer/>
