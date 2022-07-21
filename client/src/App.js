@@ -10,7 +10,7 @@ import './App.css';
 
 import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
-import Home from './pages/Home';
+import Home from './pages/Explore';
 
 import './App.css';
 
