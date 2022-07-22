@@ -10,7 +10,9 @@ export const Colours = {
     dark: "#272727",
     darkgray: "#454545",
     yellow:'#FAC213',
-};
+    transparenceGrey:'#6B6B6B33',
+    
+}
 
 export const Fonts = {
     heading1: '30px',

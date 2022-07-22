@@ -17,7 +17,7 @@ import './App.css';
 
 function App() {
   return (
-    <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
+    <Box width="400px" sx={{width:'100%'}} m="0">
        
         {/* <Navbar /> */}
 
@@ -26,6 +26,9 @@ function App() {
           <Route path="/" element = {<Landing/>} />
           <Route path="/Home" element = {<Home/>} />
           <Route path="/restaurant" element = {<Restaurant/>} />
+          <Route path="/login" element = {<Login/>} />
+
+
         </Routes>
         <Footer/>
       

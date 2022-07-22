@@ -7,50 +7,57 @@ import Link from '@mui/material/Link';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import BigImage from '../../assets/images/login_big_image.png';
-import FourImage from '../../assets/images/login_four_images.png';
-import RoundImage from '../../assets/images/round.png';
 import Checkbox from '@mui/icons-material/CheckBoxOutlineBlank';
 import Skeleton from '@mui/material/Skeleton';
-import { positions } from '@mui/system';
 import { Box, Paper, Typography } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
+import '../../assets/css/Login.css';
+
 
 const LoginMain=()=>{
-const paperStyle={padding: "5%",height:'70vh',width:380 ,margin:"6% auto" ,backgroundColor:'rgba(107, 107, 107, 0.2)',backdropFilter: "blur(30px)",borderRadius:"33px" ,color:"#EFEAEA" }
-const avatarStyle={background:' #6B6B6B33'}
+        return(
 
-
-    return(
-
-        <Grid container spacing={0} >
-                <Grid container item xs={6} direction="column" >
+        
+                <Grid container item xs={6} direction="column"  >
                     <Box sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
                     <Skeleton variant="circular" width={140} height={140} />
                     </Box>
 
-                   
-                        <Paper elevation={10} style={paperStyle}
-                        sx={{
-                            [theme.breakpoints.down('sm')]: {
-                              width: '100px',
-                              height: '20px'
-                            }}}>
+                   {/* Form */}
+                                <Paper sx={{
+                                   padding: "5%",height:'70vh',width:380 ,
+                                   margin:"6% auto" ,
+                                   backgroundColor:Colours.transparenceGrey,
+                                   backdropFilter: "blur(30px)",
+                                   borderRadius:"33px" ,
+                                   color:Colours.grayWhite, 
+                                   [theme.breakpoints.down('sm')]: {
+                                    
+                                    marginLeft: '40px',
+                                    },
+                                        }}>
                                 <Grid align='center'>
-                                    <Avatar style={avatarStyle}></Avatar>
+                                    <Avatar sx={{background:"#6B6B6B33"}}></Avatar>
                                     <h2 style={{color:"##EFEAEA",fontSize:24}}>Sign In</h2>   
                                 </Grid>
 
                                 <TextField
-                                sx={{ input: { color: "#fff" }, "label": {color: "#fff"}, "& label.Mui-focused": {
+                                sx={{ input: 
+                                    { color: "#fff" }, 
+                                    "label": {color: "#fff"},
+                                     "& label.Mui-focused": {
                                     color:"#fff"
-                                  }}}
+                                    }
+                                 
+                                }}
                               
                                 label='Username' placeholder='Enter username' fullWidth required/>
 
                                 <TextField
-                                 sx={{ input: { color: "#fff" }, "label": {color: "#fff"}, "& label.Mui-focused": {
+                                 sx={{ input: { color: "#fff" },
+                                  "label": {color: "#fff"},
+                                  "& label.Mui-focused": {
                                     color:"#fff"
                                   }}}
                                 
@@ -74,7 +81,6 @@ const avatarStyle={background:' #6B6B6B33'}
                                 />
 
                                 <Typography>
-                                {/* <Button  type='submit' variant="contained" style={{marginTop: 16,  borderRadius: 10,              backgroundColor: "#95CD41",fontSize: "18px",color:"#1B1B1E",width:120,marginLeft:120}}  sx={{ml:{lg:'15px', xs:'40px', hover: Colours.yellow }}} fullWidth>Sign In</Button> */}
                                 <Button href='#'  variant="contained" sx={{
                                 background: Colours.green, '&:hover': {
                                     backgroundColor: Colours.yellow,
@@ -84,10 +90,6 @@ const avatarStyle={background:' #6B6B6B33'}
                                 marginLeft: '32%',
                                 marginTop:'7%',
                                 hover: Colours.green,
-                                [theme.breakpoints.down('sm')]: {
-                                    fontSize: '8px',
-                                    padding: '2px',
-                                },
                                 }}>
                                 Sign In
                                 </Button>
@@ -112,21 +114,7 @@ const avatarStyle={background:' #6B6B6B33'}
         
         </Grid>
 
-
-        <Grid container item xs={6} direction="column" padding="40" margin="20 auto" >
-                        <Skeleton variant="circular" width={140} height={140} style={{margin:"0%"}} />
-                        <Skeleton variant="circular" width={140} height={140} style={{margin:"20%"}} />
-                        <img src={RoundImage} sx={{
-                         [theme.breakpoints.down('sm')]: {
-                            width: '70',
-                            height: '30'
-                            },
-                        }} alt="big-image" className="round-image" />
-                        <img  src={BigImage} alt="big-image" className="big-image" />
-                        <img src={FourImage} alt="four-image" className="four-image" /> 
-
-        </Grid>
-    </Grid>
+       
      
         
        

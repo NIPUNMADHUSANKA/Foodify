@@ -4,11 +4,16 @@ import { Box } from '@mui/material';
 import LoginBanner from '../components/login/LoginBanner';
 import HorizontalBar from '../components/HorizontalBar';
 import LoginNavbar from '../components/login/LoginNavbar';
+import '../assets/css/Login.css';
+import theme, { Colours } from '../assets/theme/theme';
 
 
-function Landing() {
+
+
+function Login() {
   return (
-    <Box>
+    <Box className='Login-body-Style' 
+    >
         <LoginNavbar/>
         <LoginBanner />
       
@@ -16,4 +21,4 @@ function Landing() {
   )
 }
 
-export default Landing
+export default Login
