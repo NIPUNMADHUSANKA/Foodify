@@ -76,6 +76,8 @@ function ComplaintHistory() {
        value={value}
        onChange={handleChange}
        aria-label="Vertical tabs example"
+       
+       TabIndicatorProps={{style: {background:'#FAC213'}}}
        sx={{ borderRight: 1, borderColor: 'divider' }}
         >
         <Tab label="Complaint One" {...a11yProps(0)} />
