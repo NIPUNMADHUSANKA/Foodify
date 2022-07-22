@@ -11,6 +11,8 @@ export const Colours = {
     darkgray: "#454545",
     yellow:'#FAC213',
     transparenceGrey:'#6B6B6B33',
+    avatarWhite:'#6B6B6B33',
+    formWhite:'#EFEAEA',
     
 }
 
