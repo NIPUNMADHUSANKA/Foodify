@@ -3,21 +3,21 @@ import { Box } from '@mui/material';
 import Menubar from '../components/Menubar';
 import Explore from '../components/home/Explore.js';
 import FoodCard from '../components/home/FoodCard.js';
-import Carousel from '../components/Carousel.js';
+import Carousel from '../components/carousel/carousel';
 import '../assets/css/Home.css';
 // import '../assets/css/App.css';  
 
 
 const Home = () => {
     return (
-        <div>
-            <Box>
+        <Box className='body-Style' sx={{ margin:0}} >
+            <Box >
                 <Menubar/>
                 <Explore/>
-                    {/* <FoodCard/> */}
-                    <Carousel />
+                    {/* <FoodCard/>
+                    <Carousel /> */}
             </Box>
-        </div>
+        </Box>
     )
 }
 
