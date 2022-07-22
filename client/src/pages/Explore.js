@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Box } from '@mui/material';
 import Menubar from '../components/Menubar';
 import ExploreF from '../components/explore/Explore.js';
-import FoodCard from '../components/explore/FoodCard.js';
+// import FoodCard from '../components/explore/FoodCard.js';
 import FoodScroll from '../components/explore/FoodScroll';
 // import Carousel from '../components/Carousel.js';
 import '../assets/css/Home.css';
@@ -20,8 +20,7 @@ const Explore = () => {
         <Box className='body-Style' sx={{ margin:0}}>
             <Menubar/>
             <ExploreF/>
-            <FoodScroll />
-                
+            {/* <FoodScroll /> */}
         </Box>
         
     )

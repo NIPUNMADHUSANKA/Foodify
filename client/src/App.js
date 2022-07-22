@@ -9,17 +9,15 @@ import './assets/css/Main_App.css';
 import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
-import Explore from './pages/ExploreHome';
-import Navbar from './components/Navbar';
+import Explore from './pages/Explore';
+
 import IntakeChart from './pages/IntakeChart';
-import Home from './pages/Explore';
 
 
 function App() {
   return (
-    <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
+    <Box sx={{margin:"0"}}>
       
-        <Navbar />
         <Routes>
         
           <Route path="/" element = {<Landing/>} />

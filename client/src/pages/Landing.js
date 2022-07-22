@@ -18,6 +18,7 @@ const details = {
 function Landing() {
   return (
     <Box>
+        <Navbar />
         <FoodBanner />
         <HorizontalBar />
         <AboutUs AboutImage = {FOODIFY_ABOUTUS}  details = {details} />
