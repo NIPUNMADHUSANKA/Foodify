@@ -1,14 +1,15 @@
 import React from 'react'
 import { Box } from '@mui/material';
-import RegisterBannerUser from '../components/Register/RegisterBannerUser';
+import RegisterBanner1 from '../components/Register/RegisterBanner1';
 import RegisterNavbar from '../components/Register/RegisterNavbar';
 
 const Signup = () => {
   return (
     <Box>
         <RegisterNavbar />
-        <RegisterBannerUser />
-      
+
+        <RegisterBanner1 />
+
     </Box>
     
   )

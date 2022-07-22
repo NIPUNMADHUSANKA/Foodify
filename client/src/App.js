@@ -12,6 +12,8 @@ import Landing from './pages/Landing';
 
 import Signup from './pages/Signup';
 
+import Signupuser from './pages/Signupuser';
+
 function App() {
   return (
     <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
@@ -23,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element = {<Landing/>} />
           <Route path="/Signup" element = {<Signup/>} />
+          <Route path="/Signupuser" element = {<Signupuser/>} />
         </Routes>
         <Footer/>
       {/* </BrowserRouter> */}

@@ -78,24 +78,4 @@ body{
     display: flex;
     flex-wrap: wrap;
   }
-
-  .bigger-image {
-    position: absolute;
-    right: 0px;
-    top: 131px;
-    width: 600px;
-    height: 700px;
-
-  }
-
-  .social-icons-fb{
-    width: 40px;
-    height: 40px;
-  }
-
-  .social-icons-gg{
-    position: absolute;
-    width: 35px;
-    height: 35px;
-  }
   
