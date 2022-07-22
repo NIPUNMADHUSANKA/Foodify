@@ -47,14 +47,7 @@ function Complaints() {
             <ComplainAdd />
             <ComplaintHistory />
          </Box>
-
-         
-         
-
-    </Box>
-   
-    
-    
+    </Box> 
   )
 }
 

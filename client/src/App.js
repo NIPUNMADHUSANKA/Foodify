@@ -10,6 +10,7 @@ import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
 import Explore from './pages/ExploreHome';
 import Navbar from './components/Navbar';
+import IntakeChart from './pages/IntakeChart';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Explore" element = {<Explore/>} />
           <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/Complaints" element = {<Complaints/>} />
+          <Route path="/Intake" element = {<IntakeChart/>} />
 
         </Routes>
         <Footer/>

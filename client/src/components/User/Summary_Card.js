@@ -13,12 +13,12 @@ function Summary_Card(props) {
     <Box color="#fff" bgcolor="#171717" width="321px" height="127px" sx={{ borderRadius: '15px'  }}>
     <CardContent >
 
-      <Typography sx={{ fontSize:"120%"}} color="#fff" gutterBottom fontWeight="bold">
+      <Typography sx={{ fontSize:"100%", mt:"2%"}} color="#fff" gutterBottom fontWeight="light">
         {props.Title}
       </Typography>
 
       <Grid display="flex" flex-direction="row">
-        <Typography sx={{ mb: 1.5, fontSize:"150%" }} color="#fff" >
+        <Typography sx={{ mb: 1.5, fontSize:"150%" }} color="#fff" fontWeight="bold">
         {props.Count}
         </Typography>
         <Typography sx={{ mb: 1.5, ml:25 }} color="#fff"  
