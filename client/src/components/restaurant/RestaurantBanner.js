@@ -78,7 +78,7 @@ const RestaurantBanner = () => {
             </BannerTitle>
 
             <BannerTitle2>
-              Reviews
+              Rating
 
             </BannerTitle2>
             <Rating name="rating" value='4.5' precision={0.5} size="small" readOnly sx={{

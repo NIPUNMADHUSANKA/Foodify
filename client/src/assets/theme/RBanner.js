@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Hidden, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import theme, { Colours, Fonts } from "./theme";
 import zIndex from "@mui/material/styles/zIndex";
 
@@ -26,6 +26,7 @@ export const BannerContainer2 = styled(Box)(({theme}) => ({
     flexDirection:"row",
     width:'100%',
     padding:'0px 0px',
+    background:Colours.primary,
     // position:'absolute',
     // top:'150%',
     // background:Colours.primary,
