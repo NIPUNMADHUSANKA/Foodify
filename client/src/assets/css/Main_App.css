@@ -1,16 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
 body{
     background-color: #3E3E3E;
     font-family: 'Poppins', sans-serif !important;
     padding: 0;
     margin: 0;
+    font-family: 'Ubuntu', sans-serif;
 }
 .hero-banner-img {
     position: absolute;
     right: 0px;
-    top: 200px;
-    width: 850px;
-    height: 600px;
+    top: 58%;
+    max-width: 55%;
     margin-top: -330px;  
+    z-index: -5;
+  }
+
+  .footer-image{
+    position: absolute;
+    top: 25%;
+    width: 200px;
+    height: 60px;
+  }
+
+  .social-media-image{
+    position: absolute;
+    width: 180px;
+    height: 45px; 
   }
 
   .hero-aboutus-img{
@@ -21,20 +37,6 @@ body{
     width: 550px;
     height: 400px;
     margin-top: -330px;  
-  }
-  .footer-image{
-    position: absolute;
-    top: 40px;
-    width: 200px;
-    height: 60px;
-  }
-
-  .social-media-image{
-    position: absolute;
-    top: 40px;
-    right:80px;
-    width: 180px;
-    height: 45px; 
   }
 
 

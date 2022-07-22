@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material';
-import FOODIFY_ABOUTUS from '../assets/foodify_aboutus.png';
+import FOODIFY_ABOUTUS from '../assets/images/foodify_aboutus.png';
 
 
 function AboutUs() {

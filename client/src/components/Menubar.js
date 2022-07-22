@@ -16,7 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
-import Logo from '../assets/foodify-logo.png';
+import Logo from '../assets/icons/foodify-logo.png';
 
 
 const Search = styled('div')(({ theme }) => ({
