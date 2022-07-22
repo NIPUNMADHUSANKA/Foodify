@@ -17,7 +17,7 @@ const Explore = () => {
 
     return (
         
-        <Box>
+        <Box className='body-Style' sx={{ margin:0}}>
             <Menubar/>
             <ExploreF/>
             <FoodScroll />
