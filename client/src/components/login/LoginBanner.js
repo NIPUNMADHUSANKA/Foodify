@@ -34,12 +34,12 @@ const LoginMain=()=>{
                                    color:Colours.grayWhite, 
                                    [theme.breakpoints.down('sm')]: {
                                     
-                                    marginLeft: '40px',
+                                    marginLeft: '50px',
                                     },
                                         }}>
                                 <Grid align='center'>
-                                    <Avatar sx={{background:"#6B6B6B33"}}></Avatar>
-                                    <h2 style={{color:"##EFEAEA",fontSize:24}}>Sign In</h2>   
+                                    <Avatar sx={{background:Colours.avatarWhite}}></Avatar>
+                                    <h2 style={{color:Colours.formWhite,fontSize:24}}>Sign In</h2>   
                                 </Grid>
 
                                 <TextField
@@ -63,7 +63,7 @@ const LoginMain=()=>{
                                 
                                 style={{ marginTop: 16 }}label='Password' placeholder='Enter password' type='password' fullWidth required/>
 
-                                <Typography style={{ marginTop: 16,marginLeft:240,color:"#95CD41"}} >
+                                <Typography style={{ marginTop: 16,marginLeft:240,color:Colours.formWhite}} >
                                     <Link href="#"  >
                                         Forgot password ?
                                 </Link>
@@ -73,7 +73,7 @@ const LoginMain=()=>{
                                     control={
                                     <Checkbox
                                         name="checkedB"
-                                        color="#EFEAEA"
+                                        color="Colours.formWhite"
                                     />
                                     }
                                    
@@ -97,7 +97,7 @@ const LoginMain=()=>{
                                 </Typography>
                             
 
-                                <Typography style={{ marginTop: 16,color:'#EFEAEA' }}> Do you have an account ?
+                                <Typography style={{ marginTop: 16,color:'Colours.formWhite' }}> Do you have an account ?
                                     <Link href="#" >
                                         Sign Up 
                                 </Link>
