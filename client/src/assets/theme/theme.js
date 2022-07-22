@@ -12,7 +12,9 @@ export const Colours = {
     yellow:'#FAC213',
     transparenceGrey:'#6B6B6B33',
     avatarWhite:'#6B6B6B33',
-    formWhite:'#EFEAEA',
+    animationWhite:'#F9F9F933',
+    white:'#FFFFFF',
+    
     
 }
 
