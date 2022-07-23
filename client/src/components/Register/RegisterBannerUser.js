@@ -18,18 +18,7 @@ import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 import BiggerImage from '../../assets/images/register_big_image.png';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const theme1 = createTheme();
 
@@ -90,28 +79,12 @@ export default function SignUp() {
                 
                 }}    
                   autoComplete="given-name"
-                  name="firstName"
+                  name="username"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="username"
+                  label="username"
                   autoFocus
-                />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 3,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }}   
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
                 />
                 <TextField
                     sx={{ input: 
@@ -131,7 +104,7 @@ export default function SignUp() {
                 />
                 <TextField
                     sx={{ input: 
-                        { color: "#fff" }, marginTop: 3, marginBottom: 3,
+                        { color: "#fff" }, marginTop: 3,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
                         color:"#fff"
@@ -146,9 +119,26 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                <TextField
+                    sx={{ input: 
+                        { color: "#fff" }, marginTop: 3, marginBottom: 3,
+                        "label": {color: "#fff"},
+                        "& label.Mui-focused": {
+                        color:"#fff"
+                        }
+                    
+                    }} 
+                  required
+                  fullWidth
+                  name="password"
+                  label="Confirm Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="By Signing up you’re agree to our Terms & Conditions."
                 />
             <Button
               type="submit"
@@ -199,7 +189,6 @@ export default function SignUp() {
                       variant="circular" width={140} height={140}/>
        </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
         <Grid container item xs={6} direction="column" padding="40" margin="20 auto" >
                     <Skeleton variant="circular" width={140} height={140} style={{margin:"0%"}} />
                     <Skeleton variant="circular" width={140} height={140} style={{margin:"20%"}} />
