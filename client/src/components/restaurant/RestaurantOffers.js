@@ -12,9 +12,10 @@ import BackgroundImage from '../../assets/images/pv4WkDi.webp';
 
 const item1 = {
   "id": "1",
-  "title": "view",
+  "title": "",
   "image":CardImage1,
   "decription":"",
+  "name":"view"
 }
 
 const item2 = {

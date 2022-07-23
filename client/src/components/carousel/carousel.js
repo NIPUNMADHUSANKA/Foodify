@@ -87,7 +87,7 @@ const carousel = (props) => {
 
 
         {/* ---------------carousel area-------------------------- */}
-        <ScrollMenu wheel="true" transition='0.4' LeftArrow = {LeftArrow} RightArrow = {RightArrow} sx={{
+        <ScrollMenu wheel={true} alignCenter={true} transition={0.4} LeftArrow = {LeftArrow} RightArrow = {RightArrow} sx={{
           margin:1,
           padding:'1rem',
         }}>
@@ -98,8 +98,7 @@ const carousel = (props) => {
           <CarouselCard item={props.item} />
           <CarouselCard item={props.item} />
           <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
+          
           {/* </Box> */}
         </ScrollMenu>
         {/* ---------------end of carousel area-------------------------- */}
