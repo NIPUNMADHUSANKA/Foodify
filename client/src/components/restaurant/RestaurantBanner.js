@@ -26,7 +26,7 @@ const RestaurantBanner = () => {
         <BannerContent src={Cover}>
 
           <Box sx={{ marginTop: '20%' }}>
-            
+
             <Button href='#' endIcon={<ArrowIcon fontSize="medium" sx={{
               [theme.breakpoints.down('sm')]: {
                 fontSize: '8px',
