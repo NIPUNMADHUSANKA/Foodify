@@ -13,7 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 
 
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
+// import { FixedSizeList, ListChildComponentProps } from 'react-window';
 
 
 // -------using props to put random images using props------------------------

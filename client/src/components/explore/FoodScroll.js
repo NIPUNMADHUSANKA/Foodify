@@ -2,7 +2,7 @@ import React from 'react';
 import {ThemeProvider, Box, Typography} from '@mui/material';
 import Carousel from 'react-elastic-carousel';
 
-import FoodCard from './FoodCard'
+import FoodCard from './RestaurantCard'
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import { width } from '@mui/system';
 
@@ -13,8 +13,8 @@ const breakpoints = [
     {width:1200, itemsToShow: 4.5},
 ]
 
-function CardBar(details) {
-  
+function FoodScroll(details) {
+
   
     const X = [1,2,3,4,5,6,7,8,9,10,11,12,];
     console.log(X)
@@ -41,4 +41,4 @@ function CardBar(details) {
     )
   }
   
-  export default CardBar
+export default FoodScroll
