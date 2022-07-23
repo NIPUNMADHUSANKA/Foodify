@@ -26,6 +26,7 @@ export const BannerContainer2 = styled(Box)(({theme}) => ({
     flexDirection:"row",
     width:'100%',
     padding:'0px 0px',
+    background:Colours.primary,
     // position:'absolute',
     // top:'150%',
     // background:Colours.primary,
