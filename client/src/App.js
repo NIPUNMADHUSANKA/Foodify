@@ -8,6 +8,7 @@ import './assets/css/Main_App.css';
 
 import Restaurant from './pages/restuarant/Restaurant';
 import FoodCategory from './pages/restuarant/FoodCategory';
+import FoodRating from './pages/restuarant/FoodRating';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
@@ -28,10 +29,14 @@ function App() {
         
           <Route path="/" element = {<Landing/>} />
           <Route path="/Explore" element = {<Explore/>} />
-          <Route path="/restaurant" element = {<Restaurant/>} />
+          <Route path="/Restaurant" element = {<Restaurant/>} />
           <Route path="/Complaints" element = {<Complaints/>} />
           <Route path="/Intake" element = {<IntakeChart/>} />
           <Route path="/login" element = {<Login/>} />
+
+          <Route path="/Restaurant/category" element = {<FoodCategory/>} />
+          <Route path="/FoodRating" element = {<FoodRating/>} />
+
 
           <Route path="/Signup" element = {<Signup/>} />
           <Route path="/Signupuser" element = {<Signupuser/>} />
