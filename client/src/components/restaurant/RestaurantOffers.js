@@ -41,6 +41,7 @@ const item4 = {
 
 
 const title = "Offers";
+const itemcount = "3";
 
 const RestaurantOffers = () => {
   return (
@@ -49,7 +50,7 @@ const RestaurantOffers = () => {
       width:'100%',
       p:'0px',
     }}>
-      <Carousel item = {item1} title={title} bimage={BackgroundImage}/>
+      <Carousel item = {item1} title={title} bimage={BackgroundImage} count={itemcount}/>
     </Box>
   )
 }

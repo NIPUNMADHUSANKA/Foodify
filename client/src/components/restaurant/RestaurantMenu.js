@@ -14,6 +14,8 @@ const item = {
 
 const title = "Menu";
 
+const itemcount = "4";
+
 const RestaurantMenu = () => {
   return (
     <Box sx={{
@@ -21,7 +23,7 @@ const RestaurantMenu = () => {
       width:'100%',
       p:'0px',
     }}>
-      <Carousel item = {item} title={title}/>
+      <Carousel item = {item} title={title} count={itemcount}/>
     </Box>
   )
 }
