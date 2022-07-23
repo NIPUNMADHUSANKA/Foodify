@@ -8,7 +8,7 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 
 // ---------------css for carousel-------------------------
-import CarouselStyle from './Carousel.css';
+import CarouselStyle from '../../assets/css/Carousel.css';
 
 // const carousel = ({ data })
 // eslint-disable-next-line no-lone-blocks
