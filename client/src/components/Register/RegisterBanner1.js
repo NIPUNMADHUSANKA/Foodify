@@ -15,43 +15,26 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const tiers = [
   {
     title: 'Free',
     price: '0',
     description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
+      'Monthly Subscription free',
+      'Charge 2% from the orders',
     ],
-    buttonText: 'Sign up for free',
+    buttonText: 'Subscribe Now',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
+    title: 'Premium',
+    // subheader: 'Most popular',
+    price: '750',
     description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
+      'Monthly Subscription  Rs. 750',
+      'No percentage from the orders',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
   },
   // {
@@ -148,10 +131,10 @@ function PricingContent() {
           color="text.primary"
           gutterBottom
         >
-          Sign Up
+          Choose one package
         </Typography>
         <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Choose user role
+          {/* Choose user role */}
         </Typography>
       </Container>
       {/* End hero unit */}
@@ -192,7 +175,7 @@ function PricingContent() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="text.primary">
-                      ${tier.price}
+                      Rs.{tier.price}
                     </Typography>
                     <Typography variant="h6" color="text.secondary">
                       /mo
@@ -222,7 +205,7 @@ function PricingContent() {
         </Grid>
       </Container>
       {/* Footer */}
-      <Container
+      {/* <Container
         maxWidth="md"
         component="footer"
         sx={{
@@ -231,7 +214,7 @@ function PricingContent() {
           py: [3, 6],
         }}
       >
-        {/* <Grid container spacing={4} justifyContent="space-evenly">
+        <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Typography variant="h6" color="text.primary" gutterBottom>
@@ -249,8 +232,8 @@ function PricingContent() {
             </Grid>
           ))}
         </Grid>
-        <Copyright sx={{ mt: 5 }} /> */}
-      </Container>
+       
+      </Container> */}
       {/* End footer */}
     </React.Fragment>
   );
