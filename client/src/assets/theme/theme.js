@@ -31,7 +31,22 @@ export const Fonts = {
 
 const theme = createTheme({
     palette: {
-        // put the colors
+        primary:{
+            main: '#FFF'
+        },
+        secondary:{
+            main: '#FAC213'
+        }
+
+    },
+    
+    typography: {
+        fontFamily: [
+          'Poppins'
+        ],
+        button: {
+            textTransform: 'none'
+        }
     },
 
     // targeting components

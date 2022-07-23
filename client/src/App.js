@@ -10,8 +10,8 @@ import Restaurant from './pages/restuarant/Restaurant';
 import FoodCategory from './pages/restuarant/FoodCategory';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
-import Explore from './pages/ExploreHome';
-import Navbar from './components/Navbar';
+import Explore from './pages/Explore';
+
 import IntakeChart from './pages/IntakeChart';
 import Home from './pages/Explore';
 
@@ -22,10 +22,8 @@ import Signupuser from './pages/Signupuser';
 
 function App() {
   return (
-    <Box width="400px" sx={{width:'100%'}} m="0">
-       
-        {/* <Navbar /> */}
-
+    <Box sx={{margin:"0"}}>
+      
         <Routes>
         
           <Route path="/" element = {<Landing/>} />
@@ -34,6 +32,7 @@ function App() {
           <Route path="/Complaints" element = {<Complaints/>} />
           <Route path="/Intake" element = {<IntakeChart/>} />
           <Route path="/login" element = {<Login/>} />
+
           <Route path="/Signup" element = {<Signup/>} />
           <Route path="/Signupuser" element = {<Signupuser/>} />
           <Route path="/restaurant/category" element = {<FoodCategory/>} />
