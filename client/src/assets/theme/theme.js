@@ -28,7 +28,20 @@ export const Fonts = {
 const theme = createTheme({
     palette: {
         primary:{
-            main:'#95CD41'
+            main: '#FFF'
+        },
+        secondary:{
+            main: '#FAC213'
+        }
+
+    },
+    
+    typography: {
+        fontFamily: [
+          'Poppins'
+        ],
+        button: {
+            textTransform: 'none'
         }
     },
 
