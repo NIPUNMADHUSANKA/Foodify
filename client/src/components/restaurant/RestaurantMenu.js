@@ -6,9 +6,10 @@ import CardImage from '../../assets/images/cardfood.png';
 
 const item = {
   "id": "1",
-  "title": "Categorey",
+  "title": "",
   "image":CardImage,
   "decription":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. deleniti? Eumquasi quidem quibusdam.",
+  "name": "view",
 }
 
 const title = "Menu";
