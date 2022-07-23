@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Button, Hidden, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import theme, { Colours, Fonts } from "./theme";
 import zIndex from "@mui/material/styles/zIndex";
 
@@ -27,6 +27,9 @@ export const BannerContainer2 = styled(Box)(({theme}) => ({
     width:'100%',
     padding:'0px 0px',
     background:Colours.primary,
+    // position:'absolute',
+    // top:'150%',
+    // background:Colours.primary,
     // 
     // for the breakpoints
     //  
@@ -41,7 +44,7 @@ export const BannerContent = styled(Box)(({src,theme}) => ({
     flexDirection:"row",
     justifyContent:"center",
     maxWidth:'100%',
-    height:'500px',
+    height:'80vh',
     padding: '20px',
     backgroundImage:`url(${src})`,
     backgroundRepeat: 'no-repeat',

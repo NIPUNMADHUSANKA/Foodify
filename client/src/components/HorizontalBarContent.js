@@ -5,8 +5,8 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import FoodCard from './FoodCard';
 
 
-import RightArrowIcon from '../assets/right-arrow.png';
-import LeftArrowIcon from '../assets/left-arrow.png';
+import RightArrowIcon from '../assets/images/right-arrow.png';
+import LeftArrowIcon from '../assets/images/left-arrow.png';
 
 const LeftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);

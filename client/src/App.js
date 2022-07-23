@@ -1,14 +1,19 @@
-
 import React from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Box } from '@mui/material';
 import Footer from './components/Footer';
+import Login from './pages/Login';
 
-import './App.css';
+import './assets/css/Main_App.css';
 
-import Navbar from './components/Navbar';
-
+import Restaurant from './pages/Restaurant';
 import Landing from './pages/Landing';
+import Complaints from './pages/Complaints';
+import Explore from './pages/ExploreHome';
+import Navbar from './components/Navbar';
+import IntakeChart from './pages/IntakeChart';
+import Home from './pages/Explore';
+
 
 import Signup from './pages/Signup';
 
@@ -16,19 +21,24 @@ import Signupuser from './pages/Signupuser';
 
 function App() {
   return (
-    <Box width="400px" sx={{width:{xl:'1488px'}}} m="auto">
+    <Box width="400px" sx={{width:'100%'}} m="0">
        
-       {/* <BrowserRouter> */}
-      
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Routes>
+        
           <Route path="/" element = {<Landing/>} />
+          <Route path="/Explore" element = {<Explore/>} />
+          <Route path="/restaurant" element = {<Restaurant/>} />
+          <Route path="/Complaints" element = {<Complaints/>} />
+          <Route path="/Intake" element = {<IntakeChart/>} />
+          <Route path="/login" element = {<Login/>} />
           <Route path="/Signup" element = {<Signup/>} />
           <Route path="/Signupuser" element = {<Signupuser/>} />
+
         </Routes>
         <Footer/>
-      {/* </BrowserRouter> */}
+      
     </Box>
   )
 }

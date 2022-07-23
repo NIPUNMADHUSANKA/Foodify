@@ -9,7 +9,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 
 import Logo from '../../assets/images/restaurant-logo.jpg';
 import Cover from '../../assets/images/indian-food-served-on-table.jpg';
-import theme, { Colours } from '../../assets/theme/theme';
+import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerImage, BannerLogo, BannerTitle, BannerTitle2 } from '../../assets/theme/RBanner';
 import { useTheme } from '@emotion/react';
 
@@ -26,7 +26,12 @@ const RestaurantBanner = () => {
         <BannerContent src={Cover}>
 
           <Box sx={{ marginTop: '20%' }}>
-            <Button href='#' endIcon={<ArrowIcon fontSize="medium"/>} variant="contained" sx={{
+            
+            <Button href='#' endIcon={<ArrowIcon fontSize="medium" sx={{
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '8px',
+              },
+            }} />} variant="contained" sx={{
               margin: '6px',
               background: Colours.yellow, '&:hover': {
                 backgroundColor: Colours.green,
@@ -35,13 +40,17 @@ const RestaurantBanner = () => {
               fontSize: '20px',
               hover: Colours.green,
               [theme.breakpoints.down('sm')]: {
-                fontSize: '10px',
+                fontSize: '8px',
                 padding: '2px',
               },
             }}>
               Order
             </Button>
-            <Button href='#' endIcon={<RestaurantMenuIcon fontSize="medium"/>} variant="contained" sx={{
+            <Button href='#' endIcon={<RestaurantMenuIcon fontSize="medium" sx={{
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '8px',
+              },
+            }} />} variant="contained" sx={{
               margin: '6px',
               background: Colours.darkgray, '&:hover': {
                 backgroundColor: Colours.grayWhite, color: Colours.dark,
@@ -49,7 +58,7 @@ const RestaurantBanner = () => {
               color: Colours.grayWhite,
               fontSize: '20px',
               [theme.breakpoints.down('sm')]: {
-                fontSize: '10px',
+                fontSize: '8px',
                 padding: '2px',
               },
             }}>
@@ -69,10 +78,14 @@ const RestaurantBanner = () => {
             </BannerTitle>
 
             <BannerTitle2>
-              Reviews
+              Rating
 
             </BannerTitle2>
-            <Rating name="rating" value='4.5' precision={0.5} size="small" readOnly />
+            <Rating name="rating" value='4.5' precision={0.5} size="small" readOnly sx={{
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '8px',
+              },
+            }} />
 
           </BannerContent2>
 

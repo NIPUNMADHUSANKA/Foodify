@@ -1,10 +1,30 @@
-import React from 'react'
+import { Box } from '@mui/material';
+import React from 'react';
+import Carousel from '../carousel/carousel';
+
+import CardImage from '../../assets/images/cardfood.png';
+
+const item = {
+  "id": "1",
+  "title": "",
+  "image":CardImage,
+  "decription":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. deleniti? Eumquasi quidem quibusdam.",
+  "name": "view",
+}
+
+const title = "Menu";
+
+const itemcount = "4";
 
 const RestaurantMenu = () => {
   return (
-    <div>
-      RestaurantMenu
-    </div>
+    <Box sx={{
+      position:'relative',
+      width:'100%',
+      p:'0px',
+    }}>
+      <Carousel item = {item} title={title} count={itemcount}/>
+    </Box>
   )
 }
 
