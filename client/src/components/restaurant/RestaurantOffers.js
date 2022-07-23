@@ -12,9 +12,10 @@ import BackgroundImage from '../../assets/images/pv4WkDi.webp';
 
 const item1 = {
   "id": "1",
-  "title": "view",
+  "title": "",
   "image":CardImage1,
   "decription":"",
+  "name":"view"
 }
 
 const item2 = {
@@ -40,6 +41,7 @@ const item4 = {
 
 
 const title = "Offers";
+const itemcount = "3";
 
 const RestaurantOffers = () => {
   return (
@@ -48,7 +50,7 @@ const RestaurantOffers = () => {
       width:'100%',
       p:'0px',
     }}>
-      <Carousel item = {item1} title={title} bimage={BackgroundImage}/>
+      <Carousel item = {item1} title={title} bimage={BackgroundImage} count={itemcount}/>
     </Box>
   )
 }

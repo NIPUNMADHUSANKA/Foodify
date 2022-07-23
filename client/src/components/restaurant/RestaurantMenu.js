@@ -3,15 +3,21 @@ import React from 'react';
 import Carousel from '../carousel/carousel';
 
 import CardImage from '../../assets/images/cardfood.png';
+import theme from '../../assets/theme/theme';
 
+// ----------------------for the caousel----------------------
 const item = {
   "id": "1",
-  "title": "Categorey",
+  "title": "",
   "image":CardImage,
   "decription":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. deleniti? Eumquasi quidem quibusdam.",
+  "name": "view",
 }
 
 const title = "Menu";
+const itemcount = "4";
+const bgcolor1 = "theme.Colours.secondary";
+// ------------------------------------------------------------------------------
 
 const RestaurantMenu = () => {
   return (
@@ -20,7 +26,7 @@ const RestaurantMenu = () => {
       width:'100%',
       p:'0px',
     }}>
-      <Carousel item = {item} title={title}/>
+      <Carousel item = {item} title={title} count={itemcount} bgcolour = {bgcolor1}/>
     </Box>
   )
 }

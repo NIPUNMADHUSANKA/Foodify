@@ -10,12 +10,16 @@ export const Colours = {
     dark: "#272727",
     darkgray: "#454545",
     yellow:'#FAC213',
+    darkgray2:'#A8A8A8',
+    gray1:'rgba(249, 249, 249, 0.2)',
+    gray2:'rgba(168, 168, 168, 0.2)',
+
     white: '#FFF',
     transparenceGrey:'#6B6B6B33',
     avatarWhite:'#6B6B6B33',
     formWhite:'#EFEAEA',
     
-}
+};
 
 export const Fonts = {
     heading1: '30px',

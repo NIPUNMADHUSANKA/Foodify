@@ -6,13 +6,19 @@ import Login from './pages/Login';
 
 import './assets/css/Main_App.css';
 
-import Restaurant from './pages/Restaurant';
+import Restaurant from './pages/restuarant/Restaurant';
+import FoodCategory from './pages/restuarant/FoodCategory';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
 
 import IntakeChart from './pages/IntakeChart';
+import Home from './pages/Explore';
 
+
+import Signup from './pages/Signup';
+
+import Signupuser from './pages/Signupuser';
 
 function App() {
   return (
@@ -27,6 +33,9 @@ function App() {
           <Route path="/Intake" element = {<IntakeChart/>} />
           <Route path="/login" element = {<Login/>} />
 
+          <Route path="/Signup" element = {<Signup/>} />
+          <Route path="/Signupuser" element = {<Signupuser/>} />
+          <Route path="/restaurant/category" element = {<FoodCategory/>} />
 
         </Routes>
         <Footer/>

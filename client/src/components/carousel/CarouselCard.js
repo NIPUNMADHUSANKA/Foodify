@@ -10,6 +10,7 @@ const CarouselCard = (props) => {
             width: '15rem',
             margin:1,
             background: Colours.grayWhite,
+            borderRadius:'1rem',
             transition: 'transform .2s', '&:hover': {
                 transform: 'scale(1.04)',
               },
@@ -37,7 +38,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {/* titel, if any */}
+                        {props.item.title}
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -73,7 +74,7 @@ const CarouselCard = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.title}
+                    {props.item.name}
                 </Button>
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}

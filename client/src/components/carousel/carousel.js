@@ -1,15 +1,14 @@
 // horizantal scrollbar
 
 import React, { useContext } from 'react'
-import { Box, IconButton, Typography } from '@mui/material';
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { Box, Typography } from '@mui/material';
 
 import CarouselCard from './CarouselCard';
 import theme, { Colours } from '../../assets/theme/theme';
+import Carousel from 'react-elastic-carousel'; //for the carousel
 
-// ---for arrow icons---
-import LeftArrow1 from '@mui/icons-material/NavigateBefore';
-import RightArrow1 from '@mui/icons-material/NavigateNext';
+// ---------------css for carousel-------------------------
+import CarouselStyle from '../../assets/css/Carousel.css';
 
 // const carousel = ({ data })
 // eslint-disable-next-line no-lone-blocks
@@ -24,47 +23,22 @@ import RightArrow1 from '@mui/icons-material/NavigateNext';
       )
       )}
     </div> */}
+    
 
 // -----------------arrows for the carousel------------
 
-// ----------left arrow--------
-const LeftArrow = () => {
-  const { scrollPrev } = useContext(VisibilityContext);
-
-  return (
-    <IconButton aria-label="left" sx={{ color:Colours.green}}
-      onClick={() => scrollPrev()}
-    >
-      <LeftArrow1 />
-    </IconButton>
-  );
-}
-
-// ----------Right arrow--------
-const RightArrow = () => {
-  const { scrollNext } = useContext(VisibilityContext);
-
-  return (
-    <IconButton aria-label="right"
-      onClick={() => scrollNext()} sx={{ color:Colours.green,}}
-    >
-      <RightArrow1 />
-    </IconButton>
-  );
-}
-
-
 const carousel = (props) => {
+
   return (
-    <div sx={{padding:0,}}>
+    <div sx={{ padding: 0, }}>
       {/*------------------------- carousel area--------------------- */}
       <Box sx={{
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        marginTop:'2%',
-        padding:0,
-        background:Colours.secondary,
+        marginTop: '2%',
+        padding: 0,
+        background: Colours.secondary,
         backgroundImage: `url(${props.bimage})`,
       }}>
         {/* ---------title area------------ */}
@@ -87,25 +61,35 @@ const carousel = (props) => {
 
 
         {/* ---------------carousel area-------------------------- */}
-        <ScrollMenu wheel="true" transition='0.4' LeftArrow = {LeftArrow} RightArrow = {RightArrow} sx={{
-          margin:1,
-          padding:'1rem',
-        }}>
-          {/* <Box> */}
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          <CarouselCard item={props.item} />
-          {/* </Box> */}
-        </ScrollMenu>
-        {/* ---------------end of carousel area-------------------------- */}
+        
+        <Carousel 
+        className= {CarouselStyle}
+        itemsToShow={props.count} 
+        easing={"ease"}
+        breakPoints={theme.breakPoints = [
+          { width: 1, itemsToShow: 1 },
+          { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+          { width: 1150, itemsToShow: props.count, itemsToScroll: 2 },
+          { width: 1450, itemsToShow: 5 },
+          { width: 1750, itemsToShow: 6 },
+        ]}
 
-      </Box>
-    </div>
+        >
+        {/* <Box> */}
+        <CarouselCard item={props.item} />
+        <CarouselCard item={props.item} />
+        <CarouselCard item={props.item} />
+        <CarouselCard item={props.item} />
+        <CarouselCard item={props.item} />
+        <CarouselCard item={props.item} />
+
+      </Carousel>
+      {/* </Box> */}
+
+      {/* ---------------end of carousel area-------------------------- */}
+
+    </Box>
+    </div >
   )
 }
 
