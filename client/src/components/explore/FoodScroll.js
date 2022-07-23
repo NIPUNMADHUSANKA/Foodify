@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import Box from '@mui/material/Box';
+import {Box, Typography} from '@mui/material';
 import Carousel from 'react-elastic-carousel';
 
-import Summary_Card from '../User/Summary_Card'
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import { width } from '@mui/system';
+
+// import FoodCard from '../FoodCard';
+import FoodCard1 from '../FoodCard';
+import FoodCard2 from './FoodCard';
+
+//toggle for food and restaurant
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 const breakpoints = [
   {width:1, itemsToShow: 1},
@@ -15,24 +22,61 @@ const breakpoints = [
 
 
 function CardBar(details) {
-  
-  
-  const X = details.details;
-  console.log(X)
-  return (
+    
+    const X = [1,2,3,4,5];
+    const [view, setView] = React.useState('Food');
+    const [FoodCard, setCard] = React.useState('FoodCard1');
 
-      <div>
+    const handleCards = (event, value) => {
+        if (value){
+            if (value == 'Food'){
+                setCard(FoodCard1)
+            } else {
+                // console.log(value)
+                setCard(FoodCard2)
+            }
+        }
+        setView(value);
+    };
+
+    // console.log(X)
+  return (
+      <Box className='foodScroll'>
+        <ToggleButtonGroup
+            value={view}
+            //colors not working properly
+            // color= {Colours.primary.main}
+            color="primary"
+            exclusive
+            onChange={handleCards}
+            sx={{
+                mb:{lg:'3%', xs:'2%'},
+                ml:{sm:'2.5%'},
+            }}
+        >
+            <ToggleButton value = 'Food' >
+                <Typography color="#EFEAEA" fontWeight="200" fontSize="20px" fontFamily='Poppins' >
+                    Food
+                </Typography>
+            </ToggleButton>
+            <ToggleButton value = 'Restaurant'>
+                <Typography color="#EFEAEA" fontWeight="200" fontSize="20px" fontFamily='Poppins' >
+                    Restaurant
+                </Typography>
+            </ToggleButton>
+        </ToggleButtonGroup>
+
         <Carousel breakPoints={breakpoints} pagination={false} disableArrowsOnEnd={true} >
           
         {Array.isArray(X)
          ? 
          X.map(Y=>
-              (<Summary_Card Title={Y[0]} Count={Y[1]} icon={Y[2]}/> ))
+              (<FoodCard/> ))
          : null   
         }
         
         </Carousel>
-      </div>
+      </Box>
 
   )
 }

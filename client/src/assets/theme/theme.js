@@ -27,7 +27,9 @@ export const Fonts = {
 
 const theme = createTheme({
     palette: {
-        // put the colors
+        primary:{
+            main:'#95CD41'
+        }
     },
 
     // targeting components

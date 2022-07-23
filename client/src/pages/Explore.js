@@ -17,10 +17,10 @@ const Explore = () => {
 
     return (
         
-        <Box className='body-Style' sx={{ margin:0}}>
+        <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
             <Menubar/>
             <ExploreF/>
-            {/* <FoodScroll /> */}
+            <FoodScroll />
         </Box>
         
     )

@@ -23,18 +23,27 @@ const ToggleB = styled('div')(({ theme }) => ({
     },
   }));
 
+const Color = "#fff";
+
+function handleLocation(){
+  if (Color == "#fff"){
+    Color='#95CD41'
+  }else{
+    Color='#fff'
+  }
+}
 
 function Explore() {
-    const [selected, setSelected] = React.useState(false);
     return (
       <Box 
         sx={{
-            mt:{lg:'5%', xs:'3%'},
+            mt:{lg:'4%', xs:'3%'},
+            mb:{lg:'1.5%', xs:'2%'},
             ml:{sm:'3%'},
             position: 'relative',
             display: 'flex',
             flexDirection: 'row',
-            alignItems: 'flex-end'
+            alignItems: 'baseline'
             }}>
         
         <Typography color="#EFEAEA" fontWeight="200" fontSize="70px" fontFamily='Poppins' paddingRight="30px">
@@ -43,18 +52,19 @@ function Explore() {
 
         <ToggleB>
           <ToggleButton
-            value="check"
-            selected={selected}
+            value="#95CD41"
+            Color={Color}
             onChange={() => {
-                setSelected(!selected);
+                handleLocation()
             }}
             sx={{padding: '7px 10px 7px 14px' }}>
             
             <Typography color="#EFEAEA" fontWeight="300" fontSize="21px" fontFamily='Poppins'>
                 Near Me
             </Typography>
-            <Brightness1Icon style={{ color:'#95CD41', paddingLeft:'6px'}}/> 
-     
+            
+            <Brightness1Icon style={{ color:Color, paddingLeft:'6px'}}/> 
+          
           </ToggleButton>
         </ToggleB>  
 
