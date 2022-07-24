@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 
 
 // -------using props to put random images using props------------------------
-const RestaurantCemments = (props) => {
+const FoodComment = (props) => {
   return (
 
     // About us main box-----------------------------------------------
@@ -18,20 +18,25 @@ const RestaurantCemments = (props) => {
 
     <ThemeProvider theme={theme}>
 
-      <Box maxWidth='100%' sx={{
+      <Box maxWidth='68%' sx={{
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
+        width: '68%',
         background: Colours.gray2,
-        marginTop: '1rem',
         padding: '0rem',
         hieght: '5vh',
+        margin:"auto",
+        marginRight:"22%",
+        marginTop: '1rem',
+        borderRadius:"1rem",
         [theme.breakpoints.down('sm')]: {
           fontSize: '10px',
           padding: '2px',
           flexDirection: 'column',
           justifyContent: 'center',
           justifyItems: 'center',
+          margin:"auto",
+          marginTop: '1rem',
         }
       }}>
         {/* -------------------topic-------------------------------------------- */}
@@ -85,4 +90,4 @@ const RestaurantCemments = (props) => {
   )
 }
 
-export default RestaurantCemments
+export default FoodComment
