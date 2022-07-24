@@ -6,7 +6,10 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 import Navbar from '../components/Navbar';
 import PageTitle from '../components/User/PageTitle';
 
-//import UploadImages from "../components/UploadImage/upload-images.component";
+import ImageUpload from '../components/UploadImage/ImageUpload'
+import Details from '../components/UploadImage/Details';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+
 
 //import "../assets/css/ImageUpload.css" 
 
@@ -23,9 +26,17 @@ function Image_Upload() {
         
         <Navbar />
         <PageTitle MainHeader = {MainHeader}/>
-        
 
-    
+        <Box textAlign="right" marginRight="10%" style={{color:'#ccc', fontSize:"150%", marginBottom:"1%"}}>
+            <AddCircleIcon />
+            Add New Food
+        </Box>
+        
+        <Box display="flex" flexdirection = "row" marginLeft="5%">
+          <ImageUpload />
+          <Details />
+        </Box>
+        
     </Box>
   )
 }

@@ -81,16 +81,14 @@ function Nutrition_Card() {
                 </Box>
             </Box>
 
-            <Box
-      sx={{ width: '100%', height: 300, maxWidth: 360}}
-    >
+            <Box>
             <FixedSizeList
-        height={420}
-        width="160%"
-        itemSize={95}
-        itemCount={6}   
+              height={420}
+              width="200%"
+              itemSize={95}
+              itemCount={6}   
         
-        style={{borderRadius : "60px"}}
+        style={{borderRadius : "40px"}}
       >
                  
                  {renderRow}

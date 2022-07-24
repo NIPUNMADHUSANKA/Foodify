@@ -19,33 +19,33 @@ import Typography from '@mui/material/Typography';
 
 
 function renderRow(props) {
-    const { index, style } = props;
-  
-    return (
-        
-      <ListItem component="div"  sx={{backgroundColor:"#111", opacity:"10"}} >
-        <ListItemButton sx={{borderBottom:"1px solid #222"}}>
-            <ListItemAvatar>
-                <Avatar>
-                    <FastfoodIcon />
-                </Avatar>
-            </ListItemAvatar>
-            
-            <ListItemText primary={
-                <Typography variant="h6" style={{ color: "white" }}>
-                250g
-                </Typography>
-                }
-            secondary={
-                <Typography style={{ color: "#EFEAEA", fontWeight:"lighter" }}>Cholesterol</Typography>
-            }
-            color="#fff"/>
+  const { index, style } = props;
 
-        </ListItemButton>
-       
-      </ListItem>      
-    );
-  }
+  return (
+      
+    <ListItem component="div"  sx={{backgroundColor:"#111", opacity:"10"}} >
+      <ListItemButton sx={{borderBottom:"1px solid #222"}}>
+          <ListItemAvatar>
+              <Avatar>
+                  <FastfoodIcon />
+              </Avatar>
+          </ListItemAvatar>
+          
+          <ListItemText primary={
+              <Typography variant="h6" style={{ color: "white" }}>
+              250g
+              </Typography>
+              }
+          secondary={
+              <Typography style={{ color: "#EFEAEA", fontWeight:"lighter" }}>Cholesterol</Typography>
+          }
+          color="#fff"/>
+
+      </ListItemButton>
+     
+    </ListItem>      
+  );
+}
 
 
 function Nutrition_Card() {
@@ -84,17 +84,14 @@ function Nutrition_Card() {
                 </Box>
             </Box>
 
-            <Box
-      sx={{ width: '100%', height: 300, maxWidth: 360 }}
-      
-    >
+            <Box>
             <FixedSizeList
-        height={420}
-        width="160%"
-        itemSize={95}
-        itemCount={6}  
-        style={{borderRadius : "60px"}}  
-      >
+              height={420}
+              width="250%"
+              itemSize={95}
+              itemCount={6}  
+              style={{borderRadius : "40px"}}  
+             >
                  
                  {renderRow}
                    
