@@ -3,14 +3,17 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 
 import Background from '../../assets/images/pv4WkDi.webp';
-import FoodRatingForm from '../../components/restaurant/FoodRatingForm';
+import RestaurantRatingForm from '../../components/restaurant/RestaurantRatingForm';
 
 // when calling data, nned to take from there
-import FoodImage from '../../assets/images/foodimage.jpg'
+import RImage from '../../assets/images/restaurant-logo.jpg';
 import { Avatar } from '@mui/material';
 
-const FoodRating = () => {
+const RestaurantRating = () => {
     return (
+        
+        // ------main box----------------
+
         <Box sx={{
             margin: 0,
             padding: 0,
@@ -35,7 +38,7 @@ const FoodRating = () => {
             }}>
 
                 {/* --------------beginin of the form area---------------- */}
-                <FoodRatingForm />
+                <RestaurantRatingForm />
             </Box>
             {/* -----------------------end of form area----------------------- */}
 
@@ -71,7 +74,7 @@ const FoodRating = () => {
 
                     <Avatar
                         alt="food image"
-                        src={FoodImage}
+                        src={RImage}
                         sx={{
                             width: "100%",
                             height: "100%",
@@ -89,4 +92,4 @@ const FoodRating = () => {
     )
 }
 
-export default FoodRating
+export default RestaurantRating
