@@ -13,7 +13,7 @@ import theme, { Colours } from '../../assets/theme/theme';
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }} >
-      <AppBar position="static" sx={{ bgcolor: "#272727" }} >
+      <AppBar position="static" sx={{ bgcolor: Colours.dark}} >
         <Toolbar >
         <Box
             component="img"

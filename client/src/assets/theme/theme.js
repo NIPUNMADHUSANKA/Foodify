@@ -15,6 +15,9 @@ export const Colours = {
     avatarWhite:'#6B6B6B33',
     animationWhite:'#F9F9F933',
     white:'#FFFFFF',
+    formWhite:'#fff',
+    cardBlack:"#171717",
+
     
     
 }

@@ -82,10 +82,10 @@ export default function SignIn() {
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
                 sx={{ input: 
-                  { color: "#fff" }, 
-                  "label": {color: "#fff"},
+                  { color: Colours.formWhite }, 
+                  "label": {color: Colours.formWhite},
                   "& label.Mui-focused": {
-                  color:"#fff"
+                  color:Colours.formWhite
                   }
               
               }}
@@ -101,10 +101,10 @@ export default function SignIn() {
             />
             <TextField
                sx={{ input: 
-                { color: "#fff" }, 
-                "label": {color: "#fff"},
+                { color: Colours.formWhite }, 
+                "label": {color: Colours.formWhite},
                 "& label.Mui-focused": {
-                color:"#fff"
+                color:Colours.formWhite
                 }
             
             }}
