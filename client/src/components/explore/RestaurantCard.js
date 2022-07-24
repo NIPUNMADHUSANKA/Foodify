@@ -3,7 +3,7 @@ import image from '../../assets/images/foodimages/indian-food-served-on-table.jp
 import React from 'react'
 import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
-import { Box } from '@mui/system';
+import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // import LatestIcon from '../assets/images/latest_food.png';
@@ -32,55 +32,42 @@ function FoodCard() {
           color:Colours.white, 
           borderRadius: '10px', 
           maxWidth: '260px', 
-          height: '320px', 
+          height: '300px', 
           cursor: 'pointer', 
           display:"Flex",
           justifyContent: "space-between",
           paddingBottom: '5%',
            }}
     >
-        <StyledBadge color="secondary" badgeContent={4.9}>
+        <StyledBadge color="secondary" badgeContent={"99+"}>
           <img src={image} alt="food" style={{width:'252px', height:'150px',border: "5px solid #fff"}}/>
         </StyledBadge>
-        <Typography fontSize="24px" fontWeight="400" mt="-45px">Mini Veg Salad</Typography>
-        <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px">
-                 Rs.1000.00
+        <Typography fontSize="24px" fontWeight="400" mt="-15px">Ministry of Crab</Typography>
+        
+
+        <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
+          Old Dutch Hospital, Fort
         </Typography>
 
-        <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="200">
-                 Restaurant Name
+        <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
+          Colombo  
         </Typography>
 
-        <Box
-          sx={{
-            display: 'flex',
-            columnGap:"10px"
-        }}>
-          <Button variant='contained' 
-          style={{
-            borderRadius: 10,
-            backgroundColor: "#95CD41",
-            fontSize: "15px",
-            color:"#272727",
-            width:"120",
-          }}
-          >
-          Order Now
-          </Button>
-          <Button variant='contained' 
+       
+          
+          <IconButton variant='contained' 
           style={{
               borderRadius: 10,
-              backgroundColor: "#95CD41",
+              backgroundColor: "#FAC213",
               fontSize: "15px",
               color:"#272727",
-              width:"120",
-              padding:"0px 15px"
+              padding:"10px 10px",
+              marginLeft: "75%"
           }}
           >
-          View 
-          <ArrowForwardIosIcon fontSize='8px' sx={{marginLeft:"2px"}}/>
-          </Button>
-        </Box>
+            <ArrowForwardIosIcon fontSize='8px'/>
+          </IconButton>
+        
 
     </Stack>
     </ThemeProvider>

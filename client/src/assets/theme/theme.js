@@ -53,7 +53,9 @@ const theme = createTheme({
 
     // targeting components
     Components: {
-
+        tab: {
+            textColor: '#FFF',
+        }
     }
 
 });

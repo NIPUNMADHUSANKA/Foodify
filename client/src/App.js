@@ -15,6 +15,7 @@ import OrderFood from './pages/restuarant/OrderFood';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
+import DashboardA from './pages/Dashboard-admin';
 
 import IntakeChart from './pages/IntakeChart';
 import Home from './pages/Explore';
@@ -32,7 +33,9 @@ function App() {
         
           <Route path="/" element = {<Landing/>} />
           <Route path="/Explore" element = {<Explore/>} />
-          <Route path="/Restaurant" element = {<Restaurant/>} />
+          <Route path="/Dashboard" element = {<DashboardA/>} />
+
+          <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/Complaints" element = {<Complaints/>} />
           <Route path="/Intake" element = {<IntakeChart/>} />
           <Route path="/login" element = {<Login/>} />

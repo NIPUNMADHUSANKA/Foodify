@@ -13,8 +13,8 @@ const breakpoints = [
     {width:1200, itemsToShow: 4.5},
 ]
 
-function CardBar(details) {
-  
+function FoodScroll(details) {
+
   
     const X = [1,2,3,4,5,6,7,8,9,10,11,12,];
     console.log(X)
@@ -41,4 +41,4 @@ function CardBar(details) {
     )
   }
   
-  export default CardBar
+export default FoodScroll
