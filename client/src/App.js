@@ -13,7 +13,9 @@ import Explore from './pages/ExploreHome';
 import Navbar from './components/Navbar';
 import IntakeChart from './pages/IntakeChart';
 import Home from './pages/Explore';
-
+import AddFoodMenu from './pages/AddFoodMenu';
+import Image_Upload from './pages/Image_Upload';
+import Nutrition_Summary from './pages/Nutrition_Summary';
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
           <Route path="/Complaints" element = {<Complaints/>} />
           <Route path="/Intake" element = {<IntakeChart/>} />
           <Route path="/login" element = {<Login/>} />
+          <Route path="/AddFoodMenu" element = {<AddFoodMenu/>} />
+          <Route path="/Image_Upload" element = {<Image_Upload/>} />
+          <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
+          
 
 
         </Routes>
