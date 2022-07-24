@@ -8,48 +8,72 @@ import {
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
+import { Box, Typography } from '@mui/material';
 
-const data = [
-  { year: '1950', population: 2.525 },
-  { year: '1960', population: 3.018 },
-  { year: '1970', population: 3.682 },
-  { year: '1980', population: 4.440 },
-  { year: '1990', population: 5.310 },
-  { year: '2000', population: 6.127 },
-  { year: '2010', population: 6.930 },
-];
 
 export default class SummaryChart extends React.PureComponent {
+
   constructor(props) {
     super(props);
 
+    const data = this.props.chartData;
+    const Head = this.props.Head;
+
     this.state = {
       data,
+      Head
     };
   }
 
   render() {
     const { data: chartData } = this.state;
-
-    console.log(data)
-    console.log(chartData)
+    const { Head: chartHead } = this.state;
 
     return (
-      <Paper>
+
+    <Paper sx={{backgroundColor: "#171717"}} >
+
+      <Box sx={{ml:"5%"}} pt={3} >
+
+            <Typography variant="h5" component="h2" textAlign="center" color="#fff">
+              {chartHead}
+            </Typography>
+
+            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px"}} onChange={this.changeData}>
+              <option>Weekly</option>
+              <option>Daily</option>
+              <option>Monthly</option>
+              <option>Yearly</option>
+            </select>
+
+            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px" }} onChange={this.changeData}>
+              <option>Sodium</option>
+              <option>Sodium</option>
+              <option>Sodium</option>
+            </select>
+
+      </Box>
+      
         <Chart
           data={chartData}
+          style={{backgroundColor: "#171717"}}
         >
+
+        
+         
           <ArgumentAxis />
           <ValueAxis max={7} />
 
           <BarSeries
-            valueField="population"
-            argumentField="year"
+            valueField="val"
+            argumentField="Day"
+            fill={"#95CD41"}    
           />
-          <Title text="World population" />
+          
           <Animation />
         </Chart>
       </Paper>
     );
+
   }
 }

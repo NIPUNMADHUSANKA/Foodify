@@ -9,6 +9,7 @@ import RestaurantAbout from '../components/AboutUs2';
 import RestaurantOffers from '../components/restaurant/RestaurantOffers';
 import RestaurantMenu from '../components/restaurant/RestaurantMenu';
 import RestaurantContact from '../components/restaurant/RestaurantContact';
+import Navbar from '../components/Navbar';
 
 import AboutImage from '../assets/images/golden-cutlery.jpg';//exporting the image for about section
 
@@ -28,7 +29,7 @@ const Restaurant = () => {
 
   return (
     <Box>
-
+      <Navbar />
       <RestaurantBanner />
       <RestaurantAbout AboutImage = {AboutImage}  details = {details} />
       <RestaurantOffers />

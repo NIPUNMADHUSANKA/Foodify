@@ -7,6 +7,8 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 import PageTitle from '../components/User/PageTitle';
 import CardBar from '../components/User/CardBar';
 import SummaryChart from '../components/User/SummaryChart';
+import Navbar from '../components/Navbar';
+import RangeChart from '../components/User/RangeChart';
 
 const MainHeader = "Intake Chart";
 
@@ -29,14 +31,16 @@ function IntakeChart() {
       ];
 
       const ChartData = [
-        { year: '1950', population: 2.525 },
-        { year: '1960', population: 3.018 },
-        { year: '1970', population: 3.682 },
-        { year: '1980', population: 4.440 },
-        { year: '1990', population: 5.310 },
-        { year: '2000', population: 6.127 },
-        { year: '2010', population: 6.930 },
+        { Day: 'Mon', val: 2.525 },
+        { Day: 'Tue', val: 3.018 },
+        { Day: 'Wed', val: 3.682 },
+        { Day: 'Thu', val: 4.440 },
+        { Day: 'Fri', val: 5.310 },
+        { Day: 'Sat', val: 6.127 },
+        { Day: 'Sun', val: 6.930 },
       ];
+
+      const Head = "Chart of Nutritions Summary";
       
     
     useEffect(() => {
@@ -45,15 +49,48 @@ function IntakeChart() {
 
   return (
     <Box>
-
+         <Navbar />
          <PageTitle MainHeader = {MainHeader}/>
          
          <Box sx={{mt:"3%", mb:"2%"}}>
           <CardBar details = {data} />
          </Box>
 
-         <Box>
-            <SummaryChart chartData = {ChartData} />
+         <Box  display="flex" flexDirection="row" sx={{ml:"5%",
+         [theme.breakpoints.down('md')]: {
+          flexDirection:"column"
+         }
+        }}
+        >
+
+
+           <Box width= "62vw" sx={{
+            [theme.breakpoints.down('md')]: {
+              width: "80vw"
+            }
+            }}>
+              <SummaryChart chartData = {ChartData} Head={Head} />
+           </Box>
+
+
+           <Box width= "20vw" sx={{ml:"5%",
+            [theme.breakpoints.down('md')]: {
+              width: "30vw",
+              mt: "5%"
+            },
+            
+            [theme.breakpoints.down('sm')]: {
+              width: "60vw",
+              mt: "5%"
+              
+            },
+            
+            
+            }}>
+              <RangeChart />
+           </Box>
+            
+            
          </Box>
 
 
