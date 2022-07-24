@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { Box } from '@mui/material';
-import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 
 // to import necessacry components of the restuarant page
 import RestaurantBanner from '../../components/restaurant/RestaurantBanner';
@@ -33,31 +32,7 @@ const comments = {
   "detail1" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
 }
 
-const comments2 = [{
-  title:"comments",
-  data:[
-    {
-      key:"1",
-      name:"User name",
-      comment:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam."
-    },
-    {
-      key:"1",
-      name:"User name",
-      comment:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam."
-    },
-    {
-      key:"1",
-      name:"User name",
-      comment:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam."
-    },
-    {
-      key:"1",
-      name:"User name",
-      comment:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam."
-    },
-  ]
-}]
+
 
 const Restaurant = () => {
 
