@@ -2,7 +2,7 @@ import React from 'react';
 import {ThemeProvider, Box, Typography} from '@mui/material';
 import Carousel from 'react-elastic-carousel';
 
-import FoodCard from './RestaurantCard'
+import FoodCard from './FoodCard'
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import { width } from '@mui/system';
 

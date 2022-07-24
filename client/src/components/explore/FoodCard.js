@@ -43,11 +43,11 @@ function FoodCard() {
           <img src={image} alt="food" style={{width:'252px', height:'150px',border: "5px solid #fff"}}/>
         </StyledBadge>
         <Typography fontSize="24px" fontWeight="400" mt="-45px">Mini Veg Salad</Typography>
-        <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="100" fontSize="15px">
+        <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px">
                  Rs.1000.00
         </Typography>
 
-        <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="100">
+        <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="200">
                  Restaurant Name
         </Typography>
 
