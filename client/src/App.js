@@ -9,6 +9,8 @@ import './assets/css/Main_App.css';
 import Restaurant from './pages/restuarant/Restaurant';
 import FoodCategory from './pages/restuarant/FoodCategory';
 import FoodRating from './pages/restuarant/FoodRating';
+import RestaurantRating from './pages/restuarant/RestaurantRating';
+import RestaurantOffer from './pages/restuarant/RestaurantOffer';
 import Landing from './pages/Landing';
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
@@ -36,7 +38,8 @@ function App() {
 
           <Route path="/Restaurant/category" element = {<FoodCategory/>} />
           <Route path="/FoodRating" element = {<FoodRating/>} />
-
+          <Route path="/Restaurant/RestaurantRating" element = {<RestaurantRating/>} />
+          <Route path="/Restaurant/Offers" element = {<RestaurantOffer/>} />
 
           <Route path="/Signup" element = {<Signup/>} />
           <Route path="/Signupuser" element = {<Signupuser/>} />

@@ -62,7 +62,7 @@ const CommentArea = styled(TextField)({
 });
 // ---------------------------------------------------------------------
 
-export default function MultilineTextFields() {
+function RestaurantRatingForm() {
 
     // ----------------for star rating-----------------------------
     const [value, setValue] = React.useState(2);
@@ -116,7 +116,7 @@ export default function MultilineTextFields() {
                         padding: '2px',
                     },
                 }}>
-                    Food Name
+                    Restaurant Name
                 </Typography>
 
                 {/* ---------------text area----------------- */}
@@ -218,3 +218,5 @@ export default function MultilineTextFields() {
         </Box>
     );
 }
+
+export default RestaurantRatingForm
