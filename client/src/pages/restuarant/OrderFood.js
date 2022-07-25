@@ -10,6 +10,10 @@ import { Avatar } from '@mui/material';
 import OrderDescription from '../../components/restaurant/OrderDescription';
 import FoodNutrition from '../../components/restaurant/FoodNutrition';
 import FoodComment from '../../components/restaurant/FoodCooment';
+import OrderFoodForm from '../../components/restaurant/OrderFoodForm';
+
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
 
 // ----------------this is tem until data call--------
 const details = {
@@ -18,7 +22,7 @@ const details = {
 
 function createData(type, amount, percentage) {
     return { type, amount, percentage };
-  }
+}
 // ---------------nutrition details--------------------
 const rows = [
     createData('Calories', 59, 6.0),
@@ -28,13 +32,13 @@ const rows = [
     createData('Carbs', 62, 7.0),
     createData('Protein', 5, 0.4),
     createData('Vitamin', 6, 0.5),
-  ];
+];
 
 //   for the comments
 const comments = {
-    "name":"username",
-    "detail1" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-  }
+    "name": "username",
+    "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+}
 
 const OrderFood = () => {
     return (
@@ -44,7 +48,7 @@ const OrderFood = () => {
             background: Colours.primary,
             width: "100%",
             display: "flex",
-            flexDirection: "row",           
+            flexDirection: "row",
             [theme.breakpoints.down('sm')]: {
                 flexDirection: "column-reverse",
             },
@@ -54,24 +58,35 @@ const OrderFood = () => {
                 width: "75%",
                 display: "flex",
                 flexDirection: "column",
-                margin:"auto",
-                marginBottom:"2rem",
+                margin: "auto",
+                marginBottom: "2rem",
                 [theme.breakpoints.down('sm')]: {
                     width: "100%",
                 },
             }}>
 
-            {/* ----description--- */}
-            <OrderDescription details={details}/>
+                {/* ----description--- */}
+                <Fade left>
+                    <OrderDescription details={details} />
+                </Fade>
 
-            <FoodNutrition data={rows} sx={{maring:"1rem"}}/>
+                <Fade top>
+                    <FoodNutrition data={rows} sx={{ maring: "1rem" }} />
+                </Fade>
 
-            <FoodComment comments={comments} />
-                
+                <Fade bottom>
+                    <OrderFoodForm />
+                </Fade>
+
+                <Fade big>
+                    <FoodComment comments={comments} />
+                </Fade>
+
             </Box>
             {/* -----------------------end of details area----------------------- */}
 
             {/* -----------------------image area------------------- */}
+            
             <Box sx={{
                 width: "25%",
                 background: `url(${Background})`,
@@ -87,19 +102,19 @@ const OrderFood = () => {
             }}>
                 {/* ------------------for the food image--------------- */}
                 <Box sx={{
-                            width: "25%",
-                            height: "50%",
-                            margin:"auto",
-                            position: "absolute",
-                            top: "25%",
-                            right: "15%",
-                            [theme.breakpoints.down('sm')]: {
-                                width: "40%",
-                                height: "18%",
-                                top: "15%",
-                                right: "30%",
-                            },
-                        }}>
+                    width: "25%",
+                    height: "50%",
+                    margin: "auto",
+                    position: "absolute",
+                    top: "25%",
+                    right: "15%",
+                    [theme.breakpoints.down('sm')]: {
+                        width: "40%",
+                        height: "18%",
+                        top: "15%",
+                        right: "30%",
+                    },
+                }}>
 
                     <Avatar
                         alt="food image"
@@ -109,7 +124,7 @@ const OrderFood = () => {
                             height: "100%",
                             border: "2px solid #EFEAEA",
                             [theme.breakpoints.down('sm')]: {
-                                
+
                             },
                         }} />
                 </Box>
@@ -117,7 +132,7 @@ const OrderFood = () => {
             </Box>
             {/* ---------------end of image area----------------------- */}
 
-        </Box>
+        </Box >
     )
 }
 

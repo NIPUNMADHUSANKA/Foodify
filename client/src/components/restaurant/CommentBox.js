@@ -1,7 +1,5 @@
-import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import theme, { Colours } from '../../assets/theme/theme'
 
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
