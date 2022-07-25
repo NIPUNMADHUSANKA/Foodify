@@ -17,7 +17,7 @@ const breakpoints = [
 function CardBar(details) {
   
   
-  const X = details.details;
+  const X = [details.details];
   console.log(X)
   return (
 
