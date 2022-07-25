@@ -17,9 +17,18 @@ export const Colours = {
     white: '#FFF',
     transparenceGrey:'#6B6B6B33',
     avatarWhite:'#6B6B6B33',
+
     formWhite:'#EFEAEA',
     darkform:'rgba(23, 23, 23, 0.4)',
     textfield:'#D9D9D9',
+
+    animationWhite:'#F9F9F933',
+    white:'#FFFFFF',
+    formWhite:'#fff',
+    cardBlack:"#171717",
+
+    
+
     
 };
 
