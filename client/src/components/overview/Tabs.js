@@ -6,6 +6,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from '@mui/material/IconButton';
 
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+import zIndex from '@mui/material/styles/zIndex';
 
 const drawerWidth = 240;
 
@@ -30,7 +31,6 @@ function TabBar(props){
                 indicatorColor="secondary"
                 orientation="vertical"
                 sx = {{
-                    alignItems: "flex-end",
                     position:"relative",
                     width:"70%"
                 }}
@@ -59,7 +59,7 @@ function TabBar(props){
             <ArrowForwardIosIcon />
         </IconButton>
 
-        {/* Drawer for mobile */}
+        {/* Drawer for mobile ----------------------------------------*/}
         <Drawer
         //   container={container}
           variant="temporary"
@@ -71,28 +71,29 @@ function TabBar(props){
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { 
+                alignItems: "flex-end",
                 boxSizing: 'border-box', 
                 width: drawerWidth,
                 position: "relative",
                 backgroundColor: "transparent",
-             },
-            
+                 
+             },            
           }}
         >
           {drawer}
         </Drawer>
 
-        {/* Drawer for big screen devices */}
+        {/* Drawer for big screen devices------------------------------------ */}
         <Drawer
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { 
+                alignItems: "flex-end",
                 boxSizing: 'border-box', 
                 width: drawerWidth, 
                 position: "relative",
-                backgroundColor: "transparent",
-                
+                backgroundColor: "transparent",               
             },
           }}
           open
