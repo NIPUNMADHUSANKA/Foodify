@@ -3,7 +3,6 @@ import React from 'react';
 import Carousel from '../carousel/carousel';
 
 import CardImage from '../../assets/images/cardfood.png';
-import theme from '../../assets/theme/theme';
 
 // ----------------------for the caousel----------------------
 const item = {
@@ -15,7 +14,7 @@ const item = {
 }
 
 const title = "Menu";
-const itemcount = "4";
+const itemcount = 4;
 const bgcolor1 = "theme.Colours.secondary";
 // ------------------------------------------------------------------------------
 

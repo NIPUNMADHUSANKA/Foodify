@@ -10,7 +10,6 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // ---------------css for carousel-------------------------
-import CarouselStyle from '../../assets/css/Carousel.css';
 
 // -----------------------------for the carousel-------------------
 const item = {
@@ -22,7 +21,7 @@ const item = {
   "name": "Order Now",
 }
 
-const itemcount = "4";
+const itemcount = 4;
 
 // ------------------------------------------------------
 
@@ -90,7 +89,6 @@ const FoodCategory = () => {
             padding:"1rem",
           }}>
             <Carousel
-              className={CarouselStyle}
               itemsToShow={itemcount}
               easing={"ease"}
               breakPoints={theme.breakPoints = [
