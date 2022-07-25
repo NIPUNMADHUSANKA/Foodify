@@ -28,10 +28,7 @@ const CarouselCard2 = (props) => {
                     image={props.item.image}
                     alt="green iguana"
                     overflow="visible"
-                    breakPoints={theme.breakPoints = [
-                        { width: 1, height:"100vh"},
-                      ]}
-                    sx={{overflow: "visible"}}
+                    
                 />
 
                 {/* ---------------------card content area---------------------- */}

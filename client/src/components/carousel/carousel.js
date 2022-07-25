@@ -1,6 +1,6 @@
 // horizantal scrollbar
 
-import React, { useContext } from 'react'
+import React from 'react'
 import { Box, Typography } from '@mui/material';
 
 import CarouselCard from './CarouselCard';
@@ -8,7 +8,6 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 
 // ---------------css for carousel-------------------------
-import CarouselStyle from '../../assets/css/Carousel.css';
 
 // const carousel = ({ data })
 // eslint-disable-next-line no-lone-blocks
@@ -63,7 +62,7 @@ const carousel = (props) => {
         {/* ---------------carousel area-------------------------- */}
         
         <Carousel 
-        className= {CarouselStyle}
+        
         itemsToShow={props.count} 
         easing={"ease"}
         breakPoints={theme.breakPoints = [
