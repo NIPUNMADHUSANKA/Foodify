@@ -5,7 +5,8 @@ import Menubar from '../components/Menubar';
 
 import Overview from '../components/overview/Overview.js';
 import Tabs from '../components/overview/Tabs.js'
-import SumCard from '../components/overview/System/SumCard.js'
+import Budget from '../components/overview/System/Budget.js'
+import Count from '../components/overview/System/Count.js'
 
 import '../assets/css/Dashboard-admin.css';
 
@@ -19,27 +20,42 @@ const Dashboard = () => {
 
     return (
         
-        <Box>
+        <Box backgroundColor= "#323131">
             <Menubar />
             <Overview />
-            <Tabs maxWidth="30%"/>
-            <Container maxWidth={false}>
-                <Grid
-                container
-                spacing={3}
-                >
+            <Box sx={{
+                display: 'flex',
+
+            }}>
+                <Tabs maxWidth="30%"/>
+                <Container maxWidth={false}>
                     <Grid
-                        item
-                        lg={3}
-                        sm={6}
-                        xl={3}
-                        xs={12}
-                        // sx={{width:'10%'}}
+                    container
+                    spacing={3}
                     >
-                        <SumCard />
+                        <Grid
+                            item
+                            lg={2.5}
+                            sm={6}
+                            xl={2.5}
+                            xs={12}
+                            
+                        >
+                            <Budget />
+                        </Grid>
+                        <Grid
+                            item
+                            lg={2.5}
+                            sm={6}
+                            xl={2.5}
+                            xs={12}
+                        >
+                            <Count />
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+                </Container>
+            </Box>
+            
         </Box>
         
     )

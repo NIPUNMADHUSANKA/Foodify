@@ -1,12 +1,17 @@
-import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Card, CardContent, Grid, Typography, ThemeProvider} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import MoneyIcon from '@mui/icons-material/Money';
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+
+// import theme from '../../../assets/theme/dashboardCard';
 
 function Budget (props) {
   return (
+  // <ThemeProvider theme={theme}>
   <Card
-    sx={{ height: '100%' }}
-    {...props}
+    sx={{ 
+      height: '100%',
+      backgroundColor: "#cacfd6", 
+    }}
   >
     <CardContent>
       <Grid
@@ -18,7 +23,7 @@ function Budget (props) {
           <Typography
             color="textSecondary"
             gutterBottom
-            variant="overline"
+            variant='subtitle1'
           >
             BUDGET
           </Typography>
@@ -32,12 +37,12 @@ function Budget (props) {
         <Grid item>
           <Avatar
             sx={{
-              backgroundColor: 'error.main',
-              height: 56,
-              width: 56
+              backgroundColor: '#561414',
+              height: 48,
+              width: 48
             }}
           >
-            <MoneyIcon />
+            <AttachMoneyRoundedIcon fontSize='medium' />
           </Avatar>
         </Grid>
       </Grid>
@@ -66,7 +71,9 @@ function Budget (props) {
         </Typography>
       </Box>
     </CardContent>
-  </Card>);
+  </Card>
+  // </ThemeProvider>
+  );
 }
 
 export default Budget;
