@@ -20,8 +20,11 @@ function Landing() {
     <Box>
         <Navbar />
         <FoodBanner />
-        <HorizontalBar />
-        <AboutUs AboutImage = {FOODIFY_ABOUTUS}  details = {details} />
+      
+       <Box mt="8%">
+          <AboutUs AboutImage = {FOODIFY_ABOUTUS}  details = {details} />
+       </Box>
+        
         
     </Box>
 

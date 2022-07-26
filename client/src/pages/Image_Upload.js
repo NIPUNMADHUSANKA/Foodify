@@ -10,6 +10,8 @@ import ImageUpload from '../components/UploadImage/ImageUpload'
 import Details from '../components/UploadImage/Details';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+import Button from '@mui/material/Button';
+
 
 //import "../assets/css/ImageUpload.css" 
 
@@ -27,7 +29,15 @@ function Image_Upload() {
         <Navbar />
         <PageTitle MainHeader = {MainHeader}/>
 
-        <Box textAlign="right" marginRight="10%" style={{color:'#ccc', fontSize:"150%", marginBottom:"1%"}}>
+        <Box float="right" textAlign="right" marginRight="10%" style={{color:'#ccc', fontSize:"150%", marginBottom:"1%"}}>
+
+            <select id="select" style={{ width: '15%', marginRight: '50px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px"}}>
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Other</option>
+            </select>
+
             <AddCircleIcon />
             Add New Food
         </Box>
@@ -36,6 +46,18 @@ function Image_Upload() {
           <ImageUpload />
           <Details />
         </Box>
+
+        <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
+           float:"right",
+           marginRight:"8%",
+           marginTop:"2%"
+           ,"&:hover": {
+           backgroundColor: "#15e577",
+           borderColor:"#564345"
+        } }}>
+          Check
+        </Button>
+        
         
     </Box>
   )
