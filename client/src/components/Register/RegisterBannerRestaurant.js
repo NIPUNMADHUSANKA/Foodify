@@ -22,7 +22,7 @@ import BiggerImage from '../../assets/images/register_big_image.png';
 
 const theme1 = createTheme();
 
-const RegisterBannerUser = () => {
+const RegisterBannerRestaurant = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -101,6 +101,22 @@ const RegisterBannerUser = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                />
+                <TextField
+                    sx={{ input: 
+                    { color: "#fff" }, marginTop: 2,
+                    "label": {color: "#fff"},
+                    "& label.Mui-focused": {
+                    color:"#fff"
+                    }
+                
+                }}    
+                  name="location"
+                  required
+                  fullWidth
+                  id="location"
+                  label="Location"
+                  autoFocus
                 />
                 <TextField
                     sx={{ input: 
@@ -213,4 +229,4 @@ const RegisterBannerUser = () => {
   );
 }
 
-export default RegisterBannerUser
+export default RegisterBannerRestaurant

@@ -20,10 +20,14 @@ import DashboardA from './pages/Dashboard-admin';
 import IntakeChart from './pages/IntakeChart';
 import Home from './pages/Explore';
 
+import UserPackage from './pages/register/UserPackage';
+import Signup from './pages/register/Signup';
 
-import Signup from './pages/Signup';
-
-import Signupuser from './pages/Signupuser';
+import Signupuser from './pages/register/Signupuser';
+import Signuprestaurant from './pages/register/Signuprestaurant';
+import Terms from './pages/register/Terms';
+import ForgetPassword from './pages/ForgetPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -46,8 +50,14 @@ function App() {
           <Route path="/Restaurant/Offers" element = {<RestaurantOffer/>} />
           <Route path="/Restaurant/Category/Orderfood" element = {<OrderFood/>} />
 
-          <Route path="/Signup" element = {<Signup/>} />
-          <Route path="/Signupuser" element = {<Signupuser/>} />
+          <Route path="/register/Signup" element = {<Signup/>} />
+          <Route path="/register/Signupuser" element = {<Signupuser/>} />
+          <Route path="/register/UserPackage" element = {<UserPackage/>} />
+          <Route path="/register/Signuprestaurant" element = {<Signuprestaurant/>} />
+          <Route path="/register/Terms" element = {<Terms/>} />
+          <Route path="/ForgetPassword" element = {<ForgetPassword/>} />
+          <Route path="/ResetPassword" element = {<ResetPassword/>} />
+
           <Route path="/restaurant/category" element = {<FoodCategory/>} />
 
         </Routes>
