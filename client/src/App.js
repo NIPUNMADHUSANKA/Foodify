@@ -19,8 +19,8 @@ import Explore from './pages/Explore';
 import DashboardA from './pages/Dashboard-admin';
 
 import IntakeChart from './pages/IntakeChart';
-import Home from './pages/Explore';
-import Explore from './pages/Explore';
+// import Home from './pages/Explore';
+// import Explore from './pages/Explore';
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import MyProfile from './pages/MyProfile';
@@ -37,7 +37,7 @@ function App() {
 
     <Box sx={{margin:"0"}}>
       
-    <Box width="400px" sx={{width:'100%'}} m="0">
+    {/* <Box width="400px" sx={{width:'100%'}} m="0"> */}
        
         {/* <Navbar /> */}
 
