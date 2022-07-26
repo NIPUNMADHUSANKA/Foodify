@@ -3,20 +3,27 @@ import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 import '../assets/css/Profile.css';
-import Unavbar from '../components/user_order/user_order_navbar';
+import Unavbar from '../components/Navbar';
 import UserOrderBanner from '../components/user_order/user_order_upper';
-const RestaurantOrder = () => {
+import UserOrderForm from '../components/user_order/user_order_form';
+
+const UserOrder = () => {
 
 
   return (
-    <Box marginTop="0px">
+<Box marginTop="0px">
       <Unavbar/>
-      <UserOrderBanner/>
 
+      <Box  className='order-body-Style'>
+      <UserOrderBanner/>
+      </Box>
+      <UserOrderForm/>
+    
+      
     </Box>
 
     
   )
 }
 
-export default RestaurantOrder
+export default UserOrder
