@@ -12,7 +12,10 @@ import Explore from './pages/Explore';
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import MyProfile from './pages/MyProfile';
-import IC from './pages/IntakeChart';
+import RestaurantOrder from './pages/RestaurantOrder';
+import UserOrder from './pages/UserOrder';
+
+
 
 
 function App() {
@@ -28,8 +31,13 @@ function App() {
           <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/login" element = {<Login/>} />
           <Route path="/userprofile" element = {<UserProfile/>} />
+          <Route path="/restaurantorder" element = {<RestaurantOrder/>} />
           <Route path="/myprofile" element = {<MyProfile/>} />
+          <Route path="/userorder" element = {<UserOrder/>} />
 
+
+
+        
           
 
 
