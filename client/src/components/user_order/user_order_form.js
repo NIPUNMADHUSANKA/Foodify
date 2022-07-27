@@ -14,6 +14,7 @@ import Button from '@mui/material/Button';
 
 
 
+
 const Userorderform = () => {
 
 
@@ -41,7 +42,7 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'1%',
+        height:'0.5%',
         backgroundColor:Colours.white,
         marginTop:'3%',
         marginBottom:'2%',
@@ -55,7 +56,7 @@ const Userorderform = () => {
         <Typography sx={{
             color:Colours.white,
             fontSize:28,
-            marginTop:'3%',
+            marginTop:'8%',
             marginLeft:'3%',
             }}>
         Pick Up Estimate</Typography>
@@ -81,9 +82,9 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'1%',
+        height:'0.5%',
         backgroundColor:Colours.white,
-        marginTop:'3%'
+        marginTop:'8%'
     }}></Box>
 
 {/* payment code */}
@@ -92,7 +93,7 @@ const Userorderform = () => {
         <Typography sx={{
             color:Colours.white,
             fontSize:28,
-            marginTop:'3%',
+            marginTop:'8%',
             marginLeft:'3%',
             }}>
         Payment</Typography>
@@ -107,11 +108,33 @@ const Userorderform = () => {
             }}>Apply the promo code
         
            </Typography>
+
+           <Button xs={12} sm={6} href='#' variant="contained" sx={{
+             marginLeft:'10%',
+             marginTop:'6%',
+             marginBottom:'6%',
+              background: Colours.green, '&:hover': {
+                backgroundColor: Colours.yellow,
+              },
+              color: Colours.dark,
+              fontSize: '20px',
+
+              hover: Colours.yellow,
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '18px',
+                marginLeft:'0%',
+                width:'50%',
+
+               
+              },
+            }}>
+              APPLY
+            </Button>
     </Box>
 
     <Box sx={{
         width:'100%',
-        height:'1%',
+        height:'0.5%',
         backgroundColor:Colours.white,
         marginTop:'3%'
     }}></Box>
@@ -122,26 +145,53 @@ const Userorderform = () => {
         <Typography sx={{
             color:Colours.white,
             fontSize:28,
-            marginTop:'3%',
+            marginTop:'6%',
             marginLeft:'3%',
+            marginBottom:'6%',
+         
             }}>
         Food Items</Typography>
 
 
        
-        <Typography sx={{
-            color:Colours.white,
-            marginTop:'3%',
-            marginLeft:'8%',
-            fontSize:14,
-            }}>Apply the promo code
-        
+        <Typography>
+            
+            <Box 
+            sx={{
+                width:'80%',
+                marginLeft:'5%',
+                height:'auto',
+                backgroundColor:Colours.transparenceGrey,
+                color:Colours.white,
+                padding:'5%',
+            }}
+            display="flex" justifyContent="space-between">
+            <p>mini veg salad</p>
+            <p>400.00</p>
+            </Box>
+            <Box
+            sx={{
+                width:'80%',
+                marginLeft:'5%',
+                marginTop:'2%',
+                height:'auto',
+                backgroundColor:Colours.transparenceGrey,
+                color:Colours.white,
+                padding:'5%',
+            }}
+            display="flex" justifyContent="space-between">
+            <p>Mini veg salad</p>
+            <p>400.00</p>
+            </Box>
+            
            </Typography>
+
+
     </Box>
 
     <Box sx={{
         width:'100%',
-        height:'1%',
+        height:'0.5%',
         backgroundColor:Colours.white,
         marginTop:'3%'
     }}></Box>
@@ -159,6 +209,14 @@ const Userorderform = () => {
         marginLeft:'60%',
         marginTop:'20%',
         color:Colours.white,
+        borderRadius:'33px',
+        [theme.breakpoints.down('sm')]: {
+          
+            marginLeft:'4%',
+            width:'80%'
+          
+           
+          },
 
     }}>
             <Box display="flex" justifyContent="space-between">
