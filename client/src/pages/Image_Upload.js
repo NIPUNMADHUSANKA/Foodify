@@ -12,6 +12,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import Button from '@mui/material/Button';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
 
 //import "../assets/css/ImageUpload.css" 
 
@@ -25,10 +27,14 @@ function Image_Upload() {
 
   return (
     <Box className='image_upload_body' sx={{ margin:0}}>
-        
+
+
+      <Fade top>
         <Navbar />
         <PageTitle MainHeader = {MainHeader}/>
-
+      </Fade>  
+        
+      <Fade right>
         <Box float="right" textAlign="right" marginRight="10%" style={{color:'#ccc', fontSize:"150%", marginBottom:"1%"}}>
 
             <select id="select" style={{ width: '15%', marginRight: '50px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px"}}>
@@ -41,12 +47,16 @@ function Image_Upload() {
             <AddCircleIcon />
             Add New Food
         </Box>
-        
+      </Fade>
+
+      <Fade left>
         <Box display="flex" flexdirection = "row" marginLeft="5%">
           <ImageUpload />
           <Details />
         </Box>
+      </Fade>
 
+      <Fade right>
         <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
            float:"right",
            marginRight:"8%",
@@ -57,7 +67,7 @@ function Image_Upload() {
         } }}>
           Check
         </Button>
-        
+      </Fade>
         
     </Box>
   )

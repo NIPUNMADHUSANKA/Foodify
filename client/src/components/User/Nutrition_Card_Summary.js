@@ -47,55 +47,79 @@ function renderRow(props) {
       </ListItem>      
     );
   }
-
+  
 
 function Nutrition_Card() {
   return (
     //Main box slding card 100vw
-    <Box color="#fff" bgcolor="none" width="100vw" mt="5%">
+
+    <Box color="#fff" bgcolor="none" width="100vw" mt="4%">
         
        
         <Box display="flex" flexDirection="row"  
-        sx = {{[theme.breakpoints.down('md')]: {
-          flexDirection:"column" }}
-    }>
-            
+          sx = {{[theme.breakpoints.down('md')]: {
+            flexDirection:"column" }}
+          }
+        >
+
+
             <Box  width="53%" 
-              sx = {{
-                [theme.breakpoints.down('md')]:{
-                  width:"100%"
-                }
-              }}
-            >
-                <img src={Image} width="70%" style={{borderRadius : "50px"}}/>
-                <Box display="flex" flexDirection="row" mt="3%" ml="10%">
-                
-                <Typography color="#95CD41" fontSize="200%" textAlign="right" sx={{mr:"8%"}} fontWeight="bold">
-                    Helathy Zoon
-                </Typography>
+                  mb="5%"
+                  ml="5%"
+                  sx = {{
+                    [theme.breakpoints.down('md')]:{
+                      width:"100%",
+                      textAlign:"center"
+                    }
+                  }}
+                >
+                    <img src={Image} width="65%" style={{borderRadius : "10px"}}/>
+                    
+                    <Typography color="#95CD41" fontSize="200%" fontWeight="bold">
+                        Healthy Zoon
+                    </Typography>
 
-                <Typography color="#FAC213" fontSize="180%" textAlign="right" sx={{mr:"5%"}} fontWeight="bold">
-                    <Button variant="outlined" sx = {{ color: "#95CD41", borderColor:"#95CD41" }}>Confirm</Button>
-                </Typography>
-
-                </Box>
+                    
             </Box>
 
             <Box>
-            <FixedSizeList
-              height={420}
-              width="200%"
-              itemSize={95}
-              itemCount={6}   
-        
-        style={{borderRadius : "40px"}}
-      >
-                 
-                 {renderRow}
-                   
-                   
-            </FixedSizeList>
-               
+                    <FixedSizeList
+                      height={420}
+                      width="150%"
+                      itemSize={95}
+                      itemCount={6}  
+                      style={{borderRadius : "40px"}}  
+                    >
+                
+                        {renderRow}
+
+                        
+
+                          
+                    </FixedSizeList>
+
+                    <Box mt="8%" mb="20%" marginLeft="35%"  display="flex" flexDirextion="row" sx={{[theme.breakpoints.down('md')]:{
+                      textAlign:"center"
+                    }}} >
+
+                            <Button variant="outlined" style={{marginRight:"5%", color:'#95CD41',borderColor: "#95CD41"
+                            ,"&:hover": {
+                            backgroundColor: "#15e577",
+                            borderColor:"#564345"
+                            } }}>
+                            Confirm
+                            </Button>
+
+                            <Button variant="outlined" style={{marginRight:"5%", color:'#F02828',borderColor: "#F02828"
+                            ,"&:hover": {
+                            backgroundColor: "#15e577",
+                            borderColor:"#564345"
+                            } }}>
+                            Reject
+                            </Button>
+
+                    </Box>
+                  
             </Box>
 
 

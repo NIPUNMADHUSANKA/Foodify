@@ -9,6 +9,11 @@ import Navbar from '../components/Navbar';
 import PageTitle from '../components/User/PageTitle';
 import Nutrition_Card from '../components/User/Nutrition_Card';
 import Nutrition_Card_Summary from '../components/User/Nutrition_Card_Summary';
+
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+
+
 const MainHeader = "Nutritions";
 
 function Nutrition_Summary() {
@@ -18,9 +23,12 @@ function Nutrition_Summary() {
     })
 
   return (
-    <Paper className='image_upload_body'>
+    <Box className='image_upload_body'>
+      
+      <Fade top>
         <Navbar />
         <PageTitle MainHeader = {MainHeader}/>
+      </Fade>
         
         <Carousel pagination={false} disableArrowsOnEnd={true} >
             <Nutrition_Card />
@@ -28,7 +36,7 @@ function Nutrition_Summary() {
         </Carousel>
 
 
-    </Paper>
+    </Box>
   )
 }
 
