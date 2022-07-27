@@ -6,16 +6,19 @@ import HorizontalBar from '../components/HorizontalBar';
 import LoginNavbar from '../components/login/LoginNavbar';
 import '../assets/css/Login.css';
 import theme, { Colours } from '../assets/theme/theme';
+import Skeleton from '@mui/material/Skeleton';
 
 
 
 
 function Login() {
   return (
-    <Box className='Login-body-Style' 
-    >
+    <Box className='Login-body-Style' >
+    
+    
         <LoginNavbar/>
         <LoginBanner />
+        
       
     </Box>
   )

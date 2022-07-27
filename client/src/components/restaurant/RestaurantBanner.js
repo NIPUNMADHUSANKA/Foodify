@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { Box, Container, Rating, Stack, ThemeProvider, Typography } from '@mui/material';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import { Box, Rating, ThemeProvider} from '@mui/material';
 import Button from '@mui/material/Button';
 import '../../assets/css/App.css';
 import ArrowIcon from '@mui/icons-material/ArrowForward';
@@ -10,8 +8,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import Logo from '../../assets/images/restaurant-logo.jpg';
 import Cover from '../../assets/images/indian-food-served-on-table.jpg';
 import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
-import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerImage, BannerLogo, BannerTitle, BannerTitle2 } from '../../assets/theme/RBanner';
-import { useTheme } from '@emotion/react';
+import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerLogo, BannerTitle, BannerTitle2 } from '../../assets/theme/RBanner';
 
 const RestaurantBanner = () => {
 
@@ -26,7 +23,7 @@ const RestaurantBanner = () => {
         <BannerContent src={Cover}>
 
           <Box sx={{ marginTop: '20%' }}>
-            
+
             <Button href='#' endIcon={<ArrowIcon fontSize="medium" sx={{
               [theme.breakpoints.down('sm')]: {
                 fontSize: '8px',
@@ -44,7 +41,7 @@ const RestaurantBanner = () => {
                 padding: '2px',
               },
             }}>
-              Order
+              Offers
             </Button>
             <Button href='#' endIcon={<RestaurantMenuIcon fontSize="medium" sx={{
               [theme.breakpoints.down('sm')]: {
@@ -81,7 +78,7 @@ const RestaurantBanner = () => {
               Rating
 
             </BannerTitle2>
-            <Rating name="rating" value='4.5' precision={0.5} size="small" readOnly sx={{
+            <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
               [theme.breakpoints.down('sm')]: {
                 fontSize: '8px',
               },
