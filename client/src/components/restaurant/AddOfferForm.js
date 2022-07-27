@@ -1,0 +1,196 @@
+
+import React, { useState } from 'react';
+import { Box } from '@mui/system';
+import theme, { Colours } from '../../assets/theme/theme';
+import { Button, IconButton, TextField, Typography } from '@mui/material';
+import styled from '@emotion/styled';
+import CategorySelection from './CategorySelection';
+import AddIcon from '@mui/icons-material/Add';
+
+// ---------------------------------text fied css style-----------------------
+const InputArea = styled(TextField)({
+    color: Colours.grayWhite,
+    '&:fielset': {
+        backgroundColor: Colours.primary,
+    },
+
+    '& label.Mui-focused': {
+        color: '#95CD41',
+        fontcolor: Colours.green,
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: '#95CD41',
+    },
+    '& .MuiLabel': {
+        color: Colours.grayWhite,
+    },
+
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: Colours.grayWhite, //white for borders when not focused
+            color: Colours.grayWhite,
+        },
+        '&:hover fieldset': {
+            borderColor: '#FAC213', //yellow border when hovering
+            color: Colours.yellow,
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: '#95CD41', //green border when foucs
+        },
+    },
+});
+// ---------------------------------------------------------------------
+
+// ----------array or object ot get category values--------------------
+const category = [
+    {
+        value: 'Category 1',
+        label: 'Category 1',
+    },
+    {
+        value: 'Category 2',
+        label: 'Category 2',
+    },
+    {
+        value: 'Category 3',
+        label: 'Category 3',
+    },
+    {
+        value: 'Category 4',
+        label: 'Category 4',
+    },
+];
+
+const AddOfferForm = () => {
+
+    // --------to add category section--------
+    const [components, addComponents] = useState(["Category1"]); //use to render when new component added to page
+
+    function addSection() {
+        addComponents([...components, <CategorySelection />])
+    }
+    // ---------------------------------------
+
+    return (
+        <Box>
+            {/* -----------------------form area------------------------- */}
+            <Box
+                component="form"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%",
+                    padding: "1rem",
+                    opacity: 0.9,
+                    background: Colours.secondary,
+                    borderRadius: "1rem",
+
+                    '& .MuiTextField-root': { m: 1, width: '96%' },
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                {/* -------text fields----------- */}
+                <InputArea id="name" label="Name" name="name" variant="outlined" />
+                <InputArea id="description" label="Description" name="description" multiline rows={6} variant="outlined" />
+
+                {/* --------date selection area--------- */}
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                }}>
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "0.5rem",
+                    }}>
+                        <Typography variant='body' sx={{ color: Colours.primary }}>Begin Date</Typography>
+                        <InputArea id="begin date" type="date" name="Bdate" variant="outlined" />
+                    </Box>
+
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "0.5rem",
+                    }}>
+                        <Typography variant='body' sx={{ color: Colours.primary }}>End Date</Typography>
+                        <InputArea id="begin date" type="date" name="Edate" variant="outlined" />
+                    </Box>
+                </Box>
+                {/* ------------end of dte selection area------------------ */}
+
+                {/* -------------category and food items area------- */}
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "95%",
+                    margin: "auto",
+                    justifyContent:"center",
+                }}>
+                    <Typography variant='body' sx={{
+                        color: Colours.primary,
+                        textAlign: "center",
+                    }}>
+                        Add Categories and food items
+                    </Typography>
+
+                    {/* button */}
+                    <IconButton onClick={addSection} sx={{width:"2.2rem"}}>
+                        <AddIcon sx={{ color: Colours.green }} />
+                    </IconButton>
+
+                    {components.map((item, i) => (
+                        <CategorySelection
+                            category={category}
+                            item={item}
+                            name={item.value}
+                        />
+                    ))}
+                </Box>
+                {/* ------------end of category and food items area----- */}
+
+                <InputArea id="standard-basic" label="Standard" variant="outlined" />
+
+                {/* -----------------------------submit and cancel area--------------------------- */}
+                <Box sx={{
+                    marginTop: "1rem"
+                }}>
+                    <Button type='submit' variant="contained" sx={{
+                        margin: '0.5rem',
+                        background: Colours.green, '&:hover': {
+                            backgroundColor: Colours.yellow,
+                        },
+                        color: Colours.dark,
+                        fontSize: '1rem',
+                        hover: Colours.green,
+                        borderRadius: "1rem",
+                        minWidth: "10%",
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '8px',
+                            padding: '2px',
+                        },
+                    }}> Add </Button>
+
+                    <Button variant="contained" sx={{
+                        margin: '0.5rem',
+                        background: Colours.grayWhite, '&:hover': {
+                            backgroundColor: Colours.secondary,
+                        },
+                        color: Colours.dark,
+                        fontSize: '1rem',
+                        hover: Colours.green,
+                        borderRadius: "1rem",
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '8px',
+                            padding: '2px',
+                        },
+                    }}>Cancel</Button>
+                </Box>
+                {/* ---------------------------------end of submit and cancel arae---------------------- */}
+            </Box>
+            {/* ----------------end of form area-------------------------- */}
+        </Box>
+    )
+}
+
+export default AddOfferForm
