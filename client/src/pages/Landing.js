@@ -9,6 +9,9 @@ import Navbar from '../components/Navbar';
 
 import FOODIFY_ABOUTUS from '../assets/images/golden-cutlery.jpg';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+
 const details = {
   "detail1" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
   "detail2" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
@@ -17,16 +20,30 @@ const details = {
 
 function Landing() {
   return (
-    <Box>
+
+    <div className='landingbg'>
+
+    <Fade top>
         <Navbar />
+
         <FoodBanner />
+    </Fade>
       
-       <Box mt="8%">
+      <Fade left>
+        <Box mt="8%">
           <AboutUs AboutImage = {FOODIFY_ABOUTUS}  details = {details} />
        </Box>
+      </Fade>
+       
+      <Fade right>
+        <Box>
+          <ContactUs />
+       </Box>
+      </Fade>
+       
         
         
-    </Box>
+    </div>
 
   )
 }

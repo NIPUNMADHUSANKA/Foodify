@@ -15,6 +15,9 @@ import Accept from '../assets/icons/Accept.png';
 import Reject from '../assets/icons/Reject.png';
 import Navbar from '../components/Navbar';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+
 const MainHeader = "Complaints";
 
 function Complaints() {
@@ -23,7 +26,7 @@ function Complaints() {
 
     [ "Total Complaints",  12, Total ],
   
-    [  "Pending Complaints",  8, Pending ],
+    [ "Pending Complaints",  8, Pending ],
   
     [ "Accepted Complaints",  10, Accept ],
   
@@ -38,18 +41,36 @@ function Complaints() {
   return (
 
     
-    <Box>
-      <Navbar />
-         <PageTitle MainHeader = {MainHeader}/>
-         
-         <Box sx={{mt:"3%", mb:"2%"}}>
-         <CardBar details = {data} />
-         </Box>
+    <Box className='complainbg'>
 
-         <Box sx={{display:"flex",flexDirection:"row"}}>
-            <ComplainAdd />
-            <ComplaintHistory />
-         </Box>
+        <Fade top>
+            <Navbar />
+            <PageTitle MainHeader = {MainHeader}/>
+        </Fade>
+        
+        <Fade left>
+          <Box sx={{mt:"3%", mb:"2%"}}>
+            <CardBar details = {data} />
+          </Box>
+        </Fade>
+         
+
+        <Fade right>
+            <Box display="flex"
+                 justifyContent="center"
+                alignItems="center">
+                <ComplainAdd />
+            </Box>
+        </Fade>
+
+        <Fade left>
+            <Box display="flex"
+                 justifyContent="center"
+                alignItems="center">
+                <ComplaintHistory />    
+            </Box>
+        </Fade>
+      
     </Box> 
   )
 }

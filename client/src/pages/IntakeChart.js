@@ -10,6 +10,9 @@ import SummaryChart from '../components/User/SummaryChart';
 import Navbar from '../components/Navbar';
 import RangeChart from '../components/User/RangeChart';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+
 const MainHeader = "Intake Chart";
 
 function IntakeChart() {
@@ -49,12 +52,18 @@ function IntakeChart() {
 
   return (
     <Box>
+
+      <Fade top>
          <Navbar />
          <PageTitle MainHeader = {MainHeader}/>
+      </Fade>
          
+         
+      <Fade left>
          <Box sx={{mt:"3%", mb:"2%"}}>
           <CardBar details = {data} />
          </Box>
+      </Fade>
 
          <Box  display="flex" flexDirection="row" sx={{ml:"5%",
          [theme.breakpoints.down('md')]: {
@@ -87,7 +96,13 @@ function IntakeChart() {
             
             
             }}>
-              <RangeChart />
+
+              <Fade right>
+                <RangeChart />
+              </Fade>
+                
+              
+
            </Box>
             
             

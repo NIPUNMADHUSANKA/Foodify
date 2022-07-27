@@ -10,6 +10,20 @@ import {
 import { Animation } from '@devexpress/dx-react-chart';
 import { Box, Typography } from '@mui/material';
 
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+
+const style = createTheme({
+  argumentAxis: {  
+    label: {  
+        font: {  
+            color: "red",  
+            size: 14  
+        }  
+    }  
+  }  
+});
+
 
 export default class SummaryChart extends React.PureComponent {
 
@@ -31,22 +45,22 @@ export default class SummaryChart extends React.PureComponent {
 
     return (
 
-    <Paper sx={{backgroundColor: "#171717"}} >
+    <Paper sx={{backgroundColor: "#eee", borderRadius:"20px", mb:"20px"}}>
 
       <Box sx={{ml:"5%"}} pt={3} >
 
-            <Typography variant="h5" component="h2" textAlign="center" color="#fff">
+            <Typography variant="h5" component="h2" textAlign="center" color="#171717" fontWeight="bold">
               {chartHead}
             </Typography>
 
-            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px"}} onChange={this.changeData}>
+            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#ddd", border:"none", color:"#222", padding:"8px"}} onChange={this.changeData}>
               <option>Weekly</option>
               <option>Daily</option>
               <option>Monthly</option>
               <option>Yearly</option>
             </select>
 
-            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px" }} onChange={this.changeData}>
+            <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#ddd", border:"none", color:"#222", padding:"8px" }} onChange={this.changeData}>
               <option>Sodium</option>
               <option>Sodium</option>
               <option>Sodium</option>
@@ -56,13 +70,13 @@ export default class SummaryChart extends React.PureComponent {
       
         <Chart
           data={chartData}
-          style={{backgroundColor: "#171717"}}
+          style={{backgroundColor: "#eee"}}
         >
 
         
          
-          <ArgumentAxis />
-          <ValueAxis max={7} />
+          <ArgumentAxis fill="#fff !import" />
+          <ValueAxis max={10} fill="#fff !import" />
 
           <BarSeries
             valueField="val"
