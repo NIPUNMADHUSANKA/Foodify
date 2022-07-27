@@ -19,11 +19,15 @@ import Explore from './pages/Explore';
 import DashboardA from './pages/Dashboard-admin';
 
 import IntakeChart from './pages/IntakeChart';
-import Home from './pages/Explore';
-import Explore from './pages/Explore';
+
+
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
 import MyProfile from './pages/MyProfile';
+import RestaurantOrder from './pages/RestaurantOrder';
+import UserOrder from './pages/UserOrder';
+
+
 
 
 
@@ -39,7 +43,7 @@ import ResetPassword from './pages/ResetPassword';
 function App() {
   return (
 
-    <Box sx={{margin:"0"}}>
+  
       
     <Box width="400px" sx={{width:'100%'}} m="0">
        
@@ -59,8 +63,13 @@ function App() {
 
           <Route path="/login" element = {<Login/>} />
           <Route path="/userprofile" element = {<UserProfile/>} />
+          <Route path="/restaurantorder" element = {<RestaurantOrder/>} />
           <Route path="/myprofile" element = {<MyProfile/>} />
+          <Route path="/userorder" element = {<UserOrder/>} />
 
+
+
+        
           
 
 

@@ -7,16 +7,15 @@ import Pnavbar from '../components/profile/profileNavbar';
 import Pcarousel from '../components/profile/profileCarouselGood';
 import AddressFormW from '../components/profile/AddressForm';
 import '../assets/css/Profile.css';
+import UserOrderd from '../components/restaurant_order/user_oreder_details';
 
-const Profile = () => {
+const RestaurantOrder = () => {
 
 
   return (
-    <Box className='Profile2-body-Style' marginTop="0px">
+    <Box marginTop="0px">
       <Pnavbar/>
-      <AddressFormW/>
-
-
+      <UserOrderd/>
 
     </Box>
 
@@ -24,4 +23,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default RestaurantOrder
