@@ -26,8 +26,12 @@ function TabBar(details) {
                 ml: "3%",
             }}
         >
-            <Tab value="one" label="Food" sx={{fontSize:"18px", fontWeight:"200"}}/>
-            <Tab value="two" label="Restaurant"  sx={{fontSize:"18px", fontWeight:"200"}}/>
+            <Tab value="one" label={
+                <Typography color="primary" fontWeight="200">Food</Typography>
+            }/>
+            <Tab value="two" label={
+                <Typography color="primary" fontWeight="200">Restaurant</Typography>
+            }/>
         </Tabs>
 
     </ThemeProvider>

@@ -35,11 +35,11 @@ function TabBar(props){
                     width:"70%"
                 }}
             >
-                <Tab value="one" label="System" sx={{fontSize:"18px", fontWeight:"300"}}/>
-                <Tab value="two" label="Users"  sx={{fontSize:"18px", fontWeight:"300"}}/>
-                <Tab value="three" label="Restaurants" sx={{fontSize:"18px", fontWeight:"300"}}/>
-                <Tab value="four" label="Orders"  sx={{fontSize:"18px", fontWeight:"300"}}/>
-                <Tab value="five" label="Complains"  sx={{fontSize:"18px", fontWeight:"300"}}/>
+                <Tab value="one" label={<Typography fontSize="18px" fontWeight="300" color="primary">System</Typography>}/>
+                <Tab value="two" label={<Typography fontSize="18px" fontWeight="300" color="primary">Users</Typography>}/>
+                <Tab value="three" label={<Typography fontSize="18px" fontWeight="300" color="primary">Restaurants</Typography>}/>
+                <Tab value="four" label={<Typography fontSize="18px" fontWeight="300" color="primary">Orders</Typography>}/>
+                <Tab value="five" label={<Typography fontSize="18px" fontWeight="300" color="primary">Complains</Typography>}/>
             </Tabs>
     
     );
