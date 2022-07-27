@@ -1,18 +1,18 @@
 import React from 'react'
 import { Box } from '@mui/material';
-import RegisterBannerUser from '../components/Register/RegisterBannerUser';
+import ForgetPasswordBanner from '../components/login/ForgetPasswordBanner';
 import RegisterNavbar from '../components/Register/RegisterNavbar';
 import '../assets/css/Registeruser.css';
 
-const Signupuser = () => {
+const ForgetPassword = () => {
   return (
     <Box className='Register-body-Style' >
         <RegisterNavbar />
-        <RegisterBannerUser />
+        <ForgetPasswordBanner />
 
     </Box>
     
   )
 }
 
-export default Signupuser
+export default ForgetPassword
