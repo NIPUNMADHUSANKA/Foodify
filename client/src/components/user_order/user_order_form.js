@@ -10,17 +10,17 @@ import Typography from '@mui/material/Typography';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import Button from '@mui/material/Button';
-
-
-
-
+import pickupfoodImage from '../../assets/images/order_food.png';
+import '../../assets/css/Profile.css';
 
 const Userorderform = () => {
 
 
   return (
 
-<Grid container spacing={2} columns={16}>
+<Grid container spacing={2} columns={16} sx={{
+  marginLeft:'3%',
+}}>
   <Grid item xs={12} sm={6}>
     <Box>
         <Typography sx={{
@@ -42,7 +42,7 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'0.5%',
+        height:'0.2%',
         backgroundColor:Colours.white,
         marginTop:'3%',
         marginBottom:'2%',
@@ -82,7 +82,7 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'0.5%',
+        height:'0.2%',
         backgroundColor:Colours.white,
         marginTop:'8%'
     }}></Box>
@@ -122,7 +122,7 @@ const Userorderform = () => {
               hover: Colours.yellow,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
-                marginLeft:'0%',
+                marginLeft:'20%',
                 width:'50%',
 
                
@@ -134,7 +134,7 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'0.5%',
+        height:'0.2%',
         backgroundColor:Colours.white,
         marginTop:'3%'
     }}></Box>
@@ -166,6 +166,7 @@ const Userorderform = () => {
                 padding:'5%',
             }}
             display="flex" justifyContent="space-between">
+            <img className='pickupfoodstyle' src={pickupfoodImage} />
             <p>mini veg salad</p>
             <p>400.00</p>
             </Box>
@@ -180,6 +181,7 @@ const Userorderform = () => {
                 padding:'5%',
             }}
             display="flex" justifyContent="space-between">
+            <img className='pickupfoodstyle' src={pickupfoodImage} />
             <p>Mini veg salad</p>
             <p>400.00</p>
             </Box>
@@ -191,9 +193,10 @@ const Userorderform = () => {
 
     <Box sx={{
         width:'100%',
-        height:'0.5%',
+        height:'0.2%',
         backgroundColor:Colours.white,
-        marginTop:'3%'
+        marginTop:'8%',
+        marginBottom:'8%',
     }}></Box>
 
 
@@ -201,13 +204,15 @@ const Userorderform = () => {
 
   {/* Right side  */}
   <Grid item xs={12} sm={6}>
-    <Box sx={{
-        width:'50%',
+    <Box className="Pickup-body-Style" sx={{
+        width:'80%',
         height:'70%',
         backgroundColor:Colours.transparenceGrey,
         padding:'5%',
+        paddingTop:'50%',
         marginLeft:'60%',
         marginTop:'20%',
+        marginBottom:'10%',
         color:Colours.white,
         borderRadius:'33px',
         [theme.breakpoints.down('sm')]: {
@@ -233,7 +238,7 @@ const Userorderform = () => {
             </Box>
             <Box display="flex">
             <Button xs={12} sm={6} href='#' variant="contained" sx={{
-             marginLeft:'10%',
+             marginLeft:'30%',
              marginTop:'10%',
               background: Colours.green, '&:hover': {
                 backgroundColor: Colours.yellow,

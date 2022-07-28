@@ -5,6 +5,9 @@ import theme, { Colours } from '../../assets/theme/theme'; //to use theme provid
 import '../../assets/css/Profile.css';
 import Pickup from '../../assets/images/pickup.png';
 import Pickupmap from '../../assets/images/pickupmap.png';
+import Gmap from '../../components/user_order/order_google_map';
+
+
 
 const RestaurantOrder = () => {
 
@@ -29,10 +32,9 @@ const RestaurantOrder = () => {
 
 
       {/* map */}
-      <Box sx={{
-        marginTop:'3%',
-      }}>
-      <img src={Pickupmap}/>
+      <Box >
+      <Gmap/>
+     
       </Box>
 
 
@@ -42,4 +44,8 @@ const RestaurantOrder = () => {
   )
 }
 
+
 export default RestaurantOrder
+
+
+
