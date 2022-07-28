@@ -92,9 +92,7 @@ export default function AddressForm() {
           width: 126, 
           height: 126 ,
          margin:'auto',
-         }}
-         
-         
+         }}   
       />
       <Box sx={{position:'absolute',marginLeft:'30%',marginTop:'-2%'}}>
       <Stack>

@@ -22,7 +22,7 @@ import BiggerImage from '../../assets/images/register_big_image.png';
 
 const theme1 = createTheme();
 
-const RegisterBannerUser = () => {
+const ResetPasswordBanner = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -59,19 +59,20 @@ const RegisterBannerUser = () => {
             background:'',
             backgroundColor:Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
-            borderRadius:"33px" 
+            borderRadius:"33px",
+            height:"500px"
            
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
-            </Avatar> */}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
+            </Avatar>
           <Typography component="h1" variant="h5" style={{color:Colours.grayWhite}}>
-            Sign Up
+          Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
                     sx={{ input: 
-                    { color: "#fff" }, marginTop: 2,
+                    { color: "#fff" }, marginTop: 3,
                     "label": {color: "#fff"},
                     "& label.Mui-focused": {
                     color:"#fff"
@@ -97,24 +98,8 @@ const RegisterBannerUser = () => {
                     }} 
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 2,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }} 
-                  required
-                  fullWidth
                   name="password"
-                  label="Password"
+                  label="New Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -136,11 +121,6 @@ const RegisterBannerUser = () => {
                   id="password"
                   autoComplete="new-password"
                 />
-                <FormControlLabel
-                  style={{color:Colours.grayWhite}}
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label={<label>I accept the <Link href='/'>Terms of Conditions.</Link></label>}
-                />
             <Button
               type="submit"
               fullWidth
@@ -155,62 +135,14 @@ const RegisterBannerUser = () => {
                marginTop:'5%',
                hover: Colours.green }}
                >
-              Sign Up
+              Submit
             </Button>
-            <Typography  
-            sx={{
-              color:'white', 
-              fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
-              marginTop:'5%',
-              marginBottom:'5%'
-              }}>
-            ---Or Signup with---
-            </Typography>
             
-            <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
-                <Link href="#" variant="body2">
-                <img src={Google} alt="Logo" className='social-icons-gg' />
-                </Link>
-              </Grid>
-            </Grid>
-            <Typography
-            sx={{
-              color:'white', 
-              fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
-              marginTop:'5%',
-              marginBottom:'5%'
-              }}>
-                Already have an account? &nbsp;
-                                    <Link href="#" >
-                                        Sign In 
-                                </Link>
-                                </Typography>
           </Box>
-          {/* <Box 
-          sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
-                    position="absolute" p="20px" >
-                    <Skeleton 
-                      sx={{ backgroundColor:Colours.transparenceGrey,marginLeft:'100%', marginTop:'80%'}}
-                      variant="circular" width={140} height={140}/>
-       </Box> */}
         </Box>
-        {/* <Grid container item xs={6} direction="column" padding="40" margin="20 auto" >
-                    <Skeleton variant="circular" width={140} height={140} style={{margin:"0%"}} />
-                    <Skeleton variant="circular" width={140} height={140} style={{margin:"20%"}} />
-                    <img  src={BiggerImage} alt="big-image" className="bigger-image" />
-
-    </Grid> */}
       </Container>
     </ThemeProvider>
   );
 }
 
-export default RegisterBannerUser
+export default ResetPasswordBanner
