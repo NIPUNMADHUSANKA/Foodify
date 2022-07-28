@@ -26,49 +26,58 @@ function Image_Upload() {
     })
 
   return (
-    <Box className='image_upload_body' sx={{ margin:0}}>
+    <Box className='image_upload_body' height="100vh">
 
 
       <Fade top>
         <Navbar />
         <PageTitle MainHeader = {MainHeader}/>
-      </Fade>  
+      </Fade>
         
       <Fade right>
-        <Box float="right" textAlign="right" marginRight="10%" style={{color:'#ccc', fontSize:"150%", marginBottom:"1%"}}>
+        <Box  style={{color:'#ccc', fontSize:"100%", marginBottom:"1%", float:"right", marginRight:'80px'}}>
 
-            <select id="select" style={{ width: '15%', marginRight: '50px', backgroundColor:"#2E2E2E", border:"none", color:"#E0E0E0", padding:"8px"}}>
+            <select id="select" style={{backgroundColor:"#2E2E2E", borderRadius:"5px", marginRight:"20px"  ,border:"none", color:"#E0E0E0", padding:"8px"}}>
               <option>Breakfast</option>
               <option>Lunch</option>
               <option>Dinner</option>
               <option>Other</option>
             </select>
 
-            <AddCircleIcon />
+            
             Add New Food
+            
         </Box>
       </Fade>
 
       <Fade left>
-        <Box display="flex" flexdirection = "row" marginLeft="5%">
-          <ImageUpload />
-          <Details />
-        </Box>
-      </Fade>
+          <Box mt="5%">
+              
+                <Box display="flex" flexdirection = "row" marginLeft="5%" 
+                sx={{[theme.breakpoints.down('md')]:{
+                    flexDirection:"column",
+                    textAlign:"center",
+                    mt:"13%"
+               }}} >
+                  <ImageUpload />
+                  <Details />
+                </Box>
+              
 
-      <Fade right>
-        <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
-           float:"right",
-           marginRight:"8%",
-           marginTop:"2%"
-           ,"&:hover": {
-           backgroundColor: "#15e577",
-           borderColor:"#564345"
-        } }}>
-          Check
-        </Button>
+                
+                  <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
+                    float:"right",
+                    marginRight:"8%",
+                    marginTop:"2%"
+                    ,"&:hover": {
+                    backgroundColor: "#15e577",
+                    borderColor:"#564345"
+                  } }}>
+                    Check
+                  </Button>
+                         
+          </Box>
       </Fade>
-        
     </Box>
   )
 }
