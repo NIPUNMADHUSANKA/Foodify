@@ -26,7 +26,7 @@ function Image_Upload() {
     })
 
   return (
-    <Box className='image_upload_body' height="100vh">
+    <Box className='image_upload_body'  >
 
 
       <Fade top>
@@ -35,7 +35,7 @@ function Image_Upload() {
       </Fade>
         
       <Fade right>
-        <Box  style={{color:'#ccc', fontSize:"100%", marginBottom:"1%", float:"right", marginRight:'80px'}}>
+        <Box  style={{color:'#ccc', fontSize:"100%", marginBottom:"1%", float:"right", marginRight:'18%'}}>
 
             <select id="select" style={{backgroundColor:"#2E2E2E", borderRadius:"5px", marginRight:"20px"  ,border:"none", color:"#E0E0E0", padding:"8px"}}>
               <option>Breakfast</option>
@@ -54,20 +54,39 @@ function Image_Upload() {
           <Box mt="5%">
               
                 <Box display="flex" flexdirection = "row" marginLeft="5%" 
-                sx={{[theme.breakpoints.down('md')]:{
+                sx={{[theme.breakpoints.down('lg')]:{
                     flexDirection:"column",
                     textAlign:"center",
-                    mt:"13%"
-               }}} >
-                  <ImageUpload />
-                  <Details />
+                    justifyContent:"center",
+                    alignItems:"center",
+                    mt:"7%",
+                    
+               },
+               [theme.breakpoints.down('md')]:{
+                mt:"10%"                
+              },
+              [theme.breakpoints.down('sm')]:{
+               mt:"15%"                
+             }
+           }} >
+
+                <Box>
+                  <ImageUpload border="1px solid #000" />
+                </Box>
+
+                <Box>
+                  
+                </Box>
+                  
+  
                 </Box>
               
 
                 
                   <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
                     float:"right",
-                    marginRight:"8%",
+                    marginRight:"20%",
+                    marginBottom:"8%",
                     marginTop:"2%"
                     ,"&:hover": {
                     backgroundColor: "#15e577",

@@ -14,6 +14,8 @@ import LunchDiningIcon from '@mui/icons-material/LunchDining';
 
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -83,20 +85,27 @@ function Details() {
         
 
 
-        <Box sx={{ ml:"18%" }}>
-            <Box>
-            <FixedSizeList
-                height={420}
-                width="180%"
-                itemSize={90}
-                itemCount={6}  
-                style={{borderRadius : "40px", }}  
-            >
-                {renderRow}
-               
-            </FixedSizeList>
-            </Box>
-        </Box>
+        
+    <Box  style={{marginBottom:"1%"}} pl="21%" width="20vw"
+
+    
+     
+    >
+              
+              <FixedSizeList
+                  height={420}
+                  width="150%"
+                  itemSize={90}
+                  itemCount={6}  
+                  style={{borderRadius : "40px"}}  
+                  
+              >
+                  {renderRow}
+                
+              </FixedSizeList>
+
+    </Box>
+        
 
         
         
