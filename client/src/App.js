@@ -106,7 +106,6 @@ function App() {
         {/* <Footer/> */}
 
       </Box>
-    </Box>
   )
 }
 

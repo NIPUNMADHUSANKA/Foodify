@@ -61,6 +61,26 @@ const category = [
     },
 ];
 
+// ------------------------food names-----------------
+const foods = [
+    {
+        value: 'Category 1',
+        label: 'Food1',
+    },
+    {
+        value: 'Category 2',
+        label: 'Food2',
+    },
+    {
+        value: 'Category 3',
+        label: 'Food3',
+    },
+    {
+        value: 'Category 4',
+        label: 'Food4',
+    },
+];
+
 const AddOfferForm = () => {
 
     // --------to add category section--------
@@ -83,7 +103,6 @@ const AddOfferForm = () => {
                     padding: "1rem",
                     opacity: 0.9,
                     background: Colours.secondary,
-                    borderRadius: "1rem",
 
                     '& .MuiTextField-root': { m: 1, width: '96%' },
                 }}
@@ -144,6 +163,7 @@ const AddOfferForm = () => {
                             category={category}
                             item={item}
                             name={item.value}
+                            foods = {foods}
                         />
                     ))}
                 </Box>
