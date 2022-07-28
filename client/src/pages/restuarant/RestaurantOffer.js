@@ -11,6 +11,9 @@ import Rlogo from '../../assets/images/restaurant-logo.jpg';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+
 // ----------------this is tem until data call--------
 const details = {
     "detail": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
@@ -53,81 +56,86 @@ const RestaurantOffer = () => {
                     flexDirection: "column",
                 }}>
                     {/* ------------topic area--------------------- */}
-                    <Box sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        padding: "1rem",
-                    }}>
-                        <IconButton>
-                            <ArrowBackIosIcon sx={{
-                                color: Colours.green, '&:hover': {
-                                    color: Colours.yellow,
-                                    [theme.breakpoints.down('sm')]: {
-                                        height:"80%",
-                                        marginTop:"30px",
-                                    },
-                                },
-                                fontSize: "2rem",
-                            }} />
-                        </IconButton>
-
-                        <Avatar
-                            alt="food image"
-                            src={Rlogo}
-                            sx={{
-                                width: "10%",
-                                height: "100%",
-                                margin: "1rem",
-                                border: "2px solid #EFEAEA",
-                                [theme.breakpoints.down('sm')]: {
-                                    height:"80%",
-                                },
-                            }} />
-
-                        <Typography variant='h4' sx={{
-                            color: Colours.green,
-                            marginTop: "4%",
-                            [theme.breakpoints.down('sm')]: {
-                                fontSize: '20px',
-                                marginRight: "10%",
-                                marginTop:"30px",
-                            }
+                    <Fade top>
+                        <Box sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            padding: "1rem",
                         }}>
-                            Seasonal Offers
-                        </Typography>
-                    </Box>
+                            <IconButton>
+                                <ArrowBackIosIcon sx={{
+                                    color: Colours.green, '&:hover': {
+                                        color: Colours.yellow,
+                                        [theme.breakpoints.down('sm')]: {
+                                            height: "80%",
+                                            marginTop: "30px",
+                                        },
+                                    },
+                                    fontSize: "2rem",
+                                }} />
+                            </IconButton>
+
+                            <Avatar
+                                alt="food image"
+                                src={Rlogo}
+                                sx={{
+                                    width: "10%",
+                                    height: "100%",
+                                    margin: "1rem",
+                                    border: "2px solid #EFEAEA",
+                                    [theme.breakpoints.down('sm')]: {
+                                        height: "80%",
+                                    },
+                                }} />
+
+                            <Typography variant='h4' sx={{
+                                color: Colours.green,
+                                marginTop: "4%",
+                                [theme.breakpoints.down('sm')]: {
+                                    fontSize: '20px',
+                                    marginRight: "10%",
+                                    marginTop: "30px",
+                                }
+                            }}>
+                                Seasonal Offers
+                            </Typography>
+                        </Box>
+                    </Fade>
                     {/* ------------end of topic area--------------- */}
 
-                    <Typography sx={{
-                        color:Colours.green,
-                        marginLeft:"2rem",
-                    }}>
-                        Description
-                    </Typography>
+                    {/* -------------description area--------------- */}
+                    <Fade left cascade>
+                        <Typography sx={{
+                            color: Colours.green,
+                            marginLeft: "2rem",
+                        }}>
+                            Description
+                        </Typography>
 
-                    <Typography variant="body1" gutterBottom sx={{
-                        color: Colours.grayWhite,
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        fontSize: '1rem',
-                        padding: '1%',
-                        width: "80%",
-                        margin: "auto",
-                        marginRight: "15%",
-                        transition: 'transform .2s', '&:hover': {
-                            transform: 'scale(1.04)',
-                            opacity: 4,
-                        },
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: '14px',
-                            marginRight: "10%",
-                        }
-                    }}>
-                        {details.detail}
-                        <br />
-                        {details.detail}
+                        <Typography variant="body1" gutterBottom sx={{
+                            color: Colours.grayWhite,
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            fontSize: '1rem',
+                            padding: '1%',
+                            width: "80%",
+                            margin: "auto",
+                            marginRight: "15%",
+                            transition: 'transform .2s', '&:hover': {
+                                transform: 'scale(1.04)',
+                                opacity: 4,
+                            },
+                            [theme.breakpoints.down('sm')]: {
+                                fontSize: '14px',
+                                marginRight: "10%",
+                            }
+                        }}>
+                            {details.detail}
+                            <br />
+                            {details.detail}
 
-                    </Typography>
+                        </Typography>
+                    </Fade>
 
                 </Box>
                 {/* --------------end of the description area---------------- */}
