@@ -9,12 +9,9 @@ import AddOfferForm from '../../components/restaurant/AddOfferForm';
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 
-// ----------------this is tem until data call--------
-const details = {
-    "detail": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-}
 
 const AddOffers = () => {
+
     return (
 
         // ------main box----------------
@@ -34,10 +31,13 @@ const AddOffers = () => {
                 flexDirection: "column-reverse",
             },
         }}>
-            <Box sx={{
-                width:"70%",
+            <Box scroll='paper' sx={{
+                width:"80%",
                 margin:"auto",
-                height:"90vh",
+                height:"80vh",
+                padding:"auto",
+                overflow: "scroll",
+                borderRadius:"0.8rem",
             }}>
                 <AddOfferForm />
             </Box>
