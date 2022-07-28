@@ -13,16 +13,19 @@ import RestaurantRating from './pages/restuarant/RestaurantRating';
 import RestaurantOffer from './pages/restuarant/RestaurantOffer';
 import OrderFood from './pages/restuarant/OrderFood';
 import Landing from './pages/Landing';
+
 import AddOffers from './pages/restuarant/AddOffers';
 
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
-import DashboardA from './pages/Dashboard-admin';
+//import DashboardA from './pages/Dashboard-admin';
 
 import IntakeChart from './pages/IntakeChart';
 
 import Home from './pages/Explore';
-// import Explore from './pages/Explore';
+import AddFoodMenu from './pages/AddFoodMenu';
+import Image_Upload from './pages/Image_Upload';
+import Nutrition_Summary from './pages/Nutrition_Summary';
 
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
@@ -56,13 +59,19 @@ function App() {
 
 
         <Routes>
+        
+          <Route path="/" element = {<Landing/>} />
+          <Route path="/Explore" element = {<Explore/>} />
+         
 
-          <Route path="/" element={<Landing />} />
-          <Route path="/Explore" element={<Explore />} />
-          <Route path="/Dashboard" element={<DashboardA />} />
+          <Route path="/restaurant" element = {<Restaurant/>} />
+          <Route path="/AddFoodMenu" element = {<AddFoodMenu/>} />
+          <Route path="/Image_Upload" element = {<Image_Upload/>} />
+          <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
+          
 
-          <Route path="/restaurant" element={<Restaurant />} />
-
+          
+          
           <Route path="/Complaints" element={<Complaints />} />
           <Route path="/Intake" element={<IntakeChart />} />
 
@@ -100,7 +109,6 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
 
           <Route path="/restaurant/category" element={<FoodCategory />} />
-
 
         </Routes>
         {/* <Footer/> */}
