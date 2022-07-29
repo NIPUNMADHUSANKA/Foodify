@@ -7,6 +7,10 @@ import styled from '@emotion/styled';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+// ------------------for the side drawer----------
+import Drawer from '@mui/material/Drawer';
+import OrderSideDrawer from './OrderSideDrawer';
+
 
 // ---------------------------------text fied css style-----------------------
 const AmountArea = styled(TextField)({
@@ -40,12 +44,36 @@ const AmountArea = styled(TextField)({
 });
 // ---------------------------------------------------------------------
 
+
+// -----------------cutomise drawer-------------------------------------
+const SideDrawer = styled(Drawer)({
+    '.MuiDrawer-paper':{
+        background:Colours.gray3,
+        borderRadius: "360px 0px 0px 360px",
+        
+    }
+});
+// -------------------------------------------------------------------------
+
 const iconbutton = {
-    color:Colours.green,'&:hover': {
+    color: Colours.green, '&:hover': {
         background: Colours.yellow,
     },
 }
 const OrderFoodForm = () => {
+
+    // --------------------for the side drawe----------------------------------------------
+    const [state, setState] = React.useState({ right: false });
+
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+    //   ------------------------------------------------------------------------------------
+
     return (
         // ------------main box------------------
         <Box sx={{
@@ -96,9 +124,9 @@ const OrderFoodForm = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <IconButton><ExpandLessIcon style={iconbutton}/></IconButton>
-                    <Box sx={{ width: "30%" }}><AmountArea name = "quantity" id="amount" defaultValue="1" label="Amount" variant="outlined" /></Box>
-                    <IconButton><ExpandMoreIcon style={iconbutton}/></IconButton>
+                    <IconButton><ExpandLessIcon style={iconbutton} /></IconButton>
+                    <Box sx={{ width: "30%" }}><AmountArea name="quantity" id="amount" defaultValue="1" label="Amount" variant="outlined" /></Box>
+                    <IconButton><ExpandMoreIcon style={iconbutton} /></IconButton>
                 </Box>
                 {/* -------------------end of inputs------------ */}
 
@@ -107,20 +135,38 @@ const OrderFoodForm = () => {
                 <Box sx={{
                     marginTop: "1rem"
                 }}>
-                    <Button type='submit' variant="contained" sx={{
-                        margin: '0.5rem',
-                        background: Colours.green, '&:hover': {
-                            backgroundColor: Colours.yellow,
-                        },
-                        color: Colours.dark,
-                        fontSize: '1rem',
-                        hover: Colours.green,
-                        borderRadius: "1rem",
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: '8px',
-                            padding: '2px',
-                        },
-                    }} endIcon={<ShoppingBagIcon />}>Proceed</Button>
+
+                    {/* -------------------------to toggle side drawer------------------ */}
+                    <React.Fragment key='right'>
+
+                        <Button sx={{
+                            margin: '0.5rem',
+                            background: Colours.green, '&:hover': {
+                                backgroundColor: Colours.yellow,
+                            },
+                            color: Colours.dark,
+                            fontSize: '1rem',
+                            hover: Colours.green,
+                            borderRadius: "1rem",
+                            [theme.breakpoints.down('sm')]: {
+                                fontSize: '8px',
+                                padding: '2px',
+                            },
+                        }} endIcon={<ShoppingBagIcon />} onClick={toggleDrawer('right', true)}>Proceed</Button>
+
+                        {/* ---------------side drawer------------ */}
+                        <SideDrawer
+                            anchor={'right'}
+                            open={state['right']}
+                            onClose={toggleDrawer('right', false)}
+                        >
+                            <OrderSideDrawer />
+                        </SideDrawer>
+                        {/* ------------end of side drawer-------- */}
+
+                    </React.Fragment>
+
+                    {/* ------------------------end of side drawer------------------------ */}
 
                     <Button variant="contained" sx={{
                         margin: '0.5rem',

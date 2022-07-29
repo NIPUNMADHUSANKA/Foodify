@@ -1,7 +1,6 @@
 import React from 'react';
 import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 import { Box, Paper, ThemeProvider, Typography } from '@mui/material';
-import { useTheme } from '@emotion/react';
 
 import '../assets/css/App.css';
 
