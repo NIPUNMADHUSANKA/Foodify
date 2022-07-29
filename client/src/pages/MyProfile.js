@@ -5,7 +5,6 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 import '../assets/css/Profile.css';
 import Pnavbar from '../components/profile/profileNavbar';
 import Pcarousel from '../components/profile/profileCarouselGood';
-import ProfileDetails from '../components/profile/profile_details';
 import AddressFormW from '../components/profile/AddressForm';
 import '../assets/css/Profile.css';
 
@@ -16,8 +15,9 @@ const Profile = () => {
     <Box className='Profile2-body-Style' marginTop="0px">
       <Pnavbar/>
       <AddressFormW/>
-      
-      
+
+
+
     </Box>
 
     

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Box,TextareaAutosize,Button } from '@mui/material';
+import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -17,10 +17,10 @@ function ComplainAdd() {
   return (
 
 
-     <Box item xs={12} sm={6} color="#fff" bgcolor="#171717" sx= {{ml:"5%",borderRadius: '20px',p:"3%", width:{lg:"50vw",xs:"70vw"} }} >
+     <Box color="#fff" bgcolor="#171717" opacity="50" sx= {{ml:"5%",borderRadius: '20px',p:"3%", width:{lg:"45vw",xs:"55vw"} }} >
     
       <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"230%",xs:"180%"} }} >
-      Add Complaint
+          Add Complaint
       </Typography>
 
       <Grid container spacing={3} sx={{ input: { color: "#fff" }, "label": {color: "#fff"}, p:"1%" }} >
@@ -37,8 +37,6 @@ function ComplainAdd() {
             sx={{"& label.Mui-focused": {
                 color:"#fff"
               }}}
-            
-            
           />
         </Grid>
 
@@ -53,19 +51,16 @@ function ComplainAdd() {
             variant="standard"
             sx={{"& label.Mui-focused": {
                 color:"#fff"
-              }}}
-            
+              }}}    
           />
         </Grid>
         
-        <Grid item xs={12} >
-           
+        <Grid item xs={12} > 
         <TextareaAutosize
             placeholder="Complaint"
             style={{ width: "100%", paddingTop: '5px'}}
             
         />
-
         </Grid>
         
         <Grid item xs={12} md={4}>
@@ -77,24 +72,27 @@ function ComplainAdd() {
         </Grid>
 
 
-        <Grid item xs={12} md={2}>
-            <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor: Colours.green, '&:hover': {
-                backgroundColor: Colours.darkgray,
-              }}}>
+        <Box mt="8%" marginLeft="35%"  display="flex" flexDirextion="row" >
+
+              <Button variant="outlined" style={{marginRight:"5%", color:'#95CD41',borderColor: "#95CD41"
+              ,"&:hover": {
+              backgroundColor: "#15e577",
+              borderColor:"#564345"
+              } }}>
               Send
-            </Button>
-        </Grid>
+              </Button>
 
-
-        <Grid item xs={12} sm={4}>
-            <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor: Colours.yellow, '&:hover': {
-                backgroundColor: Colours.darkgray,
-              }}}>
+              <Button variant="outlined" style={{color:'#FAC213', borderColor: "#FAC213",
+              "&:hover": {
+              backgroundColor: "#15e577",
+              borderColor:"#564345"
+              } }}>
               Clear
-            </Button>
-        </Grid>
+              </Button>
 
-        
+        </Box>
+
+  
       </Grid>
 
 

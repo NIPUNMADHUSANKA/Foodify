@@ -22,7 +22,7 @@ import BiggerImage from '../../assets/images/register_big_image.png';
 
 const theme1 = createTheme();
 
-export default function SignUp() {
+const RegisterBannerUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -63,15 +63,15 @@ export default function SignUp() {
            
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
-            </Avatar>
+          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
+            </Avatar> */}
           <Typography component="h1" variant="h5" style={{color:Colours.grayWhite}}>
             Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
                     sx={{ input: 
-                    { color: "#fff" }, 
+                    { color: "#fff" }, marginTop: 2,
                     "label": {color: "#fff"},
                     "& label.Mui-focused": {
                     color:"#fff"
@@ -83,12 +83,12 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="username"
-                  label="username"
+                  label="Username"
                   autoFocus
                 />
                 <TextField
                     sx={{ input: 
-                        { color: "#fff" }, marginTop: 3,
+                        { color: "#fff" }, marginTop: 2,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
                         color:"#fff"
@@ -104,7 +104,7 @@ export default function SignUp() {
                 />
                 <TextField
                     sx={{ input: 
-                        { color: "#fff" }, marginTop: 3,
+                        { color: "#fff" }, marginTop: 2,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
                         color:"#fff"
@@ -121,7 +121,7 @@ export default function SignUp() {
                 />
                 <TextField
                     sx={{ input: 
-                        { color: "#fff" }, marginTop: 3, marginBottom: 3,
+                        { color: "#fff" }, marginTop: 2, marginBottom: 2,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
                         color:"#fff"
@@ -137,8 +137,9 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
                 <FormControlLabel
+                  style={{color:Colours.grayWhite}}
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="By Signing up you’re agree to our Terms & Conditions."
+                  label={<label>I accept the <Link href='/'>Terms of Conditions.</Link></label>}
                 />
             <Button
               type="submit"
@@ -151,16 +152,16 @@ export default function SignUp() {
                 },
                color: Colours.dark,
                fontSize: '20px',
-               marginTop:'7%',
+               marginTop:'5%',
                hover: Colours.green }}
                >
               Sign Up
             </Button>
             <Typography  
             sx={{
-              color:'Colours.transparenceGrey', 
+              color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
-              paddingLeft:'34%',
+              textAlign:"center",
               marginTop:'5%',
               marginBottom:'5%'
               }}>
@@ -168,34 +169,48 @@ export default function SignUp() {
             </Typography>
             
             <Grid container xs >
-              <Grid item xs  marginLeft="40%">
+              <Grid item xs  marginLeft="35%">
                 <Link href="#" variant="body2">
                 <img src={Facebook} alt="Logo" className='social-icons-fb' />
                 </Link>
               </Grid>
-              <Grid item xs marginRight="37%">
+              <Grid item xs marginRight="35%">
                 <Link href="#" variant="body2">
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
             </Grid>
-
+            <Typography
+            sx={{
+              color:'white', 
+              fontSize:{lg:'15px', xs:'10px'},
+              textAlign:"center",
+              marginTop:'5%',
+              marginBottom:'5%'
+              }}>
+                Already have an account? &nbsp;
+                                    <Link href="#" >
+                                        Sign In 
+                                </Link>
+                                </Typography>
           </Box>
-          <Box 
+          {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
                     <Skeleton 
                       sx={{ backgroundColor:Colours.transparenceGrey,marginLeft:'100%', marginTop:'80%'}}
                       variant="circular" width={140} height={140}/>
-       </Box>
+       </Box> */}
         </Box>
-        <Grid container item xs={6} direction="column" padding="40" margin="20 auto" >
+        {/* <Grid container item xs={6} direction="column" padding="40" margin="20 auto" >
                     <Skeleton variant="circular" width={140} height={140} style={{margin:"0%"}} />
                     <Skeleton variant="circular" width={140} height={140} style={{margin:"20%"}} />
                     <img  src={BiggerImage} alt="big-image" className="bigger-image" />
 
-    </Grid>
+    </Grid> */}
       </Container>
     </ThemeProvider>
   );
 }
+
+export default RegisterBannerUser
