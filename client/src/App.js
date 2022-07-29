@@ -32,6 +32,7 @@ import UserProfile from './pages/UserProfile';
 import MyProfile from './pages/MyProfile';
 import RestaurantOrder from './pages/RestaurantOrder';
 import UserOrder from './pages/UserOrder';
+import UserNotification from './components/user_notification/user_notification';
 
 
 
@@ -81,6 +82,7 @@ function App() {
           <Route path="/restaurantorder" element = {<RestaurantOrder/>} />
           <Route path="/myprofile" element = {<MyProfile/>} />
           <Route path="/userorder" element = {<UserOrder/>} />
+          <Route path="/usernotification" element ={<UserNotification/>} />
 
 
 
