@@ -16,7 +16,7 @@ export default class LineGraph extends Component {
                 datasets: [
                     {
                         label: "Sales",
-                        data: [86, 67, 91],
+                        data: [25, 30, 32],
                         fill: {
                             target: 'origin',
                             above: 'rgba(149, 205, 65, 0.15)',   // Area will be red above the origin
@@ -28,12 +28,6 @@ export default class LineGraph extends Component {
             },
             options: {
                 responsive: true,
-                // maintainAspectRatio: false,
-                // scales: {
-                //     grid:{
-                //         borderColor: "#fff"
-                //     }
-                // }
             }
         });
     }

@@ -1,33 +1,31 @@
 import React from 'react';
 import {ThemeProvider, Box, Typography, Tab, Tabs, TextField, List, ListItem, ListItemText, MenuItem, Menu, styled} from '@mui/material';
-// import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemText from '@mui/material/ListItemText';
-// import MenuItem from '@mui/material/MenuItem';
-// import Menu from '@mui/material/Menu';
 
-// import { CalendarPicker } from '@mui/x-date-pickers';
-// import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'; 
-
 
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import theme, { Colours } from '../../../assets/theme/theme'; //to use theme provider,need to import this
 
-import LineGraph from './LineGraph';
 import { width } from '@mui/system';
 import { useParams } from 'react-router-dom';
 
+import IncomeChart from './IncomeChart';
+import SignupChart from './SignupChart';
+import AccountUpgradeChart from './AccountUpgrade';
+
+import TabPanel from '../../TabPanel';
+//------------------------------options for calendar
 const options1 = [
     'Day',
     'Month',
     'Year',
 ];
 
+//------------------------------styles for calendar
 const popperSx = {
     "& .MuiPaper-root": {
         backgroundColor: "rgba(120, 120, 120, 0.2)",
@@ -41,49 +39,64 @@ const popperSx = {
     }
 };
 
+//------------------------------styles for menu
 const menuSx = {
     "& .MuiPaper-root": {
         backgroundColor: "rgba(120, 120, 120, 0.2)",
         color:"#fff",
-        fontSize:"14px"
+        fontSize:"14px",
     },
 }
 
-function Charts(details) {
+
+function Charts() {
     
-    const [value, setValue] = React.useState('one');
-    const [date, setDate] = React.useState(new Date());
-    const [range, setRange] = React.useState('year');
-
-
+    //------------------------------------------------------------handeling tabs    
+    const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    //------------------------------------------------------------handeling calender changing dates
+    const [date, setDate] = React.useState(new Date());
     const handleChangeDate = (newValue) => {
         setDate(newValue);
     };
-
+    
+    //------------------------------------------------------------handeling day, month, year menu 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
     const open = Boolean(anchorEl);
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
     };
-
-    const handleMenuItemClick = (event, index) => {
-        setSelectedIndex(index);
-        
-        setAnchorEl(null);
-    };
-
     const handleClose = () => {
         setAnchorEl(null);
     };
     
+    //------------------------------------------------------------change calender button according to selected menu
+    const [range, setRange] = React.useState('day');
+    const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+        setAnchorEl(null);
+        switch(index){
+            case 0:
+                setRange('day')
+                case 1: 
+                setRange('month')
+                case 3:
+                    setRange('year')
+                    default:
+                        setRange('day')
+                    }
+                    // }
+    };
+                
+    
 
   return (
     <ThemeProvider theme={theme}>
+        {/* ------------------------------------------------------------tabs box */}
         <Box sx={{
             backgroundColor: "rgba(23, 23, 23, 0.8)",
             color: "primary",
@@ -100,16 +113,18 @@ function Charts(details) {
                     ml: "3%",
                 }}
             >
-                <Tab value="one" label={
+                <Tab value={0} label={
                     <Typography varient="h4" color="#fff" fontSize="15px">Income Chart</Typography>}> 
                 </Tab>
-                <Tab value="two" label={
+                <Tab value={1} label={
                     <Typography varient="h4" color="#fff" fontSize="15px">Signup Chart</Typography>}> 
                 </Tab>
-                <Tab value="three" label={
+                <Tab value={2} label={
                     <Typography varient="h4" color="#fff" fontSize="15px">Account Upgrading</Typography>}> 
                 </Tab>
             </Tabs>
+
+            {/* ------------------------------------------------------------time box */}
             <Box
             sx={{
                 display:"flex",
@@ -120,6 +135,7 @@ function Charts(details) {
                 paddingRight: "5%",
                 
             }}>
+                {/* ------------------------------------------------------------menu box */}
                 <Box>
                     <List
                         component="nav"
@@ -159,7 +175,7 @@ function Charts(details) {
                         MenuListProps={{
                         'aria-labelledby': 'lock-button',
                         role: 'listbox',
-                        width: "100%"
+                        // width: "100%"
                         }}
                         sx= {menuSx}
                     >
@@ -168,13 +184,16 @@ function Charts(details) {
                             key={option}
                             selected={index === selectedIndex}
                             onClick={(event) => handleMenuItemClick(event, index)}
-                            sx={{fontSize: "14px"}}
+                            sx={{
+                                fontSize: "14px",
+                            }}
                         >
                             {option}
                         </MenuItem>
                         ))}
                     </Menu>
                 </Box>
+                {/* ------------------------------------------------------------calendar box */}
                 <Box
                 sx={{
                     width:"20%",
@@ -184,7 +203,7 @@ function Charts(details) {
                 }}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker 
-                                views={[range]}
+                                // views={[range]}
                                 value={date}
                                 onChange={handleChangeDate}
                                 renderInput = {(params) => <TextField {...params} />}
@@ -195,8 +214,17 @@ function Charts(details) {
                         </LocalizationProvider>
                 </Box>
             </Box>
-            <LineGraph />
 
+            {/* ------------------------------------------------------------graphs changes with tabs */}
+            <TabPanel value={value} index={0}>
+                <IncomeChart />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <SignupChart />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <AccountUpgradeChart />
+            </TabPanel>
         </Box>
     </ThemeProvider>
   )
