@@ -1,13 +1,13 @@
 import React from 'react';
-import {ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import {ThemeProvider, Box, Typography, Tab, Tabs, TextField, List, ListItem, ListItemText, MenuItem, Menu, styled} from '@mui/material';
+// import List from '@mui/material/List';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemText from '@mui/material/ListItemText';
+// import MenuItem from '@mui/material/MenuItem';
+// import Menu from '@mui/material/Menu';
 
-import { CalendarPicker } from '@mui/x-date-pickers';
-import TextField from '@mui/material/TextField';
+// import { CalendarPicker } from '@mui/x-date-pickers';
+// import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'; 
@@ -20,6 +20,7 @@ import theme, { Colours } from '../../../assets/theme/theme'; //to use theme pro
 
 import LineGraph from './LineGraph';
 import { width } from '@mui/system';
+import { useParams } from 'react-router-dom';
 
 const options1 = [
     'Day',
@@ -27,12 +28,40 @@ const options1 = [
     'Year',
 ];
 
+const popperSx = {
+    "& .MuiPaper-root": {
+        backgroundColor: "rgba(120, 120, 120, 0.2)",
+        color:"#fff"
+    },
+    "& .css-j1tbx-MuiButtonBase-root-MuiPickersDay-root:hover" :{
+        backgroundColor:"#95CD41"
+    },
+    "& .css-1d8508y-MuiTypography-root": {
+        color:"#fff",
+    }
+};
+
+const menuSx = {
+    "& .MuiPaper-root": {
+        backgroundColor: "rgba(120, 120, 120, 0.2)",
+        color:"#fff",
+        fontSize:"14px"
+    },
+}
+
 function Charts(details) {
     
     const [value, setValue] = React.useState('one');
+    const [date, setDate] = React.useState(new Date());
+    const [range, setRange] = React.useState('year');
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const handleChangeDate = (newValue) => {
+        setDate(newValue);
     };
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -44,6 +73,7 @@ function Charts(details) {
 
     const handleMenuItemClick = (event, index) => {
         setSelectedIndex(index);
+        
         setAnchorEl(null);
     };
 
@@ -88,6 +118,7 @@ function Charts(details) {
                 fontSize: "10px",
                 justifyContent: "flex-end",
                 paddingRight: "5%",
+                
             }}>
                 <Box>
                     <List
@@ -106,12 +137,11 @@ function Charts(details) {
                             aria-expanded={open ? 'true' : undefined}
                             onClick={handleClickListItem}
                             sx={{
-                                padding: '2px 5px 2px 15px',
+                                padding: '5px 5px 5px 15px',
                                 backgroundColor: 'rgba(45, 45, 45, 1)',
                                 color: 'white',
                                 border: '1px solid rgba(255, 255, 255,0.6)',
                                 borderRadius: '5px',
-                                fontSize: '0px !important'
                             }}
                             >
                             <ListItemText/>
@@ -131,20 +161,38 @@ function Charts(details) {
                         role: 'listbox',
                         width: "100%"
                         }}
+                        sx= {menuSx}
                     >
                         {options1.map((option, index) => (
                         <MenuItem
                             key={option}
                             selected={index === selectedIndex}
                             onClick={(event) => handleMenuItemClick(event, index)}
+                            sx={{fontSize: "14px"}}
                         >
                             {option}
                         </MenuItem>
                         ))}
                     </Menu>
                 </Box>
-                <Box>
-                
+                <Box
+                sx={{
+                    width:"20%",
+                    backgroundColor: "rgba(45, 45, 45, 1)",
+                    border: '1px solid rgba(255, 255, 255,0.6)',
+                    borderRadius: '5px',
+                }}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker 
+                                views={[range]}
+                                value={date}
+                                onChange={handleChangeDate}
+                                renderInput = {(params) => <TextField {...params} />}
+                                PopperProps={{
+                                    sx: popperSx
+                                }}
+                            />
+                        </LocalizationProvider>
                 </Box>
             </Box>
             <LineGraph />

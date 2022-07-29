@@ -1,3 +1,4 @@
+import React from 'react';
 import { Avatar, Box, Card, CardContent, Grid, Typography, ThemeProvider} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Avatar, Box, Card, CardContent, Grid, Typography, ThemeProvider} from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
