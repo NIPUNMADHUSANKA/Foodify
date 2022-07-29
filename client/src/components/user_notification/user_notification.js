@@ -17,6 +17,8 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import { FixedSizeList } from 'react-window';
 import ListItemButton from '@mui/material/ListItemButton';
+import Skeleton from '@mui/material/Skeleton';
+
 
 
 
@@ -34,32 +36,34 @@ function renderRow(props) {
   return (
     <ListItem style={style} key={index} component="div" sx={{backgroundColor:Colours.white}} disablePadding>
 
-<Divider />
-<ListItem alignItems="flex-start">
+    <ListItem alignItems="flex-start">
+      
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
+       
         <ListItemText
-          primary="Food Hut "
+          primary={"Food Hut "}
           secondary={
             <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body"
-                color="text.primary"
-              >
-                Your order has started to prepare
+             
+              <Typography variant="h7" >
+                Your order has been started
               </Typography>
-              {" 9.00 AM"}
+              <Typography varient="h8">9.00 AM</Typography>
+              <Divider sx={{marginTop:'5%',width:'100%'}} />  
+      
             </React.Fragment>
+            
           }
+
         />
+
       </ListItem>
-      <Divider variant="inset"  />  
-    
-   
+      
+
     </ListItem>
+    
   );
 }
 
