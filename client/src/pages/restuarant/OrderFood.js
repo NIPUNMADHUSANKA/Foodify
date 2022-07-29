@@ -55,7 +55,7 @@ const OrderFood = () => {
         }}>
             {/* --------------------details area-------------------- */}
             <Box sx={{
-                width: "75%",
+                width: "70%",
                 display: "flex",
                 flexDirection: "column",
                 margin: "auto",
@@ -88,7 +88,7 @@ const OrderFood = () => {
             {/* -----------------------image area------------------- */}
             
             <Box sx={{
-                width: "25%",
+                width: "30%",
                 background: `url(${Background})`,
                 borderRadius: "360px 0px 0px 360px",
                 border: "2px solid #EFEAEA",

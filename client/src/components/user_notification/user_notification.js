@@ -41,20 +41,21 @@ function renderRow(props) {
           <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
         </ListItemAvatar>
         <ListItemText sx={{marginLeft:'0%' }}
-          primary="Summer BBQ"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
+          // primary="Summer BBQ"
+          // secondary={
+          //   <React.Fragment>
+          //     <Typography
+          //       sx={{ display: 'inline' }}
+          //       component="span"
+          //       variant="body2"
+          //       color="text.primary"
+          //     >
+          //       to Scott, Alex, Jennifer
+          //     </Typography>
+          //     {" — Wish I could come, but I'm out of town this…"}
+          //   </React.Fragment>
+          // }
+          
         />
       </ListItem>
          

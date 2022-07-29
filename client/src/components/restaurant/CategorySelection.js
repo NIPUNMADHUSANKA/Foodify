@@ -1,9 +1,9 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
+import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -42,6 +42,24 @@ const InputArea = styled(TextField)({
 
 const CategorySelection = (props) => {
 
+    // ---------------for the check list-----------------------
+    const [state, setState] = React.useState({
+        gilad: true,
+        jason: false,
+        antoine: false,
+      });
+    
+      const checklist = (event) => {
+        setState({
+          ...state,
+          [event.target.name]: event.target.checked,
+        });
+      };
+    
+      const { gilad, jason, antoine } = state;
+
+    //   ---------------------------------
+
     const [currency, setCurrency] = React.useState('category');
 
     const handleChange = (event) => {
@@ -49,10 +67,12 @@ const CategorySelection = (props) => {
     };
 
     return (
-        <Box>
+
+        <FormControl>
             <InputArea
                 id="outlined-select-currency"
                 select
+                name='category'
                 label="Category"
                 value={currency}
                 onChange={handleChange}
@@ -64,7 +84,30 @@ const CategorySelection = (props) => {
                     </MenuItem>
                 ))}
             </InputArea>
-        </Box>
+
+            {/* ------------------to select food items------------------ */}
+            <FormGroup>
+                <FormControlLabel
+                    control={
+                        <Checkbox checked={gilad} onChange={checklist} name="gilad" />
+                    }
+                    label="Gilad Gray"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox checked={jason} onChange={checklist} name="jason" />
+                    }
+                    label="Jason Killian"
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox checked={antoine} onChange={checklist} name="antoine" />
+                    }
+                    label="Antoine Llorca"
+                />
+            </FormGroup>
+            {/* ------------------end of selecting food items------------------ */}
+        </FormControl>
     )
 }
 
