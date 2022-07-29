@@ -33,32 +33,31 @@ function renderRow(props) {
 
   return (
     <ListItem style={style} key={index} component="div" sx={{backgroundColor:Colours.white}} disablePadding>
-    <ListItemText 
-         />
-<Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
+
+<Divider />
+<ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
-        <ListItemText sx={{marginLeft:'0%' }}
-          // primary="Summer BBQ"
-          // secondary={
-          //   <React.Fragment>
-          //     <Typography
-          //       sx={{ display: 'inline' }}
-          //       component="span"
-          //       variant="body2"
-          //       color="text.primary"
-          //     >
-          //       to Scott, Alex, Jennifer
-          //     </Typography>
-          //     {" — Wish I could come, but I'm out of town this…"}
-          //   </React.Fragment>
-          // }
-          
+        <ListItemText
+          primary="Food Hut "
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body"
+                color="text.primary"
+              >
+                Your order has started to prepare
+              </Typography>
+              {" 9.00 AM"}
+            </React.Fragment>
+          }
         />
       </ListItem>
-         
+      <Divider variant="inset"  />  
+    
    
     </ListItem>
   );
@@ -109,7 +108,7 @@ export default function BasicPopover() {
           }}
       >
    <Box
-      sx={{ width: '100%', height: 400, maxWidth: 360, bgcolor: 'background.paper' }}
+     
     >
       <FixedSizeList
         height={400}
