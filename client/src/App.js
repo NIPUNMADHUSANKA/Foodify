@@ -18,11 +18,11 @@ import AddOffers from './pages/restuarant/AddOffers';
 
 import Complaints from './pages/Complaints';
 import Explore from './pages/Explore';
-//import DashboardA from './pages/Dashboard-admin';
+import Dashboard from './pages/Dashboard-admin';
 
 import IntakeChart from './pages/IntakeChart';
 
-import Home from './pages/Explore';
+// import Home from './pages/Explore';
 import AddFoodMenu from './pages/AddFoodMenu';
 import Image_Upload from './pages/Image_Upload';
 import Nutrition_Summary from './pages/Nutrition_Summary';
@@ -53,7 +53,7 @@ function App() {
 
   
       
-    <Box width="400px" sx={{width:'100%'}} m="0">
+    <Box sx={{margin:"0"}}>
        
 
         {/* <Navbar /> */}
@@ -111,6 +111,8 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
 
           <Route path="/restaurant/category" element={<FoodCategory />} />
+
+          <Route path="/dashboard" element={<Dashboard />} />
 
         </Routes>
         {/* <Footer/> */}
