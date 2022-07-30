@@ -107,7 +107,7 @@ export default function AddressForm() {
         Profile Details
       </Typography>
       <Grid container spacing={3} sx={{color:Colours.formWhite}} >
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} >
           <TextField
           sx={{ input: 
             { color: Colours.formWhite }, 
@@ -118,9 +118,9 @@ export default function AddressForm() {
         
             }}
             required
-            id="firstName"
-            name="firstName"
-            label="First Name"
+            id="userName"
+            name="userName"
+            label="Username"
             fullWidth
             autoComplete="given-name"
             defaultValue="Riyansa"
@@ -128,7 +128,7 @@ export default function AddressForm() {
            
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             sx={{ input: 
             { color: Colours.formWhite }, 
@@ -147,7 +147,7 @@ export default function AddressForm() {
             variant="filled"
           />
           
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
          
            <TextField
