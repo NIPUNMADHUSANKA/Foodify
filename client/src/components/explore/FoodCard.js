@@ -78,7 +78,7 @@ function FoodCard() {
           }}
           >
           View 
-          <ArrowForwardIosIcon fontSize='8px' sx={{marginLeft:"2px"}}/>
+          <ArrowForwardIosIcon fontSize='8px' sx={{color:"#272727", marginLeft:"2px"}}/>
           </Button>
         </Box>
 

@@ -48,9 +48,13 @@ const theme = createTheme({
         },
         secondary:{
             main: '#FAC213'
+        },
+        success:{
+            main: '#95CD41'
         }
 
     },
+
     
     typography: {
         fontFamily: [
@@ -58,14 +62,15 @@ const theme = createTheme({
         ],
         button: {
             textTransform: 'none'
-        }
+        },
     },
 
     // targeting components
     Components: {
         tab: {
             textColor: '#FFF',
-        }
+        },
+        
     }
 
 });
