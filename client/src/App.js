@@ -53,7 +53,7 @@ function App() {
 
   
       
-    {/* <Box width="400px" sx={{width:'100%'}} m="0"> */}
+    <Box sx={{margin:"0"}}>
        
 
         {/* <Navbar /> */}
