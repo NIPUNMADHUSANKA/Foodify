@@ -1,17 +1,24 @@
 .Target-root{
     color: aliceblue;
 }
-
-.MuiSvgIcon-root{
-    color: white;
-}
-
 input#\:r0\:{
     color: white;
     padding: 4%;
     border: none;
     font-family: 'Poppins';
     font-size: 14px;
+}
+
+input#\:r1\:{
+    color: white;
+    padding: 4%;
+    border: none;
+    font-family: 'Poppins';
+    font-size: 14px;
+}
+
+.css-i4bv87-MuiSvgIcon-root{
+    color: white;
 }
 
 button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected.MuiPickersDay-dayWithMargin.MuiPickersDay-today.css-533gds-MuiButtonBase-root-MuiPickersDay-root{
