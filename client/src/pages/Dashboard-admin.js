@@ -5,11 +5,17 @@ import Menubar from '../components/Menubar';
 
 import Overview from '../components/overview/Overview.js';
 import Tabs from '../components/overview/Tabs.js'
-import Budget from '../components/overview/System/Budget.js'
-import Count from '../components/overview/System/Count.js'
+import DashboardCard from '../components/overview/System/DashboardCard'
 import Chart from '../components/overview/System/charts.js'
+import Orders from '../components/overview/System/FrequenltyOrderedFoods'
 import RecentTransactions from '../components/overview/System/RecentTransactions'
-import DoughnutCharts from '../components/overview/System/DoughnutCharts'
+// import DoughnutCharts from '../components/overview/System/DoughnutCharts'
+
+import AttachMoneyRounded from '@mui/icons-material/AttachMoneyRounded';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+
 
 import '../assets/css/Dashboard-admin.css';
 
@@ -43,7 +49,7 @@ const Dashboard = () => {
                             xs={12}
                             
                         >
-                            <Budget />
+                            <DashboardCard title="Total Income Today" value="Rs.24129" icon={AttachMoneyRounded} type="up" percentage="12%" since="yesterday"/>
                         </Grid>
                         <Grid item
                             lg={3}
@@ -51,7 +57,7 @@ const Dashboard = () => {
                             xl={3}
                             xs={12}
                         >
-                            <Count />
+                            <DashboardCard title="Income by Orders" value="Rs.14129" icon={ReceiptIcon} type="down" percentage="12%" since="yesterday"/>
                         </Grid>
                         <Grid item
                             lg={3}
@@ -59,7 +65,7 @@ const Dashboard = () => {
                             xl={3}
                             xs={12}
                         >
-                            <Count />
+                            <DashboardCard title="Order Count" value="102" icon={FastfoodIcon} type="down" percentage="12%" since="yesterday"/>
                         </Grid>
                         <Grid item
                             lg={3}
@@ -67,7 +73,7 @@ const Dashboard = () => {
                             xl={3}
                             xs={12}
                         >
-                            <Count />
+                            <DashboardCard title="Income by Premiums" value="Rs.10000" icon={GroupAddIcon} type="up" percentage="12%" since="yesterday"/>
                         </Grid>
                     </Grid>
                     <Grid
@@ -88,7 +94,7 @@ const Dashboard = () => {
                             xl={3}
                             xs={12}
                         >
-                            <DoughnutCharts />
+                            <Orders />
                         </Grid> 
                         <Grid item
                             lg={12}
