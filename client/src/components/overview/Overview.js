@@ -7,7 +7,7 @@ function Explore() {
     
     <Box 
     sx={{
-      mt:{lg:'3%', xs:'3%'},
+      mt:{lg:'1%', xs:'1%'},
       mb:{lg:'0.5%', xs:'2%'},
       ml:{sm:'3%'},
       position: 'relative',

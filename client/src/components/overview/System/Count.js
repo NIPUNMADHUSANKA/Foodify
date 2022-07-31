@@ -1,16 +1,18 @@
+import React from 'react';
 import { Avatar, Box, Card, CardContent, Grid, Typography, ThemeProvider} from '@mui/material';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
-// import theme from '../../../assets/theme/dashboardCard';
+import theme, { Colours } from '../../../assets/theme/theme';
+import "../../../"
 
 function Budget (props) {
   return (
-  // <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
   <Card
     sx={{ 
-      height: '100%',
-      backgroundColor: "#cacfd6", 
+      height: '90%',
+      backgroundColor: "rgba(23, 23, 23, 0.8)", 
     }}
   >
     <CardContent>
@@ -21,41 +23,42 @@ function Budget (props) {
       >
         <Grid item>
           <Typography
-            color="textSecondary"
-            gutterBottom
             variant='subtitle1'
+            color={Colours.white}
+            gutterBottom
           >
-            BUDGET
+            New Signups
           </Typography>
           <Typography
-            color="textPrimary"
+            color={Colours.white}
             variant="h4"
           >
-            $24k
+            40
           </Typography>
         </Grid>
         <Grid item>
           <Avatar
             sx={{
-              backgroundColor: '#561414',
+              backgroundColor: 'transparent',
               height: 48,
-              width: 48
+              width: 48,
+              // padding: '10px 0px'
             }}
           >
-            <AttachMoneyRoundedIcon fontSize='medium' />
+            <GroupAddIcon fontSize='large' />
           </Avatar>
         </Grid>
       </Grid>
       <Box
         sx={{
-          pt: 2,
+          pt: 1,
           display: 'flex',
           alignItems: 'center'
         }}
       >
-        <ArrowDownwardIcon color="error" />
+        <ArrowUpwardIcon sx={{color:"#95CD41"}}/>
         <Typography
-          color="error"
+          color={Colours.green}
           sx={{
             mr: 1
           }}
@@ -64,15 +67,15 @@ function Budget (props) {
           12%
         </Typography>
         <Typography
-          color="textSecondary"
+          color={Colours.white}
           variant="caption"
         >
-          Since last month
+          Since Yesterday
         </Typography>
       </Box>
     </CardContent>
   </Card>
-  // </ThemeProvider>
+  </ThemeProvider>
   );
 }
 

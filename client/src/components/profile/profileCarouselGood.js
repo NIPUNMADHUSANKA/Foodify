@@ -6,6 +6,7 @@ import theme, { Colours } from '../../assets/theme/theme'; //to use theme provid
 import Skeleton from '@mui/material/Skeleton';
 import PageTitle from '../../components/User/PageTitle';
 import CardBar from './profile_card_bar';
+import dash from '../../assets/images/profile_dash.png';
 
 
 const MainHeader = "Good Foods";
@@ -20,36 +21,22 @@ function Goodc() {
 
     const data1 = [
 
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "good" , '../assets/images/profile_dash.png' ],
-
-
-      
-       
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
       
       ];
 
 
       const data2 = [
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
-
-        [  "Pizza",  "bad" , '../assets/images/profile_dash.png' ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+      
 
        
 

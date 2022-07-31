@@ -1,14 +1,12 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -105,8 +103,8 @@ export default function SignIn() {
                 "label": {color: Colours.formWhite},
                 "& label.Mui-focused": {
                 color:Colours.formWhite
-                }
-            
+                },
+                borderColor:Colours.formWhite,
             }}
               margin="normal"
               required
@@ -118,8 +116,8 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              style={{color:Colours.grayWhite}}
-              control={<Checkbox  value="remember" color="primary" />}
+              style={{color:Colours.formWhite}}
+              control={<Checkbox  value="remember" sx={{color:Colours.formWhite}} />}
               label="Remember me"
             />
             <Button
@@ -145,7 +143,7 @@ export default function SignIn() {
 
             <Typography  
             sx={{
-              color:'Colours.transparenceGrey', 
+              color:Colours.formWhite, 
               fontSize:{lg:'15px', xs:'10px'},
               paddingLeft:'34%',
               marginTop:'5%',
@@ -155,7 +153,7 @@ export default function SignIn() {
             </Typography>
               
             <Grid container xs >
-              <Grid item xs  marginLeft="40%">
+              <Grid item xs  marginLeft="42%">
                 <Link href="#" variant="body2">
                 <img src={Facebook} alt="Logo" className='social-icons-fb' />
                 </Link>
@@ -178,7 +176,7 @@ export default function SignIn() {
                       variant="circular" width={140} height={140}/>
        </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
      
     </ThemeProvider>

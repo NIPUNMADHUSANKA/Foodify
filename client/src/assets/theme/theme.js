@@ -13,6 +13,7 @@ export const Colours = {
     darkgray2:'#A8A8A8',
     gray1:'rgba(249, 249, 249, 0.2)',
     gray2:'rgba(168, 168, 168, 0.2)',
+    gray3:'rgba(249, 249, 249, 0.7)',
 
     white: '#FFF',
     transparenceGrey:'#6B6B6B33',
@@ -47,9 +48,13 @@ const theme = createTheme({
         },
         secondary:{
             main: '#FAC213'
+        },
+        success:{
+            main: '#95CD41'
         }
 
     },
+
     
     typography: {
         fontFamily: [
@@ -57,14 +62,15 @@ const theme = createTheme({
         ],
         button: {
             textTransform: 'none'
-        }
+        },
     },
 
     // targeting components
     Components: {
         tab: {
             textColor: '#FFF',
-        }
+        },
+        
     }
 
 });

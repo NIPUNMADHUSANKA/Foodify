@@ -41,7 +41,7 @@ function Nearme(){
                 }}
                 sx={{padding: '7px 10px 7px 14px' }}>
                 
-                <Typography color="#EFEAEA" fontWeight="300" fontSize="16px" fontFamily='Poppins' textTransform= 'none'>
+                <Typography color="#EFEAEA" fontWeight="300" fontSize="18px" fontFamily='Poppins' textTransform= 'none'>
                     Near Me 
                 </Typography>
                 

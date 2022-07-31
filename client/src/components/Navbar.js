@@ -12,7 +12,7 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
 
-const pages = ['Home', 'Latest', 'About Us', 'Contact'];
+const pages = ['Home', 'Explore', 'About Us', 'Contact'];
 const Navbar = () => {
   
   const Search = styled('div')(({ theme }) => ({

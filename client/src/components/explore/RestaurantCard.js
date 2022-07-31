@@ -17,7 +17,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function FoodCard() {
+function ResCard() {
   return (
     <ThemeProvider theme={theme}>
     <Stack
@@ -65,7 +65,7 @@ function FoodCard() {
               marginLeft: "75%"
           }}
           >
-            <ArrowForwardIosIcon fontSize='8px'/>
+            <ArrowForwardIosIcon fontSize='8px' sx={{color:"#272727"}}/>
           </IconButton>
         
 
@@ -74,4 +74,4 @@ function FoodCard() {
   )
 }
 
-export default FoodCard
+export default ResCard
