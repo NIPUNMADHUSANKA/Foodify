@@ -219,9 +219,9 @@ Row.propTypes = {
   time: PropTypes.string.isRequired,
   details: PropTypes.arrayOf(
     PropTypes.shape({
-      amount: PropTypes.number.isRequired,
-      customerId: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
+      amount: PropTypes.number,
+      customerId: PropTypes.string,
+      date: PropTypes.string,
     }),
   ),
   restaurant: PropTypes.string.isRequired,
@@ -230,20 +230,20 @@ Row.propTypes = {
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2342','Robert Brown','Food Order',"8550.00", "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2342','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2343','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2344','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2345','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2346','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2347','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2348','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2349','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2350','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2351','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2352','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2353','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2354','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2355','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
 ]
 
 function TableActions() {
@@ -253,7 +253,7 @@ function TableActions() {
 
   //----------------------------------------------------------Column Define 
   const columns = [
-    { id: 'payment', label: '', maxWidth: 10},
+    { id: 'details', label: '', maxWidth: 10},
     { id: 'payment', label: 'Payment-ID', minWidth: 150},
     { id: 'user', label: 'User', minWidth: 170 },
     { id: 'type', label: 'Type', minWidth: 200 },
@@ -279,7 +279,7 @@ function TableActions() {
   return (
     <Paper sx={tableSx}>
     <TableContainer sx={{ maxHeight: 440 }}>
-      <Table stickyHeader="true" sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 
       <TableHead>
 
