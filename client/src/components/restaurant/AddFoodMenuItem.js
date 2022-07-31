@@ -56,9 +56,9 @@ function AddFoodMenuCat() {
             <Grid item xs={12}>
                 <TextField
                     required
-                    id="Menu_Category"
-                    name="Menu_Category"
-                    label="Menu Category"
+                    id="Food_Item"
+                    name="Food_Item"
+                    label="Food Item"
                     fullWidth
                     autoComplete="given-name"
                     variant="standard"
@@ -70,11 +70,27 @@ function AddFoodMenuCat() {
 
             <Grid item xs={12} > 
                 <TextareaAutosize
-                    placeholder="Description about Menu Category"
+                    placeholder="Description about Food Item"
                     style={{ width: "97%", paddingTop: '5px'}}
                     
                 />
             </Grid>
+
+            <Grid item xs={5}>
+                <TextField
+                    required
+                    id="Food_Price"
+                    name="Food_Price"
+                    label="Food Price(Rs.)"
+                    fullWidth
+                    autoComplete="given-name"
+                    variant="standard"
+                    sx={{"& label.Mui-focused": {
+                        color:"#fff"
+                    }}}
+                />
+            </Grid>
+
 
             <Grid item xs={12}>
                     <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {

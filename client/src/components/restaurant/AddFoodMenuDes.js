@@ -74,33 +74,7 @@ function AddFoodMenuDes() {
 
     </Box>
 
-            <Box mt="5%" display="flex" flexDirection="row"
-                sx={{
-                justifyContent:"center",
-                alignItems:"center"
-                }}
-            >
-
-                <Avatar src={PAGE1} sx={{
-                    width:"50px",
-                    height:"50px",
-                }}/>
-
-                <Avatar src={PAGE2} sx={{
-                    width:"40px",
-                    height:"40px",
-                    ml:"1%",
-                    mt:"0.5%"
-                }}/>
-
-                <Avatar src={PAGE2} sx={{
-                    width:"40px",
-                    height:"40px",
-                    ml:"1%",
-                    mt:"0.5%"
-                }}/>
-                
-            </Box>
+           
     </div>
   )
 }

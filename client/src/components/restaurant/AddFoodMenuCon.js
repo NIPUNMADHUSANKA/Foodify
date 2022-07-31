@@ -16,6 +16,8 @@ import AddFoodMenuCat from './AddFoodMenuCat';
 import PAGE1 from '../../assets/icons/page01.png'
 import PAGE2 from '../../assets/icons/page02.png'
 
+import AddFoodMenuItem from './AddFoodMenuItem';
+
 // ----------array or object ot get category values--------------------
 const category = [
     {
@@ -56,7 +58,7 @@ const foods = [
     },
 ];
 
-function AddFoodMenuIns() {
+function AddFoodMenuCon() {
 
     // --------to add category section--------
     const [components, addComponents] = useState(["Category1"]); //use to render when new component added to page
@@ -70,7 +72,7 @@ function AddFoodMenuIns() {
 
         <Box scroll='paper' sx={{
             margin:"auto",
-            height:"57vh",
+            height:"60vh",
             width:"53%",
             padding:"auto",
             overflow: "scroll"
@@ -91,10 +93,10 @@ function AddFoodMenuIns() {
                 }}>
 
                 <Typography variant='body' sx={{
-                        color: Colours.primary,
+                        color: Colours.formWhite,
                         textAlign: "center",
                     }}>
-                        Add Menu Categories and Description
+                       BreakFast
                 </Typography>
 
                     {/* button */}
@@ -103,7 +105,7 @@ function AddFoodMenuIns() {
                 </IconButton>
 
                 {components.map((item, i) => (
-                        <AddFoodMenuCat
+                        <AddFoodMenuItem
                             category={category}
                             item={item}
                             name={item.value}
@@ -114,10 +116,10 @@ function AddFoodMenuIns() {
                 
                 <Grid item container  ml="87%" mt="1%">
 
-                    <Button variant="contained" sx={{color:'#000',backgroundColor:"#EFEAEA", '&:hover': {
-                        backgroundColor: Colours.formWhite,
+                    <Button variant="contained" sx={{color:'#000',backgroundColor:"#95CD41", '&:hover': {
+                        backgroundColor: "#95CD41"
                     }}}>
-                    Next
+                    Confirm
                     </Button>
 
                 </Grid>
@@ -134,4 +136,4 @@ function AddFoodMenuIns() {
       )
 }
 
-export default AddFoodMenuIns
+export default AddFoodMenuCon

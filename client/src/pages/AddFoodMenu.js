@@ -21,6 +21,7 @@ import resturantLogo from '../assets/images/restaurant-logo.jpg'
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import { margin } from '@mui/system';
+import AddFoodMenuCon from '../components/restaurant/AddFoodMenuCon';
 
 
 const MainHeader = "Add Foods Menu";
@@ -73,6 +74,8 @@ function AddFoodMenu() {
           <Carousel pagination={false} disableArrowsOnEnd={true} >
               <AddFoodMenuDes />
               <AddFoodMenuIns />
+              <AddFoodMenuCon />
+              
           </Carousel>
         </Fade>
       </Box>
