@@ -13,16 +13,16 @@ import Fade from 'react-reveal/Fade';
 import ImageDetails from '../components/UploadImage/ImageDetails';
 
 
-const MainHeader = "Nutritions";
+const MainHeader = "Image Upload";
 
 function Image_Upload() {
 
     useEffect(() => {
-        document.title = "Nutritions";
+        document.title = "Image Upload";
     })
 
   return (
-    <Box className='image_upload_body' height="100vh" >
+    <Box className='image_upload_body' height="100%" >
       
       <Fade top>
         <Navbar />
