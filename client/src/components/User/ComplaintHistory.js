@@ -40,7 +40,7 @@ function ComplaintHistory() {
 
   return (
 
-    <Box color="#fff" bgcolor="#171717" opacity="50" sx= {{mt:"5%", ml:"5%",borderRadius: '20px',p:"2%", width:{lg:"45vw",xs:"55vw"} }} >
+    <Box color="#fff" bgcolor="#171717" opacity="50" sx= {{mt:"2%", mb:"2%", ml:"5%",borderRadius: '20px',p:"2%", width:{lg:"45vw",xs:"55vw"} }} >
       
       <Typography variant="h4" mt="2%"  gutterBottom sx= {{fontSize:{lg:"230%",xs:"180%"} }} >
          History of Complaints

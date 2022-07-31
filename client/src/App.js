@@ -24,6 +24,7 @@ import IntakeChart from './pages/IntakeChart';
 
 // import Home from './pages/Explore';
 import AddFoodMenu from './pages/AddFoodMenu';
+
 import Image_Upload from './pages/Image_Upload';
 import Nutrition_Summary from './pages/Nutrition_Summary';
 
@@ -59,19 +60,14 @@ function App() {
         
           <Route path="/" element = {<Landing/>} />
           <Route path="/Explore" element = {<Explore/>} />
-         
 
           <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/AddFoodMenu" element = {<AddFoodMenu/>} />
           <Route path="/Image_Upload" element = {<Image_Upload/>} />
           <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
           
-
-          
-          
           <Route path="/Complaints" element={<Complaints />} />
           <Route path="/Intake" element={<IntakeChart />} />
-
 
           <Route path="/login" element = {<Login/>} />
           <Route path="/userprofile" element = {<UserProfile/>} />
@@ -81,16 +77,12 @@ function App() {
           <Route path="/usernotification" element ={<UserNotification/>} />
 
 
-
-
           <Route path="/Restaurant/Category" element={<FoodCategory />} />
           <Route path="/FoodRating" element={<FoodRating />} />
           <Route path="/Restaurant/RestaurantRating" element={<RestaurantRating />} />
           <Route path="/Restaurant/Offers" element={<RestaurantOffer />} />
           <Route path="/Restaurant/Category/Orderfood" element={<OrderFood />} />
           <Route path="/Restaurant/AddOffers" element={<AddOffers />} />
-
-
 
           <Route path="/register/Signup" element={<Signup />} />
           <Route path="/register/Signupuser" element={<Signupuser />} />
