@@ -1,6 +1,8 @@
 import React from "react";
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import Box from '@mui/material/Box';
+
 
 export default function Home() {
   const { isLoaded } = useLoadScript({
@@ -15,12 +17,16 @@ function Map() {
   const center = useMemo(() => ({ lat:6.92 , lng: 79.86 }), []);
 
   return (
-    <GoogleMap sx={{
-        marginTop:'3%',
-        width:'50',
-        height:'50',
-      }} zoom={10} center={center} mapContainerClassName="map-container">
+    <Box sx={{
+      marginTop: '5%',
+      maxWidth: '100%',
+      height: "450px",
+      overflowX: "hidden",
+      overflowY: "hidden"
+    }}>
+    <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       <Marker position={center} />
     </GoogleMap>
+    </Box>
   );
 }

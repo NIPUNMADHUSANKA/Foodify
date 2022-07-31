@@ -16,15 +16,6 @@ return (
    
     <Grid item xs={12} sm={6} sx={{marginTop:'15%'}}  >
         <img src={Discountpng}/>
-        <div style={{
-                          position: 'absolute', 
-                          color: 'white', 
-                          top: 8, 
-                          fontSize:24,
-                          left: '59%',
-                          marginTop:'36.5%',
-                          transform: 'translateX(-50%)'
-                        }} >2.5%</div>
                       
     </Grid>
 

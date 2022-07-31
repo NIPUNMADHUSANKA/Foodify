@@ -8,11 +8,18 @@ import AddIcon from '@mui/icons-material/Add';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
+    width: "90%",
     color: Colours.grayWhite,
     '&:fielset': {
         backgroundColor: Colours.primary,
     },
 
+    '& 	.MuiInputLabel-root': {
+        color: Colours.grayWhite,
+    },
+    '& 	.MuiFormHelperText-root': {
+        color: Colours.grayWhite,
+    },
     '& label.Mui-focused': {
         color: '#95CD41',
         fontcolor: Colours.green,
@@ -103,7 +110,15 @@ const AddOfferForm = () => {
                     opacity: 0.9,
                     background: Colours.secondary,
 
-                    '& .MuiTextField-root': { m: 1, width: '96%' },
+                    '& .MuiTextField-root': {
+                        m: 1,
+                        width: '96%',
+                        
+                    },
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: '15px',
+                        padding: 0,
+                    },
                 }}
                 noValidate
                 autoComplete="off"
@@ -116,13 +131,17 @@ const AddOfferForm = () => {
                 <Box sx={{
                     display: "flex",
                     flexDirection: "row",
+                    [theme.breakpoints.down('sm')]: {
+                        flexDirection: "column",
+                    },
                 }}>
                     <Box sx={{
                         display: "flex",
                         flexDirection: "column",
                         padding: "0.5rem",
+                        
                     }}>
-                        <Typography variant='body' sx={{ color: Colours.primary }}>Begin Date</Typography>
+                        <Typography variant='body' sx={{ color: Colours.grayWhite, }}>Begin Date</Typography>
                         <InputArea id="begin date" type="date" name="Bdate" variant="outlined" />
                     </Box>
 
@@ -131,11 +150,11 @@ const AddOfferForm = () => {
                         flexDirection: "column",
                         padding: "0.5rem",
                     }}>
-                        <Typography variant='body' sx={{ color: Colours.primary }}>End Date</Typography>
+                        <Typography variant='body' sx={{ color: Colours.grayWhite, }}>End Date</Typography>
                         <InputArea id="begin date" type="date" name="Edate" variant="outlined" />
                     </Box>
                 </Box>
-                {/* ------------end of dte selection area------------------ */}
+                {/* ------------end of date selection area------------------ */}
 
                 {/* -------------category and food items area------- */}
                 <Box sx={{
@@ -143,32 +162,48 @@ const AddOfferForm = () => {
                     flexDirection: "column",
                     width: "95%",
                     margin: "auto",
-                    justifyContent:"center",
+                    justifyContent: "center",
                 }}>
                     <Typography variant='body' sx={{
-                        color: Colours.primary,
+                        color: Colours.grayWhite,
                         textAlign: "center",
                     }}>
                         Add Categories and food items
                     </Typography>
 
                     {/* button */}
-                    <IconButton onClick={addSection} sx={{width:"2.2rem"}}>
-                        <AddIcon sx={{ color: Colours.green }} />
-                    </IconButton>
+                    <Button onClick={addSection} sx={{
+                        margin: '0.5rem',
+                        background: Colours.green, '&:hover': {
+                            backgroundColor: Colours.yellow,
+                        },
+                        color: Colours.dark,
+                        fontSize: '1rem',
+                        hover: Colours.green,
+                        borderRadius: "1rem",
+                        width: "20%",
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '8px',
+                            padding: '2px',
+                        },
+                    }}
+                        endIcon={<AddIcon sx={{ color: Colours.grayWhite }} />}>
+                        Add
+                    </Button>
 
                     {components.map((item, i) => (
                         <CategorySelection
                             category={category}
                             item={item}
                             name={item.value}
-                            foods = {foods}
+                            foods={foods}
                         />
                     ))}
                 </Box>
                 {/* ------------end of category and food items area----- */}
 
-                <InputArea id="standard-basic" label="Standard" variant="outlined" />
+                {/* ------------------for discount area---------------- */}
+                <InputArea id="standard-basic" label="Discount Rate" name='discount' variant="outlined" />
 
                 {/* -----------------------------submit and cancel area--------------------------- */}
                 <Box sx={{
@@ -183,7 +218,7 @@ const AddOfferForm = () => {
                         fontSize: '1rem',
                         hover: Colours.green,
                         borderRadius: "1rem",
-                        minWidth: "10%",
+                        Width: "20%",
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '8px',
                             padding: '2px',

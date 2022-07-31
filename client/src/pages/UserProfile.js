@@ -12,7 +12,7 @@ const ProfileD = () => {
 
   return (
     <Box className='Profile-body-Style' marginTop="0px">
-      <Pnavbar/>
+      <Pnavbar />
       <Pcarousel/>
       <Box>
         <p>This is your Chance</p>

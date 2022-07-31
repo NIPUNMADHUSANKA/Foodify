@@ -23,7 +23,7 @@ function Summary_Card(props) {
         </Typography>
         <Typography sx={{ mb: 1.5, ml:25 }} color="#fff"  
         >
-           <img src={props.icon} /> 
+           <img style={{width:'100%',height:'100%'}} src={props.icon} /> 
          
         </Typography>
       </Grid>
