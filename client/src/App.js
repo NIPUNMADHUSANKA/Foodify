@@ -47,9 +47,6 @@ import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
-
-
-  
       
     <Box sx={{margin:"0"}}>
        
