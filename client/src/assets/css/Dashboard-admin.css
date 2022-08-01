@@ -25,3 +25,11 @@ button.MuiButtonBase-root.MuiPickersDay-root.Mui-selected.MuiPickersDay-dayWithM
     background-color:#FAC213;
 }
 
+input#search-box{
+    color: white;
+    font-family: 'Poppins';
+}
+
+.css-mgoxz0-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: white;
+}
