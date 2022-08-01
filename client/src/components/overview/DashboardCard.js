@@ -3,8 +3,7 @@ import { Avatar, Box, Card, CardContent, Grid, Typography, ThemeProvider} from '
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-import theme, { Colours } from '../../../assets/theme/theme';
-import "../../.."
+import theme, { Colours } from '../../assets/theme/theme';
 
 function card (props) {
   const color1 = (props.type === 'up')?"#95CD41":"#F02828";

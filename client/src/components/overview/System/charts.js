@@ -9,6 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // import ExpandMore from '@mui/icons-material/ExpandMore';
 
 import theme from '../../../assets/theme/theme'; //to use theme provider,need to import this
+import '../../../assets/css/Dashboard-admin.css';
 
 // import { width } from '@mui/system';
 // import { useParams } from 'react-router-dom';
@@ -245,7 +246,7 @@ function Charts() {
 
             {/* ------------------------------------------------------------graphs changes with tabs */}
             <TabPanel value={value} index={0}>
-                <IncomeChart />
+                <IncomeChart/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <SignupChart />
