@@ -150,7 +150,7 @@ const OrderFoodForm = () => {
                             borderRadius: "1rem",
                             [theme.breakpoints.down('sm')]: {
                                 fontSize: '8px',
-                                padding: '2px',
+                                padding: '10px',
                             },
                         }} endIcon={<ShoppingBagIcon />} onClick={toggleDrawer('right', true)}>Proceed</Button>
 
@@ -179,7 +179,7 @@ const OrderFoodForm = () => {
                         borderRadius: "1rem",
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '8px',
-                            padding: '2px',
+                            padding: '10px',
                         },
                     }}>Cancel</Button>
                 </Box>

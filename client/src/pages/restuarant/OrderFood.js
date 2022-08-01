@@ -6,11 +6,12 @@ import Background from '../../assets/images/pv4WkDi.webp';
 
 // when calling data, nned to take from there
 import FoodImage from '../../assets/images/foodimage.jpg'
-import { Avatar } from '@mui/material';
+import { Avatar, Icon, Typography } from '@mui/material';
 import OrderDescription from '../../components/restaurant/OrderDescription';
 import FoodNutrition from '../../components/restaurant/FoodNutrition';
 import FoodComment from '../../components/restaurant/FoodCooment';
 import OrderFoodForm from '../../components/restaurant/OrderFoodForm';
+import StarIcon from '@mui/icons-material/Star';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -62,6 +63,7 @@ const OrderFood = () => {
                 marginBottom: "2rem",
                 [theme.breakpoints.down('sm')]: {
                     width: "100%",
+                    marginTop:"20%",
                 },
             }}>
 
@@ -103,14 +105,19 @@ const OrderFood = () => {
                 {/* ------------------for the food image--------------- */}
                 <Box sx={{
                     width: "25%",
-                    height: "50%",
-                    margin: "auto",
+                    height: "70%",
+                    
                     position: "absolute",
                     top: "25%",
                     right: "15%",
+                    display:"flex",
+                    flexDirection:"column",
+                    background:Colours.green,
+                    borderRadius: "360px 360px 40px 40px",
+                    padding:0,
                     [theme.breakpoints.down('sm')]: {
                         width: "40%",
-                        height: "18%",
+                        height: "auto",
                         top: "15%",
                         right: "30%",
                     },
@@ -120,13 +127,53 @@ const OrderFood = () => {
                         alt="food image"
                         src={FoodImage}
                         sx={{
-                            width: "100%",
-                            height: "100%",
+                            width: "98%",
+                            height: "auto",
                             border: "2px solid #EFEAEA",
+                            
                             [theme.breakpoints.down('sm')]: {
 
                             },
                         }} />
+
+                        {/* ---rating area--- */}
+                        <Box sx={{
+                            background:Colours.green,
+                            height:"auto",
+                            borderRadius:"1rem",
+                            display:"flex",
+                            flexDirection:"column",
+                            
+                        }}>
+                            <Typography variant='h4' sx={{
+                                color:Colours.grayWhite,
+                                textAlign:"center",
+                                [theme.breakpoints.down('sm')]: {
+                                    fontSize:"15px",
+                                },
+                                }}>Name of the Food</Typography>
+                            <Box sx={{
+                                width:"80%",
+                                display:"flex",
+                                flexDirection:"row",
+                                alignItems:"center",
+                                justifyContent:"center",
+                                margin:"auto",
+                                }}>
+                                <StarIcon fontSize='medium' sx={{
+                                    color:Colours.yellow,
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize:"12px",
+                                    },
+                                    }}/>
+                                <Typography variant='h5' sx={{
+                                    color:Colours.grayWhite,
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize:"12px",
+                                    },
+                                    }}>4.2</Typography>
+                            </Box>
+                        </Box>
                 </Box>
 
             </Box>
