@@ -191,10 +191,11 @@ function TableActions() {
 
   //----------------------------------------------------------Column Define 
   const columns = [
-    { id: 'userId', label: 'User-Id', minWidth: 150},
-    { id: 'fname', label: 'First Name', minWidth: 150},
-    { id: 'lname', label: 'Last Name', minWidth: 170 },
-    { id: 'type', label: 'Type', minWidth: 150 },
+    { id: 'userId', label: 'User-Id', minWidth: 140},
+    { id: 'fname', label: 'First Name', minWidth: 140},
+    { id: 'lname', label: 'Last Name', minWidth: 120 },
+    { id: 'type', label: 'Type', minWidth: 140 },
+    { id: 'location', label: 'Location', minWidth: 150 },
     { id: 'view', label: '', minWidth: 100 },
     { id: 'delete', label: '', minWidth: 100 },
     
@@ -261,6 +262,9 @@ function TableActions() {
               </TableCell>
               <TableCell >
                 {row.lname}
+              </TableCell>
+              <TableCell >
+                {row.location}
               </TableCell>
               <TableCell >
                 {row.type}

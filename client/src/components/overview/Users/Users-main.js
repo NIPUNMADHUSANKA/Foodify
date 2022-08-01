@@ -12,7 +12,7 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 function SystemMain(props){
     return(
         <Container maxWidth="false" sx={{boxSizing: 'content-box'}}>
-        <Grid container spacing={3} >
+        <Grid container spacing={2} >
             <Grid item
                 lg={3}
                 sm={6}
@@ -51,22 +51,6 @@ function SystemMain(props){
         container
         spacing={3}
         >
-            <Grid item
-                lg={8}
-                md={12}
-                xl={9}
-                xs={12}
-            >
-                {/* <Chart /> */}
-            </Grid>
-            <Grid item
-                lg={4}
-                md={7}
-                xl={3}
-                xs={12}
-            >
-                {/* <Orders /> */}
-            </Grid> 
             <Grid item
                 lg={12}
                 md={12}
