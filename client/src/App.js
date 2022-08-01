@@ -34,6 +34,7 @@ import MyProfile from './pages/MyProfile';
 import RestaurantOrder from './pages/RestaurantOrder';
 import UserOrder from './pages/UserOrder';
 import UserNotification from './components/user_notification/user_notification';
+import RestaurantProfile from './pages/restuarant/RestaurantProfile';
 
 import UserPackage from './pages/register/UserPackage';
 import Signup from './pages/register/Signup';
@@ -83,6 +84,7 @@ function App() {
           <Route path="/Restaurant/Offers" element={<RestaurantOffer />} />
           <Route path="/Restaurant/Category/Orderfood" element={<OrderFood />} />
           <Route path="/Restaurant/AddOffers" element={<AddOffers />} />
+          <Route path="/RestaurantProfile" element={<RestaurantProfile />} />
 
           <Route path="/register/Signup" element={<Signup />} />
           <Route path="/register/Signupuser" element={<Signupuser />} />
