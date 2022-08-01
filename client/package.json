@@ -17,6 +17,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@react-google-maps/api": "^2.12.1",
     "axios": "^0.27.2",
+    "chart.js": "^3.8.2",
     "css-loader": "^6.7.1",
     "google-maps-react": "^2.0.6",
     "postcss-loader": "^7.0.1",

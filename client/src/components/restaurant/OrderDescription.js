@@ -53,7 +53,7 @@ const OrderDescription = (props) => {
                         marginTop:"12px",
                     }
                 }}>
-                    Food Name
+                    Name Of The Food
                 </Typography>
 
             </Box>

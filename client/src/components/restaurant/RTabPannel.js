@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-TabPanel.propTypes = {
+RTabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
 
-function TabPanel(props) {
+function RTabPanel(props) {
     const { children, value, index, ...other } = props;
   
     return (
@@ -21,12 +21,12 @@ function TabPanel(props) {
         {...other}
       >
         {value === index && (
-          <Box sx={{width: '100%' }}>
-            {children}
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
           </Box>
         )}
       </div>
     );
 }
 
-export default TabPanel;
+export default RTabPanel;
