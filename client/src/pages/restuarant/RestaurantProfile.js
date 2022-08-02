@@ -3,18 +3,18 @@ import { useEffect } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 
 // to import necessacry components of the restuarant page
-import RestaurantBanner from '../../components/restaurant/RestaurantBanner';
 import Navbar from '../../components/Navbar';
-import RestaurantHome from '../../components/restaurant/RestaurantHome';
+import RestaurantHome from '../../components/restaurant/profile/RestaurantHome';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import HomeIcon from '@mui/icons-material/Home';
-import RTabPanel from '../../components/restaurant/RTabPannel';
+import RTabPanel from '../../components/restaurant/profile/RTabPannel';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
+import RestaurantEditableBanner from '../../components/restaurant/profile/RestaurantEditableBanner';
 
 // styles for profile tabs----------
 const mIcons = {
@@ -66,7 +66,7 @@ const RestaurantProfile = () => {
             <Navbar />
 
             <Fade>
-                <RestaurantBanner />
+                <RestaurantEditableBanner />
             </Fade>
 
             {/* -------------------tabs of the proffile------------------ */}
