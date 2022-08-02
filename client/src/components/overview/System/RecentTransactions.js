@@ -41,7 +41,8 @@ const tableSx = {
   "& .MuiTableCell-root":{
     color: '#fff',
     bpaymentBottom: "1px solid rgba(210, 210, 210, 0.5)",
-    fontFamily: "Poppins"
+    fontFamily: "Poppins",
+    fontSize: "16px"
     // cursor: "default"
   },
 

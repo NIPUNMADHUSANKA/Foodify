@@ -46,7 +46,8 @@ const paperSx = {
   "& .MuiTableCell-root":{
     color: '#fff',
     bpaymentBottom: "1px solid rgba(210, 210, 210, 0.5)",
-    fontFamily: "Poppins"
+    fontFamily: "Poppins",
+    fontSize: "16px",
     // cursor: "default"
   },
 
@@ -231,7 +232,7 @@ function TableActions() {
     
     {/* ------------------------------------------------------------------------Table*/}
     <TableContainer sx={{ maxHeight: 440 }}>
-      <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table stickyHeader sx={{ minWidth: 500}} aria-label="custom pagination table">
 
       <TableHead>
 
