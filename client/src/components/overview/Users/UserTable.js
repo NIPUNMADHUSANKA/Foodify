@@ -268,7 +268,7 @@ const columns = [
     id: 'view', 
     label: '',
     numeric: false, 
-    minWidth: 100 },
+    minWidth: 130 },
   { 
     id: 'delete', 
     label: '',
@@ -414,6 +414,7 @@ function TableActions() {
                     <TableCell >{row.type}</TableCell>
                     <TableCell >{row.viewButton}</TableCell>
                     <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell ></TableCell>
                   </TableRow>
                 );
               })}

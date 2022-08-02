@@ -209,16 +209,16 @@ function Warning(props){
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel',0,'Colombo'),  
-  createData('B2343','Robert',2, 'Kegalle'),  
-  createData('B2344','Rachel',0,'Colombo'),  
-  createData('B2345','Robert',2, 'Kegalle'),  
-  createData('B2346','Rachel',3,'Colombo'),  
-  createData('B2347','Robert',2, 'Kegalle'),  
-  createData('B2348','Rachel',0,'Colombo'),  
-  createData('B2349','Robert',2, 'Kegalle'),  
-  createData('B2350','Rachel',3,'Colombo'),  
-  createData('B2351','Robert',2, 'Kegalle'),  
+  createData('B2342','Rachel\'s Kitchen',0,'Colombo'),  
+  createData('B2343','Green Hut',2, 'Kegalle'),  
+  createData('B2344','Rachel\'s Kitchen',0,'Colombo'),  
+  createData('B2345','Green Hut',2, 'Kegalle'),  
+  createData('B2346','Rachel\'s Kitchen',3,'Colombo'),  
+  createData('B2347','Green Hut',2, 'Kegalle'),  
+  createData('B2348','Rachel\'s Kitchen',0,'Colombo'),  
+  createData('B2349','Green Hut',2, 'Kegalle'),  
+  createData('B2350','Rachel\'s Kitchen',3,'Colombo'),  
+  createData('B2351','Green Hut',2, 'Kegalle'),  
 ]
 
 //----------------------------------------------------------sorting functions - 3
@@ -259,7 +259,7 @@ const columns = [
     minWidth: 140},
   { 
     id: 'name', 
-    label: 'Name',
+    label: 'Reastaurant Name',
     numeric: false, 
     minWidth: 140},
   { 
