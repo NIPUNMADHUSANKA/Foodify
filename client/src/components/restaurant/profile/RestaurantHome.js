@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Box } from '@mui/material';
-import RestaurantAbout from '../../AboutUs2';
+import EditAboutUs from './EditAboutUs';
 import RestaurantOffers from '../RestaurantOffers';
 import RestaurantMenu from '../RestaurantMenu';
-import RestaurantContact from '../RestaurantContact';
+import RestaurantEditContact from './RestaurantEditContact';
 import RestaurantComment from '../RestaurantComments';
 
 import AboutImage from '../../../assets/images/golden-cutlery.jpg';//exporting the image for about section
@@ -36,7 +36,7 @@ const RestaurantHome = () => {
         <Box>
 
             <Fade left>
-                <RestaurantAbout AboutImage={AboutImage} details={details} />
+                <EditAboutUs AboutImage={AboutImage} details={details} />
             </Fade>
 
             <Fade right>
@@ -52,7 +52,7 @@ const RestaurantHome = () => {
             </Fade>
 
             <Fade left>
-                <RestaurantContact Map={Map} details={contactdetails} />
+                <RestaurantEditContact Map={Map} details={contactdetails} />
             </Fade>
 
         </Box>

@@ -10,6 +10,7 @@ import Cover from '../../../assets/images/indian-food-served-on-table.jpg';
 import theme, { Colours } from '../../../assets/theme/theme';//to use theme provider,need to import this
 import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerLogo, BannerTitle, BannerTitle2 } from '../../../assets/theme/RBanner';
 
+// -------to import forms------------
 import { BannerForm1, BannerForm2 } from './EditForms';
 
 const RestaurantEditableBanner = () => {

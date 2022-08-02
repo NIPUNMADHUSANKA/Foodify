@@ -126,7 +126,7 @@ export const BannerForm1 = () => {
             {/* ---------------------------form------------------------- */}
             <Dialog
                 open={open}
-                onClose={handleClose}
+                
                 keepMounted
                 TransitionComponent={Transition}
 
@@ -196,12 +196,11 @@ export const BannerForm2 = () => {
             {/* ---------------------------form------------------------- */}
             <Dialog
                 open={open}
-                onClose={handleClose}
                 keepMounted
                 TransitionComponent={Transition}
 
             >
-                <DialogTitle>{"Update Cover Image"}</DialogTitle>
+                <DialogTitle>{"Update Logo and name"}</DialogTitle>
                 <DialogContent>
                     <Box component="form"
                         noValidate
@@ -225,4 +224,149 @@ export const BannerForm2 = () => {
 };
 
 
+// ----------------aboutus form----------------------------------
+export const AboutUsForm = () => {
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return (
+
+        <Box sx={{
+            width: "10%",
+            marginTop: 1,
+            [theme.breakpoints.down('sm')]: {
+                marginTop: 0.4,
+            },
+        }} >
+            <IconButton sx={{
+                background: Colours.yellow, '&:hover': {
+                    backgroundColor: Colours.green,
+                },
+                color: Colours.green,
+                [theme.breakpoints.down('sm')]: {
+                    '& svg': {
+                        fontSize: "15px",
+                    }
+                },
+
+            }} onClick={handleClickOpen} >
+                <EditIcon sx={{
+                    color: Colours.dark,
+                }} />
+            </IconButton>
+
+            {/* ---------------------------form------------------------- */}
+            <Dialog
+                open={open}
+                keepMounted
+                TransitionComponent={Transition}
+                fullWidth='100%'
+
+            >
+                <DialogTitle>{"Update Description"}</DialogTitle>
+                <DialogContent>
+                    <Box component="form"
+                        noValidate
+                        autoComplete="off">
+
+                        <CustomTextField 
+                        id="about_description" 
+                        label="Description" 
+                        name="about_description" 
+                        variant="outlined" 
+                        multiline rows={8} />
+
+                        <Box>
+                            <UpdateButton type='submit'>Update</UpdateButton>
+                            <CancelButton onClick={handleClose}> Cancel </CancelButton>
+                        </Box>
+
+                    </Box>
+                </DialogContent>
+            </Dialog>
+
+        </Box>
+
+    )
+};
+
+
+// ----------------contact details form----------------------------------
+export const ContactForm = () => {
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return (
+
+        <Box sx={{
+            width: "10%",
+            marginTop: 1,
+            marginLeft:"92%",
+            [theme.breakpoints.down('sm')]: {
+                marginTop: 0.4,
+                marginLeft:"88%",
+            },
+        }} >
+            <IconButton sx={{
+                background: Colours.yellow, '&:hover': {
+                    backgroundColor: Colours.green,
+                },
+                color: Colours.green,
+                [theme.breakpoints.down('sm')]: {
+                    '& svg': {
+                        fontSize: "15px",
+                    }
+                },
+
+            }} onClick={handleClickOpen} >
+                <EditIcon sx={{
+                    color: Colours.dark,
+                }} />
+            </IconButton>
+
+            {/* ---------------------------form------------------------- */}
+            <Dialog
+                open={open}
+                keepMounted
+                TransitionComponent={Transition}
+
+            >
+                <DialogTitle>{"Update Contact details"}</DialogTitle>
+                <DialogContent>
+                    <Box component="form"
+                        noValidate
+                        autoComplete="off">
+
+                        <CustomTextField id="location" label="Location" name="location" variant="outlined" />
+                        <CustomTextField id="address" label="Address" name="address" variant="outlined" />
+                        <CustomTextField id="tpnumber" label="Contact Number" name="tpnumber" variant="outlined" />
+
+                        <Box>
+                            <UpdateButton type='submit'>Update</UpdateButton>
+                            <CancelButton onClick={handleClose}> Cancel </CancelButton>
+                        </Box>
+
+                    </Box>
+                </DialogContent>
+            </Dialog>
+
+        </Box>
+
+    )
+};
