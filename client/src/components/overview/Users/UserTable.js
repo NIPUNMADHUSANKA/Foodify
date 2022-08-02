@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {ThemeProvider, createTheme } from '@mui/material/styles';
 import {useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -10,9 +10,9 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -21,18 +21,17 @@ import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { visuallyHidden } from '@mui/utils';
 
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { fontWeight } from '@mui/system';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 //----------------------------------------------------------styles for table
 const paperSx = {
     width: '100%', 
-    overflow: 'hidden', 
+    // overflow: 'hidden', 
     backgroundColor: 'rgba(23, 23, 23, 0.8)',
     marginBottom: '40px',
 
@@ -53,6 +52,7 @@ const paperSx = {
 
   "& .MuiSvgIcon-root":{
     color: '#fff',
+    paddingLeft: "4px",
   },
 
   "& .MuiTablePagination-menuItem":{
@@ -61,9 +61,13 @@ const paperSx = {
     backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
 
+  "& input":{
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+  },
+
 }
 
-// .css-mgoxz0-MuiFormLabel-root-MuiInputLabel-root.Mui-focused
+//----------------------------------------------------------Theme for buttons
 const theme = createTheme({
   palette: {
     success:{
@@ -75,20 +79,39 @@ const theme = createTheme({
   },
 });
 
+//----------------------------------------------------------styles for input
 const textFSx ={
   color:"#ccc",
   fontFamily:"Poppins",
   fontWeight: '300',
   fontSize: "14px",
+  paddingLeft: "5px" ,
+}
+
+//----------------------------------------------------------styles for sorting headcell
+const headcellSx = {
+
+  "& .MuiTableSortLabel-root:hover" : {
+    color: '#FFFFFF',
+  },
+
+  "& .MuiTableSortLabel-root.Mui-active": {
+    color: '#aaa',
+  },
+
+  "& .css-1qgma8u-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active .MuiTableSortLabel-icon": {
+    color: '#fff',
+  },
+
 }
 
 //----------------------------------------------------------name suggetions for the search
 const topNames = [
-  "Abby",
-  "Betty",
-  "Chavindu",
-  "David",
-  "Erandi"
+  "Chamari",
+  "Ian",
+  "Nina",
+  "Zayn",
+  "Mohommad"
 ];
 
 //----------------------------------------------------------Pagination function
@@ -155,9 +178,9 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(userId, fname ,lname, type, location) {
+function createData(userId,fname,lname ,location, type) {
   const viewButton = <Button variant="outlined" color="success" >View</Button>
-  const deleteButton = <Button variant="outlined" color="error">Delete</Button>
+  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
   return { 
     userId, 
     fname,
@@ -168,7 +191,6 @@ function createData(userId, fname ,lname, type, location) {
     deleteButton,
   };
 }
-
 
 
 //----------------------------------------------------------Table Row Initialize and Sorting
@@ -185,27 +207,146 @@ const rows = [
   createData('B2351','Robert','Pattinson', 'None','Premium'),  
 ]
 
+//----------------------------------------------------------sorting functions - 3
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
+    }
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+//----------------------------------------------------------Column Define 
+const columns = [
+  { 
+    id: 'userId', 
+    label: 'User-Id',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'fname', 
+    label: 'First Name',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'lname', 
+    label: 'Last Name',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'location', 
+    label: 'Location',
+    numeric: false, 
+    minWidth: 120 },
+  { 
+    id: 'type', 
+    label: 'Type',
+    numeric: true, 
+    minWidth: 140 },
+
+  { 
+    id: 'view', 
+    label: '',
+    numeric: false, 
+    minWidth: 100 },
+  { 
+    id: 'delete', 
+    label: '',
+    numeric: false, 
+    minWidth: 100 },
+  
+];
+
+//----------------------------------------------------------Table head with sorting
+function EnhancedTableHead(props) {
+  const { order, orderBy, onRequestSort } =
+    props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {columns.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+            sx={headcellSx}
+          >
+          
+          {headCell.label ?
+            <TableSortLabel
+            active={orderBy === headCell.id}
+            direction={orderBy === headCell.id ? order : 'asc'}
+            onClick={createSortHandler(headCell.id)}
+            >
+             {orderBy === headCell.id ? (
+               <Box component="span" sx={visuallyHidden}>
+                 {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+               </Box>
+             ) : null}
+             {headCell.label}
+           </TableSortLabel>
+          
+          : null}
+             
+          </TableCell>
+        ))}
+        <TableCell/>
+      </TableRow>
+    </TableHead>
+  );
+}
+
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
+
+//----------------------------------------------------------Main function
 function TableActions() {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  //----------------------------------------------------------Column Define 
-  const columns = [
-    { id: 'userId', label: 'User-Id', minWidth: 140},
-    { id: 'fname', label: 'First Name', minWidth: 140},
-    { id: 'lname', label: 'Last Name', minWidth: 120 },
-    { id: 'type', label: 'Type', minWidth: 140 },
-    { id: 'location', label: 'Location', minWidth: 150 },
-    { id: 'view', label: '', minWidth: 100 },
-    { id: 'delete', label: '', minWidth: 100 },
-    
-  ];
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('calories');
+
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  //----------------------------------------------------------Sort Request
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
   //----------------------------------------------------------Footer Functions
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -220,96 +361,88 @@ function TableActions() {
     <ThemeProvider theme={theme}>
     <Paper sx={paperSx}>
     
-    {/* -----------------------------------------------------------------------Search box*/}
-    <Stack spacing={2} sx={{ width: 300, margin:"1% 2%",}}>
-      <Autocomplete
-        id="search-box"
-        freeSolo
-        options={topNames.map((option) => option)}
-        renderInput={(params) => <TextField {...params} label={<Typography sx={textFSx}>Enter Name</Typography>} variant="standard" />}
-      />
-    </Stack>
-    
-    {/* ------------------------------------------------------------------------Table*/}
+    {/* -----------------------------------------------------------------------Search box - Auto Complete*/}
+    <Box sx={{
+      display: 'inline-flex',
+    }}>
+      <Stack spacing={2} sx={{ width: 300, margin:"1% 2%", padding:"0px 0px 10px 5px"}}>
+        <Autocomplete
+          id="search-box"
+          freeSolo
+          options={topNames.map((option) => option)}
+          renderInput={(params) => <TextField {...params} label={<Typography sx={textFSx}>Enter Name</Typography>} variant="standard" />}
+        />
+      </Stack>
+    </Box>
+
     <TableContainer sx={{ maxHeight: 440 }}>
+
+      {/* ------------------------------------------------------------------------Table with sticky header*/}
       <Table stickyHeader sx={{ minWidth: 500}} aria-label="custom pagination table">
 
-      <TableHead>
+        {/* ------------------------------------------------------------------------Tableheader with sorting*/}
+        <EnhancedTableHead
+          order={order}
+          orderBy={orderBy}
+          onRequestSort={handleRequestSort}
+          rowCount={rows.length}
+        />
 
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell
-                key={column.id}
-                align={column.align}
-                style={{ minWidth: column.minWidth}}
-              >
-                {column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-
+        {/* ------------------------------------------------------------------------TableBody with sorting*/}
         <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.userId}>
-              <TableCell component="th" scope="row">
-                {row.userId}
-              </TableCell>
-              <TableCell >
-                {row.fname}
-              </TableCell>
-              <TableCell >
-                {row.lname}
-              </TableCell>
-              <TableCell >
-                {row.location}
-              </TableCell>
-              <TableCell >
-                {row.type}
-              </TableCell>
-              <TableCell >
-                {row.viewButton}
-              </TableCell>
-              <TableCell >
-                {row.deleteButton}
-              </TableCell>
-              
-            </TableRow>
-          ))}
+        {stableSort(rows, getComparator(order, orderBy))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row, index) => {
+            const labelId = `enhanced-table-checkbox-${index}`;
+                return (
+                  <TableRow
+                    hover
+                    tabIndex={-1}
+                    key={row.userId}
+                  >
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row" 
+                      
+                    >
+                      {row.userId}
+                    </TableCell>
+                    <TableCell >{row.fname}</TableCell>
+                    <TableCell >{row.lname}</TableCell>
+                    <TableCell >{row.location}</TableCell>
+                    <TableCell >{row.type}</TableCell>
+                    <TableCell >{row.viewButton}</TableCell>
+                    <TableCell >{row.deleteButton}</TableCell>
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: (53 * emptyRows),
+                }}
+              >
+                <TableCell colSpan={12} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={7}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  'aria-label': 'rows per page',
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-        
-      </Table>
-    </TableContainer>
+      {/* ------------------------------------------------------------------------Pagination*/}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{ 
+          color: '#fff',
+          "& p":{fontFamily: 'Poppins'}  }}
+      />
     </Paper>
     </ThemeProvider>
   );
