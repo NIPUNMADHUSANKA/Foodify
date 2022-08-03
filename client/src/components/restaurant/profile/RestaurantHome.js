@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { Box } from '@mui/material';
-import RestaurantAbout from '../../components/AboutUs2';
-import RestaurantOffers from '../../components/restaurant/RestaurantOffers';
-import RestaurantMenu from '../../components/restaurant/RestaurantMenu';
-import RestaurantContact from '../../components/restaurant/RestaurantContact';
-import RestaurantComment from '../../components/restaurant/RestaurantComments';
+import EditAboutUs from './EditAboutUs';
+import RestaurantOffers from '../RestaurantOffers';
+import RestaurantMenu from '../RestaurantMenu';
+import RestaurantEditContact from './RestaurantEditContact';
+import RestaurantComment from '../RestaurantComments';
 
-import AboutImage from '../../assets/images/golden-cutlery.jpg';//exporting the image for about section
-import Map from '../../assets/images/GoogleMapTA.webp';
+import AboutImage from '../../../assets/images/golden-cutlery.jpg';//exporting the image for about section
+import Map from '../../../assets/images/GoogleMapTA.webp';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -36,7 +36,7 @@ const RestaurantHome = () => {
         <Box>
 
             <Fade left>
-                <RestaurantAbout AboutImage={AboutImage} details={details} />
+                <EditAboutUs AboutImage={AboutImage} details={details} />
             </Fade>
 
             <Fade right>
@@ -52,7 +52,7 @@ const RestaurantHome = () => {
             </Fade>
 
             <Fade left>
-                <RestaurantContact Map={Map} details={contactdetails} />
+                <RestaurantEditContact Map={Map} details={contactdetails} />
             </Fade>
 
         </Box>
