@@ -127,12 +127,12 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 ,
                  background: Colours.green,
                   '&:hover': {
-                backgroundColor: Colours.yellow,
+                background: Colours.yellow,
                  },
                 color: Colours.dark,
                 fontSize: '20px',
                 marginTop:'7%',
-                hover: Colours.green }}
+              }}
                 >
               Sign In
             </Button>
@@ -168,14 +168,15 @@ export default function SignIn() {
             
 
           </Box>
-          <Box 
+         
+        </Box>
+        <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
                     <Skeleton 
                       sx={{ backgroundColor:Colours.transparenceGrey,marginLeft:'100%', marginTop:'80%'}}
                       variant="circular" width={140} height={140}/>
        </Box>
-        </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
      
