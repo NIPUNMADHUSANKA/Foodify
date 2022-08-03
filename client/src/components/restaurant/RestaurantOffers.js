@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import React from 'react';
 import Carousel from '../carousel/carousel';
 
@@ -9,13 +9,15 @@ import CardImage1 from '../../assets/images/offer1.jpg';
 
 
 import BackgroundImage from '../../assets/images/pv4WkDi.webp';
+import theme, { Colours } from '../../assets/theme/theme';
+import EditIcon from '@mui/icons-material/Edit';
 
 const item1 = {
   "id": "1",
   "title": "",
-  "image":CardImage1,
-  "decription":"",
-  "name":"view"
+  "image": CardImage1,
+  "decription": "",
+  "name": "view"
 }
 
 // const item2 = {
@@ -46,11 +48,37 @@ const itemcount = 3;
 const RestaurantOffers = () => {
   return (
     <Box sx={{
-      position:'relative',
-      width:'100%',
-      p:'0px',
+      position: 'relative',
+      width: '100%',
+      p: '0px',
     }}>
-      <Carousel item = {item1} title={title} bimage={BackgroundImage} count={itemcount}/>
+      <Button sx={{
+        margin: '0.5rem',
+        marginBottom:0,
+        marginTop:4,
+        width:"15%",
+        background: Colours.yellow, '&:hover': {
+          backgroundColor: Colours.green,
+        },
+        color: Colours.dark,
+        fontSize: '1rem',
+        hover: Colours.green,
+        borderRadius: "1rem",
+        Width: "20%",
+        [theme.breakpoints.down('sm')]: {
+          fontSize: '8px',
+          padding: '2px',
+          width:"25%",
+        },
+      }} endIcon={<EditIcon sx={{
+        color:Colours.primary,
+        [theme.breakpoints.down('sm')]: {
+          '& svg': {
+              fontSize: "15px",
+          }
+      },
+        }}/>}>Edit Offers</Button>
+      <Carousel item={item1} title={title} bimage={BackgroundImage} count={itemcount} />
     </Box>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
-import { Box, ThemeProvider, Typography } from '@mui/material';
+import { Box, Button, ThemeProvider, Typography } from '@mui/material';
 
 import '../../assets/css/App.css';
 
@@ -34,6 +34,27 @@ const RestaurantCemments = (props) => {
           justifyItems: 'center',
         }
       }}>
+        {/* ---------------view button--------------------- */}
+        <Button sx={{
+          margin: '0.5rem',
+          marginBottom: 0,
+          marginTop: 4,
+          width:"15%",
+          background: Colours.green, '&:hover': {
+            backgroundColor: Colours.yellow,
+          },
+          color: Colours.dark,
+          fontSize: '1rem',
+          hover: Colours.green,
+          borderRadius: "1rem",
+          Width: "20%",
+          [theme.breakpoints.down('sm')]: {
+            fontSize: '8px',
+            padding: '2px',
+            width:"25%",
+          },
+        }}>View Comments</Button>
+
         {/* -------------------topic-------------------------------------------- */}
         <Typography variant="h4" gutterBottom component="div" sx={{
           color: Colours.green,
@@ -54,18 +75,18 @@ const RestaurantCemments = (props) => {
             width: '100%',
             maxWidth: '95%',
             margin: 'auto',
-            marginBottom:'1rem',
-            marginTop:'1rem',
+            marginBottom: '1rem',
+            marginTop: '1rem',
             bgcolor: Colours.gray1,
             position: 'relative',
             overflow: 'auto',
             maxHeight: '40vh',
-            borderRadius:'1rem',
-            color:Colours.grayWhite,
+            borderRadius: '1rem',
+            color: Colours.grayWhite,
             '& ul': { padding: 0 },
           }}>
-            <li>
-              <ul>
+          <li>
+            <ul>
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
@@ -73,8 +94,8 @@ const RestaurantCemments = (props) => {
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
-              </ul>
-            </li>
+            </ul>
+          </li>
         </List>
         {/* -----------------beginin of the comments----------------- */}
 

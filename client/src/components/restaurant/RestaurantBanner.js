@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Rating, ThemeProvider} from '@mui/material';
+import { Box, Rating, ThemeProvider } from '@mui/material';
 import Button from '@mui/material/Button';
 import '../../assets/css/App.css';
 import ArrowIcon from '@mui/icons-material/ArrowForward';
@@ -22,45 +22,50 @@ const RestaurantBanner = () => {
         {/* upper part of the banner */}
         <BannerContent src={Cover}>
 
-          <Box sx={{ marginTop: '20%' }}>
+          <Box sx={{ marginTop: '10%' }}>
 
-            <Button href='#' endIcon={<ArrowIcon fontSize="medium" sx={{
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '8px',
-              },
-            }} />} variant="contained" sx={{
-              margin: '6px',
-              background: Colours.yellow, '&:hover': {
-                backgroundColor: Colours.green,
-              },
-              color: Colours.dark,
-              fontSize: '20px',
-              hover: Colours.green,
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '8px',
-                padding: '2px',
-              },
+            <Box sx={{
+              width: "20%",
+              margin: "auto",
             }}>
-              Offers
-            </Button>
-            <Button href='#' endIcon={<RestaurantMenuIcon fontSize="medium" sx={{
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '8px',
-              },
-            }} />} variant="contained" sx={{
-              margin: '6px',
-              background: Colours.darkgray, '&:hover': {
-                backgroundColor: Colours.grayWhite, color: Colours.dark,
-              },
-              color: Colours.grayWhite,
-              fontSize: '20px',
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '8px',
-                padding: '2px',
-              },
-            }}>
-              Menu
-            </Button>
+              <Button href='#' endIcon={<ArrowIcon fontSize="medium" sx={{
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '8px',
+                },
+              }} />} variant="contained" sx={{
+                margin: '6px',
+                background: Colours.yellow, '&:hover': {
+                  backgroundColor: Colours.green,
+                },
+                color: Colours.dark,
+                fontSize: '20px',
+                hover: Colours.green,
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '8px',
+                  padding: '2px',
+                },
+              }}>
+                Offers
+              </Button>
+              <Button href='#' endIcon={<RestaurantMenuIcon fontSize="medium" sx={{
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '8px',
+                },
+              }} />} variant="contained" sx={{
+                margin: '6px',
+                background: Colours.darkgray, '&:hover': {
+                  backgroundColor: Colours.grayWhite, color: Colours.dark,
+                },
+                color: Colours.grayWhite,
+                fontSize: '20px',
+                [theme.breakpoints.down('sm')]: {
+                  fontSize: '8px',
+                  padding: '2px',
+                },
+              }}>
+                Menu
+              </Button>
+            </Box>
           </Box>
 
         </BannerContent>

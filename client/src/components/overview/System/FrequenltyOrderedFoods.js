@@ -12,7 +12,12 @@ const RowButton = {
   fontFamily: 'Poppins',
   display: 'flex',
   justifyContent: 'space-between',
-  borderBottom: "0.5px solid rgba(224, 224, 224, 0.9)"
+  borderBottom: "0.5px solid rgba(224, 224, 224, 0.9)",
+
+  "& .MuiTypography-root":{
+    fontFamily: 'Poppins',
+  }
+
 }
 
 function renderRow(props) {

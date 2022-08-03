@@ -8,7 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import Menubar from '../components/Menubar';
 import Overview from '../components/overview/Overview.js';
 import SystemMain from '../components/overview/System/System-main';
-import UsersMain from '../components/overview/Users/Users-main'
+import UsersMain from '../components/overview/Users/Users-main';
+import RestaurantMain from '../components/overview/Restaurant/restaurant-main';
 import TabPanel from '../components/TabPanel';
 
 
@@ -25,7 +26,7 @@ const Dashboard = () => {
     const drawerWidth = 240;
 
      {/* ------------------------------------------------------------Drawer functions */}
-    const [value, setValue] = React.useState(1);
+    const [value, setValue] = React.useState(2);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -127,6 +128,9 @@ const Dashboard = () => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <UsersMain />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <RestaurantMain />
                 </TabPanel>
                 
                     

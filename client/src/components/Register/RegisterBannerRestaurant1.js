@@ -1,25 +1,18 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
-import Facebook from '../../assets/images/facebook.png';
-import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 // import BiggerImage from '../../assets/images/register_big_image.png';
 
 
-
 const theme1 = createTheme();
 
-const RegisterBannerRestaurant = () => {
+const RegisterBannerRestaurant1 = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -76,11 +69,11 @@ const RegisterBannerRestaurant = () => {
                 
                 }}    
                   autoComplete="given-name"
-                  name="username"
+                  name="Name"
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
+                  id="name"
+                  label="Name"
                   autoFocus
                 />
                 <TextField
@@ -94,10 +87,10 @@ const RegisterBannerRestaurant = () => {
                     }} 
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="address"
+                  label="Address"
+                  name="address"
+                  autoComplete="address"
                 />
                 <TextField
                     sx={{ input: 
@@ -108,54 +101,43 @@ const RegisterBannerRestaurant = () => {
                     }
                 
                 }}    
-                  name="location"
+                  name="opening-hours"
                   required
                   fullWidth
-                  id="location"
-                  label="Location"
+                  id="openinghours"
+                  label="Opening Hours"
                   autoFocus
                 />
                 <TextField
                     sx={{ input: 
-                        { color: "#fff" }, marginTop: 2,
+                        { color: "#fff" }, marginTop: 2,marginBottom: 2,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
                         color:"#fff"
                         }
                     
                     }} 
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                    name="tp-number"
+                    required
+                    fullWidth
+                    id="tpnumber"
+                    label="Telephone Number"
+                    autoFocus
                 />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 2, marginBottom: 2,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }} 
-                  required
-                  fullWidth
-                  name="password"
-                  label="Confirm Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-                <FormControlLabel
-                  style={{color:Colours.grayWhite}}
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label={<label>I accept the <Link href='/'>Terms of Conditions.</Link></label>}
-                />
+                <Button
+                  variant="outlined"
+                  component="label"
+                >
+                  Upload Image
+                  <input
+                    type="file"
+                    hidden
+                  />
+                </Button>
+                
             <Button
               type="submit"
+              href='/register/Signuprestaurant'
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 ,
@@ -168,45 +150,10 @@ const RegisterBannerRestaurant = () => {
                marginTop:'5%',
                hover: Colours.green }}
                >
-              Sign Up
+              Submit
             </Button>
-            <Typography  
-            sx={{
-              color:'white', 
-              fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
-              marginTop:'5%',
-              marginBottom:'5%'
-              }}>
-            ---Or Signup with---
-            </Typography>
             
-            <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
-                <Link href="#" variant="body2">
-                <img src={Google} alt="Logo" className='social-icons-gg' />
-                </Link>
-              </Grid>
-            </Grid>
-            <Typography
-            sx={{
-              color:'white', 
-              fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
-              marginTop:'5%',
-              marginBottom:'5%'
-              }}>
-                Already have an account? &nbsp;
-                                    <Link href="#" >
-                                        Sign In 
-                                </Link>
-                                </Typography>
-          </Box>
+            </Box>
           {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
@@ -226,4 +173,4 @@ const RegisterBannerRestaurant = () => {
   );
 }
 
-export default RegisterBannerRestaurant
+export default RegisterBannerRestaurant1
