@@ -153,7 +153,7 @@ export default function SignIn() {
             </Typography>
               
             <Grid container xs >
-              <Grid item xs  marginLeft="42%">
+              <Grid item xs  marginLeft="37%">
                 <Link href="#" variant="body2">
                 <img src={Facebook} alt="Logo" className='social-icons-fb' />
                 </Link>
@@ -168,6 +168,10 @@ export default function SignIn() {
             
 
           </Box>
+
+          
+        </Box>
+
          
         </Box>
         <Box 
@@ -177,6 +181,7 @@ export default function SignIn() {
                       sx={{ backgroundColor:Colours.transparenceGrey,marginLeft:'100%', marginTop:'80%'}}
                       variant="circular" width={140} height={140}/>
        </Box>
+
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
      
