@@ -21,7 +21,6 @@ public class Registered_Customer_Controller {
 
 	@Autowired
 	private Registered_Customer_Sev RegCusServ;
-	private Registered_Customer_Repository registeredCustomerRepository;
 	
 	@GetMapping("/Foodify/{Username}/{Password}")
 	public ResponseEntity<?> Login(@PathVariable("Username") String Username, @PathVariable("Password") String Password ){
@@ -33,24 +32,6 @@ public class Registered_Customer_Controller {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
-	
-//	create method
-//	put object name and v name
-	@PostMapping("/create1")
-	public void createRegisteredUser(@RequestBody Registered_Customer registeredCustome) {
-		registeredCustomerRepository.insert(registeredCustome); 
-	}
-	
-//	update method
-	@PostMapping
-	public void updateRegisteredUser() {
-		
-	}
-	
-//	de_activate method
-	@PostMapping("/deactivate/{id}")
-	public void deacivateRegisteredUser(@PathVariable String id) {
-		
-	}
+
 	
 }
