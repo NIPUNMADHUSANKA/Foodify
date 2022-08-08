@@ -101,22 +101,6 @@ const RegisterBannerRestaurant = () => {
                 />
                 <TextField
                     sx={{ input: 
-                    { color: "#fff" }, marginTop: 2,
-                    "label": {color: "#fff"},
-                    "& label.Mui-focused": {
-                    color:"#fff"
-                    }
-                
-                }}    
-                  name="location"
-                  required
-                  fullWidth
-                  id="location"
-                  label="Location"
-                  autoFocus
-                />
-                <TextField
-                    sx={{ input: 
                         { color: "#fff" }, marginTop: 2,
                         "label": {color: "#fff"},
                         "& label.Mui-focused": {
@@ -170,7 +154,7 @@ const RegisterBannerRestaurant = () => {
                >
               Sign Up
             </Button>
-            <Typography  
+            {/* <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -192,7 +176,7 @@ const RegisterBannerRestaurant = () => {
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
             <Typography
             sx={{
               color:'white', 
@@ -202,7 +186,7 @@ const RegisterBannerRestaurant = () => {
               marginBottom:'5%'
               }}>
                 Already have an account? &nbsp;
-                                    <Link href="#" >
+                                    <Link href="../login" >
                                         Sign In 
                                 </Link>
                                 </Typography>
