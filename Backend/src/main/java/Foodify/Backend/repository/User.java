@@ -1,5 +1,5 @@
 
-package Foodify.Backend.Repository;
+package Foodify.Backend.repository;
 
 public interface User {
 

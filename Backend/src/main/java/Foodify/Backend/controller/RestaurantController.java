@@ -1,4 +1,4 @@
-package Foodify.Backend.Controller;
+package Foodify.Backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.Repository.RestaurantRepository;
+import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.model.Restaurant;
 
 @RestController

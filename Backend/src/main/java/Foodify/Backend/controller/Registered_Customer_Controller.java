@@ -1,5 +1,5 @@
 
-package Foodify.Backend.Controller;
+package Foodify.Backend.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.Repository.Registered_Customer_Repository;
+import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.service.Registered_Customer_Sev;

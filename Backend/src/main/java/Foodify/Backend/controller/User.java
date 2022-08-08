@@ -1,5 +1,5 @@
 
-package Foodify.Backend.Controller;
+package Foodify.Backend.controller;
 
 public class User {
 
