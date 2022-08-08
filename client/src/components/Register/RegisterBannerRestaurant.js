@@ -136,7 +136,7 @@ const RegisterBannerRestaurant = () => {
                 <FormControlLabel
                   style={{color:Colours.grayWhite}}
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label={<label>I accept the <Link href='/'>Terms of Conditions.</Link></label>}
+                  label={<label>I accept the <Link href='Terms'>Terms & Conditions.</Link></label>}
                 />
             <Button
               type="submit"
