@@ -1,4 +1,4 @@
-package Foodify.Backend.repository;
+package Foodify.Backend.Repository;
 
 import java.util.Optional;
 
