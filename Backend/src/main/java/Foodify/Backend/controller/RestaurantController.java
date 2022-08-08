@@ -7,29 +7,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.repository.RestaurantRepository;
-import Foodify.Backend.model.Restaurant;
+import Foodify.Backend.repository.Registered_Customer_Repository;
+import Foodify.Backend.model.Registered_Customer;
 
 @RestController
-public class RestaurantController extends Registered_Customer_Controller{
+public class RestaurantController{
 
 	@Autowired
-	private RestaurantRepository restaurantRepository;
+	private Registered_Customer_Repository restaurantRepository;
 	
 //	create method
 	@PostMapping("/create")
-	public void createRestaurant(@RequestBody Restaurant restaurant) {
-		restaurantRepository.insert(restaurant); 
-	}
-	
-//	update method
-	@PostMapping
-	public void updateRestaurant() {
-		
+	public void createRestaurant(@RequestBody  Registered_Customer registeredCustomer) {
+		restaurantRepository.save(registeredCustomer); 
 	}
 	
 //	de_activate method
-	@PostMapping("/deactivate/{id}")
+	@PostMapping("/restaurant/deactivate/{id}")
 	public void deacivateRestaurant(@PathVariable String id) {
 		
 	}
