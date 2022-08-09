@@ -43,19 +43,19 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme1}>
-      <Box 
-      sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
-                    position="absolute" p="20px" >
-                    <Skeleton 
-                      sx={{ backgroundColor:Colours.transparenceGrey }}
-                      variant="circular" width={140} height={140}/>
-       </Box>
-      <Container component="main" maxWidth="xs" 
-      sx={{
-        marginLeft:'6%',
-        [theme.breakpoints.down('sm')]: {
-          marginLeft: '3.6%',
-        },
+      <Box
+        sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
+        position="absolute" p="20px" >
+        <Skeleton
+          sx={{ backgroundColor: Colours.transparenceGrey }}
+          variant="circular" width={140} height={140} />
+      </Box>
+      <Container component="main" maxWidth="xs"
+        sx={{
+          marginLeft: '6%',
+          [theme.breakpoints.down('sm')]: {
+            marginLeft: '3.6%',
+          },
         }}>
         {/* <CssBaseline /> */}
         <Box
@@ -65,29 +65,30 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            background:'',
-            backgroundColor:Colours.transparenceGrey,
+            background: '',
+            backgroundColor: Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
-            borderRadius:"33px" 
-           
+            borderRadius: "33px"
+
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
-            </Avatar>
-          <Typography component="h1" variant="h5" style={{color:Colours.grayWhite}}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
+          </Avatar>
+          <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-                sx={{ input: 
-                  { color: Colours.formWhite }, 
-                  "label": {color: Colours.formWhite},
-                  "& label.Mui-focused": {
-                  color:Colours.formWhite
-                  }
-              
+              sx={{
+                input:
+                  { color: Colours.formWhite },
+                "label": { color: Colours.formWhite },
+                "& label.Mui-focused": {
+                  color: Colours.formWhite
+                }
+
               }}
-        
+
               margin="normal"
               required
               fullWidth
@@ -98,14 +99,15 @@ export default function SignIn() {
               autoFocus
             />
             <TextField
-               sx={{ input: 
-                { color: Colours.formWhite }, 
-                "label": {color: Colours.formWhite},
+              sx={{
+                input:
+                  { color: Colours.formWhite },
+                "label": { color: Colours.formWhite },
                 "& label.Mui-focused": {
-                color:Colours.formWhite
+                  color: Colours.formWhite
                 },
-                borderColor:Colours.formWhite,
-            }}
+                borderColor: Colours.formWhite,
+              }}
               margin="normal"
               required
               fullWidth
@@ -116,64 +118,65 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              style={{color:Colours.formWhite}}
-              control={<Checkbox  value="remember" sx={{color:Colours.formWhite}} />}
+              style={{ color: Colours.formWhite }}
+              control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 ,
-                 background: Colours.green,
-                  '&:hover': {
-                background: Colours.yellow,
-                 },
+              sx={{
+                mt: 3, mb: 2,
+                background: Colours.green,
+                '&:hover': {
+                  background: Colours.yellow,
+                },
                 color: Colours.dark,
                 fontSize: '20px',
-                marginTop:'7%',
+                marginTop: '7%',
               }}
-                >
+            >
               Sign In
             </Button>
-        
+
             <Link href="#" variant="body2" marginLeft="60%" marginBottom="10%">
-                  Forgot password?
+              Forgot password?
             </Link>
 
-            <Typography  
-            sx={{
-              color:Colours.formWhite, 
-              fontSize:{lg:'15px', xs:'10px'},
-              paddingLeft:'34%',
-              marginTop:'5%',
-              marginBottom:'5%'
+            <Typography
+              sx={{
+                color: Colours.formWhite,
+                fontSize: { lg: '15px', xs: '10px' },
+                paddingLeft: '34%',
+                marginTop: '5%',
+                marginBottom: '5%'
               }}>
-            ---Or Login with---
+              ---Or Login with---
             </Typography>
-              
+
             <Grid container xs >
-              <Grid item xs  marginLeft="37%">
+              <Grid item xs marginLeft="37%">
                 <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
+                  <img src={Facebook} alt="Logo" className='social-icons-fb' />
                 </Link>
               </Grid>
               <Grid item xs marginRight="37%">
                 <Link href="#" variant="body2">
-                <img src={Google} alt="Logo" className='social-icons-gg' />
+                  <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
             </Grid>
 
-            
+
 
           </Box>
 
-          
+
         </Box>
 
          
-      
+    
         <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
@@ -184,7 +187,7 @@ export default function SignIn() {
 
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
-     
-    </ThemeProvider>
+
+    </ThemeProvider >
   );
 }

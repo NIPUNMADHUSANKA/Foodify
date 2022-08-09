@@ -11,7 +11,7 @@ import Foodify.Backend.model.Registered_Customer;
 @Repository
 public interface Registered_Customer_Repository extends MongoRepository<Registered_Customer, String> {
 	
-	@Query("{'$and':[ {'UserName': ?0}, {'Password':?1} ] }")
+	@Query("{'$and':[ {'userName': ?0}, {'password':?1} ] }")
 	Optional<Registered_Customer> findByUser(String UserName, String Password);
 	
 }
