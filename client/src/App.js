@@ -46,6 +46,8 @@ import Terms from './pages/register/Terms';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
 
+import Navbar from './pages/NavBarOrg';
+
 function App() {
   return (
       
@@ -58,6 +60,9 @@ function App() {
         <Routes>
         
           <Route path="/" element = {<Landing/>} />
+
+          <Route path="/Navbar" element={<Navbar/>} />
+          
           <Route path="/Explore" element = {<Explore/>} />
 
           <Route path="/restaurant" element = {<Restaurant/>} />
