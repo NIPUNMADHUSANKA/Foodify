@@ -1,5 +1,6 @@
 package Foodify.Backend.model;
 
+import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,13 +20,14 @@ public class Registered_Customer {
 	@Id
 	private String Id;
 	
-	private String userName;
-	private String password;
-	private String accountState;
+	private String UserName;
+	private String Password;
+	private String AccountState;
 	
+	private ArrayList<String> Preferences = new ArrayList<String>();
 	private String location;
 	private String email;
-	private String telephone;
+	private String Telephone;
 	
 	
 	public String getId() {
@@ -34,29 +36,34 @@ public class Registered_Customer {
 	public void setId(String id) {
 		Id = id;
 	}
-	public String getuserName() {
-		return userName;
+	public String getUserName() {
+		return UserName;
 	}
-	public void setuserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
-	public String getpassword() {
-		return password;
+	public String getPassword() {
+		return Password;
 	}
-	public void setpassword(String password) {
-		this.password = password;
+	public void setPassword(String password) {
+		Password = password;
 	}
-
-	public String getaccountState() {
-		return accountState;
+	public ArrayList<String> getPreferences() {
+		return Preferences;
 	}
-	public void setaccountState(String accountState) {
-		this.accountState = accountState;
+	public void setPreferences(ArrayList<String> preferences) {
+		Preferences = preferences;
 	}
-	public String getlocation() {
+	public String getAccountState() {
+		return AccountState;
+	}
+	public void setAccountState(String accountState) {
+		AccountState = accountState;
+	}
+	public String getLocation() {
 		return location;
 	}
-	public void setlocation(String location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	public String getEmail() {
@@ -65,11 +72,11 @@ public class Registered_Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String gettelephone() {
-		return telephone;
+	public String getTelephone() {
+		return Telephone;
 	}
-	public void settelephone(String telephone) {
-		this.telephone = telephone;
+	public void setTelephone(String telephone) {
+		Telephone = telephone;
 	}
 	
 }
