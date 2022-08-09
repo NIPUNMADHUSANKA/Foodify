@@ -1,4 +1,4 @@
-package Foodify.Backend.controller;
+package Foodify.Backend.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
