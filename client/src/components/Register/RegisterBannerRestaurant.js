@@ -15,14 +15,33 @@ import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 // import BiggerImage from '../../assets/images/register_big_image.png';
 
+import axois from "axios";
+import { Navigate } from 'react-router-dom';
+
 
 
 const theme1 = createTheme();
 
 const RegisterBannerRestaurant = () => {
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    // creating restaurant object
+    const registeredCustomer = {
+      userName:data.get('userName'),
+      email:data.get('email'),
+      password:data.get('password'),
+      accountState:data.get('accountState'),
+    }
+
+    // here we put the url and the restaurant object that in @requestbody in backend
+    axois.post("http://localhost:8072/register/Signuprestaurant",registeredCustomer);
+
+    // Navigate("/login");
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -31,19 +50,19 @@ const RegisterBannerRestaurant = () => {
 
   return (
     <ThemeProvider theme={theme1}>
-        <Box 
-      sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
-                    position="absolute" p="20px" >
-                    <Skeleton 
-                      sx={{ backgroundColor:Colours.transparenceGrey }}
-                      variant="circular" width={140} height={140}/>
-       </Box>
-      <Container component="main" maxWidth="xs" 
-      sx={{
-        marginLeft:'6%',
-        [theme.breakpoints.down('sm')]: {
-          marginLeft: '3.6%',
-        },
+      <Box
+        sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
+        position="absolute" p="20px" >
+        <Skeleton
+          sx={{ backgroundColor: Colours.transparenceGrey }}
+          variant="circular" width={140} height={140} />
+      </Box>
+      <Container component="main" maxWidth="xs"
+        sx={{
+          marginLeft: '6%',
+          [theme.breakpoints.down('sm')]: {
+            marginLeft: '3.6%',
+          },
         }}>
         {/* <CssBaseline /> */}
         <Box
@@ -53,108 +72,126 @@ const RegisterBannerRestaurant = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            background:'',
-            backgroundColor:Colours.transparenceGrey,
+            background: '',
+            backgroundColor: Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
-            borderRadius:"33px" 
-           
+            borderRadius: "33px"
+
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main',background:Colours.avatarWhite }}>
             </Avatar> */}
-          <Typography component="h1" variant="h5" style={{color:Colours.grayWhite}}>
+          <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
             Sign Up
           </Typography>
+
+          {/* -------------------beggining of the form------------------------ */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
             <TextField
-                    sx={{ input: 
-                    { color: "#fff" }, marginTop: 2,
-                    "label": {color: "#fff"},
-                    "& label.Mui-focused": {
-                    color:"#fff"
-                    }
-                
-                }}    
-                  autoComplete="given-name"
-                  name="username"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  autoFocus
-                />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 2,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }} 
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 2,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }} 
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-                <TextField
-                    sx={{ input: 
-                        { color: "#fff" }, marginTop: 2, marginBottom: 2,
-                        "label": {color: "#fff"},
-                        "& label.Mui-focused": {
-                        color:"#fff"
-                        }
-                    
-                    }} 
-                  required
-                  fullWidth
-                  name="password"
-                  label="Confirm Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-                <FormControlLabel
-                  style={{color:Colours.grayWhite}}
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label={<label>I accept the <Link href='Terms'>Terms & Conditions.</Link></label>}
-                />
-            <Button
-              type="submit"
+              sx={{
+                input:
+                  { color: "#fff" }, marginTop: 2,
+                "label": { color: "#fff" },
+                "& label.Mui-focused": {
+                  color: "#fff"
+                }
+
+              }}
+              autoComplete="given-name"
+              name="userName"
+              required
               fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 ,
-                background: Colours.green,
-                 '&:hover': {
-               backgroundColor: Colours.yellow,
-                },
-               color: Colours.dark,
-               fontSize: '20px',
-               marginTop:'5%',
-               hover: Colours.green }}
-               >
-              Sign Up
-            </Button>
-            {/* <Typography  
+              id="userName"
+              label="UserName"
+              autoFocus
+            />
+
+            <TextField
+              sx={{
+                input:
+                  { color: "#fff" }, marginTop: 2,
+                "label": { color: "#fff" },
+                "& label.Mui-focused": {
+                  color: "#fff"
+                }
+
+              }}
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+            />
+
+            <TextField
+              sx={{
+                input:
+                  { color: "#fff" }, marginTop: 2,
+                "label": { color: "#fff" },
+                "& label.Mui-focused": {
+                  color: "#fff"
+                }
+
+              }}
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+            />
+
+            <TextField
+              sx={{
+                input:
+                  { color: "#fff" }, marginTop: 2, marginBottom: 2,
+                "label": { color: "#fff" },
+                "& label.Mui-focused": {
+                  color: "#fff"
+                }
+
+              }}
+              required
+              fullWidth
+              name="password"
+              label="Confirm Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+            />
+
+            <input type="hidden" id="accountState" name="accountState" required/>
+
+              <FormControlLabel
+                style={{ color: Colours.grayWhite }}
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label={<label>I accept the <Link href='Terms'>Terms & Conditions.</Link></label>}
+              />
+
+              {/*--------------submit buttons------------------ */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3, mb: 2,
+                  background: Colours.green,
+                  '&:hover': {
+                    backgroundColor: Colours.yellow,
+                  },
+                  color: Colours.dark,
+                  fontSize: '20px',
+                  marginTop: '5%',
+                  hover: Colours.green
+                }}
+              >
+                Sign Up
+              </Button>
+
+              {/* <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -177,19 +214,21 @@ const RegisterBannerRestaurant = () => {
                 </Link>
               </Grid>
             </Grid> */}
-            <Typography
-            sx={{
-              color:'white', 
-              fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
-              marginTop:'5%',
-              marginBottom:'5%'
-              }}>
+
+              <Typography
+                sx={{
+                  color: 'white',
+                  fontSize: { lg: '15px', xs: '10px' },
+                  textAlign: "center",
+                  marginTop: '5%',
+                  marginBottom: '5%'
+                }}>
                 Already have an account? &nbsp;
-                                    <Link href="../login" >
-                                        Sign In 
-                                </Link>
-                                </Typography>
+                <Link href="../login" >
+                  Sign In
+                </Link>
+              </Typography>
+
           </Box>
           {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
