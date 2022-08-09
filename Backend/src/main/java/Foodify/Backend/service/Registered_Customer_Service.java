@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.Repository.Registered_Customer_Repository;
+import Foodify.Backend.repository.Registered_Customer_Repository;
 
 @Service
 public class Registered_Customer_Service implements Registered_Customer_Sev{
@@ -25,7 +25,6 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 			return RegCusOptional.get();
 		}
 	}
-	
 
 	
 }

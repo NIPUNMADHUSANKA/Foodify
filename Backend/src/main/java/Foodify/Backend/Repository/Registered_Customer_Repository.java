@@ -1,4 +1,5 @@
-package Foodify.Backend.Repository;
+
+package Foodify.Backend.repository;
 
 import java.util.Optional;
 
@@ -13,8 +14,5 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 	
 	@Query("{'$and':[ {'UserName': ?0}, {'Password':?1} ] }")
 	Optional<Registered_Customer> findByUser(String UserName, String Password);
-
 	
 }
-
-
