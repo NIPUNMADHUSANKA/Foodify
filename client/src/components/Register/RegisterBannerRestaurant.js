@@ -191,7 +191,7 @@ const RegisterBannerRestaurant = () => {
                 Sign Up
               </Button>
 
-              {/* <Typography  
+              <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -213,7 +213,7 @@ const RegisterBannerRestaurant = () => {
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
 
               <Typography
                 sx={{
