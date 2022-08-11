@@ -48,4 +48,16 @@ public class Restaurant {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Restaurant ["
+				+ "userName=" + userName +
+				", password=" + password + 
+				", status=" + status + "]";
+	}
+	
+	
+	
 }
