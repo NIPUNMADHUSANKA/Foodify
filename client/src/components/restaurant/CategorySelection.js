@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
-import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
+import { Checkbox, FormControl, FormGroup, Grid, Typography } from '@mui/material';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -72,7 +72,7 @@ const foods1 = [
     }
 ];
 
-const name = { Food1: "false", Food2: "false", Food3: "false", Food4: "false", Food5: "false", Food6: "false", }
+//const name = { Food1: "false", Food2: "false", Food3: "false", Food4: "false", Food5: "false", Food6: "false", }
 
 const CategorySelection = (props) => {
 

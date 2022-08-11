@@ -3,29 +3,19 @@ import React from "react";
 //Card
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import CardMedia from "@material-ui/core/CardMedia";
 
 import Fab from "@material-ui/core/Fab";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 
 import red from "@material-ui/core/colors/red";
-import pink from "@material-ui/core/colors/pink";
 import blue from "@material-ui/core/colors/blue";
 
-import Icon from "@material-ui/core/Icon";
-import PageviewIcon from "@mui/icons-material/Pageview";
 import SearchIcon from "@mui/icons-material/Search";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import CollectionsIcon from "@mui/icons-material/Collections";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-import Typography from "@material-ui/core/Typography";
-import Popover from "@material-ui/core/Popover";
 
 // Search
 import Paper from "@material-ui/core/Paper";

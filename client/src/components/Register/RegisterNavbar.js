@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Logo from '../../assets/icons/foodify-logo.png';
 // import theme, { Colours } from '../../assets/theme/theme';
-
+import {Link} from 'react-router-dom';
 
 export default function RegisterNavbar() {
   return (
@@ -24,7 +24,7 @@ export default function RegisterNavbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             
           </Typography>
-          <Button variant="outlined" style={{ color: 'Colours.white', borderColor:'Colours.white'}} sx={{position:'relative'}} color="inherit">LogIn</Button>
+          <Button component={Link} to = '/login' variant="outlined" style={{ color: 'Colours.white', borderColor:'Colours.white'}} sx={{position:'relative'}} color="inherit">LogIn</Button>
         </Toolbar>
       </AppBar>
     </Box>

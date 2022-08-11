@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,43 +13,38 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
-import Skeleton from '@mui/material/Skeleton';
 
+//import {useForm} from 'react-hook-form';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const theme1 = createTheme();
 
+const initialState = {username:"555",password:"98665"}
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+
+  const [formData, setFormData] = useState(initialState);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
+    setFormData(initialState);
+
   };
+
+  const handleChange = (e)=>{
+    setFormData({...formData, [e.target.name]: e.target.value });
+  }
 
   return (
     <ThemeProvider theme={theme1}>
-      <Box
-        sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
-        position="absolute" p="20px" >
-        <Skeleton
-          sx={{ backgroundColor: Colours.transparenceGrey }}
-          variant="circular" width={140} height={140} />
-      </Box>
+      
+
       <Container component="main" maxWidth="xs"
         sx={{
           marginLeft: '6%',
@@ -77,8 +72,11 @@ export default function SignIn() {
           <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          
+          <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
+
             <TextField
+               handleChange = {handleChange}
               sx={{
                 input:
                   { color: Colours.formWhite },
@@ -92,13 +90,12 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="name"
               label="Username"
-              name="name"
-              autoComplete="name"
-              autoFocus
+              autoComplete='name'
             />
+
             <TextField
+              handleChange = {handleChange}
               sx={{
                 input:
                   { color: Colours.formWhite },
@@ -111,17 +108,19 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              name='password' 
+              autoComplete='amer'
+             
             />
+
+
             <FormControlLabel
               style={{ color: Colours.formWhite }}
               control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
               label="Remember me"
             />
+
             <Button
               type="submit"
               fullWidth
@@ -168,22 +167,14 @@ export default function SignIn() {
               </Grid>
             </Grid>
 
-
-
-          </Box>
+          </form>
 
 
         </Box>
 
          
     
-        <Box 
-          sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
-                    position="absolute" p="20px" >
-                    <Skeleton 
-                      sx={{ backgroundColor:Colours.transparenceGrey,marginLeft:'100%', marginTop:'80%'}}
-                      variant="circular" width={140} height={140}/>
-       </Box>
+        
 
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>

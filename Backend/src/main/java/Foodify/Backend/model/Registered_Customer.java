@@ -1,13 +1,13 @@
 package Foodify.Backend.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
@@ -19,12 +19,21 @@ public class Registered_Customer {
 	@Id
 	private String Id;
 	
+	@NotBlank(message = "Enter your username")
 	private String userName;
+	
+	@NotBlank(message = "Enter your Password")
+	@Length(min = 6, message = "Password must be at least 6 characters")
 	private String password;
+	
 	private String accountState;
 	
 	private String location;
+	
+	@NotBlank(message = "Enter your Email")
+	@Email(message = "Enter Valid Email")
 	private String email;
+	
 	private String telephone;
 	
 	
