@@ -26,6 +26,10 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     width: '100% !important', // Overrides inline-style
     height: 100,
   },
+  [theme.breakpoints.down('xs')]: {
+    width: '200 !important', // Overrides inline-style
+    height: 100,
+  },
   '&:hover, &.Mui-focusVisible': {
     zIndex: 1,
     '& .MuiImageBackdrop-root': {
@@ -85,6 +89,12 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 export default function RegisterBanner0() {
   return (
+    <React.Fragment>
+    {/* <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="300%"
+          align="center"
+        >
+          Choose user role
+        </Typography> */}
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
       {images.map((image) => (
         <ImageButton
@@ -94,7 +104,11 @@ export default function RegisterBanner0() {
             width: image.width,
           }}
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+          <ImageSrc style={{ backgroundImage: `url(${image.url})`
+            ,left: '41.9%',
+            right: '41.9%',
+            top: '20.14%',
+            bottom: '54.79%'}} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
           <Image>
             <Typography
@@ -115,5 +129,6 @@ export default function RegisterBanner0() {
         </ImageButton>
       ))}
     </Box>
+    </React.Fragment>
   );
 }

@@ -61,7 +61,7 @@ const TermsBanner = () => {
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
-              textAlign:"center",
+              textAlign:"left",
               marginTop:'5%',
               marginBottom:'5%'
               }}>
