@@ -4,10 +4,10 @@ import {  Grid, Container } from '@mui/material';
 import DashboardCard from '../DashboardCard'
 import RestaurantTable from './restaurantTable'
 
-import GroupIcon from '@mui/icons-material/Group';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import PersonIcon from '@mui/icons-material/Person';
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import StoreIcon from '@mui/icons-material/Store';
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 
 function SystemMain(props){
     return(
@@ -19,7 +19,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="User Count" value="65483" icon={GroupIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Restaurant Count" value="654" icon={StoreIcon} type="up" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -27,7 +27,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Regular Users" value="45483" icon={PersonIcon} type="down" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Restaurant Income" value="45483" icon={PriceCheckIcon} type="up" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -35,7 +35,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Premium Users" value="20000" icon={AccessibilityNewIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Order Count" value="200" icon={ShoppingBasketIcon} type="down" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -43,7 +43,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="New Signups" value="100" icon={GroupAddIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Complain Count" value="100" icon={LocalPoliceIcon} type="up" percentage="12%" since="yesterday"/>
             </Grid>
         </Grid>
         <Grid
