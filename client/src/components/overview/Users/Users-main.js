@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Grid, Container } from '@mui/material';
+import {Grid, Container} from '@mui/material';
 
 import DashboardCard from '../DashboardCard'
 import UserTable from './UserTable'
@@ -11,8 +11,8 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
 function SystemMain(props){
     return(
-        <Container maxWidth="false" sx={{boxSizing: 'content-box'}}>
-        <Grid container spacing={2} >
+        <Container maxWidth="false" >
+        <Grid container spacing={3} width="1200px">
             <Grid item
                 lg={3}
                 sm={6}

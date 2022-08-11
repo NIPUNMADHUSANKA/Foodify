@@ -40,7 +40,6 @@ import UserPackage from './pages/register/UserPackage';
 import Signup from './pages/register/Signup';
 
 import Signupuser from './pages/register/Signupuser';
-import Signuprestaurant1 from './pages/register/Signuprestaurant1';
 import Signuprestaurant from './pages/register/Signuprestaurant';
 import Terms from './pages/register/Terms';
 import ForgetPassword from './pages/ForgetPassword';
@@ -93,7 +92,6 @@ function App() {
           <Route path="/register/Signupuser" element={<Signupuser />} />
           <Route path="/register/UserPackage" element={<UserPackage />} />
           <Route path="/register/Signuprestaurant" element={<Signuprestaurant />} />
-          <Route path="/register/Signuprestaurant1" element={<Signuprestaurant1 />} />
           <Route path="/register/Terms" element={<Terms />} />
           <Route path="/ForgetPassword" element={<ForgetPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />

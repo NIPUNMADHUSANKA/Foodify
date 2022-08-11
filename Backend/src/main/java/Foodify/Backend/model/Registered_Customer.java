@@ -3,7 +3,6 @@ package Foodify.Backend.model;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +18,6 @@ public class Registered_Customer {
 	@Id
 	private String Id;
 	
-	@NotBlank(message = "Enter your username")
 	private String userName;
 	
 	@NotBlank(message = "Enter your Password")
@@ -36,6 +34,11 @@ public class Registered_Customer {
 	
 	private String telephone;
 	
+	
+//	registered user constructor
+	public Registered_Customer() {
+		super();
+	}
 	
 	public String getId() {
 		return Id;
@@ -80,5 +83,20 @@ public class Registered_Customer {
 	public void settelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+//	toString method for user
+	@Override
+	public String toString() {
+		return "Registered_Customer ["
+				+ "userName=" + userName + 
+				", password=" + password + 
+				", accountState=" + accountState
+				+ ", location=" + location +
+				", email=" + email + 
+				", telephone=" + telephone + 
+				"]";
+	}
+	
+	
 	
 }

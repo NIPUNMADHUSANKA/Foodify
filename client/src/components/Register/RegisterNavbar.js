@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Logo from '../../assets/icons/foodify-logo.png';
 // import theme, { Colours } from '../../assets/theme/theme';
-import {Link} from 'react-router-dom';
+
 
 export default function RegisterNavbar() {
   return (

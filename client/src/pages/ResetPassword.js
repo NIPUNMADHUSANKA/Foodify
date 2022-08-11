@@ -6,7 +6,7 @@ import '../assets/css/Registeruser.css';
 
 const ResetPassword = () => {
   return (
-    <Box className='Register-body-Style' >
+    <Box className='Forgetpass-body-Style' >
         <RegisterNavbar />
         <ResetPasswordBanner />
 
