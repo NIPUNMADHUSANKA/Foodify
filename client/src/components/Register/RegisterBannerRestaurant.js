@@ -51,12 +51,12 @@ const RegisterBannerRestaurant = () => {
     // const data = new FormData(event.currentTarget);
 
     const errors = {};
-    const regex = /^[^\$@]+@[^\$@]+\.[^\$@]{2,}$/i;
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
     const regex2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[0-9])(?=.[!@#$%^&]).{8,}$/gm;
-    const regexsimple = /^(?=.*[a-z]).{8,}$/gm;
-    const regexcapital = /^(?=.*[A-Z]).{8,}$/gm;
-    const regexnumber = /^(?=.*[0-9]).{8,}$/gm;
-    const regexsymbol = /^(?=.*[!@#$%^&]).{8,}$/gm;
+    const regexsimple = /^(?=.*[a-z]).{1,}$/gm;
+    const regexcapital = /^(?=.*[A-Z]).{1,}$/gm;
+    const regexnumber = /^(?=.*[0-9]).{1,}$/gm;
+    const regexsymbol = /^(?=.*[!@#$%^&]).{1,}$/gm;
     const regexsymbol2 = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9].$/gm;
 
     if (!values.userName) {
@@ -72,8 +72,6 @@ const RegisterBannerRestaurant = () => {
     }
     if (!values.password) {
       errors.password = "Password is required!";
-    } else if (values.password.length < 8) {
-      errors.password = "Password must be more than 8 charactors";
     } else if (!regexsimple.test(values.password)) {
       errors.password = "The string must contain at least 1 lowercase alphabetical character";
     } else if (!regexcapital.test(values.password)) {
@@ -82,7 +80,9 @@ const RegisterBannerRestaurant = () => {
       errors.password = "The string must contain at least 1 numeric character";
     } else if (!regexsymbol.test(values.password)) {
       errors.password = "The string must contain at least one special character";
-    }
+    }else if (values.password.length < 8) {
+      errors.password = "Password must be more than 8 charactors";
+    } 
 
     return errors;
   }
