@@ -13,7 +13,6 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
-// import BiggerImage from '../../assets/images/register_big_image.png';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';

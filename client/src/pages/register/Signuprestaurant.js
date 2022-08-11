@@ -11,10 +11,10 @@ import { ThemeProvider } from '@mui/material/styles';
 
 const Signuprestaurant = () => {
   return (
-    <ThemeProvider theme={theme}>
+    
     <Box className='Registerres-body-Style' >
         <RegisterNavbar />
-
+        <ThemeProvider theme={theme}>
 
         <Box maxWidth='100%' sx={{
         padding: '0',
@@ -86,9 +86,9 @@ const Signuprestaurant = () => {
 
      </Box>    
        
-     
+     </ThemeProvider>
+
    </Box>
-   </ThemeProvider>
  )
 }
 

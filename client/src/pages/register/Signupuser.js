@@ -11,9 +11,9 @@ import { ThemeProvider } from '@mui/material/styles';
 
 const Signupuser = () => {
   return (
-    <ThemeProvider theme={theme}>
     <Box className='Registeruser-body-Style' >
         <RegisterNavbar />
+        <ThemeProvider theme={theme}>
         <Box maxWidth='100%' sx={{
         padding: '0',
         display: 'flex',
@@ -84,9 +84,8 @@ const Signupuser = () => {
 
      </Box>    
        
-     
+     </ThemeProvider>
    </Box>
-   </ThemeProvider>
   )
 }
 
