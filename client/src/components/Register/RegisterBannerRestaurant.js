@@ -13,7 +13,6 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
-// import BiggerImage from '../../assets/images/register_big_image.png';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
@@ -139,7 +138,7 @@ const RegisterBannerRestaurant = () => {
   // ---------------------------------------------------------
 
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
         position="absolute" p="20px" >
@@ -272,7 +271,7 @@ const RegisterBannerRestaurant = () => {
               Sign Up
             </Button>
 
-            {/* <Typography  
+            <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -294,7 +293,7 @@ const RegisterBannerRestaurant = () => {
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
 
             <Typography
               sx={{

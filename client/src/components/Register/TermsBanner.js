@@ -22,7 +22,7 @@ const TermsBanner = () => {
   };
 
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
         <Box 
       sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >
@@ -48,7 +48,8 @@ const TermsBanner = () => {
             background:'',
             backgroundColor:Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
-            borderRadius:"33px" 
+            borderRadius:"33px",
+            width: 1
            
           }}
         >
