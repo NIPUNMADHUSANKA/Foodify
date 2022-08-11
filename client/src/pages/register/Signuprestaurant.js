@@ -7,9 +7,11 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
 import Zoom from '@mui/material/Zoom'; //Zoom text
 import Slide from 'react-reveal/Slide';
+import { ThemeProvider } from '@mui/material/styles';
 
 const Signuprestaurant = () => {
   return (
+    <ThemeProvider theme={theme}>
     <Box className='Registerres-body-Style' >
         <RegisterNavbar />
 
@@ -86,6 +88,7 @@ const Signuprestaurant = () => {
        
      
    </Box>
+   </ThemeProvider>
  )
 }
 

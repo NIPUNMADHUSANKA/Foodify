@@ -139,7 +139,7 @@ const RegisterBannerRestaurant = () => {
   // ---------------------------------------------------------
 
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
         position="absolute" p="20px" >
@@ -272,7 +272,7 @@ const RegisterBannerRestaurant = () => {
               Sign Up
             </Button>
 
-            {/* <Typography  
+            <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -294,7 +294,7 @@ const RegisterBannerRestaurant = () => {
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
 
             <Typography
               sx={{

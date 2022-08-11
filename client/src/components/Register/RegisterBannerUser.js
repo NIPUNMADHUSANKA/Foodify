@@ -30,7 +30,7 @@ const RegisterBannerUser = () => {
   };
 
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
         <Box 
       sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
                     position="absolute" p="20px" >

@@ -7,9 +7,11 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
 import Zoom from '@mui/material/Zoom'; //Zoom text
 import Slide from 'react-reveal/Slide';
+import { ThemeProvider } from '@mui/material/styles';
 
 const Signupuser = () => {
   return (
+    <ThemeProvider theme={theme}>
     <Box className='Registeruser-body-Style' >
         <RegisterNavbar />
         <Box maxWidth='100%' sx={{
@@ -84,6 +86,7 @@ const Signupuser = () => {
        
      
    </Box>
+   </ThemeProvider>
   )
 }
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { Box, ThemeProvider, Typography } from '@mui/material';
+import theme, { Colours } from '../../assets/theme/theme';
 import ButtonBase from '@mui/material/ButtonBase';
-import Typography from '@mui/material/Typography';
 import Userimage from '../../assets/icons/ant-design_user-outlined.png';
 import Resimage from '../../assets/icons/clarity_store-solid.png';
 
@@ -95,6 +95,7 @@ export default function RegisterBanner0() {
         >
           Choose user role
         </Typography> */}
+          <ThemeProvider theme={theme}>
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
       {images.map((image) => (
         <ImageButton
@@ -129,6 +130,7 @@ export default function RegisterBanner0() {
         </ImageButton>
       ))}
     </Box>
+    </ThemeProvider>
     </React.Fragment>
   );
 }
