@@ -10,6 +10,8 @@ import Overview from '../components/overview/Overview.js';
 import SystemMain from '../components/overview/System/System-main';
 import UsersMain from '../components/overview/Users/Users-main';
 import RestaurantMain from '../components/overview/Restaurant/restaurant-main';
+import Complains from '../components/overview/Complain/Complains-main';
+
 import TabPanel from '../components/TabPanel';
 
 
@@ -26,7 +28,7 @@ const Dashboard = () => {
     const drawerWidth = 240;
 
      {/* ------------------------------------------------------------Drawer functions */}
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(4);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -51,7 +53,7 @@ const Dashboard = () => {
                 <Tab value={0} label={<Typography fontSize="18px" fontWeight="300" color="primary">System</Typography>}/>
                 <Tab value={1} label={<Typography fontSize="18px" fontWeight="300" color="primary">Users</Typography>}/>
                 <Tab value={2} label={<Typography fontSize="18px" fontWeight="300" color="primary">Restaurants</Typography>}/>
-                <Tab value={3} label={<Typography fontSize="18px" fontWeight="300" color="primary">Orders</Typography>}/>
+                {/* <Tab value={3} label={<Typography fontSize="18px" fontWeight="300" color="primary">Orders</Typography>}/> */}
                 <Tab value={4} label={<Typography fontSize="18px" fontWeight="300" color="primary">Complains</Typography>}/>
             </Tabs>
     
@@ -132,7 +134,9 @@ const Dashboard = () => {
                 <TabPanel value={value} index={2}>
                     <RestaurantMain />
                 </TabPanel>
-                
+                <TabPanel value={value} index={4}>
+                    <Complains />
+                </TabPanel>
                     
             </Box>
             
