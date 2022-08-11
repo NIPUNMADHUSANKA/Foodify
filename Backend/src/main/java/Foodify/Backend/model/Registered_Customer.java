@@ -28,6 +28,11 @@ public class Registered_Customer {
 	private String telephone;
 	
 	
+//	registered user constructor
+	public Registered_Customer() {
+		super();
+	}
+	
 	public String getId() {
 		return Id;
 	}
@@ -71,5 +76,20 @@ public class Registered_Customer {
 	public void settelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+//	toString method for user
+	@Override
+	public String toString() {
+		return "Registered_Customer ["
+				+ "userName=" + userName + 
+				", password=" + password + 
+				", accountState=" + accountState
+				+ ", location=" + location +
+				", email=" + email + 
+				", telephone=" + telephone + 
+				"]";
+	}
+	
+	
 	
 }
