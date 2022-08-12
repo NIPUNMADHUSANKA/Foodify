@@ -25,5 +25,16 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 		}
 	}
 
+	@Override
+	public Registered_Customer ForgetPassword(String UserName) throws Registered_Customer_Exception {
+		Optional<Registered_Customer> RegCusOptional = RegCusRepo.findByUsername(UserName);
+		if (!RegCusOptional.isPresent()) {
+			throw new Registered_Customer_Exception(Registered_Customer_Exception.NotFoundException());
+		}else {
+		   	return RegCusOptional.get();
+//			System.out.println(RegCusOptional);
+		}
+	}
+
 	
 }

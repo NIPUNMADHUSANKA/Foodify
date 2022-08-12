@@ -72,4 +72,7 @@ public class Registered_Customer {
 		this.telephone = telephone;
 	}
 	
+	
+
+	
 }

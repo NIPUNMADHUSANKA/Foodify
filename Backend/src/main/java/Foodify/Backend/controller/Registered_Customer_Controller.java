@@ -32,6 +32,17 @@ public class Registered_Customer_Controller {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("/Foodify/{Username}")
+	public ResponseEntity<?> ForgetPassword(@PathVariable String Username ){
+	
+		try {
+			return new ResponseEntity<>(RegCusServ.ForgetPassword(Username), HttpStatus.OK);
+		}
+		catch(Registered_Customer_Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+	}
 
 	
 }

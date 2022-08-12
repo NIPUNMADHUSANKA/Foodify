@@ -43,10 +43,10 @@ function renderRow(props) {
           secondary={
             <React.Fragment>
              
-              <Typography variant="h7" >
+              <Typography fontFamily="Poppins" variant="h7" >
                 Your order has been started
               </Typography>
-              <Typography varient="h8">9.00 AM</Typography>
+              <Typography fontFamily="Poppins" varient="h8">9.00 AM</Typography>
               <Divider sx={{marginTop:'5%',width:'100%'}} />  
       
             </React.Fragment>
