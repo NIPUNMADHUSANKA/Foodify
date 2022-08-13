@@ -1,33 +1,37 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+import {ThemeProvider, createTheme } from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
-import Collapse from '@mui/material/Collapse';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { visuallyHidden } from '@mui/utils';
+
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { border } from '@mui/system';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 //----------------------------------------------------------styles for table
-const tableSx = {
+const paperSx = {
     width: '100%', 
-    overflow: 'hidden', 
+    // overflow: 'hidden', 
     backgroundColor: 'rgba(23, 23, 23, 0.8)',
     marginBottom: '40px',
 
@@ -42,20 +46,73 @@ const tableSx = {
     color: '#fff',
     bpaymentBottom: "1px solid rgba(210, 210, 210, 0.5)",
     fontFamily: "Poppins",
-    fontSize: "16px"
+    fontSize: "16px",
     // cursor: "default"
   },
 
   "& .MuiSvgIcon-root":{
     color: '#fff',
+    paddingLeft: "4px",
   },
 
   "& .MuiTablePagination-menuItem":{
     color:"#000",
-    fontSize:"14px"
-  }
+    fontSize:"14px",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+  },
+
+  "& input":{
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+  },
+
 }
 
+//----------------------------------------------------------Theme for buttons
+const theme = createTheme({
+  palette: {
+    success:{
+      main: '#95CD41'
+    },
+    error:{ 
+      main: '#FAC213'
+    }
+  },
+});
+
+//----------------------------------------------------------styles for input
+const textFSx ={
+  color:"#ccc",
+  fontFamily:"Poppins",
+  fontWeight: '300',
+  fontSize: "14px",
+  paddingLeft: "5px" ,
+}
+
+//----------------------------------------------------------styles for sorting headcell
+const headcellSx = {
+
+  "& .MuiTableSortLabel-root:hover" : {
+    color: '#FFFFFF',
+  },
+
+  "& .MuiTableSortLabel-root.Mui-active": {
+    color: '#aaa',
+  },
+
+  "& .css-1qgma8u-MuiButtonBase-root-MuiTableSortLabel-root.Mui-active .MuiTableSortLabel-icon": {
+    color: '#fff',
+  },
+
+}
+
+//----------------------------------------------------------name suggetions for the search
+const topNames = [
+  "Chamari",
+  "Ian",
+  "Nina",
+  "Zayn",
+  "Mohommad"
+];
 
 //----------------------------------------------------------Pagination function
 function TablePaginationActions(props) {
@@ -121,152 +178,175 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(payment, user, type, amount, date, time, restaurant) {
+function createData(userId,fname,lname ,location, type) {
+  const viewButton = <Button variant="outlined" color="success" >View</Button>
+  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
   return { 
-    payment, 
-    user, 
-    type, 
-    amount, 
-    date, 
-    time,
-    restaurant, 
-    details: [
-      {
-        item: "Cheese Pizza",
-        quantity: "2",
-        price: "2100.00",
-        discounts: "0"
-      },
-      {
-        item: "Sausage Pizza",
-        quantity: "2",
-        price: "2200.00",
-        discounts: "50"
-      },
-    ] };
+    userId, 
+    fname,
+    lname, 
+    location,
+    type,
+    viewButton,
+    deleteButton,
+  };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">{row.payment}</TableCell>
-        <TableCell >{row.user}</TableCell>
-        <TableCell >{row.type}</TableCell>
-        <TableCell >{row.amount}</TableCell>
-        <TableCell >{row.date}</TableCell>
-        <TableCell >{row.time}</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border:"none" }} colSpan={3}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ marginBottom: 3, marginTop:1}}>
-              <Typography fontFamily='Poppins'>
-                Bill from {row.restaurant}
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Item</TableCell>
-                    <TableCell>Quantity</TableCell>
-                    <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Discount</TableCell>
-                    <TableCell align="right">Total price</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.details.map((detailsRow) => (
-                    <TableRow key={detailsRow.item}>
-                      <TableCell component="th" scope="row">
-                        {detailsRow.item}
-                      </TableCell>
-                      <TableCell>{detailsRow.quantity}</TableCell>
-                      <TableCell>{detailsRow.price}</TableCell>
-                      <TableCell>{detailsRow.discounts}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
-Row.propTypes = {
-  row: PropTypes.shape({
-  payment: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
-  date: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
-  details: PropTypes.arrayOf(
-    PropTypes.shape({
-      amount: PropTypes.number,
-      customerId: PropTypes.string,
-      date: PropTypes.string,
-    }),
-  ),
-  restaurant: PropTypes.string.isRequired,
-  })
-};
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2343','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2344','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2345','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2346','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2347','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2348','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2349','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2350','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2351','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2352','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2353','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2354','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2355','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2342','Rachel','Green','Colombo','Regular'),  
+  createData('B2343','Robert','Pattinson', 'None','Premium'),  
+  createData('B2344','Rachel','Green','Colombo','Regular'),  
+  createData('B2345','Robert','Pattinson', 'None','Premium'),  
+  createData('B2346','Rachel','Green','Colombo','Regular'),  
+  createData('B2347','Robert','Pattinson', 'None','Premium'),  
+  createData('B2348','Rachel','Green','Colombo','Regular'),  
+  createData('B2349','Robert','Pattinson', 'None','Premium'),  
+  createData('B2350','Rachel','Green','Colombo','Regular'),  
+  createData('B2351','Robert','Pattinson', 'None','Premium'),  
 ]
 
+//----------------------------------------------------------sorting functions - 3
+function descendingComparator(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort(array, comparator) {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
+    }
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+//----------------------------------------------------------Column Define 
+const columns = [
+  { 
+    id: 'userId', 
+    label: 'User-Id',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'fname', 
+    label: 'First Name',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'lname', 
+    label: 'Last Name',
+    numeric: false, 
+    minWidth: 140},
+  { 
+    id: 'location', 
+    label: 'Location',
+    numeric: false, 
+    minWidth: 120 },
+  { 
+    id: 'type', 
+    label: 'Type',
+    numeric: true, 
+    minWidth: 140 },
+
+  { 
+    id: 'view', 
+    label: '',
+    numeric: false, 
+    minWidth: 130 },
+  { 
+    id: 'delete', 
+    label: '',
+    numeric: false, 
+    minWidth: 100 },
+  
+];
+
+//----------------------------------------------------------Table head with sorting
+function EnhancedTableHead(props) {
+  const { order, orderBy, onRequestSort } =
+    props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        {columns.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+            sx={headcellSx}
+          >
+          
+          {headCell.label ?
+            <TableSortLabel
+            active={orderBy === headCell.id}
+            direction={orderBy === headCell.id ? order : 'asc'}
+            onClick={createSortHandler(headCell.id)}
+            >
+             {orderBy === headCell.id ? (
+               <Box component="span" sx={visuallyHidden}>
+                 {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+               </Box>
+             ) : null}
+             {headCell.label}
+           </TableSortLabel>
+          
+          : null}
+             
+          </TableCell>
+        ))}
+        <TableCell/>
+      </TableRow>
+    </TableHead>
+  );
+}
+
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
+
+//----------------------------------------------------------Main function
 function TableActions() {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  //----------------------------------------------------------Column Define 
-  const columns = [
-    { id: 'details', label: '', maxWidth: 10},
-    { id: 'payment', label: 'Payment-ID', minWidth: 150},
-    { id: 'user', label: 'User', minWidth: 170 },
-    { id: 'type', label: 'Type', minWidth: 200 },
-    { id: 'amount', label: 'Amount', minWidth: 100 },
-    { id: 'date', label: 'Date', minWidth: 100 },
-    { id: 'time', label: 'Time', minWidth: 100},
-  ];
+  const [order, setOrder] = React.useState('asc');
+  const [orderBy, setOrderBy] = React.useState('calories');
+
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+  //----------------------------------------------------------Sort Request
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
   //----------------------------------------------------------Footer Functions
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -278,64 +358,94 @@ function TableActions() {
   };
 
   return (
-    <Paper sx={tableSx}>
+    <ThemeProvider theme={theme}>
+    <Paper sx={paperSx}>
+    
+    {/* -----------------------------------------------------------------------Search box - Auto Complete*/}
+    <Box sx={{
+      display: 'inline-flex',
+    }}>
+      <Stack spacing={2} sx={{ width: 300, margin:"1% 2%", padding:"0px 0px 10px 5px"}}>
+        <Autocomplete
+          id="search-box"
+          freeSolo
+          options={topNames.map((option) => option)}
+          renderInput={(params) => <TextField {...params} label={<Typography sx={textFSx}>Enter Name</Typography>} variant="standard" />}
+        />
+      </Stack>
+    </Box>
+
     <TableContainer sx={{ maxHeight: 440 }}>
-      <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 
-      <TableHead>
+      {/* ------------------------------------------------------------------------Table with sticky header*/}
+      <Table stickyHeader sx={{ minWidth: 1200}} aria-label="custom pagination table">
 
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell
-                key={column.id}
-                align={column.align}
-                style={{ minWidth: column.minWidth}}
-              >
-                {column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
+        {/* ------------------------------------------------------------------------Tableheader with sorting*/}
+        <EnhancedTableHead
+          order={order}
+          orderBy={orderBy}
+          onRequestSort={handleRequestSort}
+          rowCount={rows.length}
+        />
 
+        {/* ------------------------------------------------------------------------TableBody with sorting*/}
         <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <Row key={row.payment} row={row} />
-          ))}
+        {stableSort(rows, getComparator(order, orderBy))
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row, index) => {
+            const labelId = `enhanced-table-checkbox-${index}`;
+                return (
+                  <TableRow
+                    hover
+                    tabIndex={-1}
+                    key={row.userId}
+                  >
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row" 
+                      
+                    >
+                      {row.userId}
+                    </TableCell>
+                    <TableCell >{row.fname}</TableCell>
+                    <TableCell >{row.lname}</TableCell>
+                    <TableCell >{row.location}</TableCell>
+                    <TableCell >{row.type}</TableCell>
+                    <TableCell >{row.viewButton}</TableCell>
+                    <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell ></TableCell>
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow
+                style={{
+                  height: (53 * emptyRows),
+                }}
+              >
+                <TableCell colSpan={12} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
-            </TableRow>
-          )}
-        </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={7}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: {
-                  'aria-label': 'rows per page',
-                },
-                native: true,
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
-        
-      </Table>
-    </TableContainer>
+      {/* ------------------------------------------------------------------------Pagination*/}
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{ 
+          color: '#fff',
+          "& p":{fontFamily: 'Poppins'}  }}
+      />
     </Paper>
+    </ThemeProvider>
   );
 }
 
