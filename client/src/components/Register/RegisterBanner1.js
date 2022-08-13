@@ -1,6 +1,4 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,11 +7,14 @@ import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/StarBorder';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
+import { Box, ThemeProvider, Typography } from '@mui/material';
+import theme, { Colours } from '../../assets/theme/theme';
+import CardMedia from '@mui/material/CardMedia';
+import Freeimage from '../../assets/images/up1.jpg';
+import Premiumimage from '../../assets/images/up2.jpg';
+
 
 const tiers = [
   {
@@ -24,7 +25,10 @@ const tiers = [
       'Charge 2% from the orders',
     ],
     buttonText: 'Subscribe Now',
-    buttonVariant: 'outlined',
+    buttonVariant: 'contained',
+    buttonColor:'success',
+    image: Freeimage,
+
   },
   {
     title: 'Premium',
@@ -36,6 +40,8 @@ const tiers = [
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
+    buttonColor:'success',
+    image: Premiumimage,
   },
   // {
   //   title: 'Enterprise',
@@ -51,85 +57,16 @@ const tiers = [
   // },
 ];
 
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: [
-      'Cool stuff',
-      'Random feature',
-      'Team feature',
-      'Developer stuff',
-      'Another one',
-    ],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
-
 function PricingContent() {
   return (
+    
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
-      {/* <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Company name
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Enterprise
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Support
-            </Link>
-          </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar> */}
-      {/* Hero unit */}
+      <ThemeProvider theme={theme}>
       <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
-        <Typography
-          component="h1"
-          variant="h2"
+        <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="300%"
           align="center"
-          color="text.primary"
-          gutterBottom
         >
           Choose one package
         </Typography>
@@ -149,7 +86,7 @@ function PricingContent() {
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={6}
             >
-              <Card>
+              <Card style={{ borderRadius: '15px'}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -159,13 +96,15 @@ function PricingContent() {
                     align: 'center',
                   }}
                   sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'light'
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
+                    backgroundColor: Colours.darkgray2
                   }}
                 />
-                <CardContent>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image= {tier.image}
+                />
+                <CardContent  sx={{ backgroundColor:Colours.darkgray }}>
                   <Box
                     sx={{
                       display: 'flex',
@@ -174,10 +113,10 @@ function PricingContent() {
                       mb: 2,
                     }}
                   >
-                    <Typography component="h2" variant="h3" color="text.primary">
+                    <Typography component="h2" variant="h3" style={{color:Colours.grayWhite}}>
                       Rs.{tier.price}
                     </Typography>
-                    <Typography variant="h6" color="text.secondary">
+                    <Typography variant="h6" style={{color:Colours.grayWhite}}>
                       /mo
                     </Typography>
                   </Box>
@@ -188,14 +127,15 @@ function PricingContent() {
                         variant="subtitle1"
                         align="center"
                         key={line}
+                        style={{color:Colours.grayWhite}}
                       >
                         {line}
                       </Typography>
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
+                <CardActions sx={{ backgroundColor:Colours.darkgray }}>
+                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor}>
                     {tier.buttonText}
                   </Button>
                 </CardActions>
@@ -204,37 +144,8 @@ function PricingContent() {
           ))}
         </Grid>
       </Container>
-      {/* Footer */}
-      {/* <Container
-        maxWidth="md"
-        component="footer"
-        sx={{
-          borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-          mt: 8,
-          py: [3, 6],
-        }}
-      >
-        <Grid container spacing={4} justifyContent="space-evenly">
-          {footers.map((footer) => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="text.secondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
-       
-      </Container> */}
-      {/* End footer */}
+      </ThemeProvider>
+     
     </React.Fragment>
   );
 }

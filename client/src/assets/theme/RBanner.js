@@ -40,7 +40,7 @@ export const BannerContainer2 = styled(Box)(({theme}) => ({
 
 export const BannerContent = styled(Box)(({src,theme}) => ({
     display:"flex",
-    flexDirection:"row",
+    flexDirection:"column",
     justifyContent:"center",
     maxWidth:'100%',
     height:'80vh',

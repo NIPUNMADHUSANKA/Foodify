@@ -56,7 +56,7 @@ const RestaurantOffer = () => {
                     flexDirection: "column",
                 }}>
                     {/* ------------topic area--------------------- */}
-                    <Fade top>
+                    <Fade top cascade>
                         <Box sx={{
                             display: "flex",
                             flexDirection: "row",

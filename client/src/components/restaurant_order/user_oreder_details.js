@@ -67,15 +67,15 @@ export default function restaurantOrder() {
                   
                 },
                 }} >
-                  <Grid item xs={12} sm={4} sx={{ hover: Colours.white}} >
+                  {/* <Grid item xs={12} sm={6} sx={{ hover: Colours.white}} >
                     <PhoneIcon />
-                  </Grid>
+                  </Grid> */}
 
-                  <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} sm={6}>
                   <ChatBubbleIcon sx={{ hover: Colours.white}}/>
                   </Grid>
 
-                  <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} sm={6}>
                   <MailIcon sx={{ hover: Colours.white}}/>
                   </Grid>
 

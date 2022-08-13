@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
-import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography } from '@mui/material';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -12,6 +12,12 @@ const InputArea = styled(TextField)({
         backgroundColor: Colours.primary,
     },
 
+    '& 	.MuiInputLabel-root': {
+        color: Colours.grayWhite,
+    },
+    '& 	.MuiFormHelperText-root': {
+        color: Colours.grayWhite,
+    },
     '& label.Mui-focused': {
         color: '#95CD41',
         fontcolor: Colours.green,
@@ -39,28 +45,56 @@ const InputArea = styled(TextField)({
 });
 // ---------------------------------------------------------------------
 
+const foods1 = [
+    {
+        id: "0",
+        name: "Food1",
+    },
+    {
+        id: "1",
+        name: "Food2",
+    },
+    {
+        id: "2",
+        name: "Food3",
+    },
+    {
+        id: "3",
+        name: "Food4",
+    },
+    {
+        id: "4",
+        name: "Food5",
+    },
+    {
+        id: "5",
+        name: "Food6",
+    }
+];
+
+const name = { Food1: "false", Food2: "false", Food3: "false", Food4: "false", Food5: "false", Food6: "false", }
 
 const CategorySelection = (props) => {
 
+    // ------------------------food array-------------------------------
+
     // ---------------for the check list-----------------------
-    const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-      });
-    
-      const checklist = (event) => {
-        setState({
-          ...state,
-          [event.target.name]: event.target.checked,
-        });
-      };
-    
-      const { gilad, jason, antoine } = state;
+    const [checked, setChecked] = React.useState([]);
+
+    // Add/Remove checked item from list
+    const checklisthandle = (event) => {
+        var updatedList = [...checked];
+        if (event.target.checked) {
+            updatedList = [...checked, event.target.value];
+        } else {
+            updatedList.splice(checked.indexOf(event.target.value), 1);
+        }
+        setChecked(updatedList);
+    };
 
     //   ---------------------------------
 
-    const [currency, setCurrency] = React.useState('category');
+    const [category, setCurrency] = React.useState('category');
 
     const handleChange = (event) => {
         setCurrency(event.target.value);
@@ -74,7 +108,7 @@ const CategorySelection = (props) => {
                 select
                 name='category'
                 label="Category"
-                value={currency}
+                value={category}
                 onChange={handleChange}
                 helperText="Add the food Category"
             >
@@ -87,24 +121,28 @@ const CategorySelection = (props) => {
 
             {/* ------------------to select food items------------------ */}
             <FormGroup>
-                <FormControlLabel
-                    control={
-                        <Checkbox checked={gilad} onChange={checklist} name="gilad" />
-                    }
-                    label="Gilad Gray"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox checked={jason} onChange={checklist} name="jason" />
-                    }
-                    label="Jason Killian"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox checked={antoine} onChange={checklist} name="antoine" />
-                    }
-                    label="Antoine Llorca"
-                />
+
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    {foods1.map((item) => (
+                        <Grid item xs={2} sm={4} md={4} key={item.id} sx={{
+                            display:"flex",
+                            flexDirection:"row",
+                        }}>
+
+                            <Checkbox 
+                            id="begin date" 
+                            type="checkbox" 
+                            value={item.name}
+                            name={item.name} 
+                            variant="standard" 
+                            onChange={checklisthandle}
+                            />
+                            <Typography variant='body' sx={{color:Colours.grayWhite,marginTop:"2%"}}>{item.name}</Typography>
+
+                        </Grid>
+                    ))}
+                </Grid>
+
             </FormGroup>
             {/* ------------------end of selecting food items------------------ */}
         </FormControl>

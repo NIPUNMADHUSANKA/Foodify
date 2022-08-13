@@ -17,7 +17,7 @@ import theme, { Colours } from '../../assets/theme/theme';
 
 
 const pages = ['Home', 'Image', 'Chart'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
