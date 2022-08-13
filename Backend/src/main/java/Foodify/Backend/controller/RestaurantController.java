@@ -40,7 +40,7 @@ public class RestaurantController{
 //	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------
 	@PostMapping("/register/Signuprestaurant")
-	public Object createRestaurant(@Valid @RequestBody  Registered_Customer registeredCustomer) {
+	public ResponseEntity<Object> createRestaurant(@Valid @RequestBody  Registered_Customer registeredCustomer) {
 		
 //		restaurantRepository.save(registeredCustomer);
 
@@ -78,7 +78,7 @@ public class RestaurantController{
         	
 //        	adding final values to fieldErrorResponse and sending it as JSON object to frontend--------------
         	fieldErrorResponse.setFieldErrors(fieldErrors);
-    		new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
+    		return new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
 		}
 		
 //		-----------------------to check the email------------------------------------
@@ -102,7 +102,7 @@ public class RestaurantController{
         	
 //        	adding final values to fieldErrorResponse and sending it as JSON object to frontend--------------
         	fieldErrorResponse.setFieldErrors(fieldErrors);
-    		new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
+    		return new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
 		}
 		
 //		--------------------sending data to db if there is no errors--------------------------------------------
