@@ -22,20 +22,20 @@ function Goodc() {
     const data1 = [
 
         [  "Pizza",  "Sugar 16g" , dash ],
-        [  "Pizza",  "Sugar 16g" , '../../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
       
       ];
 
 
       const data2 = [
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
-        [  "Pizza",  "Sugar 16g" , '../assets/images/profile_dash.png' ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
+        [  "Pizza",  "Sugar 16g" , dash ],
       
 
        
