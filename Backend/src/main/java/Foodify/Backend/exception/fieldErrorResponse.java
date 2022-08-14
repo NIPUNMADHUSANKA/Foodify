@@ -5,7 +5,7 @@ package Foodify.Backend.exception;
 import java.util.List;
 
 public class fieldErrorResponse {
-	private List<customFieldError> fieldErrors;
+	public List<customFieldError> fieldErrors;
 
 	public fieldErrorResponse() {
 	}
