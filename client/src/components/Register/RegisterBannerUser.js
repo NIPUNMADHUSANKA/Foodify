@@ -95,7 +95,7 @@ const RegisterBannerUser = () => {
     const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
-      // creating restaurant object
+      // creating user object
       const registeredCustomer = {
         userName: formValues.userName,
         email: formValues.email,
@@ -141,7 +141,7 @@ const RegisterBannerUser = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // creating restaurant object
+    // creating user object
     const registeredCustomer = {
       userName: data.get('userName'),
       email: data.get('email'),
@@ -158,8 +158,8 @@ const RegisterBannerUser = () => {
         password: data.get('password'),
       });
     }
-    // here we put the url and the restaurant object that in @requestbody in backend
-    // axois.post("http://localhost:8072/register/Signuprestaurant", registeredCustomer);
+    // here we put the url and the user object that in @requestbody in backend
+    // axois.post("http://localhost:8072/register/Signupuser", registeredCustomer);
 
     // Navigate("/login");
   };
@@ -271,7 +271,7 @@ const RegisterBannerUser = () => {
             />
 
 
-            <input type="hidden" id="accountState" name="accountState" value="restaurant" required />
+            <input type="hidden" id="accountState" name="accountState" value="user" required />
 
             <FormControlLabel
               style={{ color: Colours.grayWhite }}
