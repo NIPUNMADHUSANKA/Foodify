@@ -27,12 +27,16 @@ import Foodify.Backend.service.Registered_Customer_Service;
 import Foodify.Backend.service.Registered_Customer_Sev;
 import Foodify.Backend.model.formResponse;
 
+//using cross origin annotation to communicate with react.js and spring
+
 @RestController
 @CrossOrigin (origins = "http://localhost:3000")
 public class Registered_Customer_Controller {
 
 	@Autowired
 	private Registered_Customer_Sev RegCusServ;
+	
+	@Autowired
 	private Registered_Customer_Repository RegCusRepo;
 	
 	
@@ -48,87 +52,38 @@ public class Registered_Customer_Controller {
 	}
 	
 	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
+	
 //	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------
 	@PostMapping("/register/Signupuser")
 	public ResponseEntity<?> createUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
 		
-//		registered_Customer_Repository.save(registeredCustomer);
+//		RegCusRepo.save(registeredCustomer);
+		
+		
+//		RegCusServ service = new RegCusServ();
+		
+		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
+		
 
-//		hash map to get values from the post-------------------------
-		HashMap<String, String> data = new HashMap<String, String>();
-		
-//		assigning values to hash map
-		data.put("userName", registeredCustomer.getuserName());
-		data.put("email", registeredCustomer.getEmail());
-		data.put("password", registeredCustomer.getpassword());
-		
-//		calling Registered_Customer_Service-------------------------------------
-		Registered_Customer_Service CS = new Registered_Customer_Service();
-		String error;
-		
-//		---------------to check the userName-------------------------------------------------
-		Integer count1 = RegCusRepo.findByUserName(data.get("userName")); 
-//		System.out.println(count);
-		if(count1 > 0 ) {
-			System.out.println(data);
-			error = "UserName already exists";
-			
-//			--------------call error response and add errors to custom field error list-----------
-			fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
-
-			List<customFieldError> fieldErrors = new ArrayList<>();
-			
-			customFieldError fieldError = new customFieldError();
-        	fieldError.setField("userName");
-        	fieldError.setMessage(error);
-        	
-        	System.out.println(error);
-//        	System.out.println(fieldError.getField());
-        	fieldErrors.add(fieldError);
-        	
-//        	adding final values to fieldErrorResponse and sending it as JSON object to frontend--------------
-        	fieldErrorResponse.setFieldErrors(fieldErrors);
-    		return new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
-		}
-		
-//		-----------------------to check the email------------------------------------
-		Integer count2 = RegCusRepo.findByUserEmail(data.get("email")); 
-//		System.out.println(count);
-		if(count2 > 0 ) {
-			System.out.println(data);
-			error = "Email already exists";
-			System.out.println(error);
-			
-//			--------------call error response and add errors to custom field error list-----------
-			fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
-
-			List<customFieldError> fieldErrors = new ArrayList<>();
-			
-			customFieldError fieldError = new customFieldError();
-        	fieldError.setField("email");
-        	fieldError.setMessage(error); 
-//        	System.out.println(fieldError.getField());
-        	fieldErrors.add(fieldError);
-        	
-//        	adding final values to fieldErrorResponse and sending it as JSON object to frontend--------------
-        	fieldErrorResponse.setFieldErrors(fieldErrors);
-    		return new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
-		}
-		
 //		--------------------sending data to db if there is no errors--------------------------------------------
-		if(count1==0 && count2==0 && fieldErrorResponse.getFieldErrors()== null) {
+		if(count == null) {
 			RegCusRepo.save(registeredCustomer);
 		}
 //		RegCusRepo.find();
 //		 System.out.println(data);
-		return null;				
+		return count;				
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
 	
 	
-	
-//	show details method
+//	----------------------------de_activate method-------------------------------------------------------------------------------
+//	@PostMapping("/user/deactivate/{id}")
+//	public void deacivateUser(@PathVariable String id) {
+//		
+//	}
+//	
+////	show details method
 //	@GetMapping
 //	public void showUserDetails() {
 //		
