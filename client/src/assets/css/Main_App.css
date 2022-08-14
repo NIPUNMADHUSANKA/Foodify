@@ -16,6 +16,7 @@ body{
 /* to hide the scrollbar in react */
 *{
   -ms-overflow-style: none;
+  /* font-family: 'Poppins'; */
 }
 ::-webkit-scrollbar {
   display: none;

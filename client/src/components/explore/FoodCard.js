@@ -15,6 +15,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     border: `2px solid ${theme.palette.background.paper}`,
     padding: '0 4px',
   },
+
+  '& img':{
+    width:'252px', 
+    height:'150px',
+    border: "5px solid #fff",
+    [theme.breakpoints.down('sm')]: {
+      width: '200px',}
+  }
 }));
 
 function FoodCard() {
@@ -37,24 +45,32 @@ function FoodCard() {
           display:"Flex",
           justifyContent: "space-between",
           paddingBottom: '5%',
+          [theme.breakpoints.down('sm')]: {
+             maxWidth: '360px',  
+          }
            }}
     >
         <StyledBadge color="secondary" badgeContent={4.9}>
-          <img src={image} alt="food" style={{width:'252px', height:'150px',border: "5px solid #fff"}}/>
+          <img src={image} alt="food" />
         </StyledBadge>
-        <Typography fontSize="24px" fontWeight="400" mt="-45px">Mini Veg Salad</Typography>
-        <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px">
+
+        <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>Mini Veg Salad</Typography>
+        <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px" sx={{[theme.breakpoints.down('sm')]: { mt:"-30px"}}}>
                  Rs.1000.00
         </Typography>
 
-        <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="200">
+        <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="200" sx={{[theme.breakpoints.down('sm')]: {mt:"0px", mb:"-20px"}}}>
                  Restaurant Name
         </Typography>
 
         <Box
           sx={{
             display: 'flex',
-            columnGap:"10px"
+            columnGap:"10px",
+            [theme.breakpoints.down('sm')]: {
+              flexDirection: 'column',
+              rowGap: '10px',
+            }
         }}>
           <Button variant='contained' 
           style={{
@@ -74,7 +90,7 @@ function FoodCard() {
               fontSize: "15px",
               color:"#272727",
               width:"120",
-              padding:"0px 15px"
+              padding:"0px 15px",
           }}
           >
           View 

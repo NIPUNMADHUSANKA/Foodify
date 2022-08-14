@@ -23,7 +23,7 @@ public class Registered_Customer {
 	private String Id;
 	
 	@NotNull(message = "UserName is required.")
-	@Size(min = 6, message = "UserName should be atleast 6 characters.")
+	@Size(min = 8, message = "UserName should be atleast 6 characters.")
 	private String userName;
 	private String password;
 	private String accountState;

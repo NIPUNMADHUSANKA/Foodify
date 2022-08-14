@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ThemeProvider, Box, Typography, Tab, Tabs, Grid, Container } from '@mui/material';
+import { ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
 
 import Menubar from '../components/Menubar';
 import ExploreF from '../components/explore/Explore.js';
@@ -9,7 +9,7 @@ import RestaurantScroll from '../components/explore/RestaurantScroll';
 import Nearme from '../components/explore/Nearme';
 import TabPanel from '../components/TabPanel';
 
-import theme, { Colours } from '../assets/theme/theme';
+import theme from '../assets/theme/theme';
 
 import '../assets/css/Home.css';
 
@@ -31,7 +31,7 @@ const Explore = () => {
         <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
             <Menubar/>
             <ExploreF/>
-            <Box sx={{ display:"flex", flexDirection:'row', alignItems: 'baseline'}}>
+            <Box sx={{ display:"flex", flexDirection:'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: {flexDirection: 'column-reverse',}}}>
             <ThemeProvider theme={theme}>
                 <Tabs
                     value={value}
