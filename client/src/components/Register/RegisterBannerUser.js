@@ -100,7 +100,7 @@ const RegisterBannerUser = () => {
         userName: formValues.userName,
         email: formValues.email,
         password: formValues.password,
-        accountState: "user",
+        accountState: "registeredUser",
       }
 
       // here we put the url and the user object that in @requestbody in backend
