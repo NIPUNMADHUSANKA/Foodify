@@ -11,11 +11,13 @@ const images = [
     url: Userimage,
     title: 'User',
     width: '50%',
+    url2: 'signupuser'
   },
   {
     url: Resimage,
     title: 'Restaurant',
     width: '50%',
+    url2: 'signuprestaurant'
   },
 ];
 
@@ -72,7 +74,7 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
   right: 0,
   top: 0,
   bottom: 0,
-  backgroundColor: theme.palette.common.black,
+  // backgroundColor: theme.palette.common.black,
   opacity: 0.4,
   transition: theme.transitions.create('opacity'),
 }));
@@ -101,6 +103,8 @@ export default function RegisterBanner0() {
         <ImageButton
           focusRipple
           key={image.title}
+          onClick={() => {
+    window.location.href = `${image.url2}`}}
           style={{
             width: image.width,
           }}
