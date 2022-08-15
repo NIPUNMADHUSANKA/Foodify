@@ -10,6 +10,10 @@ import StarIcon from '@mui/icons-material/StarBorder';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import { Box, ThemeProvider, Typography } from '@mui/material';
+import theme, { Colours } from '../../assets/theme/theme';
+import CardMedia from '@mui/material/CardMedia';
+import Freeimage from '../../assets/images/up1.jpg';
+import Premiumimage from '../../assets/images/up2.jpg';
 
 
 const tiers = [
@@ -22,6 +26,8 @@ const tiers = [
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
+    buttonColor:'success',
+    image: Freeimage,
 
   },
   {
@@ -34,6 +40,8 @@ const tiers = [
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
+    buttonColor:'success',
+    image: Premiumimage,
   },
   // {
   //   title: 'Enterprise',
@@ -55,14 +63,10 @@ function PricingContent() {
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
-      
+      <ThemeProvider theme={theme}>
       <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
-        <Typography 
-          component="h1"
-          variant="h2"
+        <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="300%"
           align="center"
-          color="Colours.primary"
-          gutterBottom
         >
           Choose one package
         </Typography>
@@ -82,7 +86,7 @@ function PricingContent() {
               sm={tier.title === 'Enterprise' ? 12 : 6}
               md={6}
             >
-              <Card>
+              <Card style={{ borderRadius: '15px'}}>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
@@ -92,13 +96,15 @@ function PricingContent() {
                     align: 'center',
                   }}
                   sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === 'light'
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
+                    backgroundColor: Colours.darkgray2
                   }}
                 />
-                <CardContent>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image= {tier.image}
+                />
+                <CardContent  sx={{ backgroundColor:Colours.darkgray }}>
                   <Box
                     sx={{
                       display: 'flex',
@@ -107,10 +113,10 @@ function PricingContent() {
                       mb: 2,
                     }}
                   >
-                    <Typography component="h2" variant="h3" color="text.primary">
+                    <Typography component="h2" variant="h3" style={{color:Colours.grayWhite}}>
                       Rs.{tier.price}
                     </Typography>
-                    <Typography variant="h6" color="text.secondary">
+                    <Typography variant="h6" style={{color:Colours.grayWhite}}>
                       /mo
                     </Typography>
                   </Box>
@@ -121,14 +127,15 @@ function PricingContent() {
                         variant="subtitle1"
                         align="center"
                         key={line}
+                        style={{color:Colours.grayWhite}}
                       >
                         {line}
                       </Typography>
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={tier.buttonVariant}>
+                <CardActions sx={{ backgroundColor:Colours.darkgray }}>
+                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor}>
                     {tier.buttonText}
                   </Button>
                 </CardActions>
@@ -137,6 +144,7 @@ function PricingContent() {
           ))}
         </Grid>
       </Container>
+      </ThemeProvider>
      
     </React.Fragment>
   );

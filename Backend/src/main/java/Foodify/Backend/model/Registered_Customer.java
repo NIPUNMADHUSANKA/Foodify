@@ -1,5 +1,8 @@
 package Foodify.Backend.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,6 +22,8 @@ public class Registered_Customer {
 	@Id
 	private String id;
 	
+	@NotNull(message = "UserName is required.")
+	@Size(min = 6, message = "UserName should be atleast 6 characters.")
 	private String userName;
 	private String password;
 	private String accountState;

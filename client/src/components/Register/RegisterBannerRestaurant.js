@@ -13,7 +13,6 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
-// import BiggerImage from '../../assets/images/register_big_image.png';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
@@ -52,12 +51,12 @@ const RegisterBannerRestaurant = () => {
     // const data = new FormData(event.currentTarget);
 
     const errors = {};
-    const regex = /^[^\$@]+@[^\$@]+\.[^\$@]{2,}$/i;
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i;
     const regex2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[0-9])(?=.[!@#$%^&]).{8,}$/gm;
-    const regexsimple = /^(?=.*[a-z]).{8,}$/gm;
-    const regexcapital = /^(?=.*[A-Z]).{8,}$/gm;
-    const regexnumber = /^(?=.*[0-9]).{8,}$/gm;
-    const regexsymbol = /^(?=.*[!@#$%^&]).{8,}$/gm;
+    const regexsimple = /^(?=.*[a-z]).{1,}$/gm;
+    const regexcapital = /^(?=.*[A-Z]).{1,}$/gm;
+    const regexnumber = /^(?=.*[0-9]).{1,}$/gm;
+    const regexsymbol = /^(?=.*[!@#$%^&]).{1,}$/gm;
     const regexsymbol2 = /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9].$/gm;
 
     if (!values.userName) {
@@ -73,8 +72,6 @@ const RegisterBannerRestaurant = () => {
     }
     if (!values.password) {
       errors.password = "Password is required!";
-    } else if (values.password.length < 8) {
-      errors.password = "Password must be more than 8 charactors";
     } else if (!regexsimple.test(values.password)) {
       errors.password = "The string must contain at least 1 lowercase alphabetical character";
     } else if (!regexcapital.test(values.password)) {
@@ -83,7 +80,9 @@ const RegisterBannerRestaurant = () => {
       errors.password = "The string must contain at least 1 numeric character";
     } else if (!regexsymbol.test(values.password)) {
       errors.password = "The string must contain at least one special character";
-    }
+    }else if (values.password.length < 8) {
+      errors.password = "Password must be more than 8 charactors";
+    } 
 
     return errors;
   }
@@ -139,7 +138,7 @@ const RegisterBannerRestaurant = () => {
   // ---------------------------------------------------------
 
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
         position="absolute" p="20px" >
@@ -272,7 +271,7 @@ const RegisterBannerRestaurant = () => {
               Sign Up
             </Button>
 
-            {/* <Typography  
+            <Typography  
             sx={{
               color:'white', 
               fontSize:{lg:'15px', xs:'10px'},
@@ -294,7 +293,7 @@ const RegisterBannerRestaurant = () => {
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-            </Grid> */}
+            </Grid>
 
             <Typography
               sx={{
