@@ -10,5 +10,8 @@ public interface Registered_Customer_Sev {
 	public Registered_Customer Login(String UserName,String Password ) throws Registered_Customer_Exception;
 	
 	public ResponseEntity<Object> validate(String name,String name2,String username,String email);
+	
+	public String passwordEncorder(String userName,String email,String password);
+
 
 }
