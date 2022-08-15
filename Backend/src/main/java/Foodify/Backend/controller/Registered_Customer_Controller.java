@@ -2,9 +2,7 @@
 package Foodify.Backend.controller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -20,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
-import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.service.Registered_Customer_Service;
 import Foodify.Backend.service.Registered_Customer_Sev;
-import Foodify.Backend.model.formResponse;
 
 //using cross origin annotation to communicate with react.js and spring
 
@@ -65,10 +60,14 @@ public class Registered_Customer_Controller {
 		
 		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
 		
+		String userName = registeredCustomer.getuserName();
+		String email = registeredCustomer.getEmail();
+		String password = registeredCustomer.getpassword();
 
 //		--------------------sending data to db if there is no errors--------------------------------------------
 		if(count == null) {
-			RegCusRepo.save(registeredCustomer);
+			RegCusServ.passwordEncorder(userName, email, password);
+//			RegCusRepo.save(registeredCustomer);
 		}
 //		RegCusRepo.find();
 //		 System.out.println(data);
