@@ -1,6 +1,5 @@
 package Foodify.Backend.model;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,16 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
 public class Registered_Customer {
 
 	@Id
-	private String Id;
+	private String id;
 	
 	private String userName;
 	private String password;
@@ -26,18 +26,22 @@ public class Registered_Customer {
 	private String location;
 	private String email;
 	private String telephone;
+
+	//Reset Password
+	@Field(name = "resetPasswordToken")
+	private String resetPasswordToken;
 	
 	
 //	registered user constructor
 	public Registered_Customer() {
 		super();
 	}
-	
+
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		id = id;
 	}
 	public String getuserName() {
 		return userName;
@@ -77,7 +81,15 @@ public class Registered_Customer {
 		this.telephone = telephone;
 	}
 
-//	toString method for user
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	//	toString method for user
 	@Override
 	public String toString() {
 		return "Registered_Customer ["
