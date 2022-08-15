@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
@@ -20,6 +21,9 @@ public class RestaurantService implements Restaurantserv{
 	
 	@Autowired
 	private Registered_Customer_Repository restaurantRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 
 
@@ -74,6 +78,25 @@ public class RestaurantService implements Restaurantserv{
 	        	return new ResponseEntity<Object>(fieldErrorResponse, HttpStatus.BAD_REQUEST);
 			}
 		}
+		return null;
+	}
+
+
+
+	@Override
+	public String passwordEncorder(String userName, String email, String password) {
+		// TODO Auto-generated method stub
+		
+		String epassword = passwordEncoder.encode(password);
+		
+		Registered_Customer user = new Registered_Customer();
+		
+		user.setuserName(userName);
+		user.setEmail(email);
+		user.setpassword(epassword);
+		
+		restaurantRepository.save(user);
+		System.out.println(epassword);
 		return null;
 	}
 	
