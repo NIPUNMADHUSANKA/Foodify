@@ -1,16 +1,9 @@
 package Foodify.Backend.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
-import Foodify.Backend.service.RestaurantService;
 import Foodify.Backend.service.Restaurantserv;
-import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.model.formResponse;
+
 
 //using cross origin annotation to communicate with react.js and spring
 
@@ -53,12 +44,15 @@ public class RestaurantController{
 		
 		ResponseEntity<Object> count = service.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
 		
+		String userName = registeredCustomer.getuserName();
+		String email = registeredCustomer.getEmail();
+		String password = registeredCustomer.getpassword();
 
 //		--------------------sending data to db if there is no errors--------------------------------------------
 		if(count == null) {
-			restaurantRepository.save(registeredCustomer);
+			service.passwordEncorder(userName, email, password);
+//			restaurantRepository.save(registeredCustomer);
 		}
-//		restaurantRepository.find();
 //		 System.out.println(data);
 		return count;				
 	}
