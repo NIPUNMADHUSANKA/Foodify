@@ -1,6 +1,5 @@
 package Foodify.Backend.model;
 
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,19 +10,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
 public class Registered_Customer {
 
 	@Id
-	private String Id;
+	private String id;
 	
 	@NotNull(message = "UserName is required.")
-	@Size(min = 8, message = "UserName should be atleast 6 characters.")
+	@Size(min = 6, message = "UserName should be atleast 6 characters.")
 	private String userName;
 	private String password;
 	private String accountState;
@@ -31,18 +31,22 @@ public class Registered_Customer {
 	private String location;
 	private String email;
 	private String telephone;
+
+	//Reset Password
+	@Field(name = "resetPasswordToken")
+	private String resetPasswordToken;
 	
 	
 //	registered user constructor
 	public Registered_Customer() {
 		super();
 	}
-	
+
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		id = id;
 	}
 	public String getuserName() {
 		return userName;
@@ -82,7 +86,15 @@ public class Registered_Customer {
 		this.telephone = telephone;
 	}
 
-//	toString method for user
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	//	toString method for user
 	@Override
 	public String toString() {
 		return "Registered_Customer ["
@@ -96,8 +108,5 @@ public class Registered_Customer {
 	}
 	
 	
-	
-	
-
 	
 }
