@@ -15,6 +15,8 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import FolderIcon from '@mui/icons-material/Folder';
+import  '../../assets/css/Profile.css';
+import { fontFamily } from '@mui/system';
 
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -103,7 +105,7 @@ export default function AddressForm() {
       </Box>
       </Box>
           
-      <Typography sx={{marginLeft:"1%",marginBottom:"5%", marginTop:"2%",color:Colours.formWhite,fontWeight:''}} variant="h6" gutterBottom >
+      <Typography sx={{fontFamily:"Poppins",marginLeft:"1%",marginBottom:"5%", marginTop:"2%",color:Colours.formWhite,fontWeight:''}} variant="h6" gutterBottom >
         Profile Details
       </Typography>
       <Grid container spacing={3} sx={{color:Colours.formWhite}} >
@@ -111,11 +113,11 @@ export default function AddressForm() {
           <TextField
           sx={{ input: 
             { color: Colours.formWhite }, 
-            "label": {color: Colours.formWhite},
+            "label": {color: Colours.formWhite,  fontFamily:'Poppins'},
             "& label.Mui-focused": {
             color:Colours.formWhite
-            },backgroundColor:Colours.transparenceGrey
-        
+            },backgroundColor:Colours.transparenceGrey,
+          
             }}
             required
             id="userName"
@@ -153,7 +155,7 @@ export default function AddressForm() {
            <TextField
            sx={{ input: 
             { color: Colours.formWhite }, 
-            "label": {color: Colours.formWhite},
+            "label": {color: Colours.formWhite,fontFamily:'Poppins'},
             "& label.Mui-focused": {
             color:Colours.formWhite
             },backgroundColor:Colours.transparenceGrey
@@ -172,7 +174,7 @@ export default function AddressForm() {
           <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
-              "label": {color: Colours.formWhite},
+              "label": {color: Colours.formWhite,fontFamily:'Poppins'},
               "& label.Mui-focused": {
               color:Colours.formWhite
               },backgroundColor:Colours.transparenceGrey
@@ -191,7 +193,7 @@ export default function AddressForm() {
           <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
-              "label": {color: Colours.formWhite},
+              "label": {color: Colours.formWhite,fontFamily:'Poppins'},
               "& label.Mui-focused": {
               color:Colours.formWhite
               },backgroundColor:Colours.transparenceGrey
@@ -210,7 +212,7 @@ export default function AddressForm() {
         <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
-              "label": {color: Colours.formWhite},
+              "label": {color: Colours.formWhite,fontFamily:'Poppins'},
               "& label.Mui-focused": {
               color:Colours.formWhite
               },backgroundColor:Colours.transparenceGrey
@@ -227,8 +229,8 @@ export default function AddressForm() {
         </Grid>
 
         {/* health conditions */}
-        <Grid item xs={12}>
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
+        {/* <Grid item xs={12}>
+        <Typography sx={{marginLeft:"1%",fontFamily:'Poppins'}} variant="h6" gutterBottom >
         Health Status
         </Typography>
         </Grid>
@@ -278,20 +280,20 @@ export default function AddressForm() {
                 }} label="Checkboxes" placeholder="deseases" />
             )}
           />
-        </Grid>
+        </Grid> */}
 
         {/*food preferences */}
         <Grid item xs={12}>
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
+        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
         Food Preferences
         </Typography>
         </Grid>
 
         <Grid item xs={12} sm={6} >
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
+        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
         Like Foods
         </Typography>
-         <Typography sx={{marginLeft:"2%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
+         <Typography sx={{fontFamily:'Poppins',marginLeft:"2%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
           <p>Pizza</p>
           <p>Veg soup</p>
           <p>Pizza</p>
@@ -299,7 +301,7 @@ export default function AddressForm() {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
+        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
         Add Foods
         </Typography>
           <Autocomplete
@@ -338,14 +340,17 @@ export default function AddressForm() {
              marginLeft:'75%',
               background: Colours.green, '&:hover': {
                 backgroundColor: Colours.yellow,
+               
               },
               color: Colours.dark,
               fontSize: '20px',
+              fontFamily:'Poppins',
               hover: Colours.yellow,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
                 marginLeft:'0%',
                 width:'100%',
+               
 
                
               },
@@ -358,9 +363,11 @@ export default function AddressForm() {
               
               background: Colours.darkgray, '&:hover': {
                 backgroundColor: Colours.grayWhite, color: Colours.dark,
+               
               },
               color: Colours.grayWhite,
               fontSize: '20px',
+              fontFamily:'Poppins',
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
                 width:'100%',

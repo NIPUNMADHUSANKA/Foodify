@@ -11,16 +11,10 @@ const ProfileD = () => {
 
 
   return (
-    <Box className='Profile-body-Style' marginTop="0px">
+    <Box className='Profile-body-Style' marginTop="0px" >
       <Pnavbar />
       <Pcarousel/>
-      <Box>
-        <p>This is your Chance</p>
-        <p>Get Ready</p>
-
-      </Box>
-      
-      
+     
     </Box>
 
     
