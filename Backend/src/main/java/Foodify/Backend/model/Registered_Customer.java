@@ -1,23 +1,26 @@
 package Foodify.Backend.model;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
 public class Registered_Customer {
 
 	@Id
-	private String Id;
+	private String id;
 	
 	private String userName;
 	
@@ -34,18 +37,22 @@ public class Registered_Customer {
 	private String email;
 	
 	private String telephone;
+
+	//Reset Password
+	@Field(name = "resetPasswordToken")
+	private String resetPasswordToken;
 	
 	
 //	registered user constructor
 	public Registered_Customer() {
 		super();
 	}
-	
+
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		id = id;
 	}
 	public String getuserName() {
 		return userName;
@@ -85,7 +92,15 @@ public class Registered_Customer {
 		this.telephone = telephone;
 	}
 
-//	toString method for user
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	//	toString method for user
 	@Override
 	public String toString() {
 		return "Registered_Customer ["

@@ -78,9 +78,9 @@ const RegisterBannerRestaurant = () => {
       errors.password = "The string must contain at least 1 numeric character";
     } else if (!regexsymbol.test(values.password)) {
       errors.password = "The string must contain at least one special character";
-    }else if (values.password.length < 8) {
+    } else if (values.password.length < 8) {
       errors.password = "Password must be more than 8 charactors";
-    } 
+    }
 
     return errors;
   }
@@ -92,6 +92,7 @@ const RegisterBannerRestaurant = () => {
   // ------------send data if corrects---------
   React.useEffect((event) => {
 
+    const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
       // creating restaurant object
@@ -103,7 +104,35 @@ const RegisterBannerRestaurant = () => {
       }
 
       // here we put the url and the restaurant object that in @requestbody in backend
-      axois.post("http://localhost:8072/register/Signuprestaurant", registeredCustomer);
+      axois.post("http://localhost:8072/register/Signuprestaurant", registeredCustomer)
+        .then(data => {
+          // this part if sucess
+        })
+        .catch(error => {
+
+          if (error.response.data) {
+
+            error.response.data.fieldErrors.forEach(fieldError => {
+              console.log(error.response.data)
+
+              if (fieldError.field == 'userName') {
+                console.log(fieldError.field)
+                errors.userName = fieldError.message;
+                setFormErrors(errors);
+                console.log(formErrors);
+              } else if (fieldError.field == 'email') {
+                console.log(fieldError.field)
+                errors.email = fieldError.message;
+                setFormErrors(errors);
+                console.log(formErrors);
+              }
+
+
+            });
+          }
+
+        });
+
     }
   }, [formErrors])
 

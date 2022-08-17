@@ -16,6 +16,7 @@ function SystemMain(props){
         <Container maxWidth="false">
           <Typography variant="h5" sx={topicSx}>New Complains</Typography>
           <ComplainsNew />
+          <Typography variant="h5" sx={topicSx}>Old Complains</Typography>
           <ComplainsNew />
         </Container>
     );

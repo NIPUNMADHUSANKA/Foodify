@@ -133,14 +133,14 @@ export default function SignIn() {
             background: '',
             backgroundColor: Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
-            borderRadius: "33px"
-
+            borderRadius: "33px",
+            
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
           </Avatar>
           <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
-            Sign In
+            Sign in
           </Typography>
           
           <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -149,11 +149,12 @@ export default function SignIn() {
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite },
+                "label": { color: Colours.formWhite,fontFamily:'Poppins', },
                 "& label.Mui-focused": {
                   color: Colours.formWhite
-                }
-
+                },
+                
+               
               }}
 
               margin="normal"
@@ -175,7 +176,7 @@ export default function SignIn() {
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite },
+                "label": { color: Colours.formWhite ,fontFamily:'Poppins',},
                 "& label.Mui-focused": {
                   color: Colours.formWhite
                 },
@@ -199,7 +200,7 @@ export default function SignIn() {
 
 
             <FormControlLabel
-              style={{ color: Colours.formWhite }}
+              style={{ color: Colours.formWhite,fontFamily:'Poppins' }}
               control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
               label="Remember me"
             />
@@ -217,12 +218,13 @@ export default function SignIn() {
                 color: Colours.dark,
                 fontSize: '20px',
                 marginTop: '7%',
+                fontFamily:'Poppins',
               }}
             >
               Sign In
             </Button>
 
-            <Link href="#" variant="body2" marginLeft="60%" marginBottom="10%">
+            <Link href="#" variant="body2" marginLeft="60%" marginBottom="10%"  fontFamily="Poppins">
               Forgot password?
             </Link>
 
@@ -230,15 +232,16 @@ export default function SignIn() {
               sx={{
                 color: Colours.formWhite,
                 fontSize: { lg: '15px', xs: '10px' },
-                paddingLeft: '34%',
+                paddingLeft: '32%',
                 marginTop: '5%',
-                marginBottom: '5%'
+                marginBottom: '5%',
+                fontFamily:'Poppins',
               }}>
               ---Or Login with---
             </Typography>
 
             <Grid container xs >
-              <Grid item xs marginLeft="37%">
+              <Grid item xs marginLeft="42%">
                 <Link href="#" variant="body2">
                   <img src={Facebook} alt="Logo" className='social-icons-fb' />
                 </Link>
