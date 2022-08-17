@@ -13,8 +13,9 @@ import Skeleton from '@mui/material/Skeleton';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
-
-
+import Grid from '@mui/material/Grid';
+import Facebook from '../../assets/images/facebook.png';
+import Google from '../../assets/images/google.png';
 
 const theme1 = createTheme();
 
@@ -87,6 +88,7 @@ const RegisterBannerRestaurant = () => {
 
   // --------------use effects fo form errors--------------
   // 1 check keys of form error object
+  
   // ------------send data if corrects---------
   React.useEffect((event) => {
 

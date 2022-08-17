@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,33 +13,103 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
+import axois from "axios";
+
 
 //import {useForm} from 'react-hook-form';
 
 
 const theme1 = createTheme();
 
-const initialState = {username:"555",password:"98665"}
-
 export default function SignIn() {
 
-  const [formData, setFormData] = useState(initialState);
+  // -------------initial states for fields---------------------------
+  const initialValues = { userName: "", password: "" };
+
+  // ----------create state name form values--------
+  const [formValues, setFormValues] = React.useState(initialValues);
+  
+  // ----------create state name form errors--------
+  const [formErrors, setFormErrors] = React.useState({});
+
+  // -------------usestate for submit form-----------
+  const [isSubmit, setIsSubmit] = React.useState(false);
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log({
-      username: data.get('username'),
-      password: data.get('password'),
-    });
-    setFormData(initialState);
 
+    // creating restaurant object
+    const registeredCustomer = {
+      userName: data.get('userName'),
+      password: data.get('password')
+    }
+
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+
+    //if ((formErrors).length === 0 && isSubmit) {
+      console.log({
+        username: data.get('userName'),
+        password: data.get('password'),
+      });
+    //}
+
+   // setFormValues(initialValues);
+    
   };
 
-  const handleChange = (e)=>{
-    setFormData({...formData, [e.target.name]: e.target.value });
+  // -------function to handle changes in the input fields and set it to formvalues----------
+  const handleChange = (e) => {
+
+    // destructuring inputfield
+    const { name, value } = e.target;
+    // get the relavant name as key and assign value to it
+    setFormValues({ ...formValues, [name]: value });
+
   }
+
+   // --------------function for form validation------------------------
+  const validate = (values) => {
+
+    // const data = new FormData(event.currentTarget);
+    const errors = {};
+
+    if (!values.userName) {
+      errors.userName = "UserName is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    } 
+    return errors;
+
+   }
+   // ------------------------end of validations------------------------
+
+   React.useEffect((event) => {
+
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+
+      
+      const userName =  formValues.userName;
+      const password =  formValues.password;
+      
+
+      console.log(userName);
+    // here we put the url and the restaurant object that in @requestbody in backend
+    axois.get("http://localhost:8072/Foodify/Login/" + userName + "/" + password)
+    .then(
+      response => {
+      console.log(response.status);
+      setFormValues(initialValues)}
+    )
+    .catch(err => {
+      console.warn(err);
+      setFormValues(initialValues);
+    });
+    }
+   }, [formErrors])
 
   return (
     <ThemeProvider theme={theme1}>
@@ -70,13 +140,12 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
           </Avatar>
           <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
-            Sign in
+            Sign In
           </Typography>
           
           <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
 
             <TextField
-               handleChange = {handleChange}
               sx={{
                 input:
                   { color: Colours.formWhite },
@@ -90,12 +159,19 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+
               label="Username"
+              name='userName' 
               autoComplete='name'
+
+              id="userName"
+              value={formValues.userName}
+              onChange={handleChange}
+              {...(formErrors.userName && { error: true, helperText: formErrors.userName })}
+
             />
 
             <TextField
-              handleChange = {handleChange}
               sx={{
                 input:
                   { color: Colours.formWhite },
@@ -108,10 +184,17 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+
               label="Password"
               name='password' 
-              autoComplete='amer'
-             
+              autoComplete='password'
+              type='password'
+
+              id="password"
+              value={formValues.password}
+              onChange={handleChange}
+              {...(formErrors.password && { error: true, helperText: formErrors.password })}
+
             />
 
 

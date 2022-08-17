@@ -5,6 +5,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Logo from '../../assets/icons/foodify-logo.png';
+import {Link} from 'react-router-dom';
+
 // import theme, { Colours } from '../../assets/theme/theme';
 
 
