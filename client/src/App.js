@@ -64,7 +64,6 @@ function App() {
           <Route path="/Image_Upload" element = {<Image_Upload/>} />
           <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
           
-     
           <Route path="/Complaints" element={<Complaints />} />
           <Route path="/Intake" element={<IntakeChart />} />
 
