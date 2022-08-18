@@ -17,10 +17,10 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 	Optional<Registered_Customer> findByUser(String UserName, String Password);
 
 	//Reset Password
-	@Query("{'email': {'$regex':?0,$options: i}}")
-	Registered_Customer findByEmail(String email);
-
-	Registered_Customer findByResetPasswordToken(String token);
+//	@Query("{'email': {'$regex':?0,$options: i}}")
+//	Registered_Customer findByEmail(String email);
+//
+//	Registered_Customer findByResetPasswordToken(String token);
 	
 	@Query(value = "{ 'status' : ?0 }", fields = "{ 'item' : 1, 'status' : 1 }")
     List<Registered_Customer> findByStatusIncludeItemAndStatusFields(String status);
