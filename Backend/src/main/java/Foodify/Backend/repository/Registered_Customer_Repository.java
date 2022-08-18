@@ -16,7 +16,7 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 	Optional<Registered_Customer> findByUser(String UserName, String Password);
 
 	//Reset Password
-	@Query("{'email': ?0}")
+	@Query("{'email': {'$regex':?0,$options: i}}")
 	Registered_Customer findByEmail(String email);
 
 	Registered_Customer findByResetPasswordToken(String token);

@@ -38,7 +38,8 @@ public class ForgotPasswordController {
     @RequestMapping(value="/Foodify/forgot_password", method = RequestMethod.POST)
     public String processForgotPassword(HttpServletRequest request, Model model) {
         String token = RandomString.make(30);
-        String email = request.getParameter("email");
+        String email = request.getParameter("email") ;
+
 
         try{
             RegCusSev.updateResetPasswordToken(token,email);
@@ -60,7 +61,7 @@ public class ForgotPasswordController {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
 
-            helper.setFrom("contact@shopme.com", "Shopme Support");
+            helper.setFrom("contact@shopme.com", "Foodify Support");
             helper.setTo(recipientEmail);
 
             String subject = "Here's the link to reset your password";
