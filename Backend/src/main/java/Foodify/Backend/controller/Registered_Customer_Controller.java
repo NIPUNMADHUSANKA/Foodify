@@ -2,28 +2,26 @@ package Foodify.Backend.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
-import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.service.Registered_Customer_Sev;
 
 @RestController
 @CrossOrigin (origins = "http://localhost:3000")
 public class Registered_Customer_Controller {
 
+    
+	
 	@Autowired
 	private Registered_Customer_Sev RegCusServ;
 	
-	@GetMapping("/Foodify/{Username}/{Password}")
+	@GetMapping("/Foodify/Login/{Username}/{Password}")
 	public ResponseEntity<?> Login(@PathVariable("Username") String Username, @PathVariable("Password") String Password ){
 	
 		try {
@@ -34,5 +32,13 @@ public class Registered_Customer_Controller {
 		}
 	}
 
+
+	@GetMapping("/")
+	public void Work() {
+		System.out.println("Welcome");
+	}
+
+
+	
 	
 }

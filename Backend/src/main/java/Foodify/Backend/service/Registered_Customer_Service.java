@@ -5,14 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Foodify.Backend.exception.Registered_Customer_Exception;
@@ -25,6 +21,9 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 
 	@Autowired
 	private Foodify.Backend.repository.Registered_Customer_Repository RegCusRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Registered_Customer Login(String UserName, String Password) throws Registered_Customer_Exception {
@@ -96,7 +95,6 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 
 	@Override
 	public String passwordEncorder(String userName, String email, String password) {
-		// TODO Auto-generated method stub
 		
 		String epassword = passwordEncoder.encode(password);
 		

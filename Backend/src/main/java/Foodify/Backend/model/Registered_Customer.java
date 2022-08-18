@@ -1,15 +1,16 @@
 package Foodify.Backend.model;
 
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
@@ -52,7 +53,7 @@ public class Registered_Customer {
 		return id;
 	}
 	public void setId(String id) {
-		id = id;
+		this.id = id;
 	}
 	public String getuserName() {
 		return userName;

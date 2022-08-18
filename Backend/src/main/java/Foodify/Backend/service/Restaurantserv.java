@@ -1,7 +1,6 @@
 package Foodify.Backend.service;
 import org.springframework.http.ResponseEntity;
 
-import Foodify.Backend.model.Registered_Customer;
 
 public interface Restaurantserv {
 

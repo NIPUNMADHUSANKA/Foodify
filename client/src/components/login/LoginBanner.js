@@ -89,24 +89,26 @@ export default function SignIn() {
 
    React.useEffect((event) => {
 
+    const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
       
       const userName =  formValues.userName;
       const password =  formValues.password;
       
-
-      console.log(userName);
     // here we put the url and the restaurant object that in @requestbody in backend
     axois.get("http://localhost:8072/Foodify/Login/" + userName + "/" + password)
     .then(
       response => {
-      console.log(response.status);
+      console.log(response);
       setFormValues(initialValues)}
     )
-    .catch(err => {
-      console.warn(err);
-      setFormValues(initialValues);
+    .catch(error => {
+
+      errors.NotFound = error.response.data;
+      setFormErrors(errors);
+      console.log("work");
+
     });
     }
    }, [formErrors])
@@ -140,7 +142,7 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
           </Avatar>
           <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
-            Sign in
+            Sign In
           </Typography>
           
           <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -168,7 +170,7 @@ export default function SignIn() {
               id="userName"
               value={formValues.userName}
               onChange={handleChange}
-              {...(formErrors.userName && { error: true, helperText: formErrors.userName })}
+              {...(formErrors.NotFound && { error: true, helperText: formErrors.NotFound })}
 
             />
 
@@ -194,7 +196,7 @@ export default function SignIn() {
               id="password"
               value={formValues.password}
               onChange={handleChange}
-              {...(formErrors.password && { error: true, helperText: formErrors.password })}
+              {...(formErrors.NotFound && { error: true, helperText: formErrors.NotFound })}
 
             />
 

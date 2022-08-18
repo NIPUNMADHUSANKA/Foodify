@@ -2,11 +2,8 @@ package Foodify.Backend.controller;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.service.Registered_Customer_Sev;
-import com.sun.mail.imap.Utility;
 import net.bytebuddy.utility.RandomString;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import java.io.Console;
 import java.io.UnsupportedEncodingException;
 
 @Controller

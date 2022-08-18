@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
@@ -24,9 +23,9 @@ import Foodify.Backend.model.Registered_Customer;
 public class RestaurantController{
 	
 
-	@Autowired
+	/*@Autowired
 	private Registered_Customer_Repository restaurantRepository;
-	
+	*/
 	@Autowired
 	private Restaurantserv service;
 	
