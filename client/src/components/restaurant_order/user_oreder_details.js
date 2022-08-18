@@ -33,7 +33,7 @@ export default function restaurantOrder() {
       <Grid container spacing={3} sx={{color:Colours.formWhite,paddingBottom:"2%"}} >
 
         <Grid item xs={12} sm={6}>
-        <Typography variant="h6" gutterBottom >
+        <Typography fontFamily="Poppins" variant="h6" gutterBottom >
               Customer Details
         </Typography>
           <Box sx={{backgroundColor:Colours.transparenceGrey,padding:"2%"}}>
@@ -86,7 +86,7 @@ export default function restaurantOrder() {
 
         {/* ordering */}
         <Grid item xs={12} sm={6}>
-        <Typography variant="h6" gutterBottom >
+        <Typography fontFamily="Poppins" variant="h6" gutterBottom >
               Order Details
         </Typography>
         <Box sx={{backgroundColor:Colours.transparenceGrey,paddingLeft:"2%",paddingTop:"2%",paddingBottom:"2%"}}>

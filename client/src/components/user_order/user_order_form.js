@@ -28,6 +28,7 @@ const Userorderform = () => {
             fontSize:28,
             marginTop:'3%',
             marginLeft:'3%',
+            fontFamily:'Poppins',
             }}>
         Salad hut</Typography>
 
@@ -58,6 +59,7 @@ const Userorderform = () => {
             fontSize:28,
             marginTop:'8%',
             marginLeft:'3%',
+            fontFamily:'Poppins',
             }}>
         Pick Up Estimate</Typography>
 
@@ -71,6 +73,7 @@ const Userorderform = () => {
             color:Colours.white,
             marginLeft:'8%',
             marginTop:'3%',
+            
         }}
       >
         <Radio value="auto" label="within 30 minutes" />
@@ -84,7 +87,8 @@ const Userorderform = () => {
         width:'100%',
         height:'0.2%',
         backgroundColor:Colours.white,
-        marginTop:'8%'
+        marginTop:'8%',
+        fontFamily:'Poppins',
     }}></Box>
 
 {/* payment code */}
@@ -95,6 +99,7 @@ const Userorderform = () => {
             fontSize:28,
             marginTop:'8%',
             marginLeft:'3%',
+            fontFamily:'Poppins',
             }}>
         Payment</Typography>
 
@@ -118,7 +123,7 @@ const Userorderform = () => {
               },
               color: Colours.dark,
               fontSize: '20px',
-
+              fontFamily:'Poppins',
               hover: Colours.yellow,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
@@ -148,7 +153,7 @@ const Userorderform = () => {
             marginTop:'6%',
             marginLeft:'3%',
             marginBottom:'6%',
-         
+            fontFamily:'Poppins',
             }}>
         Food Items</Typography>
 
@@ -245,7 +250,7 @@ const Userorderform = () => {
               },
               color: Colours.dark,
               fontSize: '20px',
-
+              fontFamily:'Poppins',
               hover: Colours.yellow,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',

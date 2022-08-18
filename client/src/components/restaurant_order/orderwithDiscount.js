@@ -48,6 +48,7 @@ return (
               },
               color: Colours.dark,
               fontSize: '20px',
+              fontFamily:'Poppins',
               hover: Colours.yellow,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
@@ -68,6 +69,7 @@ return (
               },
               color: Colours.grayWhite,
               fontSize: '20px',
+              fontFamily:'Poppins',
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
                 width:'100%',

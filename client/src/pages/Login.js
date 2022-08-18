@@ -57,7 +57,7 @@ function Login() {
            
               <Zoom in={true}>
                   
-                  <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="500%"
+                  <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="500%" fontFamily={'Poppins'}
                     sx= {{
                       marginTop: '20%',
                       marginLeft:'14%',
