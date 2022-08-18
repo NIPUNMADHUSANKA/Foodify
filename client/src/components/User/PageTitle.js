@@ -9,6 +9,9 @@ function PageTitle(props) {
         color: Colours.grayWhite,
         ml:"4%",
         mt:"3%",
+
+        // Changing font family 
+        fontFamily:"Poppins",
         [theme.breakpoints.down('sm')]: {
           fontSize: '220%',
           mt:"5%",

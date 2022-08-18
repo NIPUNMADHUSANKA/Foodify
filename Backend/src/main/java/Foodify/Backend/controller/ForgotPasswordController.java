@@ -38,9 +38,7 @@ public class ForgotPasswordController {
     @RequestMapping(value="/Foodify/forgot_password", method = RequestMethod.POST)
     public String processForgotPassword(HttpServletRequest request, Model model) {
         String token = RandomString.make(30);
-        String email = request.getParameter("email") ;
-
-
+        String email = request.getParameter("email");
         try{
             RegCusSev.updateResetPasswordToken(token,email);
             String resetPasswordLink = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString() + "/Foodify/reset_password?token=" + token;

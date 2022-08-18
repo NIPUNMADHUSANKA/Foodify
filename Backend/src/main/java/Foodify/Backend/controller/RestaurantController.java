@@ -12,26 +12,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
+import Foodify.Backend.service.Restaurantserv;
+import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.model.formResponse;
+
 
 //using cross origin annotation to communicate with react.js and spring
-@CrossOrigin 
+
 @RestController
+@CrossOrigin (origins = "http://localhost:3000")
 public class RestaurantController{
+	
 
 	@Autowired
 	private Registered_Customer_Repository restaurantRepository;
 	
-//	create method
+	@Autowired
+	private Restaurantserv service;
+	
+	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
+	
+//	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------
 	@PostMapping("/register/Signuprestaurant")
-	public ResponseEntity<formResponse> createRestaurant(@Valid @RequestBody  Registered_Customer registeredCustomer) {
+	public ResponseEntity<Object> createRestaurant(@Valid @RequestBody  Registered_Customer registeredCustomer) {
+		
 //		restaurantRepository.save(registeredCustomer);
-		return ResponseEntity.ok(new formResponse("Success !")); 
+		
+		
+//		RestaurantService service = new RestaurantService();
+		
+		ResponseEntity<Object> count = service.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
+		
+		String userName = registeredCustomer.getuserName();
+		String email = registeredCustomer.getEmail();
+		String password = registeredCustomer.getpassword();
+
+//		--------------------sending data to db if there is no errors--------------------------------------------
+		if(count == null) {
+			service.passwordEncorder(userName, email, password);
+//			restaurantRepository.save(registeredCustomer);
+		}
+//		 System.out.println(data);
+		return count;				
 	}
+//	----------------end of create method-----------------------------------------------------------------------------------------
 	
-//	de_activate method
+	
+//	----------------------------de_activate method-------------------------------------------------------------------------------
 	@PostMapping("/restaurant/deactivate/{id}")
 	public void deacivateRestaurant(@PathVariable String id) {
 		
