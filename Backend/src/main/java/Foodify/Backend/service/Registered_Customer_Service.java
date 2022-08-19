@@ -115,6 +115,36 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 	
 
 	//Reset Password
+//	@Override
+//	public void updateResetPasswordToken(String token, String email) throws Registered_Customer_Exception {
+//
+//		Registered_Customer RegCus = RegCusRepo.findByEmail(email);
+//		if (RegCus == null) {
+//			throw new Registered_Customer_Exception(Registered_Customer_Exception.NotFoundException());
+//		}else {
+//			RegCus.setResetPasswordToken(token);
+//			RegCusRepo.save(RegCus);
+//		}
+//	}
+
+//	@Override
+//	public Registered_Customer getByResetPasswordToken(String token){
+//		return RegCusRepo.findByResetPasswordToken(token);
+//	}
+//
+//	@Override
+//	public void updatePassword(Registered_Customer RegCus, String newPassword){
+//		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//		String encodedPassword = passwordEncoder.encode(newPassword);
+//
+//		RegCus.setpassword(encodedPassword);
+//
+//		RegCus.setResetPasswordToken(null);
+//		RegCusRepo.save(RegCus);
+//	}
+
+
+	//Reset Password
 	@Override
 	public void updateResetPasswordToken(String token, String email) throws Registered_Customer_Exception {
 
@@ -142,7 +172,6 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 		RegCus.setResetPasswordToken(null);
 		RegCusRepo.save(RegCus);
 	}
-
 
 	
 }

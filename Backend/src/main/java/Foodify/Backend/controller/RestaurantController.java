@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Foodify.Backend.service.Restaurantserv;
@@ -19,6 +20,7 @@ import Foodify.Backend.model.Registered_Customer;
 //using cross origin annotation to communicate with react.js and spring
 
 @RestController
+@RequestMapping("/Restaurant")
 @CrossOrigin (origins = "http://localhost:3000")
 public class RestaurantController{
 	
@@ -33,7 +35,7 @@ public class RestaurantController{
 	
 //	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------
-	@PostMapping("/register/Signuprestaurant")
+	@PostMapping("/Register/Signuprestaurant")
 	public ResponseEntity<Object> createRestaurant(@Valid @RequestBody  Registered_Customer registeredCustomer) {
 		
 //		restaurantRepository.save(registeredCustomer);

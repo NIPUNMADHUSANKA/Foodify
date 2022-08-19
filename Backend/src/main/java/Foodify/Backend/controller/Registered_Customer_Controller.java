@@ -1,6 +1,11 @@
 package Foodify.Backend.controller;
 
 
+
+
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +36,53 @@ public class Registered_Customer_Controller {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
+	
+//	-----------------------------------------create method-------------------------------------------------------------------
+//	----------to response entity, use response object----------
+	@PostMapping("/register/Signupuser")
+	public ResponseEntity<?> createUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
+		
+//		RegCusRepo.save(registeredCustomer);
+		
+		
+//		RegCusServ service = new RegCusServ();
+		
+		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
+		
+		String userName = registeredCustomer.getuserName();
+		String email = registeredCustomer.getEmail();
+		String password = registeredCustomer.getpassword();
 
 
-	@GetMapping("/")
-	public void Work() {
-		System.out.println("Welcome");
+//		--------------------sending data to db if there is no errors--------------------------------------------
+		if(count == null) {
+			RegCusServ.passwordEncorder(userName, email, password);
+//			RegCusRepo.save(registeredCustomer);
+		}
+//		RegCusRepo.find();
+//		 System.out.println(data);
+		return count;				
 	}
+//	----------------end of create method-----------------------------------------------------------------------------------------
+	
 
 
 	
+
+
+
 	
+//	----------------------------de_activate method-------------------------------------------------------------------------------
+//	@PostMapping("/user/deactivate/{id}")
+//	public void deacivateUser(@PathVariable String id) {
+//		
+//	}
+//	
+////	show details method
+//	@GetMapping
+//	public void showUserDetails() {
+//		
+//	}
 }
