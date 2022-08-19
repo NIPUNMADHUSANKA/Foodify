@@ -50,10 +50,7 @@ export default function SignIn() {
     setIsSubmit(true);
 
     //if ((formErrors).length === 0 && isSubmit) {
-      console.log({
-        username: data.get('userName'),
-        password: data.get('password'),
-      });
+      
     //}
 
    // setFormValues(initialValues);
@@ -100,14 +97,16 @@ export default function SignIn() {
     axois.get("http://localhost:8072/Foodify/Login/" + userName + "/" + password)
     .then(
       response => {
-      console.log(response);
+    
+      localStorage.setItem('REGCUSID', response.data.id);
+      localStorage.setItem('REGCUSROLE', response.data.accountState);
+      
       setFormValues(initialValues)}
     )
     .catch(error => {
 
       errors.NotFound = error.response.data;
       setFormErrors(errors);
-      console.log("work");
 
     });
     }
