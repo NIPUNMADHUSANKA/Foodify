@@ -3,7 +3,6 @@ package Foodify.Backend.service;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,7 +83,7 @@ public class RestaurantService implements Restaurantserv{
 
 
 	@Override
-	public String passwordEncorder(String userName, String email, String password) {
+	public String passwordEncorder(String userName, String email, String password, String accountStatus) {
 		// TODO Auto-generated method stub
 		
 		String epassword = passwordEncoder.encode(password);
@@ -94,6 +93,7 @@ public class RestaurantService implements Restaurantserv{
 		user.setuserName(userName);
 		user.setEmail(email);
 		user.setpassword(epassword);
+		user.setaccountState(accountStatus);
 		
 		restaurantRepository.save(user);
 		System.out.println(epassword);
