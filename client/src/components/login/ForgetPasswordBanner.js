@@ -8,19 +8,72 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
-
+import axios from 'axios';
 
 
 const theme1 = createTheme();
 
 const ForgetPasswordBanner = () => {
+
+  const initialValues = {  email: "" };
+  const [formValues, setFormValues] = React.useState(initialValues);
+  const [isSubmit, setIsSubmit] = React.useState(false);
+  const handleChange = (e) => {
+
+    // destructuring inputfield
+    const { name, value } = e.target;
+    // get the relavant name as key and assign value to it
+    setFormValues({ ...formValues, [name]: value });
+
+  }
+
+  React.useEffect((event) => {
+
+    const errors = {};
+    if (isSubmit) {
+
+      // creating restaurant object
+      const forgotPassword = {
+      
+        email: formValues.email,
+      
+      }
+
+      // here we put the url and the restaurant object that in @requestbody in backend
+      axios.post("http://localhost:8072/Foodify/forgot_password", forgotPassword)
+    
+        .then(data => {
+          // this part if sucess
+
+        })
+        .catch(error =>{
+          if(error.response.data){
+            console.log("There is an error")
+          }
+        })
+
+    }
+  })
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const forgotPassword = {
+
       email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    }
+
+    setIsSubmit(true);
+
+    if (isSubmit) {
+      console.log({
+        email: data.get('email'),
+
+      });
+    }
   };
 
   return (
@@ -71,11 +124,14 @@ const ForgetPasswordBanner = () => {
                 
                 }}    
                   autoComplete="given-name"
-                  name="username"
+                  name="email"
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
+                  id="email"
+                  label="Email Address"
+                  value={formValues.email}
+                  onChange={handleChange}
+                  // {...(formErrors.email && { error: true, helperText: formErrors.email })}
                   autoFocus
                 />
             <Button

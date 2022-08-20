@@ -142,7 +142,7 @@ export default function SignIn() {
               Sign In
             </Button>
 
-            <Link href="#" variant="body2" marginLeft="60%" marginBottom="10%"  fontFamily="Poppins">
+            <Link href="./ForgetPassword" variant="body2" marginLeft="60%" marginBottom="10%"  fontFamily="Poppins">
               Forgot password?
             </Link>
 

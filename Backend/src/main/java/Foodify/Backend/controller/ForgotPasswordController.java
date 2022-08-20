@@ -22,6 +22,9 @@ import java.io.Console;
 import java.io.UnsupportedEncodingException;
 
 @Controller
+@CrossOrigin (origins = "http://localhost:3000")
+@RequestMapping(value="/Foodify")
+
 public class ForgotPasswordController {
 
     @Autowired
@@ -30,15 +33,16 @@ public class ForgotPasswordController {
     @Autowired
     private Registered_Customer_Sev RegCusSev;
 
-    @GetMapping("/Foodify/forgot_password")
-    public String showForgotPasswordForm(){
-        return "forgot_password_form";
-    }
-
-    @RequestMapping(value="/Foodify/forgot_password", method = RequestMethod.POST)
-    public String processForgotPassword(HttpServletRequest request, Model model) {
+//    @GetMapping("/Foodify/forgot_password")
+//    public String showForgotPasswordForm(){
+//        return "forgot_password_form";
+//    }
+    @PostMapping("/forgot_password")
+    public String processForgotPassword(HttpServletRequest request, Model model,Registered_Customer forgotPassword) {
+    	
+    	System.out.println(forgotPassword.getEmail());
         String token = RandomString.make(30);
-        String email = request.getParameter("email");
+        String email = request.getParameter(forgotPassword.getEmail());
         try{
             RegCusSev.updateResetPasswordToken(token,email);
             String resetPasswordLink = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString() + "/Foodify/reset_password?token=" + token;
