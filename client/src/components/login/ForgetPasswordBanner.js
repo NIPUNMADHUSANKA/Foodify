@@ -41,8 +41,10 @@ const ForgetPasswordBanner = () => {
 
       // here we put the url and the restaurant object that in @requestbody in backend
       axios.post("http://localhost:8072/Foodify/forgot_password", forgotPassword)
+    
         .then(data => {
           // this part if sucess
+
         })
         .catch(error =>{
           if(error.response.data){
