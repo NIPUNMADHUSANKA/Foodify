@@ -1,5 +1,8 @@
 package Foodify.Backend.model;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,13 +14,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Setter
 @Getter
 @AllArgsConstructor
 //@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
-public class Registered_Customer {
+public class Registered_Customer{
 
 	@Id
 	private String id;
@@ -35,18 +40,17 @@ public class Registered_Customer {
 	//Reset Password
 	@Field(name = "resetPasswordToken")
 	private String resetPasswordToken;
-	
-	
+		
 //	registered user constructor
 	public Registered_Customer() {
-		super();
+
 	}
 
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
-		id = id;
+		this.id = id;
 	}
 	public String getuserName() {
 		return userName;
@@ -106,7 +110,6 @@ public class Registered_Customer {
 				", telephone=" + telephone + 
 				"]";
 	}
+
 	
-	
-	
-}
+};
