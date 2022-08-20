@@ -60,12 +60,13 @@ const ForgetPasswordBanner = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     const forgotPassword = {
 
       email: data.get('email'),
 
     }
-
+    
     setIsSubmit(true);
 
     if (isSubmit) {
