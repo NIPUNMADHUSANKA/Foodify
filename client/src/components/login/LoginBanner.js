@@ -14,6 +14,8 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import axois from "axios";
+import { useNavigate } from 'react-router-dom';
+import AuthService from '../../services/auth-service';
 
 
 //import {useForm} from 'react-hook-form';
@@ -23,12 +25,15 @@ const theme1 = createTheme();
 
 export default function SignIn() {
 
+  const navigate = useNavigate();
+
+
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", password: "" };
 
   // ----------create state name form values--------
   const [formValues, setFormValues] = React.useState(initialValues);
-  
+
   // ----------create state name form errors--------
   const [formErrors, setFormErrors] = React.useState({});
 
@@ -50,11 +55,11 @@ export default function SignIn() {
     setIsSubmit(true);
 
     //if ((formErrors).length === 0 && isSubmit) {
-      
+
     //}
 
-   // setFormValues(initialValues);
-    
+    // setFormValues(initialValues);
+
   };
 
   // -------function to handle changes in the input fields and set it to formvalues----------
@@ -67,7 +72,7 @@ export default function SignIn() {
 
   }
 
-   // --------------function for form validation------------------------
+  // --------------function for form validation------------------------
   const validate = (values) => {
 
     // const data = new FormData(event.currentTarget);
@@ -78,43 +83,44 @@ export default function SignIn() {
     }
     if (!values.password) {
       errors.password = "Password is required!";
-    } 
+    }
     return errors;
 
-   }
-   // ------------------------end of validations------------------------
+  }
+  // ------------------------end of validations------------------------
 
-   React.useEffect((event) => {
+  React.useEffect((event) => {
 
     const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
-      
-      const userName =  formValues.userName;
-      const password =  formValues.password;
-      
-    // here we put the url and the restaurant object that in @requestbody in backend
-    axois.get("http://localhost:8072/Foodify/Login/" + userName + "/" + password)
-    .then(
-      response => {
-    
-      localStorage.setItem('REGCUSID', response.data.id);
-      localStorage.setItem('REGCUSROLE', response.data.accountState);
-      
-      setFormValues(initialValues)}
-    )
-    .catch(error => {
 
-      errors.NotFound = error.response.data;
-      setFormErrors(errors);
+      const userName = formValues.userName;
+      const password = formValues.password;
 
-    });
+      AuthService.login(userName, password).then(
+        () => {
+          navigate("/Explore");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setIsSubmit(false);
+        }
+      );
+
+
     }
-   }, [formErrors])
+  }, [formErrors])
 
   return (
     <ThemeProvider theme={theme1}>
-      
+
 
       <Container component="main" maxWidth="xs"
         sx={{
@@ -135,7 +141,7 @@ export default function SignIn() {
             backgroundColor: Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
             borderRadius: "33px",
-            
+
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
@@ -143,19 +149,19 @@ export default function SignIn() {
           <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
             Sign In
           </Typography>
-          
+
           <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
 
             <TextField
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite,fontFamily:'Poppins', },
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
                 "& label.Mui-focused": {
                   color: Colours.formWhite
                 },
-                
-               
+
+
               }}
 
               margin="normal"
@@ -163,7 +169,7 @@ export default function SignIn() {
               fullWidth
 
               label="Username"
-              name='userName' 
+              name='userName'
               autoComplete='name'
 
               id="userName"
@@ -177,7 +183,7 @@ export default function SignIn() {
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite ,fontFamily:'Poppins',},
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
                 "& label.Mui-focused": {
                   color: Colours.formWhite
                 },
@@ -188,7 +194,7 @@ export default function SignIn() {
               fullWidth
 
               label="Password"
-              name='password' 
+              name='password'
               autoComplete='password'
               type='password'
 
@@ -201,7 +207,7 @@ export default function SignIn() {
 
 
             <FormControlLabel
-              style={{ color: Colours.formWhite,fontFamily:'Poppins' }}
+              style={{ color: Colours.formWhite, fontFamily: 'Poppins' }}
               control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
               label="Remember me"
             />
@@ -219,13 +225,13 @@ export default function SignIn() {
                 color: Colours.dark,
                 fontSize: '20px',
                 marginTop: '7%',
-                fontFamily:'Poppins',
+                fontFamily: 'Poppins',
               }}
             >
               Sign In
             </Button>
 
-            <Link href="./ForgetPassword" variant="body2" marginLeft="60%" marginBottom="10%"  fontFamily="Poppins">
+            <Link href="./ForgetPassword" variant="body2" marginLeft="60%" marginBottom="10%" fontFamily="Poppins">
               Forgot password?
             </Link>
 
@@ -236,7 +242,7 @@ export default function SignIn() {
                 paddingLeft: '32%',
                 marginTop: '5%',
                 marginBottom: '5%',
-                fontFamily:'Poppins',
+                fontFamily: 'Poppins',
               }}>
               ---Or Login with---
             </Typography>
@@ -259,9 +265,9 @@ export default function SignIn() {
 
         </Box>
 
-         
-    
-        
+
+
+
 
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
