@@ -1,8 +1,10 @@
 package Foodify.Backend.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
@@ -40,6 +46,23 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 			return RegCusOptional.get();
 		}
 	}
+	
+////	--------------------------to get the user and grand authority------------------------------------------------------------
+//	@Override
+//    @Transactional(readOnly = true)
+//    public UserDetails loadUserByUsername(String userName) {
+//		
+//		Registered_Customer user = RegCusRepo.findByUserName2(userName);
+//        if (user == null) throw new UsernameNotFoundException(userName);
+//
+//        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+//        
+//        grantedAuthorities.add(new SimpleGrantedAuthority(user.getaccountState()));
+//        
+//
+//        return new org.springframework.security.core.userdetails.User(user.getuserName(), user.getpassword(), grantedAuthorities);
+//    }
+////	-------------------------end of getting user---------------------------------------------------------
 	
 	@Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
@@ -99,7 +122,7 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 
 
 	@Override
-	public String passwordEncorder(String userName, String email, String password) {
+	public String passwordEncorder(String userName, String email, String password, String accountState) {
 		// TODO Auto-generated method stub
 		
 		String epassword = passwordEncoder.encode(password);
@@ -109,6 +132,7 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 		user.setuserName(userName);
 		user.setEmail(email);
 		user.setpassword(epassword);
+		user.setaccountState(accountState);
 		
 		RegCusRepo.save(user);
 		System.out.println(epassword);
@@ -118,7 +142,7 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 	
 //	--------------------------end of for validate userName and email--------------------------------------------
 	
-	
+
 
 	//Reset Password
 	@Override
@@ -147,6 +171,12 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 
 		RegCus.setResetPasswordToken(null);
 		RegCusRepo.save(RegCus);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String userName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

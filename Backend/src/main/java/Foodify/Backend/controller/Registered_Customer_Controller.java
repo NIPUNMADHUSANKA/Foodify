@@ -70,11 +70,12 @@ public class Registered_Customer_Controller {
 		String userName = registeredCustomer.getuserName();
 		String email = registeredCustomer.getEmail();
 		String password = registeredCustomer.getpassword();
+		String accountState = registeredCustomer.getaccountState();
 
 
 //		--------------------sending data to db if there is no errors--------------------------------------------
 		if(count == null) {
-			RegCusServ.passwordEncorder(userName, email, password);
+			RegCusServ.passwordEncorder(userName, email, password, accountState);
 //			RegCusRepo.save(registeredCustomer);
 		}
 //		RegCusRepo.find();
