@@ -32,6 +32,7 @@ import Foodify.Backend.service.Registered_Customer_Sev;
 //using cross origin annotation to communicate with react.js and spring
 
 @RestController
+@RequestMapping("/User")
 @CrossOrigin (origins = "http://localhost:3000")
 public class Registered_Customer_Controller {
 
@@ -57,7 +58,7 @@ public class Registered_Customer_Controller {
 	
 //	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------
-	@PostMapping("/register/Signupuser")
+	@PostMapping("/Register/Signupuser")
 	public ResponseEntity<?> createUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
 		
 //		RegCusRepo.save(registeredCustomer);
