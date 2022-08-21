@@ -85,7 +85,7 @@ public class AuthenticationController {
 	}
 	
 //	--------------1.13.50---------------
-	@GetMapping("/testing2")
+	@GetMapping("/auth/userinfo")
 	private ResponseEntity<?> userInfo(Principal user) {
 		
 //		---------1.13.55---------
