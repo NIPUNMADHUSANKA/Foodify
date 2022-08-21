@@ -1,10 +1,14 @@
 package Foodify.Backend.controller;
 
+import java.security.Principal;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import Foodify.Backend.request.AuthenticationRequest;
 import Foodify.Backend.service.UserService;
 import Foodify.Backend.util.JwtUtil;
+import Foodify.Backend.Response.LoginResponse;
+import Foodify.Backend.Response.UserInfo;
 import Foodify.Backend.model.AuthenticationResponse;
+import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.repository.UserRepository;
 
 @RestController
@@ -59,16 +66,43 @@ public class AuthenticationController {
 		String name = loadedUser.getUsername();
 		System.out.println(name);
 		
+//		-----------------newly added--1.08.39-NI------------------------------------------
+//		Registered_Customer user = (Registered_Customer) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password)).getPrincipal();
 		String generatedToken = jwtUtil.generateToken(name);
-				
 		
-		return ResponseEntity.ok(new AuthenticationResponse(generatedToken));
+		LoginResponse response = new LoginResponse();
+		response.setToken(generatedToken);
+				
+		return ResponseEntity.ok(response);
+//		return ResponseEntity.ok(new AuthenticationResponse(generatedToken));
 		
 	}
 	
 	@GetMapping("/testing")
 	private String Testing() {
 		return "Welcome to dashboard" +" "+ SecurityContextHolder.getContext().getAuthentication().getName();
+		
+	}
+	
+//	--------------1.13.50---------------
+	@GetMapping("/testing2")
+	private ResponseEntity<?> userInfo(Principal user) {
+		
+//		---------1.13.55---------
+//		Registered_Customer loadUser = new Registered_Customer();
+//		Registered_Customer loadUser = (Registered_Customer) userService.loadUserByUsername(user.getName());
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Collection<? extends GrantedAuthority> role = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+		
+		UserInfo userInfo = new UserInfo();
+		userInfo.setUserName(username);
+		userInfo.setRoles(role);
+		
+//		Registered_Customer foundUser = userRepository.findByuserName(userName);
+		return ResponseEntity.ok(userInfo);
+		
+//		-----------1.20.08-------------------------------------------
 		
 	}
 

@@ -36,6 +36,17 @@ public class Registered_Customer{
 	private String location;
 	private String email;
 	private String telephone;
+	
+//	-----------1.15.22---this is for after logged in-----------
+	private Object authorities;
+
+	public Object getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Object authorities) {
+		this.authorities = authorities;
+	}
 
 	//Reset Password
 	@Field(name = "resetPasswordToken")
