@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
@@ -15,66 +15,38 @@ const theme1 = createTheme();
 
 const ForgetPasswordBanner = () => {
 
-  const initialValues = {  email: "" };
-  const [formValues, setFormValues] = React.useState(initialValues);
+  const [email, setEmail] = React.useState("");
+
+  const [formErrors, setFormErrors] = React.useState({});
+
   const [isSubmit, setIsSubmit] = React.useState(false);
-  const handleChange = (e) => {
-
-    // destructuring inputfield
-    const { name, value } = e.target;
-    // get the relavant name as key and assign value to it
-    setFormValues({ ...formValues, [name]: value });
-
-  }
-
-  React.useEffect((event) => {
-
-    const errors = {};
-    if (isSubmit) {
-
-      // creating restaurant object
-      const forgotPassword = {
-      
-        email: formValues.email,
-      
-      }
-
-      // here we put the url and the restaurant object that in @requestbody in backend
-      axios.post("http://localhost:8072/Foodify/forgot_password", forgotPassword)
-    
-        .then(data => {
-          // this part if sucess
-
-        })
-        .catch(error =>{
-          if(error.response.data){
-            console.log("There is an error")
-          }
-        })
-
-    }
-  })
-
-
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const forgotPassword = {
-
-      email: data.get('email'),
-
-    }
+    event.preventDefault();
+    const email = email;
 
     setIsSubmit(true);
 
-    if (isSubmit) {
+    if ((formErrors).length === 0 && isSubmit) {
       console.log({
-        email: data.get('email'),
-
+        email: email
       });
     }
-  };
+    
+    axios.post("http://localhost:8072/Foodify/forgot_password", email)
+    .then(response => {
+      console.log(response);
+        console.log(response.data);
+        window.location = "http://localhost:3000" //This line of code will redirect you once the submission is succeed
+    })
+
+  }
+
+  const handleChange = event => {
+    setEmail(event.target.value)
+  }
+
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -129,7 +101,6 @@ const ForgetPasswordBanner = () => {
                   fullWidth
                   id="email"
                   label="Email Address"
-                  value={formValues.email}
                   onChange={handleChange}
                   // {...(formErrors.email && { error: true, helperText: formErrors.email })}
                   autoFocus

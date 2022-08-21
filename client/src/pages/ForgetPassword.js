@@ -9,7 +9,6 @@ const ForgetPassword = () => {
     <Box className='Forgetpass-body-Style' >
         <RegisterNavbar />
         <ForgetPasswordBanner />
-
     </Box>
     
   )
