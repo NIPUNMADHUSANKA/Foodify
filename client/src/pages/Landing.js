@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import FoodBanner from '../components/FoodufyBanner';
-import HorizontalBar from '../components/HorizontalBar';
 import AboutUs from '../components/AboutUs2';
 import ContactUs from '../components/ContactUs';
 import Navbar from '../components/Navbar';

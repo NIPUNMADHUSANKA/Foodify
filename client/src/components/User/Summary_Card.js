@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+import theme from '../../assets/theme/theme'; //to use theme provider,need to import this
 
 
 function Summary_Card(props) {
