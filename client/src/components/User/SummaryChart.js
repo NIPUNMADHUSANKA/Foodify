@@ -3,26 +3,12 @@ import Paper from '@mui/material/Paper';
 import {
   Chart,
   BarSeries,
-  Title,
   ArgumentAxis,
   ValueAxis,
 } from '@devexpress/dx-react-chart-material-ui';
 import { Animation } from '@devexpress/dx-react-chart';
 import { Box, Typography } from '@mui/material';
 
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
-
-const style = createTheme({
-  argumentAxis: {  
-    label: {  
-        font: {  
-            color: "red",  
-            size: 14  
-        }  
-    }  
-  }  
-});
 
 
 export default class SummaryChart extends React.PureComponent {

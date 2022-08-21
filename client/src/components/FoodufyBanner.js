@@ -6,8 +6,8 @@ import FOODIFY_BANNER from '../assets/images/foodify-banner.png';
 import theme, { Colours } from './../assets/theme/theme';//to use theme provider,need to import this
 
 import Zoom from '@mui/material/Zoom'; //Zoom text
-import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
-import arrowDown from "react-useanimations";
+
+import {Link} from 'react-router-dom';
 
 
 function FoodufyBanner() {
@@ -59,7 +59,7 @@ function FoodufyBanner() {
             
                 <Box textAlign="center" mt="2%">
 
-                      <Button variant="outlined" style={{marginRight:"2%", color:'#95CD41', borderColor: "#95CD41"
+                      <Button component={Link} to = '/login' variant="outlined" style={{marginRight:"2%", color:'#95CD41', borderColor: "#95CD41"
                       ,"&:hover": {
                       backgroundColor: "#15e577",
                       borderColor:"#564345"
@@ -67,7 +67,7 @@ function FoodufyBanner() {
                       SignIn
                     </Button>
                     
-                    <Button variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
+                    <Button component={Link} to = '/register/Signup' variant="outlined" style={{color:'#95CD41', borderColor: "#95CD41",
                       "&:hover": {
                       backgroundColor: "#15e577",
                       borderColor:"#564345"
