@@ -1,11 +1,13 @@
 package Foodify.Backend.controller;
 
+import java.security.Principal;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import Foodify.Backend.request.AuthenticationRequest;
 import Foodify.Backend.service.UserService;
 import Foodify.Backend.util.JwtUtil;
+import Foodify.Backend.Response.LoginResponse;
+import Foodify.Backend.Response.UserInfo;
 import Foodify.Backend.model.AuthenticationResponse;
+import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.repository.UserRepository;
 
 @RestController
@@ -59,16 +64,12 @@ public class AuthenticationController {
 		String name = loadedUser.getUsername();
 		System.out.println(name);
 		
+//		-----------------newly added--1.08.39-NI------------------------------------------
+//		Registered_Customer user = (Registered_Customer) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password)).getPrincipal();
 		String generatedToken = jwtUtil.generateToken(name);
 				
 		
 		return ResponseEntity.ok(new AuthenticationResponse(generatedToken));
-		
-	}
-	
-	@GetMapping("/testing")
-	private String Testing() {
-		return "Welcome to dashboard" +" "+ SecurityContextHolder.getContext().getAuthentication().getName();
 		
 	}
 
