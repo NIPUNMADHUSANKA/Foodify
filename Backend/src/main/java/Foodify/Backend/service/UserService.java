@@ -1,8 +1,14 @@
 package Foodify.Backend.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,9 +34,26 @@ public class UserService implements UserDetailsService{
 		
 		String username = foundUser.getuserName();
 		String password = foundUser.getpassword();
+		String role = foundUser.getaccountState();
+		
+		List<String> list = new ArrayList<>();
+		list.add(role);
+		
+		List<GrantedAuthority> authorities = getUserAuthority(foundUser.getaccountState());
 		
 		
-		return new User(username,password,new ArrayList<>());
+		return new User(username,password,authorities);
+	}
+	
+	private List<GrantedAuthority> getUserAuthority(String getaccountState) {
+		// TODO Auto-generated method stub
+		Set<GrantedAuthority> roles = new HashSet<>();
+		
+	        roles.add(new SimpleGrantedAuthority(getaccountState));
+	
+	
+	    List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+	    return grantedAuthorities;
 	}
 
 }
