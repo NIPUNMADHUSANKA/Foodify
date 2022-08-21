@@ -7,7 +7,7 @@ public interface Restaurantserv {
 
 	public ResponseEntity<Object> validate(String name,String name2,String username,String email);
 	
-	public String passwordEncorder(String userName,String email,String password);
+	public String passwordEncorder(String userName,String email,String password, String accountStatus);
 	
 	
 }
