@@ -36,17 +36,14 @@ public class ForgotPasswordController {
 
         System.out.println(forgotPassword.getEmail());
         String token = RandomString.make(30);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         String email = request.getParameter(forgotPassword.getEmail());
 
-=======
-        String email = request.getParameter("email");
->>>>>>> 12a8cf87ebaa96580c11426dd946ed0b76b0172d
-=======
-        String email = request.getParameter(forgotPassword.getEmail());
 
->>>>>>> efc7fcb66bf781ff4f4dfd8da88256f51613a48e
+//        String email = request.getParameter("email");
+
+//        String email = request.getParameter(forgotPassword.getEmail());
+
         try{
             RegCusSev.updateResetPasswordToken(token,email);
             String resetPasswordLink = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString() + "/Foodify/reset_password?token=" + token;

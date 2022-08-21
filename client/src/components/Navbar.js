@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import {  Link } from "react-router-dom";
 
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -19,7 +20,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import Logo from '../assets/icons/foodify-logo.png';
 
-const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
+
 
 const mobileMenu = {
   // backgroundColor: 'Transparent',
@@ -67,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: "calc(1em + ${theme.spacing(4)})",
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -123,12 +124,12 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
       sx={mobileMenu}
     >
-      {pages.map((page) => (
+      {/* {pages.map((page) => (
         <MenuItem>         
             {page}
         </MenuItem>
       ))}
-      
+       */}
       <MenuItem>
         NOTIFICATIONS
       </MenuItem>
@@ -151,14 +152,38 @@ export default function PrimarySearchAppBar() {
             src={Logo}
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
-              >
-                {page}
-              </Button>
-            ))}
+        <Button
+        component={Link} to='/'
+          sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
+        >
+          HOME
+
+        </Button>  
+        <Button
+        component={Link} to='/Explore'
+
+          sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
+        >
+          EXPLORE
+
+        </Button> 
+        <Button
+        component={Link} to='/restaurant'
+
+          sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
+        >
+          ABOUT US
+
+        </Button> 
+        <Button
+        component={Link} to='/restaurant'
+          sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
+        >
+          CONTACT US
+
+        </Button> 
+     
+
         </Box>
           
         <Search>
