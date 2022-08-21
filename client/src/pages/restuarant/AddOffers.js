@@ -94,7 +94,7 @@ const AddOffers = () => {
                     padding:0,
                     width:"auto",
                     overflow: "auto",
-                    width: "90%",
+
                     hieght:"auto"
                 },
             }}>

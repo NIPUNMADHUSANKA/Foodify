@@ -4,20 +4,18 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
-import Facebook from '../../assets/images/facebook.png';
-import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
-
-
+import Grid from '@mui/material/Grid';
+import Facebook from '../../assets/images/facebook.png';
+import Google from '../../assets/images/google.png';
 
 const theme1 = createTheme();
 
@@ -90,6 +88,7 @@ const RegisterBannerRestaurant = () => {
 
   // --------------use effects fo form errors--------------
   // 1 check keys of form error object
+  
   // ------------send data if corrects---------
   React.useEffect((event) => {
 

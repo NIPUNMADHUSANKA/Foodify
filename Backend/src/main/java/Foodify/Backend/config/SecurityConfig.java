@@ -15,12 +15,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import Foodify.Backend.service.JwtFilterRequest;
 import Foodify.Backend.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -49,7 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/register/Signupuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant")
-		.permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.permitAll()
+		.antMatchers("/FoodiFy/auth/userinfo").permitAll()
+		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 		// TODO Auto-generated method stub

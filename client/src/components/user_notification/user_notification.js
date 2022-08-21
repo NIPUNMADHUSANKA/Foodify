@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import theme, { Colours } from '../../assets/theme/theme';
+import { Colours } from '../../assets/theme/theme';
 import { styled } from '@mui/material/styles';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
