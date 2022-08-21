@@ -1,12 +1,10 @@
 package Foodify.Backend.controller;
+
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.service.Registered_Customer_Sev;
-import com.sun.mail.imap.Utility;
 import net.bytebuddy.utility.RandomString;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -22,6 +20,8 @@ import java.io.Console;
 import java.io.UnsupportedEncodingException;
 
 @Controller
+@CrossOrigin (origins = "http://localhost:3000")
+@RequestMapping(value="/Foodify")
 public class ForgotPasswordController {
 
     @Autowired
@@ -30,15 +30,14 @@ public class ForgotPasswordController {
     @Autowired
     private Registered_Customer_Sev RegCusSev;
 
-    @GetMapping("/Foodify/forgot_password")
-    public String showForgotPasswordForm(){
-        return "forgot_password_form";
-    }
+    //    @RequestMapping(value="/Foodify/forgot_password", method = RequestMethod.POST)
+    @PostMapping("/forgot_password")
+    public String processForgotPassword(HttpServletRequest request, Model model, Registered_Customer forgotPassword) {
 
-    @RequestMapping(value="/Foodify/forgot_password", method = RequestMethod.POST)
-    public String processForgotPassword(HttpServletRequest request, Model model) {
+        System.out.println(forgotPassword.getEmail());
         String token = RandomString.make(30);
-        String email = request.getParameter("email");
+        String email = request.getParameter(forgotPassword.getEmail());
+
         try{
             RegCusSev.updateResetPasswordToken(token,email);
             String resetPasswordLink = ServletUriComponentsBuilder.fromRequestUri(request).replacePath(null).build().toUriString() + "/Foodify/reset_password?token=" + token;
@@ -56,31 +55,31 @@ public class ForgotPasswordController {
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message);
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
 
-            helper.setFrom("contact@shopme.com", "Foodify Support");
-            helper.setTo(recipientEmail);
+        helper.setFrom("contact@shopme.com", "Foodify Support");
+        helper.setTo(recipientEmail);
 
-            String subject = "Here's the link to reset your password";
+        String subject = "Here's the link to reset your password";
 
-            String content = "<p>Hello,</p>"
-                    + "<p>You have requested to reset your password.</p>"
-                    + "<p>Click the link below to change your password:</p>"
-                    + "<p><a href=\"" + link + "\">Change my password</a></p>"
-                    + "<br>"
-                    + "<p>Ignore this email if you do remember your password, "
-                    + "or you have not made the request.</p>";
+        String content = "<p>Hello,</p>"
+                + "<p>You have requested to reset your password.</p>"
+                + "<p>Click the link below to change your password:</p>"
+                + "<p><a href=\"" + link + "\">Change my password</a></p>"
+                + "<br>"
+                + "<p>Ignore this email if you do remember your password, "
+                + "or you have not made the request.</p>";
 
-            helper.setSubject(subject);
+        helper.setSubject(subject);
 
-            helper.setText(content, true);
+        helper.setText(content, true);
 
-            mailSender.send(message);
-        }
+        mailSender.send(message);
+    }
 
 
-    @GetMapping("/Foodify/reset_password")
+    @GetMapping("/reset_password")
     public String showResetPasswordForm(@Param(value="token") String token, Model model) {
 
         Registered_Customer RegCus = RegCusSev.getByResetPasswordToken(token);
@@ -92,9 +91,9 @@ public class ForgotPasswordController {
         }
 
         return "reset_password_form";
-}
+    }
 
-    @PostMapping("/Foodify/reset_password")
+    @PostMapping("/reset_password")
     public String processResetPassword(HttpServletRequest request, Model model) {
         String token = request.getParameter("token");
         String password = request.getParameter("password");

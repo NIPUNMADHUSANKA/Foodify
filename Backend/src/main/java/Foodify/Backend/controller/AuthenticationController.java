@@ -4,7 +4,9 @@ import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -58,7 +60,7 @@ public class AuthenticationController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password));
 		}catch(Exception e) {
-			return ResponseEntity.ok(new AuthenticationResponse("Failed authenticated"+userName));
+			return new ResponseEntity<>("Not Found User", HttpStatus.NOT_FOUND);
 		}
 		
 		UserDetails loadedUser = userService.loadUserByUsername(userName);
@@ -69,23 +71,19 @@ public class AuthenticationController {
 //		-----------------newly added--1.08.39-NI------------------------------------------
 //		Registered_Customer user = (Registered_Customer) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password)).getPrincipal();
 		String generatedToken = jwtUtil.generateToken(name);
-		
-		LoginResponse response = new LoginResponse();
-		response.setToken(generatedToken);
 				
-		return ResponseEntity.ok(response);
-//		return ResponseEntity.ok(new AuthenticationResponse(generatedToken));
 		
-	}
-	
-	@GetMapping("/testing")
-	private String Testing() {
-		return "Welcome to dashboard" +" "+ SecurityContextHolder.getContext().getAuthentication().getName();
+		return ResponseEntity.ok(new AuthenticationResponse(generatedToken));
 		
-	}
 	
+
 //	--------------1.13.50---------------
+
+	}
+
+
 	@GetMapping("/auth/userinfo")
+	@PreAuthorize("hasRole('user') or hasRole('resturant') or hasRole('admin')")
 	private ResponseEntity<?> userInfo(Principal user) {
 		
 //		---------1.13.55---------
@@ -101,9 +99,7 @@ public class AuthenticationController {
 		
 //		Registered_Customer foundUser = userRepository.findByuserName(userName);
 		return ResponseEntity.ok(userInfo);
-		
-//		-----------1.20.08-------------------------------------------
-		
+
 	}
 
 }

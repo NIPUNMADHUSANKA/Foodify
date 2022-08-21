@@ -18,7 +18,6 @@ import axois from "axios";
 import { Navigate } from 'react-router-dom';
 
 
-
 const theme1 = createTheme();
 
 const RegisterBannerUser = () => {

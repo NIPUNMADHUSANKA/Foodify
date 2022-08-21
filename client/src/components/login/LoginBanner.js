@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,43 +13,115 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
-import Skeleton from '@mui/material/Skeleton';
+import axois from "axios";
+import { useNavigate } from 'react-router-dom';
+import AuthService from '../../services/auth-service';
 
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+//import {useForm} from 'react-hook-form';
+
 
 const theme1 = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const navigate = useNavigate();
+
+
+  // -------------initial states for fields---------------------------
+  const initialValues = { userName: "", password: "" };
+
+  // ----------create state name form values--------
+  const [formValues, setFormValues] = React.useState(initialValues);
+
+  // ----------create state name form errors--------
+  const [formErrors, setFormErrors] = React.useState({});
+
+  // -------------usestate for submit form-----------
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    // creating restaurant object
+    const registeredCustomer = {
+      userName: data.get('userName'),
+      password: data.get('password')
+    }
+
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+
+    //if ((formErrors).length === 0 && isSubmit) {
+
+    //}
+
+    // setFormValues(initialValues);
+
   };
+
+  // -------function to handle changes in the input fields and set it to formvalues----------
+  const handleChange = (e) => {
+
+    // destructuring inputfield
+    const { name, value } = e.target;
+    // get the relavant name as key and assign value to it
+    setFormValues({ ...formValues, [name]: value });
+
+  }
+
+  // --------------function for form validation------------------------
+  const validate = (values) => {
+
+    // const data = new FormData(event.currentTarget);
+    const errors = {};
+
+    if (!values.userName) {
+      errors.userName = "UserName is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    }
+    return errors;
+
+  }
+  // ------------------------end of validations------------------------
+
+  React.useEffect((event) => {
+
+    const errors = {};
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+
+
+      const userName = formValues.userName;
+      const password = formValues.password;
+
+      AuthService.login(userName, password).then(
+        () => {
+          navigate("/Explore");
+          window.location.reload();
+        },
+        (error) => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          setIsSubmit(false);
+        }
+      );
+
+
+    }
+  }, [formErrors])
 
   return (
     <ThemeProvider theme={theme1}>
-      <Box
-        sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
-        position="absolute" p="20px" >
-        <Skeleton
-          sx={{ backgroundColor: Colours.transparenceGrey }}
-          variant="circular" width={140} height={140} />
-      </Box>
+
+
       <Container component="main" maxWidth="xs"
         sx={{
           marginLeft: '6%',
@@ -69,41 +141,49 @@ export default function SignIn() {
             backgroundColor: Colours.transparenceGrey,
             backdropFilter: "blur(30px)",
             borderRadius: "33px",
-            
+
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main', background: Colours.avatarWhite }}>
           </Avatar>
-          <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite, fontFamily:'Poppins' }}>
-            Sign in
+          <Typography component="h1" variant="h5" style={{ color: Colours.grayWhite }}>
+            Sign In
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
+          <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
+
             <TextField
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite,fontFamily:'Poppins', },
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
                 "& label.Mui-focused": {
                   color: Colours.formWhite
                 },
-                
-               
+
+
               }}
 
               margin="normal"
               required
               fullWidth
-              id="name"
+
               label="Username"
-              name="name"
-              autoComplete="name"
-              autoFocus
+              name='userName'
+              autoComplete='name'
+
+              id="userName"
+              value={formValues.userName}
+              onChange={handleChange}
+              {...(formErrors.NotFound && { error: true, helperText: formErrors.NotFound })}
+
             />
+
             <TextField
               sx={{
                 input:
                   { color: Colours.formWhite },
-                "label": { color: Colours.formWhite ,fontFamily:'Poppins',},
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
                 "& label.Mui-focused": {
                   color: Colours.formWhite
                 },
@@ -112,17 +192,26 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              name="password"
+
               label="Password"
-              type="password"
+              name='password'
+              autoComplete='password'
+              type='password'
+
               id="password"
-              autoComplete="current-password"
+              value={formValues.password}
+              onChange={handleChange}
+              {...(formErrors.NotFound && { error: true, helperText: formErrors.NotFound })}
+
             />
+
+
             <FormControlLabel
-              style={{ color: Colours.formWhite,fontFamily:'Poppins' }}
+              style={{ color: Colours.formWhite, fontFamily: 'Poppins' }}
               control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
               label="Remember me"
             />
+
             <Button
               type="submit"
               fullWidth
@@ -136,13 +225,13 @@ export default function SignIn() {
                 color: Colours.dark,
                 fontSize: '20px',
                 marginTop: '7%',
-                fontFamily:'Poppins',
+                fontFamily: 'Poppins',
               }}
             >
               Sign In
             </Button>
 
-            <Link href="#" variant="body2" marginLeft="60%" marginBottom="10%"  fontFamily="Poppins">
+            <Link href="./ForgetPassword" variant="body2" marginLeft="60%" marginBottom="10%" fontFamily="Poppins">
               Forgot password?
             </Link>
 
@@ -153,7 +242,7 @@ export default function SignIn() {
                 paddingLeft: '32%',
                 marginTop: '5%',
                 marginBottom: '5%',
-                fontFamily:'Poppins',
+                fontFamily: 'Poppins',
               }}>
               ---Or Login with---
             </Typography>
@@ -171,20 +260,14 @@ export default function SignIn() {
               </Grid>
             </Grid>
 
-
-
-          </Box>
+          </form>
 
 
         </Box>
 
-        <Box
-          sx={{ mt: { lg: '90px', xs: '10px' }, ml: { sm: '40px' } }}
-          position="absolute" p="20px" >
-          <Skeleton
-            sx={{ backgroundColor: Colours.transparenceGrey, marginLeft: '100%', marginTop: '80%' }}
-            variant="circular" width={140} height={140} />
-        </Box>
+
+
+
 
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
