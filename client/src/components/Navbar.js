@@ -38,6 +38,21 @@ const mobileMenu = {
     backgroundColor: 'rgba(255, 255, 255, 0.27)',
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     backdropFilter: 'blur(6px)',
+  },
+
+}
+
+const userMenu = {
+  marginTop: "40px",
+  '& .MuiMenuItem-root' : {
+    fontSize: 12,
+    color: 'White'
+  },
+
+  '& .MuiPopover-paper' : {
+    backgroundColor: 'rgba(255, 255, 255, 0.27)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(6px)',
   }
 
 }
@@ -109,6 +124,38 @@ export default function PrimarySearchAppBar() {
   };
 
   const menuId = 'primary-search-account-menu';
+  const renderAccountMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      sx={userMenu}
+    >
+      <MenuItem>
+        PROFILE
+      </MenuItem>
+      <MenuItem>
+        CONSUMPTION
+      </MenuItem>
+      <MenuItem>
+        PAYMENT
+      </MenuItem>
+      <MenuItem>
+        LOGOUT
+      </MenuItem>
+    
+    </Menu>
+  );
   
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -158,8 +205,13 @@ export default function PrimarySearchAppBar() {
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
             
+<<<<<<< HEAD
           {/* {
             (CHECKROLE=="User")? "Nipun" : "Madhusanka"
+=======
+          {
+            // (CHECKROLE=="User")? "Nipun" : "Madhusanka"
+>>>>>>> 531c8d33d81b2dcb470bfe19e2856e48301449c5
               
             
           } */}
@@ -178,8 +230,7 @@ export default function PrimarySearchAppBar() {
         />
         </Search>
         
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            
+        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>  
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -196,10 +247,12 @@ export default function PrimarySearchAppBar() {
               aria-controls={menuId}
               aria-haspopup="true"
               color="inherit"
+              onClick={handleProfileMenuOpen}
             >
               <AccountCircle />
             </IconButton>
           </Box>
+            {renderAccountMenu}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -208,7 +261,7 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
-            >
+              >
               <MoreIcon />
             </IconButton>
           </Box>
