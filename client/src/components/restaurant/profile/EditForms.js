@@ -11,6 +11,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
 import axios from 'axios';
 
+
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -168,6 +169,8 @@ export const BannerForm2 = () => {
         setOpen(false);
     };
 
+    
+
     return (
 
         <Box sx={{
@@ -207,7 +210,7 @@ export const BannerForm2 = () => {
                         noValidate
                         autoComplete="off">
 
-                        <CustomTextField id="restaurant_name" label="Restaurant Name" name="restaurant_name" variant="outlined" />
+                        <CustomTextField id="restaurant_name" label="Restaurant_name" name="restaurant_name" variant="outlined" />
                         <CustomTextField type="file" name='image' />
 
                         <Box>
@@ -227,16 +230,48 @@ export const BannerForm2 = () => {
 
 // ----------------aboutus form----------------------------------
 export const AboutUsForm = () => {
-
+    const initialValues = { about: "" };
+    const [formValues, setFormValues] = React.useState(initialValues);
+    const [formErrors, setFormErrors] = React.useState({});
+    
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+
+    const restaurantAbout ={
+        about:formValues.about,
+    }
+
+    
+
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        const data=new FormData(event.currentTarget);
+        const restaurantAbout ={
+            about:data.get('about_description')
+        }
+
+        axois.post("http://localhost:8072/Restaurant/addAbout",restaurantAbout ).then(data=>{
+            console.log("Entry access sucessfull")
+
+    })
+    .catch(error =>{
+        console.log("There is an error")
+
+    })
+    }
+
+    
 
     return (
 
@@ -274,13 +309,13 @@ export const AboutUsForm = () => {
             >
                 <DialogTitle>{"Update Description"}</DialogTitle>
                 <DialogContent>
-                    <Box component="form"
+                    <Box component="form" onSubmit={handleSubmit}
                         noValidate
                         autoComplete="off">
 
                         <CustomTextField 
                         id="about_description" 
-                        label="Description" 
+                        label="about_description" 
                         name="about_description" 
                         variant="outlined" 
                         multiline rows={8} />
