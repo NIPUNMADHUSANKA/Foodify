@@ -1,5 +1,7 @@
 package Foodify.Backend.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -20,9 +22,19 @@ public class Restaurant {
 	
 	@Id
 	private String id;
-	private String userName;
-	private String password;
-	private String status;
+	private String userId;
+	private String restaurantName;
+	private Double rating;
+	private String aboutUS;
+	private String address;
+	private int telephone;
+	private String location;
+	private String openHours;
+	private LocalDateTime starttime;
+	private LocalDateTime closeHour;
+	private String logo;
+	private String bannerImage;
+	
 	
 	public String getId() {
 		return id;
@@ -30,33 +42,82 @@ public class Restaurant {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUserName() {
-		return userName;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
+	public String getRestaurantName() {
+		return restaurantName;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
-	public String getStatus() {
-		return status;
+	public Double getRating() {
+		return rating;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+	public String getAboutUS() {
+		return aboutUS;
+	}
+	public void setAboutUS(String aboutUS) {
+		this.aboutUS = aboutUS;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public int getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(int telephone) {
+		this.telephone = telephone;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getOpenHours() {
+		return openHours;
+	}
+	public void setOpenHours(String openHours) {
+		this.openHours = openHours;
+	}
+	public LocalDateTime getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(LocalDateTime starttime) {
+		this.starttime = starttime;
+	}
+	public LocalDateTime getCloseHour() {
+		return closeHour;
+	}
+	public void setCloseHour(LocalDateTime closeHour) {
+		this.closeHour = closeHour;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+	public String getBannerImage() {
+		return bannerImage;
+	}
+	public void setBannerImage(String bannerImage) {
+		this.bannerImage = bannerImage;
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Restaurant ["
-				+ "userName=" + userName +
-				", password=" + password + 
-				", status=" + status + "]";
-	}
+
+
 	
 	
 	
