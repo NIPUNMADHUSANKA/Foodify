@@ -4,23 +4,23 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
+import Facebook from '../../assets/images/facebook.png';
+import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
-import Facebook from '../../assets/images/facebook.png';
-import Google from '../../assets/images/google.png';
+
 
 const theme1 = createTheme();
 
-const RegisterBannerRestaurant = () => {
-
+const RegisterBannerPremiumUser = () => {
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
 
@@ -28,7 +28,7 @@ const RegisterBannerRestaurant = () => {
   const [formValues, setFormValues] = React.useState(initialValues);
 
   // ----------create state name form errors--------
-  const [formErrors, setFormErrors] = React.useState({}); 
+  const [formErrors, setFormErrors] = React.useState({});
 
   // -------------usestate for submit form-----------
   const [isSubmit, setIsSubmit] = React.useState(false);
@@ -88,23 +88,22 @@ const RegisterBannerRestaurant = () => {
 
   // --------------use effects fo form errors--------------
   // 1 check keys of form error object
-  
   // ------------send data if corrects---------
   React.useEffect((event) => {
 
     const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
-      // creating restaurant object
+      // creating user object
       const registeredCustomer = {
         userName: formValues.userName,
         email: formValues.email,
         password: formValues.password,
-        accountState: "restaurant",
+        accountState: "premiumUser",
       }
 
-      // here we put the url and the restaurant object that in @requestbody in backend
-      axois.post("http://localhost:8072/Restaurant/Register/Signuprestaurant", registeredCustomer)
+      // here we put the url and the user object that in @requestbody in backend
+      axois.post("http://localhost:8072/User/Register/Signuppremiumuser", registeredCustomer)
         .then(data => {
           // this part if sucess
         })
@@ -141,7 +140,7 @@ const RegisterBannerRestaurant = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    // creating restaurant object
+    // creating user object
     const registeredCustomer = {
       userName: data.get('userName'),
       email: data.get('email'),
@@ -158,8 +157,8 @@ const RegisterBannerRestaurant = () => {
         password: data.get('password'),
       });
     }
-    // here we put the url and the restaurant object that in @requestbody in backend
-    // axois.post("http://localhost:8072/register/Signuprestaurant", registeredCustomer);
+    // here we put the url and the user object that in @requestbody in backend
+    // axois.post("http://localhost:8072/register/Signupuser", registeredCustomer);
 
     // Navigate("/login");
   };
@@ -271,7 +270,7 @@ const RegisterBannerRestaurant = () => {
             />
 
 
-            <input type="hidden" id="accountState" name="accountState" value="restaurant" required />
+            <input type="hidden" id="accountState" name="accountState" value="user" required />
 
             <FormControlLabel
               style={{ color: Colours.grayWhite }}
@@ -298,7 +297,6 @@ const RegisterBannerRestaurant = () => {
             >
               Sign Up
             </Button>
-
             <Typography  
             sx={{
               color:'white', 
@@ -322,21 +320,19 @@ const RegisterBannerRestaurant = () => {
                 </Link>
               </Grid>
             </Grid>
-
             <Typography
-              sx={{
-                color: 'white',
-                fontSize: { lg: '15px', xs: '10px' },
-                textAlign: "center",
-                marginTop: '5%',
-                marginBottom: '5%'
+            sx={{
+              color:'white', 
+              fontSize:{lg:'15px', xs:'10px'},
+              textAlign:"center",
+              marginTop:'5%',
+              marginBottom:'5%'
               }}>
-              Already have an account? &nbsp;
-              <Link href="../login" >
-                Sign In
-              </Link>
-            </Typography>
-
+                Already have an account? &nbsp;
+                <Link href="../login" >
+                  Sign In 
+                </Link>
+              </Typography>
           </Box>
           {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}
@@ -357,4 +353,4 @@ const RegisterBannerRestaurant = () => {
   );
 }
 
-export default RegisterBannerRestaurant
+export default RegisterBannerPremiumUser

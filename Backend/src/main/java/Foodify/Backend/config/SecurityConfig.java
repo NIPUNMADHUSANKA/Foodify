@@ -48,8 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
-				"/register/Signupuser",
+         "/User/Register/Signupuser",
+				"/User/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
+				"/Restaurant/editContact",
 				"/Restaurant/Register/Signuprestaurant")
 		.permitAll()
 		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")

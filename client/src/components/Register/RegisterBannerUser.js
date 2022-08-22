@@ -99,11 +99,11 @@ const RegisterBannerUser = () => {
         userName: formValues.userName,
         email: formValues.email,
         password: formValues.password,
-        accountState: "registeredUser",
+        accountState: "User",
       }
 
       // here we put the url and the user object that in @requestbody in backend
-      axois.post("http://localhost:8072/register/Signupuser", registeredCustomer)
+      axois.post("http://localhost:8072/User/Register/Signupuser", registeredCustomer)
         .then(data => {
           // this part if sucess
         })
@@ -329,10 +329,10 @@ const RegisterBannerUser = () => {
               marginBottom:'5%'
               }}>
                 Already have an account? &nbsp;
-                                    <Link href="#" >
-                                        Sign In 
-                                </Link>
-                                </Typography>
+                <Link href="../login" >
+                  Sign In 
+                </Link>
+              </Typography>
           </Box>
           {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}

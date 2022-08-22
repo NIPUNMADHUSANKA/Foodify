@@ -9,7 +9,8 @@ import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
-import axois from "axios";
+import axios from 'axios';
+
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -339,12 +340,37 @@ export const ContactForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (e) => {
+        setRestaurant({...restaurant, [e.target.location]:e.target.value});
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const [restaurant, setRestaurant] = React.useState({
+        location: "",
+        address: "",
+        tpnumber: ""
+    });
+
+    const { location, address, tpnumber} = restaurant;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data=new FormData(e.currentTarget);
+
+        axios.post("http://localhost:8072/Restaurant/editContact",restaurant )
+        .then(data=>{
+            console.log("Entry access sucessfull")
+
+        })
+        .catch(error =>{
+            console.log("There is an error")
+
+        })
+
     };
 
     return (
@@ -386,7 +412,8 @@ export const ContactForm = () => {
                 <DialogContent>
                     <Box component="form"
                         noValidate
-                        autoComplete="off">
+                        autoComplete="off"
+                        onSubmit={handleSubmit}>
 
                         <CustomTextField id="location" label="Location" name="location" variant="outlined" />
                         <CustomTextField id="address" label="Address" name="address" variant="outlined" />
