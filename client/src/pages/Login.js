@@ -11,9 +11,6 @@ import Slide from 'react-reveal/Slide';
 
 
 
-
-
-
 function Login() {
   return (
     <Box className='Login-body-Style' >

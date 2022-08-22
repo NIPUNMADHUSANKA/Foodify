@@ -28,7 +28,7 @@ const RegisterBannerRestaurant = () => {
   const [formValues, setFormValues] = React.useState(initialValues);
 
   // ----------create state name form errors--------
-  const [formErrors, setFormErrors] = React.useState({});
+  const [formErrors, setFormErrors] = React.useState({}); 
 
   // -------------usestate for submit form-----------
   const [isSubmit, setIsSubmit] = React.useState(false);
