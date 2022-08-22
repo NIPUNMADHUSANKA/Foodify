@@ -205,11 +205,16 @@ export default function PrimarySearchAppBar() {
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
             
+<<<<<<< HEAD
+          {/* {
+            (CHECKROLE=="User")? "Nipun" : "Madhusanka"
+=======
           {
             // (CHECKROLE=="User")? "Nipun" : "Madhusanka"
+>>>>>>> 531c8d33d81b2dcb470bfe19e2856e48301449c5
               
             
-          }
+          } */}
            
             
 

@@ -261,7 +261,7 @@ export const AboutUsForm = () => {
             about:data.get('about_description')
         }
 
-        axois.post("http://localhost:8072/Restaurant/addAbout",restaurantAbout ).then(data=>{
+        axios.post("http://localhost:8072/Restaurant/addAbout",restaurantAbout ).then(data=>{
             console.log("Entry access sucessfull")
 
     })
