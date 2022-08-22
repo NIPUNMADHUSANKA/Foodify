@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,6 +22,7 @@ import Foodify.Backend.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -45,11 +47,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable().authorizeRequests().antMatchers(
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
 				"/register/Signupuser",
 				"/FoodiFy/auth/login",
-				"/Restaurant/Register/Signuprestaurant", "/Restaurant/editContact")
-		.permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				"/Restaurant/editContact",
+				"/Restaurant/Register/Signuprestaurant")
+		.permitAll()
+		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")
+		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("user")
+		.antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant")
+		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premium_user")
+		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("admin")
+		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 		// TODO Auto-generated method stub
