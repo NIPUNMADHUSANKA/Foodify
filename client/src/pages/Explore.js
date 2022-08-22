@@ -36,13 +36,14 @@ const Explore = () => {
     
     const [content, setContent] = useState("");
 
+
     useEffect((event) => {
 
         
   
     }, []);
 
-    console.log(content);
+
 
     return (
         <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>

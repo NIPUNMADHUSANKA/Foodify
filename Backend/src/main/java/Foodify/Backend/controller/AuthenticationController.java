@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -66,7 +67,7 @@ public class AuthenticationController {
 		UserDetails loadedUser = userService.loadUserByUsername(userName);
 		
 		String name = loadedUser.getUsername();
-		System.out.println(name);
+//		System.out.println(name);
 		
 //		-----------------newly added--1.08.39-NI------------------------------------------
 //		Registered_Customer user = (Registered_Customer) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password)).getPrincipal();
@@ -86,6 +87,7 @@ public class AuthenticationController {
 		
 	}
 	
+//	@PreAuthorize("hasaccountState('MODERATOR') or hasaccountState('ADMIN')")
 //	--------------1.13.50---------------
 	@GetMapping("/auth/userinfo")
 	private ResponseEntity<?> userInfo(Principal user) {
@@ -96,7 +98,7 @@ public class AuthenticationController {
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Collection<? extends GrantedAuthority> role = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-		
+
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserName(username);
 		userInfo.setRoles(role);
