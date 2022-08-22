@@ -41,6 +41,8 @@ const Explore = () => {
         UserService.getUserInfo().then(
           (response) => {
             setContent(response.data);
+            console.log(currentUser);
+
             
           },
           (error) => {
