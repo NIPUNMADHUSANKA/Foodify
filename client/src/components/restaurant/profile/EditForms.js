@@ -305,6 +305,15 @@ export const ContactForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
+    // ----------------initial values
+    let [restaurant, setRestaurant] = React.useState({
+        location: "",
+        address: "",
+        telephone: ""
+    });
+
+
+    //------------------assign input values to the variables
     const handleClickOpen = (e) => {
         setRestaurant({...restaurant, [e.target.location]:e.target.value});
         setOpen(true);
@@ -314,19 +323,24 @@ export const ContactForm = () => {
         setOpen(false);
     };
 
-    const [restaurant, setRestaurant] = React.useState({
-        location: "",
-        address: "",
-        tpnumber: ""
-    });
 
-    const { location, address, tpnumber} = restaurant;
+    // const { location, address, telephone} = restaurant;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const data=new FormData(e.currentTarget);
 
-        axios.post("http://localhost:8072/RestaurantInfo/editContact",restaurant )
+        const restaurantInfo = {
+            location: data.get('location'),
+            address: data.get('address'),
+            telephone: data.get('tpnumber')
+        }
+
+        console.log({
+            restaurantInfo
+        });
+
+        axios.post("http://localhost:8072/RestaurantInfo/editContact", restaurantInfo)
         .then(data=>{
             console.log("Entry access sucessfull")
 
@@ -335,7 +349,6 @@ export const ContactForm = () => {
             console.log("There is an error")
 
         })
-
     };
 
     return (

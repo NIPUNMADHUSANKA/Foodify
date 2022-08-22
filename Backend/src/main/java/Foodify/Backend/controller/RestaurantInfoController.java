@@ -14,13 +14,9 @@ public class RestaurantInfoController {
     @Autowired
     private RestaurantRepository resRepo;
 
-    @Autowired
-    private Restaurantserv resServ;
-
     @PostMapping("/editContact")
-    public boolean saveAbout(@RequestBody Restaurant restaurant ) {
-
-		resRepo.save(restaurant);
+    public boolean editContact(@RequestBody Restaurant restaurantInfo) {
+		resRepo.save(restaurantInfo);
         return true;
     }
 }
