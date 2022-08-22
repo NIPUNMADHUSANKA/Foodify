@@ -35,9 +35,9 @@ public class RestaurantAboutController {
 	}
 	
 	@GetMapping("/viewAbout/{id}")
-	public List<Restaurant_About> getAbout() {
-		return Res_about_repo.findAll();
-	}
+//	public List<Restaurant_About> getAbout(@PathVariable String id) {
+//		return Res_about_repo.ge;
+//	}
 	
 	//update existing student record by id
 //	@PutMapping("/{student_id}")
