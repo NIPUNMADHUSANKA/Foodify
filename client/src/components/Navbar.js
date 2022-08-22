@@ -19,7 +19,13 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import Logo from '../assets/icons/foodify-logo.png';
 
+import {Link} from 'react-router-dom';
+
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
+
+const ROLE = JSON.parse(localStorage.getItem('ROLE'));
+
+const CHECKROLE = ROLE[0].authority;
 
 const mobileMenu = {
   // backgroundColor: 'Transparent',
@@ -151,14 +157,15 @@ export default function PrimarySearchAppBar() {
             src={Logo}
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
-              >
-                {page}
-              </Button>
-            ))}
+            
+          {
+            (CHECKROLE=="User")? "Nipun" : "Madhusanka"
+              
+            
+          }
+           
+            
+
         </Box>
           
         <Search>

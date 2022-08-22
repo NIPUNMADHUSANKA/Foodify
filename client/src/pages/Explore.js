@@ -14,8 +14,7 @@ import AuthService from '../services/auth-service';
 import UserService from '../services/user-service';
 
 import '../assets/css/Home.css';
-
-
+import axios from "axios";
 
 const Explore = () => {
 
@@ -37,25 +36,14 @@ const Explore = () => {
     
     const [content, setContent] = useState("");
 
-    useEffect(() => {
-        UserService.getUserInfo().then(
-          (response) => {
-            setContent(response.data);
-            
-          },
-          (error) => {
-            const _content =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-              error.message ||
-              error.toString();
-            setContent(_content);
-          }
-        );
-      }, []);
 
-      console.log(content);
+    useEffect((event) => {
+
+        
+  
+    }, []);
+
+
 
     return (
         <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
