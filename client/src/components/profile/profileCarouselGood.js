@@ -9,8 +9,8 @@ import CardBar from './profile_card_bar';
 import dash from '../../assets/images/profile_dash.png';
 
 
-const MainHeader = "Good Foods";
-const MainHeader2 = "Bad Foods";
+const MainHeader = "Healthy Foods";
+const MainHeader2 = "Unhealthy Foods";
 // const MainHeader3 = "My Details";
 
 
