@@ -56,12 +56,7 @@ public class RestaurantController{
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
 
-	@PostMapping("/Restaurant/editContact")
-	public boolean saveAbout(@RequestBody Restaurant restaurant ) {
 
-//		restaurantRepository.save(restaurant);
-		return true;
-	}
 
 
 //	----------------------------de_activate method-------------------------------------------------------------------------------

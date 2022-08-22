@@ -326,7 +326,7 @@ export const ContactForm = () => {
         e.preventDefault();
         const data=new FormData(e.currentTarget);
 
-        axios.post("http://localhost:8072/Restaurant/editContact",restaurant )
+        axios.post("http://localhost:8072/RestaurantInfo/editContact",restaurant )
         .then(data=>{
             console.log("Entry access sucessfull")
 

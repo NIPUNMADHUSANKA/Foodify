@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().authorizeRequests().antMatchers(
 				"/register/Signupuser",
 				"/FoodiFy/auth/login",
-				"/Restaurant/Register/Signuprestaurant", "/Restaurant/editContact")
+				"/Restaurant/Register/Signuprestaurant", "/RestaurantInfo/editContact")
 		.permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
