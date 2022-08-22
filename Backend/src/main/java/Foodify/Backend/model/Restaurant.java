@@ -27,7 +27,7 @@ public class Restaurant {
 	private Double rating;
 	private String aboutUS;
 	private String address;
-	private int telephone;
+	private String telephone;
 	private String location;
 	private String openHours;
 	private LocalDateTime starttime;
