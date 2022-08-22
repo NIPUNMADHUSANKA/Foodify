@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
 				"/register/Signupuser",
 				"/FoodiFy/auth/login",
+				"/Restaurant/editContact",
 				"/Restaurant/Register/Signuprestaurant")
 		.permitAll()
 		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")
