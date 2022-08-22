@@ -30,7 +30,7 @@ import Foodify.Backend.repository.UserRepository;
 
 @RestController
 @RequestMapping("/FoodiFy")
-@CrossOrigin
+@CrossOrigin (origins = "http://localhost:3000")
 public class AuthenticationController {
 
 	@Autowired
@@ -58,7 +58,8 @@ public class AuthenticationController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName,password));
 		}catch(Exception e) {
-			return ResponseEntity.ok(new AuthenticationResponse("Failed authenticated"+userName));
+			
+			return new ResponseEntity<>("User Not Found", HttpStatus.NOT_FOUND);
 		}
 		
 		UserDetails loadedUser = userService.loadUserByUsername(userName);
@@ -85,7 +86,7 @@ public class AuthenticationController {
 	}
 	
 //	--------------1.13.50---------------
-	@GetMapping("/testing2")
+	@GetMapping("/auth/userinfo")
 	private ResponseEntity<?> userInfo(Principal user) {
 		
 //		---------1.13.55---------

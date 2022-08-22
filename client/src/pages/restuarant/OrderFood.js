@@ -6,7 +6,7 @@ import Background from '../../assets/images/pv4WkDi.webp';
 
 // when calling data, nned to take from there
 import FoodImage from '../../assets/images/foodimage.jpg'
-import { Avatar, Icon, Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import OrderDescription from '../../components/restaurant/OrderDescription';
 import FoodNutrition from '../../components/restaurant/FoodNutrition';
 import FoodComment from '../../components/restaurant/FoodCooment';

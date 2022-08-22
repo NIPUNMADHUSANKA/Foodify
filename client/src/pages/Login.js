@@ -1,20 +1,13 @@
 import React from 'react';
-import { Box, Typography, Button, ThemeProvider, Stack } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import LoginBanner from '../components/login/LoginBanner';
-import HorizontalBar from '../components/HorizontalBar';
 import LoginNavbar from '../components/login/LoginNavbar';
 import '../assets/css/Login.css';
 import theme, { Colours } from '../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
-import Reveal from 'react-reveal/Reveal';
 import Zoom from '@mui/material/Zoom'; //Zoom text
-import Flip from 'react-reveal/Flip';
 import Slide from 'react-reveal/Slide';
-import { Paper} from '@mui/material';
-
-
-
 
 
 

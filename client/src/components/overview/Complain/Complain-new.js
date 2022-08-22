@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {ThemeProvider, createTheme } from '@mui/material/styles';
 import {useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -26,7 +25,9 @@ import { visuallyHidden } from '@mui/utils';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+
+import Popup from'./Popup.js'
+import image1 from '../../../assets/images/Complain/image1.jpg'
 
 //----------------------------------------------------------styles for table
 const paperSx = {
@@ -66,18 +67,6 @@ const paperSx = {
   },
 
 }
-
-//----------------------------------------------------------Theme for buttons
-const theme = createTheme({
-  palette: {
-    success:{
-      main: '#95CD41'
-    },
-    error:{ 
-      main: '#FAC213'
-    }
-  },
-});
 
 //----------------------------------------------------------styles for input
 const textFSx ={
@@ -178,33 +167,32 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(userId,fname,lname ,location, type) {
-  const viewButton = <Button variant="outlined" color="success" >View</Button>
-  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
+function createData(complaintId,title,user ,Restaurant,image,description) {
+  // const viewButton = <Button variant="outlined" color="success" onClick={Popup}>View</Button> 
   return { 
-    userId, 
-    fname,
-    lname, 
-    location,
-    type,
-    viewButton,
-    deleteButton,
+    complaintId, 
+    title,
+    user, 
+    Restaurant,
+    //give the complain popup data too
+    image,
+    description
   };
 }
 
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel','Green','Colombo','Regular'),  
-  createData('B2343','Robert','Pattinson', 'None','Premium'),  
-  createData('B2344','Rachel','Green','Colombo','Regular'),  
-  createData('B2345','Robert','Pattinson', 'None','Premium'),  
-  createData('B2346','Rachel','Green','Colombo','Regular'),  
-  createData('B2347','Robert','Pattinson', 'None','Premium'),  
-  createData('B2348','Rachel','Green','Colombo','Regular'),  
-  createData('B2349','Robert','Pattinson', 'None','Premium'),  
-  createData('B2350','Rachel','Green','Colombo','Regular'),  
-  createData('B2351','Robert','Pattinson', 'None','Premium'),  
+  createData('B2342','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2343','Quality of the food is not good','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2344','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2345','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2346','Quality of the food is not good','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2347','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2348','Quality of the food is not good','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2349','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2350','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
+  createData('B2351','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
 ]
 
 //----------------------------------------------------------sorting functions - 3
@@ -239,41 +227,31 @@ function stableSort(array, comparator) {
 //----------------------------------------------------------Column Define 
 const columns = [
   { 
-    id: 'userId', 
-    label: 'User-Id',
+    id: 'complaintId', 
+    label: 'Complaint-Id',
+    numeric: false, 
+    minWidth: 100},
+  { 
+    id: 'title', 
+    label: 'Title',
+    numeric: false, 
+    minWidth: 250},
+  { 
+    id: 'user', 
+    label: 'User',
     numeric: false, 
     minWidth: 140},
   { 
-    id: 'fname', 
-    label: 'First Name',
-    numeric: false, 
-    minWidth: 140},
-  { 
-    id: 'lname', 
-    label: 'Last Name',
-    numeric: false, 
-    minWidth: 140},
-  { 
-    id: 'location', 
-    label: 'Location',
+    id: 'Restaurant', 
+    label: 'Restaurent',
     numeric: false, 
     minWidth: 120 },
-  { 
-    id: 'type', 
-    label: 'Type',
-    numeric: true, 
-    minWidth: 140 },
 
   { 
     id: 'view', 
     label: '',
     numeric: false, 
-    minWidth: 130 },
-  { 
-    id: 'delete', 
-    label: '',
-    numeric: false, 
-    minWidth: 100 },
+    minWidth: 150 }
   
 ];
 
@@ -336,7 +314,6 @@ function TableActions() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
 
-
   //----------------------------------------------------------Empty Rows
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -358,7 +335,6 @@ function TableActions() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
     <Paper sx={paperSx}>
     
     {/* -----------------------------------------------------------------------Search box - Auto Complete*/}
@@ -398,7 +374,7 @@ function TableActions() {
                   <TableRow
                     hover
                     tabIndex={-1}
-                    key={row.userId}
+                    key={row.complaintId}
                   >
                     <TableCell
                       component="th"
@@ -406,14 +382,18 @@ function TableActions() {
                       scope="row" 
                       
                     >
-                      {row.userId}
+                      {row.complaintId}
                     </TableCell>
-                    <TableCell >{row.fname}</TableCell>
-                    <TableCell >{row.lname}</TableCell>
-                    <TableCell >{row.location}</TableCell>
-                    <TableCell >{row.type}</TableCell>
-                    <TableCell >{row.viewButton}</TableCell>
-                    <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell >{row.title}</TableCell>
+                    <TableCell >{row.user}</TableCell>
+                    <TableCell >{row.Restaurant}</TableCell>
+                    <TableCell ><Popup 
+                                  title={row.title} 
+                                  image={row.image}
+                                  restaurant={row.Restaurant}
+                                  user={row.user}
+                                  description={row.description}/>
+                    </TableCell>
                     <TableCell ></TableCell>
                   </TableRow>
                 );
@@ -445,7 +425,6 @@ function TableActions() {
           "& p":{fontFamily: 'Poppins'}  }}
       />
     </Paper>
-    </ThemeProvider>
   );
 }
 

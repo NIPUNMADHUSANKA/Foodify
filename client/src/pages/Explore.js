@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
 
 import Menubar from '../components/Menubar';
@@ -10,10 +10,11 @@ import Nearme from '../components/explore/Nearme';
 import TabPanel from '../components/TabPanel';
 
 import theme from '../assets/theme/theme';
+import AuthService from '../services/auth-service';
+import UserService from '../services/user-service';
 
 import '../assets/css/Home.css';
-
-
+import axios from "axios";
 
 const Explore = () => {
 
@@ -21,16 +22,41 @@ const Explore = () => {
         document.title = "Explore";
     })
 
+
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    ///-- Get Token UserName--///
+    const currentUser = AuthService.getCurrentUser();
+
+    
+    const [content, setContent] = useState("");
+
+    useEffect((event) => {
+
+        
+  
+    }, []);
+
+    console.log(content);
+
     return (
         <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
+            
+            <Typography sx = {{color:"#fff"}}>{content.userName}</Typography>
+
             <Menubar/>
+
+
             <ExploreF/>
+
+
+            
+
             <Box sx={{ display:"flex", flexDirection:'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: {flexDirection: 'column-reverse',}}}>
             <ThemeProvider theme={theme}>
                 <Tabs
