@@ -13,10 +13,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
-import axois from "axios";
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/auth-service';
-
+import UserService from '../../services/user-service';
 
 //import {useForm} from 'react-hook-form';
 
@@ -94,27 +93,28 @@ export default function SignIn() {
     const errors = {};
     if (Object.keys(formErrors).length === 0 && isSubmit) {
 
-
       const userName = formValues.userName;
       const password = formValues.password;
 
-      AuthService.login(userName, password).then(
-        () => {
-          navigate("/Explore");
-          window.location.reload();
+     AuthService.login(userName,password).then(()=>{
+
+      UserService.getUserInfo().then(
+        (response) => {
+            console.log(response.data.roles);
+            localStorage.setItem("ROLE", JSON.stringify(response.data.roles));
         },
         (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setIsSubmit(false);
+          console.log(error);
         }
       );
+      navigate("/Explore")
 
 
+     },(error)=>{
+      errors.NotFound = error.response.data;
+      setFormErrors(errors);
+     })
+    
     }
   }, [formErrors])
 
