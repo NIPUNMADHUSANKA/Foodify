@@ -34,7 +34,7 @@ public class RestaurantAboutController {
         return "Added Successfully";
 	}
 	
-	@GetMapping("/viewAbout")
+	@GetMapping("/viewAbout/{id}")
 	public List<Restaurant_About> getAbout() {
 		return Res_about_repo.findAll();
 	}
