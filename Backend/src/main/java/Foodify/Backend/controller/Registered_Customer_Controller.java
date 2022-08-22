@@ -83,6 +83,35 @@ public class Registered_Customer_Controller {
 //	----------------end of create method-----------------------------------------------------------------------------------------
 	
 
+//	-----------------------------------------create method-------------------------------------------------------------------
+//	----------to response entity, use response object----------
+	@PostMapping("/Register/Signuppremiumuser")
+	public ResponseEntity<?> createPremiumUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
+		
+//		RegCusRepo.save(registeredCustomer);
+		
+		
+//		RegCusServ service = new RegCusServ();
+		
+		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
+		
+		String userName = registeredCustomer.getuserName();
+		String email = registeredCustomer.getEmail();
+		String password = registeredCustomer.getpassword();
+		String accountState = registeredCustomer.getaccountState();
+
+
+//		--------------------sending data to db if there is no errors--------------------------------------------
+		if(count == null) {
+			RegCusServ.passwordEncorder(userName, email, password, accountState);
+//			RegCusRepo.save(registeredCustomer);
+		}
+//		RegCusRepo.find();
+//		 System.out.println(data);
+		return count;				
+	}
+//	----------------end of create method-----------------------------------------------------------------------------------------
+	
 
 	
 
