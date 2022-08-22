@@ -11,7 +11,7 @@ const images = [
     url: Userimage,
     title: 'User',
     width: '50%',
-    url2: 'signupuser'
+    url2: 'UserPackage'
   },
   {
     url: Resimage,
