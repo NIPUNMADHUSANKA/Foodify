@@ -1,13 +1,13 @@
 import axios from "axios";
 import authHeader from "./auth-header";
-const API_URL = "http://localhost:8072/FoodiFy/Services/";
+const API_URL = "http://localhost:8072/FoodiFy/auth";
+
 
 const getPublicContent = () => {
   return axios.get(API_URL + "all");
 };
 
 const getUserInfo = () => {
-    console.log(authHeader());
     return axios.get("http://localhost:8072/FoodiFy/auth/userinfo", { headers: authHeader() });
   };
 
