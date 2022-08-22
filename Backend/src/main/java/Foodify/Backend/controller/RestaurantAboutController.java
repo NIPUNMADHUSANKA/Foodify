@@ -34,9 +34,9 @@ public class RestaurantAboutController {
         return "Added Successfully";
 	}
 	
-	@GetMapping("/viewAbout/{id}")
+//	@GetMapping("/viewAbout/{id}")
 //	public List<Restaurant_About> getAbout(@PathVariable String id) {
-//		return Res_about_repo.ge;
+//		
 //	}
 	
 	//update existing student record by id
