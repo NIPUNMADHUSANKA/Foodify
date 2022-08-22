@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable().authorizeRequests().antMatchers(
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
 				"/register/Signupuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant")

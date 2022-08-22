@@ -5,7 +5,7 @@ import Drawer from '@mui/material/Drawer';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from '@mui/material/IconButton';
 
-import Menubar from '../components/Menubar';
+import Menubar from '../components/Navbar';
 import Overview from '../components/overview/Overview.js';
 import SystemMain from '../components/overview/System/System-main';
 import UsersMain from '../components/overview/Users/Users-main';
@@ -28,7 +28,7 @@ const Dashboard = () => {
     const drawerWidth = 240;
 
     /* ------------------------------------------------------------Drawer functions */
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(4);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -54,7 +54,7 @@ const Dashboard = () => {
                 <Tab value={1} label={<Typography fontSize="18px" fontWeight="300" color="primary">Users</Typography>}/>
                 <Tab value={2} label={<Typography fontSize="18px" fontWeight="300" color="primary">Restaurants</Typography>}/>
                 {/* <Tab value={3} label={<Typography fontSize="18px" fontWeight="300" color="primary">Orders</Typography>}/> */}
-                <Tab value={4} label={<Typography fontSize="18px" fontWeight="300" color="primary">Complains</Typography>}/>
+                <Tab value={4} label={<Typography fontSize="18px" fontWeight="300" color="primary">Complaints</Typography>}/>
             </Tabs>
     
     );
