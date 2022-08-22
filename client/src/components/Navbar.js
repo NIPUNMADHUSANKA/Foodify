@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -20,13 +20,10 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import Logo from '../assets/icons/foodify-logo.png';
 
-<<<<<<< HEAD
 
-=======
-import {Link} from 'react-router-dom';
+
 
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
->>>>>>> fc2650d2a808cf3f3e56c9001506d08ca0f9ce25
 
 const ROLE = JSON.parse(localStorage.getItem('ROLE'));
 
@@ -162,7 +159,7 @@ export default function PrimarySearchAppBar() {
             src={Logo}
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-<<<<<<< HEAD
+
         <Button
         component={Link} to='/'
           sx={{ my: 2, color: 'white', display: 'block', ml:10 }}
@@ -194,7 +191,6 @@ export default function PrimarySearchAppBar() {
 
         </Button> 
      
-=======
             
           {
             (CHECKROLE=="User")? "Nipun" : "Madhusanka"
@@ -203,7 +199,7 @@ export default function PrimarySearchAppBar() {
           }
            
             
->>>>>>> fc2650d2a808cf3f3e56c9001506d08ca0f9ce25
+
 
         </Box>
           
