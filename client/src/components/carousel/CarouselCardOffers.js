@@ -3,18 +3,17 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import {Link} from 'react-router-dom';
 
-const CarouselCard2 = (props) => {
+const CarouselCardOffers = (props) => {
     return (
         // ---------main card area------------
         <Card sx={{
             maxWidth: 345,
             width: '15rem',
             margin:1,
-            background: Colours.gray2,
+            background: Colours.grayWhite,
             borderRadius:'1rem',
             transition: 'transform .2s', '&:hover': {
                 transform: 'scale(1.04)',
-                background:Colours.darkgray,
               },
             [theme.breakpoints.down('sm')]: {
                 width:'12rem',
@@ -28,8 +27,6 @@ const CarouselCard2 = (props) => {
                     height="235vh"
                     image={props.item.image}
                     alt="green iguana"
-                    overflow="visible"
-                    
                 />
 
                 {/* ---------------------card content area---------------------- */}
@@ -37,7 +34,6 @@ const CarouselCard2 = (props) => {
                     {/* title, if any */}
                     <Typography gutterBottom variant="h5" component="div" sx={{
                         textAlign:'center',
-                        color:Colours.formWhite,
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '14px',
                             padding: '2px',
@@ -45,31 +41,15 @@ const CarouselCard2 = (props) => {
                     }}>
                         {props.item.title}
                     </Typography>
-
-                    {/* title2 */}
+                    {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
                         textAlign:'center',
-                        color:Colours.formWhite,
-                        fontSize:"0.8rem",
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: '8px',
-                            padding: '2px',
-                        },
-                    }}>
-                        {props.item.name2}
-                    </Typography>
-
-                    {/* price, if any */}
-                    <Typography variant="body2" color="text.secondary" sx={{
-                        textAlign:'center',
-                        color:Colours.formWhite,
-                        fontSize:"1rem",
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '10px',
                             padding: '2px',
                         },
                     }}>
-                        {props.item.price}
+                        {props.item.decription}
                     </Typography>
 
                 </CardContent>
@@ -83,9 +63,8 @@ const CarouselCard2 = (props) => {
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <Button size="small" component={Link} to={"/Restaurant/Category/Orderfood"} sx={{
+                <Button size="small" component={Link} to={"/Restaurant/Offers"} sx={{
                     margin: '6px',
-                    padding:"0.5rem",
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,
                     },
@@ -106,4 +85,4 @@ const CarouselCard2 = (props) => {
     )
 }
 
-export default CarouselCard2
+export default CarouselCardOffers

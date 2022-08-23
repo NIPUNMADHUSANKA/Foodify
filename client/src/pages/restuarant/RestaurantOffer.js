@@ -10,6 +10,7 @@ import bgImage from '../../assets/images/offersbg.png';
 import Rlogo from '../../assets/images/restaurant-logo.jpg';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import {Link} from 'react-router-dom';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -62,7 +63,7 @@ const RestaurantOffer = () => {
                             flexDirection: "row",
                             padding: "1rem",
                         }}>
-                            <IconButton>
+                            <IconButton component={Link} to={"/Restaurant"}>
                                 <ArrowBackIosIcon sx={{
                                     color: Colours.green, '&:hover': {
                                         color: Colours.yellow,

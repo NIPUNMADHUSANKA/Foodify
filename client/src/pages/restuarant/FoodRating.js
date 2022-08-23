@@ -8,27 +8,40 @@ import FoodRatingForm from '../../components/restaurant/FoodRatingForm';
 // when calling data, nned to take from there
 import FoodImage from '../../assets/images/foodimage.jpg'
 import { Avatar } from '@mui/material';
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
 
 const FoodRating = () => {
     return (
-        <Box sx={{
+
+        <div>
+
+        <Fade top>
+          <Navbar />
+        </Fade>
+        
+            <Box sx={{
             margin: 0,
             padding: 0,
             background: Colours.primary,
             width: "100%",
             display: "flex",
-            flexDirection: "row",           
+            flexDirection: "row",
             [theme.breakpoints.down('sm')]: {
                 flexDirection: "column-reverse",
             },
         }}>
+
+            
+
             {/* --------------------form area-------------------- */}
             <Box sx={{
                 width: "70%",
                 display: "flex",
                 flexDirection: "column",
-                margin:"auto",
-                marginBottom:"2rem",
+                margin: "auto",
+                marginBottom: "2rem",
                 [theme.breakpoints.down('sm')]: {
                     width: "100%",
                 },
@@ -55,19 +68,19 @@ const FoodRating = () => {
             }}>
                 {/* ------------------for the food image--------------- */}
                 <Box sx={{
-                            width: "25%",
-                            height: "50%",
-                            margin:"auto",
-                            position: "absolute",
-                            top: "25%",
-                            right: "15%",
-                            [theme.breakpoints.down('sm')]: {
-                                width: "40%",
-                                height: "18%",
-                                top: "15%",
-                                right: "30%",
-                            },
-                        }}>
+                    width: "25%",
+                    height: "50%",
+                    margin: "auto",
+                    position: "absolute",
+                    top: "25%",
+                    right: "15%",
+                    [theme.breakpoints.down('sm')]: {
+                        width: "40%",
+                        height: "18%",
+                        top: "15%",
+                        right: "30%",
+                    },
+                }}>
 
                     <Avatar
                         alt="food image"
@@ -77,7 +90,7 @@ const FoodRating = () => {
                             height: "100%",
                             border: "2px solid #EFEAEA",
                             [theme.breakpoints.down('sm')]: {
-                                
+
                             },
                         }} />
                 </Box>
@@ -86,6 +99,8 @@ const FoodRating = () => {
             {/* ---------------end of image area----------------------- */}
 
         </Box>
+        </div>
+        
     )
 }
 

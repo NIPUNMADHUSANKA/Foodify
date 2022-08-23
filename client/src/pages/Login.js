@@ -9,14 +9,17 @@ import Skeleton from '@mui/material/Skeleton';
 import Zoom from '@mui/material/Zoom'; //Zoom text
 import Slide from 'react-reveal/Slide';
 
-
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
 
 function Login() {
   return (
     <Box className='Login-body-Style' >
-       <LoginNavbar/>
-
-
+       
+       <Fade top>
+            <Navbar />
+        </Fade>
 
        <Box maxWidth='100%' sx={{
         padding: '0',
