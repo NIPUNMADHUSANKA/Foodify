@@ -306,22 +306,22 @@ const RegisterBannerUser = () => {
               fontSize:{lg:'15px', xs:'10px'},
               textAlign:"center",
               marginTop:'5%',
-              marginBottom:'5%'
+              marginBottom:'3%'
               }}>
             ---Or Signup with---
             </Typography>
             
             <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
+              <Grid item xs  marginLeft="45%">
                 <Link href="#" variant="body2">
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
+              {/* <Grid item xs marginRight="35%">
+                <Link href="#" variant="body2">
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
+                </Link>
+              </Grid> */}
             </Grid>
             <Typography
             sx={{

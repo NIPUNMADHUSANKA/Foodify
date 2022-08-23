@@ -50,40 +50,40 @@ const InputArea = styled(TextField)({
 // ----------array or object ot get category values--------------------
 const category = [
     {
-        value: 'Category 1',
-        label: 'Category 1',
+        value: 'Vegie',
+        label: 'Vegie',
     },
     {
-        value: 'Category 2',
-        label: 'Category 2',
+        value: 'Sea Food',
+        label: 'Sea Food',
     },
     {
-        value: 'Category 3',
-        label: 'Category 3',
+        value: 'Indian',
+        label: 'Indian',
     },
     {
-        value: 'Category 4',
-        label: 'Category 4',
+        value: 'Italian',
+        label: 'Italian',
     },
 ];
 
 // ------------------------food names-----------------
 const foods = [
     {
-        value: 'Category 1',
-        label: 'Food1',
+        value: 'Vegie',
+        label: 'Vegie Masala',
     },
     {
-        value: 'Category 2',
-        label: 'Food2',
+        value: 'Sea Food',
+        label: 'Sea Food Fish curry',
     },
     {
-        value: 'Category 3',
-        label: 'Food3',
+        value: 'Indian',
+        label: 'Indian Those',
     },
     {
-        value: 'Category 4',
-        label: 'Food4',
+        value: 'Italian',
+        label: 'Italian burger',
     },
 ];
 
