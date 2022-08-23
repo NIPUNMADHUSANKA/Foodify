@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout")
+
 		.permitAll()
 		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")
 		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("user")

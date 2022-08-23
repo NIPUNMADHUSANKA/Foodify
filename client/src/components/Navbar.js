@@ -204,11 +204,9 @@ export default function PrimarySearchAppBar() {
             src={Logo}
         />
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-            
           {
             // (CHECKROLE=="User")? "Nipun" : "Madhusanka"
-              
-            
+
           }
            
             

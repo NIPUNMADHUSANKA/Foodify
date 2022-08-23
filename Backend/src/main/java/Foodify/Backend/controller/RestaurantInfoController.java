@@ -26,5 +26,4 @@ public class RestaurantInfoController {
         return true;
     }
 
-
 }
