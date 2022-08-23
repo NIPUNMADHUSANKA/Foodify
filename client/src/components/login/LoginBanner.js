@@ -251,16 +251,16 @@ export default function SignIn() {
             </Typography>
 
             <Grid container xs >
-              <Grid item xs marginLeft="42%">
+              <Grid item xs  marginLeft="49%">
                 <Link href="#" variant="body2">
-                  <img src={Facebook} alt="Logo" className='social-icons-fb' />
+                <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-              <Grid item xs marginRight="37%">
+              {/* <Grid item xs marginRight="35%">
                 <Link href="#" variant="body2">
-                  <img src={Google} alt="Logo" className='social-icons-gg' />
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
 
           </form>

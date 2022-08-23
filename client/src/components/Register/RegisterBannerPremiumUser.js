@@ -312,16 +312,16 @@ const RegisterBannerPremiumUser = () => {
             </Typography>
             
             <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
+              <Grid item xs  marginLeft="45%">
                 <Link href="#" variant="body2">
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
+              {/* <Grid item xs marginRight="35%">
+                <Link href="#" variant="body2">
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
+                </Link>
+              </Grid> */}
             </Grid>
             <Typography
             sx={{
