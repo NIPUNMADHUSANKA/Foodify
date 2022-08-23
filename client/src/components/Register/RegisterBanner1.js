@@ -27,6 +27,7 @@ const tiers = [
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
     buttonColor:'success',
+    url: 'signupuser',
     image: Freeimage,
 
   },
@@ -41,6 +42,7 @@ const tiers = [
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
     buttonColor:'success',
+    url: 'signuppremiumuser',
     image: Premiumimage,
   },
   // {
@@ -135,7 +137,8 @@ function PricingContent() {
                   </ul>
                 </CardContent>
                 <CardActions sx={{ backgroundColor:Colours.darkgray }}>
-                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor}>
+                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor} onClick={() => {
+    window.location.href = `${tier.url}`}}>
                     {tier.buttonText}
                   </Button>
                 </CardActions>
