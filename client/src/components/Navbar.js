@@ -202,6 +202,7 @@ export default function PrimarySearchAppBar() {
               height: 40,
             }}
             src={Logo}
+
           />
 
           {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
