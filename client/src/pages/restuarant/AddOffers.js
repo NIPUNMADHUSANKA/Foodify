@@ -10,7 +10,7 @@ import AddOfferForm from '../../components/restaurant/AddOfferForm';
 import Fade from 'react-reveal/Fade';
 import Rlogo from '../../assets/images/restaurant-logo.jpg';
 import { Avatar, IconButton, Typography } from '@mui/material';
-
+import Navbar from './../../components/Navbar';
 
 const AddOffers = () => {
 
@@ -33,6 +33,10 @@ const AddOffers = () => {
                 flexDirection: "column",
             },
         }}>
+
+        <Fade top>
+          <Navbar />
+        </Fade>
 
             {/* ------------topic area--------------------- */}
             <Fade top cascade>

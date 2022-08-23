@@ -18,6 +18,9 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import '../assets/css/Dashboard-admin.css';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
 
 const Dashboard = () => {
 

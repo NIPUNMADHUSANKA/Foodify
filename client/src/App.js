@@ -45,17 +45,14 @@ import Terms from './pages/register/Terms';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
 
-import Navbar from './pages/NavBarOrg';
+import Navbar from './components/Navbar'
+
 
 function App() {
   return (
       
     <Box sx={{margin:"0"}}>
        
-
-        {/* <Navbar /> */}
-
-
         <Routes>
         
           <Route path="/" element = {<Landing/>} />

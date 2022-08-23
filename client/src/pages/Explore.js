@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
+import { ThemeProvider, Box, Typography, Tab, Tabs } from '@mui/material';
 
 import Menubar from '../components/Menubar';
 import ExploreF from '../components/explore/Explore.js';
@@ -12,6 +12,11 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import AuthService from '../services/auth-service';
 import UserService from '../services/user-service';
+
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
 
 import '../assets/css/Home.css';
 import axios from "axios";
@@ -33,63 +38,64 @@ const Explore = () => {
     ///-- Get Token UserName--///
     const currentUser = AuthService.getCurrentUser();
 
-    
+
     const [content, setContent] = useState("");
 
     useEffect((event) => {
 
-        
-  
+
+
     }, []);
 
     console.log(content);
 
     return (
-        <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
-            
-            <Typography sx = {{color:"#fff"}}>{content.userName}</Typography>
+        <Box className='bg' sx={{ display: "flex", flexDirection: 'column', margin: 0 }}>
 
-            <Menubar/>
+            <Typography sx={{ color: "#fff" }}>{content.userName}</Typography>
+
+            <Fade top>
+                <Navbar />
+            </Fade>
+
+            <ExploreF />
 
 
-            <ExploreF/>
 
 
-            
-
-            <Box sx={{ display:"flex", flexDirection:'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: {flexDirection: 'column-reverse',}}}>
-            <ThemeProvider theme={theme}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    textColor= "primary"
-                    indicatorColor="secondary"
-                    sx = {{
-                        color: "primary",
-                        mb: "1%",
-                        ml: "3%",
-                    }}
-                >
-                    <Tab value={0} label={
-                        <Typography color="primary" fontWeight="200" fontSize="18px">Food</Typography>
-                    }/>
-                    <Tab value={1} label={
-                        <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
-                    }/>
-                </Tabs>
-                <Nearme />
-            </ThemeProvider>
+            <Box sx={{ display: "flex", flexDirection: 'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: { flexDirection: 'column-reverse', } }}>
+                <ThemeProvider theme={theme}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        textColor="primary"
+                        indicatorColor="secondary"
+                        sx={{
+                            color: "primary",
+                            mb: "1%",
+                            ml: "3%",
+                        }}
+                    >
+                        <Tab value={0} label={
+                            <Typography color="primary" fontWeight="200" fontSize="18px">Food</Typography>
+                        } />
+                        <Tab value={1} label={
+                            <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
+                        } />
+                    </Tabs>
+                    <Nearme />
+                </ThemeProvider>
             </Box >
             <Box minHeight="50vh">
                 <TabPanel value={value} index={0}>
-                    <FoodScroll/>
+                    <FoodScroll />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <RestaurantScroll/>
+                    <RestaurantScroll />
                 </TabPanel>
             </Box>
         </Box >
-        
+
     )
 }
 

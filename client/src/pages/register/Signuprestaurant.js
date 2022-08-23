@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material';
 import RegisterBannerRestaurant from '../../components/Register/RegisterBannerRestaurant';
-import RegisterNavbar from '../../components/Register/RegisterNavbar';
 import '../../assets/css/Registerrestaurant.css';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
@@ -9,11 +8,18 @@ import Zoom from '@mui/material/Zoom'; //Zoom text
 import Slide from 'react-reveal/Slide';
 import { ThemeProvider } from '@mui/material/styles';
 
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
 const Signuprestaurant = () => {
   return (
     
     <Box className='Registerres-body-Style' >
-        <RegisterNavbar />
+        
+        <Fade top>
+          <Navbar />
+        </Fade>
+        
         <ThemeProvider theme={theme}>
 
         <Box maxWidth='100%' sx={{

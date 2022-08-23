@@ -5,7 +5,6 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 
 import Carousel from 'react-elastic-carousel';
 
-import Navbar from '../components/Navbar';
 import PageTitle from '../components/User/PageTitle';
 import AddFoodMenuDes from '../components/restaurant/AddFoodMenuDes';
 import AddFoodMenuIns from '../components/restaurant/AddFoodMenuIns';
@@ -20,9 +19,10 @@ import resturantLogo from '../assets/images/restaurant-logo.jpg'
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
 import { margin } from '@mui/system';
 import AddFoodMenuCon from '../components/restaurant/AddFoodMenuCon';
-
 
 const MainHeader = "Add Foods Menu";
 
