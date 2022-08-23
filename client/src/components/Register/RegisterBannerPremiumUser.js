@@ -20,7 +20,7 @@ import { Navigate } from 'react-router-dom';
 
 const theme1 = createTheme();
 
-const RegisterBannerUser = () => {
+const RegisterBannerPremiumUser = () => {
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
 
@@ -99,11 +99,11 @@ const RegisterBannerUser = () => {
         userName: formValues.userName,
         email: formValues.email,
         password: formValues.password,
-        accountState: "User",
+        accountState: "premiumUser",
       }
 
       // here we put the url and the user object that in @requestbody in backend
-      axois.post("http://localhost:8072/Register/Signupuser", registeredCustomer)
+      axois.post("http://localhost:8072/Register/Signuppremiumuser", registeredCustomer)
         .then(data => {
           // this part if sucess
         })
@@ -353,4 +353,4 @@ const RegisterBannerUser = () => {
   );
 }
 
-export default RegisterBannerUser
+export default RegisterBannerPremiumUser

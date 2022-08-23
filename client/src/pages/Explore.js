@@ -12,6 +12,7 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import AuthService from '../services/auth-service';
 import UserService from '../services/user-service';
+import axois from "axios";
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -27,7 +28,8 @@ const Explore = () => {
         document.title = "Explore";
     })
 
-
+    // ----------store restaurant values--------
+    const [details, setDetails] = React.useState({});
 
     const [value, setValue] = React.useState(0);
 
@@ -43,11 +45,29 @@ const Explore = () => {
 
     useEffect((event) => {
 
+        axois.get("http://localhost:8072/FoodiFy/Service/ShowRestaurant")
+            .then(data => {
+                // this part if sucess
+                console.log(data);
+                console.log(currentUser);
 
+                const details = data.data;
+                setDetails({ ...details});
+            })
+            .catch(error => {
+
+                if (error.response.data) {
+
+                    error.response.data.fieldErrors.forEach(fieldError => {
+
+                    });
+                }
+
+            });
 
     }, []);
 
-    console.log(content);
+
 
     return (
         <Box className='bg' sx={{ display: "flex", flexDirection: 'column', margin: 0 }}>
@@ -88,10 +108,17 @@ const Explore = () => {
             </Box >
             <Box minHeight="50vh">
                 <TabPanel value={value} index={0}>
+
+
                     <FoodScroll />
+
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <RestaurantScroll />
+
+                    {console.log(details)}
+                    <RestaurantScroll details={details} />
+
+
                 </TabPanel>
             </Box>
         </Box >

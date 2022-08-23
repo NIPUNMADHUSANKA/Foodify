@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,6 +22,7 @@ import Foodify.Backend.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -45,15 +47,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		/*
+		 * "/FoodiFy/Service/**" for services that use without token
+		 * "/FoodiFy/User/**" for functions that use by logged in normal user
+		 * "/FoodiFy/Restaurant/**" for functions that use by logged in Restaurant
+		 * "/FoodiFy/Premium/**" for functions that use by logged in premium user
+		 * "/FoodiFy/Admin/**" for functions that use by logged in admin
+		 * 
+		 * */
+		
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
-				"/register/Signupuser",
+         "/Register/Signupuser",
+				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
-				"/Restaurant/Register/Signuprestaurant")
-
+				"/Restaurant/Register/Signuprestaurant",
+				"/FoodiFy/Service/**",
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout")
 		.permitAll()
-		.antMatchers(
-				"/FoodiFy/auth/userinfo")
-		.permitAll()
+		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("user")
+		.antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant")
+		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser")
+		.antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin")
 		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);

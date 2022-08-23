@@ -6,6 +6,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import styled from '@emotion/styled';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {Link} from 'react-router-dom';
 
 // ------------------for the side drawer----------
 import Drawer from '@mui/material/Drawer';
@@ -168,7 +169,7 @@ const OrderFoodForm = () => {
 
                     {/* ------------------------end of side drawer------------------------ */}
 
-                    <Button variant="contained" sx={{
+                    <Button variant="contained" component={Link} to={"/Restaurant/Category"} sx={{
                         margin: '0.5rem',
                         background: Colours.grayWhite, '&:hover': {
                             backgroundColor: Colours.secondary,

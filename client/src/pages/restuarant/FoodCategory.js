@@ -11,6 +11,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Navbar from './../../components/Navbar';
 import Fade from 'react-reveal/Fade';
 
+import {Link} from 'react-router-dom';
 
 // ---------------css for carousel-------------------------
 
@@ -67,7 +68,7 @@ const FoodCategory = () => {
             display:"flex",
             flexDirection:"row",
           }}>
-            <IconButton>
+            <IconButton component={Link} to={"/Restaurant/#menu"}>
               <ArrowBackIcon sx={{
                 color:Colours.green,
                 fontSize:"2rem",

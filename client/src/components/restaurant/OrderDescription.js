@@ -3,6 +3,7 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import { IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import {Link} from 'react-router-dom';
 
 
 const OrderDescription = (props) => {
@@ -31,7 +32,7 @@ const OrderDescription = (props) => {
                 flexDirection: "row",
                 padding: "1rem",
             }}>
-                <IconButton>
+                <IconButton component={Link} to={"/Restaurant/Category"} >
                     <ArrowBackIosIcon sx={{
                         color: Colours.green, '&:hover': {
                             color: Colours.yellow,
