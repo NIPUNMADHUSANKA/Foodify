@@ -79,4 +79,13 @@ public class RestaurantController{
 		return restaurantrepo.findAll();
 		
 	}
+	
+//	show details method
+//	@GetMapping("/FoodiFy/Service/ShowRestaurantAbout")
+//	public List<Restaurant> showAboutUs() {
+//		
+//		
+////		return restaurantrepo.findlast();
+//		
+//	}
 }

@@ -26,10 +26,7 @@ import { visuallyHidden } from '@mui/utils';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-
-import { Link } from 'react-router-dom';
-
-// const navigate = useNavigate()
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 //----------------------------------------------------------styles for table
 const paperSx = {
@@ -110,11 +107,11 @@ const headcellSx = {
 
 //----------------------------------------------------------name suggetions for the search
 const topNames = [
-  "Pizza Hut",
-  "KFC",
-  "Burger King",
-  "McDonald's",
-  "Subway"
+  "Chamari",
+  "Ian",
+  "Nina",
+  "Zayn",
+  "Mohommad"
 ];
 
 //----------------------------------------------------------Pagination function
@@ -181,48 +178,32 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(resId,name ,location) {
-  const viewButton = <Button component={Link} to='/restaurant' variant="outlined" color="success" >View Restaurant</Button>
-  const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
-  const deleteButton = <Button variant="outlined" color="error">Block</Button>
+function createData(userId,name ,type, location, telephone, email) {
+  const unblockButton = <Button variant="outlined" color="error">Unblock</Button>
   return { 
-    resId, 
+    userId, 
     name,
+    type,
     location,
-    viewButton,
-    viewComplaints,
-    deleteButton,
+    telephone,
+    email,
+    unblockButton,
   };
 }
 
-//----------------------------------------------------------warning level icons
-// function Warning(props){
-
-//   const stars = []
-
-//   for (var i = 0; i < props.value; i++) {
-//     stars.push(<WarningAmberIcon />);
-//   }
-
-//   return (
-//     <div>
-//       {stars}
-//     </div>
-//   )
-// }
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel\'s Kitchen','Colombo'),  
-  createData('B2343','Green Hut', 'Kegalle'),  
-  createData('B2344','Rachel\'s Kitchen','Colombo'),  
-  createData('B2345','Green Hut', 'Kegalle'),  
-  createData('B2346','Rachel\'s Kitchen','Colombo'),  
-  createData('B2347','Green Hut', 'Kegalle'),  
-  createData('B2348','Rachel\'s Kitchen','Colombo'),  
-  createData('B2349','Green Hut', 'Kegalle'),  
-  createData('B2350','Rachel\'s Kitchen','Colombo'),  
-  createData('B2351','Green Hut', 'Kegalle'),  
+  createData('B2342','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2343','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2344','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2345','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2346','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2347','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2348','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2349','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2350','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2351','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
 ]
 
 //----------------------------------------------------------sorting functions - 3
@@ -257,31 +238,41 @@ function stableSort(array, comparator) {
 //----------------------------------------------------------Column Define 
 const columns = [
   { 
-    id: 'resId', 
-    label: 'Restaurant-Id',
+    id: 'userId', 
+    label: 'User-Id',
     numeric: false, 
     minWidth: 140},
   { 
     id: 'name', 
-    label: 'Reastaurant Name',
+    label: 'Name',
     numeric: false, 
     minWidth: 140},
   { 
-    id: 'location',  
+    id: 'type', 
+    label: 'Type',
+    numeric: true, 
+    minWidth: 140 },
+  { 
+    id: 'location', 
     label: 'Location',
     numeric: false, 
     minWidth: 120 },
-  
+
   { 
-    id: 'view', 
+    id: 'telephone', 
+    label: 'Telephone',
+    numeric: false, 
+    minWidth: 130 },
+  { 
+    id: 'email', 
+    label: 'Email',
+    numeric: false, 
+    minWidth: 130 },
+  { 
+    id: 'unblock', 
     label: '',
     numeric: false, 
-    minWidth: 100 },
-  { 
-    id: 'delete', 
-    label: '',
-    numeric: false, 
-    minWidth: 100 },
+    minWidth: 50 },
   
 ];
 
@@ -406,22 +397,23 @@ function TableActions() {
                   <TableRow
                     hover
                     tabIndex={-1}
-                    key={row.resId}
+                    key={row.userId}
                   >
                     <TableCell
                       component="th"
                       id={labelId}
-                      scope="row"
+                      scope="row" 
                       
                     >
-                      {row.resId}
+                      {row.userId}
                     </TableCell>
                     <TableCell >{row.name}</TableCell>
+                    <TableCell >{row.type}</TableCell>
                     <TableCell >{row.location}</TableCell>
-                    <TableCell >{row.viewButton}</TableCell>
-                    <TableCell >{row.viewComplaints}</TableCell>
-                    <TableCell >{row.deleteButton}</TableCell>
-                    {/* <TableCell ></TableCell> */}
+                    <TableCell >{row.telephone}</TableCell>
+                    <TableCell >{row.email}</TableCell>
+                    <TableCell >{row.unblockButton}</TableCell>
+                    <TableCell ></TableCell>
                   </TableRow>
                 );
               })}

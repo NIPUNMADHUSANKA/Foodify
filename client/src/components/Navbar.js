@@ -44,8 +44,8 @@ const mobileMenu = {
 }
 
 const userMenu = {
-  marginTop: "40px",
-  '& .MuiMenuItem-root': {
+  marginTop: "55px",
+  '& .MuiMenuItem-root' : {
     fontSize: 12,
     color: 'White'
   },
@@ -218,6 +218,7 @@ export default function PrimarySearchAppBar() {
               height: 40,
             }}
             src={Logo}
+
           />
 
           {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
@@ -376,6 +377,7 @@ export default function PrimarySearchAppBar() {
                   aria-haspopup="true"
                   color="inherit"
                   onClick={handleProfileMenuOpen}
+
                   component = {Link} 
                   to = "/myProfile"
                 >
@@ -433,7 +435,7 @@ export default function PrimarySearchAppBar() {
 
 
           </Box>
-
+          {renderAccountMenu}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
