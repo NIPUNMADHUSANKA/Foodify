@@ -15,12 +15,15 @@ import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 
 import axois from "axios";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme1 = createTheme();
 
 const RegisterBannerUser = () => {
+
+  const navigate = useNavigate();
+
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
 
@@ -105,7 +108,7 @@ const RegisterBannerUser = () => {
       // here we put the url and the user object that in @requestbody in backend
       axois.post("http://localhost:8072/Register/Signupuser", registeredCustomer)
         .then(data => {
-          // this part if sucess
+          navigate("/Login")
         })
         .catch(error => {
 

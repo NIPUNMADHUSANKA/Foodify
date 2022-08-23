@@ -14,6 +14,8 @@ import Fade from 'react-reveal/Fade';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
 import RestaurantEditableBanner from '../../components/restaurant/profile/RestaurantEditableBanner';
+import RestaurantDashboard from '../../components/restaurant/profile/Dashboard';
+
 
 import Navbar from './../../components/Navbar';
 
@@ -94,7 +96,7 @@ const RestaurantProfile = () => {
                     <RestaurantHome />
                 </RTabPanel>
                 <RTabPanel value={value} index={1} >
-                    Dashboard
+                    <RestaurantDashboard />
                 </RTabPanel>
                 <RTabPanel value={value} index={2} >
                     volet

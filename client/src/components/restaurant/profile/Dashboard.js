@@ -1,7 +1,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -22,12 +23,11 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Stack from '@mui/material/Stack';
-import { Autocomplete } from '@mui/material';
-import TextField from '@mui/material/TextField';
 import { border } from '@mui/system';
 
-//----------------------------------------------------------styles for table
+import { Link } from 'react-router-dom';
+
+
 const tableSx = {
     width: '100%', 
     overflow: 'hidden', 
@@ -56,31 +56,22 @@ const tableSx = {
   "& .MuiTablePagination-menuItem":{
     color:"#000",
     fontSize:"14px"
-  },
-  
-  "& input":{
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-  },
-
+  }
 }
 
-//----------------------------------------------------------styles for input
-const textFSx ={
-  color:"#ccc",
-  fontFamily:"Poppins",
-  fontWeight: '300',
-  fontSize: "14px",
-  paddingLeft: "5px" ,
-}
-
-//----------------------------------------------------------name suggetions for the search
-const topNames = [
-  "Pizza Hut",
-  "KFC",
-  "Burger King",
-  "McDonald's",
-  "Subway"
-];
+const theme = createTheme({
+  palette: {
+    success:{
+      main: '#95CD41'
+    },
+    error:{ 
+      main: '#FAC213'
+    },
+    warning:{
+      main: '#f44336'
+    }
+  },
+});
 
 //----------------------------------------------------------Pagination function
 function TablePaginationActions(props) {
@@ -147,6 +138,12 @@ TablePaginationActions.propTypes = {
 
 //----------------------------------------------------------Table Row Define
 function createData(payment, user, type, amount, date, time, restaurant) {
+
+  const view = <Button component={Link} to='/Restaurant/Category/Orderfood/userorder' variant="contained" color="success" size="small">View</Button>
+  const done = <Button variant="contained" color="success" size="small">Completed</Button>
+  const prepare = <Button variant="contained" color="warning" size="small">Start</Button>
+  const abort = <Button variant="contained" color="error" size="small">Abort</Button>
+  const cancel = <Button variant="contained" color="error" size="small">Cancel</Button>
   return { 
     payment, 
     user, 
@@ -155,18 +152,26 @@ function createData(payment, user, type, amount, date, time, restaurant) {
     date, 
     time,
     restaurant, 
+    done,
+    cancel,
     details: [
       {
         item: "Cheese Pizza",
         quantity: "2",
         price: "2100.00",
-        discounts: "0"
+        discounts: "0",
+        status: "Queued",
+        view,
+        statusButton:prepare
       },
       {
         item: "Sausage Pizza",
         quantity: "2",
         price: "2200.00",
-        discounts: "50"
+        discounts: "50",
+        status: "Preparing",
+        view,
+        statusButton:abort
       },
     ] };
 }
@@ -193,13 +198,15 @@ function Row(props) {
         <TableCell >{row.amount}</TableCell>
         <TableCell >{row.date}</TableCell>
         <TableCell >{row.time}</TableCell>
+        <TableCell >{row.done}</TableCell>
+        <TableCell >{row.cancel}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0, border:"none" }} colSpan={3}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ marginBottom: 3, marginTop:1}}>
               <Typography fontFamily='Poppins'>
-                Bill from {row.restaurant}
+                Bill to {row.user}
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
@@ -209,6 +216,9 @@ function Row(props) {
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Discount</TableCell>
                     <TableCell align="right">Total price</TableCell>
+                    <TableCell align="right">Currunt Status</TableCell>
+                    <TableCell ></TableCell>
+                    <TableCell ></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -217,12 +227,15 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {detailsRow.item}
                       </TableCell>
-                      <TableCell>{detailsRow.quantity}</TableCell>
-                      <TableCell>{detailsRow.price}</TableCell>
-                      <TableCell>{detailsRow.discounts}</TableCell>
+                      <TableCell align="right">{detailsRow.quantity}</TableCell>
+                      <TableCell align="right">{detailsRow.price}</TableCell>
+                      <TableCell align="right">{detailsRow.discounts}</TableCell>
                       <TableCell align="right">
                         {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
                       </TableCell>
+                      <TableCell>{detailsRow.status}</TableCell>
+                      <TableCell>{detailsRow.view}</TableCell>
+                      <TableCell>{detailsRow.statusButton}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -256,20 +269,19 @@ Row.propTypes = {
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2343','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2344','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2345','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2346','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2347','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2348','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2349','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2350','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2351','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2352','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2353','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2354','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2355','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
+  createData('B2342','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2343','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  createData('B2344','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2345','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  createData('B2346','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2347','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  createData('B2348','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2349','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  createData('B2350','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2351','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  createData('B2352','Robert Brown','Preparing',8550, "2022/04/23","14:23:14"),  
+  createData('B2353','Rachel Green','Queued',8550, "2022/04/23","14:23:19"),  
+  
 ]
 
 function TableActions() {
@@ -282,10 +294,12 @@ function TableActions() {
     { id: 'details', label: '', maxWidth: 10},
     { id: 'payment', label: 'Payment-ID', minWidth: 150},
     { id: 'user', label: 'User', minWidth: 170 },
-    { id: 'type', label: 'Type', minWidth: 200 },
+    { id: 'type', label: 'Status', minWidth: 200 },
     { id: 'amount', label: 'Amount', minWidth: 100 },
     { id: 'date', label: 'Date', minWidth: 100 },
     { id: 'time', label: 'Time', minWidth: 100},
+    { id: 'done', label: '', minWidth: 100},
+    { id: 'cancel', label: '', minWidth: 100},
   ];
 
   //----------------------------------------------------------Empty Rows
@@ -304,20 +318,6 @@ function TableActions() {
 
   return (
     <Paper sx={tableSx}>
-    
-    <Box sx={{
-      display: 'inline-flex',
-    }}>
-      <Stack spacing={2} sx={{ width: 300, margin:"1% 2%", padding:"0px 0px 10px 5px"}}>
-        <Autocomplete
-          id="search-box"
-          freeSolo
-          options={topNames.map((option) => option)}
-          renderInput={(params) => <TextField {...params} label={<Typography sx={textFSx}>Enter Name</Typography>} variant="standard" />}
-        />
-      </Stack>
-    </Box>
-
     <TableContainer sx={{ maxHeight: 800 }}>
       <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 

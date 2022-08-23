@@ -54,7 +54,7 @@ const OrderDescription = (props) => {
                         marginTop:"12px",
                     }
                 }}>
-                    Name Of The Food
+                    Boneless Diang na Bangus
                 </Typography>
 
             </Box>
