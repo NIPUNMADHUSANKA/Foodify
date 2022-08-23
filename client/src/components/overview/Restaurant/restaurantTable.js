@@ -213,12 +213,12 @@ function createData(resId,name ,location) {
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel\'s Kitchen','Colombo'),  
-  createData('B2343','Green Hut', 'Kegalle'),  
-  createData('B2344','Rachel\'s Kitchen','Colombo'),  
-  createData('B2345','Green Hut', 'Kegalle'),  
-  createData('B2346','Rachel\'s Kitchen','Colombo'),  
-  createData('B2347','Green Hut', 'Kegalle'),  
+  createData('B2342','Rachel Green','Colombo'),  
+  createData('B2343','Ross Geller', 'Kegalle'),  
+  createData('B2344','Monica Geller','Colombo'),  
+  createData('B2345','Chandler Bing', 'Kegalle'),  
+  createData('B2346','Joey Tribbiyani','Colombo'),  
+  createData('B2347','Pheobe Buffay', 'Kegalle'),  
   createData('B2348','Rachel\'s Kitchen','Colombo'),  
   createData('B2349','Green Hut', 'Kegalle'),  
   createData('B2350','Rachel\'s Kitchen','Colombo'),  
