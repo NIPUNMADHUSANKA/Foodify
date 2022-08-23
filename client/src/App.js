@@ -45,7 +45,7 @@ import Signuprestaurant from './pages/register/Signuprestaurant';
 import Terms from './pages/register/Terms';
 import ForgetPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
-
+import ViewEaten from './components/profile/VieweatenFooditems';
 import Navbar from './components/Navbar'
 
 
@@ -77,6 +77,7 @@ function App() {
           <Route path="/myprofile" element = {<MyProfile/>} />
           <Route path="/Restaurant/Category/Orderfood/userorder" element = {<UserOrder/>} />
           <Route path="/usernotification" element ={<UserNotification/>} />
+          <Route path="/ViewEatenFoodItems" element ={<ViewEaten/>} />
 
 
           <Route path="/Restaurant/Category" element={<FoodCategory />} />

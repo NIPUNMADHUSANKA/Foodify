@@ -22,4 +22,5 @@ public interface Registered_Customer_Sev {
 	public void updatePassword(Registered_Customer RegCus, String newPassword);
 
 
+	
 }
