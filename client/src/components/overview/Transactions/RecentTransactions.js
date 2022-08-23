@@ -22,6 +22,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Stack from '@mui/material/Stack';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material/TextField';
 import { border } from '@mui/system';
 
 //----------------------------------------------------------styles for table
@@ -53,9 +56,31 @@ const tableSx = {
   "& .MuiTablePagination-menuItem":{
     color:"#000",
     fontSize:"14px"
-  }
+  },
+  
+  "& input":{
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+  },
+
 }
 
+//----------------------------------------------------------styles for input
+const textFSx ={
+  color:"#ccc",
+  fontFamily:"Poppins",
+  fontWeight: '300',
+  fontSize: "14px",
+  paddingLeft: "5px" ,
+}
+
+//----------------------------------------------------------name suggetions for the search
+const topNames = [
+  "Pizza Hut",
+  "KFC",
+  "Burger King",
+  "McDonald's",
+  "Subway"
+];
 
 //----------------------------------------------------------Pagination function
 function TablePaginationActions(props) {
@@ -279,6 +304,20 @@ function TableActions() {
 
   return (
     <Paper sx={tableSx}>
+    
+    <Box sx={{
+      display: 'inline-flex',
+    }}>
+      <Stack spacing={2} sx={{ width: 300, margin:"1% 2%", padding:"0px 0px 10px 5px"}}>
+        <Autocomplete
+          id="search-box"
+          freeSolo
+          options={topNames.map((option) => option)}
+          renderInput={(params) => <TextField {...params} label={<Typography sx={textFSx}>Enter Name</Typography>} variant="standard" />}
+        />
+      </Stack>
+    </Box>
+
     <TableContainer sx={{ maxHeight: 800 }}>
       <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 

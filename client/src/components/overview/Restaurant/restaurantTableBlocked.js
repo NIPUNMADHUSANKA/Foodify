@@ -184,7 +184,7 @@ TablePaginationActions.propTypes = {
 function createData(resId,name ,location) {
   const viewButton = <Button component={Link} to='/restaurant' variant="outlined" color="success" >View Restaurant</Button>
   const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
-  const deleteButton = <Button variant="outlined" color="error">Block</Button>
+  const deleteButton = <Button variant="outlined" color="error">UnBlock</Button>
   return { 
     resId, 
     name,
@@ -213,16 +213,16 @@ function createData(resId,name ,location) {
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel Green','Colombo'),  
-  createData('B2343','Ross Geller', 'Kegalle'),  
-  createData('B2344','Monica Geller','Colombo'),  
-  createData('B2345','Chandler Bing', 'Kegalle'),  
-  createData('B2346','Joey Tribbiyani','Colombo'),  
-  createData('B2347','Pheobe Buffay', 'Kegalle'),  
-  createData('B2348','Rachel\'s Kitchen','Colombo'),  
-  createData('B2349','Green Hut', 'Kegalle'),  
-  createData('B2350','Rachel\'s Kitchen','Colombo'),  
-  createData('B2351','Green Hut', 'Kegalle'),  
+  createData('B2392','Rachel Green','Colombo'),  
+  createData('B2393','Ross Geller', 'Kegalle'),  
+  createData('B2394','Monica Geller','Colombo'),  
+  createData('B2395','Chandler Bing', 'Kegalle'),  
+  createData('B2396','Joey Tribbiyani','Colombo'),  
+  createData('B2397','Pheobe Buffay', 'Kegalle'),  
+  createData('B2398','Rachel\'s Kitchen','Colombo'),  
+  createData('B2399','Green Hut', 'Kegalle'),  
+  createData('B2400','Rachel\'s Kitchen','Colombo'),  
+  createData('B2401','Green Hut', 'Kegalle'),  
 ]
 
 //----------------------------------------------------------sorting functions - 3
