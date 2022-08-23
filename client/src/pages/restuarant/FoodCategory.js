@@ -57,7 +57,7 @@ const FoodCategory = () => {
         </Fade>
 
         <Box sx={{
-          marginTop: "14%",
+          marginTop: "8%",
           [theme.breakpoints.down('sm')]: {
             marginTop: "40%",
           },

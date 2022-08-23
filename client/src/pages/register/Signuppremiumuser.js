@@ -9,10 +9,17 @@ import Zoom from '@mui/material/Zoom'; //Zoom text
 import Slide from 'react-reveal/Slide';
 import { ThemeProvider } from '@mui/material/styles';
 
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
 const Signupuser = () => {
   return (
     <Box className='Registeruser-body-Style' >
-        <RegisterNavbar />
+
+        <Fade top>
+          <Navbar />
+        </Fade>
+
         <ThemeProvider theme={theme}>
         <Box maxWidth='100%' sx={{
         padding: '0',

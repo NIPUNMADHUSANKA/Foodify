@@ -24,6 +24,7 @@ const details = {
   "detail3": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
 }
 
+
 const contactdetails = {
   "Location": "Location",
   "Address": "Address",
