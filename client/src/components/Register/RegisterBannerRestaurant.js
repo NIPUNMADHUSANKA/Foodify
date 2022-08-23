@@ -109,7 +109,7 @@ const RegisterBannerRestaurant = () => {
       // here we put the url and the restaurant object that in @requestbody in backend
       axois.post("http://localhost:8072/Restaurant/Register/Signuprestaurant", registeredCustomer)
         .then(data => {
-          navigate("/Explore")
+          navigate("/login")
         })
         .catch(error => {
 
