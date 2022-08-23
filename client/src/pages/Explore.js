@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
+import { ThemeProvider, Box, Typography, Tab, Tabs } from '@mui/material';
 
 import Menubar from '../components/Menubar';
 import ExploreF from '../components/explore/Explore.js';
@@ -12,6 +12,7 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import AuthService from '../services/auth-service';
 import UserService from '../services/user-service';
+import axois from "axios";
 
 import '../assets/css/Home.css';
 import axios from "axios";
@@ -22,7 +23,8 @@ const Explore = () => {
         document.title = "Explore";
     })
 
-
+    // ----------store restaurant values--------
+    const [details, setDetails] = React.useState({});
 
     const [value, setValue] = React.useState(0);
 
@@ -33,64 +35,86 @@ const Explore = () => {
     ///-- Get Token UserName--///
     const currentUser = AuthService.getCurrentUser();
 
-    
-    const [content, setContent] = useState("");
 
+    const [content, setContent] = useState("");
 
     useEffect((event) => {
 
-        
-  
+        axois.get("http://localhost:8072/FoodiFy/Service/ShowRestaurant")
+            .then(data => {
+                // this part if sucess
+                console.log(data);
+                console.log(currentUser);
+
+                const details = data.data;
+                setDetails({ ...details});
+            })
+            .catch(error => {
+
+                if (error.response.data) {
+
+                    error.response.data.fieldErrors.forEach(fieldError => {
+
+                    });
+                }
+
+            });
+
     }, []);
 
 
 
     return (
-        <Box className='bg' sx={{ display:"flex", flexDirection:'column', margin:0}}>
-            
-            <Typography sx = {{color:"#fff"}}>{content.userName}</Typography>
+        <Box className='bg' sx={{ display: "flex", flexDirection: 'column', margin: 0 }}>
 
-            <Menubar/>
+            <Typography sx={{ color: "#fff" }}>{content.userName}</Typography>
 
-
-            <ExploreF/>
+            <Menubar />
 
 
-            
+            <ExploreF />
 
-            <Box sx={{ display:"flex", flexDirection:'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: {flexDirection: 'column-reverse',}}}>
-            <ThemeProvider theme={theme}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    textColor= "primary"
-                    indicatorColor="secondary"
-                    sx = {{
-                        color: "primary",
-                        mb: "1%",
-                        ml: "3%",
-                    }}
-                >
-                    <Tab value={0} label={
-                        <Typography color="primary" fontWeight="200" fontSize="18px">Food</Typography>
-                    }/>
-                    <Tab value={1} label={
-                        <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
-                    }/>
-                </Tabs>
-                <Nearme />
-            </ThemeProvider>
+
+
+
+            <Box sx={{ display: "flex", flexDirection: 'row', alignItems: 'baseline', [theme.breakpoints.down('sm')]: { flexDirection: 'column-reverse', } }}>
+                <ThemeProvider theme={theme}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        textColor="primary"
+                        indicatorColor="secondary"
+                        sx={{
+                            color: "primary",
+                            mb: "1%",
+                            ml: "3%",
+                        }}
+                    >
+                        <Tab value={0} label={
+                            <Typography color="primary" fontWeight="200" fontSize="18px">Food</Typography>
+                        } />
+                        <Tab value={1} label={
+                            <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
+                        } />
+                    </Tabs>
+                    <Nearme />
+                </ThemeProvider>
             </Box >
             <Box minHeight="50vh">
                 <TabPanel value={value} index={0}>
-                    <FoodScroll/>
+
+                    <FoodScroll />
+
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <RestaurantScroll/>
+
+                    {console.log(details)}
+                    <RestaurantScroll details={details} />
+
                 </TabPanel>
             </Box>
         </Box >
-        
+
     )
 }
 

@@ -1,6 +1,7 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
-import theme, { Colours } from '../../assets/theme/theme'
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import React from 'react';
+import theme, { Colours } from '../../assets/theme/theme';
+import {Link} from 'react-router-dom';
 
 const CarouselCard = (props) => {
     return (
@@ -62,7 +63,7 @@ const CarouselCard = (props) => {
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <Button size="small" sx={{
+                <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
                     margin: '6px',
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,

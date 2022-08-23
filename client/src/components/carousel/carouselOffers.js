@@ -3,11 +3,11 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material';
 
-import CarouselCard from './CarouselCardMenu';
+import CarouselCardOffers from './CarouselCardOffers';
 import theme, { Colours } from '../../assets/theme/theme';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 
-// ---------------css for carousel-------------------------
+// ---------------css for carousel------------------------
 
 // const carousel = ({ data })
 // eslint-disable-next-line no-lone-blocks
@@ -75,12 +75,12 @@ const carousel = (props) => {
 
         >
         {/* <Box> */}
-        <CarouselCard item={props.item} />
-        <CarouselCard item={props.item} />
-        <CarouselCard item={props.item} />
-        <CarouselCard item={props.item} />
-        <CarouselCard item={props.item} />
-        <CarouselCard item={props.item} />
+        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} />
 
       </Carousel>
       {/* </Box> */}

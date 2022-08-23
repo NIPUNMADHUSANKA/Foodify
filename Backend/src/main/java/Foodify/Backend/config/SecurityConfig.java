@@ -47,19 +47,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		/*
+		 * "/FoodiFy/Service/**" for services that use without token
+		 * "/FoodiFy/User/**" for functions that use by logged in normal user
+		 * "/FoodiFy/Restaurant/**" for functions that use by logged in Restaurant
+		 * "/FoodiFy/Premium/**" for functions that use by logged in premium user
+		 * "/FoodiFy/Admin/**" for functions that use by logged in admin
+		 * 
+		 * */
+		
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
          "/Register/Signupuser",
 				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
+				"/FoodiFy/Service/**",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout")
-
 		.permitAll()
-		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")
 		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("user")
 		.antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant")
-		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premium_user")
-		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("admin")
+		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser")
+		.antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin")
 		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
