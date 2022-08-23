@@ -12,9 +12,9 @@ import Navbar from '../components/Navbar';
 import Fade from 'react-reveal/Fade';
 
 const details = {
-  "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-  "detail2": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-  "detail3": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+  "detail1": "Most of the people do not have a proper understanding about the nutritional value of what they eat. ",
+  "detail2": "Today, the consumption of unhealthy foods such as fast food, snacks and alcohol has led to an increase in the prevalence of chronic diseases such as diabetes and high cholesterol.",
+  "detail3": "Foodify - assist people in locating their local favorite dishes and suggest a variety of others based on their preferences and diet plan.",
 }
 
 function Landing() {

@@ -53,7 +53,7 @@ function FoodufyBanner() {
                   fontSize: '180%'
                 }
               }}>
-              Recommendation <br /> & <br /> Order Foods
+              Suggestion <br /> & <br /> Order Foods
             </Typography>
 
           </Zoom>
