@@ -215,13 +215,6 @@ export default function SignIn() {
 
             />
 
-
-            <FormControlLabel
-              style={{ color: Colours.formWhite, fontFamily: 'Poppins' }}
-              control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
-              label="Remember me"
-            />
-
             <Button
               type="submit"
               fullWidth

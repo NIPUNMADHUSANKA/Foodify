@@ -13,6 +13,7 @@ import Menu from '@mui/material/Menu';
 
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
@@ -20,6 +21,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Logo from '../assets/icons/foodify-logo.png';
 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
 
@@ -47,7 +50,7 @@ const userMenu = {
     color: 'White'
   },
 
-  '& .MuiPopover-paper' : {
+  '& .MuiPopover-paper': {
     backgroundColor: 'rgba(255, 255, 255, 0.27)',
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     backdropFilter: 'blur(6px)',
@@ -95,12 +98,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("ROLE");
+
+    ROLE = null
+    
+    navigate("/Explore");
+
+  };
 
   //use this for notifiacation menu
   const handleProfileMenuOpen = (event) => {
@@ -139,22 +156,21 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
       sx={userMenu}
     >
-      <MenuItem>
+      <MenuItem component={Link} to = "/myprofile">
         PROFILE
       </MenuItem>
+
       <MenuItem>
-        CONSUMPTION
+        TRANSACTION
       </MenuItem>
-      <MenuItem>
-        PAYMENT
-      </MenuItem>
-      <MenuItem>
+
+      <MenuItem >
         LOGOUT
       </MenuItem>
-    
+
     </Menu>
   );
-  
+
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -196,7 +212,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static" style={{ background: '#000', boxShadow: '0 10 5 0 rgba(0,0,0,0.75)' }}>
         <Toolbar>
 
-          <Box 
+          <Box
             component="img"
             sx={{
               height: 40,
@@ -288,7 +304,7 @@ export default function PrimarySearchAppBar() {
             )()}
             {(() => {
               if (ROLE === "premiumUser") {
-                return (<Button component={Link} to='/userprofile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> EAT HISTORY </Button>);
+                return (<Button component={Link} to='/userprofile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> HISTORY </Button>);
               }
             }
             )()}
@@ -349,7 +365,29 @@ export default function PrimarySearchAppBar() {
 
 
 
-            {/*------------------------------START Notification Icons-------------------------------------------------*/}
+            {/*------------------------------START User Icons-------------------------------------------------*/}
+            
+            {(() => {
+              if (ROLE != null && ROLE != "Admin" && ROLE != "restaurant") {
+                return (<IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  color="inherit"
+                  onClick={handleProfileMenuOpen}
+
+                  component = {Link} 
+                  to = "/myProfile"
+                >
+                  <AccountCircle />
+                </IconButton>);
+              }
+            }
+            )()}
+
+
             {(() => {
               if (ROLE != null) {
                 return (<IconButton
@@ -359,17 +397,18 @@ export default function PrimarySearchAppBar() {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   color="inherit"
-                  onClick={handleProfileMenuOpen}
                 >
-                  <AccountCircle />
+                  <LogoutIcon onClick = {logout} />
                 </IconButton>);
               }
             }
             )()}
-            {/*------------------------------END Notification Icons-------------------------------------------------*/}
 
 
-            {/*------------------------------START Notification Icons-------------------------------------------------*/}
+            {/*------------------------------END User Icons-------------------------------------------------*/}
+
+
+            {/*------------------------------START Login Icons-------------------------------------------------*/}
             {(() => {
               if (ROLE === null) {
                 return (
@@ -378,11 +417,11 @@ export default function PrimarySearchAppBar() {
               }
             }
             )()}
-            {/*------------------------------END Notification Icons-------------------------------------------------*/}
+            {/*------------------------------END Login Icons-------------------------------------------------*/}
 
 
 
-            {/*------------------------------START Login Icons-------------------------------------------------*/}
+            {/*------------------------------START SignUp Icons-------------------------------------------------*/}
             {(() => {
               if (ROLE === null) {
                 return (
@@ -405,12 +444,13 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
-              >
+            >
               <MoreIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
+      {renderAccountMenu}
       {renderMobileMenu}
     </Box>
   );
