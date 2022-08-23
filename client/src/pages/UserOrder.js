@@ -7,22 +7,30 @@ import Unavbar from '../components/Navbar';
 import UserOrderBanner from '../components/user_order/user_order_upper';
 import UserOrderForm from '../components/user_order/user_order_form';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
+
 const UserOrder = () => {
 
 
   return (
-<Box marginTop="0px">
-      <Unavbar/>
+    <Box marginTop="0px">
 
-      <Box  className='order-body-Style'>
-      <UserOrderBanner/>
+      <Fade top>
+        <Navbar />
+      </Fade>
+
+      <Box className='order-body-Style'>
+        <UserOrderBanner />
       </Box>
-      <UserOrderForm/>
-    
-      
+      <UserOrderForm />
+
+
     </Box>
 
-    
+
   )
 }
 

@@ -7,11 +7,11 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 import PageTitle from '../components/User/PageTitle';
 import CardBar from '../components/User/CardBar';
 import SummaryChart from '../components/User/SummaryChart';
-import Navbar from '../components/Navbar';
 import RangeChart from '../components/User/RangeChart';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
 
 const MainHeader = "Intake Chart";
 

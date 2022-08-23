@@ -5,6 +5,7 @@ import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/mater
 import theme, { Colours } from '../../assets/theme/theme';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import {Link} from 'react-router-dom';
 
 // import LatestIcon from '../assets/images/latest_food.png';
 
@@ -17,7 +18,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function ResCard() {
+function ResCard(data) {
+
+  console.log(data.data.restaurantName);
   return (
     <ThemeProvider theme={theme}>
     <Stack
@@ -42,11 +45,11 @@ function ResCard() {
         <StyledBadge color="secondary" badgeContent={"99+"}>
           <img src={image} alt="food" style={{width:'252px', height:'150px',border: "5px solid #fff"}}/>
         </StyledBadge>
-        <Typography fontSize="24px" fontWeight="400" mt="-15px">Ministry of Crab</Typography>
+        <Typography fontSize="24px" fontWeight="400" mt="-15px">{data.data.restaurantName}</Typography>
         
 
         <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
-          Old Dutch Hospital, Fort
+        {data.data.address}
         </Typography>
 
         <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
@@ -55,7 +58,7 @@ function ResCard() {
 
        
           
-          <IconButton variant='contained' 
+          <IconButton variant='contained' component={Link} to={"/restaurant"}
           style={{
               borderRadius: 10,
               backgroundColor: "#FAC213",

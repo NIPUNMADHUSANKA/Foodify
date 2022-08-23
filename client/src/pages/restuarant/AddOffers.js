@@ -6,11 +6,12 @@ import theme, { Colours } from '../../assets/theme/theme';
 import bgImage from '../../assets/images/offersbg.png';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AddOfferForm from '../../components/restaurant/AddOfferForm';
+import {Link} from 'react-router-dom';
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import Rlogo from '../../assets/images/restaurant-logo.jpg';
 import { Avatar, IconButton, Typography } from '@mui/material';
-
+import Navbar from './../../components/Navbar';
 
 const AddOffers = () => {
 
@@ -34,6 +35,10 @@ const AddOffers = () => {
             },
         }}>
 
+        <Fade top>
+          <Navbar />
+        </Fade>
+
             {/* ------------topic area--------------------- */}
             <Fade top cascade>
                 <Box sx={{
@@ -41,7 +46,7 @@ const AddOffers = () => {
                     flexDirection: "row",
                     padding: "1rem",
                 }}>
-                    <IconButton>
+                    <IconButton component={Link} to={"/restaurant"}>
                         <ArrowBackIosIcon sx={{
                             color: Colours.green, '&:hover': {
                                 color: Colours.yellow,

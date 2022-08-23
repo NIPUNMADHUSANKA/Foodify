@@ -100,16 +100,26 @@ export default function SignIn() {
 
       UserService.getUserInfo().then(
         (response) => {
-            console.log(response.data.roles);
+            
             localStorage.setItem("ROLE", JSON.stringify(response.data.roles));
+
+            const ROLE = JSON.parse(localStorage.getItem('ROLE'));
+            const CHECKROLE = ROLE[0].authority;
+      
+            if(CHECKROLE!="restaurant")
+            {
+              navigate("/")
+            }
+            else{
+              navigate("/restaurant")
+            }
+
+
         },
         (error) => {
           console.log(error);
         }
       );
-      navigate("/Explore")
-
-
      },(error)=>{
       errors.NotFound = error.response.data;
       setFormErrors(errors);

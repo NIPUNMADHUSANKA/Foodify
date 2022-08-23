@@ -3,9 +3,11 @@ import {Grid, Container} from '@mui/material';
 
 import DashboardCard from '../DashboardCard'
 import UserTable from './UserTable'
+import Blocked from './BlockedTable'
 
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Typography from '@mui/material/Typography';
 import PersonIcon from '@mui/icons-material/Person';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 
@@ -58,6 +60,20 @@ function SystemMain(props){
                 xs={12}
             >
                 <UserTable/>
+            </Grid>
+        </Grid>
+        <Grid
+        container
+        spacing={1}
+        >
+            <Grid item
+                lg={12}
+                md={12}
+                xl={12}
+                xs={12}
+            >
+                <Typography variant="h4" sx={{color: 'white', fontFamily: 'Poppins', fontWeight: '200', marginTop: '0px'}}>Blocked Users</Typography>
+                <Blocked/>
             </Grid>
         </Grid>
         </Container>
