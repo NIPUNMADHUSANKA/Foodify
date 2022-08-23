@@ -261,11 +261,12 @@ export const AboutUsForm = () => {
             about:data.get('about_description')
         }
 
-        axios.post("http://localhost:8072/Restaurant/addAbout",restaurantAbout ).then(data=>{
+        axios.post("http://localhost:8072/RestaurantInfo/editAbout",restaurantAbout ).then(data=>{
             console.log("Entry access sucessfull")
 
     })
     .catch(error =>{
+        console.log(restaurantAbout)
         console.log("There is an error")
 
     })

@@ -19,4 +19,11 @@ public class RestaurantInfoController {
 		resRepo.save(restaurantInfo);
         return true;
     }
+
+    @PostMapping("/editAbout")
+    public boolean editAbout(@RequestBody Restaurant restaurantAbout) {
+        resRepo.save(restaurantAbout);
+        return true;
+    }
+
 }
