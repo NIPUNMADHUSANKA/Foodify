@@ -19,22 +19,20 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 
 import Logo from '../assets/icons/foodify-logo.png';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
 
-const ROLE = JSON.parse(localStorage.getItem('ROLE'));
-
-// const CHECKROLE = ROLE[0].authority;
+var ROLE = null;
 
 const mobileMenu = {
   // backgroundColor: 'Transparent',
-  '& .MuiMenuItem-root' : {
+  '& .MuiMenuItem-root': {
     fontSize: 12,
     color: 'White'
   },
 
-  '& .MuiPopover-paper' : {
+  '& .MuiPopover-paper': {
     backgroundColor: 'rgba(255, 255, 255, 0.27)',
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
     backdropFilter: 'blur(6px)',
@@ -108,12 +106,12 @@ export default function PrimarySearchAppBar() {
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-  
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -177,11 +175,11 @@ export default function PrimarySearchAppBar() {
       sx={mobileMenu}
     >
       {pages.map((page) => (
-        <MenuItem>         
-            {page}
+        <MenuItem>
+          {page}
         </MenuItem>
       ))}
-      
+
       <MenuItem>
         NOTIFICATIONS
       </MenuItem>
@@ -191,61 +189,213 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"style={{ background: 'transparent' , boxShadow: 'none'}}>
+      <AppBar position="static" style={{ background: '#000', boxShadow: '0 10 5 0 rgba(0,0,0,0.75)' }}>
         <Toolbar>
-          
-        <Box
+
+          <Box 
             component="img"
-            sx={{    
-                height: 40,
+            sx={{
+              height: 40,
             }}
             src={Logo}
-        />
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
-                      {
-            // (CHECKROLE=="User")? "Nipun" : "Madhusanka"
 
-          } 
-           
-            
+          />
 
-        </Box>
-          
-        <Search>
-        <SearchIconWrapper>
-            <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-            placeholder="Search for items"
-            inputProps={{ 'aria-label': 'search' }}
-        />
-        </Search>
-        
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>  
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-              onClick={handleProfileMenuOpen}
-            >
-              <AccountCircle />
-            </IconButton>
+          {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+          {(() => {
+            if (JSON.parse(localStorage.getItem('ROLE'))) {
+              ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+              console.log(ROLE)
+            }
+          }
+          )()}
+          {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+            {/*------------------------------START Without Resturants Have this option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE != "restaurant") {
+                return (<Button component={Link} to='/' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> HOME </Button>);
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE != "restaurant") {
+                return (<Button component={Link} to='/Explore' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> EXPLORE </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Without Resturants Have this option-------------------------------------------------*/}
+
+
+            {/*------------------------------START Only unregistered Have this option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === null) {
+                return (<Button component={Link} to='/' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> ABOUT US </Button>);
+              }
+            }
+            )()}
+
+            {(() => {
+              if (ROLE === null) {
+                return (<Button component={Link} to='/Explore' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> CONTACT US </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only unregistered Have this option-------------------------------------------------*/}
+
+
+
+            {/*------------------------------START Only Resturants Have these option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (<Button component={Link} to='/RestaurantProfile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> HOME </Button>);
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (<Button component={Link} to='/AddFoodMenu' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> MENU </Button>);
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (<Button component={Link} to='/Restaurant/AddOffers' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> OFFERS </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Resturants Have these option-------------------------------------------------*/}
+
+
+            {/*------------------------------START Only Premium Have these option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === "premiumUser") {
+                return (<Button component={Link} to='/Image_Upload' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> IMAGE </Button>);
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "premiumUser") {
+                return (<Button component={Link} to='/Intake' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> CHART </Button>);
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "premiumUser") {
+                return (<Button component={Link} to='/userprofile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> EAT HISTORY </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Premium Have these option-------------------------------------------------*/}
+
+            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === "User" || ROLE === "premiumUser") {
+                return (<Button component={Link} to='/Complaints' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> COMPLAIN  </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Registered user and Premium Have this option-------------------------------------------------*/}
+
+            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === "Admin") {
+                return (<Button component={Link} to='/dashboard' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> DASHBOARD  </Button>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Registered user and Premium Have this option-------------------------------------------------*/}
+
           </Box>
-            {renderAccountMenu}
+
+
+
+
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search for items"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
+
+            {/*------------------------------START Notification Icons-------------------------------------------------*/}
+            {(() => {
+              if (ROLE != null) {
+                return (<IconButton
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                >
+                  <Badge badgeContent={17} color="error">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>);
+              }
+            }
+            )()}
+            {/*------------------------------END Notification Icons-------------------------------------------------*/}
+
+
+
+            {/*------------------------------START Notification Icons-------------------------------------------------*/}
+            {(() => {
+              if (ROLE != null) {
+                return (<IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>);
+              }
+            }
+            )()}
+            {/*------------------------------END Notification Icons-------------------------------------------------*/}
+
+
+            {/*------------------------------START Notification Icons-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === null) {
+                return (
+                  <Button component={Link} to='/login' sx={{ my: 2, color: 'white', display: 'block', ml: 1 }}> LogIn  </Button>
+                );
+              }
+            }
+            )()}
+            {/*------------------------------END Notification Icons-------------------------------------------------*/}
+
+
+
+            {/*------------------------------START Login Icons-------------------------------------------------*/}
+            {(() => {
+              if (ROLE === null) {
+                return (
+                  <Button component={Link} to='/register/Signup' sx={{ my: 2, color: 'white', display: 'block', ml: 1 }}> SignUp  </Button>
+                );
+              }
+            }
+            )()}
+            {/*------------------------------END Signup Icons-------------------------------------------------*/}
+
+
+
+          </Box>
+
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -263,4 +413,5 @@ export default function PrimarySearchAppBar() {
       {renderMobileMenu}
     </Box>
   );
+
 }

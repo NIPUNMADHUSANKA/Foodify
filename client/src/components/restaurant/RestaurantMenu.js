@@ -5,6 +5,7 @@ import Carousel from '../carousel/carousel';
 import CardImage from '../../assets/images/cardfood.png';
 import theme, { Colours } from '../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
+import {Link} from 'react-router-dom';
 
 // ----------------------for the caousel----------------------
 const item = {
@@ -27,7 +28,7 @@ const RestaurantMenu = () => {
       width:'100%',
       p:'0px',
     }}>
-      <Button sx={{
+      <Button component={Link} to={"/AddFoodMenu"} sx={{
         margin: '0.5rem',
         marginBottom:0,
         marginTop:4,
@@ -54,6 +55,8 @@ const RestaurantMenu = () => {
       },
         }}/>}>Edit Menu</Button>
       <Carousel item = {item} title={title} count={itemcount} bgcolour = {bgcolor1}/>
+
+
     </Box>
   )
 }

@@ -103,7 +103,7 @@ const RegisterBannerPremiumUser = () => {
       }
 
       // here we put the url and the user object that in @requestbody in backend
-      axois.post("http://localhost:8072/User/Register/Signuppremiumuser", registeredCustomer)
+      axois.post("http://localhost:8072/Register/Signuppremiumuser", registeredCustomer)
         .then(data => {
           // this part if sucess
         })

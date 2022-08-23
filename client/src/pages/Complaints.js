@@ -13,10 +13,10 @@ import Total from '../assets/icons/Total.png';//exporting the image for about se
 import Pending from '../assets/icons/Pending.png';
 import Accept from '../assets/icons/Accept.png';
 import Reject from '../assets/icons/Reject.png';
-import Navbar from '../components/Navbar';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
 
 const MainHeader = "Complaints";
 
