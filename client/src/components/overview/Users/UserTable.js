@@ -178,33 +178,32 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(userId,fname,lname ,location, type) {
-  const viewButton = <Button variant="outlined" color="success" >View</Button>
-  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
+function createData(userId,name ,type, location, telephone, email) {
+  const blockButton = <Button variant="outlined" color="error">Block</Button>
   return { 
     userId, 
-    fname,
-    lname, 
-    location,
+    name,
     type,
-    viewButton,
-    deleteButton,
+    location,
+    telephone,
+    email,
+    blockButton,
   };
 }
 
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rachel','Green','Colombo','Regular'),  
-  createData('B2343','Robert','Pattinson', 'None','Premium'),  
-  createData('B2344','Rachel','Green','Colombo','Regular'),  
-  createData('B2345','Robert','Pattinson', 'None','Premium'),  
-  createData('B2346','Rachel','Green','Colombo','Regular'),  
-  createData('B2347','Robert','Pattinson', 'None','Premium'),  
-  createData('B2348','Rachel','Green','Colombo','Regular'),  
-  createData('B2349','Robert','Pattinson', 'None','Premium'),  
-  createData('B2350','Rachel','Green','Colombo','Regular'),  
-  createData('B2351','Robert','Pattinson', 'None','Premium'),  
+  createData('B2342','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2343','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2344','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2345','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2346','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2347','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2348','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2349','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
+  createData('B2350','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
+  createData('B2351','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
 ]
 
 //----------------------------------------------------------sorting functions - 3
@@ -244,36 +243,36 @@ const columns = [
     numeric: false, 
     minWidth: 140},
   { 
-    id: 'fname', 
-    label: 'First Name',
+    id: 'name', 
+    label: 'Name',
     numeric: false, 
     minWidth: 140},
-  { 
-    id: 'lname', 
-    label: 'Last Name',
-    numeric: false, 
-    minWidth: 140},
-  { 
-    id: 'location', 
-    label: 'Location',
-    numeric: false, 
-    minWidth: 120 },
   { 
     id: 'type', 
     label: 'Type',
     numeric: true, 
     minWidth: 140 },
+  { 
+    id: 'location', 
+    label: 'Location',
+    numeric: false, 
+    minWidth: 120 },
 
   { 
-    id: 'view', 
-    label: '',
+    id: 'telephone', 
+    label: 'Telephone',
     numeric: false, 
     minWidth: 130 },
   { 
-    id: 'delete', 
+    id: 'email', 
+    label: 'Email',
+    numeric: false, 
+    minWidth: 130 },
+  { 
+    id: 'block', 
     label: '',
     numeric: false, 
-    minWidth: 100 },
+    minWidth: 50 },
   
 ];
 
@@ -408,12 +407,12 @@ function TableActions() {
                     >
                       {row.userId}
                     </TableCell>
-                    <TableCell >{row.fname}</TableCell>
-                    <TableCell >{row.lname}</TableCell>
-                    <TableCell >{row.location}</TableCell>
+                    <TableCell >{row.name}</TableCell>
                     <TableCell >{row.type}</TableCell>
-                    <TableCell >{row.viewButton}</TableCell>
-                    <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell >{row.location}</TableCell>
+                    <TableCell >{row.telephone}</TableCell>
+                    <TableCell >{row.email}</TableCell>
+                    <TableCell >{row.blockButton}</TableCell>
                     <TableCell ></TableCell>
                   </TableRow>
                 );
