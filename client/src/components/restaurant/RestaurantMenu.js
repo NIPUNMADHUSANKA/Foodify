@@ -7,14 +7,59 @@ import theme, { Colours } from '../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 
+import image1 from '../../assets/images/food categories/1.jpg';
+import image2 from '../../assets/images/food categories/2.jpg';
+import image3 from '../../assets/images/food categories/3.webp';
+import image4 from '../../assets/images/food categories/4.jpg';
+import image5 from '../../assets/images/food categories/5.jpg';
+
+
 // ----------------------for the caousel----------------------
 const item = {
   "id": "1",
-  "title": "",
-  "image": CardImage,
-  "decription": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. deleniti? Eumquasi quidem quibusdam.",
+  "title": "All day breakfast",
+  "image": image1,
+  "decription": "",
   "name": "view",
 }
+
+const item1 = [
+  {
+    "id": "1",
+    "title": "All day breakfast",
+    "image": image1,
+    "decription": "",
+    "name": "view",
+  },
+  {
+    "id": "2",
+    "title": "Rise",
+    "image": image2,
+    "decription": "",
+    "name": "view",
+  },
+  {
+    "id": "3",
+    "title": "Sea Foods",
+    "image": image3,
+    "decription": "",
+    "name": "view",
+  },
+  {
+    "id": "4",
+    "title": "Drinks",
+    "image": image4,
+    "decription": "",
+    "name": "view",
+  },
+  {
+    "id": "5",
+    "title": "Soup",
+    "image": image5,
+    "decription": "",
+    "name": "view",
+  }
+]
 
 const title = "Menu";
 const itemcount = 4;
@@ -79,7 +124,7 @@ const RestaurantMenu = () => {
 
 
 
-      <Carousel item={item} title={title} count={itemcount} bgcolour={bgcolor1} />
+      <Carousel item={item1} title={title} count={itemcount} bgcolour={bgcolor1} />
 
 
     </Box>

@@ -28,6 +28,9 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
 
 const carousel = (props) => {
 
+  console.log(props.item)
+
+  const data = props.item;
   return (
     <div sx={{ padding: 0, }}>
       {/*------------------------- carousel area--------------------- */}
@@ -75,12 +78,18 @@ const carousel = (props) => {
 
         >
         {/* <Box> */}
+
+        {data.map((items, index) => {
+        return (
+          <CarouselCardOffers item={items} />
+        );
+      })}
+        {/* <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
-        <CarouselCardOffers item={props.item} />
-        <CarouselCardOffers item={props.item} />
+        <CarouselCardOffers item={props.item} /> */}
 
       </Carousel>
       {/* </Box> */}
