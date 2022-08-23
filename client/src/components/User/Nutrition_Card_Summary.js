@@ -76,7 +76,7 @@ function Nutrition_Card() {
                     <img src={Image} width="65%" style={{borderRadius : "10px"}}/>
                     
                     <Typography color="#95CD41" fontSize="200%" fontWeight="bold">
-                        Healthy Zoon
+                    Healthy Zone
                     </Typography>
 
                     
