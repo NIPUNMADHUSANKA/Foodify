@@ -182,7 +182,7 @@ TablePaginationActions.propTypes = {
 
 //----------------------------------------------------------Table Row Define
 function createData(resId,name ,location) {
-  const viewButton = <Button component={Link} to='/restaurant' variant="outlined" color="success" >View Restaurant</Button>
+  const viewButton = <Button component={Link} to='/RestaurantOrder' variant="outlined" color="success" >View Restaurant</Button>
   const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
   const deleteButton = <Button variant="outlined" color="error">Block</Button>
   return { 
