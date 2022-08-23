@@ -3,7 +3,10 @@ import {  Grid, Container } from '@mui/material';
 
 import DashboardCard from '../DashboardCard'
 import RestaurantTable from './restaurantTable'
+import RestaurantTableBlocked from './restaurantTableBlocked'
 
+
+import Typography from '@mui/material/Typography';
 import StoreIcon from '@mui/icons-material/Store';
 import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
@@ -48,7 +51,7 @@ function SystemMain(props){
         </Grid>
         <Grid
         container
-        spacing={3}
+        spacing={1}
         >
             <Grid item
                 lg={12}
@@ -57,6 +60,15 @@ function SystemMain(props){
                 xs={12}
             >
                 <RestaurantTable/>
+            </Grid>
+            <Grid item
+                lg={12}
+                md={12}
+                xl={12}
+                xs={12}
+            >
+                <Typography variant='h4' sx={{fontFamily: 'Poppins', fontWeight: '200', color: 'white'}}>Blocked Restaurants</Typography>
+                <RestaurantTableBlocked/>
             </Grid>
         </Grid>
         </Container>
