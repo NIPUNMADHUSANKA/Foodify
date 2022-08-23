@@ -25,7 +25,7 @@ const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
 
 const ROLE = JSON.parse(localStorage.getItem('ROLE'));
 
-const CHECKROLE = ROLE[0].authority;
+// const CHECKROLE = ROLE[0].authority;
 
 const mobileMenu = {
   // backgroundColor: 'Transparent',
@@ -156,7 +156,7 @@ export default function PrimarySearchAppBar() {
             }}
             src={Logo}
         />
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
+        {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'} }}>
             
           {
             (CHECKROLE=="User")? "Nipun" : "Madhusanka"
@@ -166,7 +166,7 @@ export default function PrimarySearchAppBar() {
            
             
 
-        </Box>
+        </Box> */}
           
         <Search>
         <SearchIconWrapper>

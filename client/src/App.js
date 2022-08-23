@@ -77,7 +77,7 @@ function App() {
           <Route path="/userprofile" element = {<UserProfile/>} />
           <Route path="/restaurantorder" element = {<RestaurantOrder/>} />
           <Route path="/myprofile" element = {<MyProfile/>} />
-          <Route path="/userorder" element = {<UserOrder/>} />
+          <Route path="/Restaurant/Category/Orderfood/userorder" element = {<UserOrder/>} />
           <Route path="/usernotification" element ={<UserNotification/>} />
 
 

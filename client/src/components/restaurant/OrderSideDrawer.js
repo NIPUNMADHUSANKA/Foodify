@@ -8,6 +8,7 @@ import FoodItem2 from '../../assets/images/plate1.jpg';
 import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import {Link} from 'react-router-dom';
 
 
 // ---------this is temp-------
@@ -122,7 +123,7 @@ const OrderSideDrawer = (anchor) => {
             {/* -------------------end of the list------------------- */}
 
             {/* ---------------checkout button-------------------- */}
-            <Button variant="contained" sx={{
+            <Button variant="contained" component={Link} to={"/Restaurant/Category/Orderfood/userorder"} sx={{
                 margin: 'auto',
                 marginTop: "1rem",
                 width: "60%",

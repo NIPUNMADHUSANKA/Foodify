@@ -60,7 +60,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade bottom>
-      <RestaurantMenu />
+      <RestaurantMenu id="menu" />
       </Fade>
 
       <Fade big>

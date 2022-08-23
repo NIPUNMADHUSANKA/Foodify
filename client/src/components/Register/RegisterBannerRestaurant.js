@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
+import { useNavigate } from 'react-router-dom';
 
 import axois from "axios";
 import { Navigate } from 'react-router-dom';
@@ -20,6 +21,8 @@ import Google from '../../assets/images/google.png';
 const theme1 = createTheme();
 
 const RegisterBannerRestaurant = () => {
+
+  const navigate = useNavigate();
 
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
@@ -106,7 +109,7 @@ const RegisterBannerRestaurant = () => {
       // here we put the url and the restaurant object that in @requestbody in backend
       axois.post("http://localhost:8072/Restaurant/Register/Signuprestaurant", registeredCustomer)
         .then(data => {
-          // this part if sucess
+          navigate("/Explore")
         })
         .catch(error => {
 

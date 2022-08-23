@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
-import Carousel from '../carousel/carousel';
+import Carousel from '../carousel/carouselOffers';
+import {Link} from 'react-router-dom';
 
 import CardImage1 from '../../assets/images/offer1.jpg';
 // import CardImage2 from '../../assets/images/offer2.jpg';
@@ -52,7 +53,7 @@ const RestaurantOffers = () => {
       width: '100%',
       p: '0px',
     }}>
-      <Button sx={{
+      <Button component={Link} to={"/Restaurant/AddOffers"} sx={{
         margin: '0.5rem',
         marginBottom:0,
         marginTop:4,
