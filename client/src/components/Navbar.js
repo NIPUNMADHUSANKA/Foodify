@@ -41,7 +41,7 @@ const mobileMenu = {
 }
 
 const userMenu = {
-  marginTop: "40px",
+  marginTop: "55px",
   '& .MuiMenuItem-root' : {
     fontSize: 12,
     color: 'White'
@@ -359,6 +359,7 @@ export default function PrimarySearchAppBar() {
                   aria-controls={menuId}
                   aria-haspopup="true"
                   color="inherit"
+                  onClick={handleProfileMenuOpen}
                 >
                   <AccountCircle />
                 </IconButton>);
@@ -395,7 +396,7 @@ export default function PrimarySearchAppBar() {
 
 
           </Box>
-
+          {renderAccountMenu}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
