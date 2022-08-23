@@ -14,6 +14,11 @@ import AuthService from '../services/auth-service';
 import UserService from '../services/user-service';
 import axois from "axios";
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
+
 import '../assets/css/Home.css';
 import axios from "axios";
 
@@ -69,8 +74,9 @@ const Explore = () => {
 
             <Typography sx={{ color: "#fff" }}>{content.userName}</Typography>
 
-            <Menubar />
-
+            <Fade top>
+                <Navbar />
+            </Fade>
 
             <ExploreF />
 
@@ -103,6 +109,7 @@ const Explore = () => {
             <Box minHeight="50vh">
                 <TabPanel value={value} index={0}>
 
+
                     <FoodScroll />
 
                 </TabPanel>
@@ -110,6 +117,7 @@ const Explore = () => {
 
                     {console.log(details)}
                     <RestaurantScroll details={details} />
+
 
                 </TabPanel>
             </Box>

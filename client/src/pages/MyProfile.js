@@ -8,12 +8,20 @@ import Pcarousel from '../components/profile/profileCarouselGood';
 import AddressFormW from '../components/profile/AddressForm';
 import '../assets/css/Profile.css';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
 const Profile = () => {
 
 
   return (
     <Box className='Profile2-body-Style' marginTop="0px">
-      <Pnavbar/>
+      
+      <Fade top>
+            <Navbar />
+      </Fade>
+
       <AddressFormW/>
 
 

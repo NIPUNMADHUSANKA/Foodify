@@ -8,6 +8,9 @@ import CardImage from '../../assets/images/plate1.jpg';
 import CarouselCard2 from '../../components/carousel/CarouselCard2';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
 import {Link} from 'react-router-dom';
 
 // ---------------css for carousel-------------------------
@@ -48,6 +51,10 @@ const FoodCategory = () => {
         padding: 0,
 
       }}>
+
+        <Fade top>
+          <Navbar />
+        </Fade>
 
         <Box sx={{
           marginTop: "14%",

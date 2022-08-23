@@ -4,10 +4,17 @@ import ResetPasswordBanner from '../components/login/ResetPasswordBanner';
 import RegisterNavbar from '../components/Register/RegisterNavbar';
 import '../assets/css/Registeruser.css';
 
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
+
+
 const ResetPassword = () => {
   return (
     <Box className='Forgetpass-body-Style' >
-        <RegisterNavbar />
+        <Fade top>
+            <Navbar />
+        </Fade>
         <ResetPasswordBanner />
 
     </Box>

@@ -9,86 +9,98 @@ import RestaurantRatingForm from '../../components/restaurant/RestaurantRatingFo
 import RImage from '../../assets/images/restaurant-logo.jpg';
 import { Avatar } from '@mui/material';
 
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
 const RestaurantRating = () => {
     return (
-        
+
         // ------main box----------------
 
-        <Box sx={{
-            margin: 0,
-            padding: 0,
-            background: Colours.primary,
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",           
-            [theme.breakpoints.down('sm')]: {
-                flexDirection: "column-reverse",
-            },
-        }}>
-            {/* --------------------form area-------------------- */}
+        <div>
+
+            <Fade top>
+                <Navbar />
+            </Fade>
+
             <Box sx={{
-                width: "70%",
+                margin: 0,
+                padding: 0,
+                background: Colours.primary,
+                width: "100%",
                 display: "flex",
-                flexDirection: "column",
-                margin:"auto",
-                marginBottom:"2rem",
+                flexDirection: "row",
                 [theme.breakpoints.down('sm')]: {
-                    width: "100%",
+                    flexDirection: "column-reverse",
                 },
             }}>
-
-                {/* --------------beginin of the form area---------------- */}
-                <RestaurantRatingForm />
-            </Box>
-            {/* -----------------------end of form area----------------------- */}
-
-            {/* -----------------------image area------------------- */}
-            <Box sx={{
-                width: "30%",
-                background: `url(${Background})`,
-                borderRadius: "360px 0px 0px 360px",
-                border: "2px solid #EFEAEA",
-                [theme.breakpoints.down('sm')]: {
-                    width: "98%",
-                    margin: 0,
-                    padding: 0,
-                    height: "25vh",
-                    borderRadius: "0px 0px 360px 360px",
-                },
-            }}>
-                {/* ------------------for the food image--------------- */}
+                {/* --------------------form area-------------------- */}
                 <Box sx={{
-                            width: "25%",
-                            height: "50%",
-                            margin:"auto",
-                            position: "absolute",
-                            top: "25%",
-                            right: "15%",
-                            [theme.breakpoints.down('sm')]: {
-                                width: "40%",
-                                height: "18%",
-                                top: "15%",
-                                right: "30%",
-                            },
-                        }}>
+                    width: "70%",
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "auto",
+                    marginBottom: "2rem",
+                    [theme.breakpoints.down('sm')]: {
+                        width: "100%",
+                    },
+                }}>
 
-                    <Avatar
-                        alt="food image"
-                        src={RImage}
-                        sx={{
-                            width: "100%",
-                            height: "100%",
-                            border: "2px solid #EFEAEA",
-                            [theme.breakpoints.down('sm')]: {
-                                
-                            },
-                        }} />
+                    {/* --------------beginin of the form area---------------- */}
+                    <RestaurantRatingForm />
                 </Box>
+                {/* -----------------------end of form area----------------------- */}
+
+                {/* -----------------------image area------------------- */}
+                <Box sx={{
+                    width: "30%",
+                    background: `url(${Background})`,
+                    borderRadius: "360px 0px 0px 360px",
+                    border: "2px solid #EFEAEA",
+                    [theme.breakpoints.down('sm')]: {
+                        width: "98%",
+                        margin: 0,
+                        padding: 0,
+                        height: "25vh",
+                        borderRadius: "0px 0px 360px 360px",
+                    },
+                }}>
+                    {/* ------------------for the food image--------------- */}
+                    <Box sx={{
+                        width: "25%",
+                        height: "50%",
+                        margin: "auto",
+                        position: "absolute",
+                        top: "25%",
+                        right: "15%",
+                        [theme.breakpoints.down('sm')]: {
+                            width: "40%",
+                            height: "18%",
+                            top: "15%",
+                            right: "30%",
+                        },
+                    }}>
+
+                        <Avatar
+                            alt="food image"
+                            src={RImage}
+                            sx={{
+                                width: "100%",
+                                height: "100%",
+                                border: "2px solid #EFEAEA",
+                                [theme.breakpoints.down('sm')]: {
+
+                                },
+                            }} />
+                    </Box>
+
+                </Box>
+                {/* ---------------end of image area----------------------- */}
 
             </Box>
-            {/* ---------------end of image area----------------------- */}
+        </div>
 
-        </Box>
+
     )
 }
 
