@@ -9,6 +9,8 @@ import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
+import axios from 'axios';
+
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -167,6 +169,8 @@ export const BannerForm2 = () => {
         setOpen(false);
     };
 
+    
+
     return (
 
         <Box sx={{
@@ -206,7 +210,7 @@ export const BannerForm2 = () => {
                         noValidate
                         autoComplete="off">
 
-                        <CustomTextField id="restaurant_name" label="Restaurant Name" name="restaurant_name" variant="outlined" />
+                        <CustomTextField id="restaurant_name" label="Restaurant_name" name="restaurant_name" variant="outlined" />
                         <CustomTextField type="file" name='image' />
 
                         <Box>
@@ -226,16 +230,49 @@ export const BannerForm2 = () => {
 
 // ----------------aboutus form----------------------------------
 export const AboutUsForm = () => {
-
+    const initialValues = { about: "" };
+    const [formValues, setFormValues] = React.useState(initialValues);
+    const [formErrors, setFormErrors] = React.useState({});
+    
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
+
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+
+    const restaurantAbout ={
+        about:formValues.about,
+    }
+
+    
+
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        const data=new FormData(event.currentTarget);
+        const restaurantAbout ={
+            about:data.get('about_description')
+        }
+
+        axios.post("http://localhost:8072/RestaurantInfo/editAbout",restaurantAbout ).then(data=>{
+            console.log("Entry access sucessfull")
+
+    })
+    .catch(error =>{
+        console.log(restaurantAbout)
+        console.log("There is an error")
+
+    })
+    }
+
+    
 
     return (
 
@@ -273,13 +310,13 @@ export const AboutUsForm = () => {
             >
                 <DialogTitle>{"Update Description"}</DialogTitle>
                 <DialogContent>
-                    <Box component="form"
+                    <Box component="form" onSubmit={handleSubmit}
                         noValidate
                         autoComplete="off">
 
                         <CustomTextField 
                         id="about_description" 
-                        label="Description" 
+                        label="about_description" 
                         name="about_description" 
                         variant="outlined" 
                         multiline rows={8} />
@@ -304,12 +341,50 @@ export const ContactForm = () => {
 
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
+    // ----------------initial values
+    let [restaurant, setRestaurant] = React.useState({
+        location: "",
+        address: "",
+        telephone: ""
+    });
+
+
+    //------------------assign input values to the variables
+    const handleClickOpen = (e) => {
+        setRestaurant({...restaurant, [e.target.location]:e.target.value});
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+
+    // const { location, address, telephone} = restaurant;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data=new FormData(e.currentTarget);
+
+        const restaurantInfo = {
+            location: data.get('location'),
+            address: data.get('address'),
+            telephone: data.get('tpnumber')
+        }
+
+        console.log({
+            restaurantInfo
+        });
+
+        axios.post("http://localhost:8072/RestaurantInfo/editContact", restaurantInfo)
+        .then(data=>{
+            console.log("Entry access sucessfull")
+
+        })
+        .catch(error =>{
+            console.log("There is an error")
+
+        })
     };
 
     return (
@@ -351,7 +426,8 @@ export const ContactForm = () => {
                 <DialogContent>
                     <Box component="form"
                         noValidate
-                        autoComplete="off">
+                        autoComplete="off"
+                        onSubmit={handleSubmit}>
 
                         <CustomTextField id="location" label="Location" name="location" variant="outlined" />
                         <CustomTextField id="address" label="Address" name="address" variant="outlined" />

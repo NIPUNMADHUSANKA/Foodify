@@ -25,9 +25,9 @@ public class Restaurant {
 	private String userId;
 	private String restaurantName;
 	private Double rating;
-	private String aboutUS;
+	private String about;
 	private String address;
-	private int telephone;
+	private String telephone;
 	private String location;
 	private String openHours;
 	private LocalDateTime starttime;
@@ -60,22 +60,25 @@ public class Restaurant {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
-	public String getAboutUS() {
-		return aboutUS;
+
+	public String getAbout() {
+		return about;
 	}
-	public void setAboutUS(String aboutUS) {
-		this.aboutUS = aboutUS;
+
+	public void setAbout(String about) {
+		this.about = about;
 	}
+
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	public String getLocation() {

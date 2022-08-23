@@ -4,15 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import Foodify.Backend.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
@@ -67,8 +62,10 @@ public class RestaurantController{
 		return count;				
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
-	
-	
+
+
+
+
 //	----------------------------de_activate method-------------------------------------------------------------------------------
 	@PostMapping("/Restaurant/restaurant/deactivate/{id}")
 	public void deacivateRestaurant(@PathVariable String id) {
