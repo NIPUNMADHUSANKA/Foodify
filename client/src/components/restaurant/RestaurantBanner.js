@@ -76,7 +76,7 @@ const RestaurantBanner = () => {
           <BannerLogo src={Logo} />
           <BannerContent2>
             <BannerTitle>
-              Reastaurant Name
+              Bojun Hut
             </BannerTitle>
 
             <BannerTitle2>

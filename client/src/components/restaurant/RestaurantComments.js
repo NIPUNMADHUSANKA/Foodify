@@ -11,6 +11,11 @@ import List from '@mui/material/List';
 
 // -------using props to put random images using props------------------------
 const RestaurantCemments = (props) => {
+
+  console.log(props.comments)
+
+  const data = props.comments;
+
   return (
 
     // About us main box-----------------------------------------------
@@ -35,11 +40,11 @@ const RestaurantCemments = (props) => {
         }
       }}>
         {/* ---------------view button--------------------- */}
-        <Button sx={{
+        {/* <Button sx={{
           margin: '0.5rem',
           marginBottom: 0,
           marginTop: 4,
-          width:"15%",
+          width: "15%",
           background: Colours.green, '&:hover': {
             backgroundColor: Colours.yellow,
           },
@@ -51,9 +56,9 @@ const RestaurantCemments = (props) => {
           [theme.breakpoints.down('sm')]: {
             fontSize: '8px',
             padding: '2px',
-            width:"25%",
+            width: "25%",
           },
-        }}>View Comments</Button>
+        }}>View Comments</Button> */}
 
         {/* -------------------topic-------------------------------------------- */}
         <Typography variant="h4" gutterBottom component="div" sx={{
@@ -85,17 +90,31 @@ const RestaurantCemments = (props) => {
             color: Colours.grayWhite,
             '& ul': { padding: 0 },
           }}>
-          <li>
-            <ul>
+
+          {data.map((items, index) => {
+            return (
+
+              <li>
+                <ul>
+                  <CommentBox comments={items} sx={{ margin: 'auto', padding: 0 }} />
+                </ul>
+              </li>
+
+
+            );
+          })}
+
+          {/* <li>
+            <ul> */}
+          {/* <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
-              <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
-              <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
-            </ul>
-          </li>
+              <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} /> */}
+          {/* </ul>
+          </li> */}
         </List>
         {/* -----------------beginin of the comments----------------- */}
 

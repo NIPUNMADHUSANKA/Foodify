@@ -5,7 +5,7 @@ import theme, { Colours } from '../../assets/theme/theme';
 import Background from '../../assets/images/pv4WkDi.webp';
 
 // when calling data, nned to take from there
-import FoodImage from '../../assets/images/foodimage.jpg'
+import FoodImage from '../../assets/images/food items/1.png'
 import { Avatar, Typography } from '@mui/material';
 import OrderDescription from '../../components/restaurant/OrderDescription';
 import FoodNutrition from '../../components/restaurant/FoodNutrition';
@@ -20,7 +20,7 @@ import Navbar from './../../components/Navbar';
 
 // ----------------this is tem until data call--------
 const details = {
-    "detail": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+    "detail": "Daing na Bangus refers to milkfish that is marinated in a mixture composed of vinegar, crushed peppercorn, garlic, and salt. Hot pepper such as cayenne pepper powder can be added to make it spicy. It is usually marinated overnight for best results, and then fried until crispy.",
 }
 
 function createData(type, amount, percentage) {
@@ -42,6 +42,29 @@ const comments = {
     "name": "username",
     "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
 }
+
+const comments1 = [
+    {
+      "name": "Navod",
+      "detail1": "This is a good restaurant",
+    },
+    {
+      "name": "Sankalpa98",
+      "detail1": "This place has good hospitality",
+    },
+    {
+      "name": "Nisheda",
+      "detail1": "This place provides good service",
+    },
+    {
+      "name": "Shehan21",
+      "detail1": "This offers food with exelent quality",
+    },
+    {
+      "name": "Jane",
+      "detail1": "This is a good restaurant",
+    }
+  ]
 
 const OrderFood = () => {
     return (
@@ -91,7 +114,7 @@ const OrderFood = () => {
                     </Fade>
 
                     <Fade big>
-                        <FoodComment comments={comments} />
+                        <FoodComment comments={comments1} />
                     </Fade>
 
                 </Box>
@@ -161,7 +184,7 @@ const OrderFood = () => {
                                 [theme.breakpoints.down('sm')]: {
                                     fontSize: "15px",
                                 },
-                            }}>Name of the Food</Typography>
+                            }}>Boneless Diang na Bangus</Typography>
                             <Box sx={{
                                 width: "80%",
                                 display: "flex",
