@@ -48,27 +48,27 @@ const InputArea = styled(TextField)({
 const foods1 = [
     {
         id: "0",
-        name: "Food1",
+        name: "Vegie Masala",
     },
     {
         id: "1",
-        name: "Food2",
+        name: "Vegie onion pizza",
     },
     {
         id: "2",
-        name: "Food3",
+        name: "Vegie Those",
     },
     {
         id: "3",
-        name: "Food4",
+        name: "Burger",
     },
     {
         id: "4",
-        name: "Food5",
+        name: "Samosha",
     },
     {
         id: "5",
-        name: "Food6",
+        name: "Noodles",
     }
 ];
 
