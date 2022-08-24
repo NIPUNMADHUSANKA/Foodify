@@ -17,7 +17,7 @@ import Fade from 'react-reveal/Fade';
 
 // ----------------this is tem until data call--------
 const details = {
-    "detail": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+    "detail": "Have a celebrity bartend from 4-8pm, and give all proceeds from pizzas sold during that time to your local food bank.Halloween costume contests featuring giveaways or gifts, a different offering for each of the twelve days of Christmas, a Mother’s Day trivia event",
 }
 
 const RestaurantOffer = () => {
