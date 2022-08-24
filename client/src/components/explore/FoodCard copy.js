@@ -1,4 +1,4 @@
-import image from '../../assets/images/foodimages/indian-food-served-on-table.jpg'
+import image from '../../assets/images/food items/1.png'
 
 import React from 'react'
 import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
