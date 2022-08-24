@@ -26,9 +26,9 @@ function Complaints() {
 
     [ "Total Complaints",  12, Total ],
   
-    [ "Pending Complaints",  8, Pending ],
+    [ "Pending Complaints",  6, Pending ],
   
-    [ "Accepted Complaints",  10, Accept ],
+    [ "Accepted Complaints",  3, Accept ],
   
     [ "Rejected Complaints",  3, Reject ]
   

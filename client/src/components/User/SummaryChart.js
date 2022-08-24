@@ -48,8 +48,8 @@ export default class SummaryChart extends React.PureComponent {
 
             <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#ddd", border:"none", color:"#222", padding:"8px" }} onChange={this.changeData}>
               <option>Sodium</option>
-              <option>Sodium</option>
-              <option>Sodium</option>
+              <option>Carbh</option>
+              <option>Suger</option>
             </select>
 
       </Box>

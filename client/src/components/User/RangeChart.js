@@ -12,7 +12,7 @@ function RangeChart() {
         
         <Box>
             <Typography variant="h6" component="h2" textAlign="center" color="#fff" p="5%">
-                    Nutritions Range
+                    Daily Nutritions Intake Range
                     <EditIcon sx={{ml:"5%", mt:"2%"}} />
             </Typography>
         </Box>
