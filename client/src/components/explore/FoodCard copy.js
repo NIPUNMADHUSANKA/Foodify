@@ -54,7 +54,7 @@ function FoodCard() {
           <img src={image} alt="food" />
         </StyledBadge>
 
-        <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>Mini Veg Salad</Typography>
+        <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>Boneless Diang</Typography>
         <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px" sx={{[theme.breakpoints.down('sm')]: { mt:"-30px"}}}>
                  Rs.1000.00
         </Typography>

@@ -390,6 +390,8 @@ export default function AddressForm() {
               color: Colours.grayWhite,
               fontSize: '20px',
               fontFamily:'Poppins',
+              marginLeft:'85%',
+              marginBottom:'10%',
               [theme.breakpoints.down('sm')]: {
                 fontSize: '18px',
                 width:'100%',
