@@ -111,7 +111,7 @@ export default function SignIn() {
               navigate("/")
             }
             else{
-              navigate("/restaurant")
+              navigate("/Restaurantprofile")
             }
 
 

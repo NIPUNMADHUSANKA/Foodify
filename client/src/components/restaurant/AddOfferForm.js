@@ -90,7 +90,7 @@ const foods = [
 const AddOfferForm = () => {
 
     // --------to add category section--------
-    const [components, addComponents] = useState(["Category1"]); //use to render when new component added to page
+    const [components, addComponents] = useState(["Vegie"]); //use to render when new component added to page
 
     function addSection() {
         addComponents([...components, <CategorySelection />])

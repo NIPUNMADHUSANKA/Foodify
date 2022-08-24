@@ -22,7 +22,10 @@ const tiers = [
     price: '0',
     description: [
       'Monthly Subscription free',
-      'Charge 2% from the orders',
+      'Charge 5% from the orders',
+      '.',
+      '.',
+      '.'
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
@@ -34,10 +37,12 @@ const tiers = [
   {
     title: 'Premium',
     // subheader: 'Most popular',
-    price: '750',
+    price: '500',
     description: [
-      'Monthly Subscription  Rs. 750',
+      'Monthly Subscription  Rs. 500',
       'No percentage from the orders',
+      'Displaying nutrients values by image uploading',
+      'Displaying intake chart'
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
