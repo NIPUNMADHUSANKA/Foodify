@@ -28,7 +28,7 @@ function ComplaintHistory() {
       return (
         <ListItem style={style} key={index} component="div" disablePadding sx={{bgcolor:"#373737"}}>
           <ListItemButton>
-            <ListItemText  sx = {{height:"5%"}} primary={`Complaint 1`} secondary={
+            <ListItemText  sx = {{height:"5%"}} primary={`Not Good Customer Service`} secondary={
               <Typography fontWeight="lighter" color="#95CD41">
                 Accepted
               </Typography>

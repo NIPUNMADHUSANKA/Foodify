@@ -19,17 +19,17 @@ function IntakeChart() {
 
     const data = [
 
-        [ "Total Calories",  "250g" ],
+        [ "Total Monthly Calories",  "250g" ],
       
-        [  "Total Sodium",  "300g" ],
+        [  "Total Monthly Sodium",  "300g" ],
       
-        [ "Total Carbh",  "100g" ],
+        [ "Total Monthly Carbh",  "100g" ],
       
-        [ "Total Suger",  "80g" ],
+        [ "Total Monthly Suger",  "80g" ],
 
-        [ "Total Fat",  "120g" ],
+        [ "Total Monthly Fat",  "120g" ],
       
-        [ "Total Cholestrol",  "10g" ]
+        [ "Total Monthly Cholestrol",  "10g" ]
       
       ];
 
