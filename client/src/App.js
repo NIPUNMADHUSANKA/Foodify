@@ -48,6 +48,8 @@ import ResetPassword from './pages/ResetPassword';
 import ViewEaten from './components/profile/VieweatenFooditems';
 import Navbar from './components/Navbar'
 
+import AddFoodMenuItem from './pages/AddFoodMenuItem';
+
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
 
           <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/AddFoodMenu" element = {<AddFoodMenu/>} />
+          <Route path="/AddFoodMenuItem" element = {<AddFoodMenuItem/>} />
           <Route path="/Image_Upload" element = {<Image_Upload/>} />
           <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
           

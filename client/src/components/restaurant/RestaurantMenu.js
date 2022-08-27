@@ -5,7 +5,6 @@ import Carousel from '../carousel/carousel';
 import CardImage from '../../assets/images/cardfood.png';
 import theme, { Colours } from '../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
-import { Link } from 'react-router-dom';
 
 import image1 from '../../assets/images/food categories/1.jpg';
 import image2 from '../../assets/images/food categories/2.jpg';
@@ -13,6 +12,8 @@ import image3 from '../../assets/images/food categories/3.webp';
 import image4 from '../../assets/images/food categories/4.jpg';
 import image5 from '../../assets/images/food categories/5.jpg';
 
+// -------to import forms------------
+import MenuForm from './profile/MenuForm';
 
 // ----------------------for the caousel----------------------
 const item = {
@@ -30,6 +31,8 @@ const item1 = [
     "image": image1,
     "decription": "",
     "name": "view",
+    "name2": "Edit",
+    "name3": "Delete"
   },
   {
     "id": "2",
@@ -37,6 +40,8 @@ const item1 = [
     "image": image2,
     "decription": "",
     "name": "view",
+    "name2": "Edit",
+    "name3": "Delete"
   },
   {
     "id": "3",
@@ -44,6 +49,8 @@ const item1 = [
     "image": image3,
     "decription": "",
     "name": "view",
+    "name2": "Edit",
+    "name3": "Delete"
   },
   {
     "id": "4",
@@ -51,6 +58,8 @@ const item1 = [
     "image": image4,
     "decription": "",
     "name": "view",
+    "name2": "Edit",
+    "name3": "Delete",
   },
   {
     "id": "5",
@@ -58,6 +67,8 @@ const item1 = [
     "image": image5,
     "decription": "",
     "name": "view",
+    "name2": "Edit",
+    "name3": "Delete"
   }
 ]
 
@@ -90,38 +101,11 @@ const RestaurantMenu = () => {
       {(() => {
         if (ROLE === "restaurant") {
           return (
-            <Button component={Link} to={"/AddFoodMenu"} sx={{
-              margin: '0.5rem',
-              marginBottom: 0,
-              marginTop: 4,
-              width: "15%",
-              background: Colours.yellow, '&:hover': {
-                backgroundColor: Colours.green,
-              },
-              color: Colours.dark,
-              fontSize: '1rem',
-              hover: Colours.green,
-              borderRadius: "1rem",
-              Width: "20%",
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '8px',
-                padding: '2px',
-                width: "25%",
-              },
-            }} endIcon={<EditIcon sx={{
-              color: Colours.primary,
-              [theme.breakpoints.down('sm')]: {
-                '& svg': {
-                  fontSize: "15px",
-                }
-              },
-            }} />}>Edit Menu
-            </Button>
+          <MenuForm />
           );
         }
       }
       )()}
-
 
 
       <Carousel item={item1} title={title} count={itemcount} bgcolour={bgcolor1} />

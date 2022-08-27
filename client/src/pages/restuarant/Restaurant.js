@@ -17,6 +17,7 @@ import Map from '../../assets/images/GoogleMapTA.webp';
 import Fade from 'react-reveal/Fade';
 import Navbar from './../../components/Navbar';
 
+
 // to collect the description imformation
 const details = {
   "detail1": "One of Sri Lankan's most beloved restaurants,",
