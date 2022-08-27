@@ -99,6 +99,14 @@ public class RestaurantService implements Restaurantserv{
 		System.out.println(epassword);
 		return null;
 	}
+
+
+
+	@Override
+	public void updateContactDetails(String username) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 //	--------------------------end of for validate userName and email--------------------------------------------
