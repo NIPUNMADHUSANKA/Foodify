@@ -9,5 +9,7 @@ public interface Restaurantserv {
 	
 	public String passwordEncorder(String userName,String email,String password, String accountStatus);
 	
+	public void updateContactDetails(String username);
+	
 	
 }

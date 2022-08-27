@@ -10,7 +10,8 @@ import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
 import axios from 'axios';
-
+import authHeader from "../../../services/auth-header";
+import { useNavigate } from 'react-router-dom';
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -261,8 +262,9 @@ export const AboutUsForm = () => {
             about:data.get('about_description')
         }
 
-        axios.post("http://localhost:8072/RestaurantInfo/editAbout",restaurantAbout ).then(data=>{
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs",restaurantAbout,{ headers: authHeader() }).then(data=>{
             console.log("Entry access sucessfull")
+            setOpen(false);
 
     })
     .catch(error =>{
@@ -339,6 +341,9 @@ export const AboutUsForm = () => {
 // ----------------contact details form----------------------------------
 export const ContactForm = () => {
 
+  const navigate = useNavigate();
+
+
     const [open, setOpen] = React.useState(false);
 
     // ----------------initial values
@@ -376,9 +381,11 @@ export const ContactForm = () => {
             restaurantInfo
         });
 
-        axios.post("http://localhost:8072/RestaurantInfo/editContact", restaurantInfo)
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo,{ headers: authHeader() })
         .then(data=>{
             console.log("Entry access sucessfull")
+            setOpen(false);
+            navigate("/RestaurantProfile")
 
         })
         .catch(error =>{

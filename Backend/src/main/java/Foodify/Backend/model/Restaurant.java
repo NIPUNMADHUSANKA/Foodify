@@ -23,6 +23,7 @@ public class Restaurant {
 	@Id
 	private String id;
 	private String userId;
+	private String userName;
 	private String restaurantName;
 	private Double rating;
 	private String about;
@@ -47,6 +48,12 @@ public class Restaurant {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getRestaurantName() {
 		return restaurantName;
