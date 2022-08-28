@@ -8,24 +8,47 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { color } from '@mui/system';
 import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
-
+import AuthService from '../../services/auth-service';
+import UserService from '../../services/user-service';
+import axios from 'axios';
+import authHeader from "../../services/auth-header";
 
 
 function ComplainAdd() {
+  
   const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:""};
   const [formValues,setFormValues] = React.useState(initialValues);
   const[isSubmit,setIsSubmit]=React.useState(false);
   
   const handleSubmit = (e) =>{
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    console.log(formValues);
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    // console.log(date);
 
-    const complain ={
-      // ResturantName:data.get('Resturant_Name'),
-      complainTitle:data.get('Complaint_Title'),
-      complainDescription:data.get('Complaint'),
+
+    const complain = {
+      restauratId: formValues.Resturant_Name,
+      complainTitle: formValues.Complaint_Title,
+      complainDescription: formValues.Complaint,
+      complainStatus:"pending",
+      addedDate:"2022-04-05"
+     
     }
-    setIsSubmit(true);
+    axios.post("http://localhost:8072/FoodiFy/User/addComplains", complain, { headers: authHeader() })
+            .then(data => {
+                console.log("Entry access sucessfull")
+                window.location.reload(false);
+               
+                
+            })
+            .catch(error => {
+                //  console.log(complain)
+                 console.log("There is an error")
+
+            })
+
   };
 
   const handleChange = (e) =>{
@@ -33,15 +56,7 @@ function ComplainAdd() {
     setFormValues({ ...formValues,[name]:value});
   }
 
-  React.useEffect((event) => {
-    if(isSubmit){
-      const complainTitle=formValues.Complaint_Title;
-      const complainDescription=formValues.Complaint;
   
-    }else{
-      console.log("There is an error")
-    }
-  })
    
   return (
 
@@ -130,7 +145,7 @@ function ComplainAdd() {
             />
         </Grid>
         
-        <Grid item xs={12} > 
+         <Grid item xs={12} > 
         <TextareaAutosize
       
               sx={{
@@ -161,15 +176,15 @@ function ComplainAdd() {
 
 
         />
-        </Grid>
+        </Grid> 
         
-        <Grid item xs={12} md={4}>
+         <Grid item xs={12} md={4}>
             <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {
                 backgroundColor: Colours.darkgray,
               }}}>
               Add a photo
             </Button>
-        </Grid>
+        </Grid> 
 
 
         <Box mt="8%" marginLeft="35%"  display="flex" flexDirextion="row" >

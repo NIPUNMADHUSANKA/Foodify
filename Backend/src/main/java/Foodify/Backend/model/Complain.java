@@ -1,7 +1,7 @@
 package Foodify.Backend.model;
 
 import java.io.File;
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +15,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @Document(collection="Complains")
 public class Complain {
+	
+	@Id
+	private String id;
+	private String userName;
+	private String restaurantId;
+	private String complainTitle;
+	private String complainDescription;
+	private String complainStatus;
+	private Date addedDate;
+	
 	public String getId() {
 		return id;
 	}
@@ -57,14 +67,7 @@ public class Complain {
 	public void setComplainStatus(String complainStatus) {
 		this.complainStatus = complainStatus;
 	}
-	@Id
-	private String id;
-	private String userName;
-	private String restaurantId;
-	private String complainTitle;
-	private String complainDescription;
-	private String complainStatus;
-	private Date addedDate;
+	
 	
 //	private File image;
 	
