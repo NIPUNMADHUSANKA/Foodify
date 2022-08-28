@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -86,7 +86,7 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
 }));
 
 
-// -----------------form1----------------------------------
+// -----------------form1 update cover image----------------------------------
 export const BannerForm1 = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -98,6 +98,14 @@ export const BannerForm1 = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    //  --------------------for preview the image------------------
+    const [imagePreview, setImagePreview] = useState(null);
+    // ----------------sending image for the backend--------------
+    const [imageData, setImageData] = useState(null);
+
+    const [imageName, setImageName] = useState("");
+    // --------keep the image name from the back end--------------------
 
     return (
 
