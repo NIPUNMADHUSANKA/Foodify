@@ -39,6 +39,7 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 
 	Registered_Customer findByResetPasswordToken(String token);
 	
+	Registered_Customer findByuserName(String userName);
 }
 
 
