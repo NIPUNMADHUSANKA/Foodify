@@ -1,7 +1,10 @@
 package Foodify.Backend.model;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,9 +36,9 @@ public class Restaurant {
 	private String openHours;
 	private LocalDateTime starttime;
 	private LocalDateTime closeHour;
-	private String logo;
-	private String bannerImage;
-	
+	private Binary logo;
+	private Binary bannerImage;
+	private String bImage;
 	
 	public String getId() {
 		return id;
@@ -112,23 +115,32 @@ public class Restaurant {
 	public void setCloseHour(LocalDateTime closeHour) {
 		this.closeHour = closeHour;
 	}
-	public String getLogo() {
+	public Binary getLogo() {
 		return logo;
 	}
-	public void setLogo(String logo) {
+	public void setLogo(Binary logo) {
 		this.logo = logo;
 	}
-	public String getBannerImage() {
+	public Binary getBannerImage() {
 		return bannerImage;
 	}
-	public void setBannerImage(String bannerImage) {
-		this.bannerImage = bannerImage;
+	public void setBannerImage(Binary binary) {
+		this.bannerImage = binary;
+	}
+	public String getbImage() {
+		return bImage;
+	}
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
 	
-	
-
-
-	
-	
+	@Override
+	public String toString() {
+		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="
+				+ restaurantName + ", rating=" + rating + ", about=" + about + ", address=" + address + ", telephone="
+				+ telephone + ", location=" + location + ", openHours=" + openHours + ", starttime=" + starttime
+				+ ", closeHour=" + closeHour + ", logo=" + logo + ", bannerImage=" + bannerImage + ", bImage=" + bImage
+				+ "]";
+	}
 	
 }

@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("user");
+		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
 		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
