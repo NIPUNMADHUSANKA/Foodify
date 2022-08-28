@@ -12,7 +12,26 @@ import theme, { Colours } from '../../assets/theme/theme';//to use theme provide
 
 
 function ComplainAdd() {
+  const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:""};
+  const [formValues,setFormValues] = React.useState(initialValues);
+  const[isSubmit,setIsSubmit]=React.useState(false);
+  
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
 
+    const registeredCustomer ={
+      Resturant_Name:data.get('Resturant_Name'),
+      complainTitle:data.get('Complaint_Title'),
+      complainDescription:data.get('Complaint'),
+    }
+    setIsSubmit(true);
+  };
+
+  const handleChange = (e) =>{
+    const {name,value} = e.target;
+    setFormValues({ ...formValues,[name]:value});
+  }
    
   return (
 
@@ -23,8 +42,11 @@ function ComplainAdd() {
           Add Complaint
       </Typography>
 
+
+      <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
       <Grid container spacing={3} sx={{ input: { color: "#fff" }, "label": {color: "#fff"}, p:"1%" }} >
-        
+     
+ 
         <Grid item xs={12}>
           <TextField
             required
@@ -37,6 +59,9 @@ function ComplainAdd() {
             sx={{"& label.Mui-focused": {
                 color:"#fff"
               }}}
+            value={formValues.Resturant_Name}
+            onChnage={handleChange}
+
           />
         </Grid>
 
@@ -51,15 +76,20 @@ function ComplainAdd() {
             variant="standard"
             sx={{"& label.Mui-focused": {
                 color:"#fff"
-              }}}    
+              }}}  
+            value={formValues.Complaint_Title}
+            onChnage={handleChange}  
           />
         </Grid>
         
         <Grid item xs={12} > 
         <TextareaAutosize
+            id="Complaint"
+            name="Complaint"
             placeholder="Complaint"
             style={{ width: "100%", paddingTop: '5px'}}
-            
+            value={formValues.Complaint}
+            onChnage={handleChange} 
         />
         </Grid>
         
@@ -67,14 +97,14 @@ function ComplainAdd() {
             <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {
                 backgroundColor: Colours.darkgray,
               }}}>
-              Browse
+              Add a photo
             </Button>
         </Grid>
 
 
         <Box mt="8%" marginLeft="35%"  display="flex" flexDirextion="row" >
 
-              <Button variant="outlined" style={{marginRight:"5%", color:'#95CD41',borderColor: "#95CD41"
+              <Button type="submit" variant="outlined" style={{marginRight:"5%", color:'#95CD41',borderColor: "#95CD41"
               ,"&:hover": {
               backgroundColor: "#15e577",
               borderColor:"#564345"
@@ -94,7 +124,7 @@ function ComplainAdd() {
 
   
       </Grid>
-
+      </form>
 
      </Box>
 
