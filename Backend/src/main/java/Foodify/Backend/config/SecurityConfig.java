@@ -61,16 +61,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout", "/Orders/All", "/FoodItems/All")
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/RegisteredUser/addComplains", "/Orders/All", "/FoodItems/All")
+
+				
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
-		.antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant")
-		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("User")
-		.antMatchers("/FoodiFy/Orders/User/**").hasAnyAuthority("user")
-		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser")
-		.antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin")
-		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
+		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
+		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
+		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
+		http.authorizeRequests().anyRequest().authenticated();
+
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 		// TODO Auto-generated method stub
 //		http.authorizeRequests().anyRequest().authenticated();
