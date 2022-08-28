@@ -22,16 +22,10 @@ public class Complain {
 		this.id = id;
 	}
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getRestaurantName() {
-		return restaurantName;
-	}
-	public void setRestaurantName(String restaurantName) {
-		this.restaurantName = restaurantName;
+		this.userName = username;
 	}
 	public String getComplainTitle() {
 		return complainTitle;
@@ -51,20 +45,27 @@ public class Complain {
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
-//	public File getImage() {
-//		return image;
-//	}
-//	public void setImage(File image) {
-//		this.image = image;
-//	}
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+	public String getComplainStatus() {
+		return complainStatus;
+	}
+	public void setComplainStatus(String complainStatus) {
+		this.complainStatus = complainStatus;
+	}
 	@Id
-	
 	private String id;
-	private String username;
-	private String restaurantName;
+	private String userName;
+	private String restaurantId;
 	private String complainTitle;
 	private String complainDescription;
+	private String complainStatus;
 	private Date addedDate;
+	
 //	private File image;
 	
 		
