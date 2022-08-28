@@ -1,8 +1,10 @@
 package Foodify.Backend.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +36,7 @@ public class Restaurant {
 	private LocalDateTime closeHour;
 	private String logo;
 	private String bannerImage;
+
 	
 	
 	public String getId() {
@@ -117,11 +120,5 @@ public class Restaurant {
 	public void setBannerImage(String bannerImage) {
 		this.bannerImage = bannerImage;
 	}
-	
-	
 
-
-	
-	
-	
 }

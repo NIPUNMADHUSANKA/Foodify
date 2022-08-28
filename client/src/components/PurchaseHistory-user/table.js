@@ -23,7 +23,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { border } from '@mui/system';
+import {Link} from 'react-router-dom';
 
 //----------------------------------------------------------styles for table
 const tableSx = {
@@ -125,8 +125,9 @@ TablePaginationActions.propTypes = {
 
 //----------------------------------------------------------Table Row Define
 function createData(amount, date, time, restaurant) {
-  const viewItem = <Button variant="outlined" color="success" size="small">View Item</Button>
-  const createComplaint = <Button variant="outlined" color="error" size="small">Create Complaint</Button>
+  const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
+  const rateItem = <Button variant="outlined" color="success" size="small" component={Link} to="../FoodRating">Rate Item</Button>
+  const createComplaint = <Button variant="outlined" color="error" size="small" component={Link} to="../Complaints">Create Complaint</Button>
   return { 
     // payment, 
     date, 
@@ -142,6 +143,7 @@ function createData(amount, date, time, restaurant) {
         price: "2100.00",
         discounts: "0",
         viewItem,
+        rateItem,
         createComplaint
       },
       {
@@ -150,6 +152,7 @@ function createData(amount, date, time, restaurant) {
         price: "2200.00",
         discounts: "50",
         viewItem,
+        rateItem,
         createComplaint
       },
     ] };
@@ -193,6 +196,7 @@ function Row(props) {
                     <TableCell align="right">Total price</TableCell>
                     <TableCell align="right"></TableCell>
                     <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -208,6 +212,7 @@ function Row(props) {
                         {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
                       </TableCell>
                       <TableCell align="right">{detailsRow.viewItem}</TableCell>
+                      <TableCell>{detailsRow.rateItem}</TableCell>
                       <TableCell>{detailsRow.createComplaint}</TableCell>
                     </TableRow>
                   ))}
