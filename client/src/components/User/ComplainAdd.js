@@ -20,8 +20,8 @@ function ComplainAdd() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
 
-    const registeredCustomer ={
-      Resturant_Name:data.get('Resturant_Name'),
+    const complain ={
+      // ResturantName:data.get('Resturant_Name'),
       complainTitle:data.get('Complaint_Title'),
       complainDescription:data.get('Complaint'),
     }
@@ -32,6 +32,16 @@ function ComplainAdd() {
     const {name,value} = e.target;
     setFormValues({ ...formValues,[name]:value});
   }
+
+  React.useEffect((event) => {
+    if(isSubmit){
+      const complainTitle=formValues.Complaint_Title;
+      const complainDescription=formValues.Complaint;
+  
+    }else{
+      console.log("There is an error")
+    }
+  })
    
   return (
 
@@ -49,24 +59,35 @@ function ComplainAdd() {
  
         <Grid item xs={12}>
           <TextField
-            required
-            id="Resturant_Name"
-            name="Resturant_Name"
-            label="Resturant Name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-            sx={{"& label.Mui-focused": {
-                color:"#fff"
-              }}}
-            value={formValues.Resturant_Name}
-            onChnage={handleChange}
+          sx={{
+                input:
+                  { color: Colours.formWhite },
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
+                "& label.Mui-focused": {
+                  color: Colours.formWhite
+                },
 
-          />
+
+              }}
+
+              margin="normal"
+              required
+              fullWidth
+
+              label="Resturant_Name"
+              name='Resturant_Name'
+              autoComplete='name'
+
+              id="Restaurant_Name"
+              value={formValues.Resturant_Name}
+              onChange={handleChange}
+              
+
+            />
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
+          {/* <TextField
             required
             id="Complaint_Title"
             name="Complaint_Title"
@@ -79,17 +100,66 @@ function ComplainAdd() {
               }}}  
             value={formValues.Complaint_Title}
             onChnage={handleChange}  
-          />
+          /> */}
+
+        <TextField
+          sx={{
+                input:
+                  { color: Colours.formWhite },
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
+                "& label.Mui-focused": {
+                  color: Colours.formWhite
+                },
+
+
+              }}
+
+              margin="normal"
+              required
+              fullWidth
+
+              label="Complaint_Title"
+              name='Complaint_Title'
+              autoComplete='name'
+
+              id="Complaint_Title"
+              value={formValues.Complaint_Title}
+              onChange={handleChange}
+              
+
+            />
         </Grid>
         
         <Grid item xs={12} > 
         <TextareaAutosize
-            id="Complaint"
-            name="Complaint"
-            placeholder="Complaint"
-            style={{ width: "100%", paddingTop: '5px'}}
-            value={formValues.Complaint}
-            onChnage={handleChange} 
+      
+              sx={{
+                input:
+                  { color: Colours.formWhite },
+                "label": { color: Colours.formWhite, fontFamily: 'Poppins', },
+                "& label.Mui-focused": {
+                  color: Colours.formWhite
+                },
+
+
+              }}
+
+              margin="normal"
+              required
+              fullWidth
+              aria-label="minimum height"
+              label="Complaint"
+              name='Complaint'
+              minRows={10}
+              style={{ width: "100%"}}
+              autoComplete='name'
+              placeholder="Complaint"
+              id="Complaint"
+              value={formValues.Complaint}
+              onChange={handleChange}
+              
+
+
         />
         </Grid>
         
