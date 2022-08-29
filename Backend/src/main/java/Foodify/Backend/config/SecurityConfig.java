@@ -58,11 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
          "/Register/Signupuser",
-		"/Register/Signuppremiumuser",
-		"/FoodiFy/auth/login",
-		"/Restaurant/Register/Signuprestaurant",
-		"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout", "/Orders/All", "/FoodItems/All","/RegisteredUser/addComplains")
-		
+				"/Register/Signuppremiumuser",
+				"/FoodiFy/auth/login",
+				"/Restaurant/Register/Signuprestaurant",
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
+				"/RegisteredUser/addComplains")
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -70,7 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
 		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
-		http.authorizeRequests().anyRequest().authenticated();		
+		http.authorizeRequests().anyRequest().authenticated();
+		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 		// TODO Auto-generated method stub
 //		http.authorizeRequests().anyRequest().authenticated();

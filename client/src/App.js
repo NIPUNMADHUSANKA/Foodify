@@ -48,8 +48,6 @@ import ResetPassword from './pages/ResetPassword';
 import ViewEaten from './components/profile/VieweatenFooditems';
 import Navbar from './components/Navbar'
 
-import PurchaseHistory from './pages/PurchaseHistory';
-
 
 function App() {
   return (
@@ -102,7 +100,6 @@ function App() {
           <Route path="/restaurant/category" element={<FoodCategory />} />
 
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/purchaseHistory" element={<PurchaseHistory />} />
 
         </Routes>
         {/* <Footer/> */}
