@@ -182,7 +182,7 @@ TablePaginationActions.propTypes = {
 
 //----------------------------------------------------------Table Row Define
 function createData(resId,name ,location) {
-  const viewButton = <Button component={Link} to='/Restaurant' variant="outlined" color="success" >View Restaurant</Button>
+  const viewButton = <Button component={Link} to='/RestaurantOrder' variant="outlined" color="success" >View Restaurant</Button>
   const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
   const deleteButton = <Button variant="outlined" color="error">Block</Button>
   return { 
@@ -213,9 +213,9 @@ function createData(resId,name ,location) {
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 const rows = [
-  createData('B2342','Rasa Bojun','Colombo'),  
-  createData('B2343','KFC', 'Kegalle'),  
-  createData('B2344','MacDonalds','Colombo'),  
+  createData('B2342','Rachel Green','Colombo'),  
+  createData('B2343','Ross Geller', 'Kegalle'),  
+  createData('B2344','Monica Geller','Colombo'),  
   createData('B2345','Chandler Bing', 'Kegalle'),  
   createData('B2346','Joey Tribbiyani','Colombo'),  
   createData('B2347','Pheobe Buffay', 'Kegalle'),  

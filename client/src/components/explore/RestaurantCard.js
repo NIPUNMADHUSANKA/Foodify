@@ -1,15 +1,13 @@
 import image from '../../assets/images/foodimages/indian-food-served-on-table.jpg'
 
 import React from 'react'
-import { ThemeProvider, Stack, Typography, Button, Badge, styled } from '@mui/material';
+import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 // import LatestIcon from '../assets/images/latest_food.png';
-
-const id = "";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -23,62 +21,58 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 function ResCard(data) {
 
   console.log(data.data.restaurantName);
-  console.log(data.data);
   return (
     <ThemeProvider theme={theme}>
-      <Stack
+    <Stack
         type="button"
         alignItems="center"
         justifyContent="center"
         className="food-card"
-        sx={{
-          backgroundColor: Colours.transparenceGrey,
+        sx={{ 
+          backgroundColor:Colours.transparenceGrey,
           backdropFilter: "blur(30px)",
-          borderRadius: "33px",
-          color: Colours.white,
-          borderRadius: '10px',
-          maxWidth: '260px',
-          height: '300px',
-          cursor: 'pointer',
-          display: "Flex",
+          borderRadius:"33px" ,
+          color:Colours.white, 
+          borderRadius: '10px', 
+          maxWidth: '260px', 
+          height: '300px', 
+          cursor: 'pointer', 
+          display:"Flex",
           justifyContent: "space-between",
           paddingBottom: '5%',
-        }}
-      >
+           }}
+    >
         <StyledBadge color="secondary" badgeContent={"99+"}>
-          <img src={image} alt="food" style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
+          <img src={image} alt="food" style={{width:'252px', height:'150px',border: "5px solid #fff"}}/>
         </StyledBadge>
         <Typography fontSize="24px" fontWeight="400" mt="-15px">{data.data.restaurantName}</Typography>
-
+        
 
         <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
-          {data.data.address}
+        {data.data.address}
         </Typography>
 
         <Typography fontSize="15px" textAlign="center" mt="-15px" mb="-10px" fontWeight="200">
-          Colombo
+          Colombo  
         </Typography>
 
-
-        {/* to={"/restaurant"} */}
-        <IconButton variant='contained' component={Link} to={{
-          pathname: "/restaurant",
-          // your data array of objects
-        }}
+       
+          
+          <IconButton variant='contained' component={Link} to={"/restaurant"}
           style={{
-            borderRadius: 10,
-            backgroundColor: "#FAC213",
-            fontSize: "15px",
-            color: "#272727",
-            padding: "10px 10px",
-            marginLeft: "75%"
+              borderRadius: 10,
+              backgroundColor: "#FAC213",
+              fontSize: "15px",
+              color:"#272727",
+              padding:"10px 10px",
+              marginLeft: "75%"
           }}
-        >
-          <ArrowForwardIosIcon fontSize='8px' sx={{ color: "#272727" }} />
-        </IconButton>
+          >
+            <ArrowForwardIosIcon fontSize='8px' sx={{color:"#272727"}}/>
+          </IconButton>
+        
 
-
-      </Stack>
+    </Stack>
     </ThemeProvider>
   )
 }

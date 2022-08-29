@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,8 +10,7 @@ import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
 import axios from 'axios';
-import authHeader from "../../../services/auth-header";
-import { useNavigate } from 'react-router-dom';
+
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -86,7 +85,7 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
 }));
 
 
-// -----------------form1 update cover image----------------------------------
+// -----------------form1----------------------------------
 export const BannerForm1 = () => {
 
     const [open, setOpen] = React.useState(false);
@@ -98,14 +97,6 @@ export const BannerForm1 = () => {
     const handleClose = () => {
         setOpen(false);
     };
-
-    //  --------------------for preview the image------------------
-    const [imagePreview, setImagePreview] = useState(null);
-    // ----------------sending image for the backend--------------
-    const [imageData, setImageData] = useState(null);
-
-    const [imageName, setImageName] = useState("");
-    // --------keep the image name from the back end--------------------
 
     return (
 
@@ -270,9 +261,8 @@ export const AboutUsForm = () => {
             about:data.get('about_description')
         }
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs",restaurantAbout,{ headers: authHeader() }).then(data=>{
+        axios.post("http://localhost:8072/RestaurantInfo/editAbout",restaurantAbout ).then(data=>{
             console.log("Entry access sucessfull")
-            setOpen(false);
 
     })
     .catch(error =>{
@@ -349,9 +339,6 @@ export const AboutUsForm = () => {
 // ----------------contact details form----------------------------------
 export const ContactForm = () => {
 
-  const navigate = useNavigate();
-
-
     const [open, setOpen] = React.useState(false);
 
     // ----------------initial values
@@ -389,11 +376,9 @@ export const ContactForm = () => {
             restaurantInfo
         });
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo,{ headers: authHeader() })
+        axios.post("http://localhost:8072/RestaurantInfo/editContact", restaurantInfo)
         .then(data=>{
             console.log("Entry access sucessfull")
-            setOpen(false);
-            navigate("/RestaurantProfile")
 
         })
         .catch(error =>{
