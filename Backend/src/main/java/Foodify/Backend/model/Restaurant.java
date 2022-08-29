@@ -144,5 +144,5 @@ public class Restaurant {
 				+ ", closeHour=" + closeHour + ", logo=" + logo + ", bannerImage=" + bannerImage + ", bImage=" + bImage
 				+ "]";
 	}
-
+	
 }
