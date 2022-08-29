@@ -2,10 +2,12 @@ package Foodify.Backend.model;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Arrays;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -36,9 +38,11 @@ public class Restaurant {
 	private String openHours;
 	private LocalDateTime starttime;
 	private LocalDateTime closeHour;
+
 	private Binary logo;
 	private Binary bannerImage;
 	private String bImage;
+
 	
 	public String getId() {
 		return id;
@@ -133,7 +137,7 @@ public class Restaurant {
 	public void setbImage(String bImage) {
 		this.bImage = bImage;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="

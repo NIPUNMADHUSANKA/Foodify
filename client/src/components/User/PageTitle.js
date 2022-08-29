@@ -9,13 +9,14 @@ function PageTitle(props) {
         color: Colours.grayWhite,
         ml:"4%",
         mt:"3%",
+        fontWeight:"200",
 
         // Changing font family 
         fontFamily:"Poppins",
         [theme.breakpoints.down('sm')]: {
           fontSize: '220%',
           mt:"5%",
-          ml:"5%"
+          ml:"5%",
         }
       }}>
         {props.MainHeader}

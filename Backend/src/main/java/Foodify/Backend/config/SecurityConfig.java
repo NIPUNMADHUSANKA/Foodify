@@ -61,8 +61,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout",
-				"/RegisteredUser/addComplains")
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/RegisteredUser/addComplains", "/Orders/All", "/FoodItems/All")
+
+				
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -71,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
 		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
 		http.authorizeRequests().anyRequest().authenticated();
-		
+
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 		// TODO Auto-generated method stub
 //		http.authorizeRequests().anyRequest().authenticated();
