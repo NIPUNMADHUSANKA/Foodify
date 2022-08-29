@@ -1,6 +1,7 @@
 package Foodify.Backend.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,7 @@ public class UserService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
 		
 		Registered_Customer foundUser = userRepository.findByuserName(userName);
 		
@@ -44,7 +46,7 @@ public class UserService implements UserDetailsService{
 	}
 	
 	private List<GrantedAuthority> getUserAuthority(String getaccountState) {
-		
+		// TODO Auto-generated method stub
 		Set<GrantedAuthority> roles = new HashSet<>();
 		
 	        roles.add(new SimpleGrantedAuthority(getaccountState));

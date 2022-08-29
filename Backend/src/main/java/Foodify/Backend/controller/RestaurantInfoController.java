@@ -2,6 +2,7 @@ package Foodify.Backend.controller;
 
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.repository.RestaurantRepository;
+import Foodify.Backend.service.Restaurantserv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
