@@ -13,6 +13,7 @@ import AuthService from '../../services/auth-service';
 
 // -------to import forms------------
 import MenuForm from './profile/MenuForm';
+import authHeader from "../../services/auth-header";
 
 
 // ----------------------for the caousel----------------------
@@ -81,6 +82,27 @@ const RestaurantMenu = () => {
 
   ///-- Get Token UserName--///
   const currentUser = AuthService.getCurrentUser();
+
+/*
+  useEffect((event) => {
+
+    axois.get("http://localhost:8072/RegisteredUser/getFoodMenu", { headers: authHeader() })
+        .then(data => {
+            // this part if sucess
+            console.log(data);
+            console.log(currentUser);
+
+            const details = data.data;
+            setDetails({ ...details});
+        })
+        .catch(error => {
+
+            console.log(error);
+            
+
+        });
+
+}, []);*/
 
   return (
     <Box sx={{

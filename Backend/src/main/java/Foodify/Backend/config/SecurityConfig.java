@@ -61,12 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
-
-				"/RestaurantInfo/editContact", 
-				"/RestaurantInfo/editAbout",
-				"/RegisteredUser/addComplains",
-				"/RegisteredUser/addFoodMenu",
-				"/RegisteredUser/addFoodMenuCategory",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
 				"/RegisteredUser/addComplains")
 		.permitAll()
@@ -79,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
-		
+		// TODO Auto-generated method stub
 //		http.authorizeRequests().anyRequest().authenticated();
 //		http.formLogin();
 	}
@@ -144,7 +138,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //@Bean
 //@Override
 //public AuthenticationManager authenticationManagerBean() throws Exception {
-//	
+//	// TODO Auto-generated method stub
 //	return super.authenticationManagerBean();
 //}
 //

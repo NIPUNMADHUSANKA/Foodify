@@ -9,7 +9,7 @@ public class AuthenticationRequest {
 
 	public AuthenticationRequest() {
 
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getUserName() {
