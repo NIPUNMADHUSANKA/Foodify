@@ -1,13 +1,12 @@
 package Foodify.Backend.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import Foodify.Backend.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,9 @@ import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.model.Restaurant;
 
 
 //using cross origin annotation to communicate with react.js and spring
@@ -127,6 +127,46 @@ public class RestaurantController{
 	}
 	
 		
+
+	/* -------------------------------- Add Food Menu -------------------------------- */
+	@PostMapping("/RegisteredUser/addFoodMenu")
+	public ResponseEntity<?> addFoodMenu(@Valid @RequestBody FoodMenu foodMenu) {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		foodMenu.setUsername(userName);
+		
+		try {
+
+			return new ResponseEntity<>(service.addFoodMenu(foodMenu), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+
+	/* -------------------------------- Add Food Menu -------------------------------- */
+	@PostMapping("/RegisteredUser/addFoodMenuCategory")
+	public ResponseEntity<?> addFoodCategory(@Valid @RequestBody FoodCategory foodCategory) {
+		
+		try {
+
+			return new ResponseEntity<>(service.addFoodMenuCategory(foodCategory), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+
+
 	
 	
 	

@@ -1,7 +1,9 @@
 package Foodify.Backend.service;
 import org.springframework.http.ResponseEntity;
 
-import Foodify.Backend.model.Registered_Customer;
+import Foodify.Backend.exception.FoodMenuException;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodMenu;
 
 public interface Restaurantserv {
 
@@ -10,6 +12,10 @@ public interface Restaurantserv {
 	public String passwordEncorder(String userName,String email,String password, String accountStatus);
 	
 	public void updateContactDetails(String username);
+
+	public FoodMenu addFoodMenu(FoodMenu foodMenu) throws FoodMenuException;
+
+	public FoodCategory addFoodMenuCategory(FoodCategory foodCategory) throws FoodMenuException;
 	
 	
 }

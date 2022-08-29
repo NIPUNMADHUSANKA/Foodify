@@ -120,7 +120,7 @@ function AddFoodMenuIns() {
                     <Button variant="contained" sx={{color:'#000',backgroundColor:"#EFEAEA", '&:hover': {
                         backgroundColor: Colours.formWhite,
                     }}} component={Link} to = "/AddFoodMenuItem">
-                    Next
+                    Confirm
                     </Button>
 
                 </Grid>

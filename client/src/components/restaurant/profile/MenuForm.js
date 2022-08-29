@@ -7,7 +7,10 @@ import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import Slide from '@mui/material/Slide';
 import styled from '@emotion/styled';
+import UserService from '../../../services/user-service';
 
+import axios from "axios";
+import authHeader from "../../../services/auth-header";
 
 
 // ----------for the transition of the form------------
@@ -55,6 +58,20 @@ function MenuForm() {
 
     const [open, setOpen] = React.useState(false);
 
+    // -------------initial states for fields---------------------------
+    const initialValues = { foodMenuName: "", foodMenuDes: "" };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    // ----------create state name form errors--------
+    const [formErrors, setFormErrors] = React.useState({});
+
+    // -------------usestate for submit form-----------
+    const [isSubmit, setIsSubmit] = React.useState(false);
+
+
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -62,6 +79,42 @@ function MenuForm() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const errors = {};
+
+        // creating menu object
+        const restaurantmenu = {
+            foodMenuName: formValues.foodMenuName,
+            foodMenuDes: formValues.foodMenuDes
+        }
+
+        axios.post("http://localhost:8072/RegisteredUser/addFoodMenu", restaurantmenu, { headers: authHeader() })
+        .then(data => {
+            console.log("Entry access sucessfull");
+            setFormValues(initialValues);
+            setOpen(false);
+        })
+        .catch(error => {
+             errors.exists = error.response.data;
+             setFormErrors(errors);
+
+        })
+
+    }
+
+    // -------function to handle changes in the input fields and set it to formvalues----------
+    const handleChange = (e) => {
+
+        // destructuring inputfield
+        const { name, value } = e.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+
+
+    }
 
     return (
 
@@ -108,18 +161,32 @@ function MenuForm() {
                         noValidate
                         autoComplete="off">
 
-                        <CustomTextField id="restaurant_name" label="Food Menu Name" name="restaurant_name" variant="outlined" />
+                        <CustomTextField id="foodMenuName" label="Food Menu Name" name="foodMenuName" variant="outlined"
+
+                            value={formValues.foodMenuName}
+                            onChange={handleChange}
+                            {...(formErrors.exists && { error: true, helperText: formErrors.exists})}
+
+                        />
+
+
                         <CustomTextField type="file" name='image' />
 
                         <CustomTextField
-                            id="about_description"
+                            id="foodMenuName"
                             label="About Food Menu"
-                            name="about_description"
+                            name="foodMenuDes"
                             variant="outlined"
-                            multiline rows={8} />
+                            multiline rows={8}
+
+                            value={formValues.foodMenuDes}
+                            onChange={handleChange}
+                            {...(formErrors.exists && { error: true, helperText: formErrors.exists})}
+
+                        />
 
                         <Box>
-                            <Button type='submit' sx={{
+                            <Button onClick={handleSubmit} sx={{
                                 margin: '0.5rem',
                                 background: Colours.green, '&:hover': {
                                     backgroundColor: Colours.yellow,

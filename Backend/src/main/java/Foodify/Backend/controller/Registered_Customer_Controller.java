@@ -11,16 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-
-import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
@@ -34,10 +26,6 @@ public class Registered_Customer_Controller {
 
 	@Autowired
 	private Registered_Customer_Sev RegCusServ;
-	
-	@Autowired
-	private Registered_Customer_Repository RegCusRepo;
-	
 	
 	@GetMapping("/Foodify/{Username}/{Password}")
 	public ResponseEntity<?> Login(@PathVariable("Username") String Username, @PathVariable("Password") String Password ){

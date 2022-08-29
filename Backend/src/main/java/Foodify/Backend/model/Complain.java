@@ -1,6 +1,5 @@
 package Foodify.Backend.model;
 
-import java.io.File;
 import java.sql.Date;
 
 import org.springframework.data.annotation.Id;
