@@ -6,21 +6,39 @@ import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Foodify.Backend.exception.FoodMenuException;
+import org.springframework.web.multipart.MultipartFile;
+
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.FoodCategory;
 import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.repository.Registered_Customer_Repository;
+
 import Foodify.Backend.repository.FoodCategoryRepo;
 import Foodify.Backend.repository.FoodMenuRepo;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Service
 public class RestaurantService implements Restaurantserv {
@@ -117,8 +135,45 @@ public class RestaurantService implements Restaurantserv {
 
 	}
 
-	// --------------------------end of for validate userName and
-	// email--------------------------------------------
+//---------------------for upload cover image-------------------------------
+	@Override
+	public void init(String userName) {
+		// TODO Auto-generated method stub
+		
+			
+	}
+
+
+
+	@Override
+	public void saveBanner(MultipartFile file, String username) {
+		// TODO Auto-generated method stub
+		
+		String imageDirectory = System.getProperty("user.dir") + "/uploads/restaurantBanners/"+username;
+		final Path root = Paths.get("uploads");
+		final Path fileNamePath = Paths.get(imageDirectory,username.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+		
+		try {
+		      Files.createDirectory(fileNamePath);
+		    } catch (IOException e) {
+		      throw new RuntimeException("Could not initialize folder for upload!");
+		    }
+		
+		try {
+		      Files.copy(file.getInputStream(),fileNamePath.resolve(file.getOriginalFilename()));
+		    } catch (Exception e) {
+		      throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
+		    }
+		
+	}
+
+
+
+	@Override
+	public Resource loadBanner(String filename) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	@Override

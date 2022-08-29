@@ -1,15 +1,30 @@
 package Foodify.Backend.controller;
 
+import java.awt.PageAttributes.MediaType;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import Foodify.Backend.model.Restaurant;
+
+import org.apache.commons.io.FilenameUtils;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
@@ -126,6 +141,7 @@ public class RestaurantController{
 		restaurantrepo.save(restaurant);
 	}
 	
+
 		
 
 	/* -------------------------------- Add Food Menu -------------------------------- */
@@ -168,6 +184,70 @@ public class RestaurantController{
 
 
 	
+
+//---------------upload cover image--------------------------------------
+    @PostMapping("/FoodiFy/Restaurant/uploadBannerImage")
+    public ResponseEntity<?> uploadImage(@RequestParam("imageFile")MultipartFile file) throws IOException {
+    	
+    	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+    					
+    	
+//    	String imageDirectory = System.getProperty("user.dir") + "/uploads/restaurantBanners/"+userName;
+//        makeDirectoryIfNotExist(imageDirectory);
+//        System.out.println(imageDirectory);
+//        Path fileNamePath = Paths.get(imageDirectory,userName.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+//        System.out.println(fileNamePath);
+        
+//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+        Restaurant restaurant = restaurantrepo.findByuserName(userName);
+        restaurant.setBannerImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        System.out.println(restaurant.getBannerImage());
+        restaurantrepo.save(restaurant);
+        
+		return new ResponseEntity<>(userName, HttpStatus.CREATED);
+       
+    }
+
+//    private void makeDirectoryIfNotExist(String imageDirectory) {
+//        File directory = new File(imageDirectory);
+//        if (!directory.exists()) {
+//            directory.mkdir();
+//        }
+//    }
+    
+//    -------------------get restaurant information-----------------------------
+    @GetMapping("/FoodiFy/Restaurant/GetRestaurant")
+    private String getRestaurantCover(Model model) {
+    	
+    	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+    	Restaurant restaurant = restaurantrepo.findByuserName(userName);
+    	
+//    	model.addAttribute(restaurant);
+    	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+    	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+    	
+    	System.out.println(restaurant.getbImage());
+    	
+		return restaurant.getbImage();
+    	
+    }
+    
+    
+  //--------------------------------------------upload Logo details--------------------------------------------------------
+    @PostMapping("/FoodiFy/Restaurant/uploadLogoDetails")
+    public ResponseEntity<?> uploadLogoDetails(@RequestParam("imageFile")MultipartFile file) throws IOException {
+    	
+    	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+        Restaurant restaurant = restaurantrepo.findByuserName(userName);
+        restaurant.setBannerImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        System.out.println(restaurant.getBannerImage());
+        restaurantrepo.save(restaurant);
+        
+		return new ResponseEntity<>(userName, HttpStatus.CREATED);     
+    }
+
 	
 	
 	

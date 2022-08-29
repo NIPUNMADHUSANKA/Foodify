@@ -61,15 +61,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
 				"/Restaurant/Register/Signuprestaurant",
+
 				"/RestaurantInfo/editContact", 
 				"/RestaurantInfo/editAbout",
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addFoodMenu",
 				"/RegisteredUser/addFoodMenuCategory")
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
+				"/RegisteredUser/addComplains")
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("user");
+		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
 		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
