@@ -50,16 +50,10 @@ const Explore = () => {
                 console.log(currentUser);
 
                 const details = data.data;
+
                 setDetails({ ...details});
             })
             .catch(error => {
-
-                if (error.response.data) {
-
-                    error.response.data.fieldErrors.forEach(fieldError => {
-
-                    });
-                }
 
             });
 

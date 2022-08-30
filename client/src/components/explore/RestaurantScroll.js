@@ -35,19 +35,10 @@ function FoodScroll(details) {
         mb: "6%"
       }}>
       <Carousel breakPoints={breakpoints} pagination={true} disableArrowsOnEnd={true} sx={{ paddingTop: "1%" }}>
-        {/* {console.log(details)} */}
 
-        {/* {console.log(x)} 
-        {Array.isArray(x.details)
-          ?
-          x.details.map(info =>
-            
-              (<RestaurantCard />))
-          : null
-        } */}
-
-        {Object.keys(x).map((keyName, i) => (
+        {Object.keys(x).map((keyName) => (
           console.log(x[keyName]),
+          
           <RestaurantCard data={x[keyName]} />
           
         ))}
