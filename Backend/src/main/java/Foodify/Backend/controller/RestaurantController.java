@@ -101,7 +101,18 @@ public class RestaurantController{
 	@GetMapping("/FoodiFy/Service/ShowRestaurant")
 	public List<Restaurant> showRestaurants() {
 		
-		return restaurantrepo.findAll();
+		List<Restaurant> restaurants = restaurantrepo.findAll();
+
+//		System.out.println(restaurants);
+//		
+		for(int i = 0; i<restaurants.size();i++) {
+			restaurants.get(i).setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+			
+			return restaurants;
+		}
+		return restaurants;
+		
+		
 		
 	}
 	
@@ -133,7 +144,7 @@ public class RestaurantController{
 		Restaurant restaurant = restaurantrepo.findByuserName(userName);
 //		System.out.println(restaurant.getUserId());
 		
-		restaurant.setAddress(AboutUs.getAbout());
+		restaurant.setAbout(AboutUs.getAbout());
 //		restaurant.setLocation(contactDetails.getLocation());
 //		restaurant.setTelephone(contactDetails.getTelephone());
 		
@@ -181,7 +192,7 @@ public class RestaurantController{
     	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	
-    	System.out.println(restaurant.getbImage());
+//    	System.out.println(restaurant.getbImage());
     	
 		return restaurant.getbImage();
     	
@@ -190,18 +201,38 @@ public class RestaurantController{
     
   //--------------------------------------------upload Logo details--------------------------------------------------------
     @PostMapping("/FoodiFy/Restaurant/uploadLogoDetails")
-    public ResponseEntity<?> uploadLogoDetails(@RequestParam("imageFile")MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadLogoDetails(@RequestParam("imageFile")MultipartFile file,@RequestParam("restName") String name) throws IOException {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
     	
 //    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
         Restaurant restaurant = restaurantrepo.findByuserName(userName);
-        restaurant.setBannerImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
-        System.out.println(restaurant.getBannerImage());
+        restaurant.setLogo(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        restaurant.setRestaurantName(name);
+        
+        System.out.println(name);
+        
         restaurantrepo.save(restaurant);
         
 		return new ResponseEntity<>(userName, HttpStatus.CREATED);     
     }
+    
+//  -------------------get restaurant information-----------------------------
+  @GetMapping("/FoodiFy/Restaurant/GetRestaurantInfo")
+  private Restaurant getRestaurant(Model model) {
+  	
+  	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+  	Restaurant restaurant = restaurantrepo.findByuserName(userName);
+  	
+//  	model.addAttribute(restaurant);
+  	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+  	restaurant.setTempLogo(Base64.getEncoder().encodeToString(restaurant.getLogo().getData()));
+  	
+//  	System.out.println(restaurant.getbImage());
+  	
+		return restaurant;
+  	
+  }
 	
 	
 	

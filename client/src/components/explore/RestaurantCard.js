@@ -1,6 +1,6 @@
 import image from '../../assets/images/foodimages/indian-food-served-on-table.jpg'
 
-import React from 'react'
+import React, { useState } from 'react';
 import { ThemeProvider, Stack, Typography, Button, Badge, styled } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import IconButton from '@mui/material/IconButton';
@@ -22,8 +22,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function ResCard(data) {
 
+  const [Cover1, setCover] = useState(null);
+
+  setCover(data.data.bImage)
+
   console.log(data.data.restaurantName);
-  console.log(data.data);
+  console.log(data.data.bImage);
+
   return (
     <ThemeProvider theme={theme}>
       <Stack
@@ -46,7 +51,9 @@ function ResCard(data) {
         }}
       >
         <StyledBadge color="secondary" badgeContent={"99+"}>
-          <img src={image} alt="food" style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
+          <img src={image} 
+          alt="food" 
+          style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
         </StyledBadge>
         <Typography fontSize="24px" fontWeight="400" mt="-15px">{data.data.restaurantName}</Typography>
 
