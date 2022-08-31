@@ -16,6 +16,9 @@ import AddFoodMenuCat from './AddFoodMenuCat';
 import PAGE1 from '../../assets/icons/page01.png'
 import PAGE2 from '../../assets/icons/page02.png'
 
+import {Link} from 'react-router-dom';
+
+
 // ----------array or object ot get category values--------------------
 const category = [
     {
@@ -79,7 +82,7 @@ function AddFoodMenuIns() {
         <Box component="form" color="#fff" bgcolor="#171717" opacity="50" sx= {{display: "flex",flexDirection: "column",borderRadius: '20px',p:"3%", '& .MuiTextField-root': { m: 1, width: '96%' }, width:{lg:"45vw",xs:"55vw"} }} >
         
           <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"230%",xs:"180%"} }} >
-               Add Foods Menu
+                Foods Menu Name
           </Typography>
     
           <Box sx={{
@@ -116,8 +119,8 @@ function AddFoodMenuIns() {
 
                     <Button variant="contained" sx={{color:'#000',backgroundColor:"#EFEAEA", '&:hover': {
                         backgroundColor: Colours.formWhite,
-                    }}}>
-                    Next
+                    }}} component={Link} to = "/AddFoodMenuItem">
+                    Confirm
                     </Button>
 
                 </Grid>

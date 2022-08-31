@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -101,7 +102,27 @@ public class RestaurantController{
 	@GetMapping("/FoodiFy/Service/ShowRestaurant")
 	public List<Restaurant> showRestaurants() {
 		
-		return restaurantrepo.findAll();
+		List<Restaurant> restaurants = restaurantrepo.findAll();
+		List<Restaurant> restaurantsList = new ArrayList<Restaurant>();
+
+//		System.out.println(restaurants);
+//		
+		for(int i = 0; i<restaurants.size();i++) {
+			Restaurant restaurant = new Restaurant();
+			
+			restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
+			restaurant.setAddress(restaurants.get(i).getAddress());
+			restaurant.setId(restaurants.get(i).getId());
+			
+			restaurantsList.add(restaurant);
+
+		}
+		
+		System.out.println(restaurantsList);
+		return restaurantsList;
+		
+		
 		
 	}
 	
@@ -133,10 +154,8 @@ public class RestaurantController{
 		Restaurant restaurant = restaurantrepo.findByuserName(userName);
 //		System.out.println(restaurant.getUserId());
 		
-		restaurant.setAddress(AboutUs.getAbout());
-//		restaurant.setLocation(contactDetails.getLocation());
-//		restaurant.setTelephone(contactDetails.getTelephone());
-		
+		restaurant.setAbout(AboutUs.getAbout());
+
 		restaurantrepo.save(restaurant);
 	}
 	
@@ -178,10 +197,10 @@ public class RestaurantController{
     	Restaurant restaurant = restaurantrepo.findByuserName(userName);
     	
 //    	model.addAttribute(restaurant);
-    	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+//    	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	
-    	System.out.println(restaurant.getbImage());
+//    	System.out.println(restaurant.getbImage());
     	
 		return restaurant.getbImage();
     	
@@ -190,18 +209,50 @@ public class RestaurantController{
     
   //--------------------------------------------upload Logo details--------------------------------------------------------
     @PostMapping("/FoodiFy/Restaurant/uploadLogoDetails")
-    public ResponseEntity<?> uploadLogoDetails(@RequestParam("imageFile")MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadLogoDetails(@RequestParam("imageFile")MultipartFile file,@RequestParam("restName") String name) throws IOException {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
     	
 //    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
         Restaurant restaurant = restaurantrepo.findByuserName(userName);
-        restaurant.setBannerImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
-        System.out.println(restaurant.getBannerImage());
+        restaurant.setLogo(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        restaurant.setRestaurantName(name);
+        
+        System.out.println(name);
+        
         restaurantrepo.save(restaurant);
         
 		return new ResponseEntity<>(userName, HttpStatus.CREATED);     
     }
+    
+//  -------------------get restaurant information-----------------------------
+  @GetMapping("/FoodiFy/Restaurant/GetRestaurantInfo")
+  private Restaurant getRestaurant(Model model) {
+  	
+  	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+  	Restaurant restaurant = restaurantrepo.findByuserName(userName);
+  	
+//  	model.addAttribute(restaurant);
+  	restaurant.setTempLogo(Base64.getEncoder().encodeToString(restaurant.getLogo().getData()));
+  	
+//  	System.out.println(restaurant.getbImage());
+		return restaurant;
+  }
+  
+//---------------------------------------------get restaurant information from user view-------------------------------------------------------
+@GetMapping("/FoodiFy/Service/GetRestaurantInfo/{id}")
+private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
+	
+	System.out.println(id);
+	Restaurant restaurant = restaurantrepo.findByid(id);
+	
+	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+	restaurant.setTempLogo(Base64.getEncoder().encodeToString(restaurant.getLogo().getData()));
+	
+//	System.out.println(restaurant.getbImage());
+//		return restaurant;
+	return restaurant;
+}
 	
 	
 	

@@ -102,6 +102,8 @@ export default function SignIn() {
         (response) => {
             
             localStorage.setItem("ROLE", JSON.stringify(response.data.roles));
+            
+            localStorage.setItem("USERNAME", JSON.stringify(response.data.userName));
 
             const ROLE = JSON.parse(localStorage.getItem('ROLE'));
             const CHECKROLE = ROLE[0].authority;

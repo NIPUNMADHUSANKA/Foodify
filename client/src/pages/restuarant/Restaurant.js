@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 
 // to import necessacry components of the restuarant page
@@ -16,6 +15,10 @@ import Map from '../../assets/images/GoogleMapTA.webp';
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import Navbar from './../../components/Navbar';
+import { useLocation } from 'react-router-dom';
+import axois from "axios";
+import { Data } from '@react-google-maps/api';
+
 
 // to collect the description imformation
 const details = {
@@ -24,16 +27,10 @@ const details = {
   "detail3": " Chef Michael Anthony's ever-evolving seasonal menu showcases the restaurant's relationships with local farms and purveyors.",
 }
 
-
 const contactdetails = {
   "Location": "Location",
   "Address": "401/A1,3rd lane,Gale Road",
   "TpNumber": "011-2738920",
-}
-
-const comments = {
-  "name": "username",
-  "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
 }
 
 const comments1 = [
@@ -67,6 +64,43 @@ const Restaurant = () => {
     document.title = "Restaurant Page";
   })
 
+  // --------------to get the id------------------
+  const location = useLocation();
+  // console.log(location)
+
+  // ----------------calling restaurant data------------------------------
+
+  const [Data, setData] = useState([]);
+
+  useEffect((event) => {
+
+    axois.get(`http://localhost:8072/FoodiFy/Service/GetRestaurantInfo/${location.state.id}`)
+        .then(data => {
+            // this part if sucess
+            setData(data.data)
+            
+        })
+        .catch(error => {
+
+        });
+
+}, []);
+
+console.log(Data)
+
+const details1 = {
+  "detail1": Data.about,
+  "detail2": "",
+  "detail3": " ",
+}
+
+const contactdetails1 = {
+  "Location": Data.location,
+  "Address": Data.address,
+  "TpNumber": Data.telephone,
+}
+
+
   return (
     <Box>
 
@@ -76,11 +110,11 @@ const Restaurant = () => {
       </Fade>
 
       <Fade>
-        <RestaurantBanner />
+        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName}/>
       </Fade>
 
       <Fade left>
-        <RestaurantAbout AboutImage={AboutImage} details={details} />
+        <RestaurantAbout AboutImage={AboutImage} details={details1} />
       </Fade>
 
       <Fade right>
@@ -96,7 +130,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade left>
-        <RestaurantContact Map={Map} details={contactdetails} />
+        <RestaurantContact Map={Map} details={contactdetails1} />
       </Fade>
 
     </Box>

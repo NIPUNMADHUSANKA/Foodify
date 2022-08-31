@@ -16,5 +16,6 @@ public interface RestaurantRepository extends MongoRepository<Restaurant, String
 //	public List<Restaurant> findlast();
 	
 	Restaurant findByuserName(String userName);
+	Restaurant findByid(String id);
 
 }

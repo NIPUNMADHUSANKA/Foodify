@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ThemeProvider, Box, Typography, Tab, Tabs } from '@mui/material';
 
-import Menubar from '../components/Menubar';
 import ExploreF from '../components/explore/Explore.js';
 // import Tabs from '../components/explore/Tabs';
 import FoodScroll from '../components/explore/FoodScroll';
@@ -11,7 +10,6 @@ import TabPanel from '../components/TabPanel';
 
 import theme from '../assets/theme/theme';
 import AuthService from '../services/auth-service';
-import UserService from '../services/user-service';
 import axois from "axios";
 
 // for scroll reveals
@@ -52,16 +50,10 @@ const Explore = () => {
                 console.log(currentUser);
 
                 const details = data.data;
+
                 setDetails({ ...details});
             })
             .catch(error => {
-
-                if (error.response.data) {
-
-                    error.response.data.fieldErrors.forEach(fieldError => {
-
-                    });
-                }
 
             });
 

@@ -35,7 +35,12 @@ const logout = () => {
 
 
 const getCurrentUser = () => {
+  console.log(localStorage.getItem("TOKEN"));
   return JSON.parse(localStorage.getItem("TOKEN"));
+};
+
+const getCurrentUsername = () => {
+  
 };
 
 
@@ -44,6 +49,7 @@ const AuthService = {
   login,
   logout,
   getCurrentUser,
+  getCurrentUsername
 };
 
 
