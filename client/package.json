@@ -21,6 +21,7 @@
     "css-loader": "^6.7.1",
     "date-fns": "^2.29.1",
     "google-maps-react": "^2.0.6",
+    "pluscodes": "^2.5.1",
     "postcss-loader": "^7.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

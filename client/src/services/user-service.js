@@ -9,7 +9,9 @@ const getPublicContent = () => {
 
 const getUserInfo = () => {
     return axios.get("http://localhost:8072/FoodiFy/auth/userinfo", { headers: authHeader() });
-  };
+};
+
+
 
 const getUserBoard = () => {
   return axios.get(API_URL + "user", { headers: authHeader() });

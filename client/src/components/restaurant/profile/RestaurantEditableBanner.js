@@ -105,6 +105,16 @@ const RestaurantEditableBanner = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const [open2, setOpen2] = React.useState(false);
+
+    const handleClickOpen2 = () => {
+        setOpen2(true);
+    };
+
+    const handleClose2 = () => {
+        setOpen2(false);
+    };
     // ------------------------------------------------------------------
 
     //  --------------------for preview the image------------------
@@ -112,13 +122,30 @@ const RestaurantEditableBanner = () => {
     // ----------------sending image for the backend--------------
     const [imageData, setImageData] = useState(null);
 
+    //  --------------------for preview the image2------------------
+    const [imagePreview2, setImagePreview2] = useState(null);
+    // ----------------sending image2 for the backend--------------
+    const [imageData2, setImageData2] = useState(null);
+
     const [imageName, setImageName] = useState("");
 
     const [Cover1, setCover] = useState(null);
 
+    const [Logo1, setLogo] = useState(null);
+
     // ---------------set response data ----------------------------------------------
     const [image, setImage] = useState(null);
     // console.log(data);
+
+    // -------------initial states for fields---------------------------
+    const initialValues = { restaurant_name: "" };
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    // -------------initial states for fields---------------------------
+    const initialValues2 = { restaurant_name: "" };
+    // ----------create state name form values--------
+    const [RestaurantName, setName] = React.useState(initialValues2);
 
     const blob = null;
 
@@ -126,27 +153,49 @@ const RestaurantEditableBanner = () => {
 
         axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurant", { headers: authHeader() })
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setCover(data.data)
 
-                if(data.data==null){
-                    setImagePreview(Cover);
-                }
-                // const blob = new Blob([Int8Array.from(data.data)]);
-                // const image1 = window.URL.createObjectURL(blob);
-                // console.log(image1)
-                // setImage(URL.createObjectURL(blob));
-
-                // const imageData = new FormData();
-                // imageData.append('imageFile', blob);
-                // setImageData(imageData);
-                // setImagePreview(URL.createObjectURL(blob));
-            }).catch(err => console.log(err));
-
-
+            }).catch(err => {
+                console.log(err)
+                setImagePreview(Cover);
+            });
 
         console.log("hello");
 
+    }, []);
+
+    useEffect(() => {
+
+        axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantInfo", { headers: authHeader() })
+            .then(data => {
+                console.log(data)
+
+                const image = data.data.tempLogo;
+                setLogo(image);
+
+                setName({ ...RestaurantName, ["restaurant_name"]: data.data.restaurantName });
+                // setName(data.data.restaurantName)
+
+                console.log(`data:image/jpeg;base64,${Logo1}`)
+                console.log(data.data.restaurantName)
+
+                // {Logo1 !== null ? setImagePreview2(Logo1) : setImagePreview2(Logo)}
+
+                // if (data.data.tempLogo == null) {
+                //     setImagePreview2(Logo);
+                // }
+                // if (data.data.restaurantName == null) {
+                //     setName("Restaurant_Name")
+                // }
+            }).catch(err => {
+                console.log(err)
+
+                    setImagePreview2(Logo);
+
+                    setName({ ...RestaurantName, ["restaurant_name"]: "Restaurant_Name"})
+
+            });
     }, []);
 
     // ---------------preview function-------------------
@@ -164,7 +213,7 @@ const RestaurantEditableBanner = () => {
                 console.log("Entry access sucessfull")
                 window.location.reload(false);
                 setOpen(false);
-                
+
             })
             .catch(error => {
                 // console.log(restaurantAbout)
@@ -172,6 +221,47 @@ const RestaurantEditableBanner = () => {
 
             })
     }
+
+    // -----------------------------for the logo part--------------------------------------------
+    const handleUploadClick2 = event => {
+        let file = event.target.files[0];
+        const imageData2 = new FormData();
+        imageData2.append('imageFile', file);
+        setImageData2(imageData2);
+        setImagePreview2(URL.createObjectURL(file));
+    }
+
+    const handleChange2 = event2 => {
+
+        // setImageName(event2.target.value);
+        // destructuring inputfield
+        const { name, value } = event2.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+        console.log(imageName);
+
+
+    };
+
+    // ---------------------------for uploading the logo-----------------------------------------
+    const uploadImageWithAdditionalData2 = () => {
+
+        imageData2.append('restName', formValues.restaurant_name);
+
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/uploadLogoDetails", imageData2, { headers: authHeader() })
+            .then(data => {
+                console.log("Entry access sucessfull")
+                window.location.reload(false);
+                setOpen2(false);
+
+            })
+            .catch(error => {
+                // console.log(restaurantAbout)
+                // console.log("There is an error")
+
+            })
+    }
+    
 
     const showCoverImage = () => {
 
@@ -314,10 +404,10 @@ const RestaurantEditableBanner = () => {
 
                 {/* lower part of the banner */}
                 <BannerContainer2>
-                    <BannerLogo src={Logo} />
+                    <BannerLogo src={imagePreview2 !== null ? imagePreview2 : `data:image/jpeg;base64,${Logo1}`} />
                     <BannerContent2>
                         <BannerTitle>
-                            Reastaurant Name
+                            {RestaurantName.restaurant_name}
                         </BannerTitle>
 
                         <BannerTitle2>
@@ -331,8 +421,65 @@ const RestaurantEditableBanner = () => {
                         }} />
 
                     </BannerContent2>
-                    {/* ----------from2------------------ */}
-                    <BannerForm2 />
+                    {/* -------------------------------------------from2-------------------------------------- */}
+                    {/* <BannerForm2 /> */}
+                    <Box sx={{
+                        width: "10%",
+                        marginTop: 4,
+                        [theme.breakpoints.down('sm')]: {
+                            marginTop: 0.4,
+                        },
+                    }} >
+                        <IconButton sx={{
+                            background: Colours.yellow, '&:hover': {
+                                backgroundColor: Colours.green,
+                            },
+                            color: Colours.green,
+                            [theme.breakpoints.down('sm')]: {
+                                '& svg': {
+                                    fontSize: "15px",
+                                }
+                            },
+
+                        }} onClick={handleClickOpen2} >
+                            <EditIcon sx={{
+                                color: Colours.dark,
+                            }} />
+                        </IconButton>
+
+                        {/* ---------------------------form------------------------- */}
+                        <Dialog
+                            open={open2}
+                            keepMounted
+                            TransitionComponent={Transition}
+
+                        >
+                            <DialogTitle>{"Update Logo and name"}</DialogTitle>
+                            <DialogContent>
+                                <Box component="form"
+                                    noValidate
+                                    autoComplete="off">
+
+                                    <CustomTextField
+                                        id="restaurant_name"
+                                        label="Restaurant_name"
+                                        name="restaurant_name"
+                                        variant="outlined"
+                                        onChange={handleChange2}
+                                    />
+                                    <CustomTextField type="file" name='image' onChange={handleUploadClick2} />
+
+                                    <Box>
+                                        <UpdateButton onClick={uploadImageWithAdditionalData2}>Update</UpdateButton>
+                                        <CancelButton onClick={handleClose2}> Cancel </CancelButton>
+                                    </Box>
+
+                                </Box>
+                            </DialogContent>
+                        </Dialog>
+
+                    </Box>
+                    {/* ---------------------------------end of form 2----------------------------------------------------------- */}
 
                 </BannerContainer2>
                 {/* end of the lower part of the banner */}

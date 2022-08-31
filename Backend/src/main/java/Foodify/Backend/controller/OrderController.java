@@ -23,7 +23,7 @@ public class OrderController {
     @Autowired(required = false) //error debugged by false
     private Order_Service order_service;
 
-    @GetMapping("/FoodiFy/User/{userId}")
+    @GetMapping("/FoodiFy/User/Orders/{userId}")
     public List<Order> ordersByUser(@PathVariable String userId){
         return (order_repository.findByUser(userId));
     }
