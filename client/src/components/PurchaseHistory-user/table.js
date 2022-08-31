@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -24,6 +25,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Link} from 'react-router-dom';
+
 
 //----------------------------------------------------------styles for table
 const tableSx = {
@@ -159,6 +161,7 @@ function createData(amount, date, time, restaurant) {
 }
 
 function Row(props) {
+  // console.log(props);
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -242,28 +245,31 @@ Row.propTypes = {
   })
 };
 
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData(8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-]
 
-function TableActions() {
-  
+
+function TableActions(details) {
+
+  //----------------------------------------------------------accepting data array object out of details object
+  const info = details.data;
+  var date, time, price, restaurant;
+
+  const rows = [
+    Object.keys(info).map((key, index) => (
+      date = info[key].datetime,
+      time = info[key].datetime,
+      price = 1250,
+      restaurant = "RestaurantZ",
+      createData(price, date, time, restaurant)
+      ))
+  ];
+
+  const rowsData = rows[0];
+
+  //-----------------------------------------------------------end of modyfyng data to the table, now rowsData is a array
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
 
   //----------------------------------------------------------Column Define 
   const columns = [
@@ -288,6 +294,7 @@ function TableActions() {
     setPage(0);
   };
 
+
   return (
     <Paper sx={tableSx}>
     <TableContainer sx={{ maxHeight: 440 }}>
@@ -310,10 +317,8 @@ function TableActions() {
 
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <Row key={row.payment} row={row} />
+            ? rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage): rowsData).map((row) => (
+            <Row key={row.date} row={row} />
           ))}
 
           {emptyRows > 0 && (
@@ -321,6 +326,7 @@ function TableActions() {
               <TableCell colSpan={6} />
             </TableRow>
           )}
+          
         </TableBody>
 
         <TableFooter>

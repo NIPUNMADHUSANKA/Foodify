@@ -48,6 +48,8 @@ import ResetPassword from './pages/ResetPassword';
 import ViewEaten from './components/profile/VieweatenFooditems';
 import Navbar from './components/Navbar'
 
+import PurchaseHistory from './pages/PurchaseHistory';
+
 
 function App() {
   return (
@@ -78,6 +80,7 @@ function App() {
           <Route path="/Restaurant/Category/Orderfood/userorder" element = {<UserOrder/>} />
           <Route path="/usernotification" element ={<UserNotification/>} />
           <Route path="/ViewEatenFoodItems" element ={<ViewEaten/>} />
+          <Route path="/PurchaseHistory" element ={<PurchaseHistory/>} />
 
 
           <Route path="/Restaurant/Category" element={<FoodCategory />} />

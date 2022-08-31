@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
+import { useEffect,useState} from 'react';
 
-import { Box, Grid, Container, Paper, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
+import { Box, Typography } from '@mui/material';
 
 import PageTitle from '../components/User/PageTitle';
-import CardBar from '../components/User/CardBar';
-import SummaryChart from '../components/User/SummaryChart';
-import RangeChart from '../components/User/RangeChart';
 
-// for scroll reveals
-import Fade from 'react-reveal/Fade';
+import AuthService from '../services/auth-service';
+import authHeader from '../services/auth-header';
+
 import Navbar from '../components/Navbar';
 import Table from '../components/PurchaseHistory-user/table';
+import axios from "axios";
+
 
 const MainHeader = "Purchase History";
+const currentUser = AuthService.getCurrentUser();
+
 
 function IntakeChart() {
+  const [details, setDetails] = React.useState({});
 
+  useEffect((event) => {
+
+    //initialize the user id and pass to the url
+    axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
+        .then(data => {
+          // console.log(data);
+          // console.log(currentUser);
+          const details = data.data;
+          setDetails({ ...details});
+          // console.log(details);
+        })
+        .catch(error => {
+          if (error.response.data) {
+            console.log(error.response.data);
+          }
+        });
+
+}, []);
   return (
     <Box>
 
@@ -33,7 +53,7 @@ function IntakeChart() {
               xl={9}
               xs={12}
           > */}
-            <Table/>
+            <Table data={details}/>
           {/* </Grid>
         </Grid> */}
 
