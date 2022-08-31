@@ -6,7 +6,6 @@ import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,
 import Carousel from 'react-elastic-carousel';
 
 import PageTitle from '../components/User/PageTitle';
-import AddFoodMenuDes from '../components/restaurant/AddFoodMenuDes';
 import AddFoodMenuIns from '../components/restaurant/AddFoodMenuIns';
 
 import {Avatar, IconButton} from '@mui/material';
@@ -22,7 +21,6 @@ import Fade from 'react-reveal/Fade';
 import Navbar from '../components/Navbar';
 
 import { margin } from '@mui/system';
-import AddFoodMenuCon from '../components/restaurant/AddFoodMenuCon';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Link} from 'react-router-dom';
 
@@ -89,10 +87,7 @@ function AddFoodMenu() {
       <Box mt="3%">
         <Fade left>
           <Carousel pagination={false} disableArrowsOnEnd={true} >
-            <AddFoodMenuDes />
             <AddFoodMenuIns />
-            <AddFoodMenuCon />
-
           </Carousel>
         </Fade>
       </Box>

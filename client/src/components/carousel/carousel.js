@@ -58,6 +58,7 @@ const carousel = (props) => {
             },
           }}>
             {props.title}
+            
           </Typography>
         </Box>
         {/* ---------end of title area------------ */}

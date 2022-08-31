@@ -1,6 +1,7 @@
 import React from 'react';
 import theme, { Colours } from '../../../assets/theme/theme'; //to use theme provider,need to import this
 import { Box, IconButton, Paper, ThemeProvider, Typography } from '@mui/material';
+import Gmap from '../RestaurantLocationMap';
 
 import '../../../assets/css/App.css';
 
@@ -12,12 +13,18 @@ import EmailIcon from '@mui/icons-material/Email';
 // -------to import forms------------
 import { ContactForm } from './EditForms';
 
+// const { decode } = require('pluscodes')
+// decode('VVW3+8WF') 
+
+// console.log(decode('VVW3+8WF'))
+
 // -------using props to put random images using props------------------------
 const RestaurantEditContact = (props) => {
+
+  
   return (
 
     // About us main box-----------------------------------------------
-
 
     <ThemeProvider theme={theme}>
 
@@ -46,6 +53,7 @@ const RestaurantEditContact = (props) => {
           margin: '0',
           padding: '0',
           width: '40%',
+          overflow:"hidden",
           justifyContent: 'center',
           borderRadius: '0px 360px 360px 0px',
           backgroundImage: `url(${props.Map})`,//calling the image as a prop
@@ -63,6 +71,10 @@ const RestaurantEditContact = (props) => {
             marginLeft: '20%',
           }
         }}>
+
+          {/* ---------enter the map----------- */}
+          <Gmap location={props.details.Location}/>
+          
         </Paper>
         {/* Box 1 */}
 

@@ -41,6 +41,7 @@ public class Restaurant {
 	private Binary logo;
 	private Binary bannerImage;
 	private String bImage;
+	private String tempLogo;
 	
 	public String getId() {
 		return id;
@@ -136,6 +137,12 @@ public class Restaurant {
 		this.bImage = bImage;
 	}
 	
+	public String getTempLogo() {
+		return tempLogo;
+	}
+	public void setTempLogo(String tempLogo) {
+		this.tempLogo = tempLogo;
+	}
 	@Override
 	public String toString() {
 		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="

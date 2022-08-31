@@ -1,7 +1,7 @@
 import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CarouselCard = (props) => {
     return (
@@ -9,14 +9,14 @@ const CarouselCard = (props) => {
         <Card sx={{
             maxWidth: 345,
             width: '15rem',
-            margin:1,
+            margin: 1,
             background: Colours.grayWhite,
-            borderRadius:'1rem',
+            borderRadius: '1rem',
             transition: 'transform .2s', '&:hover': {
                 transform: 'scale(1.04)',
-              },
+            },
             [theme.breakpoints.down('sm')]: {
-                width:'12rem',
+                width: '12rem',
             },
         }}>
             {/* ---------------card action area---------------------- */}
@@ -33,7 +33,7 @@ const CarouselCard = (props) => {
                 <CardContent>
                     {/* title, if any */}
                     <Typography gutterBottom variant="h5" component="div" sx={{
-                        textAlign:'center',
+                        textAlign: 'center',
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '14px',
                             padding: '2px',
@@ -43,7 +43,7 @@ const CarouselCard = (props) => {
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
-                        textAlign:'center',
+                        textAlign: 'center',
                         [theme.breakpoints.down('sm')]: {
                             fontSize: '10px',
                             padding: '2px',
@@ -60,8 +60,8 @@ const CarouselCard = (props) => {
 
             {/* -------------------------card button area---------------------- */}
             <CardActions sx={{
-                justifyContent:'center',
-                alignItems:'center',
+                justifyContent: 'center',
+                alignItems: 'center',
             }}>
                 <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
                     margin: '6px',
@@ -76,6 +76,36 @@ const CarouselCard = (props) => {
                     },
                 }}>
                     {props.item.name}
+                </Button>
+
+                <Button component={Link} to={"/AddFoodMenu"} size="small" sx={{
+                    margin: '6px',
+                    background: Colours.yellow, '&:hover': {
+                        backgroundColor: Colours.green,
+                    },
+                    color: Colours.dark,
+                    fontSize: '0.8rem',
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: '8px',
+                        padding: '2px',
+                    },
+                }}>
+                    {props.item.name2}
+                </Button>
+
+                <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
+                    margin: '6px',
+                    background: Colours.green, '&:hover': {
+                        backgroundColor: Colours.yellow,
+                    },
+                    color: Colours.dark,
+                    fontSize: '0.8rem',
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: '8px',
+                        padding: '2px',
+                    },
+                }}>
+                    {props.item.name3}
                 </Button>
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}

@@ -36,12 +36,75 @@ function AddFoodMenuCat() {
                 />
             </Grid>
 
-            <Grid item xs={5}>
+            <Grid item xs={12}>
                 <TextField
                     required
                     id="Food_Price"
                     name="Food_Price"
                     label="Food Price(Rs.)"
+                    fullWidth
+                    autoComplete="given-name"
+                    variant="standard"
+                    sx={{"& label.Mui-focused": {
+                        color:"#fff"
+                    }}}
+                />
+            </Grid>
+
+            <Grid item xs={3}>
+                <TextField
+                    required
+                    id="Food_Price"
+                    name="Food_Price"
+                    label="Calories (g)"
+                    fullWidth
+                    autoComplete="given-name"
+                    variant="standard"
+                    sx={{"& label.Mui-focused": {
+                        color:"#fff"
+                    }}}
+                />
+            </Grid>
+
+
+            <Grid item xs={3}>
+                <TextField
+                    required
+                    id="Food_Price"
+                    name="Food_Price"
+                    label="Fat (g)"
+                    fullWidth
+                    autoComplete="given-name"
+                    variant="standard"
+                    sx={{"& label.Mui-focused": {
+                        color:"#fff"
+                    }}}
+                />
+            </Grid>
+
+
+            <Grid item xs={3}>
+                <TextField
+                    required
+                    id="Food_Price"
+                    name="Food_Price"
+                    label="Protein (g)"
+                    fullWidth
+                    autoComplete="given-name"
+                    variant="standard"
+                    sx={{"& label.Mui-focused": {
+                        color:"#fff"
+                    }}}
+                />
+            </Grid>
+
+
+            <Grid item xs={3}>
+                <TextField
+                    required
+                    id="Food_Price"
+                    name="Food_Price"
+                    label="Carbo (g)"
                     fullWidth
                     autoComplete="given-name"
                     variant="standard"

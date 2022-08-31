@@ -272,6 +272,7 @@ export const AboutUsForm = () => {
 
         axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs",restaurantAbout,{ headers: authHeader() }).then(data=>{
             console.log("Entry access sucessfull")
+            window.location.reload(false);
             setOpen(false);
 
     })
@@ -392,8 +393,8 @@ export const ContactForm = () => {
         axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo,{ headers: authHeader() })
         .then(data=>{
             console.log("Entry access sucessfull")
+            window.location.reload(false);
             setOpen(false);
-            navigate("/RestaurantProfile")
 
         })
         .catch(error =>{
