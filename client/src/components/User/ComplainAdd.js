@@ -18,7 +18,7 @@ function ComplainAdd() {
 
   const [imageData, setImageData] = useState(null);
 
-  const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:"",imageData};
+  const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:""};
 
   const [formValues,setFormValues] = React.useState(initialValues);
   const[isSubmit,setIsSubmit]=React.useState(false);
@@ -42,17 +42,17 @@ function ComplainAdd() {
       // image:imageData
      
     }
+    console.log(typeof(complain));
     console.log(complain);
-    // imageData.append('restauratId',formValues.Resturant_Name);
-    // imageData.append('complainTitle',formValues.Complaint_Title);
-    // imageData.append('complainDescription',formValues.Complaint);
-    // imageData.append('complainStatus',"pending");
-    // imageData.append('addedDate',"2022-04-05");
-    // imageData.append('restauratId',formValues.addedDate);
+     imageData.append('restauratId',formValues.Resturant_Name);
+     imageData.append('complainTitle',formValues.Complaint_Title);
+     imageData.append('complainDescription',formValues.Complaint);
+     imageData.append('complainStatus',"pending");
+     imageData.append('addedDate',"2022-04-05");
      console.log(imageData);
 
-
-    axios.post("http://localhost:8072/FoodiFy/User/addComplains", [complain,imageData],{ headers: authHeader() })
+    console.log(authHeader());
+    axios.post("http://localhost:8072/FoodiFy/User/addComplains", imageData,{ headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull")
                 window.location.reload(false);
@@ -60,8 +60,8 @@ function ComplainAdd() {
                 
             })
             .catch(error => {
-                //  console.log(complain)
-                 console.log("There is an error")
+                  console.log(error)
+                //  console.log("There is an error")
 
             })
 
@@ -77,7 +77,7 @@ function ComplainAdd() {
     let file = event.target.files[0];
     const imageData = new FormData();
     imageData.append('Image', file);
-    setImageData(event.target.files[0]);
+    setImageData(imageData);
 
     const {name,value} = event.target;
     setFormValues({ ...formValues,[name]:value})
