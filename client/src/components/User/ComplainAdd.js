@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useState } from 'react';
 import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -15,28 +15,44 @@ import authHeader from "../../services/auth-header";
 
 
 function ComplainAdd() {
-  
-  const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:""};
+
+  const [imageData, setImageData] = useState(null);
+
+  const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:"",imageData};
+
   const [formValues,setFormValues] = React.useState(initialValues);
   const[isSubmit,setIsSubmit]=React.useState(false);
-  
+
+  //sending data to the backend
   const handleSubmit = (e) =>{
     e.preventDefault();
     console.log(formValues);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     // console.log(date);
-
-
+    
+    // const Imagedata = new FormData();
+    
     const complain = {
       restauratId: formValues.Resturant_Name,
       complainTitle: formValues.Complaint_Title,
       complainDescription: formValues.Complaint,
       complainStatus:"pending",
-      addedDate:"2022-04-05"
+      addedDate:"2022-04-05",
+      // image:imageData
      
     }
-    axios.post("http://localhost:8072/FoodiFy/User/addComplains", complain, { headers: authHeader() })
+    console.log(complain);
+    // imageData.append('restauratId',formValues.Resturant_Name);
+    // imageData.append('complainTitle',formValues.Complaint_Title);
+    // imageData.append('complainDescription',formValues.Complaint);
+    // imageData.append('complainStatus',"pending");
+    // imageData.append('addedDate',"2022-04-05");
+    // imageData.append('restauratId',formValues.addedDate);
+     console.log(imageData);
+
+
+    axios.post("http://localhost:8072/FoodiFy/User/addComplains", [complain,imageData],{ headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull")
                 window.location.reload(false);
@@ -55,6 +71,18 @@ function ComplainAdd() {
     const {name,value} = e.target;
     setFormValues({ ...formValues,[name]:value});
   }
+
+//sending data to image data
+  const handleUploadClick = event => {
+    let file = event.target.files[0];
+    const imageData = new FormData();
+    imageData.append('Image', file);
+    setImageData(event.target.files[0]);
+
+    const {name,value} = event.target;
+    setFormValues({ ...formValues,[name]:value})
+    // setImagePreview(URL.createObjectURL(file));
+}
 
   
    
@@ -179,11 +207,13 @@ function ComplainAdd() {
         </Grid> 
         
          <Grid item xs={12} md={4}>
-            <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {
+         <TextField type="file" name='Image' onChange={handleUploadClick} />
+
+            {/* <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {
                 backgroundColor: Colours.darkgray,
               }}}>
               Add a photo
-            </Button>
+            </Button> */}
         </Grid> 
 
 

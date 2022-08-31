@@ -3,6 +3,7 @@ package Foodify.Backend.model;
 import java.io.File;
 import java.util.Date;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,6 +25,7 @@ public class Complain {
 	private String complainDescription;
 	private String complainStatus;
 	private Date addedDate;
+	private Binary image;
 	
 	public String getId() {
 		return id;
@@ -67,7 +69,12 @@ public class Complain {
 	public void setComplainStatus(String complainStatus) {
 		this.complainStatus = complainStatus;
 	}
-	
+	public Binary getImage() {
+		return image;
+	}
+	public Binary setImage(Binary image) {
+		return this.image = image;
+	}
 	
 //	private File image;
 	
