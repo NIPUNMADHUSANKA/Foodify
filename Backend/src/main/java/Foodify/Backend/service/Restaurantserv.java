@@ -1,12 +1,13 @@
 package Foodify.Backend.service;
 
 import org.springframework.http.ResponseEntity;
-import java.nio.file.Path;
-import java.util.stream.Stream;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
-import Foodify.Backend.model.Registered_Customer;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodItem;
+import Foodify.Backend.model.FoodMenu;
+import Foodify.Backend.exception.FoodMenuException;
 
 public interface Restaurantserv {
 
@@ -16,6 +17,12 @@ public interface Restaurantserv {
 	
 	public void updateContactDetails(String username);
 	
+	public FoodMenu addFoodMenu(FoodMenu foodMenu) throws FoodMenuException;
+
+	public FoodCategory addFoodCategory(FoodCategory foodCategory) throws FoodMenuException;
+
+	public FoodItem addFoodCategoryItem(FoodItem foodItem) throws FoodMenuException;
+
 	public void init(String username);
 	
 	public void saveBanner(MultipartFile file,String username);

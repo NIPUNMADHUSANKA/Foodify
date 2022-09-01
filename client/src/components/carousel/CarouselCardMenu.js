@@ -3,7 +3,16 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Link } from 'react-router-dom';
 
+import image1 from '../../assets/images/food categories/1.jpg';
+import { id } from 'date-fns/locale';
+
 const CarouselCard = (props) => {
+
+    console.log(props.item);
+
+    const menu = props.item;
+    
+    
     return (
         // ---------main card area------------
         <Card sx={{
@@ -22,10 +31,11 @@ const CarouselCard = (props) => {
             {/* ---------------card action area---------------------- */}
             <CardActionArea>
                 {/* -------------------image area------------------------- */}
+                
                 <CardMedia
                     component="img"
                     height="235vh"
-                    image={props.item.image}
+                    image={image1}
                     alt="green iguana"
                 />
 
@@ -39,7 +49,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.title}
+                        {menu.foodMenuName}
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -49,7 +59,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.decription}
+                        {menu.foodMenuDes}
                     </Typography>
 
                 </CardContent>
@@ -75,10 +85,12 @@ const CarouselCard = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.name}
+                    View
                 </Button>
 
-                <Button component={Link} to={"/AddFoodMenu"} size="small" sx={{
+               {/* <Link to={`blog/${id}`}>{title}</Link> */}
+
+                <Button component={Link} to={'/AddFoodMenu'} state= {{ id: menu.id , name: menu.foodMenuName}} size="small" sx={{
                     margin: '6px',
                     background: Colours.yellow, '&:hover': {
                         backgroundColor: Colours.green,
@@ -90,7 +102,7 @@ const CarouselCard = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.name2}
+                    Edit
                 </Button>
 
                 <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
@@ -105,7 +117,7 @@ const CarouselCard = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.name3}
+                    Delete
                 </Button>
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}

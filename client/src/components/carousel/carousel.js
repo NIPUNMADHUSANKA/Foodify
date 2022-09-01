@@ -22,15 +22,17 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
       )
       )}
     </div> */}
-    
+
 
 // -----------------arrows for the carousel------------
 
 const carousel = (props) => {
 
-  console.log(props.item)
+
 
   const data = props.item;
+
+  console.log(data);
 
   return (
     <div sx={{ padding: 0, }}>
@@ -58,48 +60,48 @@ const carousel = (props) => {
             },
           }}>
             {props.title}
-            
+
           </Typography>
         </Box>
         {/* ---------end of title area------------ */}
 
 
         {/* ---------------carousel area-------------------------- */}
-        
-        <Carousel 
-        
-        itemsToShow={props.count} 
-        easing={"ease"}
-        breakPoints={theme.breakPoints = [
-          { width: 1, itemsToShow: 1 },
-          { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
-          { width: 1150, itemsToShow: props.count, itemsToScroll: 2 },
-          { width: 1450, itemsToShow: 5 },
-          { width: 1750, itemsToShow: 6 },
-        ]}
 
-        >
-        {/* <Box> */}
+        <Carousel
+          itemsToShow={3}
+          easing={"ease"}
+          breakPoints={theme.breakPoints = [
+            { width: 1, itemsToShow: 1 },
+            { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+            { width: 1150, itemsToShow: props.count, itemsToScroll: 2 },
+            { width: 1450, itemsToShow: 5 },
+            { width: 1750, itemsToShow: 6 },
+          ]}>
+          {/* <Box> */}
 
-        {data.map((items, index) => {
-        return (
-          <CarouselCard item={items} />
-        );
-      })}
+          {Object.keys(data).map((key, index) => (
 
-        {/* <CarouselCard item={props.item} />
+            
+            <CarouselCard item={data[index]} />
+
+          ))}
+
+          {/* <CarouselCard item={props.item} />
         <CarouselCard item={props.item} />
         <CarouselCard item={props.item} />
         <CarouselCard item={props.item} />
         <CarouselCard item={props.item} />
         <CarouselCard item={props.item} /> */}
 
-      </Carousel>
-      {/* </Box> */}
+        </Carousel>
 
-      {/* ---------------end of carousel area-------------------------- */}
 
-    </Box>
+        {/* </Box> */}
+
+        {/* ---------------end of carousel area-------------------------- */}
+
+      </Box>
     </div >
   )
 }

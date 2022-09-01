@@ -67,7 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RestaurantInfo/editAbout",
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addFoodMenu",
+				"/RegisteredUser/getFoodMenu",
 				"/RegisteredUser/addFoodMenuCategory",
+				"/RegisteredUser/addFoodMenuCategory",
+				"/RegisteredUser/addFoodMenuCategoryItem",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
 				"/RegisteredUser/addComplains")
 		.permitAll()
