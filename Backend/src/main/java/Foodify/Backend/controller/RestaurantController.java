@@ -27,10 +27,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodItem;
+import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.model.Restaurant;
 
@@ -51,7 +55,10 @@ public class RestaurantController{
 	
 	@Autowired
 	private RestaurantRepository restaurantrepo;
-	
+
+	@Autowired
+	private FoodMenuRepo foodMenuRepo;
+
 	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
 	
 //	-----------------------------------------create method-------------------------------------------------------------------
@@ -159,6 +166,74 @@ public class RestaurantController{
 		restaurantrepo.save(restaurant);
 	}
 	
+	/* -------------------------------- Add Food Menu -------------------------------- */
+	@PostMapping("/RegisteredUser/addFoodMenu")
+	public ResponseEntity<?> addFoodMenu(@Valid @RequestBody FoodMenu foodMenu) {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		foodMenu.setUsername(userName);
+		
+		try {
+
+			return new ResponseEntity<>(service.addFoodMenu(foodMenu), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+	/* -------------------------------- Get Food Menu -------------------------------- */
+	@GetMapping("/RegisteredUser/getFoodMenu")
+	public List<FoodMenu> getFoodMenu() {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		return foodMenuRepo.findByuserName(userName);
+
+	}
+
+
+
+	/* -------------------------------- Add Food category -------------------------------- */
+	@PostMapping("/RegisteredUser/addFoodMenuCategory")
+	public ResponseEntity<?> addFoodCategory(@Valid @RequestBody FoodCategory foodCategory) {
+		
+		try {
+
+			return new ResponseEntity<>(service.addFoodCategory(foodCategory), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+
+	/* -------------------------------- Add Food Item -------------------------------- */
+	@PostMapping("/RegisteredUser/addFoodMenuCategoryItem")
+	public ResponseEntity<?> addFoodCategoryItem(@Valid @RequestBody FoodItem foodItem) {
+		
+		try {
+
+			return new ResponseEntity<>(service.addFoodCategoryItem(foodItem), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+	
+
+
 //---------------upload cover image--------------------------------------
     @PostMapping("/FoodiFy/Restaurant/uploadBannerImage")
     public ResponseEntity<?> uploadImage(@RequestParam("imageFile")MultipartFile file) throws IOException {

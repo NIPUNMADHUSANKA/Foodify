@@ -3,6 +3,7 @@ package Foodify.Backend.service;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.exception.FoodMenuException;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodItem;
+import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Registered_Customer;
+import Foodify.Backend.repository.FoodCategoryRepo;
+import Foodify.Backend.repository.FoodItem_Repository;
+import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 
 import java.io.IOException;
@@ -39,6 +47,17 @@ public class RestaurantService implements Restaurantserv{
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private FoodMenuRepo foodMenuRepo;
+
+	@Autowired
+	private FoodCategoryRepo foodCategoryRepo;
+
+	@Autowired
+	private FoodItem_Repository foodItem_Repository;
+	
+
 	
 
 
@@ -164,6 +183,70 @@ public class RestaurantService implements Restaurantserv{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public FoodMenu addFoodMenu(FoodMenu foodMenu) throws FoodMenuException {
+
+		String userName = foodMenu.getUsername();
+		String foodMenuName = foodMenu.getfoodMenuName();
+
+		Optional<FoodMenu> FoodMenuOptional = foodMenuRepo.findByResturantMenuExists(userName, foodMenuName);
+
+		if (FoodMenuOptional.isPresent()) {
+			throw new FoodMenuException(FoodMenuException.FoodMemuAlreadyExists());
+
+		}
+		else{
+			foodMenuRepo.save(foodMenu);
+			return null;
+		}
+
+	}
+
+
+
+	@Override
+	public FoodCategory addFoodCategory(FoodCategory foodCategory) throws FoodMenuException {
+		
+		String menuId = foodCategory.getmenuId();
+		String foodMenuCategory = foodCategory.getfoodMenuCategory();
+
+		Optional<FoodCategory> FoodMenuCateOptional = foodCategoryRepo.findByMenuCategoryExists(menuId, foodMenuCategory);
+
+		if (FoodMenuCateOptional.isPresent()) {
+			throw new FoodMenuException(FoodMenuException.FoodMemuCategoryAlreadyExists());
+
+		}
+		else{
+			foodCategoryRepo.save(foodCategory);
+			return null;
+		}
+
+
+	}
+
+
+
+	@Override
+	public FoodItem addFoodCategoryItem(FoodItem foodItem) throws FoodMenuException {
+
+		String catId = foodItem.getcatId();
+		String name = foodItem.getName();
+
+		Optional<FoodItem> FoodMenuCateItemOptional = foodItem_Repository.findByMenuCategoryItemExists(catId, name);
+
+		if (FoodMenuCateItemOptional.isPresent()) {
+			throw new FoodMenuException(FoodMenuException.FoodMemuCategoryItemAlreadyExists());
+
+		}
+		else{
+			foodItem_Repository.save(foodItem);
+			return null;
+		}
+
+	}
+
 	
 	
 //	--------------------------end of for validate userName and email--------------------------------------------

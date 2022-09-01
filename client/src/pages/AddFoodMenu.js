@@ -20,16 +20,20 @@ import resturantLogo from '../assets/images/restaurant-logo.jpg'
 import Fade from 'react-reveal/Fade';
 import Navbar from '../components/Navbar';
 
-import { margin } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Link} from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
+import AuthService from '../services/auth-service';
 
 
-const MainHeader = "Add Foods Menu";
+const MainHeader = "Add Foods Menu Category";
 
 function AddFoodMenu() {
 
+  // --------------to get the id------------------
+  const location = useLocation();
+ 
   useEffect(() => {
     document.title = "Add Foods Menu";
   })
@@ -86,9 +90,9 @@ function AddFoodMenu() {
 
       <Box mt="3%">
         <Fade left>
-          <Carousel pagination={false} disableArrowsOnEnd={true} >
-            <AddFoodMenuIns />
-          </Carousel>
+          
+            <AddFoodMenuIns Path = {location} />
+          
         </Fade>
       </Box>
 

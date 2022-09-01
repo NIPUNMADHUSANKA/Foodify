@@ -2,7 +2,6 @@ package Foodify.Backend.model;
 
 import javax.validation.constraints.NotNull;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,7 +17,7 @@ public class FoodCategory {
     @Id
 	private String id;
     @NotNull(message = "Food Menu Name cannot be null")
-    private ObjectId menuId;
+    private String menuId;
 	@NotNull(message = "Food Category cannot be null")
     private String foodMenuCategory;
 	private String foodMenuCategoryDes;
@@ -31,11 +30,11 @@ public class FoodCategory {
 		this.id = id;
 	}
 
-    public ObjectId getmenuId() {
+    public String getmenuId() {
 		return menuId;
 	}
-	public void setmenuId(ObjectId objId) {
-		this.menuId = objId;
+	public String setmenuId(String menuId) {
+		return this.menuId = menuId;
 	}
 
     public String getfoodMenuCategory() {
