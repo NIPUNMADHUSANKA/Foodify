@@ -19,6 +19,10 @@ public class FoodMenuException extends Exception{
 		return "Food Category already exists";
 	}
 
+	public static String FoodMemuCategoryItemAlreadyExists() {
+		return "Food already exists";
+	}
+
 	public static String FoodMemuNotFound() {
 		return "Menu Name not Found";
 	}

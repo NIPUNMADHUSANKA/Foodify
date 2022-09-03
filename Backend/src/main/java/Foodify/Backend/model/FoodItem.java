@@ -11,7 +11,49 @@ public class FoodItem {
     private String name;
     private Double price;
     private String description;
-    private ObjectId restaurant;
+    private String catId;
+
+    
+
+    private Double calaries;
+    private Double fat;
+    private Double protein;
+    private Double carbo;
+
+    public Double getCalaries() {
+        return calaries;
+    }
+
+    public void setCalaries(Double calaries) {
+        this.calaries = calaries;
+    }
+
+    
+    public Double getFat() {
+        return fat;
+    }
+
+    public void setFat(Double fat) {
+        this.fat = fat;
+    }
+
+    
+    public Double getProtein() {
+        return protein;
+    }
+
+    public void setProtein(Double protein) {
+        this.protein = protein;
+    }
+
+    
+    public Double getCarbo() {
+        return carbo;
+    }
+
+    public void setCarbo(Double carbo) {
+        this.carbo = carbo;
+    }
 
     public ObjectId getId() { return Id; }
 
@@ -29,7 +71,13 @@ public class FoodItem {
 
     public void setDescription(String description) { this.description = description; }
 
-    public ObjectId getRestaurant() { return restaurant; }
+    public String getcatId() {
+        return catId;
+    }
 
-    public void setRestaurant(ObjectId restaurant) { this.restaurant = restaurant;}
+    public void setCatId(String catId) {
+        this.catId = catId;
+    }
+
+   
 }

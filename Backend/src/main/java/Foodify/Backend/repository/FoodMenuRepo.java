@@ -1,5 +1,6 @@
 package Foodify.Backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -14,5 +15,7 @@ public interface FoodMenuRepo extends MongoRepository<FoodMenu,String>{
     
     @Query("{'$and':[ {'userName': ?0}, {'foodMenuName':?1} ] }")
 	Optional<FoodMenu> findByResturantMenuExists(String userName, String foodMenuName);
+
+    List<FoodMenu> findByuserName(String userName);
     
 }

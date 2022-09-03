@@ -83,15 +83,16 @@ const RestaurantMenu = () => {
   ///-- Get Token UserName--///
   const currentUser = AuthService.getCurrentUser();
 
-/*
+
   useEffect((event) => {
 
     axois.get("http://localhost:8072/RegisteredUser/getFoodMenu", { headers: authHeader() })
         .then(data => {
             // this part if sucess
-            console.log(data);
-            console.log(currentUser);
-
+            console.log(data.data);
+            console.log(item1);
+            
+            
             const details = data.data;
             setDetails({ ...details});
         })
@@ -102,7 +103,7 @@ const RestaurantMenu = () => {
 
         });
 
-}, []);*/
+}, []);
 
   return (
     <Box sx={{
@@ -131,7 +132,7 @@ const RestaurantMenu = () => {
       )()}
 
 
-      <Carousel item={item1} title={title} count={itemcount} bgcolour={bgcolor1} />
+      <Carousel item={details} title={title} count={itemcount} bgcolour={bgcolor1} />
 
 
     </Box>
