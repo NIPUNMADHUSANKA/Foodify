@@ -8,6 +8,11 @@ import '../../assets/css/App.css';
 import CommentBox from './CommentBox';
 import List from '@mui/material/List';
 
+import RestaurantCommentForm from './profile/RestaurantCommentForm';
+import AuthService from '../../services/auth-service';
+import authHeader from "../../services/auth-header";
+
+var ROLE = null;
 
 // -------using props to put random images using props------------------------
 const RestaurantCemments = (props) => {
@@ -15,6 +20,8 @@ const RestaurantCemments = (props) => {
   console.log(props.comments)
 
   const data = props.comments;
+
+  const currentUser = AuthService.getCurrentUser();
 
   return (
 
@@ -59,6 +66,25 @@ const RestaurantCemments = (props) => {
             width: "25%",
           },
         }}>View Comments</Button> */}
+
+        {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+        {(() => {
+          if (JSON.parse(localStorage.getItem('ROLE'))) {
+            ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+            console.log(ROLE)
+          }
+        }
+        )()}
+        {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
+
+        {(() => {
+          if (ROLE === "User") {
+            return (
+            <RestaurantCommentForm />
+            );
+          }
+        }
+        )()}
 
         {/* -------------------topic-------------------------------------------- */}
         <Typography variant="h4" gutterBottom component="div" sx={{
