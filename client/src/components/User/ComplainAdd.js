@@ -37,7 +37,7 @@ function ComplainAdd() {
       restauratId: formValues.Resturant_Name,
       complainTitle: formValues.Complaint_Title,
       complainDescription: formValues.Complaint,
-      complainStatus:"pending",
+      complainStatus:"accepted",
       addedDate:"2022-04-05",
       // image:imageData
      
