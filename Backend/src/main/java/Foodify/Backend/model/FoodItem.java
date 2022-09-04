@@ -4,10 +4,19 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection="FoodItems")
 public class FoodItem {
     @Id
-    private ObjectId Id;
+    private String id;
     private String name;
     private Double price;
     private String description;
@@ -19,6 +28,8 @@ public class FoodItem {
     private Double fat;
     private Double protein;
     private Double carbo;
+    
+    private int discount;
 
     public Double getCalaries() {
         return calaries;
@@ -55,11 +66,17 @@ public class FoodItem {
         this.carbo = carbo;
     }
 
-    public ObjectId getId() { return Id; }
+    
 
-    public void setId(ObjectId id) { Id = id; }
+    public String getId() {
+		return id;
+	}
 
-    public String getName() { return name; }
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() { return name; }
 
     public void setName(String name) { this.name = name;}
 
@@ -78,6 +95,18 @@ public class FoodItem {
     public void setCatId(String catId) {
         this.catId = catId;
     }
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+    
+    
+    
+    
 
    
 }

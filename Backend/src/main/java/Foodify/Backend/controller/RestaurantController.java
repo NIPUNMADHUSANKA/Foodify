@@ -1,25 +1,18 @@
 package Foodify.Backend.controller;
 
-import java.awt.PageAttributes.MediaType;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
 import Foodify.Backend.model.Restaurant;
-
-import org.apache.commons.io.FilenameUtils;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +20,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.repository.FoodCategoryRepo;
+import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
+import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
@@ -35,8 +31,8 @@ import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.FoodCategory;
 import Foodify.Backend.model.FoodItem;
 import Foodify.Backend.model.FoodMenu;
+import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.model.Restaurant;
 
 
 //using cross origin annotation to communicate with react.js and spring
@@ -58,6 +54,15 @@ public class RestaurantController{
 
 	@Autowired
 	private FoodMenuRepo foodMenuRepo;
+	
+	@Autowired
+	private FoodCategoryRepo foodcategories;
+	
+	@Autowired
+	private FoodItem_Repository foodItems;
+	
+	@Autowired
+	private OffersRepository offersRepo;
 
 	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
 	
@@ -195,6 +200,99 @@ public class RestaurantController{
 		return foodMenuRepo.findByuserName(userName);
 
 	}
+	
+	/* ------------------------------------------------------------- Get Food Categories -------------------------------------------------------- */
+	@GetMapping("/FoodiFy/Restaurant/getCategories")
+	public List<FoodCategory> getcategory() {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
+		System.out.println(Menu);
+		List<FoodCategory> restaurantsList = new ArrayList<FoodCategory>();
+		
+		for(int i=0;i<Menu.size();i++) {
+			System.out.println(Menu.get(i).getId());
+			List<FoodCategory> category = foodcategories.findBymenuId(Menu.get(i).getId());
+			restaurantsList.addAll(category);
+			System.out.println(category);
+//			return foodcategories.findBymenuId(Menu.get(i).getfoodMenuName());
+		}
+		return restaurantsList;
+	
+	}
+	
+	/* ------------------------------------------------------------- Get Food items -------------------------------------------------------- */
+	@PostMapping("/FoodiFy/Restaurant/getfoodItems1")
+	public List<FoodItem> getfoodItem(@RequestBody FoodItem foodItem) {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+//		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
+//		System.out.println(Menu);
+		List<FoodCategory> itemsList = new ArrayList<FoodCategory>();
+		
+		List<FoodItem> items = foodItems.findBycatId(foodItem.getcatId());
+		
+		return items;
+	
+	}
+	
+	  //--------------------------------------------upload offer details--------------------------------------------------------
+    @PostMapping("/FoodiFy/Restaurant/uploadOffers")
+    public ResponseEntity<?> uploadOffers(
+    		@RequestParam("imageFile")MultipartFile file,
+    		@RequestParam("name") String name,
+    		@RequestParam("description") String description,
+    		@RequestParam("Bdate")String Bdate,
+    		@RequestParam("Edate")String Edate,
+    		@RequestParam("discount") String discount,
+    		@RequestParam("itemList") String itemList
+    		) throws IOException {
+    	
+    	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+    	Offers offers = new Offers();
+    	
+//    	-----------------converting string into array to get category and food items------------------------
+    	String[] arr = null;
+    	//converting using String.split() method with "," as a delimiter  
+        arr = itemList.split(",");
+    	
+        offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+        offers.setName(name);
+        offers.setDescription(description);
+        
+        offers.setStartDate(LocalDate.parse(Bdate));
+        offers.setEndDate(LocalDate.parse(Edate));
+        
+        offers.setDiscount(Integer.parseInt(discount));
+        offers.setUserName(userName);
+        
+        List<String> itemIds = new ArrayList<String>();
+        
+        
+//        ----------------setting discounts for relevant food items----------------------------
+        for (int i = 1; i< arr.length; i++)
+        {  
+        	FoodItem food = foodItems.findByid(arr[i]);
+        	food.setDiscount(Integer.parseInt(discount));
+        	foodItems.save(food);
+        	
+        	itemIds.add(arr[i]);
+            System.out.println(arr[i]);  
+        }
+        
+        offers.setItems(itemIds);
+        
+        System.out.println(arr[0]);
+        
+        offersRepo.save(offers);
+        
+		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);     
+    }
+
 
 
 
