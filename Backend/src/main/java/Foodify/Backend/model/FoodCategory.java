@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.bson.types.Binary;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +23,8 @@ public class FoodCategory {
     private String foodMenuCategory;
 	@NotNull(message = "Food Category Description cannot be null")
 	private String foodMenuCategoryDes;
- 
+	private Binary image;
+	
 
     public String getId() {
 		return id;
@@ -51,4 +54,11 @@ public class FoodCategory {
 		this.foodMenuCategoryDes = foodMenuCategoryDes;
 	}
 
+	public Binary getImage() {
+		return image;
+	}
+	public Binary setImage(Binary image) {
+		return this.image = image;
+	}
+	
 }

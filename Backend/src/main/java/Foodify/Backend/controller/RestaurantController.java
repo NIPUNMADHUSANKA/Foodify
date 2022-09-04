@@ -1,25 +1,17 @@
 package Foodify.Backend.controller;
 
-import java.awt.PageAttributes.MediaType;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import Foodify.Backend.model.Restaurant;
 
-import org.apache.commons.io.FilenameUtils;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +29,6 @@ import Foodify.Backend.model.FoodCategory;
 import Foodify.Backend.model.FoodItem;
 import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.model.Restaurant;
 
 
 //using cross origin annotation to communicate with react.js and spring
@@ -204,8 +195,20 @@ public class RestaurantController{
 
 	/* -------------------------------- Add Food category -------------------------------- */
 	@PostMapping("/RegisteredUser/addFoodMenuCategory")
-	public ResponseEntity<?> addFoodCategory(@Valid @RequestBody FoodCategory foodCategory) {
-		
+	public ResponseEntity<?> addFoodCategory(
+		@RequestParam("Image")MultipartFile image,
+    	@RequestParam("menuId") String menuId,
+    	@RequestParam("foodMenuCategory") String foodMenuCategory,
+    	@RequestParam("foodMenuCategoryDes") String foodMenuCategoryDes) throws IOException {
+
+			FoodCategory foodCategory = new FoodCategory();
+
+			foodCategory.setmenuId(menuId);
+			foodCategory.setfoodMenuCategory(foodMenuCategory);
+			foodCategory.setfoodMenuCategoryDes(foodMenuCategoryDes);
+			foodCategory.setImage(new Binary(BsonBinarySubType.BINARY, image.getBytes()));
+			
+
 		try {
 
 			return new ResponseEntity<>(service.addFoodCategory(foodCategory), HttpStatus.OK);
@@ -229,9 +232,34 @@ public class RestaurantController{
 
 	/* -------------------------------- Add Food Item -------------------------------- */
 	@PostMapping("/RegisteredUser/addFoodMenuCategoryItem")
-	public ResponseEntity<?> addFoodCategoryItem(@Valid @RequestBody FoodItem foodItem) {
+	public ResponseEntity<?> addFoodCategoryItem(
+		
+		@RequestParam("Image")MultipartFile image,
+    	@RequestParam("catId") String catId,
+    	@RequestParam("name") String name,
+    	@RequestParam("description") String description,
+		@RequestParam("price") Double price,
+		@RequestParam("calaries") Double calaries,
+    	@RequestParam("fat") Double fat,
+    	@RequestParam("protein") Double protein,
+		@RequestParam("carbo") Double carbo
+
+		) throws IOException {
 		
 		try {
+
+			FoodItem foodItem = new FoodItem();
+		
+			foodItem.setCatId(catId);
+			foodItem.setName(name);
+			foodItem.setDescription(description);
+			foodItem.setPrice(price);
+			foodItem.setCalaries(calaries);
+			foodItem.setCarbo(carbo);
+			foodItem.setFat(fat);
+			foodItem.setProtein(protein);
+			foodItem.setImage(new Binary(BsonBinarySubType.BINARY, image.getBytes()));
+
 
 			return new ResponseEntity<>(service.addFoodCategoryItem(foodItem), HttpStatus.OK);
 

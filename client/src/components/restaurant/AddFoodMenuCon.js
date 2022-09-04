@@ -77,13 +77,11 @@ function AddFoodMenuCon(props) {
 
     // ----------create state name form values--------
     const [formValues, setFormValues] = React.useState(initialValues);
+    const [imageData, setImageData] = useState(null);
+
 
     // ----------create state name form errors--------
     const [formErrors, setFormErrors] = React.useState({});
-
-
-    // ----------store restaurant values--------
-    const [details, setDetails] = React.useState({});
 
 
     // -------function to handle changes in the input fields and set it to formvalues----------
@@ -95,6 +93,17 @@ function AddFoodMenuCon(props) {
         setFormValues({ ...formValues, [name]: value });
 
 
+    }
+
+    const handleUploadClick = event => {
+        let file = event.target.files[0];
+        const imageData = new FormData();
+        imageData.append('Image', file);
+        setImageData(imageData);
+
+        const { name, value } = event.target;
+        setFormValues({ ...formValues, [name]: value })
+        // setImagePreview(URL.createObjectURL(file));
     }
 
     const handleSubmit = (e) => {
@@ -129,7 +138,21 @@ function AddFoodMenuCon(props) {
         else if (!isNaN(Food_Price) && !isNaN(Food_Calories) && !isNaN(Food_Fat) && !isNaN(Food_Protein) && !isNaN(Food_Carbo)) {
 
 
-            axios.post("http://localhost:8072/RegisteredUser/addFoodMenuCategoryItem", restaurantmenucatfood, { headers: authHeader() })
+            imageData.append('catId', Id);
+            imageData.append('name', formValues.Food_Item);
+            imageData.append('description', formValues.Food_Des);
+            imageData.append('price', formValues.Food_Price);
+
+            imageData.append('calaries', formValues.Food_Calories);
+            imageData.append('fat', formValues.Food_Fat);
+            imageData.append('protein', formValues.Food_Protein);
+            imageData.append('carbo', formValues.Food_Carbo);
+            
+
+            console.log(imageData);
+
+            
+            axios.post("http://localhost:8072/RegisteredUser/addFoodMenuCategoryItem", imageData, { headers: authHeader() })
                 .then(data => {
                     setFormValues(initialValues);
                     window.location.reload(false);
@@ -141,6 +164,7 @@ function AddFoodMenuCon(props) {
 
                 })
 
+                
 
         }
         else {
@@ -335,15 +359,10 @@ function AddFoodMenuCon(props) {
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <Button variant="contained" sx={{
-                                color: '#FFFFFF', backgroundColor: "#3E3E3E", '&:hover': {
-                                    backgroundColor: Colours.darkgray,
-                                }
-                            }}>
-                                Browse
-                            </Button>
+                        <Grid item xs={12} md={4}>
+                            <TextField type="file" name='Image' onChange={handleUploadClick} />
                         </Grid>
+
                     </Grid>
 
 
