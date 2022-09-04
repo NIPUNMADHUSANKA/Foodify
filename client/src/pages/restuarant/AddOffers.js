@@ -6,12 +6,15 @@ import theme, { Colours } from '../../assets/theme/theme';
 import bgImage from '../../assets/images/offersbg.png';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AddOfferForm from '../../components/restaurant/AddOfferForm';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import Rlogo from '../../assets/images/restaurant-logo.jpg';
 import { Avatar, IconButton, Typography } from '@mui/material';
 import Navbar from './../../components/Navbar';
+
+// ------------------for get user roles-----------------
+var ROLE = null;
 
 const AddOffers = () => {
 
@@ -35,9 +38,9 @@ const AddOffers = () => {
             },
         }}>
 
-        <Fade top>
-          <Navbar />
-        </Fade>
+            <Fade top>
+                <Navbar />
+            </Fade>
 
             {/* ------------topic area--------------------- */}
             <Fade top cascade>
@@ -46,18 +49,35 @@ const AddOffers = () => {
                     flexDirection: "row",
                     padding: "1rem",
                 }}>
-                    <IconButton component={Link} to={"/restaurant"}>
-                        <ArrowBackIosIcon sx={{
-                            color: Colours.green, '&:hover': {
-                                color: Colours.yellow,
-                                [theme.breakpoints.down('sm')]: {
-                                    height: "80%",
-                                    marginTop: "30px",
-                                },
-                            },
-                            fontSize: "2rem",
-                        }} />
-                    </IconButton>
+                    {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+                    {(() => {
+                        if (JSON.parse(localStorage.getItem('ROLE'))) {
+                            ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+                            console.log(ROLE)
+                        }
+                    }
+                    )()}
+                    {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
+
+                    {(() => {
+                        if (ROLE === "restaurant") {
+                            return (
+                                <IconButton component={Link} to={"/Restaurantprofile"}>
+                                    <ArrowBackIosIcon sx={{
+                                        color: Colours.green, '&:hover': {
+                                            color: Colours.yellow,
+                                            [theme.breakpoints.down('sm')]: {
+                                                height: "80%",
+                                                marginTop: "30px",
+                                            },
+                                        },
+                                        fontSize: "2rem",
+                                    }} />
+                                </IconButton>
+                            );
+                        }
+                    }
+                    )()}
 
                     <Avatar
                         alt="food image"
@@ -93,14 +113,14 @@ const AddOffers = () => {
                 height: "85vh",
                 padding: "auto",
                 overflow: "scroll",
-                marginBottom:"2%",
+                marginBottom: "2%",
                 borderRadius: "0.8rem",
                 [theme.breakpoints.down('sm')]: {
-                    padding:0,
-                    width:"auto",
+                    padding: 0,
+                    width: "auto",
                     overflow: "auto",
 
-                    hieght:"auto"
+                    hieght: "auto"
                 },
             }}>
                 <AddOfferForm />

@@ -98,7 +98,7 @@ const RestaurantOffers = () => {
                   fontSize: "15px",
                 }
               },
-            }} />}>Edit Offers
+            }} />}>Add Offers
             </Button>
           );
         }

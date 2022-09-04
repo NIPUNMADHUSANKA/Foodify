@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.repository.FoodCategoryRepo;
+import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
@@ -58,6 +61,13 @@ public class RestaurantController{
 
 	@Autowired
 	private FoodMenuRepo foodMenuRepo;
+	
+	@Autowired
+	private FoodCategoryRepo foodcategories;
+	
+	@Autowired
+	private FoodItem_Repository foodItems;
+	
 
 	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
 	
@@ -195,6 +205,51 @@ public class RestaurantController{
 		return foodMenuRepo.findByuserName(userName);
 
 	}
+	
+	/* ------------------------------------------------------------- Get Food Categories -------------------------------------------------------- */
+	@GetMapping("/FoodiFy/Restaurant/getCategories")
+	public List<FoodCategory> getcategory() {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
+		System.out.println(Menu);
+		List<FoodCategory> restaurantsList = new ArrayList<FoodCategory>();
+		
+		for(int i=0;i<Menu.size();i++) {
+			System.out.println(Menu.get(i).getId());
+			List<FoodCategory> category = foodcategories.findBymenuId(Menu.get(i).getId());
+			restaurantsList.addAll(category);
+			System.out.println(category);
+//			return foodcategories.findBymenuId(Menu.get(i).getfoodMenuName());
+		}
+		return restaurantsList;
+	
+	}
+	
+	/* ------------------------------------------------------------- Get Food items -------------------------------------------------------- */
+	@PostMapping("/FoodiFy/Restaurant/getfoodItems1")
+	public List<FoodItem> getfoodItem(@RequestBody FoodItem foodItem) {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+//		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
+//		System.out.println(Menu);
+		List<FoodCategory> itemsList = new ArrayList<FoodCategory>();
+		
+		List<FoodItem> items = foodItems.findBycatId(foodItem.getcatId());
+		
+//		for(int i=0;i<Menu.size();i++) {
+//			System.out.println(Menu.get(i).getId());
+//			List<FoodCategory> category = foodcategories.findBymenuId(Menu.get(i).getId());
+//			itemsList.addAll(category);
+//			System.out.println(category);
+////			return foodcategories.findBymenuId(Menu.get(i).getfoodMenuName());
+//		}
+		return items;
+	
+	}
+
 
 
 

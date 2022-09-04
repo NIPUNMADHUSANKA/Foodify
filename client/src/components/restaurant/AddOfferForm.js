@@ -97,6 +97,19 @@ const AddOfferForm = () => {
     }
     // ---------------------------------------
 
+    // -------------initial states for fields---------------------------
+    const initialValues = { name: "", description: "" };
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    const handleChange = event => {
+
+        const { name, value } = event.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+        // console.log(imageName);
+    };
+
     return (
         <Box>
             {/* -----------------------form area------------------------- */}
@@ -113,7 +126,7 @@ const AddOfferForm = () => {
                     '& .MuiTextField-root': {
                         m: 1,
                         width: '96%',
-                        
+
                     },
                     [theme.breakpoints.down('sm')]: {
                         fontSize: '15px',
@@ -124,8 +137,8 @@ const AddOfferForm = () => {
                 autoComplete="off"
             >
                 {/* -------text fields----------- */}
-                <InputArea id="name" label="Name" name="name" variant="outlined" />
-                <InputArea id="description" label="Description" name="description" multiline rows={6} variant="outlined" />
+                <InputArea id="name" label="Name" name="name" variant="outlined" onChange={handleChange}/>
+                <InputArea id="description" label="Description" name="description" multiline rows={6} variant="outlined" onChange={handleChange}/>
 
                 {/* --------date selection area--------- */}
                 <Box sx={{
@@ -139,10 +152,10 @@ const AddOfferForm = () => {
                         display: "flex",
                         flexDirection: "column",
                         padding: "0.5rem",
-                        
+
                     }}>
                         <Typography variant='body' sx={{ color: Colours.grayWhite, }}>Begin Date</Typography>
-                        <InputArea id="begin date" type="date" name="Bdate" variant="outlined" />
+                        <InputArea id="begin date" type="date" name="Bdate" variant="outlined" onChange={handleChange}/>
                     </Box>
 
                     <Box sx={{
@@ -151,7 +164,7 @@ const AddOfferForm = () => {
                         padding: "0.5rem",
                     }}>
                         <Typography variant='body' sx={{ color: Colours.grayWhite, }}>End Date</Typography>
-                        <InputArea id="begin date" type="date" name="Edate" variant="outlined" />
+                        <InputArea id="begin date" type="date" name="Edate" variant="outlined" onChange={handleChange}/>
                     </Box>
                 </Box>
                 {/* ------------end of date selection area------------------ */}
@@ -172,7 +185,7 @@ const AddOfferForm = () => {
                     </Typography>
 
                     {/* button */}
-                    <Button onClick={addSection} sx={{
+                    {/* <Button onClick={addSection} sx={{
                         margin: '0.5rem',
                         background: Colours.green, '&:hover': {
                             backgroundColor: Colours.yellow,
@@ -189,7 +202,7 @@ const AddOfferForm = () => {
                     }}
                         endIcon={<AddIcon sx={{ color: Colours.grayWhite }} />}>
                         Add
-                    </Button>
+                    </Button> */}
 
                     {components.map((item, i) => (
                         <CategorySelection
@@ -203,7 +216,10 @@ const AddOfferForm = () => {
                 {/* ------------end of category and food items area----- */}
 
                 {/* ------------------for discount area---------------- */}
-                <InputArea id="standard-basic" label="Discount Rate" name='discount' variant="outlined" />
+                <InputArea id="standard-basic" label="Discount Rate" name='discount' variant="outlined" onChange={handleChange}/>
+
+                {/* ---------------------add image area------------------------------------ */}
+                <InputArea type="file" name='image' label="Offer Image" />
 
                 {/* -----------------------------submit and cancel area--------------------------- */}
                 <Box sx={{
