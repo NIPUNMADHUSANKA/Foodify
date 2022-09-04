@@ -21,6 +21,7 @@ public class FoodMenu {
     private String userName;
     @NotNull(message = "Food Menu Name cannot be null")
 	private String foodMenuName;
+	@NotNull(message = "Food Menu Description cannot be null")
 	private String foodMenuDes;
 	
     public String getId() {

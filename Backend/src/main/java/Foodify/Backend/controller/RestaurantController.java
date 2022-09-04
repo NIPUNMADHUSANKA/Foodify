@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.repository.FoodCategoryRepo;
 import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
@@ -58,6 +59,9 @@ public class RestaurantController{
 
 	@Autowired
 	private FoodMenuRepo foodMenuRepo;
+
+	@Autowired
+	private FoodCategoryRepo foodCategoryRepo;
 
 	fieldErrorResponse fieldErrorResponse = new fieldErrorResponse();
 	
@@ -212,6 +216,14 @@ public class RestaurantController{
 
 		}
 		
+	}
+
+	/* -------------------------------- Get Food Category -------------------------------- */
+	@GetMapping("/RegisteredUser/getFoodCategory/{menuId}")
+	public List<FoodCategory> getFoodMenu(@PathVariable String menuId) {
+
+		return foodCategoryRepo.findBymenuId(menuId);
+
 	}
 
 

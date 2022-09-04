@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
+import { Box, TextareaAutosize, Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import {IconButton, TextField, Typography } from '@mui/material';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { color } from '@mui/system';
-import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
-
-import AddIcon from '@mui/icons-material/Add';
-
-import Avatar from '@mui/material/Avatar';
+import { TextField, Typography } from '@mui/material';
+import { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 
 import AddFoodMenuCat from './AddFoodMenuCat';
 
-import PAGE1 from '../../assets/icons/page01.png'
-import PAGE2 from '../../assets/icons/page02.png'
+import axios from "axios";
 
-import AddFoodMenuItem from './AddFoodMenuItem';
+import authHeader from "../../services/auth-header";
+
 
 // ----------array or object ot get category values--------------------
 const category = [
@@ -58,7 +51,10 @@ const foods = [
     },
 ];
 
-function AddFoodMenuCon() {
+function AddFoodMenuCon(props) {
+
+    const Id = props.Path.state.id;
+    const name = props.Path.state.name;
 
     // --------to add category section--------
     const [components, addComponents] = useState(["Category1"]); //use to render when new component added to page
@@ -68,72 +64,313 @@ function AddFoodMenuCon() {
     }
     // ---------------------------------------
 
+
+    const initialValues = {
+        Food_Carbo: null,
+        Food_Protein: null,
+        Food_Fat: null,
+        Food_Calories: null,
+        Food_Price: "",
+        Food_Des: "",
+        Food_Item: ""
+    };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    // ----------create state name form errors--------
+    const [formErrors, setFormErrors] = React.useState({});
+
+
+    // ----------store restaurant values--------
+    const [details, setDetails] = React.useState({});
+
+
+    // -------function to handle changes in the input fields and set it to formvalues----------
+    const handleChange = (e) => {
+
+        // destructuring inputfield
+        const { name, value } = e.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+
+
+    }
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+
+        const errors = {};
+
+        // creating menu object
+        const restaurantmenucatfood = {
+            name: formValues.Food_Item,
+            price: formValues.Food_Price,
+            description: formValues.Food_Des,
+            catId: Id,
+            calaries: formValues.Food_Calories,
+            fat: formValues.Food_Fat,
+            protein: formValues.Food_Protein,
+            carbo: formValues.Food_Carbo
+        }
+
+        const Food_Price = Number(formValues.Food_Price);
+        const Food_Calories = Number(formValues.Food_Calories);
+        const Food_Fat = Number(formValues.Food_Fat);
+        const Food_Carbo = Number(formValues.Food_Carbo);
+        const Food_Protein = Number(formValues.Food_Protein);
+
+        if (Food_Price === 0 && Food_Calories === 0 && Food_Fat === 0 && Food_Protein === 0 && Food_Carbo === 0) {
+            errors.valuetype = "Complete All Inputs";
+            setFormErrors(errors);
+        }
+        else if (!isNaN(Food_Price) && !isNaN(Food_Calories) && !isNaN(Food_Fat) && !isNaN(Food_Protein) && !isNaN(Food_Carbo)) {
+
+
+            axios.post("http://localhost:8072/RegisteredUser/addFoodMenuCategoryItem", restaurantmenucatfood, { headers: authHeader() })
+                .then(data => {
+                    setFormValues(initialValues);
+                    window.location.reload(false);
+
+                })
+                .catch(error => {
+                    errors.exists = error.response.data;
+                    setFormErrors(errors);
+
+                })
+
+
+        }
+        else {
+            errors.valuetype = "Check these are real values";
+            setFormErrors(errors);
+        }
+
+
+
+
+    }
+
     return (
 
         <Box scroll='paper' sx={{
-            margin:"auto",
-            height:"60vh",
-            width:"53%",
-            padding:"auto",
+            margin: "auto",
+            height: "60vh",
+            width: "49%",
+            padding: "auto",
             overflow: "scroll"
-           }}>
-             
-        <Box component="form" color="#fff" bgcolor="#171717" opacity="50" sx= {{display: "flex",flexDirection: "column",borderRadius: '20px',p:"3%", '& .MuiTextField-root': { m: 1, width: '96%' }, width:{lg:"45vw",xs:"55vw"} }} >
-        
-          <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"230%",xs:"180%"} }} >
-               Add Foods Menu
-          </Typography>
-    
-          <Box sx={{
+        }}>
+
+            <Box component="form" color="#fff" bgcolor="#171717" opacity="50" sx={{ display: "flex", flexDirection: "column", borderRadius: '20px', p: "3%", '& .MuiTextField-root': { m: 1, width: '96%' }, width: { lg: "45vw", xs: "55vw" } }} >
+
+                <Typography variant="h4" gutterBottom sx={{ fontSize: { lg: "230%", xs: "180%" } }} >
+                    Add Foods
+                </Typography>
+
+                <Box sx={{
                     display: "flex",
                     flexDirection: "column",
                     width: "95%",
                     margin: "auto",
-                    justifyContent:"center",
+                    justifyContent: "center",
                 }}>
 
-                <Typography variant='body' sx={{
+                    <Typography variant='body' sx={{
                         color: Colours.formWhite,
                         textAlign: "center",
                     }}>
-                       BreakFast
-                </Typography>
+                        {name}
+                    </Typography>
 
-                    {/* button */}
-                <IconButton onClick={addSection} sx={{width:"2.2rem"}}>
-                    <AddIcon sx={{ color: Colours.green, textAlign:"right" }} />
-                </IconButton>
+                    <Grid container spacing={3} sx={{ input: { color: "#fff" }, "label": { color: "#fff" }, p: "1%" }} >
 
-                {components.map((item, i) => (
-                        <AddFoodMenuItem
-                            category={category}
-                            item={item}
-                            name={item.value}
-                            foods = {foods}
-                        />
-                ))}
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="Food_Item"
+                                name="Food_Item"
+                                label="Food Item"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
 
-                
-                <Grid item container  ml="87%" mt="1%">
-
-                    <Button variant="contained" sx={{color:'#000',backgroundColor:"#95CD41", '&:hover': {
-                        backgroundColor: "#95CD41"
-                    }}}>
-                    Confirm
-                    </Button>
-
-                </Grid>
+                                value={formValues.Food_Item}
+                                onChange={handleChange}
+                                {...(formErrors.exists && { error: true, helperText: formErrors.exists })}
 
 
-          </Box>
-    
-              
-    
+                            />
+                        </Grid>
+
+                        <Grid item xs={12} >
+                            <TextareaAutosize
+                                required
+                                id="Food_Des"
+                                name="Food_Des"
+                                placeholder="Description about Food Item"
+                                style={{ width: "97%", paddingTop: '5px' }}
+
+                                value={formValues.Food_Des}
+                                onChange={handleChange}
+                                {...(formErrors.exists && { error: true, helperText: formErrors.exists })}
+
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="Food_Price"
+                                name="Food_Price"
+                                label="Food Price(Rs.)"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
+
+                                value={formValues.Food_Price}
+                                onChange={handleChange}
+                                {...(formErrors.valuetype && { error: true, helperText: formErrors.valuetype })}
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <TextField
+                                required
+                                id="Food_Calories"
+                                name="Food_Calories"
+                                label="Calories (g)"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
+
+                                value={formValues.Food_Calories}
+                                onChange={handleChange}
+                                {...(formErrors.valuetype && { error: true, helperText: formErrors.valuetype })}
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <TextField
+                                required
+                                id="Food_Fat"
+                                name="Food_Fat"
+                                label="Fat (g)"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
+
+                                value={formValues.Food_Fat}
+                                onChange={handleChange}
+                                {...(formErrors.valuetype && { error: true, helperText: formErrors.valuetype })}
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <TextField
+                                required
+                                id="Food_Protein"
+                                name="Food_Protein"
+                                label="Protein (g)"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
+
+                                value={formValues.Protein}
+                                onChange={handleChange}
+                                {...(formErrors.valuetype && { error: true, helperText: formErrors.valuetype })}
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={3}>
+                            <TextField
+                                required
+                                id="Food_Carbo"
+                                name="Food_Carbo"
+                                label="Carbo (g)"
+                                fullWidth
+                                autoComplete="given-name"
+                                variant="standard"
+                                sx={{
+                                    "& label.Mui-focused": {
+                                        color: "#fff"
+                                    }
+                                }}
+
+                                value={formValues.Food_Carbo}
+                                onChange={handleChange}
+                                {...(formErrors.valuetype && { error: true, helperText: formErrors.valuetype })}
+
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Button variant="contained" sx={{
+                                color: '#FFFFFF', backgroundColor: "#3E3E3E", '&:hover': {
+                                    backgroundColor: Colours.darkgray,
+                                }
+                            }}>
+                                Browse
+                            </Button>
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid item container ml="87%" mt="1%">
+
+                        <Button variant="contained" sx={{
+                            color: '#000', backgroundColor: "#95CD41", '&:hover': {
+                                backgroundColor: "#95CD41"
+                            }
+                        }}
+                            onClick={handleSubmit}
+                        >
+                            Confirm
+                        </Button>
+
+                    </Grid>
+
+
+                </Box>
+
+
+
+            </Box>
+
+
         </Box>
-    
-                
-        </Box>
-      )
+    )
 }
 
 export default AddFoodMenuCon

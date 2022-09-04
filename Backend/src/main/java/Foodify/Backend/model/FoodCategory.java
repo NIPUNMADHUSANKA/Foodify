@@ -16,10 +16,10 @@ public class FoodCategory {
     
     @Id
 	private String id;
-    @NotNull(message = "Food Menu Name cannot be null")
     private String menuId;
 	@NotNull(message = "Food Category cannot be null")
     private String foodMenuCategory;
+	@NotNull(message = "Food Category Description cannot be null")
 	private String foodMenuCategoryDes;
  
 

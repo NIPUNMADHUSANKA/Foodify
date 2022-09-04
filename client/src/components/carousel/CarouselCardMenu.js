@@ -8,9 +8,8 @@ import { id } from 'date-fns/locale';
 
 const CarouselCard = (props) => {
 
-    console.log(props.item);
 
-    const menu = props.item;
+    const category = props.item;
     
     
     return (
@@ -49,7 +48,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {menu.foodMenuName}
+                        {category.foodMenuCategory}
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -59,7 +58,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {menu.foodMenuDes}
+                        {category.foodMenuCategoryDes}
                     </Typography>
 
                 </CardContent>
@@ -90,7 +89,7 @@ const CarouselCard = (props) => {
 
                {/* <Link to={`blog/${id}`}>{title}</Link> */}
 
-                <Button component={Link} to={'/AddFoodMenu'} state= {{ id: menu.id , name: menu.foodMenuName}} size="small" sx={{
+                <Button component={Link} to={'/AddFoodMenuItem'} state= {{ id: category.id , name: category.foodMenuCategory}} size="small" sx={{
                     margin: '6px',
                     background: Colours.yellow, '&:hover': {
                         backgroundColor: Colours.green,

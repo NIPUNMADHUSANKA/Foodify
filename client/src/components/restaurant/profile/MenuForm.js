@@ -11,6 +11,8 @@ import UserService from '../../../services/user-service';
 
 import axios from "axios";
 import authHeader from "../../../services/auth-header";
+import { Link } from 'react-router-dom';
+
 
 
 // ----------for the transition of the form------------
@@ -148,6 +150,28 @@ function MenuForm() {
             </Button>
 
 
+            <Button component={Link} to={'/AddFoodMenu'} sx={{
+                margin: '0.5rem',
+                marginBottom: 0,
+                marginTop: 4,
+                width: "15%",
+                background: Colours.yellow, '&:hover': {
+                    backgroundColor: Colours.green,
+                },
+                color: Colours.dark,
+                fontSize: '1rem',
+                hover: Colours.green,
+                borderRadius: "1rem",
+                Width: "20%",
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: '8px',
+                    padding: '2px',
+                    width: "25%",
+                },
+            }}>Add Food Category
+            </Button>
+
+
             {/* ---------------------------form------------------------- */}
             <Dialog
                 open={open}
@@ -169,8 +193,6 @@ function MenuForm() {
 
                         />
 
-
-                        <CustomTextField type="file" name='image' />
 
                         <CustomTextField
                             id="foodMenuName"

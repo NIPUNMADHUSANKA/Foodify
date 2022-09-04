@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 
-import Carousel from 'react-elastic-carousel';
 
 import PageTitle from '../components/User/PageTitle';
 import AddFoodMenuIns from '../components/restaurant/AddFoodMenuIns';
@@ -24,7 +23,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Link} from 'react-router-dom';
 
 import { useLocation } from 'react-router-dom';
-import AuthService from '../services/auth-service';
 
 
 const MainHeader = "Add Foods Menu Category";
@@ -91,7 +89,7 @@ function AddFoodMenu() {
       <Box mt="3%">
         <Fade left>
           
-            <AddFoodMenuIns Path = {location} />
+            <AddFoodMenuIns />
           
         </Fade>
       </Box>
