@@ -109,8 +109,21 @@ const CategorySelection = (props) => {
     // ----------create state name form values--------
     const [formValues, setFormValues] = React.useState(initialValues);
 
-    console.log(formValues);
-    console.log(category);
+    console.log(category)
+    console.log(checked)
+
+    const list1 = [category,checked]
+
+    console.log(list1)
+
+       // ------------send data if corrects---------
+       React.useEffect((event) => {
+
+        if (checked !== null) {
+
+        }
+
+    }, [])
 
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
@@ -226,17 +239,17 @@ const CategorySelection = (props) => {
                                         display: "flex",
                                         flexDirection: "row",
                                     }}>
-            
+
                                         <Checkbox
                                             id="begin date"
                                             type="checkbox"
-                                            value={details2[keyName2].name}
+                                            value={details2[keyName2].id}
                                             name={details2[keyName2].name}
                                             variant="standard"
                                             onChange={checklisthandle}
                                         />
                                         <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
-            
+
                                     </Grid>
                                 ))
                             );

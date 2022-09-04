@@ -1,5 +1,6 @@
 package Foodify.Backend.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,16 +24,16 @@ public class Offers {
 	
 	@Id
 	private String id;
+	private String userName;
 	private String name;
 	private String description;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date startDate;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private String category;
 	private List<String> items;
 	private int discount;
 	private Binary image;
+	private String tempImage;
 	
 	
 	public Offers() {
@@ -48,6 +49,16 @@ public class Offers {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 
@@ -71,22 +82,22 @@ public class Offers {
 	}
 
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -128,6 +139,16 @@ public class Offers {
 
 	public void setImage(Binary image) {
 		this.image = image;
+	}
+	
+	
+	public String getTempImage() {
+		return tempImage;
+	}
+
+
+	public void setTempImage(String tempImage) {
+		this.tempImage = tempImage;
 	}
 
 

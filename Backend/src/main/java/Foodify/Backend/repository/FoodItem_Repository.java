@@ -2,6 +2,7 @@
 package Foodify.Backend.repository;
 
 import Foodify.Backend.model.FoodItem;
+import Foodify.Backend.model.Offers;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -13,6 +14,8 @@ import java.util.Optional;
 @Repository
 public interface FoodItem_Repository extends MongoRepository<FoodItem, String> {
 
+	FoodItem findByid(String id);
+	
 	@Query(value ="{restaurant: ?0}", count=true)
 	List<FoodItem> findByRes(String ResId);
 
@@ -20,7 +23,7 @@ public interface FoodItem_Repository extends MongoRepository<FoodItem, String> {
 	Optional<FoodItem> findByMenuCategoryItemExists(String catId, String name);
 	
 	List<FoodItem> findBycatId(String catId);
-	
+		
 }
 
 
