@@ -126,42 +126,31 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(amount, date, time, restaurant) {
+function createData(amount, date, time, restaurant, billItems) {
   const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
   const rateItem = <Button variant="outlined" color="success" size="small" component={Link} to="../FoodRating">Rate Item</Button>
   const createComplaint = <Button variant="outlined" color="error" size="small" component={Link} to="../Complaints">Create Complaint</Button>
-  return { 
-    // payment, 
+  
+
+  
+  billItems.forEach(billItem => (
+    billItem['viewItem'] = viewItem,
+    billItem['rateItem'] = rateItem,
+    billItem['createComplaint'] = createComplaint
+    // console.log(billItem))
+  ))
+
+  var details = billItems;
+    return {  
     date, 
     time,
     restaurant, 
-    // type, 
     amount, 
-    // restaurant, 
-    details: [
-      {
-        item: "Cheese Pizza",
-        quantity: "2",
-        price: "2100.00",
-        discounts: "0",
-        viewItem,
-        rateItem,
-        createComplaint
-      },
-      {
-        item: "Sausage Pizza",
-        quantity: "2",
-        price: "2200.00",
-        discounts: "50",
-        viewItem,
-        rateItem,
-        createComplaint
-      },
-    ] };
+    details
+  };
 }
 
 function Row(props) {
-  // console.log(props);
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -251,15 +240,22 @@ function TableActions(details) {
 
   //----------------------------------------------------------accepting data array object out of details object
   const info = details.data;
-  var date, time, price, restaurant;
+  // console.log(info)
+  var datetime, date, time, price, restaurant, details;
 
   const rows = [
     Object.keys(info).map((key, index) => (
-      date = info[key].datetime,
-      time = info[key].datetime,
+
+      datetime = info[key].datetime.split("T"),
+      console.log(datetime),
+
+      date = datetime[0],
+      time = datetime[1].slice(0,8),
       price = 1250,
       restaurant = "RestaurantZ",
-      createData(price, date, time, restaurant)
+      details = info[key].details,
+      // console.log(info[key].details), // object works fine
+      createData(price, date, time, restaurant, details)
       ))
   ];
 
