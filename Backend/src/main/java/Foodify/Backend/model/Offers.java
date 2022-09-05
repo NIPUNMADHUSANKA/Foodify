@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Document(collection="offers")
 public class Offers {
 	

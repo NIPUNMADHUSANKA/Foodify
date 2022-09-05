@@ -29,7 +29,7 @@ function IntakeChart() {
           // console.log(currentUser);
           const details = data.data;
           setDetails({ ...details});
-          // console.log(details);
+          console.log(details);
         })
         .catch(error => {
           if (error.response.data) {
