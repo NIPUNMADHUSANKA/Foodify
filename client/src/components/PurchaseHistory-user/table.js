@@ -182,7 +182,7 @@ function Row(props) {
                 <TableHead >
                   <TableRow>
                     <TableCell>Item</TableCell>
-                    <TableCell>Quantity</TableCell>
+                    <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Discount</TableCell>
                     <TableCell align="right">Total price</TableCell>
@@ -193,15 +193,16 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    <TableRow key={detailsRow.item}>
+                    console.log(typeof(detailsRow)),
+                    <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
-                        {detailsRow.item}
+                        {detailsRow.name}
                       </TableCell>
-                      <TableCell>{detailsRow.quantity}</TableCell>
-                      <TableCell>{detailsRow.price}</TableCell>
-                      <TableCell>{detailsRow.discounts}</TableCell>
+                      <TableCell align="right">{detailsRow.quantity}</TableCell>
+                      <TableCell align="right">{detailsRow.price}</TableCell>
+                      <TableCell align="right">{detailsRow.discount}</TableCell>
                       <TableCell align="right">
-                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
+                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discount}
                       </TableCell>
                       <TableCell align="right">{detailsRow.viewItem}</TableCell>
                       <TableCell>{detailsRow.rateItem}</TableCell>
@@ -251,7 +252,7 @@ function TableActions(details) {
 
       date = datetime[0],
       time = datetime[1].slice(0,8),
-      price = 1250,
+      price = info[key].price,
       restaurant = "RestaurantZ",
       details = info[key].details,
       // console.log(info[key].details), // object works fine
@@ -314,7 +315,7 @@ function TableActions(details) {
         <TableBody>
           {(rowsPerPage > 0
             ? rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage): rowsData).map((row) => (
-            <Row key={row.date} row={row} />
+            <Row key={row.id} row={row} />
           ))}
 
           {emptyRows > 0 && (
