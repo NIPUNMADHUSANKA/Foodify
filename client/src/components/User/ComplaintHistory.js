@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useEffect,useState } from 'react';
 import { Box,TextareaAutosize,Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -16,11 +16,30 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { FixedSizeList } from 'react-window';
+import authHeader from '../../services/auth-header';
+import axois from "axios";
 
   
     
 function ComplaintHistory() {
+  const [complainhis, setData2] = useState([]);
 
+useEffect((event) => {
+
+  axois.get(`http://localhost:8072/FoodiFy/User/getCount/complainhistory`, {headers: authHeader()})
+      .then(data => {
+          // this part if sucess
+          setData2(data.data)
+          
+      })
+      .catch(error => {
+          console.log("There is an error");
+      });
+
+}, []);
+
+console.log(complainhis);
+console.log(complainhis.complainTitle  );
   
     function renderRow(props) {
       const { index, style } = props;

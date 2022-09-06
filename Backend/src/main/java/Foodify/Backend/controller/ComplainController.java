@@ -90,7 +90,7 @@ public class ComplainController {
 	
 	@GetMapping("/FoodiFy/User/getCount/complainhistory")
 	public List<Complain> complainhistory() {
-		List<Complain> complains = complainRepository.findAll(Sort.by(Sort.Direction.ASC, "addedDate"));
+		List<Complain> complains = complainRepository.findAll();
 		
 		return complains;
 	}
