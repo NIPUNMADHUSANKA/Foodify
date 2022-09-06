@@ -360,7 +360,7 @@ function AddFoodMenuCon(props) {
                         </Grid>
 
                         <Grid item xs={12} md={4}>
-                            <TextField type="file" name='Image' onChange={handleUploadClick} />
+                            <TextField type="file" name='Image' onChange={handleUploadClick} required />
                         </Grid>
 
                     </Grid>

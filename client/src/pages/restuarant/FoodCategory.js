@@ -86,7 +86,7 @@ const data = [
 const itemcount = 4;
 
 // ------------------------------------------------------
-console.log(data)
+//console.log(data)
 
 const data2 = data;
 

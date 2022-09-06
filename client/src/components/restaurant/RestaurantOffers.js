@@ -64,7 +64,7 @@ const RestaurantOffers = () => {
       {(() => {
         if (JSON.parse(localStorage.getItem('ROLE'))) {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-          console.log(ROLE)
+         // console.log(ROLE)
         }
       }
       )()}

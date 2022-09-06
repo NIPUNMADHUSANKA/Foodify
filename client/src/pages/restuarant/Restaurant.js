@@ -72,11 +72,13 @@ const Restaurant = () => {
 
   const [Data, setData] = useState([]);
 
+  
   useEffect((event) => {
 
     axois.get(`http://localhost:8072/FoodiFy/Service/GetRestaurantInfo/${location.state.id}`)
         .then(data => {
             // this part if sucess
+            console.log(data.data);
             setData(data.data)
             
         })
@@ -86,7 +88,7 @@ const Restaurant = () => {
 
 }, []);
 
-console.log(Data)
+
 
 const details1 = {
   "detail1": Data.about,
