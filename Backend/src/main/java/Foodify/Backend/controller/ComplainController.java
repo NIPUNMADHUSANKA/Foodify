@@ -8,6 +8,7 @@ import java.util.List;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,7 +40,7 @@ public class ComplainController {
     		@RequestParam("complainTitle") String name2,
     		@RequestParam("complainDescription") String name3,
     		@RequestParam("complainStatus") String name4,
-    		@RequestParam("addedDate") String name5) throws IOException {
+    		@RequestParam("addedDate") Date name5) throws IOException {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 //		System.out.println(complain);
@@ -74,18 +75,23 @@ public class ComplainController {
 		String state = "accepted";
 		int complains = (int) complainRepository.count2(state);
 //		List<Complain> complainList = new ArrayList<Complain>();
-
 //		System.out.println(complainList);
 		return complains;
 	}
 	
 	@GetMapping("/FoodiFy/User/getCount/rejected")
-	public int showComplains() {
+	public int showComplainsrejected() {
 		String state = "rejected";
 		int complains = (int) complainRepository.count2(state);
 //		List<Complain> complainList = new ArrayList<Complain>();
-
 //		System.out.println(complainList);
+		return complains;
+	}
+	
+	@GetMapping("/FoodiFy/User/getCount/complainhistory")
+	public List<Complain> complainhistory() {
+		List<Complain> complains = complainRepository.findAll(Sort.by(Sort.Direction.ASC, "addedDate"));
+		
 		return complains;
 	}
 
