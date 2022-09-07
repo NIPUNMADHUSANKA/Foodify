@@ -1,6 +1,7 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -226,11 +227,10 @@ public class RestaurantController{
 	@PostMapping("/FoodiFy/Restaurant/getfoodItems1")
 	public List<FoodItem> getfoodItem(@RequestBody FoodItem foodItem) {
 		
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 //		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
 //		System.out.println(Menu);
-		List<FoodCategory> itemsList = new ArrayList<FoodCategory>();
 		
 		List<FoodItem> items = foodItems.findBycatId(foodItem.getcatId());
 		
@@ -292,10 +292,74 @@ public class RestaurantController{
         
 		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);     
     }
+    
+	/* -------------------------------- Get offers restaurant view -------------------------------- */
+	@GetMapping("/FoodiFy/Service/getOffer/{id}")
+	public Offers getOffers(@PathVariable(value="id") String id) {
+		
+		Offers offer = offersRepo.findByid(id);
+		
+		offer.setTempImage(Base64.getEncoder().encodeToString(offer.getImage().getData()));
+		
+		return offer;
+	}
 
+	/* -------------------------------- Get offer view -------------------------------- */
+	@GetMapping("/FoodiFy/Restaurant/getOffersR")
+	public List<Offers> getOffer() {
+		
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();	
+		List<Offers> items = offersRepo.findByuserName(userName);
+		List<Offers> offerList = new ArrayList<Offers>();
+//		--------------------setting relevant data for output------------------------
+		for(int i = 0; i<items.size();i++) {
+			Offers offer = new Offers();			
+			offer.setTempImage(Base64.getEncoder().encodeToString(items.get(i).getImage().getData()));
+			offer.setName(items.get(i).getName());
+			offer.setId(items.get(i).getId());			
+			offerList.add(offer);
+		}
+		return offerList;
+	}
+	
+	/* -------------------------------- Get offer Customer view -------------------------------- */
+	@PostMapping("/FoodiFy/Service/getOffersC")
+	public List<Offers> getOffer2(@RequestParam("id") String id) {
+		
+		Restaurant restaurant = restaurantrepo.findByid(id);
+		String userName = restaurant.getUserName();
 
+		List<Offers> items = offersRepo.findByuserName(userName);
+		List<Offers> offerList = new ArrayList<Offers>();
+//		--------------------setting relevant data for output------------------------
+		for(int i = 0; i<items.size();i++) {
+			Offers offer = new Offers();			
+			offer.setTempImage(Base64.getEncoder().encodeToString(items.get(i).getImage().getData()));
+			offer.setName(items.get(i).getName());
+			offer.setId(items.get(i).getId());			
+			offerList.add(offer);
+		}
+		return offerList;
+	}
+	
+//-------------------------------------------- get food items of the offer ----------------------------------------------
+	@PostMapping("/FoodiFy/Service/getOfferItems")
+	public ResponseEntity<?> getOfferItems(@RequestParam("items")String items ) {
+		
+		System.out.println(items);
+		try {
 
+			return new ResponseEntity<>(service.getItems(items), HttpStatus.OK);
 
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+		
+	}
+
+	
 	/* -------------------------------- Add Food category -------------------------------- */
 	@PostMapping("/RegisteredUser/addFoodMenuCategory")
 	public ResponseEntity<?> addFoodCategory(@Valid @RequestBody FoodCategory foodCategory) {
@@ -337,13 +401,6 @@ public class RestaurantController{
     public ResponseEntity<?> uploadImage(@RequestParam("imageFile")MultipartFile file) throws IOException {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-    					
-    	
-//    	String imageDirectory = System.getProperty("user.dir") + "/uploads/restaurantBanners/"+userName;
-//        makeDirectoryIfNotExist(imageDirectory);
-//        System.out.println(imageDirectory);
-//        Path fileNamePath = Paths.get(imageDirectory,userName.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
-//        System.out.println(fileNamePath);
         
 //    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
         Restaurant restaurant = restaurantrepo.findByuserName(userName);
@@ -354,13 +411,6 @@ public class RestaurantController{
 		return new ResponseEntity<>(userName, HttpStatus.CREATED);
        
     }
-
-//    private void makeDirectoryIfNotExist(String imageDirectory) {
-//        File directory = new File(imageDirectory);
-//        if (!directory.exists()) {
-//            directory.mkdir();
-//        }
-//    }
     
 //    -------------------get restaurant information-----------------------------
     @GetMapping("/FoodiFy/Restaurant/GetRestaurant")
@@ -426,6 +476,8 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 //		return restaurant;
 	return restaurant;
 }
+
+
 	
 	
 	
