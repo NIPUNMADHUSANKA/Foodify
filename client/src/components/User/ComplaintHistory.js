@@ -24,12 +24,21 @@ import axois from "axios";
 function ComplaintHistory() {
   const [complainhis, setData2] = useState([]);
 
+  
+
 useEffect((event) => {
 
   axois.get(`http://localhost:8072/FoodiFy/User/getCount/complainhistory`, {headers: authHeader()})
       .then(data => {
           // this part if sucess
-          setData2(data.data)
+          const details = data.data;
+          setData2({ ...details});
+          console.log(details);
+          // details.array.forEach(element => {
+          //   Object.entries(element).forEach(([key , value]) => 
+              
+          // });
+         
           
       })
       .catch(error => {
@@ -37,10 +46,15 @@ useEffect((event) => {
       });
 
 }, []);
+// console.log("This is the compo");
+//  console.log(complainhis);
+// var complaint = complainhis[0];
+// console.log(complaint); // this is an object
+// console.log(Object.keys(complaint));
+// console.log(complaint[id]);
 
-console.log(complainhis);
-console.log(complainhis.complainTitle  );
-  
+
+
     function renderRow(props) {
       const { index, style } = props;
     
