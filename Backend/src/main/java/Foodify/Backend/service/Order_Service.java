@@ -4,8 +4,10 @@ package Foodify.Backend.service;
 import Foodify.Backend.model.FoodItem;
 import Foodify.Backend.model.Order;
 import Foodify.Backend.model.OrderItem;
+import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.Order_Repository;
+import Foodify.Backend.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,9 @@ public class Order_Service implements Order_Serv{
 
 	@Autowired
 	private FoodItem_Repository foodItem_repository;
+
+	@Autowired
+	private RestaurantRepository restaurantRepository;
 
 	@Override
 	public List<Order> findByUser(String UserId){
@@ -49,6 +54,7 @@ public class Order_Service implements Order_Serv{
 				x.put("price",item.getPrice());
 				x.put("discount",item.getDiscount());
 				price += (((double)x.get("price")) * ((int)x.get("quantity"))) - (int)x.get("discount");
+				
 			}
 			order.setPrice((float) price);
 		}
