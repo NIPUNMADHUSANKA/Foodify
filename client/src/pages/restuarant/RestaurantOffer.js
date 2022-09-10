@@ -27,6 +27,7 @@ var ROLE = null;
 
 const RestaurantOffer = () => {
 
+
     {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
     {
         (() => {
@@ -100,7 +101,7 @@ const RestaurantOffer = () => {
                 itemlisthandle(items1)
 
                 setDetails({ ...details });
-                console.log(items1);
+                console.log(details);
                 // setItems([...items1]);
 
                 if (image1 !== null) {
@@ -133,6 +134,13 @@ const RestaurantOffer = () => {
         )()
     }
     {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
+
+    // -------------------------------------getting the end date and convert into date format----------------------------
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = details.endDate;
+    const eDate1 = new Date(Edate1);
+
+    // console.log(date.toString());
 
     return (
 
@@ -299,9 +307,41 @@ const RestaurantOffer = () => {
                                 ))}
                             </List>
                             <br />
-                            <b>From:{details.startDate} to:{details.endDate}</b>
-
+                            {(() => {
+                                if (todayDate < eDate1) {
+                                    return (
+                                        <b>From:{details.startDate} to:{details.endDate}</b>
+                                    );
+                                }
+                            }
+                            )()}
+                            {(() => {
+                            if (todayDate > eDate1) {
+                                return (
+                                    <Typography variant="body1" gutterBottom sx={{
+                                        color: '#ff0000',
+                                        justifyContent: 'center',
+                                        textAlign: 'center',
+                                        fontSize: '1rem',
+                                        padding: '1%',
+                                        width: "80%",
+                                        margin: "auto",
+                                        transition: 'transform .2s', '&:hover': {
+                                            transform: 'scale(1.04)',
+                                            opacity: 4,
+                                        },
+                                        [theme.breakpoints.down('sm')]: {
+                                            fontSize: '14px',
+                                            marginRight: "10%",
+                                        }
+                                    }}>Expired</Typography>
+                                );
+                            }
+                        }
+                        )()}
                         </Typography>
+
+
                     </Fade>
 
                 </Box>
@@ -317,7 +357,7 @@ const RestaurantOffer = () => {
                                 display: 'flex',
                                 flexDirection: 'row'
                             }}>
-                                <Button size="small" sx={{
+                                <Button size="small" state={{id:details.id}} sx={{
                                     margin: '6px',
                                     background: Colours.green, '&:hover': {
                                         backgroundColor: Colours.yellow,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import theme, { Colours } from '../../assets/theme/theme';
-import { Button,TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import styled from '@emotion/styled';
 import CategorySelection from './CategorySelection';
 import axios from 'axios';
@@ -223,7 +223,7 @@ const AddOfferForm = () => {
         imageData.append('Bdate', formValues.Bdate);
         imageData.append('Edate', formValues.Edate);
         imageData.append('discount', formValues.discount);
-        imageData.append('itemList',list1)
+        imageData.append('itemList', list1)
 
 
         console.log(imageData)
@@ -373,25 +373,37 @@ const AddOfferForm = () => {
                                     if (details2 !== null) {
                                         return (
 
+
                                             Object.keys(details2).map((keyName2) => (
+                                                // -------------------loop-----------------------------
                                                 console.log(details2[keyName2]),
 
-                                                <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                }}>
+                                                (() => {
+                                                    if (details2[keyName2].discount === 0) {
+                                                        return (
+                                                            <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
+                                                                display: "flex",
+                                                                flexDirection: "row",
+                                                            }}>
 
-                                                    <Checkbox
-                                                        id="begin date"
-                                                        type="checkbox"
-                                                        value={details2[keyName2].id}
-                                                        name={details2[keyName2].name}
-                                                        variant="standard"
-                                                        onChange={checklisthandle}
-                                                    />
-                                                    <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+                                                                <Checkbox
+                                                                    id="begin date"
+                                                                    type="checkbox"
+                                                                    value={details2[keyName2].id}
+                                                                    name={details2[keyName2].name}
+                                                                    variant="standard"
+                                                                    onChange={checklisthandle}
+                                                                />
 
-                                                </Grid>
+                                                                <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+
+                                                            </Grid>
+                                                        );
+                                                    }
+                                                }
+                                                )()
+
+                                                // -------------------------loop-------------------------------------
                                             ))
                                         );
                                     }

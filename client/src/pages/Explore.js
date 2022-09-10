@@ -18,7 +18,6 @@ import Navbar from '../components/Navbar';
 
 
 import '../assets/css/Home.css';
-import axios from "axios";
 
 const Explore = () => {
 
