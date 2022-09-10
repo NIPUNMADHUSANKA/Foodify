@@ -106,7 +106,7 @@ const Explore = () => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
 
-                    {console.log(details)}
+                    {/* {console.log(details)} */}
                     <RestaurantScroll details={details} />
 
 

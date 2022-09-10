@@ -8,6 +8,7 @@ import axios from 'axios';
 import authHeader from "../../services/auth-header";
 import { Checkbox, FormControl, FormGroup, Grid, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import { useLocation } from 'react-router-dom';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -50,47 +51,10 @@ const InputArea = styled(TextField)({
 });
 // ---------------------------------------------------------------------
 
-// ----------array or object ot get category values--------------------
-const category = [
-    {
-        value: 'Vegie',
-        label: 'Vegie',
-    },
-    {
-        value: 'Sea Food',
-        label: 'Sea Food',
-    },
-    {
-        value: 'Indian',
-        label: 'Indian',
-    },
-    {
-        value: 'Italian',
-        label: 'Italian',
-    },
-];
-
-// ------------------------food names-----------------
-const foods = [
-    {
-        value: 'Vegie',
-        label: 'Vegie Masala',
-    },
-    {
-        value: 'Sea Food',
-        label: 'Sea Food Fish curry',
-    },
-    {
-        value: 'Indian',
-        label: 'Indian Those',
-    },
-    {
-        value: 'Italian',
-        label: 'Italian burger',
-    },
-];
-
 const AddOfferForm = () => {
+
+    // --------------to get the id------------------
+    const location = useLocation();
 
     // ------------------------food array-------------------------------
 
@@ -117,6 +81,9 @@ const AddOfferForm = () => {
 
     // ----------------------for store response data of items----------------------
     const [details2, setDetails2] = React.useState({});
+
+    // ----------------------for store offer response data----------------------
+    const [offerdetails, setOfferDetails] = React.useState({});
 
     // console.log(category)
     // console.log(checked)
@@ -148,6 +115,23 @@ const AddOfferForm = () => {
         };
 
         sendGetRequest();
+
+        // -----------------------------------to get the offer details------------------------------------------
+        const getOfferDetails = async () => {
+            try {
+                const resp3 = await axios.get(`http://localhost:8072/FoodiFy/Service/getOffer/${location.state.id}`, { headers: authHeader() });
+
+                const offerDetails = resp3.data;
+                setOfferDetails({ ...offerDetails });
+
+                console.log(offerdetails);
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        getOfferDetails();
 
     }, []);
 
@@ -249,7 +233,8 @@ const AddOfferForm = () => {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    width: "100%",
+                    width: "90%",
+                    margin:"auto",
                     padding: "1rem",
                     opacity: 0.9,
                     background: Colours.secondary,

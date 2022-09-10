@@ -75,7 +75,7 @@ const RestaurantHome = () => {
 
     axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantInfo", { headers: authHeader() })
       .then(data => {
-        console.log(data)
+        // console.log(data)
 
         if(data.data.about !== null){
 

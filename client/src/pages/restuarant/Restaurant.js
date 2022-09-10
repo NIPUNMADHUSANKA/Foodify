@@ -86,7 +86,7 @@ const Restaurant = () => {
 
 }, []);
 
-console.log(Data)
+// console.log(Data)
 
 const details1 = {
   "detail1": Data.about,

@@ -28,7 +28,7 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
 
 const carousel = (props) => {
 
-  console.log(props.item)
+  // console.log(props.item)
 
   const x = props.item
 
@@ -79,7 +79,7 @@ const carousel = (props) => {
           ]}>
 
           {Object.keys(x).map((keyName) => (
-            console.log(x[keyName]),
+            // console.log(x[keyName]),
 
             <CarouselCardOffers data={x[keyName]} />
 

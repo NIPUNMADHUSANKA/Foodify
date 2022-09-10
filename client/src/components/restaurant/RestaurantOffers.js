@@ -63,7 +63,7 @@ const RestaurantOffers = (props) => {
     (() => {
       if (JSON.parse(localStorage.getItem('ROLE'))) {
         ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-        console.log(ROLE)
+        // console.log(ROLE)
       }
     }
     )()
@@ -85,7 +85,7 @@ const RestaurantOffers = (props) => {
         const details = resp.data;
         setDetails({ ...details });
 
-        console.log(details);
+        // console.log(details);
       } catch (err) {
         // Handle Error Here
         console.error(err);
@@ -109,7 +109,7 @@ const RestaurantOffers = (props) => {
           const details = resp.data;
           setDetails({ ...details });
 
-          console.log(details);
+          // console.log(details);
         } catch (err) {
           // Handle Error Here
           console.error(err);

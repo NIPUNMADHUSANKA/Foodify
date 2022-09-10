@@ -261,7 +261,7 @@ public class RestaurantController{
 		}
     }
     
-	/* -------------------------------- Get offers restaurant view -------------------------------- */
+	/* -------------------------------- Get single offers restaurant view -------------------------------- */
 	@GetMapping("/FoodiFy/Service/getOffer/{id}")
 	public Offers getOffers(@PathVariable(value="id") String id) {
 		
@@ -272,7 +272,7 @@ public class RestaurantController{
 		return offer;
 	}
 
-	/* -------------------------------- Get offer view -------------------------------- */
+	/* -------------------------------- Get offer view for cards-------------------------------- */
 	@GetMapping("/FoodiFy/Restaurant/getOffersR")
 	public List<Offers> getOffer() {
 		
@@ -290,7 +290,7 @@ public class RestaurantController{
 		return offerList;
 	}
 	
-	/* -------------------------------- Get offer Customer view -------------------------------- */
+	/* -------------------------------- Get offer Customer view for cards-------------------------------- */
 	@PostMapping("/FoodiFy/Service/getOffersC")
 	public List<Offers> getOffer2(@RequestParam("id") String id) {
 		
