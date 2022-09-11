@@ -9,6 +9,8 @@ public interface Order_Serv {
 	List<Order> findByUser(String UserId);
 	List<Order> findByRes(String RestaurantId);
 
-	List<Order> getDetailedOrder(String UserId);
-	
+	List<Order> getDetailedOrders(String UserId);
+
+	List<Order> getDetailedOrders();
+
 }

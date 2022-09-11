@@ -26,6 +26,17 @@ public class Order {
 
     private float price;
 
+    private String resId;
+
+
+    public String getResId() {
+        return resId;
+    }
+
+    public void setResId(String resId) {
+        this.resId = resId;
+    }
+
     public String getId() { return Id.toString(); }
 
     public void setId(ObjectId id) { Id = id; }

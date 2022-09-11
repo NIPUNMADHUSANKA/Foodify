@@ -149,13 +149,9 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(amount, date, time, restaurant, billItems) {
+function createData(amount, date, time, restaurant, user,type, billItems) {
   const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
-  const user = "User";
-  const type = "Type";
-  
 
-  
   billItems.forEach(billItem => (
     billItem['viewItem'] = viewItem
     // console.log(billItem))
@@ -169,6 +165,7 @@ function createData(amount, date, time, restaurant, billItems) {
     type,
     restaurant, 
     amount, 
+    user,
     details
   };
 }
@@ -213,12 +210,12 @@ function Row(props) {
                     <TableCell align="right">Total price</TableCell>
                     <TableCell align="right"></TableCell>
                     <TableCell align="right"></TableCell>
-                    {/* <TableCell align="right"></TableCell> */}
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    console.log(typeof(detailsRow)),
+                    // console.log(typeof(detailsRow)),
                     <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
                         {detailsRow.name}
@@ -267,24 +264,23 @@ Row.propTypes = {
 function TableActions(details) {
 
   //----------------------------------------------------------accepting data array object out of details object
-  const info = details.data;
-  console.log(details);
-  // console.log(info)
-  var datetime, date, time, price, restaurant, details;
+  const orders = details.orders;
+  // console.log(details);
+  var datetime, date, time, price, restaurant, details,user,type;
 
   const rows = [
-    Object.keys(info).map((key, index) => (
+    Object.keys(orders).map((key, index) => (
 
-      datetime = info[key].datetime.split("T"),
-      console.log(datetime),
-
+      datetime = orders[key].datetime.split("T"),
       date = datetime[0],
       time = datetime[1].slice(0,8),
-      price = info[key].price,
-      restaurant = "RestaurantZ",
-      details = info[key].details,
-      // console.log(info[key].details), // object works fine
-      createData(price, date, time, restaurant, details)
+
+      price = orders[key].price,
+      restaurant = orders[key].resId,
+      details = orders[key].details,
+      user = orders[key].user,
+      type = "Order",
+      createData(price, date, time, restaurant, user, type, details)
       ))
   ];
 
@@ -302,7 +298,7 @@ function TableActions(details) {
     // { id: 'payment', label: 'Payment-ID', minWidth: 100},
     { id: 'date', label: 'Date', minWidth: 100 },
     { id: 'time', label: 'Time', minWidth: 100},
-    { id: 'user', label: 'User', minWidth: 100 },
+    { id: 'user', label: 'User', minWidth: 150},
     { id: 'type', label: 'Type', minWidth: 100 },
     { id: 'restaurant', label: 'Restaurant', minWidth: 200 },
     { id: 'amount', label: 'Amount', minWidth: 100 },
