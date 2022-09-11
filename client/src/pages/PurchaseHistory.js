@@ -14,22 +14,22 @@ import axios from "axios";
 
 
 const MainHeader = "Purchase History";
-const currentUser = AuthService.getCurrentUser();
-
+const currentUser = AuthService.getCurrentUser(); // to do : this gives the user token, make it get 
+// console.log(currentUser);
 
 function IntakeChart() {
   const [details, setDetails] = React.useState({});
 
   useEffect((event) => {
 
-    //initialize the user id and pass to the url
+    //to do:initialize the user id and pass to the url
     axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
         .then(data => {
           // console.log(data);
           // console.log(currentUser);
           const details = data.data;
           setDetails({ ...details});
-          console.log(details);
+          // console.log(details);
         })
         .catch(error => {
           if (error.response.data) {
@@ -38,6 +38,7 @@ function IntakeChart() {
         });
 
 }, []);
+// console.log(details);
   return (
     <Box>
 

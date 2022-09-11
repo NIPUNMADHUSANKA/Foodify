@@ -19,9 +19,27 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import '../assets/css/Dashboard-admin.css';
 
-// for scroll reveals
-import Fade from 'react-reveal/Fade';
-import Navbar from '../components/Navbar';
+import axios from 'axios';
+
+import AuthService from '../services/auth-service';
+import authHeader from '../services/auth-header';
+
+
+// function dataAccessTransaction(details){
+//     axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
+//     .then(data => {
+//         const details = data.data;
+//         setDetails({ ...details});
+//         console.log( ...details);
+//     })
+//     .catch(error => {
+//     if (error.response.data) {
+//         console.log(error.response.data);
+//     }
+//     });
+//     return details;
+// }
+
 
 const Dashboard = () => {
 
@@ -29,10 +47,30 @@ const Dashboard = () => {
         document.title = "Dashboard";
     })
 
-    const drawerWidth = 240;
+    const [details, setDetails] = React.useState({});
+
+    /* ------------------------------------------------------------Data Intialization */
+
+    /* -----------------------------------------Transactions */
+    const [transactions, setTransactions] = React.useState({});
+    useEffect((event) => {
+        axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
+        .then(data => {
+            const transactions = data.data;
+            setTransactions({ ...transactions});
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
+    }, []);
+    // console.log(transactions);
+
 
     /* ------------------------------------------------------------Drawer functions */
-    const [value, setValue] = React.useState(0);
+    const drawerWidth = 240;
+    const [value, setValue] = React.useState(3);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -139,7 +177,8 @@ const Dashboard = () => {
                     <RestaurantMain />
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <Transactions />
+                    {/* {console.log(transactions)} */}
+                    <Transactions data={transactions}/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
                     <Complains />
