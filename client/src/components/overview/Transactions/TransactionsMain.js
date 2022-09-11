@@ -3,21 +3,23 @@ import {  Grid, Container } from '@mui/material';
 
 import RecentTransactions from './RecentTransactions' 
 
-function SystemMain(props){
+function TransactionMain(props){
+
     return(
-        <Container padding="0" sx={{boxSizing: 'content-box'}}>
-        <Grid container spacing={2}>
+        <Container sx={{boxSizing: 'content-box'}}>
+        <Grid container>
             <Grid item
                 lg={12}
                 sm={12}
                 xl={12}
                 xs={12}  
             >
-                <RecentTransactions />
+                {/* {console.log(props)} */}
+                <RecentTransactions data = {props.data}/>
             </Grid>
         </Grid>
         </Container>
     );
 }
 
-export default SystemMain
+export default TransactionMain
