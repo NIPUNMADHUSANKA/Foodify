@@ -215,7 +215,7 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    console.log(typeof(detailsRow)),
+                    // console.log(typeof(detailsRow)),
                     <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
                         {detailsRow.name}
@@ -265,7 +265,7 @@ function TableActions(details) {
 
   //----------------------------------------------------------accepting data array object out of details object
   const orders = details.orders;
-  console.log(details);
+  // console.log(details);
   var datetime, date, time, price, restaurant, details,user,type;
 
   const rows = [
