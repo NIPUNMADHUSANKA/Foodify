@@ -22,6 +22,8 @@ public class FoodItem {
     private String description;
     private String catId;
 
+    private String resId;
+
     
 
     private Double calaries;
@@ -103,10 +105,13 @@ public class FoodItem {
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
-    
-    
-    
-    
 
-   
+
+    public String getResId() {
+        return resId;
+    }
+
+    public void setResId(String resId) {
+        this.resId = resId;
+    }
 }

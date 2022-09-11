@@ -193,7 +193,7 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    console.log(typeof(detailsRow)),
+                    // console.log(typeof(detailsRow)),
                     <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
                         {detailsRow.name}
@@ -241,19 +241,19 @@ function TableActions(details) {
 
   //----------------------------------------------------------accepting data array object out of details object
   const info = details.data;
-  // console.log(info)
+  console.log(info)
   var datetime, date, time, price, restaurant, details;
 
   const rows = [
     Object.keys(info).map((key, index) => (
 
       datetime = info[key].datetime.split("T"),
-      console.log(datetime),
+      // console.log(datetime),
 
       date = datetime[0],
       time = datetime[1].slice(0,8),
       price = info[key].price,
-      restaurant = "RestaurantZ",
+      restaurant = info[key].resId,
       details = info[key].details,
       // console.log(info[key].details), // object works fine
       createData(price, date, time, restaurant, details)

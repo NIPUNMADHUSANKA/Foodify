@@ -52,12 +52,13 @@ const Dashboard = () => {
     /* ------------------------------------------------------------Data Intialization */
 
     /* -----------------------------------------Transactions */
-    const [transactions, setTransactions] = React.useState({});
+    const [orders, setOrders] = React.useState({});
     useEffect((event) => {
-        axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
+        /* -----------------------------------------Orders */
+        axios.get("http://localhost:8072/Foodify/Admin/Orders/All",{ headers: authHeader()})
         .then(data => {
-            const transactions = data.data;
-            setTransactions({ ...transactions});
+            const orders = data.data;
+            setOrders({ ...orders});
         })
         .catch(error => {
             if (error.response.data) {
@@ -65,7 +66,6 @@ const Dashboard = () => {
             }
         });
     }, []);
-    // console.log(transactions);
 
 
     /* ------------------------------------------------------------Drawer functions */
@@ -178,7 +178,7 @@ const Dashboard = () => {
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     {/* {console.log(transactions)} */}
-                    <Transactions data={transactions}/>
+                    <Transactions orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
                     <Complains />

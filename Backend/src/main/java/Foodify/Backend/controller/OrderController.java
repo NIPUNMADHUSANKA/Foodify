@@ -27,14 +27,16 @@ public class OrderController {
 
     @GetMapping("/FoodiFy/User/Orders/{userId}")
     public List<Order> ordersByUser(@PathVariable String userId){
-        List<Order> detailed =  order_service.getDetailedOrder(userId);
+        List<Order> detailed =  order_service.getDetailedOrders(userId);
 //        List<Order> detailed =  order_repository.findByUser(userId);
         return detailed;
     }
 
-    @GetMapping("/Orders/All")
+    @GetMapping("Foodify/Admin/Orders/All")
     public List<Order> ordersAll(){
-        return (order_repository.findAll());
+        List<Order> detailed =  order_service.getDetailedOrders();
+//        List<Order> detailed =  order_repository.findByUser(userId);
+        return detailed;
     }
 
 

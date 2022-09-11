@@ -15,7 +15,7 @@ function TransactionMain(props){
                 xs={12}  
             >
                 {/* {console.log(props)} */}
-                <RecentTransactions data = {props.data}/>
+                <RecentTransactions orders = {props.orders}/>
             </Grid>
         </Grid>
         </Container>
