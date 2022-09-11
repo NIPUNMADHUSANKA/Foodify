@@ -21,7 +21,7 @@ public class Complain {
 	private String complainTitle;
 	private String complainDescription;
 	private String complainStatus;
-	private String addedDate;
+	private Date addedDate;
 	private Binary image;
 	
 	public Complain() {
@@ -51,10 +51,10 @@ public class Complain {
 	public void setComplainDescription(String complainDescription) {
 		this.complainDescription = complainDescription;
 	}
-	public String getAddedDate() {
+	public Date getAddedDate() {
 		return addedDate;
 	}
-	public void setAddedDate(String addedDate) {
+	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
 	}
 	public String getRestaurantId() {
