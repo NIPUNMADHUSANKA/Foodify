@@ -102,7 +102,7 @@ const CarouselCard = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
+                <Button component={Link} to={"/Restaurant/Category"} state={{ id: category.id, name: category.foodMenuCategory }} size="small" sx={{
                     margin: '6px',
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,

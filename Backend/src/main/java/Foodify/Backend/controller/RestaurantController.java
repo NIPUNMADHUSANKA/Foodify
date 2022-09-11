@@ -227,6 +227,13 @@ public class RestaurantController {
 
 	}
 
+
+	@GetMapping("/FoodiFy/RegisteredUser/getFoodCategoryItem/{catId}")
+	public List<?> getFoodItem(@PathVariable String catId) {
+		
+		return foodItem_Repository.findByMenuCategoryItem(catId);
+
+	}
 	/*
 	 * -------------------------------- Get Food Category
 	 * --------------------------------
