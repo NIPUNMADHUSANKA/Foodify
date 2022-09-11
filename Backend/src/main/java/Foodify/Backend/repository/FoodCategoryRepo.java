@@ -18,6 +18,5 @@ public interface FoodCategoryRepo extends MongoRepository<FoodCategory,String>{
     
     List<FoodCategory> findBymenuId(String menuId);
 
-    List<FoodCategory> findBymenuId(String menuId);
 
 }

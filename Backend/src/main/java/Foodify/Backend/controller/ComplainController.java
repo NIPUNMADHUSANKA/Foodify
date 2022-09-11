@@ -1,7 +1,6 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +10,9 @@ import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-=======
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> c48c6e329bcbfa925358786357726bdba0f706a1
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,7 +40,7 @@ public class ComplainController {
     		@RequestParam("complainTitle") String name2,
     		@RequestParam("complainDescription") String name3,
     		@RequestParam("complainStatus") String name4,
-    		@RequestParam("addedDate") Date name5) throws IOException {
+    		@RequestParam("addedDate") String name5) throws IOException {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 //		System.out.println(complain);
