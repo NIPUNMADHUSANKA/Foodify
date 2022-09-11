@@ -23,7 +23,7 @@ public class Complain {
 	private String complainTitle;
 	private String complainDescription;
 	private String complainStatus;
-	private Date addedDate;
+	private String addedDate;
 	private Binary image;
 	
 	public Complain() {
@@ -53,10 +53,10 @@ public class Complain {
 	public void setComplainDescription(String complainDescription) {
 		this.complainDescription = complainDescription;
 	}
-	public Date getAddedDate() {
+	public String getAddedDate() {
 		return addedDate;
 	}
-	public void setAddedDate(Date addedDate) {
+	public void setAddedDate(String addedDate) {
 		this.addedDate = addedDate;
 	}
 	public String getRestaurantId() {

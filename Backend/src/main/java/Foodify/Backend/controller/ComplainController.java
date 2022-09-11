@@ -40,7 +40,7 @@ public class ComplainController {
     		@RequestParam("complainTitle") String name2,
     		@RequestParam("complainDescription") String name3,
     		@RequestParam("complainStatus") String name4,
-    		@RequestParam("addedDate") Date name5) throws IOException {
+    		@RequestParam("addedDate") String name5) throws IOException {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 //		System.out.println(complain);
@@ -52,7 +52,7 @@ public class ComplainController {
 		complain.setComplainTitle(name2);
 		complain.setComplainDescription(name3);
 		complain.setComplainStatus(name4);
-		complain.setAddedDate((java.sql.Date) name5);
+		complain.setAddedDate(name5);
 		complain.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
 		complainRepository.save(complain);
 		return null;
