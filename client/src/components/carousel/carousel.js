@@ -32,8 +32,7 @@ const carousel = (props) => {
 
   const data = props.item;
 
-  console.log(data);
-
+  
   return (
     <div sx={{ padding: 0, }}>
       {/*------------------------- carousel area--------------------- */}

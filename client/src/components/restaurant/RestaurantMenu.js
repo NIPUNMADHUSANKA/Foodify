@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { Box } from '@mui/material';
 import Carousel from '../carousel/carousel';
 
@@ -75,26 +75,34 @@ var ROLE = null;
 // ------------------------------------------------------------------------------
 
 
+var Title = "Resturant Menu";
+var menuId = null;
+
 const RestaurantMenu = () => {
 
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
 
+  // ----------Get Category --------
+  const [getCat, setgetCat] = React.useState(false);
+
+
   ///-- Get Token UserName--///
   const currentUser = AuthService.getCurrentUser();
 
 
-  useEffect((event) => {
+useEffect((event) => {
 
     axois.get("http://localhost:8072/RegisteredUser/getFoodMenu", { headers: authHeader() })
         .then(data => {
             // this part if sucess
-            console.log(data.data);
-            console.log(item1);
-            
-            
-            const details = data.data;
-            setDetails({ ...details});
+            //console.log(data.data[0].foodMenuName);
+            //console.log(item1.foodMenuName);
+            Title = data.data[0].foodMenuName;
+            menuId = data.data[0].id;
+            setgetCat(true);
+           
+
         })
         .catch(error => {
 
@@ -105,7 +113,25 @@ const RestaurantMenu = () => {
 
 }, []);
 
-  return (
+
+useEffect((event) => {
+
+  axois.get("http://localhost:8072/RegisteredUser/getFoodCategory/"+menuId, { headers: authHeader() })
+      .then(data => {    
+        //  console.log("work");
+          const details = data.data;
+          //console.log(data);
+          setDetails({ ...details});
+      })
+      .catch(error => {
+          console.log(error);
+          
+
+      });
+
+}, [getCat]);
+
+return (
     <Box sx={{
       position: 'relative',
       width: '100%',
@@ -116,7 +142,7 @@ const RestaurantMenu = () => {
       {(() => {
         if (JSON.parse(localStorage.getItem('ROLE'))) {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-          console.log(ROLE)
+          //console.log(ROLE)
         }
       }
       )()}
@@ -132,7 +158,7 @@ const RestaurantMenu = () => {
       )()}
 
 
-      <Carousel item={details} title={title} count={itemcount} bgcolour={bgcolor1} />
+      <Carousel item={details} title={Title} count={itemcount} bgcolour={bgcolor1} />
 
 
     </Box>

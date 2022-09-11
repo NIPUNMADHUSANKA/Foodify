@@ -122,7 +122,13 @@
        </dependency>
 <!-- Thanks for using https://jar-download.com -->
 		
-	</dependencies>
+	
+   <dependency>
+     <groupId>org.mongodb</groupId>
+     <artifactId>mongo-java-driver</artifactId>
+     <version>3.11.0</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>

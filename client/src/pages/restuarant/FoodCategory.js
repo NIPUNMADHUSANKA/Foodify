@@ -1,10 +1,8 @@
 import { Box, IconButton, Typography } from '@mui/material'
-import React from 'react'
-
+import React, {useEffect } from "react";
 import Background from '../../assets/images/categoryBackground.png'
 import theme, { Colours } from '../../assets/theme/theme'
 
-import CardImage from '../../assets/images/plate1.jpg';
 import CarouselCard2 from '../../components/carousel/CarouselCard2';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -17,13 +15,18 @@ import image3 from '../../assets/images/food items/3.webp';
 import image4 from '../../assets/images/food items/4.jpg';
 import image5 from '../../assets/images/food items/5.webp';
 import image6 from '../../assets/images/food items/6.webp';
-
+import axois from "axios";
 import { Link } from 'react-router-dom';
+
+import authHeader from "../../services/auth-header";
+import AuthService from '../../services/auth-service';
+import { useLocation } from 'react-router-dom';
 
 // ---------------css for carousel-------------------------
 
 // -----------------------------for the carousel-------------------
-const item = {
+
+/*const item = {
   "id": "1",
   "title": "Boneless Diang na Bangus",
   "image": image1,
@@ -82,17 +85,51 @@ const data = [
     "name": "Order Now",
   }
 ]
-
+*/
 const itemcount = 4;
 
 // ------------------------------------------------------
-console.log(data)
+//console.log(data)
 
-const data2 = data;
+//const data2 = data;
 
 const FoodCategory = () => {
 
+  const location = useLocation();
+  const Id = location.state.id;
+  const name = location.state.name;
+
+  // ----------store restaurant values--------
+  const [details, setDetails] = React.useState({});
+
+  // ----------Get Category --------
+  const [isgetItem, setisgetItem] = React.useState(false);
+
+
+  ///-- Get Token UserName--///
+  const currentUser = AuthService.getCurrentUser();
+
+  useEffect((event) => {
+
+  axois.get("http://localhost:8072/FoodiFy/RegisteredUser/getFoodCategoryItem/"+Id, { headers: authHeader() })
+        .then(data => {
+            
+          setDetails(data.data);  
+          setisgetItem(true);
+
+        })
+        .catch(error => {
+            console.log(error);
+      
+  });
+
+}, [isgetItem]);
+
+
+  
   return (
+
+    
 
     <Box sx={{
       width: '100%',
@@ -146,7 +183,8 @@ const FoodCategory = () => {
                 padding: '2px',
               },
             }}>
-              Sea Food
+             {name}
+             
             </Typography>
           </Box>
           {/* ---------end of title area------------ */}
@@ -156,8 +194,9 @@ const FoodCategory = () => {
 
           <Box sx={{
             padding: "1rem",
-          }}>
-            <Carousel
+          }}>  
+          
+          <Carousel
               itemsToShow={itemcount}
               easing={"ease"}
               breakPoints={theme.breakPoints = [
@@ -167,15 +206,20 @@ const FoodCategory = () => {
                 { width: 1450, itemsToShow: 5 },
                 { width: 1750, itemsToShow: 6 },
               ]}
-
-            >
+            > 
               {/* <Box> */}
 
-              {data.map((items, index) => {
-                return (
-                  <CarouselCard2 item={items} />
-                );
-              })}
+
+              {
+                Array.from(details).map((item)=>{
+
+                  return(
+                    <CarouselCard2 item={item} />
+                  )
+                 
+                })
+              }
+            
 
               {/* <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />

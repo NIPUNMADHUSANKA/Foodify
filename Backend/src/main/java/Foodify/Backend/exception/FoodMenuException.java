@@ -12,15 +12,15 @@ public class FoodMenuException extends Exception{
 	}
     
     public static String FoodMemuAlreadyExists() {
-		return "Resturant with given Menu Name already exists";
+		return "Resturant already have menu";
 	}
 
 	public static String FoodMemuCategoryAlreadyExists() {
-		return "Food Category already exists";
+		return "This Food Category already have exists";
 	}
 
 	public static String FoodMemuCategoryItemAlreadyExists() {
-		return "Food already exists";
+		return "This Food already have exists";
 	}
 
 	public static String FoodMemuNotFound() {

@@ -67,11 +67,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RegisteredUser/addFoodMenu",
 				"/RegisteredUser/getFoodMenu",
 				"/RegisteredUser/addFoodMenuCategory",
-				"/RegisteredUser/addFoodMenuCategory",
+				"/RegisteredUser/getFoodCategory",
+				"/FoodiFy/RegisteredUser/getFoodCategoryItem",
+				"/RegisteredUser/deleteFoodCategory",
 				"/RegisteredUser/addFoodMenuCategoryItem",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addRestaurantComment",
+				"/RegisteredUser/addFoodComment",
 				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All","/FoodiFy/User/**")
 
 		.permitAll()

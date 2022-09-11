@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -126,42 +126,31 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(amount, date, time, restaurant) {
+function createData(amount, date, time, restaurant, billItems) {
   const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
   const rateItem = <Button variant="outlined" color="success" size="small" component={Link} to="../FoodRating">Rate Item</Button>
   const createComplaint = <Button variant="outlined" color="error" size="small" component={Link} to="../Complaints">Create Complaint</Button>
-  return { 
-    // payment, 
+  
+
+  
+  billItems.forEach(billItem => (
+    billItem['viewItem'] = viewItem,
+    billItem['rateItem'] = rateItem,
+    billItem['createComplaint'] = createComplaint
+    // console.log(billItem))
+  ))
+
+  var details = billItems;
+    return {  
     date, 
     time,
     restaurant, 
-    // type, 
     amount, 
-    // restaurant, 
-    details: [
-      {
-        item: "Cheese Pizza",
-        quantity: "2",
-        price: "2100.00",
-        discounts: "0",
-        viewItem,
-        rateItem,
-        createComplaint
-      },
-      {
-        item: "Sausage Pizza",
-        quantity: "2",
-        price: "2200.00",
-        discounts: "50",
-        viewItem,
-        rateItem,
-        createComplaint
-      },
-    ] };
+    details
+  };
 }
 
 function Row(props) {
-  // console.log(props);
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -193,7 +182,7 @@ function Row(props) {
                 <TableHead >
                   <TableRow>
                     <TableCell>Item</TableCell>
-                    <TableCell>Quantity</TableCell>
+                    <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Discount</TableCell>
                     <TableCell align="right">Total price</TableCell>
@@ -204,15 +193,16 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    <TableRow key={detailsRow.item}>
+                    // console.log(typeof(detailsRow)),
+                    <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
-                        {detailsRow.item}
+                        {detailsRow.name}
                       </TableCell>
-                      <TableCell>{detailsRow.quantity}</TableCell>
-                      <TableCell>{detailsRow.price}</TableCell>
-                      <TableCell>{detailsRow.discounts}</TableCell>
+                      <TableCell align="right">{detailsRow.quantity}</TableCell>
+                      <TableCell align="right">{detailsRow.price}</TableCell>
+                      <TableCell align="right">{detailsRow.discount}</TableCell>
                       <TableCell align="right">
-                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
+                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discount}
                       </TableCell>
                       <TableCell align="right">{detailsRow.viewItem}</TableCell>
                       <TableCell>{detailsRow.rateItem}</TableCell>
@@ -251,15 +241,22 @@ function TableActions(details) {
 
   //----------------------------------------------------------accepting data array object out of details object
   const info = details.data;
-  var date, time, price, restaurant;
+  console.log(info)
+  var datetime, date, time, price, restaurant, details;
 
   const rows = [
     Object.keys(info).map((key, index) => (
-      date = info[key].datetime,
-      time = info[key].datetime,
-      price = 1250,
-      restaurant = "RestaurantZ",
-      createData(price, date, time, restaurant)
+
+      datetime = info[key].datetime.split("T"),
+      // console.log(datetime),
+
+      date = datetime[0],
+      time = datetime[1].slice(0,8),
+      price = info[key].price,
+      restaurant = info[key].resId,
+      details = info[key].details,
+      // console.log(info[key].details), // object works fine
+      createData(price, date, time, restaurant, details)
       ))
   ];
 
@@ -318,7 +315,7 @@ function TableActions(details) {
         <TableBody>
           {(rowsPerPage > 0
             ? rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage): rowsData).map((row) => (
-            <Row key={row.date} row={row} />
+            <Row key={row.id} row={row} />
           ))}
 
           {emptyRows > 0 && (

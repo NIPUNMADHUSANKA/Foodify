@@ -1,5 +1,7 @@
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import authHeader from "../../services/auth-header";
 import theme, { Colours } from '../../assets/theme/theme';
 
 import Background from '../../assets/images/pv4WkDi.webp';
@@ -8,9 +10,10 @@ import Background from '../../assets/images/pv4WkDi.webp';
 import Offer from '../../assets/images/offer5.jpg';
 import bgImage from '../../assets/images/offersbg.png';
 import Rlogo from '../../assets/images/restaurant-logo.jpg';
-import { Avatar, IconButton, Typography } from '@mui/material';
+import { Avatar, Button, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -20,7 +23,117 @@ const details = {
     "detail": "Have a celebrity bartend from 4-8pm, and give all proceeds from pizzas sold during that time to your local food bank.Halloween costume contests featuring giveaways or gifts, a different offering for each of the twelve days of Christmas, a Mother’s Day trivia event",
 }
 
+var ROLE = null;
+
 const RestaurantOffer = () => {
+
+    {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+    {
+        (() => {
+            if (JSON.parse(localStorage.getItem('ROLE'))) {
+                ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+                console.log(ROLE)
+            }
+        }
+        )()
+    }
+    {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
+
+    const [details, setDetails] = useState({});
+
+    // ---------to set food items--------------------
+    const [details2, setDetails2] = useState({});
+
+    // --------------to get the id------------------
+    const location = useLocation();
+
+    const [itemData, setItemData] = useState(null);
+
+    var offer1 = null;
+
+    const image1 = details.tempImage;
+
+    // -----------------------to set items--------------------------------
+    const [items, setItems] = React.useState([]);
+
+    // -----------------adding items to array--------------------
+    const itemlisthandle = (item) => {
+
+        var items = item;
+        console.log(items);
+
+        const sendGetRequest2 = async () => {
+            try {
+
+                const itemData = new FormData();
+                itemData.append('items', items);
+                setItemData(itemData);
+
+                const resp2 = await axios.post(`http://localhost:8072/FoodiFy/Service/getOfferItems`, itemData);
+
+                const details2 = resp2.data;
+                setDetails2({ ...details2 });
+
+
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        sendGetRequest2();
+
+    };
+
+    console.log(details2);
+    // ---------------------------getting customer view-----------------------------------
+    useEffect((event) => {
+
+        // ---------------------for the restaurant view-------------------------------
+        const sendGetRequest = async () => {
+            try {
+                const resp = await axios.get(`http://localhost:8072/FoodiFy/Service/getOffer/${location.state.id}`);
+
+                const details = resp.data;
+
+                const items1 = resp.data.items;
+                itemlisthandle(items1)
+
+                setDetails({ ...details });
+                console.log(items1);
+                // setItems([...items1]);
+
+                if (image1 !== null) {
+                    offer1 = `data:image/jpeg;base64,${image1}`;
+                } else {
+                    offer1 = Offer;
+                }
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        sendGetRequest();
+
+        console.log(items);
+
+    }, []);
+
+    var ROLE = null;
+
+    {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+    {
+        (() => {
+            if (JSON.parse(localStorage.getItem('ROLE'))) {
+                ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+                console.log(ROLE)
+            }
+        }
+        )()
+    }
+    {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
+
     return (
 
         // ------main box----------------
@@ -63,18 +176,44 @@ const RestaurantOffer = () => {
                             flexDirection: "row",
                             padding: "1rem",
                         }}>
-                            <IconButton component={Link} to={"/Restaurant"}>
-                                <ArrowBackIosIcon sx={{
-                                    color: Colours.green, '&:hover': {
-                                        color: Colours.yellow,
-                                        [theme.breakpoints.down('sm')]: {
-                                            height: "80%",
-                                            marginTop: "30px",
-                                        },
-                                    },
-                                    fontSize: "2rem",
-                                }} />
-                            </IconButton>
+                            {(() => {
+                                if (ROLE !== "restaurant") {
+                                    return (
+                                        <IconButton component={Link} to={"/Restaurant"}>
+                                            <ArrowBackIosIcon sx={{
+                                                color: Colours.green, '&:hover': {
+                                                    color: Colours.yellow,
+                                                    [theme.breakpoints.down('sm')]: {
+                                                        height: "80%",
+                                                        marginTop: "30px",
+                                                    },
+                                                },
+                                                fontSize: "2rem",
+                                            }} />
+                                        </IconButton>
+                                    );
+                                }
+                            }
+                            )()}
+                            {(() => {
+                                if (ROLE === "restaurant") {
+                                    return (
+                                        <IconButton component={Link} to={"/RestaurantProfile"}>
+                                            <ArrowBackIosIcon sx={{
+                                                color: Colours.green, '&:hover': {
+                                                    color: Colours.yellow,
+                                                    [theme.breakpoints.down('sm')]: {
+                                                        height: "80%",
+                                                        marginTop: "30px",
+                                                    },
+                                                },
+                                                fontSize: "2rem",
+                                            }} />
+                                        </IconButton>
+                                    );
+                                }
+                            }
+                            )()}
 
                             <Avatar
                                 alt="food image"
@@ -131,15 +270,87 @@ const RestaurantOffer = () => {
                                 marginRight: "10%",
                             }
                         }}>
-                            {details.detail}
+                            {details.description}
                             <br />
-                            {details.detail}
+                            <br />
+                            Food Items
+
+                            {/* ---------------showing the food items--------------------- */}
+                            <List dense={true} sx={{
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                margin: 'auto',
+                                width: '20%',
+                                marginLeft: '42%',
+                                textAlign: 'center',
+                                [theme.breakpoints.down('sm')]: {
+                                    fontSize: '14px',
+                                    marginLeft: '28%',
+                                    width: '50%',
+                                }
+                            }}>
+                                {Object.keys(details2).map((keyName) => (
+                                    console.log(details2[keyName]),
+                                    <ListItem>
+                                        <ListItemText sx={{ color: Colours.green, }}
+                                            primary={details2[keyName]}
+                                        />
+                                    </ListItem>
+                                ))}
+                            </List>
+                            <br />
+                            <b>From:{details.startDate} to:{details.endDate}</b>
 
                         </Typography>
                     </Fade>
 
                 </Box>
                 {/* --------------end of the description area---------------- */}
+
+                {/* ---------------------edit and delete area---------------------- */}
+                {(() => {
+                    if (ROLE === "restaurant") {
+                        return (
+                            <Box sx={{
+                                width: '80%',
+                                margin: 'auto',
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Button size="small" sx={{
+                                    margin: '6px',
+                                    background: Colours.green, '&:hover': {
+                                        backgroundColor: Colours.yellow,
+                                    },
+                                    color: Colours.dark,
+                                    fontSize: '0.8rem',
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize: '8px',
+                                        padding: '2px',
+                                    },
+                                }}>
+                                    Edit
+                                </Button>
+
+                                <Button size="small" sx={{
+                                    margin: '6px',
+                                    background: Colours.darkgray, '&:hover': {
+                                        backgroundColor: Colours.cardBlack,
+                                    },
+                                    color: Colours.grayWhite,
+                                    fontSize: '0.8rem',
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize: '8px',
+                                        padding: '2px',
+                                    },
+                                }}>
+                                    Delete
+                                </Button>
+                            </Box>
+                        );
+                    }
+                }
+                )()}
 
             </Box>
             {/* -----------------------end of description area----------------------- */}
@@ -159,7 +370,7 @@ const RestaurantOffer = () => {
                     borderRadius: "0px 0px 360px 360px",
                 },
             }}>
-                {/* ------------------for the food image--------------- */}
+                {/* ------------------for the offer image--------------- */}
                 <Box sx={{
                     width: "25%",
                     height: "50%",
@@ -167,7 +378,7 @@ const RestaurantOffer = () => {
                     position: "absolute",
                     top: "25%",
                     right: "15%",
-                    background: `url(${Offer})`,
+                    background: `url(${image1 !== null ? `data:image/jpeg;base64,${image1}` : Offer})`,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     opacity: 4,

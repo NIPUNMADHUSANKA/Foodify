@@ -5,6 +5,8 @@ import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.service.Order_Service;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,18 @@ public class OrderController {
 
     @GetMapping("/FoodiFy/User/Orders/{userId}")
     public List<Order> ordersByUser(@PathVariable String userId){
-        return (order_repository.findByUser(userId));
+        List<Order> detailed =  order_service.getDetailedOrders(userId);
+//        List<Order> detailed =  order_repository.findByUser(userId);
+        return detailed;
     }
 
-    @GetMapping("/Orders/All")
+    @GetMapping("Foodify/Admin/Orders/All")
     public List<Order> ordersAll(){
-        return (order_repository.findAll());
+        List<Order> detailed =  order_service.getDetailedOrders();
+//        List<Order> detailed =  order_repository.findByUser(userId);
+        return detailed;
     }
+
+
 
 }

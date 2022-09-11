@@ -1,6 +1,7 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,19 +11,21 @@ import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+=======
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> c48c6e329bcbfa925358786357726bdba0f706a1
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import Foodify.Backend.model.Complain;
-import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.repository.ComplainRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -31,7 +34,7 @@ public class ComplainController {
 	
 	@Autowired
 	private ComplainRepository complainRepository;
-//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {	
+//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {
 	@PostMapping("/FoodiFy/User/addComplains")
 
     public ResponseEntity<?> uploadcomplaindetails(
@@ -46,6 +49,7 @@ public class ComplainController {
 //		System.out.println(complain);
 
 		System.out.println(userName);
+		
 		Complain complain = new Complain();
 		complain.setRestaurantId(name1);
 		complain.setComplainTitle(name2);
@@ -57,6 +61,8 @@ public class ComplainController {
 		return null;
 
 	}
+
+
 	
 	
 	@GetMapping("/FoodiFy/User/getCount/pending")
