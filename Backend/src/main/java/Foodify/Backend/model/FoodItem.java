@@ -1,6 +1,7 @@
 package Foodify.Backend.model;
 
-import org.bson.types.ObjectId;
+import org.bson.types.Binary;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,14 +23,11 @@ public class FoodItem {
     private String description;
     private String catId;
 
-    private String resId;
-
-    
-
     private Double calaries;
     private Double fat;
     private Double protein;
     private Double carbo;
+    private Binary image;
     
     private int discount;
 
@@ -40,7 +38,6 @@ public class FoodItem {
     public void setCalaries(Double calaries) {
         this.calaries = calaries;
     }
-
     
     public Double getFat() {
         return fat;
@@ -49,7 +46,6 @@ public class FoodItem {
     public void setFat(Double fat) {
         this.fat = fat;
     }
-
     
     public Double getProtein() {
         return protein;
@@ -58,7 +54,6 @@ public class FoodItem {
     public void setProtein(Double protein) {
         this.protein = protein;
     }
-
     
     public Double getCarbo() {
         return carbo;
@@ -98,20 +93,19 @@ public class FoodItem {
         this.catId = catId;
     }
 
-	public int getDiscount() {
+    public Binary getImage() {
+		return image;
+	}
+	public Binary setImage(Binary image) {
+		return this.image = image;
+	}
+
+  public int getDiscount() {
 		return discount;
 	}
 
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
-
-
-    public String getResId() {
-        return resId;
-    }
-
-    public void setResId(String resId) {
-        this.resId = resId;
-    }
+    
 }

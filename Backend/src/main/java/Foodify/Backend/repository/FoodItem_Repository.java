@@ -21,6 +21,10 @@ public interface FoodItem_Repository extends MongoRepository<FoodItem, String> {
 
 	@Query("{'$and':[ {'catId': ?0}, {'name':?1} ] }")
 	Optional<FoodItem> findByMenuCategoryItemExists(String catId, String name);
+
+	@Query(value ="{catId: ?0}", count=true)
+	List<FoodItem> findByMenuCategoryItem(String catId);
+	
 	
 	List<FoodItem> findBycatId(String catId);
 		
