@@ -21,7 +21,7 @@ public class ComplainController {
 	
 	@Autowired
 	private ComplainRepository complainRepository;
-//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {	
+//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {
 	@PostMapping("/FoodiFy/User/addComplains")
 
     public ResponseEntity<?> uploadcomplaindetails(
@@ -48,6 +48,8 @@ public class ComplainController {
 		return null;
 
 	}
+
+
 	
 	
 //	@PostMapping("/FoodiFy/User/addComplains/addImage")

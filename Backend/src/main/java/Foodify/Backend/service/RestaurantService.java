@@ -24,10 +24,12 @@ import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.repository.FoodCategoryRepo;
 import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
+import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 
 import java.io.Console;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,10 +60,12 @@ public class RestaurantService implements Restaurantserv{
 	@Autowired
 	private FoodItem_Repository foodItem_Repository;
 	
-
+	@Autowired
+	private FoodItem_Repository foodItems;
 	
-
-
+	@Autowired
+	private OffersRepository offersRepo;
+	
 	@Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
 		String error;
@@ -246,9 +250,31 @@ public class RestaurantService implements Restaurantserv{
 
 	}
 
-	
-	
-//	--------------------------end of for validate userName and email--------------------------------------------
+
+	//---------------------------------to get the food items--------------------------------------------
+	@Override
+	public List<String> getItems(String items) {
+		// TODO Auto-generated method stub
+		List<String> itemNames = new ArrayList<String>();
+		
+		String[] arr = null;
+		//converting using String.split() method with "," as a delimiter  
+        arr = items.split(",");
+        
+        for (int i = 0; i< arr.length; i++)
+        {  
+        	FoodItem food = foodItems.findByid(arr[i]);
+        	itemNames.add(food.getName());
+            System.out.println(arr[i]);  
+        }
+		return itemNames;
+	}
+
+
+
+
+
+
 	
 	
 	

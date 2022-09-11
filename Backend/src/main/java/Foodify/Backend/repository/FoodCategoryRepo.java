@@ -15,6 +15,8 @@ public interface FoodCategoryRepo extends MongoRepository<FoodCategory,String>{
     
     @Query("{'$and':[ {'menuId': ?0}, {'foodMenuCategory':?1} ] }")
 	Optional<FoodCategory> findByMenuCategoryExists(String menuId, String foodMenuCategory);
+    
+    List<FoodCategory> findBymenuId(String menuId);
 
     List<FoodCategory> findBymenuId(String menuId);
 

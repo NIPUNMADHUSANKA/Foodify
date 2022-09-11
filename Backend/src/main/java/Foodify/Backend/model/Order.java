@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Console;
+//import java.sql.Array;
+import java.util.ArrayList;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,8 +21,21 @@ public class Order {
     private ObjectId Id;
 
     private Date datetime;
-    private Item[] details;
-    private ObjectId user;
+    private ArrayList details;
+    private String user;
+
+    private float price;
+
+    private String resId;
+
+
+    public String getResId() {
+        return resId;
+    }
+
+    public void setResId(String resId) {
+        this.resId = resId;
+    }
 
     public String getId() { return Id.toString(); }
 
@@ -30,32 +45,23 @@ public class Order {
 
     public void setDatetime(Date datetime) { this.datetime = datetime; }
 
-//    public void setDate(Date datetime) throws ParseException {
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-////        Date date = format.parse(datetime.toString());
-//        this.date = new Date();
-//    }
+    public ArrayList getDetails() { return details; }
 
-    public Item[] getDetails() { return details; }
-
-    public void setDetails(Item[] details) { this.details = details; }
+    public void setDetails(ArrayList details) { this.details = details; }
 
     public String getUser() {
-        return user.toString();
+        return user;
     }
 
-    public void setUser(ObjectId user) {
-        this.user = user;
+    public void setUser(String user) {
+        this.user = user.toString();
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 };
-
-class Item{
-
-    @DBRef
-    public ObjectId item;
-    public Integer quantity;
-
-    public String getItem() {
-        return item.toString();
-    }
-}

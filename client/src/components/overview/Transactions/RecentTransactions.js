@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+// import { useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
@@ -15,6 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -22,10 +24,11 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import {Link} from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { Autocomplete } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { border } from '@mui/system';
+
 
 //----------------------------------------------------------styles for table
 const tableSx = {
@@ -40,7 +43,7 @@ const tableSx = {
     color: '#fff',
     fontSize: 16,
   },
-  
+
   "& .MuiTableCell-root":{
     color: '#fff',
     bpaymentBottom: "1px solid rgba(210, 210, 210, 0.5)",
@@ -57,7 +60,7 @@ const tableSx = {
     color:"#000",
     fontSize:"14px"
   },
-  
+
   "& input":{
     backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
@@ -146,29 +149,25 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(payment, user, type, amount, date, time, restaurant) {
-  return { 
-    payment, 
-    user, 
-    type, 
-    amount, 
+function createData(amount, date, time, restaurant, user,type, billItems) {
+  const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
+
+  billItems.forEach(billItem => (
+    billItem['viewItem'] = viewItem
+    // console.log(billItem))
+  ))
+
+  var details = billItems;
+    return {  
     date, 
     time,
+    user, 
+    type,
     restaurant, 
-    details: [
-      {
-        item: "Cheese Pizza",
-        quantity: "2",
-        price: "2100.00",
-        discounts: "0"
-      },
-      {
-        item: "Sausage Pizza",
-        quantity: "2",
-        price: "2200.00",
-        discounts: "50"
-      },
-    ] };
+    amount, 
+    user,
+    details
+  };
 }
 
 function Row(props) {
@@ -187,42 +186,49 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">{row.payment}</TableCell>
+        <TableCell component="th" scope="row">{row.date}</TableCell>
+        <TableCell >{row.time}</TableCell>
         <TableCell >{row.user}</TableCell>
         <TableCell >{row.type}</TableCell>
+        <TableCell >{row.restaurant}</TableCell>
         <TableCell >{row.amount}</TableCell>
-        <TableCell >{row.date}</TableCell>
-        <TableCell >{row.time}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border:"none" }} colSpan={3}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0, border:"none" }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ marginBottom: 3, marginTop:1}}>
               <Typography fontFamily='Poppins'>
                 Bill from {row.restaurant}
               </Typography>
               <Table size="small" aria-label="purchases">
-                <TableHead>
+                <TableHead >
                   <TableRow>
                     <TableCell>Item</TableCell>
-                    <TableCell>Quantity</TableCell>
+                    <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Discount</TableCell>
                     <TableCell align="right">Total price</TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow) => (
-                    <TableRow key={detailsRow.item}>
+                    // console.log(typeof(detailsRow)),
+                    <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
-                        {detailsRow.item}
+                        {detailsRow.name}
                       </TableCell>
-                      <TableCell>{detailsRow.quantity}</TableCell>
-                      <TableCell>{detailsRow.price}</TableCell>
-                      <TableCell>{detailsRow.discounts}</TableCell>
+                      <TableCell align="right">{detailsRow.quantity}</TableCell>
+                      <TableCell align="right">{detailsRow.price}</TableCell>
+                      <TableCell align="right">{detailsRow.discount}</TableCell>
                       <TableCell align="right">
-                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discounts}
+                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discount}
                       </TableCell>
+                      <TableCell align="right">{detailsRow.viewItem}</TableCell>
+                      <TableCell>{detailsRow.rateItem}</TableCell>
+                      <TableCell>{detailsRow.createComplaint}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -237,12 +243,11 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-  payment: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   details: PropTypes.arrayOf(
     PropTypes.shape({
       amount: PropTypes.number,
@@ -254,39 +259,53 @@ Row.propTypes = {
   })
 };
 
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2343','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2344','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2345','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2346','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2347','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2348','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2349','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2350','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2351','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2352','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2353','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2354','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-  createData('B2355','Robert Brown','Food Order',8550, "2022/04/23","14:23:14", "RestaurantZ"),  
-]
 
-function TableActions() {
-  
+
+function TableActions(details) {
+
+  //----------------------------------------------------------accepting data array object out of details object
+  const orders = details.orders;
+  // console.log(details);
+  var datetime, date, time, price, restaurant, details,user,type;
+
+  const rows = [
+    Object.keys(orders).map((key, index) => (
+
+      datetime = orders[key].datetime.split("T"),
+      date = datetime[0],
+      time = datetime[1].slice(0,8),
+
+      price = orders[key].price,
+      restaurant = orders[key].resId,
+      details = orders[key].details,
+      user = orders[key].user,
+      type = "Order",
+      createData(price, date, time, restaurant, user, type, details)
+      ))
+  ];
+
+  const rowsData = rows[0];
+
+  //-----------------------------------------------------------end of modyfyng data to the table, now rowsData is a array
+
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
 
   //----------------------------------------------------------Column Define 
   const columns = [
     { id: 'details', label: '', maxWidth: 10},
-    { id: 'payment', label: 'Payment-ID', minWidth: 150},
-    { id: 'user', label: 'User', minWidth: 170 },
-    { id: 'type', label: 'Type', minWidth: 200 },
-    { id: 'amount', label: 'Amount', minWidth: 100 },
+    // { id: 'payment', label: 'Payment-ID', minWidth: 100},
     { id: 'date', label: 'Date', minWidth: 100 },
     { id: 'time', label: 'Time', minWidth: 100},
+    { id: 'user', label: 'User', minWidth: 150},
+    { id: 'type', label: 'Type', minWidth: 100 },
+    { id: 'restaurant', label: 'Restaurant', minWidth: 200 },
+    { id: 'amount', label: 'Amount', minWidth: 100 },
+    
+    
   ];
+
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
@@ -302,9 +321,10 @@ function TableActions() {
     setPage(0);
   };
 
+
   return (
     <Paper sx={tableSx}>
-    
+
     <Box sx={{
       display: 'inline-flex',
     }}>
@@ -317,7 +337,7 @@ function TableActions() {
         />
       </Stack>
     </Box>
-
+    
     <TableContainer sx={{ maxHeight: 800 }}>
       <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 
@@ -338,23 +358,22 @@ function TableActions() {
 
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <Row key={row.payment} row={row} />
+            ? rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage): rowsData).map((row) => (
+            <Row key={row.id} row={row} />
           ))}
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
+              <TableCell />
             </TableRow>
           )}
+          
         </TableBody>
 
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[10, 15, 25, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={7}
               count={rows.length}
               rowsPerPage={rowsPerPage}
