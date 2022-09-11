@@ -22,13 +22,15 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
       )
       )}
     </div> */}
-    
+
 
 // -----------------arrows for the carousel------------
 
 const carousel = (props) => {
 
   console.log(props.item)
+
+  const x = props.item
 
   const data = props.item;
   return (
@@ -63,40 +65,45 @@ const carousel = (props) => {
 
 
         {/* ---------------carousel area-------------------------- */}
-        
-        <Carousel 
-        
-        itemsToShow={props.count} 
-        easing={"ease"}
-        breakPoints={theme.breakPoints = [
-          { width: 1, itemsToShow: 1 },
-          { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
-          { width: 1150, itemsToShow: props.count, itemsToScroll: 2 },
-          { width: 1450, itemsToShow: 5 },
-          { width: 1750, itemsToShow: 6 },
-        ]}
 
-        >
-        {/* <Box> */}
+        <Carousel
 
-        {data.map((items, index) => {
+          itemsToShow={props.count}
+          easing={"ease"}
+          breakPoints={theme.breakPoints = [
+            { width: 1, itemsToShow: 1 },
+            { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+            { width: 1150, itemsToShow: props.count, itemsToScroll: 2 },
+            { width: 1450, itemsToShow: 5 },
+            { width: 1750, itemsToShow: 6 },
+          ]}>
+
+          {Object.keys(x).map((keyName) => (
+            console.log(x[keyName]),
+
+            <CarouselCardOffers data={x[keyName]} />
+
+          ))}
+          {/* <Box> */}
+
+          {/* {data.map((items, index) => {
         return (
           <CarouselCardOffers item={items} />
         );
-      })}
-        {/* <CarouselCardOffers item={props.item} />
+      })} */}
+          {/* <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} />
         <CarouselCardOffers item={props.item} /> */}
 
-      </Carousel>
-      {/* </Box> */}
+        </Carousel>
+        {/* </Box> */}
 
-      {/* ---------------end of carousel area-------------------------- */}
+        {/* ---------------end of carousel area-------------------------- */}
 
-    </Box>
+      </Box>
     </div >
   )
 }

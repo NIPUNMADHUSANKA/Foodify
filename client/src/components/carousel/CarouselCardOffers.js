@@ -2,8 +2,13 @@ import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typo
 import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import {Link} from 'react-router-dom';
+import CardImage1 from '../../assets/images/offer1.jpg';
 
 const CarouselCardOffers = (props) => {
+
+    console.log(props.data.id)
+    const image1 = props.data.tempImage
+
     return (
         // ---------main card area------------
         <Card sx={{
@@ -25,7 +30,7 @@ const CarouselCardOffers = (props) => {
                 <CardMedia
                     component="img"
                     height="235vh"
-                    image={props.item.image}
+                    image={image1 !== null ? `data:image/jpeg;base64,${image1}` : CardImage1}
                     alt="green iguana"
                 />
 
@@ -39,7 +44,7 @@ const CarouselCardOffers = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.title}
+                        {props.data.name}
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -49,7 +54,7 @@ const CarouselCardOffers = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.decription}
+                        {props.data.decription}
                     </Typography>
 
                 </CardContent>
@@ -63,7 +68,7 @@ const CarouselCardOffers = (props) => {
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <Button size="small" component={Link} to={"/Restaurant/Offers"} sx={{
+                <Button size="small" component={Link} to={"/Restaurant/Offers"} state= {{ id: props.data.id }} sx={{
                     margin: '6px',
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,
@@ -75,7 +80,7 @@ const CarouselCardOffers = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.name}
+                    View
                 </Button>
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}

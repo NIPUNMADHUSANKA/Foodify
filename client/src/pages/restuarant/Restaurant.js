@@ -118,7 +118,7 @@ const contactdetails1 = {
       </Fade>
 
       <Fade right>
-        <RestaurantOffers />
+        <RestaurantOffers rId={location.state.id}/>
       </Fade>
 
       <Fade bottom>
@@ -126,7 +126,7 @@ const contactdetails1 = {
       </Fade>
 
       <Fade big>
-        <RestaurantComment comments={comments1} />
+        <RestaurantComment comments={comments1}/>
       </Fade>
 
       <Fade left>

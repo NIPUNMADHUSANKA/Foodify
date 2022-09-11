@@ -1,6 +1,10 @@
 package Foodify.Backend.service;
 
 import org.springframework.http.ResponseEntity;
+
+import java.lang.reflect.Array;
+import java.util.List;
+
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,4 +32,6 @@ public interface Restaurantserv {
 	public void saveBanner(MultipartFile file,String username);
 	
 	public Resource loadBanner(String filename);
+	
+	public List<String> getItems(String items);
 }
