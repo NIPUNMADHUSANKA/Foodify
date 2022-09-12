@@ -161,6 +161,7 @@ const RestaurantEditableBanner = () => {
                 setImagePreview(Cover);
             });
 
+
         //console.log("hello");
 
     }, []);
@@ -169,6 +170,7 @@ const RestaurantEditableBanner = () => {
 
         axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantInfo", { headers: authHeader() })
             .then(data => {
+
                 //console.log(data)
 
                 const image = data.data.tempLogo;
@@ -203,7 +205,7 @@ const RestaurantEditableBanner = () => {
         let file = event.target.files[0];
         const imageData = new FormData();
         imageData.append('imageFile', file);
-        setImageData(imageData);
+        // setImageData(imageData);
         setImagePreview(URL.createObjectURL(file));
     }
 
@@ -286,9 +288,9 @@ const RestaurantEditableBanner = () => {
 
                 {/* upper part of the banner */}
 
-                {console.log(imagePreview)}
+                {/* {console.log(imagePreview)}
 
-                {console.log(Cover)}
+                {console.log(Cover)} */}
 
                 <BannerContent src={imagePreview !== null ? imagePreview : `data:image/jpeg;base64,${Cover1}`}>
 

@@ -1,11 +1,15 @@
 package Foodify.Backend.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Optional;
 
+import Foodify.Backend.model.*;
 import org.apache.commons.io.FilenameUtils;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -17,10 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import Foodify.Backend.exception.FoodMenuException;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.model.FoodCategory;
-import Foodify.Backend.model.FoodItem;
-import Foodify.Backend.model.FoodMenu;
-import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.repository.FoodCategoryRepo;
 import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
@@ -270,12 +270,48 @@ public class RestaurantService implements Restaurantserv{
 		return itemNames;
 	}
 
+	@Override
+	public ResponseEntity<?> uploadOffer(String name, String description, String Bdate, String Edate, String discount, String itemList, MultipartFile file,String userName) throws IOException {
+
+		//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+		Offers offers = new Offers();
+
+//    	-----------------converting string into array to get category and food items------------------------
+		String[] arr = null;
+		//converting using String.split() method with "," as a delimiter
+		arr = itemList.split(",");
+
+		offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+		offers.setName(name);
+		offers.setDescription(description);
+
+		offers.setStartDate(LocalDate.parse(Bdate));
+		offers.setEndDate(LocalDate.parse(Edate));
+
+		offers.setDiscount(Integer.parseInt(discount));
+		offers.setUserName(userName);
+
+		List<String> itemIds = new ArrayList<String>();
 
 
+//        ----------------setting discounts for relevant food items----------------------------
+		for (int i = 1; i< arr.length; i++)
+		{
+			FoodItem food = foodItems.findByid(arr[i]);
+			food.setDiscount(Integer.parseInt(discount));
+			foodItems.save(food);
+
+			itemIds.add(arr[i]);
+			System.out.println(arr[i]);
+		}
+
+		offers.setItems(itemIds);
+
+		System.out.println(arr[0]);
+
+		offersRepo.save(offers);
+		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);
+	}
 
 
-
-	
-	
-	
 }

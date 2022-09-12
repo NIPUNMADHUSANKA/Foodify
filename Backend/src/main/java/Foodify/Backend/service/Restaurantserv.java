@@ -2,6 +2,7 @@ package Foodify.Backend.service;
 
 import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface Restaurantserv {
 	public Resource loadBanner(String filename);
 	
 	public List<String> getItems(String items);
+
+	public ResponseEntity<?> uploadOffer(String name,String description,String Bdate,String Edate,String discount,String itemList,MultipartFile file,String userName) throws IOException;
 }

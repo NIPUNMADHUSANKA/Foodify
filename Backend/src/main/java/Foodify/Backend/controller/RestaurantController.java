@@ -1,11 +1,10 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+
 import java.sql.Array;
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -248,6 +247,43 @@ public class RestaurantController {
 		return items;
 	
 	}
+
+	/* ------------------------------------------------------------- Get Food items for update -------------------------------------------------------- */
+	@PostMapping("/FoodiFy/Restaurant/offerFoodItems")
+	public List<FoodItem> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
+
+//		get the relevent offer
+		Offers offer = offersRepo.findByid(offerId);
+//		get the item list from offer
+		List<String> items = offer.getItems();
+//		get the list that belong to this category
+		List<FoodItem> items2 = foodItems.findBycatId(catId);
+//		final food item list
+		List<FoodItem> foodList = new ArrayList<FoodItem>();
+//		creating new empty list
+		List<String> List1 = new ArrayList<String>();
+
+		for(int i = 0; i<items2.size();i++) {
+			List1.add(items2.get(i).getId());
+		}
+//		get the common food items
+		List1.retainAll(items);
+
+		for(int i = 0; i<items2.size();i++) {
+			if(items2.get(i).getDiscount() == 0){
+				List1.add(items2.get(i).getId());
+			}
+		}
+//		returning the final loop
+		for(int i = 0; i<List1.size();i++) {
+			foodList.add(foodItems.findByid(List1.get(i)));
+		}
+		System.out.println("l3 == "+List1);
+//		offer.setName(items.get(i).getName());
+
+		return foodList;
+
+	}
 	
 	  //--------------------------------------------upload offer details--------------------------------------------------------
     @PostMapping("/FoodiFy/Restaurant/uploadOffers")
@@ -262,49 +298,19 @@ public class RestaurantController {
     		) throws IOException {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-    	
-//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
-    	Offers offers = new Offers();
-    	
-//    	-----------------converting string into array to get category and food items------------------------
-    	String[] arr = null;
-    	//converting using String.split() method with "," as a delimiter  
-        arr = itemList.split(",");
-    	
-        offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
-        offers.setName(name);
-        offers.setDescription(description);
-        
-        offers.setStartDate(LocalDate.parse(Bdate));
-        offers.setEndDate(LocalDate.parse(Edate));
-        
-        offers.setDiscount(Integer.parseInt(discount));
-        offers.setUserName(userName);
-        
-        List<String> itemIds = new ArrayList<String>();
-        
-        
-//        ----------------setting discounts for relevant food items----------------------------
-        for (int i = 1; i< arr.length; i++)
-        {  
-        	FoodItem food = foodItems.findByid(arr[i]);
-        	food.setDiscount(Integer.parseInt(discount));
-        	foodItems.save(food);
-        	
-        	itemIds.add(arr[i]);
-            System.out.println(arr[i]);  
-        }
-        
-        offers.setItems(itemIds);
-        
-        System.out.println(arr[0]);
-        
-        offersRepo.save(offers);
-        
-		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);     
+
+		try {
+
+			return new ResponseEntity<>(service.uploadOffer(name,description,Bdate,Edate,discount,itemList,file,userName), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
     }
     
-	/* -------------------------------- Get offers restaurant view -------------------------------- */
+	/* -------------------------------- Get single offers restaurant view -------------------------------- */
 	@GetMapping("/FoodiFy/Service/getOffer/{id}")
 	public Offers getOffers(@PathVariable(value="id") String id) {
 		
@@ -315,7 +321,7 @@ public class RestaurantController {
 		return offer;
 	}
 
-	/* -------------------------------- Get offer view -------------------------------- */
+	/* -------------------------------- Get offer view for cards-------------------------------- */
 	@GetMapping("/FoodiFy/Restaurant/getOffersR")
 	public List<Offers> getOffer() {
 		
@@ -333,7 +339,7 @@ public class RestaurantController {
 		return offerList;
 	}
 	
-	/* -------------------------------- Get offer Customer view -------------------------------- */
+	/* -------------------------------- Get offer Customer view for cards-------------------------------- */
 	@PostMapping("/FoodiFy/Service/getOffersC")
 	public List<Offers> getOffer2(@RequestParam("id") String id) {
 		
@@ -505,9 +511,7 @@ public class RestaurantController {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
     	Restaurant restaurant = restaurantrepo.findByuserName(userName);
-    	
-//    	model.addAttribute(restaurant);
-//    	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+
     	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	
 //    	System.out.println(restaurant.getbImage());
@@ -560,22 +564,8 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 	
 	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
 	restaurant.setTempLogo(Base64.getEncoder().encodeToString(restaurant.getLogo().getData()));
-	
-//	System.out.println(restaurant.getbImage());
-//		return restaurant;
+
 	return restaurant;
 }
 
-
-	
-	
-	
-//	show details method
-//	@GetMapping("/FoodiFy/Service/ShowRestaurantAbout")
-//	public List<Restaurant> showAboutUs() {
-//		
-//		
-////		return restaurantrepo.findlast();
-//		
-//	}
 }
