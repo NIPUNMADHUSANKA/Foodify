@@ -235,6 +235,43 @@ public class RestaurantController{
 		return items;
 	
 	}
+
+	/* ------------------------------------------------------------- Get Food items for update -------------------------------------------------------- */
+	@PostMapping("/FoodiFy/Restaurant/offerFoodItems")
+	public List<FoodItem> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
+
+//		get the relevent offer
+		Offers offer = offersRepo.findByid(offerId);
+//		get the item list from offer
+		List<String> items = offer.getItems();
+//		get the list that belong to this category
+		List<FoodItem> items2 = foodItems.findBycatId(catId);
+//		final food item list
+		List<FoodItem> foodList = new ArrayList<FoodItem>();
+//		creating new empty list
+		List<String> List1 = new ArrayList<String>();
+
+		for(int i = 0; i<items2.size();i++) {
+			List1.add(items2.get(i).getId());
+		}
+//		get the common food items
+		List1.retainAll(items);
+
+		for(int i = 0; i<items2.size();i++) {
+			if(items2.get(i).getDiscount() == 0){
+				List1.add(items2.get(i).getId());
+			}
+		}
+//		returning the final loop
+		for(int i = 0; i<List1.size();i++) {
+			foodList.add(foodItems.findByid(List1.get(i)));
+		}
+		System.out.println("l3 == "+List1);
+//		offer.setName(items.get(i).getName());
+
+		return foodList;
+
+	}
 	
 	  //--------------------------------------------upload offer details--------------------------------------------------------
     @PostMapping("/FoodiFy/Restaurant/uploadOffers")

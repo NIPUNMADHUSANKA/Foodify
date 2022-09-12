@@ -74,7 +74,7 @@ const AddOfferForm = () => {
 
     //   ---------------------------------
 
-    const [category, setCategory] = React.useState('category');
+
 
     // ----------------------for store response data----------------------
     const [details, setDetails] = React.useState({});
@@ -85,17 +85,78 @@ const AddOfferForm = () => {
     // ----------------------for store offer response data----------------------
     const [offerdetails, setOfferDetails] = React.useState({});
 
+    // ----------------------for store items list----------------------
+    const [items1, setItems1] = React.useState({});
+
+    // ----------------------for store items list----------------------
+    const [items2, setItems2] = React.useState({});
+
     // console.log(category)
     // console.log(checked)
 
-    // ------------send data if corrects---------
-    React.useEffect((event) => {
+    // ----------------------to send offer id and cat id to server-----------------------------
+    const [foods, setFoods] = React.useState({});
 
-        if (checked !== null) {
+    // const cat = defaultCategory.data;
+    // const cat1 = String(cat);
+    // console.log(cat1);
 
+    const [category, setCategory] = React.useState("");
+
+    // ------------------set default values of category and items-------------------------------------
+    const addFoodId = (data) => {
+
+        // var id = String(data);
+        // console.log(data);
+        // const cat = details;
+        // setItems2({ ...items2,id })
+    };
+
+    // ---------------------------to get the food items for selected category--------------------------------------
+    const getFood = (food) => {
+
+        const catId1 = String(food);
+        const foods = new FormData();
+        foods.append('catId', catId1);
+        foods.append('offerId', location.state.id);
+
+        setCategory(food);
+
+        var items = {
+            "catId": food
         }
 
-    }, [])
+        // console.log(items);
+        const sendGetRequest2 = async () => {
+            try {
+                const resp2 = await axios.post('http://localhost:8072/FoodiFy/Restaurant/offerFoodItems', foods, { headers: authHeader() });
+
+                const details2 = resp2.data;
+                const details3 = resp2.data;
+                setDetails2({ ...details2 });
+
+                console.log(details2);
+                var updatedList = [...checked];
+                // updatedList = [...checked, event.target.value];
+                console.log("request susccess 1");
+
+                const items2 = [];
+                details3.map((keyName2) => (
+                    items2.push(keyName2.id),
+                    updatedList = [...checked, keyName2.id]       
+                ))
+                console.log(items2)
+                setItems2(items2);
+                
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        sendGetRequest2();
+
+    };
 
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
@@ -107,7 +168,7 @@ const AddOfferForm = () => {
                 const details = resp.data;
                 setDetails({ ...details });
 
-                // console.log(details);
+                console.log(details);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -119,12 +180,27 @@ const AddOfferForm = () => {
         // -----------------------------------to get the offer details------------------------------------------
         const getOfferDetails = async () => {
             try {
-                const resp3 = await axios.get(`http://localhost:8072/FoodiFy/Service/getOffer/${location.state.id}`, { headers: authHeader() });
+                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOffer/${location.state.id}`);
 
-                const offerDetails = resp3.data;
+                const offerDetails = respOffer.data;
+
+                const details3 = respOffer.data.items;
+                const items1 = [];
+                details3.map((keyName2) => (
+                    console.log(keyName2),
+                    items1.push(keyName2)       
+                ))
+                setItems1(items1);
+
                 setOfferDetails({ ...offerDetails });
 
-                console.log(offerdetails);
+                // --------------sending category id -----------------------------
+                addCategory(respOffer.data.category);
+                setCategory(respOffer.data.category);
+                getFood(respOffer.data.category);
+
+                // console.log(offerDetails);
+                // setItems([...items1]);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -134,6 +210,34 @@ const AddOfferForm = () => {
         getOfferDetails();
 
     }, []);
+
+    // -------------initial states for fields---------------------------
+    const initialValues = {
+        name: offerdetails.name,
+        description: "",
+        Bdate: "",
+        Edate: "",
+        discount: ""
+    };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    const handleChange = event => {
+
+        const { name, value } = event.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+        // console.log(imageName);
+    };
+
+    // ------------------set default values of category and items-------------------------------------
+    const addCategory = (data) => {
+
+        console.log(data);
+        const cat = details;
+        // setDefaultCategory({ data });
+    };
 
     // -------------------------------------------------------------------calling food items-------------------------------------------------------
     const handleChange2 = event => {
@@ -150,6 +254,9 @@ const AddOfferForm = () => {
 
                 const details2 = resp2.data;
                 setDetails2({ ...details2 });
+
+                console.log("Request sucessful")
+                console.log(details2)
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -160,28 +267,10 @@ const AddOfferForm = () => {
 
     };
 
-    // console.log(details2);
-
-    // --------to add category section--------
-    const [components, addComponents] = useState(["Vegie"]); //use to render when new component added to page
-
-    function addSection() {
-        addComponents([...components, <CategorySelection />])
-    }
-    // ---------------------------------------
-
-    // -------------initial states for fields---------------------------
-    const initialValues = { name: "", description: "", Bdate: "", Edate: "", discount: "" };
-    // ----------create state name form values--------
-    const [formValues, setFormValues] = React.useState(initialValues);
-
-    const handleChange = event => {
-
-        const { name, value } = event.target;
-        // get the relavant name as key and assign value to it
-        setFormValues({ ...formValues, [name]: value });
-        // console.log(imageName);
-    };
+    console.log(offerdetails);
+    console.log(category);
+    console.log(items1);
+    console.log(items2);
 
     // ----------------sending image for the backend--------------
     const [imageData, setImageData] = useState(null);
@@ -225,6 +314,19 @@ const AddOfferForm = () => {
             })
     }
 
+
+    // if(JSON.stringify(items2) === JSON.stringify(items1)){
+    //     console.log(true);
+    // }
+    // const Bdate = new Date(offerdetails.startDate);
+    var todayDate = new Date(); //Today Date    
+    // -----------------------------setting up date to display---------------------------------
+    const bDate = new Date(offerdetails.startDate).toLocaleDateString('en-CA');
+    // console.log(defaultValue)
+
+    // var defaultValue = new Date(Bdate).toISOString().split("T")[0];
+    const Edate = new Date(offerdetails.endDate).toLocaleDateString('en-CA');
+
     return (
         <Box>
             {/* -----------------------form area------------------------- */}
@@ -234,7 +336,7 @@ const AddOfferForm = () => {
                     display: "flex",
                     flexDirection: "column",
                     width: "90%",
-                    margin:"auto",
+                    margin: "auto",
                     padding: "1rem",
                     opacity: 0.9,
                     background: Colours.secondary,
@@ -253,8 +355,8 @@ const AddOfferForm = () => {
                 autoComplete="off"
             >
                 {/* -------text fields----------- */}
-                <InputArea id="name" label="Name" name="name" variant="outlined" onChange={handleChange} />
-                <InputArea id="description" label="Description" name="description" multiline rows={6} variant="outlined" onChange={handleChange} />
+                <InputArea id="name" label="Name" value={offerdetails.name} focused name="name" variant="outlined" onChange={handleChange} />
+                <InputArea id="description" label="Description" focused value={offerdetails.description} name="description" multiline rows={6} variant="outlined" onChange={handleChange} />
 
                 {/* --------date selection area--------- */}
                 <Box sx={{
@@ -271,7 +373,7 @@ const AddOfferForm = () => {
 
                     }}>
                         <Typography variant='body' sx={{ color: Colours.grayWhite, }}>Begin Date</Typography>
-                        <InputArea id="begin date" type="date" name="Bdate" variant="outlined" onChange={handleChange} />
+                        <InputArea id="begin date" focused value={formValues.Bdate ? formValues.Bdate : bDate} type="date" name="Bdate" variant="outlined" onChange={handleChange} />
                     </Box>
 
                     <Box sx={{
@@ -280,7 +382,7 @@ const AddOfferForm = () => {
                         padding: "0.5rem",
                     }}>
                         <Typography variant='body' sx={{ color: Colours.grayWhite, }}>End Date</Typography>
-                        <InputArea id="begin date" type="date" name="Edate" variant="outlined" onChange={handleChange} />
+                        <InputArea id="begin date" focused value={formValues.Edate ? formValues.Edate : Edate} type="date" name="Edate" variant="outlined" onChange={handleChange} />
                     </Box>
                 </Box>
                 {/* ------------end of date selection area------------------ */}
@@ -300,110 +402,104 @@ const AddOfferForm = () => {
                         Add Categories and food items
                     </Typography>
 
-                    <FormControl>
-                        <InputArea
-                            id="outlined-select-currency"
-                            select
-                            name='category'
-                            label="Category"
-                            value={category}
-                            onChange={handleChange2}
-                            helperText="Add food Category"
-                        >
-                            {/* ------------------------give categories if available-------------------------------------- */}
+                    <InputArea
+                        focused
+                        id="outlined-select-currency"
+                        select
+                        label="Select"
+                        value={category}
+                        onChange={handleChange2}
+                        helperText="Please select your currency"
+                    >
+                        {/* ------------------------give categories if available-------------------------------------- */}
+                        {(() => {
+                            if (details !== null) {
+                                return (
+
+                                    Object.keys(details).map((keyName) => (
+                                        // console.log(details[keyName]),
+                                        <MenuItem key={keyName} value={details[keyName].id}>
+                                            {details[keyName].foodMenuCategory}
+                                        </MenuItem>
+
+                                    ))
+                                );
+                            }
+                        }
+                        )()}
+
+                        {/* ---------------------------------default when categories are not availble-------------------------------- */}
+                        {(() => {
+                            if (details == null) {
+                                return (
+
+                                    <MenuItem value={0} name="none">
+                                        there is no categories
+                                    </MenuItem>
+
+                                );
+                            }
+                        }
+                        )()}
+                    </InputArea>
+
+                    {/* ------------------to select food items------------------ */}
+                    <FormGroup>
+
+                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+                            {/* ------------------------give food items if available-------------------------------------- */}
                             {(() => {
-                                if (details !== null) {
+                                if (details2 !== null) {
                                     return (
 
-                                        Object.keys(details).map((keyName) => (
-                                            // console.log(details[keyName]),
-                                            <MenuItem key={keyName} value={details[keyName].id} name="Category1">
-                                                {details[keyName].foodMenuCategory}
-                                            </MenuItem>
 
+                                        Object.keys(details2).map((keyName2) => (
+                                            // -------------------loop-----------------------------
+
+                                            console.log(JSON.stringify(items2) + "==" + JSON.stringify(items1)),
+                                            // let arr = details2.filter(detail2 => details2[keyname].id === items1)
+                                            (() => {
+                                                if (details2 !== null || details2[keyName2].discount === 0) {
+                                                    return (
+                                                        <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
+                                                            display: "flex",
+                                                            flexDirection: "row",
+                                                        }}>
+
+                                                            <Checkbox
+                                                                id="begin date"
+                                                                type="checkbox"
+                                                                value={details2[keyName2].id}
+                                                                name={details2[keyName2].name}
+                                                                variant="standard"
+                                                                onChange={checklisthandle}
+                                                            />
+
+                                                            <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+
+                                                        </Grid>
+                                                    );
+                                                }
+                                            }
+                                            )()
+
+                                            // -------------------------loop-------------------------------------
                                         ))
                                     );
                                 }
                             }
                             )()}
+                        </Grid>
 
-                            {/* ---------------------------------default when categories are not availble-------------------------------- */}
-                            {(() => {
-                                if (details == null) {
-                                    return (
+                    </FormGroup>
+                    {/* ------------------end of selecting food items------------------ */}
 
-                                        <MenuItem value={0} name="none">
-                                            there is no categories
-                                        </MenuItem>
-
-                                    );
-                                }
-                            }
-                            )()}
-
-                            {/* {props.category.map((option) => (
-                    <MenuItem key={option.value} value={option.value} name={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))} */}
-                        </InputArea>
-
-                        {/* ------------------to select food items------------------ */}
-                        <FormGroup>
-
-                            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-
-                                {/* ------------------------give food items if available-------------------------------------- */}
-                                {(() => {
-                                    if (details2 !== null) {
-                                        return (
-
-
-                                            Object.keys(details2).map((keyName2) => (
-                                                // -------------------loop-----------------------------
-                                                // console.log(details2[keyName2]),
-
-                                                (() => {
-                                                    if (details2[keyName2].discount === 0) {
-                                                        return (
-                                                            <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
-                                                                display: "flex",
-                                                                flexDirection: "row",
-                                                            }}>
-
-                                                                <Checkbox
-                                                                    id="begin date"
-                                                                    type="checkbox"
-                                                                    value={details2[keyName2].id}
-                                                                    name={details2[keyName2].name}
-                                                                    variant="standard"
-                                                                    onChange={checklisthandle}
-                                                                />
-
-                                                                <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
-
-                                                            </Grid>
-                                                        );
-                                                    }
-                                                }
-                                                )()
-
-                                                // -------------------------loop-------------------------------------
-                                            ))
-                                        );
-                                    }
-                                }
-                                )()}
-                            </Grid>
-
-                        </FormGroup>
-                        {/* ------------------end of selecting food items------------------ */}
-                    </FormControl>
                 </Box>
                 {/* ------------end of category and food items area----- */}
 
                 {/* ------------------for discount area---------------- */}
-                <InputArea id="standard-basic" label="Discount Rate" name='discount' variant="outlined" onChange={handleChange} />
+                <InputArea id="standard-basic" label="Discount Rate" focused value={offerdetails.discount} name='discount' variant="outlined" onChange={handleChange} />
 
                 {/* ---------------------add image area------------------------------------ */}
                 <Typography variant='body' sx={{
