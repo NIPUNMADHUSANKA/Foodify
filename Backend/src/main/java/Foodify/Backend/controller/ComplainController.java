@@ -1,23 +1,28 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import Foodify.Backend.model.Complain;
-import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.repository.ComplainRepository;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -26,7 +31,7 @@ public class ComplainController {
 	
 	@Autowired
 	private ComplainRepository complainRepository;
-//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {	
+//	public Complain createComplain(@RequestBody Complain complain,@RequestParam("Image")MultipartFile file) throws IOException {
 	@PostMapping("/FoodiFy/User/addComplains")
 
     public ResponseEntity<?> uploadcomplaindetails(
@@ -41,6 +46,7 @@ public class ComplainController {
 //		System.out.println(complain);
 
 		System.out.println(userName);
+		
 		Complain complain = new Complain();
 		complain.setRestaurantId(name1);
 		complain.setComplainTitle(name2);
@@ -52,15 +58,44 @@ public class ComplainController {
 		return null;
 
 	}
+
+
 	
 	
-//	@PostMapping("/FoodiFy/User/addComplains/addImage")
-//	public ResponseEntity <?> uploadImage (@RequestParam("imageFile")MultipartFile file) throws IOException{
-//		Complain complain = null;
-//		complain.setImage(new Binary(BsonBinarySubType.BINARY,file.getBytes()));
-//		
-//		
-//
-//	}
+	@GetMapping("/FoodiFy/User/getCount/pending")
+	public int showComplainspending() {
+		String state = "pending";
+		int complains = (int) complainRepository.count2(state);
+//		List<Complain> complainList = new ArrayList<Complain>();
+
+//		System.out.println(complainList);
+		return complains;
+	}
+	
+	
+	@GetMapping("/FoodiFy/User/getCount/accepted")
+	public int showComplainsaccepted() {
+		String state = "accepted";
+		int complains = (int) complainRepository.count2(state);
+//		List<Complain> complainList = new ArrayList<Complain>();
+//		System.out.println(complainList);
+		return complains;
+	}
+	
+	@GetMapping("/FoodiFy/User/getCount/rejected")
+	public int showComplainsrejected() {
+		String state = "rejected";
+		int complains = (int) complainRepository.count2(state);
+//		List<Complain> complainList = new ArrayList<Complain>();
+//		System.out.println(complainList);
+		return complains;
+	}
+	
+	@GetMapping("/FoodiFy/User/getCount/complainhistory")
+	public List<Complain> complainhistory() {
+		List<Complain> complains = complainRepository.findAll();
+		
+		return complains;
+	}
 
 }

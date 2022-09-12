@@ -1,7 +1,6 @@
 package Foodify.Backend.model;
 
-import java.io.File;
-import java.util.Date;
+import java.sql.Date;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;

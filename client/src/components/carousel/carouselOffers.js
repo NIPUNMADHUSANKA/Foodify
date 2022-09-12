@@ -29,6 +29,7 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
 const carousel = (props) => {
 
   // console.log(props.item)
+  //console.log(props.item)
 
   const x = props.item
 

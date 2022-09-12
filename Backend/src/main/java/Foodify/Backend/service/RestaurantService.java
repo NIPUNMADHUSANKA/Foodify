@@ -27,6 +27,7 @@ import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 
+import java.io.Console;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
@@ -184,7 +185,7 @@ public class RestaurantService implements Restaurantserv{
 
 	@Override
 	public Resource loadBanner(String filename) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -193,13 +194,13 @@ public class RestaurantService implements Restaurantserv{
 	public FoodMenu addFoodMenu(FoodMenu foodMenu) throws FoodMenuException {
 
 		String userName = foodMenu.getUsername();
-		String foodMenuName = foodMenu.getfoodMenuName();
 
-		Optional<FoodMenu> FoodMenuOptional = foodMenuRepo.findByResturantMenuExists(userName, foodMenuName);
+		System.out.println(userName);
+		
+		Optional<FoodMenu> FoodMenuOptional = foodMenuRepo.findByResturantMenuExists(userName);
 
 		if (FoodMenuOptional.isPresent()) {
 			throw new FoodMenuException(FoodMenuException.FoodMemuAlreadyExists());
-
 		}
 		else{
 			foodMenuRepo.save(foodMenu);
@@ -207,8 +208,6 @@ public class RestaurantService implements Restaurantserv{
 		}
 
 	}
-
-
 
 	@Override
 	public FoodCategory addFoodCategory(FoodCategory foodCategory) throws FoodMenuException {

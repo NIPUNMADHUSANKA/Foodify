@@ -162,6 +162,7 @@ const RestaurantEditableBanner = () => {
             });
 
         // console.log("hello");
+        //console.log("hello");
 
     }, []);
 
@@ -170,6 +171,7 @@ const RestaurantEditableBanner = () => {
         axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantInfo", { headers: authHeader() })
             .then(data => {
                 // console.log(data)
+                //console.log(data)
 
                 const image = data.data.tempLogo;
                 setLogo(image);
@@ -210,7 +212,7 @@ const RestaurantEditableBanner = () => {
     const uploadImageWithAdditionalData = () => {
         axios.post("http://localhost:8072/FoodiFy/Restaurant/uploadBannerImage", imageData, { headers: authHeader() })
             .then(data => {
-                console.log("Entry access sucessfull")
+               // console.log("Entry access sucessfull")
                 window.location.reload(false);
                 setOpen(false);
 
@@ -238,7 +240,7 @@ const RestaurantEditableBanner = () => {
         const { name, value } = event2.target;
         // get the relavant name as key and assign value to it
         setFormValues({ ...formValues, [name]: value });
-        console.log(imageName);
+       // console.log(imageName);
 
 
     };
@@ -250,7 +252,7 @@ const RestaurantEditableBanner = () => {
 
         axios.post("http://localhost:8072/FoodiFy/Restaurant/uploadLogoDetails", imageData2, { headers: authHeader() })
             .then(data => {
-                console.log("Entry access sucessfull")
+               // console.log("Entry access sucessfull")
                 window.location.reload(false);
                 setOpen2(false);
 

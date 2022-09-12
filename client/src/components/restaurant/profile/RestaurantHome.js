@@ -119,7 +119,7 @@ const RestaurantHome = () => {
       </Fade>
 
       <Fade bottom>
-        <RestaurantMenu />
+        <RestaurantMenu/>
       </Fade>
 
       <Fade big>
