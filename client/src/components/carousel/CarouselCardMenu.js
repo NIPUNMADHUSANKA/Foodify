@@ -3,16 +3,43 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Link } from 'react-router-dom';
 
-import image1 from '../../assets/images/food categories/1.jpg';
-import { id } from 'date-fns/locale';
+import axois from "axios";
+import authHeader from '../../services/auth-header';
+
+
+
+var ROLE = null;
 
 const CarouselCard = (props) => {
 
-    console.log(props.item);
 
-    const menu = props.item;
-    
-    
+    const category = props.item;
+
+    const categoryId = category.id;
+
+    var image = null;
+
+    if (category.image) {
+        image = category.image.data;
+    }
+
+    const handleDelete = () => {
+
+        axois.get("http://localhost:8072/RegisteredUser/deleteFoodCategory/" + categoryId, { headers: authHeader() })
+            .then(data => {
+                // this part if sucess
+                window.location.reload(false);
+
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+
+    }
+
+
+
     return (
         // ---------main card area------------
         <Card sx={{
@@ -31,13 +58,15 @@ const CarouselCard = (props) => {
             {/* ---------------card action area---------------------- */}
             <CardActionArea>
                 {/* -------------------image area------------------------- */}
-                
+
                 <CardMedia
                     component="img"
                     height="235vh"
-                    image={image1}
-                    alt="green iguana"
+                    src={`data:image/jpeg;base64,${image}`}
+                    alt={category.foodMenuCategory}
                 />
+
+
 
                 {/* ---------------------card content area---------------------- */}
                 <CardContent>
@@ -49,7 +78,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {menu.foodMenuName}
+                        {category.foodMenuCategory}
                     </Typography>
                     {/* description, if any */}
                     <Typography variant="body2" color="text.secondary" sx={{
@@ -59,7 +88,7 @@ const CarouselCard = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {menu.foodMenuDes}
+                        {category.foodMenuCategoryDes}
                     </Typography>
 
                 </CardContent>
@@ -73,7 +102,7 @@ const CarouselCard = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
+                <Button component={Link} to={"/Restaurant/Category"} state={{ id: category.id, name: category.foodMenuCategory }} size="small" sx={{
                     margin: '6px',
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,
@@ -88,37 +117,70 @@ const CarouselCard = (props) => {
                     View
                 </Button>
 
-               {/* <Link to={`blog/${id}`}>{title}</Link> */}
+                {/* <Link to={`blog/${id}`}>{title}</Link> */}
 
-                <Button component={Link} to={'/AddFoodMenu'} state= {{ id: menu.id , name: menu.foodMenuName}} size="small" sx={{
-                    margin: '6px',
-                    background: Colours.yellow, '&:hover': {
-                        backgroundColor: Colours.green,
-                    },
-                    color: Colours.dark,
-                    fontSize: '0.8rem',
-                    [theme.breakpoints.down('sm')]: {
-                        fontSize: '8px',
-                        padding: '2px',
-                    },
-                }}>
-                    Edit
-                </Button>
 
-                <Button component={Link} to={"/Restaurant/Category"} size="small" sx={{
-                    margin: '6px',
-                    background: Colours.green, '&:hover': {
-                        backgroundColor: Colours.yellow,
-                    },
-                    color: Colours.dark,
-                    fontSize: '0.8rem',
-                    [theme.breakpoints.down('sm')]: {
-                        fontSize: '8px',
-                        padding: '2px',
-                    },
-                }}>
-                    Delete
-                </Button>
+                {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+                {(() => {
+                    if (JSON.parse(localStorage.getItem('ROLE'))) {
+                        ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+                        //console.log(ROLE)
+                    }
+                }
+                )()}
+                {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
+
+
+                {(() => {
+                    if (ROLE === "restaurant") {
+                        return (
+                            <Button component={Link} to={'/AddFoodMenuItem'} state={{ id: category.id, name: category.foodMenuCategory }} size="small" sx={{
+                                margin: '6px',
+                                background: Colours.yellow, '&:hover': {
+                                    backgroundColor: Colours.green,
+                                },
+                                color: Colours.dark,
+                                fontSize: '0.8rem',
+                                [theme.breakpoints.down('sm')]: {
+                                    fontSize: '8px',
+                                    padding: '2px',
+                                },
+                            }}>
+                                Edit
+                            </Button>
+                        );
+                    }
+                }
+                )()}
+
+
+                {(() => {
+                    if (ROLE === "restaurant") {
+                        return (
+                            <Button
+                                onClick={handleDelete}
+                                size="small" sx={{
+                                    margin: '6px',
+                                    background: Colours.green, '&:hover': {
+                                        backgroundColor: Colours.yellow,
+                                    },
+                                    color: Colours.dark,
+                                    fontSize: '0.8rem',
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize: '8px',
+                                        padding: '2px',
+                                    },
+                                }}>
+                                Delete
+                            </Button>
+                        );
+                    }
+                }
+                )()}
+
+
+
+
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}
 

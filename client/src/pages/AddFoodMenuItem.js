@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 
-import Carousel from 'react-elastic-carousel';
-
 import PageTitle from '../components/User/PageTitle';
-import AddFoodMenuIns from '../components/restaurant/AddFoodMenuIns';
 
 import {Avatar, IconButton} from '@mui/material';
 
@@ -20,16 +17,22 @@ import AddFoodMenuCon from '../components/restaurant/AddFoodMenuCon';
 import Fade from 'react-reveal/Fade';
 import Navbar from '../components/Navbar';
 
-import { margin } from '@mui/system';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {Link} from 'react-router-dom';
 
+import { useLocation } from 'react-router-dom';
 
 
-const MainHeader = "Add Foods Menu";
+
+
+const MainHeader = "Add Food";
 
 
 function AddFoodMenuItem() {
+
+  // --------------to get the id------------------
+  const location = useLocation();
+ 
 
     useEffect(() => {
         document.title = "Add Foods Menu";
@@ -87,9 +90,9 @@ function AddFoodMenuItem() {
     
           <Box mt="3%">
             <Fade left>
-              <Carousel pagination={false} disableArrowsOnEnd={true} >
-                <AddFoodMenuCon />
-              </Carousel>
+              
+                <AddFoodMenuCon Path = {location} />
+              
             </Fade>
           </Box>
     

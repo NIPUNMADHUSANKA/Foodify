@@ -13,31 +13,96 @@ import Total from '../assets/icons/Total.png';//exporting the image for about se
 import Pending from '../assets/icons/Pending.png';
 import Accept from '../assets/icons/Accept.png';
 import Reject from '../assets/icons/Reject.png';
+import axois from "axios";
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import Navbar from '../components/Navbar';
+import authHeader from '../services/auth-header';
 
 const MainHeader = "Complaints";
 
 function Complaints() {
 
+  useEffect(() => {
+    document.title = "Complaints";
+})
+
+
+  const [Datapending, setData] = useState([]);
+
+
+  useEffect((event) => {
+
+    axois.get(`http://localhost:8072/FoodiFy/User/getCount/pending`, {headers: authHeader()})
+        .then(data => {
+            // this part if sucess
+            setData(data.data)
+            
+        })
+        .catch(error => {
+            console.log("There is an error");
+        });
+
+}, []);
+
+console.log(Datapending)
+
+const [Dataaccepted, setData1] = useState([]);
+
+useEffect((event) => {
+
+  axois.get(`http://localhost:8072/FoodiFy/User/getCount/accepted`, {headers: authHeader()})
+      .then(data => {
+          // this part if sucess
+          setData1(data.data)
+          
+      })
+      .catch(error => {
+          console.log("There is an error");
+      });
+
+}, []);
+
+console.log(Dataaccepted)
+
+
+const [Datarejected, setData2] = useState([]);
+
+useEffect((event) => {
+
+  axois.get(`http://localhost:8072/FoodiFy/User/getCount/rejected`, {headers: authHeader()})
+      .then(data => {
+          // this part if sucess
+          setData2(data.data)
+          
+      })
+      .catch(error => {
+          console.log("There is an error");
+      });
+
+}, []);
+
+console.log(Datarejected)
+
+const sum = Datapending + Dataaccepted + Datarejected;
+
+
   const data = [
 
-    [ "Total Complaints",  12, Total ],
+    [ "Total Complaints",  sum, Total ],
   
-    [ "Pending Complaints",  6, Pending ],
+    [ "Pending Complaints", Datapending, Pending ],
   
-    [ "Accepted Complaints",  3, Accept ],
+    [ "Accepted Complaints", Dataaccepted, Accept ],
   
-    [ "Rejected Complaints",  3, Reject ]
+    [ "Rejected Complaints",  Datarejected, Reject ]
   
   ];
 
-    useEffect(() => {
-        document.title = "Complaints";
-    })
+  
 
+   
   return (
 
     
@@ -53,6 +118,7 @@ function Complaints() {
             <CardBar details = {data} />
           </Box>
         </Fade>
+
          
 
         <Fade right>

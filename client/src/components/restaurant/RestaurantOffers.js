@@ -129,7 +129,15 @@ const RestaurantOffers = (props) => {
       p: '0px',
     }}>
 
-
+      {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+      {(() => {
+        if (JSON.parse(localStorage.getItem('ROLE'))) {
+          ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+         // console.log(ROLE)
+        }
+      }
+      )()}
+      {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
 
       {(() => {
         if (ROLE === "restaurant") {
