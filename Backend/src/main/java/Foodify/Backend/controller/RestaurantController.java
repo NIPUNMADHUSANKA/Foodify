@@ -236,11 +236,6 @@ public class RestaurantController {
 	@PostMapping("/FoodiFy/Restaurant/getfoodItems1")
 	public List<FoodItem> getfoodItem(@RequestBody FoodItem foodItem) {
 		
-//		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-//		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
-//		System.out.println(Menu);
-		
 		List<FoodItem> items = foodItems.findBycatId(foodItem.getcatId());
 		
 		return items;
@@ -249,38 +244,17 @@ public class RestaurantController {
 
 	/* ------------------------------------------------------------- Get Food items for update -------------------------------------------------------- */
 	@PostMapping("/FoodiFy/Restaurant/offerFoodItems")
-	public List<FoodItem> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
+	public ResponseEntity<?> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
 
-//		get the relevent offer
-		Offers offer = offersRepo.findByid(offerId);
-//		get the item list from offer
-		List<String> items = offer.getItems();
-//		get the list that belong to this category
-		List<FoodItem> items2 = foodItems.findBycatId(catId);
-//		final food item list
-		List<FoodItem> foodList = new ArrayList<FoodItem>();
-//		creating new empty list
-		List<String> List1 = new ArrayList<String>();
+		try {
 
-		for(int i = 0; i<items2.size();i++) {
-			List1.add(items2.get(i).getId());
+			return new ResponseEntity<>(service.getOfferFoods(catId,offerId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
 		}
-//		get the common food items
-		List1.retainAll(items);
-
-		for(int i = 0; i<items2.size();i++) {
-			if(items2.get(i).getDiscount() == 0){
-				List1.add(items2.get(i).getId());
-			}
-		}
-//		returning the final loop
-		for(int i = 0; i<List1.size();i++) {
-			foodList.add(foodItems.findByid(List1.get(i)));
-		}
-		System.out.println("l3 == "+List1);
-//		offer.setName(items.get(i).getName());
-
-		return foodList;
 
 	}
 	
@@ -308,6 +282,33 @@ public class RestaurantController {
 
 		}
     }
+
+	//--------------------------------------------update offer details--------------------------------------------------------
+	@PostMapping("/FoodiFy/Restaurant/updateOffer")
+	public ResponseEntity<?> updateOffer(
+			@RequestParam("imageFile")MultipartFile file,
+			@RequestParam("name") String name,
+			@RequestParam("description") String description,
+			@RequestParam("Bdate")String Bdate,
+			@RequestParam("Edate")String Edate,
+			@RequestParam("discount") String discount,
+			@RequestParam("offerId") String offerId,
+			@RequestParam("itemList") String itemList,
+			@RequestParam("foodItems") String foodItems
+	) throws IOException {
+
+		String userName1 = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		try {
+
+			return new ResponseEntity<>(service.updateOffer(name,description,Bdate,Edate,discount,itemList,file,userName1,offerId,foodItems), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
     
 	/* -------------------------------- Get single offers restaurant view -------------------------------- */
 	@GetMapping("/FoodiFy/Service/getOffer/{id}")
