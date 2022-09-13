@@ -578,6 +578,7 @@ public List<FoodItem> showfoods() {
 		FoodItem fooditem = new FoodItem();
 
 //		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+//		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
 		fooditem.setName(fooditems.get(i).getName());
 		fooditem.setPrice(fooditems.get(i).getPrice());
 //		restaurant.setId(fooditems.get(i).getId());
@@ -590,6 +591,7 @@ public List<FoodItem> showfoods() {
 	return fooditemsList;
 
 }
+
 
 
 	
