@@ -3,12 +3,12 @@ import { Box } from '@mui/system';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Button, TextField } from '@mui/material';
 import styled from '@emotion/styled';
-import CategorySelection from './CategorySelection';
 import axios from 'axios';
 import authHeader from "../../services/auth-header";
-import { Checkbox, FormControl, FormGroup, Grid, Typography } from '@mui/material';
+import { Checkbox,FormGroup, Grid, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -55,6 +55,8 @@ const AddOfferForm = () => {
 
     // --------------to get the id------------------
     const location = useLocation();
+
+    const navigate = useNavigate();
 
     // ------------------------food array-------------------------------
 
@@ -142,12 +144,10 @@ const AddOfferForm = () => {
 
                 const items2 = [];
                 details3.map((keyName2) => (
-                    items2.push(keyName2.id),
-                    updatedList = [...checked, keyName2.id]       
+                    items2.push(keyName2.id)
                 ))
                 console.log(items2)
                 setItems2(items2);
-                
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -157,6 +157,18 @@ const AddOfferForm = () => {
         sendGetRequest2();
 
     };
+
+    // -------------initial states for fields---------------------------
+    const initialValues = {
+        name: offerdetails.name,
+        description: "",
+        Bdate: "",
+        Edate: "",
+        discount: ""
+    };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
 
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
@@ -188,9 +200,11 @@ const AddOfferForm = () => {
                 const items1 = [];
                 details3.map((keyName2) => (
                     console.log(keyName2),
-                    items1.push(keyName2)       
+                    items1.push(keyName2)
                 ))
                 setItems1(items1);
+                // setChecked(items1);
+
 
                 setOfferDetails({ ...offerDetails });
 
@@ -198,6 +212,16 @@ const AddOfferForm = () => {
                 addCategory(respOffer.data.category);
                 setCategory(respOffer.data.category);
                 getFood(respOffer.data.category);
+
+                // --------------------setting default form values---------------
+                const initialValues = {
+                    name: respOffer.data.name ,
+                    description:respOffer.data.description ,
+                    Bdate: respOffer.data.startDate,
+                    Edate: respOffer.data.endDate,
+                    discount: respOffer.data.discount
+                }
+                setFormValues({ ...initialValues });
 
                 // console.log(offerDetails);
                 // setItems([...items1]);
@@ -210,18 +234,6 @@ const AddOfferForm = () => {
         getOfferDetails();
 
     }, []);
-
-    // -------------initial states for fields---------------------------
-    const initialValues = {
-        name: offerdetails.name,
-        description: "",
-        Bdate: "",
-        Edate: "",
-        discount: ""
-    };
-
-    // ----------create state name form values--------
-    const [formValues, setFormValues] = React.useState(initialValues);
 
     const handleChange = event => {
 
@@ -267,7 +279,7 @@ const AddOfferForm = () => {
 
     };
 
-    console.log(offerdetails);
+    console.log(formValues);
     console.log(category);
     console.log(items1);
     console.log(items2);
@@ -289,36 +301,34 @@ const AddOfferForm = () => {
 
         const list1 = [category, checked]
 
-        // console.log(list1)
+        console.log(list1)
+        console.log(items1)
 
         imageData.append('name', formValues.name);
         imageData.append('description', formValues.description);
         imageData.append('Bdate', formValues.Bdate);
         imageData.append('Edate', formValues.Edate);
         imageData.append('discount', formValues.discount);
-        imageData.append('itemList', list1)
+        imageData.append('offerId', location.state.id);
+        imageData.append('itemList', list1);
+        imageData.append('foodItems', items1);
 
 
         // console.log(imageData)
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/uploadOffers", imageData, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/updateOffer", imageData, { headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull")
-                window.location.reload(false);
-
+                // window.location.reload(false);
+                navigate("/Restaurant/Offers",{ state: { id: location.state.id } });
             })
             .catch(error => {
                 // console.log(restaurantAbout)
                 // console.log("There is an error")
-
             })
+            
     }
 
-
-    // if(JSON.stringify(items2) === JSON.stringify(items1)){
-    //     console.log(true);
-    // }
-    // const Bdate = new Date(offerdetails.startDate);
     var todayDate = new Date(); //Today Date    
     // -----------------------------setting up date to display---------------------------------
     const bDate = new Date(offerdetails.startDate).toLocaleDateString('en-CA');
@@ -355,8 +365,8 @@ const AddOfferForm = () => {
                 autoComplete="off"
             >
                 {/* -------text fields----------- */}
-                <InputArea id="name" label="Name" value={offerdetails.name} focused name="name" variant="outlined" onChange={handleChange} />
-                <InputArea id="description" label="Description" focused value={offerdetails.description} name="description" multiline rows={6} variant="outlined" onChange={handleChange} />
+                <InputArea id="name" label="Name" focused defaultValue={offerdetails.name}  name="name" multiline rows={1} variant="outlined" onChange={handleChange} />
+                <InputArea id="description" label="Description" focused defaultValue={offerdetails.description} name="description" multiline rows={6} variant="outlined" onChange={handleChange} />
 
                 {/* --------date selection area--------- */}
                 <Box sx={{
@@ -499,7 +509,7 @@ const AddOfferForm = () => {
                 {/* ------------end of category and food items area----- */}
 
                 {/* ------------------for discount area---------------- */}
-                <InputArea id="standard-basic" label="Discount Rate" focused value={offerdetails.discount} name='discount' variant="outlined" onChange={handleChange} />
+                <InputArea id="standard-basic" label="Discount Rate" focused defaultValue={offerdetails.discount} name='discount' multiline rows={1} variant="outlined" onChange={handleChange} />
 
                 {/* ---------------------add image area------------------------------------ */}
                 <Typography variant='body' sx={{
