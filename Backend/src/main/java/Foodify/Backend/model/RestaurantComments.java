@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Document(collection="RestaurantComments")
-public class RestaurantComment {
+public class RestaurantComments {
 	
 	@Id
 	private String id;
@@ -21,6 +21,11 @@ public class RestaurantComment {
 	private String restaurantId;
 	private String commentDescription;
 	private Date addedDate;
+	
+	public RestaurantComments() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	public String getId() {
 		return id;
