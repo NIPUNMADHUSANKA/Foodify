@@ -2,8 +2,6 @@ package Foodify.Backend.controller;
 
 import java.io.IOException;
 
-import java.sql.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -36,7 +34,7 @@ import Foodify.Backend.model.FoodMenu;
 import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Registered_Customer;
 
-//using cross origin annotation to communicate with react.js and spring
+//using cross-origin annotation to communicate with react.js and spring
 //@RequestMapping("/Restaurant")
 
 @RestController
@@ -126,7 +124,7 @@ public class RestaurantController {
 
 		// System.out.println(restaurants);
 		//
-		for (int i = 0; i < restaurants.size(); i++) {
+		for(int i = 0; i < restaurants.size(); i++) {
 			Restaurant restaurant = new Restaurant();
 
 			restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
@@ -374,6 +372,15 @@ public class RestaurantController {
 
 		}
 		
+	}
+
+	/* -------------------------------- Get single food item for order view -------------------------------- */
+	@GetMapping("/FoodiFy/Service/getOrderFood/{id}")
+	public FoodItem getOrderFood(@PathVariable(value="id") String foodId) {
+
+		FoodItem food = foodItems.findByid(foodId);
+
+		return food;
 	}
 
 	

@@ -1,11 +1,12 @@
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
+import axios from 'axios';
+import authHeader from "../../services/auth-header";
 
 import Background from '../../assets/images/pv4WkDi.webp';
 
-// when calling data, nned to take from there
-import FoodImage from '../../assets/images/food items/1.png'
+// when calling data, nned to take from there'
 import { Avatar, Typography } from '@mui/material';
 import OrderDescription from '../../components/restaurant/OrderDescription';
 import FoodNutrition from '../../components/restaurant/FoodNutrition';
@@ -16,6 +17,7 @@ import StarIcon from '@mui/icons-material/Star';
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
 import Navbar from './../../components/Navbar';
+import { useLocation } from 'react-router-dom';
 
 
 // ----------------this is tem until data call--------
@@ -26,47 +28,97 @@ const details = {
 function createData(type, amount, percentage) {
     return { type, amount, percentage };
 }
-// ---------------nutrition details--------------------
-const rows = [
-    createData('Calories', 59, 6.0),
-    createData('Cholesterol', 2, 1.0),
-    createData('Sodium', 7, 2.0),
-    createData('Fat', 37, 4.0),
-    createData('Carbs', 62, 7.0),
-    createData('Protein', 5, 0.4),
-    createData('Vitamin', 6, 0.5),
-];
 
 //   for the comments
-const comments = {
-    "name": "username",
-    "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-}
 
 const comments1 = [
     {
-      "name": "Navod",
-      "detail1": "This is a good restaurant",
+        "name": "Navod",
+        "detail1": "This is a good restaurant",
     },
     {
-      "name": "Sankalpa98",
-      "detail1": "This place has good hospitality",
+        "name": "Sankalpa98",
+        "detail1": "This place has good hospitality",
     },
     {
-      "name": "Nisheda",
-      "detail1": "This place provides good service",
+        "name": "Nisheda",
+        "detail1": "This place provides good service",
     },
     {
-      "name": "Shehan21",
-      "detail1": "This offers food with exelent quality",
+        "name": "Shehan21",
+        "detail1": "This offers food with exelent quality",
     },
     {
-      "name": "Jane",
-      "detail1": "This is a good restaurant",
+        "name": "Jane",
+        "detail1": "This is a good restaurant",
     }
-  ]
+]
+
+
 
 const OrderFood = () => {
+
+    // --------------to get the id------------------
+    const location = useLocation();
+
+    // ----------------------for store response data----------------------
+    const [details1, setDetails1] = React.useState({});
+    // --------------to store total nutrition amount----------------
+    const [total, setTotal] = React.useState(null);
+
+    // -----------setting up nutritions-----------------
+    const rows = [
+        createData('Calories', details1.calaries, ((details1.calaries / total) * 100).toFixed(1)),
+        createData('Fat', details1.fat, ((details1.fat / total) * 100).toFixed(1)),
+        createData('Carbs', details1.carbo, ((details1.carbo / total) * 100).toFixed(1)),
+        createData('Protein', details1.protein, ((details1.protein / total) * 100).toFixed(1)),
+    ];
+
+    // ----------------setting up image--------------------
+    var image = null;
+    var name = null;
+    var price = null;
+
+    if (details1.image) {
+        image = details1.image.data;
+    }
+    if (details1.name) {
+        name = details1.name;
+    }
+    if (details1.price) {
+        price = details1.price;
+    }
+
+    // ------------------------calling category values---------------------------------------------------
+    useEffect(() => {
+
+        // -----------------------------------to getting food item details------------------------------------------
+        const getOfferDetails = async () => {
+            try {
+                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOrderFood/${location.state.id}`);
+
+                const details = respOffer.data;
+                setDetails1({ ...details });
+
+                // ----------------------setting up nutrition count----------------------------
+                const totalG = details.carbo + details.fat + details.protein + details.calaries;
+                // console.log(totalG);
+                setTotal(totalG);
+
+                console.log(details);
+                // setItems([...items1]);
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        getOfferDetails();
+
+    }, []);
+
+    // console.log(total);
+
     return (
 
         <div>
@@ -74,7 +126,7 @@ const OrderFood = () => {
             <Fade top>
                 <Navbar />
             </Fade>
-            
+
             <Box sx={{
                 margin: 0,
                 padding: 0,
@@ -102,7 +154,7 @@ const OrderFood = () => {
 
                     {/* ----description--- */}
                     <Fade left>
-                        <OrderDescription details={details} />
+                        <OrderDescription details={details1} />
                     </Fade>
 
                     <Fade top>
@@ -110,7 +162,7 @@ const OrderFood = () => {
                     </Fade>
 
                     <Fade bottom>
-                        <OrderFoodForm />
+                        <OrderFoodForm price={price}/>
                     </Fade>
 
                     <Fade big>
@@ -158,10 +210,10 @@ const OrderFood = () => {
 
                         <Avatar
                             alt="food image"
-                            src={FoodImage}
+                            src={`data:image/jpeg;base64,${image}`}
                             sx={{
                                 width: "98%",
-                                height: "auto",
+                                height: "50vh",
                                 border: "2px solid #EFEAEA",
 
                                 [theme.breakpoints.down('sm')]: {
@@ -184,7 +236,10 @@ const OrderFood = () => {
                                 [theme.breakpoints.down('sm')]: {
                                     fontSize: "15px",
                                 },
-                            }}>Boneless Diang na Bangus</Typography>
+                            }}>
+                                {/* -------------food name-------------------- */}
+                                {name}
+                            </Typography>
                             <Box sx={{
                                 width: "80%",
                                 display: "flex",

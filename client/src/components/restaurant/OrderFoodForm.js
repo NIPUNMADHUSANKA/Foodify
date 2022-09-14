@@ -1,12 +1,12 @@
 import { Button, IconButton, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import styled from '@emotion/styled';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // ------------------for the side drawer----------
 import Drawer from '@mui/material/Drawer';
@@ -48,10 +48,10 @@ const AmountArea = styled(TextField)({
 
 // -----------------cutomise drawer-------------------------------------
 const SideDrawer = styled(Drawer)({
-    '.MuiDrawer-paper':{
-        background:Colours.gray3,
+    '.MuiDrawer-paper': {
+        background: Colours.gray3,
         borderRadius: "360px 0px 0px 360px",
-        
+
     }
 });
 // -------------------------------------------------------------------------
@@ -61,7 +61,38 @@ const iconbutton = {
         background: Colours.yellow,
     },
 }
-const OrderFoodForm = () => {
+const OrderFoodForm = (props) => {
+
+    // --------------to setting up food count--------------------
+    let [num, setNum] = useState(1);
+    var price = parseInt(props.price);
+
+    // console.log(price);
+
+    let [amount, setAmount] = useState(1);
+
+    // console.log(amount);
+    // to increment
+    let incNum = () => {
+        if (num < 10) {
+            setNum(Number(num) + 1);
+        }
+    };
+    // to drecement
+    let decNum = () => {
+        if (num > 1) {
+            setNum(num - 1);
+        }
+    }
+
+    let handleChange = (e) => {
+        setNum(e.target.value);
+    }
+
+    let handleAmount = (amount) => {
+        // console.log(amount);
+        setAmount(amount);
+    }
 
     // --------------------for the side drawe----------------------------------------------
     const [state, setState] = React.useState({ right: false });
@@ -114,7 +145,16 @@ const OrderFoodForm = () => {
                         padding: '2px',
                     },
                 }}>
-                    Amount to pay:
+                    Amount to pay: Rs.
+                    {(() => {
+                        if (num) {
+                            return (
+                                num*price
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
                 </Typography>
 
                 {/* ---------------text area----------------- */}
@@ -125,9 +165,9 @@ const OrderFoodForm = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <IconButton><ExpandLessIcon style={iconbutton} /></IconButton>
-                    <Box sx={{ width: "30%" }}><AmountArea name="quantity" id="amount" defaultValue="1" label="Amount" variant="outlined" /></Box>
-                    <IconButton><ExpandMoreIcon style={iconbutton} /></IconButton>
+                    <IconButton onClick={incNum}><ExpandLessIcon style={iconbutton} /></IconButton>
+                    <Box sx={{ width: "30%" }}><AmountArea name="quantity" id="amount" defaultValue="0" value={num} onChange={handleChange} label="Quantity" variant="outlined" /></Box>
+                    <IconButton onClick={decNum}><ExpandMoreIcon style={iconbutton} /></IconButton>
                 </Box>
                 {/* -------------------end of inputs------------ */}
 

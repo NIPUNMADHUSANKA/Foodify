@@ -41,4 +41,6 @@ public interface Restaurantserv {
 	public ResponseEntity<?> updateOffer(String name,String description,String Bdate,String Edate,String discount,String itemList,MultipartFile file,String userName,String offerId,String foodItems1) throws IOException;
 
 	public List<FoodItem> getOfferFoods(String catId,String offerId);
+
+	public FoodItem getOrderFood(String foodId);
 }
