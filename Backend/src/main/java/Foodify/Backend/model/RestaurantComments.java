@@ -20,6 +20,7 @@ public class RestaurantComments {
 	private String userName;
 	private String restaurantId;
 	private String commentDescription;
+	private Integer rating;
 	private Date addedDate;
 	
 	public RestaurantComments() {
@@ -56,6 +57,14 @@ public class RestaurantComments {
 	}
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 	
 	
