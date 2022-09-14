@@ -54,7 +54,6 @@ const itemcount = 3;
 
 var ROLE = null;
 
-var ROLE2 = null;
 
 const RestaurantOffers = (props) => {
 

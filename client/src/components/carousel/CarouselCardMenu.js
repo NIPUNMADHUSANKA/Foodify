@@ -25,7 +25,7 @@ const CarouselCard = (props) => {
 
     const handleDelete = () => {
 
-        axois.get("http://localhost:8072/RegisteredUser/deleteFoodCategory/" + categoryId, { headers: authHeader() })
+        axois.get("http://localhost:8072/FoodiFy/Restaurant/deleteFoodCategory" + categoryId, { headers: authHeader() })
             .then(data => {
                 // this part if sucess
                 window.location.reload(false);

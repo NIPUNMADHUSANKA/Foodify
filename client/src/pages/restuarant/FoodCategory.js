@@ -9,16 +9,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Navbar from './../../components/Navbar';
 import Fade from 'react-reveal/Fade';
 
-import image1 from '../../assets/images/food items/1.png';
-import image2 from '../../assets/images/food items/2.webp';
-import image3 from '../../assets/images/food items/3.webp';
-import image4 from '../../assets/images/food items/4.jpg';
-import image5 from '../../assets/images/food items/5.webp';
-import image6 from '../../assets/images/food items/6.webp';
 import axois from "axios";
 import { Link } from 'react-router-dom';
 
-import authHeader from "../../services/auth-header";
 import AuthService from '../../services/auth-service';
 import { useLocation } from 'react-router-dom';
 
@@ -111,7 +104,7 @@ const FoodCategory = () => {
 
   useEffect((event) => {
 
-  axois.get("http://localhost:8072/FoodiFy/RegisteredUser/getFoodCategoryItem/"+Id, { headers: authHeader() })
+  axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/"+Id)
         .then(data => {
             
           setDetails(data.data);  

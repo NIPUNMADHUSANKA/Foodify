@@ -22,7 +22,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function ResCard(data) {
 
-  console.log(data.data.id)
+ // console.log(data.data.id)
 
   const [Cover1, setCover] = useState(null);
 

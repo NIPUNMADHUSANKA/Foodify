@@ -31,6 +31,8 @@ function AddFoodMenu() {
 
   // --------------to get the id------------------
   const location = useLocation();
+
+  console.log(location);
  
   useEffect(() => {
     document.title = "Add Foods Menu";
