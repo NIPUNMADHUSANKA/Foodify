@@ -90,29 +90,14 @@ const AddOfferForm = () => {
     // ----------------------for store items list----------------------
     const [items1, setItems1] = React.useState({});
 
-    // ----------------------for store items list----------------------
-    const [items2, setItems2] = React.useState({});
-
     // console.log(category)
     // console.log(checked)
-
-    // ----------------------to send offer id and cat id to server-----------------------------
-    const [foods, setFoods] = React.useState({});
 
     // const cat = defaultCategory.data;
     // const cat1 = String(cat);
     // console.log(cat1);
 
     const [category, setCategory] = React.useState("");
-
-    // ------------------set default values of category and items-------------------------------------
-    const addFoodId = (data) => {
-
-        // var id = String(data);
-        // console.log(data);
-        // const cat = details;
-        // setItems2({ ...items2,id })
-    };
 
     // ---------------------------to get the food items for selected category--------------------------------------
     const getFood = (food) => {
@@ -124,9 +109,9 @@ const AddOfferForm = () => {
 
         setCategory(food);
 
-        var items = {
-            "catId": food
-        }
+        // var items = {
+        //     "catId": food
+        // }
 
         // console.log(items);
         const sendGetRequest2 = async () => {
@@ -137,17 +122,15 @@ const AddOfferForm = () => {
                 const details3 = resp2.data;
                 setDetails2({ ...details2 });
 
-                console.log(details2);
-                var updatedList = [...checked];
-                // updatedList = [...checked, event.target.value];
+                // console.log(details2);
                 console.log("request susccess 1");
 
                 const items2 = [];
                 details3.map((keyName2) => (
                     items2.push(keyName2.id)
                 ))
-                console.log(items2)
-                setItems2(items2);
+                // console.log(items2)
+                // setItems2(items2);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -180,7 +163,7 @@ const AddOfferForm = () => {
                 const details = resp.data;
                 setDetails({ ...details });
 
-                console.log(details);
+                // console.log(details);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -192,14 +175,14 @@ const AddOfferForm = () => {
         // -----------------------------------to get the offer details------------------------------------------
         const getOfferDetails = async () => {
             try {
-                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOffer/${location.state.id}`);
+                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOrderFood/${location.state.id}`);
 
                 const offerDetails = respOffer.data;
 
                 const details3 = respOffer.data.items;
                 const items1 = [];
                 details3.map((keyName2) => (
-                    console.log(keyName2),
+                    // console.log(keyName2),
                     items1.push(keyName2)
                 ))
                 setItems1(items1);
@@ -209,7 +192,7 @@ const AddOfferForm = () => {
                 setOfferDetails({ ...offerDetails });
 
                 // --------------sending category id -----------------------------
-                addCategory(respOffer.data.category);
+                // addCategory(respOffer.data.category);
                 setCategory(respOffer.data.category);
                 getFood(respOffer.data.category);
 
@@ -244,12 +227,12 @@ const AddOfferForm = () => {
     };
 
     // ------------------set default values of category and items-------------------------------------
-    const addCategory = (data) => {
+    // const addCategory = (data) => {
 
-        console.log(data);
-        const cat = details;
-        // setDefaultCategory({ data });
-    };
+    //     // console.log(data);
+    //     const cat = details;
+    //     // setDefaultCategory({ data });
+    // };
 
     // -------------------------------------------------------------------calling food items-------------------------------------------------------
     const handleChange2 = event => {
@@ -268,7 +251,7 @@ const AddOfferForm = () => {
                 setDetails2({ ...details2 });
 
                 console.log("Request sucessful")
-                console.log(details2)
+                // console.log(details2)
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -279,10 +262,10 @@ const AddOfferForm = () => {
 
     };
 
-    console.log(formValues);
-    console.log(category);
-    console.log(items1);
-    console.log(items2);
+    // console.log(formValues);
+    // console.log(category);
+    // console.log(items1);
+    // console.log(items2);
 
     // ----------------sending image for the backend--------------
     const [imageData, setImageData] = useState(null);
@@ -301,8 +284,8 @@ const AddOfferForm = () => {
 
         const list1 = [category, checked]
 
-        console.log(list1)
-        console.log(items1)
+        // console.log(list1)
+        // console.log(items1)
 
         imageData.append('name', formValues.name);
         imageData.append('description', formValues.description);
@@ -329,7 +312,7 @@ const AddOfferForm = () => {
             
     }
 
-    var todayDate = new Date(); //Today Date    
+    // var todayDate = new Date(); //Today Date    
     // -----------------------------setting up date to display---------------------------------
     const bDate = new Date(offerdetails.startDate).toLocaleDateString('en-CA');
     // console.log(defaultValue)
@@ -467,7 +450,7 @@ const AddOfferForm = () => {
                                         Object.keys(details2).map((keyName2) => (
                                             // -------------------loop-----------------------------
 
-                                            console.log(JSON.stringify(items2) + "==" + JSON.stringify(items1)),
+                                            // console.log(JSON.stringify(items2) + "==" + JSON.stringify(items1)),
                                             // let arr = details2.filter(detail2 => details2[keyname].id === items1)
                                             (() => {
                                                 if (details2 !== null || details2[keyName2].discount === 0) {
