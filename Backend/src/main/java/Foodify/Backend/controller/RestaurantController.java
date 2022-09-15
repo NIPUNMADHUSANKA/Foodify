@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import Foodify.Backend.model.Restaurant;
+import Foodify.Backend.model.*;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +28,6 @@ import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.model.FoodCategory;
-import Foodify.Backend.model.FoodItem;
-import Foodify.Backend.model.FoodMenu;
-import Foodify.Backend.model.Offers;
-import Foodify.Backend.model.Registered_Customer;
 
 //using cross-origin annotation to communicate with react.js and spring
 //@RequestMapping("/Restaurant")
