@@ -209,9 +209,12 @@ function RestaurantRatingForm() {
                         <Rating
                             id="rating"
                             name="rating"
-                            value={formValues.value}
+                            value={formValues.rating}
                             precision={0.5}
                             getLabelText={getLabelText}
+                            // onChange={(event, newValue) => {
+                            //     setValue(newValue);
+                            // }}
                             onChange={handleChange}
                             onChangeActive={(event, newHover) => {
                                 setHover(newHover);
