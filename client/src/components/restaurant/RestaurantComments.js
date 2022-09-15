@@ -1,6 +1,7 @@
 import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import { Box, Button, ThemeProvider, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import '../../assets/css/App.css';
 
@@ -8,9 +9,10 @@ import '../../assets/css/App.css';
 import CommentBox from './CommentBox';
 import List from '@mui/material/List';
 
-import RestaurantCommentForm from './profile/RestaurantCommentForm';
 import AuthService from '../../services/auth-service';
 import authHeader from "../../services/auth-header";
+import EditIcon from '@mui/icons-material/Edit';
+
 
 var ROLE = null;
 
@@ -80,7 +82,33 @@ const RestaurantCemments = (props) => {
         {(() => {
           if (ROLE === "User") {
             return (
-            <RestaurantCommentForm />
+            <Button component={Link} to={"/Restaurant/RestaurantRating"} sx={{
+              margin: '0.5rem',
+              marginBottom: 0,
+              marginTop: 4,
+              width: "15%",
+              background: Colours.yellow, '&:hover': {
+                backgroundColor: Colours.green,
+              },
+              color: Colours.dark,
+              fontSize: '1rem',
+              hover: Colours.green,
+              borderRadius: "1rem",
+              Width: "20%",
+              [theme.breakpoints.down('sm')]: {
+                fontSize: '8px',
+                padding: '2px',
+                width: "25%",
+              },
+            }} endIcon={<EditIcon sx={{
+              color: Colours.primary,
+              [theme.breakpoints.down('sm')]: {
+                '& svg': {
+                  fontSize: "15px",
+                }
+              },
+            }} />}>Add Comments
+            </Button>
             );
           }
         }

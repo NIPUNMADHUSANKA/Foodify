@@ -27,6 +27,7 @@ import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
+import Foodify.Backend.repository.RestaurantCommentRepository;
 
 import java.io.Console;
 import java.io.IOException;
@@ -66,6 +67,9 @@ public class RestaurantService implements Restaurantserv{
 	
 	@Autowired
 	private OffersRepository offersRepo;
+	
+	@Autowired
+	private RestaurantCommentRepository restaurantCommentRepository;
 	
 	@Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
@@ -407,6 +411,26 @@ public class RestaurantService implements Restaurantserv{
 
 		return foodList;
 	}
+	
+	//---------------------------------to get the res comments--------------------------------------------
+		@Override
+		public List<String> getResComments(String rescomments) {
+			// TODO Auto-generated method stub
+			List<String> resComments = new ArrayList<String>();
+
+			String[] arr = null;
+			//converting using String.split() method with "," as a delimiter  
+	        arr = rescomments.split(",");
+
+	        for (int i = 0; i< arr.length; i++)
+	        {  
+	        	RestaurantComments rescomment = restaurantCommentRepository.findByid(arr[i]);
+	        	resComments.add(rescomment.getUsername());
+	            System.out.println(arr[i]);  
+	        }
+			return resComments;
+		}
+
 
 	@Override
 	public FoodItem getOrderFood(String foodId) {
