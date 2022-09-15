@@ -243,7 +243,7 @@ console.log(details);
                 Array.from(details).map((item) => {
 
                   return (
-                    <CarouselCard2 item={item} />
+                    <CarouselCard2 item={item} Rid={location.state.id} />
                   )
 
                 })

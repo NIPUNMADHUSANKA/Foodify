@@ -7,6 +7,8 @@ import styled from '@emotion/styled';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
+import authHeader from "../../services/auth-header";
+import axios from 'axios';
 
 // ------------------for the side drawer----------
 import Drawer from '@mui/material/Drawer';
@@ -65,9 +67,10 @@ const OrderFoodForm = (props) => {
 
     // --------------to setting up food count--------------------
     let [num, setNum] = useState(1);
-    var price = parseInt(props.price);
+    var price = parseInt(props.orderdata.price);
 
-    // console.log(price);
+    console.log(props.Rid);
+    var RID = props.Rid;
 
     let [amount, setAmount] = useState(1);
 
@@ -98,6 +101,7 @@ const OrderFoodForm = (props) => {
     const [state, setState] = React.useState({ right: false });
 
     const toggleDrawer = (anchor, open) => (event) => {
+
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
@@ -105,6 +109,45 @@ const OrderFoodForm = (props) => {
         setState({ ...state, [anchor]: open });
     };
     //   ------------------------------------------------------------------------------------
+
+    // --------------------------------sending data for cart-----------------------------
+    const addToCart = () => {
+
+        // ---------------item obj----------------------
+        const price = (num*props.orderdata.price)-(num*props.orderdata.price*(props.orderdata.discount/100));
+        const Rid = RID;
+        const Fid = props.orderdata.Fid;
+
+
+        const orderItem = {
+            "foodId" : Fid,
+            "quantity":num,
+            "restaurantId":Rid,
+            "price":price
+        }
+
+        const OrderData = new FormData();
+        OrderData.append('item', orderItem);
+        OrderData.append('price', price);
+        OrderData.append('Rid', Rid);
+         // -----------------------------------to getting food item details------------------------------------------
+         const setOrderItem = async () => {
+            try {
+                const resp = await axios.post(`http://localhost:8072/FoodiFy/Service/setShoppingCart`,orderItem,{ headers: authHeader() });
+
+                const details = resp.data;
+
+                console.log("Entry Successful");
+                // setItems([...items1]);
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        setOrderItem();
+
+    };
 
     return (
         // ------------main box------------------
@@ -149,7 +192,8 @@ const OrderFoodForm = (props) => {
                     {(() => {
                         if (num) {
                             return (
-                                num*price
+                                // num*price
+                                (num*props.orderdata.price)-(num*props.orderdata.price*(props.orderdata.discount/100))
                                 // handleAmount(num*price)
                             );
                         }
@@ -193,7 +237,9 @@ const OrderFoodForm = (props) => {
                                 fontSize: '8px',
                                 padding: '10px',
                             },
-                        }} endIcon={<ShoppingBagIcon />} onClick={toggleDrawer('right', true)}>Proceed</Button>
+                        }} endIcon={<ShoppingBagIcon />} onClick={addToCart}>Add to cart</Button>
+
+{/* onClick={toggleDrawer('right', true)} */}
 
                         {/* ---------------side drawer------------ */}
                         <SideDrawer

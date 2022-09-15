@@ -19,6 +19,11 @@ import Fade from 'react-reveal/Fade';
 import Navbar from './../../components/Navbar';
 import { useLocation } from 'react-router-dom';
 
+// ------------------for the side drawer----------
+import Drawer from '@mui/material/Drawer';
+import OrderSideDrawer from '../../components/restaurant/OrderSideDrawer';
+import styled from '@emotion/styled';
+
 
 // ----------------this is tem until data call--------
 const details = {
@@ -78,6 +83,11 @@ const OrderFood = () => {
     var image = null;
     var name = null;
     var price = null;
+    var Fid = null;
+    var discount = null;
+    var Rid = location.state.id.Rid;
+
+    console.log(location.state);
 
     if (details1.image) {
         image = details1.image.data;
@@ -88,6 +98,23 @@ const OrderFood = () => {
     if (details1.price) {
         price = details1.price;
     }
+    if (details1.id) {
+        Fid = details1.id;
+    }
+    if (details1.id) {
+        Fid = details1.id;  //foodId
+    }
+    if (details1.discount) {
+        discount = details1.discount;
+    }
+
+    const orderdata = {
+        "Fid": Fid,
+        "price": price,
+        "Rid": location.state.id,
+        "discount": discount,
+    }
+
 
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
@@ -95,7 +122,7 @@ const OrderFood = () => {
         // -----------------------------------to getting food item details------------------------------------------
         const getOfferDetails = async () => {
             try {
-                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOrderFood/${location.state.id}`);
+                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOrderFood/${location.state.id.id}`);
 
                 const details = respOffer.data;
                 setDetails1({ ...details });
@@ -115,7 +142,33 @@ const OrderFood = () => {
 
         getOfferDetails();
 
+        // --------calling items for cart---------------
+        
+
     }, []);
+
+    // -----------------cutomise drawer-------------------------------------
+    const SideDrawer = styled(Drawer)({
+        '.MuiDrawer-paper': {
+            background: Colours.gray3,
+            borderRadius: "360px 0px 0px 360px",
+
+        }
+    });
+    // -------------------------------------------------------------------------
+
+    // --------------------for the side drawe----------------------------------------------
+    const [state, setState] = React.useState({ right: false });
+
+    const toggleDrawer = (anchor, open) => (event) => {
+
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+    //   ------------------------------------------------------------------------------------
 
     // console.log(total);
 
@@ -125,7 +178,18 @@ const OrderFood = () => {
 
             <Fade top>
                 <Navbar />
+                <button onClick={toggleDrawer('right', true)}>cart</button>
             </Fade>
+
+            {/* ---------------side drawer------------ */}
+            <SideDrawer
+                anchor={'right'}
+                open={state['right']}
+                onClose={toggleDrawer('right', false)}
+            >
+                <OrderSideDrawer />
+            </SideDrawer>
+            {/* ------------end of side drawer-------- */}
 
             <Box sx={{
                 margin: 0,
@@ -162,7 +226,7 @@ const OrderFood = () => {
                     </Fade>
 
                     <Fade bottom>
-                        <OrderFoodForm price={price}/>
+                        <OrderFoodForm orderdata={orderdata} Rid={Rid} />
                     </Fade>
 
                     <Fade big>

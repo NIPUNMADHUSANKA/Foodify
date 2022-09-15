@@ -92,7 +92,7 @@ const OrderDescription = (props) => {
                 {details.description}
                 <br />
                 <br />
-                Price:Rs.{details.price}
+                Discount: {details.discount}%
             </Typography>
 
         </Box>
