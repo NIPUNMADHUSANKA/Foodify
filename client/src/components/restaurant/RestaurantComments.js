@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import { Box, Button, ThemeProvider, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import List from '@mui/material/List';
 import AuthService from '../../services/auth-service';
 import authHeader from "../../services/auth-header";
 import EditIcon from '@mui/icons-material/Edit';
-
+import axios from 'axios';
 
 var ROLE = null;
 
@@ -24,6 +24,71 @@ const RestaurantCemments = (props) => {
   const data = props.comments;
 
   const currentUser = AuthService.getCurrentUser();
+
+  {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+  {
+    (() => {
+      if (JSON.parse(localStorage.getItem('ROLE'))) {
+        ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+        // console.log(ROLE)
+      }
+    }
+    )()
+  }
+  {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
+
+  // ----------------------for store response data----------------------
+  const [details, setDetails] = useState({});
+
+  const [itemData, setItemData] = useState(null);
+
+  useEffect((event) => {
+
+    // ---------------------for the restaurant view-------------------------------
+    const sendGetRequest = async () => {
+      try {
+        const resp = await axios.get('http://localhost:8072/FoodiFy/Restaurant/getRestaurantCommentR', { headers: authHeader() });
+
+        const details = resp.data;
+        setDetails({ ...details });
+
+        // console.log(details);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+
+    // --------------------------check the user and get data------------------------------------------
+    if (ROLE === "restaurant") {
+      sendGetRequest();
+    }
+    else {
+      const id = props.rId
+      const itemData = new FormData();
+      itemData.append('id', id);
+      setItemData(itemData);
+      // --------------------------for customer view--------------------------------------
+      const sendGetRequest2 = async () => {
+        try {
+          const resp = await axios.post(`http://localhost:8072/FoodiFy/Service/getRestaurantCommentC`,itemData);
+
+          const details = resp.data;
+          setDetails({ ...details });
+
+          // console.log(details);
+        } catch (err) {
+          // Handle Error Here
+          console.error(err);
+        }
+      };
+
+      sendGetRequest2();
+
+    }
+
+  }, []);
+
 
   return (
 
