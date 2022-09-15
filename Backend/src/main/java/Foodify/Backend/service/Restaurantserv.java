@@ -43,4 +43,6 @@ public interface Restaurantserv {
 	public List<FoodItem> getOfferFoods(String catId,String offerId);
 	
 	public List<String> getResComments(String rescomments);
+
+	public FoodItem getOrderFood(String foodId);
 }

@@ -1,5 +1,5 @@
 import { Box, IconButton, Typography } from '@mui/material'
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import Background from '../../assets/images/categoryBackground.png'
 import theme, { Colours } from '../../assets/theme/theme'
 
@@ -9,12 +9,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Navbar from './../../components/Navbar';
 import Fade from 'react-reveal/Fade';
 
-import image1 from '../../assets/images/food items/1.png';
-import image2 from '../../assets/images/food items/2.webp';
-import image3 from '../../assets/images/food items/3.webp';
-import image4 from '../../assets/images/food items/4.jpg';
-import image5 from '../../assets/images/food items/5.webp';
-import image6 from '../../assets/images/food items/6.webp';
 import axois from "axios";
 import { Link } from 'react-router-dom';
 
@@ -92,8 +86,22 @@ const itemcount = 4;
 //console.log(data)
 
 //const data2 = data;
+var ROLE = null;
 
 const FoodCategory = () => {
+
+
+  {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+  {
+    (() => {
+      if (JSON.parse(localStorage.getItem('ROLE'))) {
+        ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+        // console.log(ROLE)
+      }
+    }
+    )()
+  }
+  {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
 
   const location = useLocation();
   const Id = location.state.id;
@@ -107,29 +115,29 @@ const FoodCategory = () => {
 
 
   ///-- Get Token UserName--///
-  const currentUser = AuthService.getCurrentUser();
+  // const currentUser = AuthService.getCurrentUser();
 
   useEffect((event) => {
 
-  axois.get("http://localhost:8072/FoodiFy/RegisteredUser/getFoodCategoryItem/"+Id, { headers: authHeader() })
-        .then(data => {
-            
-          setDetails(data.data);  
-          setisgetItem(true);
+    axois.get("http://localhost:8072/FoodiFy/RegisteredUser/getFoodCategoryItem/" + Id, { headers: authHeader() })
+      .then(data => {
 
-        })
-        .catch(error => {
-            console.log(error);
-      
-  });
+        setDetails(data.data);
+        setisgetItem(true);
 
-}, [isgetItem]);
+      })
+      .catch(error => {
+        console.log(error);
 
+      });
 
-  
+  }, [isgetItem]);
+
+console.log(details);
+
   return (
 
-    
+
 
     <Box sx={{
       width: '100%',
@@ -166,12 +174,33 @@ const FoodCategory = () => {
             display: "flex",
             flexDirection: "row",
           }}>
-            <IconButton component={Link} to={"/Restaurant/#menu"}>
-              <ArrowBackIcon sx={{
-                color: Colours.green,
-                fontSize: "2rem",
-              }} />
-            </IconButton>
+
+            {(() => {
+              if (ROLE === "User") {
+                return (
+                  <IconButton component={Link} to={"/Restaurant"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (
+                  <IconButton component={Link} to={"/Restaurantprofile"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
             <Typography variant="h4" gutterBottom component="div" sx={{
               width: '100%',
               textAlign: 'left',
@@ -183,8 +212,8 @@ const FoodCategory = () => {
                 padding: '2px',
               },
             }}>
-             {name}
-             
+              {name}
+
             </Typography>
           </Box>
           {/* ---------end of title area------------ */}
@@ -194,9 +223,9 @@ const FoodCategory = () => {
 
           <Box sx={{
             padding: "1rem",
-          }}>  
-          
-          <Carousel
+          }}>
+
+            <Carousel
               itemsToShow={itemcount}
               easing={"ease"}
               breakPoints={theme.breakPoints = [
@@ -206,20 +235,20 @@ const FoodCategory = () => {
                 { width: 1450, itemsToShow: 5 },
                 { width: 1750, itemsToShow: 6 },
               ]}
-            > 
+            >
               {/* <Box> */}
 
 
               {
-                Array.from(details).map((item)=>{
+                Array.from(details).map((item) => {
 
-                  return(
+                  return (
                     <CarouselCard2 item={item} />
                   )
-                 
+
                 })
               }
-            
+
 
               {/* <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />

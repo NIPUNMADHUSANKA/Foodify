@@ -3,6 +3,7 @@ package Foodify.Backend.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,9 +79,9 @@ public class RestaurantService implements Restaurantserv{
 //		---------------to check the userName-------------------------------------------------
 		if(name == "userName") {
 			
-			System.out.println(username);
+//			System.out.println(username);
 			Integer count1 = restaurantRepository.findByUserName(username); 
-			System.out.println(email);
+//			System.out.println(email);
 			if(count1 > 0) {
 				error = "UserName already exists";
 //				--------------call error response and add errors to custom field error list-----------
@@ -102,7 +103,7 @@ public class RestaurantService implements Restaurantserv{
 		}
 		if(name2 == "email"){
 			Integer count2 = restaurantRepository.findByUserEmail(email); 
-			System.out.println(count2);
+//			System.out.println(count2);
 			if(count2 > 0) {
 				error = "Email already exists";
 //				--------------call error response and add errors to custom field error list-----------
@@ -140,7 +141,7 @@ public class RestaurantService implements Restaurantserv{
 		user.setaccountState(accountStatus);
 		
 		restaurantRepository.save(user);
-		System.out.println(epassword);
+//		System.out.println(epassword);
 		return null;
 	}
 
@@ -294,6 +295,7 @@ public class RestaurantService implements Restaurantserv{
 
 		offers.setDiscount(Integer.parseInt(discount));
 		offers.setUserName(userName);
+		offers.setCategory(arr[0]);
 
 		List<String> itemIds = new ArrayList<String>();
 
@@ -363,12 +365,12 @@ public class RestaurantService implements Restaurantserv{
 			foodItems.save(food);
 
 			itemIds.add(arr[i]);
-			System.out.println(arr[i]);
+//			System.out.println(arr[i]);
 		}
 
 		offers.setItems(itemIds);
 
-		System.out.println(arr[0]);
+//		System.out.println(arr[0]);
 
 		offersRepo.save(offers);
 		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);
@@ -429,6 +431,14 @@ public class RestaurantService implements Restaurantserv{
 			return resComments;
 		}
 
+
+	@Override
+	public FoodItem getOrderFood(String foodId) {
+
+		FoodItem food = foodItems.findByid(foodId);
+//		food.setImage(Base64.getEncoder().encodeToString(food.getImage().getData()));
+		return food;
+	}
 
 
 }
