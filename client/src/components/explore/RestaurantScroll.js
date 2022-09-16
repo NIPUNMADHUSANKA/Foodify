@@ -22,10 +22,7 @@ function FoodScroll(details) {
 
   const firstDog = Array.isArray(x) && x.length ? x[0] : {};
   const headers = Object.keys(firstDog);
-
-  //console.log(x);
-  //console.log(headers);
-  // console.log(X)
+  
   return (
 
     <Box

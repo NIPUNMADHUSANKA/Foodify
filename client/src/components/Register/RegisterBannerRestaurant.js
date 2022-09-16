@@ -13,9 +13,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from 'react-router-dom';
 
 import axois from "axios";
-import { Navigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 
 const theme1 = createTheme();

@@ -7,6 +7,9 @@ import {Link} from 'react-router-dom';
 
 
 const OrderDescription = (props) => {
+
+    const details = props.details;
+    // console.log(details);
   return (
     
     <Box sx={{
@@ -32,7 +35,7 @@ const OrderDescription = (props) => {
                 flexDirection: "row",
                 padding: "1rem",
             }}>
-                <IconButton component={Link} to={"/Restaurant/Category"} >
+                <IconButton component={Link} to={"/Restaurant/Category"} state={{id:details.catId}} >
                     <ArrowBackIosIcon sx={{
                         color: Colours.green, '&:hover': {
                             color: Colours.yellow,
@@ -54,7 +57,7 @@ const OrderDescription = (props) => {
                         marginTop:"12px",
                     }
                 }}>
-                    Boneless Diang na Bangus
+                    {details.name}
                 </Typography>
 
             </Box>
@@ -86,10 +89,10 @@ const OrderDescription = (props) => {
                     marginRight: "10%",
                 }
             }}>
-                {props.details.detail}
+                {details.description}
                 <br />
-                {props.details.detail}
-
+                <br />
+                Discount: {details.discount}%
             </Typography>
 
         </Box>

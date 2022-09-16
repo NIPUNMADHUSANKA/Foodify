@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 import javax.validation.Valid;
 
-import Foodify.Backend.model.Restaurant;
+import Foodify.Backend.model.*;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +29,8 @@ import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.model.FoodCategory;
-import Foodify.Backend.model.FoodItem;
-import Foodify.Backend.model.FoodMenu;
-import Foodify.Backend.model.Offers;
-import Foodify.Backend.model.Registered_Customer;
 
-//using cross origin annotation to communicate with react.js and spring
+//using cross-origin annotation to communicate with react.js and spring
 //@RequestMapping("/Restaurant")
 
 @RestController
@@ -125,7 +120,7 @@ public class RestaurantController {
 
 		// System.out.println(restaurants);
 		//
-		for (int i = 0; i < restaurants.size(); i++) {
+		for(int i = 0; i < restaurants.size(); i++) {
 			Restaurant restaurant = new Restaurant();
 
 			restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
@@ -224,15 +219,26 @@ public class RestaurantController {
 	@PostMapping("/FoodiFy/Restaurant/getfoodItems1")
 	public List<FoodItem> getfoodItem(@RequestBody FoodItem foodItem) {
 		
-//		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-//		List<FoodMenu> Menu = foodMenuRepo.findByuserName(userName);
-//		System.out.println(Menu);
-		
 		List<FoodItem> items = foodItems.findBycatId(foodItem.getcatId());
 		
 		return items;
 	
+	}
+
+	/* ------------------------------------------------------------- Get Food items for update -------------------------------------------------------- */
+	@PostMapping("/FoodiFy/Restaurant/offerFoodItems")
+	public ResponseEntity<?> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
+
+		try {
+
+			return new ResponseEntity<>(service.getOfferFoods(catId,offerId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+
 	}
 	
 	  //--------------------------------------------upload offer details--------------------------------------------------------
@@ -248,49 +254,46 @@ public class RestaurantController {
     		) throws IOException {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-    	
-//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
-    	Offers offers = new Offers();
-    	
-//    	-----------------converting string into array to get category and food items------------------------
-    	String[] arr = null;
-    	//converting using String.split() method with "," as a delimiter  
-        arr = itemList.split(",");
-    	
-        offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
-        offers.setName(name);
-        offers.setDescription(description);
-        
-        offers.setStartDate(LocalDate.parse(Bdate));
-        offers.setEndDate(LocalDate.parse(Edate));
-        
-        offers.setDiscount(Integer.parseInt(discount));
-        offers.setUserName(userName);
-        
-        List<String> itemIds = new ArrayList<String>();
-        
-        
-//        ----------------setting discounts for relevant food items----------------------------
-        for (int i = 1; i< arr.length; i++)
-        {  
-        	FoodItem food = foodItems.findByid(arr[i]);
-        	food.setDiscount(Integer.parseInt(discount));
-        	foodItems.save(food);
-        	
-        	itemIds.add(arr[i]);
-            System.out.println(arr[i]);  
-        }
-        
-        offers.setItems(itemIds);
-        
-        System.out.println(arr[0]);
-        
-        offersRepo.save(offers);
-        
-		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);     
+
+		try {
+
+			return new ResponseEntity<>(service.uploadOffer(name,description,Bdate,Edate,discount,itemList,file,userName), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
     }
+
+	//--------------------------------------------update offer details--------------------------------------------------------
+	@PostMapping("/FoodiFy/Restaurant/updateOffer")
+	public ResponseEntity<?> updateOffer(
+			@RequestParam("imageFile")MultipartFile file,
+			@RequestParam("name") String name,
+			@RequestParam("description") String description,
+			@RequestParam("Bdate")String Bdate,
+			@RequestParam("Edate")String Edate,
+			@RequestParam("discount") String discount,
+			@RequestParam("offerId") String offerId,
+			@RequestParam("itemList") String itemList,
+			@RequestParam("foodItems") String foodItems
+	) throws IOException {
+
+		String userName1 = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		try {
+
+			return new ResponseEntity<>(service.updateOffer(name,description,Bdate,Edate,discount,itemList,file,userName1,offerId,foodItems), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
     
-	/* -------------------------------- Get offers restaurant view -------------------------------- */
+	/* -------------------------------- Get single offers restaurant view -------------------------------- */
 	@GetMapping("/FoodiFy/Service/getOffer/{id}")
 	public Offers getOffers(@PathVariable(value="id") String id) {
 		
@@ -301,7 +304,7 @@ public class RestaurantController {
 		return offer;
 	}
 
-	/* -------------------------------- Get offer view -------------------------------- */
+	/* -------------------------------- Get offer view for cards-------------------------------- */
 	@GetMapping("/FoodiFy/Restaurant/getOffersR")
 	public List<Offers> getOffer() {
 		
@@ -319,7 +322,7 @@ public class RestaurantController {
 		return offerList;
 	}
 	
-	/* -------------------------------- Get offer Customer view -------------------------------- */
+	/* -------------------------------- Get offer Customer view for cards-------------------------------- */
 	@PostMapping("/FoodiFy/Service/getOffersC")
 	public List<Offers> getOffer2(@RequestParam("id") String id) {
 		
@@ -354,6 +357,15 @@ public class RestaurantController {
 
 		}
 		
+	}
+
+	/* -------------------------------- Get single food item for order view -------------------------------- */
+	@GetMapping("/FoodiFy/Service/getOrderFood/{id}")
+	public FoodItem getOrderFood(@PathVariable(value="id") String foodId) {
+
+		FoodItem food = foodItems.findByid(foodId);
+
+		return food;
 	}
 
 	
@@ -526,9 +538,7 @@ public class RestaurantController {
     	
     	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
     	Restaurant restaurant = restaurantrepo.findByuserName(userName);
-    	
-//    	model.addAttribute(restaurant);
-//    	model.addAttribute("bannerImage",Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
+
     	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
     	
 //    	System.out.println(restaurant.getbImage());
@@ -581,22 +591,8 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 	
 	restaurant.setbImage(Base64.getEncoder().encodeToString(restaurant.getBannerImage().getData()));
 	restaurant.setTempLogo(Base64.getEncoder().encodeToString(restaurant.getLogo().getData()));
-	
-//	System.out.println(restaurant.getbImage());
-//		return restaurant;
+
 	return restaurant;
 }
 
-
-	
-	
-	
-//	show details method
-//	@GetMapping("/FoodiFy/Service/ShowRestaurantAbout")
-//	public List<Restaurant> showAboutUs() {
-//		
-//		
-////		return restaurantrepo.findlast();
-//		
-//	}
 }

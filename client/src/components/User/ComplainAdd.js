@@ -24,7 +24,7 @@ function ComplainAdd() {
     console.log(formValues);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    // console.log(date);
+    console.log(date);
     
     // const Imagedata = new FormData();
     
@@ -32,8 +32,8 @@ function ComplainAdd() {
       restauratId: formValues.Resturant_Name,
       complainTitle: formValues.Complaint_Title,
       complainDescription: formValues.Complaint,
-      complainStatus:"pending",
-      addedDate:"2022-04-05",
+      complainStatus:"accepted",
+      addedDate:date,
       // image:imageData
      
     }
@@ -43,7 +43,7 @@ function ComplainAdd() {
      imageData.append('complainTitle',formValues.Complaint_Title);
      imageData.append('complainDescription',formValues.Complaint);
      imageData.append('complainStatus',"pending");
-     imageData.append('addedDate',"2022-04-05");
+     imageData.append('addedDate',date);
      console.log(imageData);
 
     console.log(authHeader());

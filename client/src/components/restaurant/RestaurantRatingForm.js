@@ -6,6 +6,9 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
+import authHeader from "../../services/auth-header";
+import axios from "axios";
+
 
 // --------------------------------rating values---------------------------
 const labels = {
@@ -68,6 +71,53 @@ function RestaurantRatingForm() {
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
     // ------------------------------------------------------------
+    // -------------initial states for fields---------------------------
+    const initialValues = { commentDescription: "", rating: 2 };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    // ----------create state name form errors--------
+    const [formErrors, setFormErrors] = React.useState({});
+
+    // -------------usestate for submit form-----------
+    const [isSubmit, setIsSubmit] = React.useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const errors = {};
+
+        // creating comment object
+        const restaurantcomment = {
+            commentDescription: formValues.commentDescription,
+            rating: formValues.rating
+        }
+
+        axios.post("http://localhost:8072/FoodiFy/User/addRestaurantComment", restaurantcomment, { headers: authHeader() })
+        .then(data => {
+            console.log("Entry access sucessfull");
+            window.location.reload(false);
+        })
+        .catch(error => {
+             errors.exists = error.response.data;
+             setFormErrors(errors);
+
+        })
+
+    }
+
+    // -------function to handle changes in the input fields and set it to formvalues----------
+    const handleChange = (e) => {
+
+        // destructuring inputfield
+        const { name, value } = e.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+
+
+    }
+    
     return (
 
         // ------------main box------------------
@@ -121,12 +171,15 @@ function RestaurantRatingForm() {
 
                 {/* ---------------text area----------------- */}
                 <CommentArea
-                    name='comment'
+                    id="commentDescription"
+                    name="commentDescription"
                     label="Add Comment"
                     multiline
                     rows={6}
                     placeholder="Comment"
-                />
+                    value={formValues.commentDescription}
+                    onChange={handleChange}
+                       />
 
                 {/* ---------------star rating area-------------- */}
                 <Box sx={{
@@ -154,13 +207,15 @@ function RestaurantRatingForm() {
                         }}
                     >
                         <Rating
+                            id="rating"
                             name="rating"
-                            value={value}
+                            value={formValues.rating}
                             precision={0.5}
                             getLabelText={getLabelText}
-                            onChange={(event, newValue) => {
-                                setValue(newValue);
-                            }}
+                            // onChange={(event, newValue) => {
+                            //     setValue(newValue);
+                            // }}
+                            onChange={handleChange}
                             onChangeActive={(event, newHover) => {
                                 setHover(newHover);
                             }}
@@ -179,7 +234,7 @@ function RestaurantRatingForm() {
                 <Box sx={{
                     marginTop: "1rem"
                 }}>
-                    <Button type='submit' variant="contained" sx={{
+                    <Button onClick={handleSubmit} type='submit' variant="contained" sx={{
                         margin: '0.5rem',
                         background: Colours.green, '&:hover': {
                             backgroundColor: Colours.yellow,

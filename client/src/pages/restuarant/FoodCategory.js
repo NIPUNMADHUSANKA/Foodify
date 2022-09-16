@@ -1,5 +1,5 @@
 import { Box, IconButton, Typography } from '@mui/material'
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import Background from '../../assets/images/categoryBackground.png'
 import theme, { Colours } from '../../assets/theme/theme'
 
@@ -85,8 +85,22 @@ const itemcount = 4;
 //console.log(data)
 
 //const data2 = data;
+var ROLE = null;
 
 const FoodCategory = () => {
+
+
+  {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+  {
+    (() => {
+      if (JSON.parse(localStorage.getItem('ROLE'))) {
+        ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+        // console.log(ROLE)
+      }
+    }
+    )()
+  }
+  {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
 
   const location = useLocation();
   const Id = location.state.id;
@@ -100,29 +114,28 @@ const FoodCategory = () => {
 
 
   ///-- Get Token UserName--///
-  const currentUser = AuthService.getCurrentUser();
+  // const currentUser = AuthService.getCurrentUser();
 
   useEffect((event) => {
 
-  axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/"+Id)
+ axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/"+Id)
         .then(data => {
             
           setDetails(data.data);  
           setisgetItem(true);
+      })
+      .catch(error => {
+        console.log(error);
 
-        })
-        .catch(error => {
-            console.log(error);
-      
-  });
+      });
 
-}, [isgetItem]);
+  }, [isgetItem]);
 
+console.log(details);
 
-  
   return (
 
-    
+
 
     <Box sx={{
       width: '100%',
@@ -159,12 +172,33 @@ const FoodCategory = () => {
             display: "flex",
             flexDirection: "row",
           }}>
-            <IconButton component={Link} to={"/Restaurant/#menu"}>
-              <ArrowBackIcon sx={{
-                color: Colours.green,
-                fontSize: "2rem",
-              }} />
-            </IconButton>
+
+            {(() => {
+              if (ROLE === "User") {
+                return (
+                  <IconButton component={Link} to={"/Restaurant"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (
+                  <IconButton component={Link} to={"/Restaurantprofile"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
             <Typography variant="h4" gutterBottom component="div" sx={{
               width: '100%',
               textAlign: 'left',
@@ -176,8 +210,8 @@ const FoodCategory = () => {
                 padding: '2px',
               },
             }}>
-             {name}
-             
+              {name}
+
             </Typography>
           </Box>
           {/* ---------end of title area------------ */}
@@ -187,9 +221,9 @@ const FoodCategory = () => {
 
           <Box sx={{
             padding: "1rem",
-          }}>  
-          
-          <Carousel
+          }}>
+
+            <Carousel
               itemsToShow={itemcount}
               easing={"ease"}
               breakPoints={theme.breakPoints = [
@@ -199,20 +233,20 @@ const FoodCategory = () => {
                 { width: 1450, itemsToShow: 5 },
                 { width: 1750, itemsToShow: 6 },
               ]}
-            > 
+            >
               {/* <Box> */}
 
 
               {
-                Array.from(details).map((item)=>{
+                Array.from(details).map((item) => {
 
-                  return(
-                    <CarouselCard2 item={item} />
+                  return (
+                    <CarouselCard2 item={item} Rid={location.state.id} />
                   )
-                 
+
                 })
               }
-            
+
 
               {/* <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />

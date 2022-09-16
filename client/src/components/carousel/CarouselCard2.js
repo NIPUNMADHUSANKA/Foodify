@@ -6,6 +6,13 @@ import {Link} from 'react-router-dom';
 const CarouselCard2 = (props) => {
 
     const itemdata = props.item;
+    const Rid = props.Rid;
+
+    const IDs = {
+        "id": itemdata.id,
+        "Rid":Rid
+    }
+    // console.log(itemdata);
 
     var image = null;
 
@@ -96,7 +103,7 @@ const CarouselCard2 = (props) => {
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <Button size="small" component={Link} to={"/Restaurant/Category/Orderfood"} sx={{
+                <Button size="small" component={Link} to={"/Restaurant/Category/Orderfood"} state={{id:IDs}} sx={{
                     margin: '6px',
                     padding:"0.5rem",
                     background: Colours.green, '&:hover': {

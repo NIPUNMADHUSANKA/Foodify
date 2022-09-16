@@ -1,24 +1,17 @@
 package Foodify.Backend.model;
 
-import org.bson.codecs.pojo.annotations.BsonProperty;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Console;
 //import java.sql.Array;
 import java.util.ArrayList;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Document(collection="Orders")
 public class Order {
 
     @Id
-    private ObjectId Id;
+    private String Id;
 
     private Date datetime;
     private ArrayList details;
@@ -39,7 +32,7 @@ public class Order {
 
     public String getId() { return Id.toString(); }
 
-    public void setId(ObjectId id) { Id = id; }
+    public void setId(String id) { Id = id; }
 
     public Date getDatetime() { return datetime; }
 
