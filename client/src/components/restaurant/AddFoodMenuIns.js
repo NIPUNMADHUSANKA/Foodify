@@ -70,7 +70,7 @@ function AddFoodMenuIns() {
 
 
        
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/RegisteredUser/addFoodMenuCategory", imageData, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenuCategory", imageData, { headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull");
                 setFormValues(initialValues);
@@ -88,7 +88,7 @@ function AddFoodMenuIns() {
     }
 
     useEffect((event) => {
-        axios.get("http://localhost:8072/FoodiFy/Resturant/getFoodMenu", { headers: authHeader() })
+        axios.get("http://localhost:8072/FoodiFy/Restaurant/getFoodMenu", { headers: authHeader() })
             .then(data => {
                 var menuId = data.data[0].id;
                 setDetails({ ...details, "menuId": menuId });

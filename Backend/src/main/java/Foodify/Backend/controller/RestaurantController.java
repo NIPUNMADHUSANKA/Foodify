@@ -178,7 +178,7 @@ public class RestaurantController {
 	 * -------------------------------- Add Food Menu
 	 * --------------------------------
 	 */
-	@PostMapping("/FoodiFy/Restaurant/RegisteredUser/addFoodMenu")
+	@PostMapping("/FoodiFy/Restaurant/addFoodMenu")
 	public ResponseEntity<?> addFoodMenu(@Valid @RequestBody FoodMenu foodMenu) {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -361,7 +361,7 @@ public class RestaurantController {
 	 * -------------------------------- Add Food category
 	 * --------------------------------
 	 */
-	@PostMapping("/FoodiFy/Restaurant/RegisteredUser/addFoodMenuCategory")
+	@PostMapping("/FoodiFy/Restaurant/addFoodMenuCategory")
 	public ResponseEntity<?> addFoodCategory(
 			@RequestParam("Image") MultipartFile image,
 			@RequestParam("menuId") String menuId,
@@ -420,7 +420,7 @@ public class RestaurantController {
 	 * -------------------------------- Get Food Menu With Token for Resturants
 	 * --------------------------------
 	 */
-	@GetMapping("/FoodiFy/Resturant/getFoodMenu")
+	@GetMapping("/FoodiFy/Restaurant/getFoodMenu")
 	public List<FoodMenu> getFoodResturanrMenuWithToken() {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();	

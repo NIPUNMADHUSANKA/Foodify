@@ -83,6 +83,7 @@ var menuId = null;
 const RestaurantMenu = (props) => {
 
   resId = props.rId;
+  console.log(resId);
 
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
@@ -97,13 +98,19 @@ const RestaurantMenu = (props) => {
 
   useEffect((event) => {
 
-    ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+    
 
+    if (JSON.parse(localStorage.getItem('ROLE'))) {
+      ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+      //console.log(ROLE)
+    }
+    else{
+      ROLE = null;
+    }
+  
     if (ROLE === "restaurant") {
 
-      
-
-      axois.get("http://localhost:8072/FoodiFy/Resturant/getFoodMenu", { headers: authHeader() })
+      axois.get("http://localhost:8072/FoodiFy/Restaurant/getFoodMenu", { headers: authHeader() })
         .then(data => {
           // this part if sucess
           //console.log(data.data[0].foodMenuName);
@@ -143,7 +150,7 @@ const RestaurantMenu = (props) => {
   }, []);
 
 
-  useEffect((event) => {
+ if(getCat){
 
     axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategory/" + menuId)
       .then(data => {
@@ -156,7 +163,10 @@ const RestaurantMenu = (props) => {
         console.log(error);
       });
 
-  }, [getCat]);
+      setgetCat(false);
+
+  }
+
 
 
   return (
@@ -171,6 +181,9 @@ const RestaurantMenu = (props) => {
         if (JSON.parse(localStorage.getItem('ROLE'))) {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
           //console.log(ROLE)
+        }
+        else{
+          ROLE = null;
         }
       }
       )()}

@@ -65,14 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RestaurantInfo/editAbout",
 				"/RegisteredUser/addComplains",
 
-				"/FoodiFy/Restaurant/RegisteredUser/addFoodMenu",
 				"/FoodiFy/AllUser/getFoodMenu/**",
-				"/FoodiFy/Resturant/getFoodMenu",
 				"/FoodiFy/AllUser/getFoodCategory/**",
 				"/FoodiFy/AllUser/getFoodCategoryItem/**",
-				"/FoodiFy/Restaurant/RegisteredUser/addFoodMenuCategory",
-				"/FoodiFy/Restaurant/deleteFoodCategory",
-				"/FoodiFy/Restaurant/addFoodMenuCategoryItem",
 				
 				"/RestaurantInfo/editContact",
 				"/RestaurantInfo/editAbout",

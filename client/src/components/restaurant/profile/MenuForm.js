@@ -91,7 +91,7 @@ function MenuForm() {
             foodMenuDes: formValues.foodMenuDes
         }
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/RegisteredUser/addFoodMenu", restaurantmenu, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenu", restaurantmenu, { headers: authHeader() })
         .then(data => {
             setFormValues(initialValues);
             setOpen(false);
