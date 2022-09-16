@@ -4,10 +4,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
-import EditIcon from '@mui/icons-material/Edit';
 import Slide from '@mui/material/Slide';
 import styled from '@emotion/styled';
-import UserService from '../../../services/user-service';
 
 import axios from "axios";
 import authHeader from "../../../services/auth-header";
@@ -93,9 +91,8 @@ function MenuForm() {
             foodMenuDes: formValues.foodMenuDes
         }
 
-        axios.post("http://localhost:8072/RegisteredUser/addFoodMenu", restaurantmenu, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenu", restaurantmenu, { headers: authHeader() })
         .then(data => {
-            console.log("Entry access sucessfull");
             setFormValues(initialValues);
             setOpen(false);
         })

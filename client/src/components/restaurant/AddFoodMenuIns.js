@@ -9,47 +9,6 @@ import axios from "axios";
 
 import authHeader from "../../services/auth-header";
 
-
-// ----------array or object ot get category values--------------------
-const category = [
-    {
-        value: 'Vegie',
-        label: 'Vegie',
-    },
-    {
-        value: 'Sea Food',
-        label: 'Sea Food',
-    },
-    {
-        value: 'Indian',
-        label: 'Indian',
-    },
-    {
-        value: 'Italian',
-        label: 'Italian',
-    },
-];
-
-// ------------------------food names-----------------
-const foods = [
-    {
-        value: 'Vegie',
-        label: 'Vegie Masala',
-    },
-    {
-        value: 'Sea Food',
-        label: 'Sea Food Fish curry',
-    },
-    {
-        value: 'Indian',
-        label: 'Indian Those',
-    },
-    {
-        value: 'Italian',
-        label: 'Italian burger',
-    },
-];
-
 var food = 0;
 var formDataCat = new FormData();
 
@@ -57,7 +16,6 @@ var formDataCat = new FormData();
 const initialValues = { foodMenuCategory: "", foodMenuCategoryDes: "" };
 
 function AddFoodMenuIns() {
-
 
 
     // --------to add category section--------
@@ -112,7 +70,7 @@ function AddFoodMenuIns() {
 
 
        
-        axios.post("http://localhost:8072/RegisteredUser/addFoodMenuCategory", imageData, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenuCategory", imageData, { headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull");
                 setFormValues(initialValues);
@@ -130,7 +88,7 @@ function AddFoodMenuIns() {
     }
 
     useEffect((event) => {
-        axios.get("http://localhost:8072/RegisteredUser/getFoodMenu", { headers: authHeader() })
+        axios.get("http://localhost:8072/FoodiFy/Restaurant/getFoodMenu", { headers: authHeader() })
             .then(data => {
                 var menuId = data.data[0].id;
                 setDetails({ ...details, "menuId": menuId });

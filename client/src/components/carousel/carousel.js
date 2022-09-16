@@ -32,7 +32,7 @@ const carousel = (props) => {
 
   const data = props.item;
 
-  
+
   return (
     <div sx={{ padding: 0, }}>
       {/*------------------------- carousel area--------------------- */}
@@ -58,7 +58,7 @@ const carousel = (props) => {
               padding: '2px',
             },
           }}>
-            {props.title}
+            Menu
 
           </Typography>
         </Box>

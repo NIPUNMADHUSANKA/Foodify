@@ -54,7 +54,6 @@ const itemcount = 3;
 
 var ROLE = null;
 
-var ROLE2 = null;
 
 const RestaurantOffers = (props) => {
 
@@ -134,6 +133,9 @@ const RestaurantOffers = (props) => {
         if (JSON.parse(localStorage.getItem('ROLE'))) {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
          // console.log(ROLE)
+        }
+        else{
+          ROLE = null;
         }
       }
       )()}
