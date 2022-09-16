@@ -1,16 +1,8 @@
 import * as React from 'react';
+import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Box, TextareaAutosize, Button, List } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { color } from '@mui/system';
-import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';

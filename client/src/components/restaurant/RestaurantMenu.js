@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box } from '@mui/material';
 import Carousel from '../carousel/carousel';
 
@@ -76,9 +76,14 @@ var ROLE = null;
 
 
 var Title = "Resturant Menu";
+var resId = null;
 var menuId = null;
 
-const RestaurantMenu = () => {
+
+const RestaurantMenu = (props) => {
+
+  resId = props.rId;
+  console.log(resId);
 
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
@@ -91,47 +96,80 @@ const RestaurantMenu = () => {
   const currentUser = AuthService.getCurrentUser();
 
 
-useEffect((event) => {
+  useEffect((event) => {
 
-    axois.get("http://localhost:8072/RegisteredUser/getFoodMenu", { headers: authHeader() })
+    
+
+    if (JSON.parse(localStorage.getItem('ROLE'))) {
+      ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+      //console.log(ROLE)
+    }
+    else{
+      ROLE = null;
+    }
+  
+    if (ROLE === "restaurant") {
+
+      axois.get("http://localhost:8072/FoodiFy/Restaurant/getFoodMenu", { headers: authHeader() })
         .then(data => {
-            // this part if sucess
-            //console.log(data.data[0].foodMenuName);
-            //console.log(item1.foodMenuName);
-            Title = data.data[0].foodMenuName;
-            menuId = data.data[0].id;
-            setgetCat(true);
-           
-
+          // this part if sucess
+          //console.log(data.data[0].foodMenuName);
+          //console.log(item1.foodMenuName);
+          Title = data.data[0].foodMenuName;
+          menuId = data.data[0].id;
+          setgetCat(true);
         })
         .catch(error => {
 
-            console.log(error);
-            
+          console.log(error);
 
         });
 
-}, []);
+    }
+    else {
+
+      axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodMenu/" + resId)
+        .then(data => {
+          // this part if sucess
+          //console.log(data.data[0].foodMenuName);
+          //console.log(item1.foodMenuName);
+          Title = data.data[0].foodMenuName;
+          menuId = data.data[0].id;
+          setgetCat(true);
+        })
+        .catch(error => {
+
+          console.log(error);
+
+        });
+
+    }
 
 
-useEffect((event) => {
 
-  axois.get("http://localhost:8072/RegisteredUser/getFoodCategory/"+menuId, { headers: authHeader() })
-      .then(data => {    
+  }, []);
+
+
+ if(getCat){
+
+    axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategory/" + menuId)
+      .then(data => {
         //  console.log("work");
-          const details = data.data;
-          //console.log(data);
-          setDetails({ ...details});
+        const details = data.data;
+        //   console.log(data);
+        setDetails({ ...details });
       })
       .catch(error => {
-          console.log(error);
-          
-
+        console.log(error);
       });
 
-}, [getCat]);
+      setgetCat(false);
 
-return (
+  }
+
+
+
+  return (
     <Box sx={{
       position: 'relative',
       width: '100%',
@@ -144,6 +182,9 @@ return (
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
           //console.log(ROLE)
         }
+        else{
+          ROLE = null;
+        }
       }
       )()}
       {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
@@ -151,7 +192,7 @@ return (
       {(() => {
         if (ROLE === "restaurant") {
           return (
-          <MenuForm />
+            <MenuForm />
           );
         }
       }

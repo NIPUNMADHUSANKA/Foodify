@@ -64,18 +64,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RestaurantInfo/editContact", 
 				"/RestaurantInfo/editAbout",
 				"/RegisteredUser/addComplains",
-				"/RegisteredUser/addFoodMenu",
-				"/RegisteredUser/getFoodMenu",
-				"/RegisteredUser/addFoodMenuCategory",
-				"/RegisteredUser/getFoodCategory",
-				"/FoodiFy/RegisteredUser/getFoodCategoryItem",
-				"/RegisteredUser/deleteFoodCategory",
-				"/RegisteredUser/addFoodMenuCategoryItem",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
+
+				"/FoodiFy/AllUser/getFoodMenu/**",
+				"/FoodiFy/AllUser/getFoodCategory/**",
+				"/FoodiFy/AllUser/getFoodCategoryItem/**",
+				
+				"/RestaurantInfo/editContact",
+				"/RestaurantInfo/editAbout",
+				"/Orders/All",
+				"/FoodItems/All",
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addRestaurantComment",
 				"/RegisteredUser/addFoodComment",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All","/FoodiFy/User/**")
+				"/RestaurantInfo/editContact",
+				"/RestaurantInfo/editAbout",
+				"/Orders/All",
+				"/FoodItems/All",
+				"/FoodiFy/User/**")
 
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()

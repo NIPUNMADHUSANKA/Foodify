@@ -152,7 +152,7 @@ function AddFoodMenuCon(props) {
             console.log(imageData);
 
             
-            axios.post("http://localhost:8072/RegisteredUser/addFoodMenuCategoryItem", imageData, { headers: authHeader() })
+            axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenuCategoryItem", imageData, { headers: authHeader() })
                 .then(data => {
                     setFormValues(initialValues);
                     window.location.reload(false);
