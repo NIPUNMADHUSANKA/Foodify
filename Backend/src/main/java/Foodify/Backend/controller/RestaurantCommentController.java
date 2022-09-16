@@ -36,7 +36,7 @@ public class RestaurantCommentController {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		System.out.println(Rescomment);
 
-		System.out.println(userName);
+//		System.out.println(userName);
 //		String restauratId=commentRes.getRestaurantId();
 //		String commentDescription=complain.getCommentDescription();
 //		Date addedDate=complain.getAddedDate();

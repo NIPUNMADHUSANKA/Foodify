@@ -23,6 +23,8 @@ const RestaurantCemments = (props) => {
 
   const data = props.comments;
 
+  const rId = props.rId;
+
   const currentUser = AuthService.getCurrentUser();
 
   {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
@@ -66,7 +68,7 @@ const RestaurantCemments = (props) => {
     else {
       const id = props.rId
       const itemData = new FormData();
-      itemData.append('id', id);
+      itemData.append('restaurantId', id);
       setItemData(itemData);
       // --------------------------for customer view--------------------------------------
       const sendGetRequest2 = async () => {
@@ -147,7 +149,7 @@ const RestaurantCemments = (props) => {
         {(() => {
           if (ROLE === "User") {
             return (
-            <Button component={Link} to={"/Restaurant/RestaurantRating"} sx={{
+            <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId }} sx={{
               margin: '0.5rem',
               marginBottom: 0,
               marginTop: 4,

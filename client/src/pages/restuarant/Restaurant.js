@@ -127,7 +127,7 @@ const contactdetails1 = {
       </Fade>
 
       <Fade big>
-        <RestaurantComment comments={comments1}/>
+        <RestaurantComment rId={location.state.id} comments={comments1}/>
       </Fade>
 
       <Fade left>
