@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Box, Button, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 
@@ -7,9 +7,12 @@ import FoodItem1 from '../../assets/images/profile_dash.png';
 import FoodItem2 from '../../assets/images/plate1.jpg';
 import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import {Link} from 'react-router-dom';
-
+// import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { Link } from 'react-router-dom';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import CancelIcon from '@mui/icons-material/Cancel';
+import axios from 'axios';
+import authHeader from "../../services/auth-header";
 
 // ---------this is temp-------
 const items = [
@@ -18,13 +21,13 @@ const items = [
         id: "foodId",
         name: "Name of the food 1",
         quantity: 1,
-        img1: {FoodItem1},
+        img1: { FoodItem1 },
     },
     {
         id: "foodId",
         name: "Name of the food 2",
         quantity: 2,
-        img1: {FoodItem2},
+        img1: { FoodItem2 },
     },
 ]
 
@@ -41,12 +44,61 @@ const OrderSideDrawer = (anchor) => {
         setState({ ...state, [anchor]: open });
     };
 
+    // ----------------------for store food response data----------------------
+    const [details1, setDetails1] = React.useState({});
+
+    // ----------------------for store quantity response data----------------------
+    const [details2, setDetails2] = React.useState({});
+
+    // ----------------------for store price response data----------------------
+    const [price, setPrice] = React.useState(0);
+
+    var price1 = 0; 
+
+    // -------------------to call shop cart data-----------------------------
+    useEffect(() => {
+
+        // -----------------------------------to getting food item details------------------------------------------
+        const getOfferDetails = async () => {
+            try {
+                const respOffer = await axios.get(`http://localhost:8072/FooddiFy/Service/getShoppingCart`, { headers: authHeader() });
+
+                const details = respOffer.data;
+                const foodItems = details.foodItems;
+                const quantityList = details.quantityList;
+                const price = details.price;
+                price1 = details.price;
+
+                console.log(details);
+                console.log(foodItems);
+                console.log(quantityList);
+
+                setDetails1([...foodItems]);
+                setDetails2([...quantityList]);
+                setPrice(price);
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        getOfferDetails();
+
+        // --------calling items for cart---------------
+
+
+    }, []);
+    // ---------------------------------------------------------------------
+
+    console.log(price);
+
     return (
+
         <Box
             sx={{
                 width: "40rem",
                 background: Colours.gray1,
-                opacity: 0.6,
+                opacity: 0.8,
                 borderRadius: "0px 0px 360px 360px",
                 display: "flex",
                 flexDirection: "column",
@@ -66,7 +118,7 @@ const OrderSideDrawer = (anchor) => {
                 Restaurant name
             </Typography>
 
-            <Divider sx={{width:"70%", color:Colours.primary, margin:"auto"}}/>
+            <Divider sx={{ width: "70%", color: Colours.primary, margin: "auto" }} />
 
             {/* -------------add more---------------- */}
             <Button variant="contained" sx={{
@@ -93,32 +145,42 @@ const OrderSideDrawer = (anchor) => {
                 width: "70%",
                 margin: "auto",
             }}>
-                {items.map((item) => (
-                    <ListItem key={item}>
+                {
+                    Array.from(details1).map((item, index) => {
+                        console.log(index);
+                        return (
+                            <ListItem key={item.id}>
 
-                        <ListItemIcon>
-                            <TakeoutDiningIcon />
-                        </ListItemIcon>
+                                <ListItemIcon>
+                                    <TakeoutDiningIcon />
+                                </ListItemIcon>
 
-                        <ListItemText>Quantity:{item.quantity}</ListItemText>
-                        <ListItemText>{item.name}</ListItemText>
+                                <ListItemText>Quantity:{details2[index]}</ListItemText>
+                                <ListItemText>{item.name}</ListItemText>
 
-                        {/* {console.log(item.foodimage)} */}
+                                {/* {console.log(item.foodimage)} */}
 
-                        <ListItemAvatar key={item}>
-                            <Avatar
-                                alt="food image"
-                                src={FoodItem2}
-                                sx={{
-                                    border: "2px solid #EFEAEA",
-                                    [theme.breakpoints.down('sm')]: {
+                                <ListItemAvatar key={item}>
+                                    <Avatar
+                                        alt="food image"
+                                        src={`data:image/jpeg;base64,${item.image.data}`}
+                                        sx={{
+                                            border: "2px solid #EFEAEA",
+                                            [theme.breakpoints.down('sm')]: {
 
-                                    },
-                                }} />
-                        </ListItemAvatar>
+                                            },
+                                        }} />
+                                </ListItemAvatar>
 
-                    </ListItem>
-                ))}
+                                <ListItemButton sx={{ borderRadius: "100%", width: "10%" }}>
+                                    <CancelIcon />
+                                </ListItemButton>
+
+                            </ListItem>
+                        )
+
+                    })
+                }
             </List>
             {/* -------------------end of the list------------------- */}
 
@@ -138,7 +200,7 @@ const OrderSideDrawer = (anchor) => {
                     fontSize: '8px',
                     padding: '2px',
                 },
-            }} endIcon={<ShoppingBagIcon />} >Proceed</Button>
+            }} endIcon={<ShoppingCartCheckoutIcon />} >Chechout Rs.{price}</Button>
         </Box>
     )
 }

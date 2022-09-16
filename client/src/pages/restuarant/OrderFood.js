@@ -87,7 +87,7 @@ const OrderFood = () => {
     var discount = null;
     var Rid = location.state.id.Rid;
 
-    console.log(location.state);
+    // console.log(location.state);
 
     if (details1.image) {
         image = details1.image.data;
@@ -157,7 +157,7 @@ const OrderFood = () => {
     });
     // -------------------------------------------------------------------------
 
-    // --------------------for the side drawe----------------------------------------------
+    // --------------------for the side drawer----------------------------------------------
     const [state, setState] = React.useState({ right: false });
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -168,7 +168,7 @@ const OrderFood = () => {
 
         setState({ ...state, [anchor]: open });
     };
-    //   ------------------------------------------------------------------------------------
+    //   ------------------End of the side drawer--------------------------------------
 
     // console.log(total);
 
@@ -178,7 +178,6 @@ const OrderFood = () => {
 
             <Fade top>
                 <Navbar />
-                <button onClick={toggleDrawer('right', true)}>cart</button>
             </Fade>
 
             {/* ---------------side drawer------------ */}

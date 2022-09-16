@@ -4,19 +4,25 @@ package Foodify.Backend.service;
 import Foodify.Backend.model.FoodItem;
 import Foodify.Backend.model.OrderItem;
 import Foodify.Backend.model.ShoppingCart;
+import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.ShoppingCart_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShopCartServiceImp implements ShopCartService{
 
     @Autowired
     private ShoppingCart_Repository ShoppingCartRepo;
+
+    @Autowired
+    private FoodItem_Repository foodItem_repository;
 
 //    ------------------for set up shopping cart---------------------------
     @Override
@@ -67,5 +73,37 @@ public class ShopCartServiceImp implements ShopCartService{
 
 
         return null;
+    }
+
+    //---------------------to get the shop cart item list----------------------------
+    @Override
+    public Map setCartitems(String userName) {
+
+        ShoppingCart shoppingCart = ShoppingCartRepo.findByuserName(userName);
+//        assigning item list
+        List<OrderItem> orderItems = shoppingCart.getItems();
+        List<FoodItem> foodItemList = new ArrayList<FoodItem>();
+        List<Integer> quantityList = new ArrayList<Integer>();
+
+
+        for (OrderItem item : orderItems){
+
+            String foodId = item.getFoodId();
+            FoodItem foodItems = foodItem_repository.findByid(foodId);
+            foodItemList.add(foodItems);
+
+            int quantity = item.getQuantity();
+            quantityList.add(quantity);
+        }
+
+        int price = shoppingCart.getPrice();
+
+        Map mapFinal = new HashMap();
+        mapFinal.put("foodItems",foodItemList);
+        mapFinal.put("quantityList",quantityList);
+        mapFinal.put("price",price);
+
+
+        return mapFinal;
     }
 }
