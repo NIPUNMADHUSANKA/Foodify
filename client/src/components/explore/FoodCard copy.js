@@ -26,7 +26,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function FoodCard(data) {
-  console.log(data.data.id)
+  console.log(data.data.id);
+  console.log(data.data.name)
+  // console.log(data.data.bImage)
+
+
   // const image1 = data.data.bImage
 
 

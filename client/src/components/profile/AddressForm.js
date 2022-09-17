@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState , useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -17,6 +18,8 @@ import Stack from '@mui/material/Stack';
 import FolderIcon from '@mui/icons-material/Folder';
 import  '../../assets/css/Profile.css';
 import { fontFamily } from '@mui/system';
+import authHeader from '../../services/auth-header';
+import axois from "axios";
 
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -76,6 +79,25 @@ const top100Films = [
 ////////////////////////////////////////////////////////////
 
 export default function AddressForm() {
+
+  const [profileData, setData] = useState([]);
+
+
+  useEffect((event) => {
+
+    axois.get(`http://localhost:8072/FoodiFy/User/editprofile`, {headers: authHeader()})
+        .then(data => {
+            // this part if sucess
+            setData(data.data)
+            
+        })
+        .catch(error => {
+            console.log("There is an error");
+        });
+
+}, []);
+console.log(profileData);
+console.log(profileData.userName);
   return (
     <Container 
     sx={{
@@ -125,7 +147,7 @@ export default function AddressForm() {
             label="Username"
             fullWidth
             autoComplete="given-name"
-            defaultValue="Riyansa"
+            defaultValue={profileData.userName}
             variant="filled"
            
           />

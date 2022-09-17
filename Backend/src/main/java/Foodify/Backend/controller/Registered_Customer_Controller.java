@@ -1,11 +1,16 @@
 
 package Foodify.Backend.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +29,7 @@ import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
+import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.service.Registered_Customer_Sev;
 
 //using cross origin annotation to communicate with react.js and spring
@@ -133,4 +139,15 @@ public class Registered_Customer_Controller {
 //	public void showUserDetails() {
 //		
 //	}
+	
+	@GetMapping("/FoodiFy/User/editprofile")
+	public Registered_Customer showProfile() {
+
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		Registered_Customer regcustomer = RegCusRepo.findByuserName(userName);
+		regcustomer.setuserName(regcustomer.getuserName());
+		regcustomer.setEmail(regcustomer.getEmail());
+		return regcustomer;
+
+	}
 }
