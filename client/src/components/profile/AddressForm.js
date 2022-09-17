@@ -132,6 +132,9 @@ console.log(profileData.userName);
       </Typography>
       <Grid container spacing={3} sx={{color:Colours.formWhite}} >
         <Grid item xs={12} >
+        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+          User Name
+      </Typography>
           <TextField
           sx={{ input: 
             { color: Colours.formWhite }, 
@@ -144,10 +147,9 @@ console.log(profileData.userName);
             required
             id="userName"
             name="userName"
-            label="Username"
+            placeholder={profileData.userName}
             fullWidth
             autoComplete="given-name"
-            defaultValue={profileData.userName}
             variant="filled"
            
           />
@@ -172,8 +174,11 @@ console.log(profileData.userName);
           />
           
         </Grid> */}
+        
         <Grid item xs={12}>
-         
+          <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+              Email
+          </Typography>
            <TextField
            sx={{ input: 
             { color: Colours.formWhite }, 
@@ -185,14 +190,16 @@ console.log(profileData.userName);
             }}
             id="Email"
             name="Email"
-            label="Email"
+            placeholder={profileData.email}
             fullWidth
             autoComplete="email"
-            defaultValue="RiyansaAbeweera@gmail.com"
             variant="filled"
           />
         </Grid>
         <Grid item xs={12}>
+        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+              Telephone No
+          </Typography>
           <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
@@ -204,14 +211,16 @@ console.log(profileData.userName);
               }}
             id="Telephone no"
             name="Telephone no"
-            label="Telephone no"
+            placeholder={profileData.location}
             fullWidth
             autoComplete="Telephone no"
-            defaultValue="0701234567"
             variant="filled"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} >
+        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+              Home Town
+          </Typography>
           <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
@@ -223,98 +232,17 @@ console.log(profileData.userName);
               }}
             id="City"
             name="City"
-            label="City"
+            placeholder={profileData.location}
             fullWidth
             autoComplete="City"
-            defaultValue="Kurunegala"
             variant="filled"
           />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <TextField
-            sx={{ input: 
-              { color: Colours.formWhite }, 
-              "label": {color: Colours.formWhite,fontFamily:'Poppins'},
-              "& label.Mui-focused": {
-              color:Colours.formWhite
-              },backgroundColor:Colours.transparenceGrey
-          
-              }}
-            id="hometown"
-            name="hometown"
-            label="Home Town"
-            fullWidth
-            autoComplete="Close city"
-            defaultValue="Kurunegala"
-            variant="filled"
-          />
-        </Grid>
-
-        {/* health conditions */}
-        {/* <Grid item xs={12}>
-        <Typography sx={{marginLeft:"1%",fontFamily:'Poppins'}} variant="h6" gutterBottom >
-        Health Status
-        </Typography>
         </Grid>
 
         <Grid item xs={12} sm={6} >
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
-        Diseases
-        </Typography>
-         <Typography sx={{marginLeft:"2%",backgroundColor:Colours.transparenceGrey,paddingLeft:'2%'}} >
-          <p>Diabetic</p>
-          <p>Diabetic</p>
-          <p>Diabetic</p>
-          <p>Diabetic</p>
+        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+              Prefered food items
           </Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Typography sx={{marginLeft:"1%"}} variant="h6" gutterBottom >
-        Add Disease
-        </Typography  >
-          <Autocomplete
-            multiple
-            id="checkboxes-tags-demo"
-            options={top100Films}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
-                  
-                />
-                {option.title}
-              </li>
-            )}
-            style={{ width: '100%',backgroundColor:Colours.transparenceGrey }}
-            renderInput={(params) => (
-              <TextField {...params} sx={{  input: 
-                { color: Colours.formWhite }, 
-                "label": {color: Colours.formWhite},
-                "& label.Mui-focused": {
-                color:Colours.formWhite
-                }, 
-                
-                }} label="Checkboxes" placeholder="deseases" />
-            )}
-          />
-        </Grid> */}
-
-        {/*food preferences */}
-        <Grid item xs={12}>
-        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
-        Food Preferences
-        </Typography>
-        </Grid>
-
-        <Grid item xs={12} sm={6} >
-        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
-        Like Foods
-        </Typography>
          <Typography sx={{fontFamily:'Poppins',marginLeft:"2%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
           <p>Pizza</p>
           <p>Veg soup</p>
@@ -322,10 +250,11 @@ console.log(profileData.userName);
           <p>Veg soup</p>
           </Typography>
         </Grid>
+
         <Grid item xs={12} sm={6}>
-        <Typography sx={{fontFamily:'Poppins',marginLeft:"1%"}} variant="h6" gutterBottom >
-        Add Foods
-        </Typography>
+        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+              Select favourite food items
+          </Typography>
           <Autocomplete
             multiple
             id="checkboxes-tags-demo"

@@ -147,6 +147,8 @@ public class Registered_Customer_Controller {
 		Registered_Customer regcustomer = RegCusRepo.findByuserName(userName);
 		regcustomer.setuserName(regcustomer.getuserName());
 		regcustomer.setEmail(regcustomer.getEmail());
+		regcustomer.settelephone(regcustomer.gettelephone());
+		regcustomer.setlocation(regcustomer.getlocation());
 		return regcustomer;
 
 	}
