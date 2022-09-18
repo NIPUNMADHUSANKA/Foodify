@@ -12,4 +12,6 @@ public interface ShopCartService {
     public ResponseEntity<?> setShoppingCart(String userName, OrderItem orderItem,int price);
 
     public Map setCartitems(String userName);
+
+    public  Map deleteCartItem(String userName,int index);
 }

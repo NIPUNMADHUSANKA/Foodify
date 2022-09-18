@@ -106,4 +106,53 @@ public class ShopCartServiceImp implements ShopCartService{
 
         return mapFinal;
     }
+
+    @Override
+    public Map deleteCartItem(String userName, int index1) {
+
+//        old shopping cart
+        ShoppingCart shoppingCart = ShoppingCartRepo.findByuserName(userName);
+//        assigning item list
+        List<OrderItem> orderItems = shoppingCart.getItems();
+
+//        lists for assign items
+        List<FoodItem> foodItemList = new ArrayList<FoodItem>();
+        List<Integer> quantityList = new ArrayList<Integer>();
+
+        int price1 = orderItems.get(index1).getPrice();
+//        -------remove selected item--------------
+        int num = index1;
+        orderItems.remove(num);
+        int price = shoppingCart.getPrice() - price1;
+
+        shoppingCart.setItems(orderItems);
+        shoppingCart.setPrice(price);
+        ShoppingCartRepo.save(shoppingCart);
+
+        System.out.println(price1);
+
+//        -------------updated shop cart--------------
+        ShoppingCart shoppingCart1 = ShoppingCartRepo.findByuserName(userName);
+//        assigning item list
+        List<OrderItem> orderItems1 = shoppingCart1.getItems();
+
+        for (OrderItem item : orderItems1){
+
+            String foodId = item.getFoodId();
+            FoodItem foodItems = foodItem_repository.findByid(foodId);
+            foodItemList.add(foodItems);
+
+            int quantity = item.getQuantity();
+            quantityList.add(quantity);
+        }
+
+        int price2 = shoppingCart1.getPrice();
+        Map mapFinal = new HashMap();
+        mapFinal.put("foodItems",foodItemList);
+        mapFinal.put("quantityList",quantityList);
+        mapFinal.put("price",price2);
+
+
+        return mapFinal;
+    }
 }

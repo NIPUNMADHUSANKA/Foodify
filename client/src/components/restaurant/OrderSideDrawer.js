@@ -56,6 +56,7 @@ const OrderSideDrawer = (anchor) => {
     var price1 = 0; 
 
     // -------------------to call shop cart data-----------------------------
+
     useEffect(() => {
 
         // -----------------------------------to getting food item details------------------------------------------
@@ -88,6 +89,64 @@ const OrderSideDrawer = (anchor) => {
 
 
     }, []);
+
+    const deleteCartItem = (event, index) => {
+
+        console.log(index);
+        
+        // -----------------------------------to getting food item details------------------------------------------
+        axios.get(`http://localhost:8072/FooddiFy/Service/deleteCartItem/${index}`,{ headers: authHeader() })
+            .then(data => {
+
+                const details = data.data;
+                const foodItems = details.foodItems;
+                const quantityList = details.quantityList;
+                const price = details.price;
+                price1 = details.price;
+
+                console.log(details);
+                console.log(foodItems);
+                console.log(quantityList);
+
+                setDetails1([...foodItems]);
+                setDetails2([...quantityList]);
+                setPrice(price);
+
+            })
+            .catch(error => {
+                console.error(error);
+                // console.log(restaurantAbout)
+                // console.log("There is an error")
+
+            })
+
+
+        // const getOfferDetails = async () => {
+        //     try {const respOffer = await axios.get(`http://localhost:8072/FooddiFy/Service/deleteCartItem/${index}`, { headers: authHeader() });
+
+        //         const details = respOffer.data;
+        //         const foodItems = details.foodItems;
+        //         const quantityList = details.quantityList;
+        //         const price = details.price;
+        //         price1 = details.price;
+
+        //         console.log(details);
+        //         console.log(foodItems);
+        //         console.log(quantityList);
+
+        //         setDetails1([...foodItems]);
+        //         setDetails2([...quantityList]);
+        //         setPrice(price);
+        //     } catch (err) {
+        //         // Handle Error Here
+        //         console.error(err);
+        //     }
+        // };
+
+        // getOfferDetails();
+
+        
+    };
     // ---------------------------------------------------------------------
 
     console.log(price);
@@ -172,7 +231,7 @@ const OrderSideDrawer = (anchor) => {
                                         }} />
                                 </ListItemAvatar>
 
-                                <ListItemButton sx={{ borderRadius: "100%", width: "10%" }}>
+                                <ListItemButton onClick={event => deleteCartItem(event,index)} sx={{ borderRadius: "100%", width: "10%" }}>
                                     <CancelIcon />
                                 </ListItemButton>
 
