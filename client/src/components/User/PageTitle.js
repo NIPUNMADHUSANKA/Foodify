@@ -1,6 +1,6 @@
 import React from 'react'
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import '../../assets/css/App.css';
 
 function PageTitle(props) {

@@ -17,7 +17,6 @@ import Fade from 'react-reveal/Fade';
 import Navbar from './../../components/Navbar';
 import { useLocation } from 'react-router-dom';
 import axois from "axios";
-import { Data } from '@react-google-maps/api';
 
 
 // to collect the description imformation
@@ -77,7 +76,7 @@ const Restaurant = () => {
     axois.get(`http://localhost:8072/FoodiFy/Service/GetRestaurantInfo/${location.state.id}`)
         .then(data => {
             // this part if sucess
-            console.log(data.data);
+           // console.log(data.data);
             setData(data.data)
             
         })
@@ -123,7 +122,7 @@ const contactdetails1 = {
       </Fade>
 
       <Fade bottom>
-        <RestaurantMenu />
+        <RestaurantMenu  rId={location.state.id} />
       </Fade>
 
       <Fade big>

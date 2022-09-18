@@ -12,7 +12,6 @@ import Fade from 'react-reveal/Fade';
 import axois from "axios";
 import { Link } from 'react-router-dom';
 
-import authHeader from "../../services/auth-header";
 import AuthService from '../../services/auth-service';
 import { useLocation } from 'react-router-dom';
 
@@ -119,12 +118,11 @@ const FoodCategory = () => {
 
   useEffect((event) => {
 
-    axois.get("http://localhost:8072/FoodiFy/RegisteredUser/getFoodCategoryItem/" + Id, { headers: authHeader() })
-      .then(data => {
-
-        setDetails(data.data);
-        setisgetItem(true);
-
+ axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/"+Id)
+        .then(data => {
+            
+          setDetails(data.data);  
+          setisgetItem(true);
       })
       .catch(error => {
         console.log(error);

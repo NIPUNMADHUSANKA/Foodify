@@ -97,6 +97,9 @@ const RestaurantOffers = (props) => {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
          // console.log(ROLE)
         }
+        else{
+          ROLE = null;
+        }
       }
       )()}
       {/*------------------------------END SET USERTOLE-------------------------------------------------*/}

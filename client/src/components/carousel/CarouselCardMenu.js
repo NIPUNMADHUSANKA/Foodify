@@ -25,7 +25,9 @@ const CarouselCard = (props) => {
 
     const handleDelete = () => {
 
-        axois.get("http://localhost:8072/RegisteredUser/deleteFoodCategory/" + categoryId, { headers: authHeader() })
+        console.log(categoryId);
+
+        axois.get("http://localhost:8072/FoodiFy/Restaurant/deleteFoodCategory" + categoryId, { headers: authHeader() })
             .then(data => {
                 // this part if sucess
                 window.location.reload(false);
@@ -126,6 +128,9 @@ const CarouselCard = (props) => {
                         ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
                         //console.log(ROLE)
                     }
+                    else{
+                        ROLE = null;
+                      }
                 }
                 )()}
                 {/*------------------------------END SET USERTOLE-------------------------------------------------*/}

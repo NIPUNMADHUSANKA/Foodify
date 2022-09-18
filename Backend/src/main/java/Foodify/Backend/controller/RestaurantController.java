@@ -1,10 +1,11 @@
 package Foodify.Backend.controller;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.time.LocalDate;
 
 
 import javax.validation.Valid;
@@ -172,7 +173,7 @@ public class RestaurantController {
 	 * -------------------------------- Add Food Menu
 	 * --------------------------------
 	 */
-	@PostMapping("/RegisteredUser/addFoodMenu")
+	@PostMapping("/FoodiFy/Restaurant/addFoodMenu")
 	public ResponseEntity<?> addFoodMenu(@Valid @RequestBody FoodMenu foodMenu) {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -191,18 +192,7 @@ public class RestaurantController {
 
 	}
 
-	/*
-	 * -------------------------------- Get Food Menu
-	 * --------------------------------
-	 */
-	@GetMapping("/RegisteredUser/getFoodMenu")
-	public List<FoodMenu> getFoodMenu() {
-
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-
-		return foodMenuRepo.findByuserName(userName);
-
-	}
+	
 	
 	/* ------------------------------------------------------------- Get Food Categories -------------------------------------------------------- */
 	@GetMapping("/FoodiFy/Restaurant/getCategories")
@@ -383,7 +373,7 @@ public class RestaurantController {
 	 * -------------------------------- Add Food category
 	 * --------------------------------
 	 */
-	@PostMapping("/RegisteredUser/addFoodMenuCategory")
+	@PostMapping("/FoodiFy/Restaurant/addFoodMenuCategory")
 	public ResponseEntity<?> addFoodCategory(
 			@RequestParam("Image") MultipartFile image,
 			@RequestParam("menuId") String menuId,
@@ -410,18 +400,53 @@ public class RestaurantController {
 	}
 
 
-	@GetMapping("/FoodiFy/RegisteredUser/getFoodCategoryItem/{catId}")
+	/*
+	 * -------------------------------- Add Food category items
+	 * --------------------------------
+	 */
+	@GetMapping("/FoodiFy/AllUser/getFoodCategoryItem/{catId}")
 	public List<?> getFoodItem(@PathVariable String catId) {
 		
 		return foodItem_Repository.findByMenuCategoryItem(catId);
 
 	}
+
+
+	/*
+	 * -------------------------------- Get Food Menu
+	 * --------------------------------
+	 */
+	@GetMapping("/FoodiFy/AllUser/getFoodMenu/{resId}")
+	public List<FoodMenu> getFoodResturanrMenu(@PathVariable String resId) {
+
+		Optional<Restaurant> resturant = restaurantrepo.findById(resId);
+
+		String userName = resturant.get().getUserName();
+
+		return foodMenuRepo.findByuserName(userName);
+
+	}
+
+
+	/*
+	 * -------------------------------- Get Food Menu With Token for Resturants
+	 * --------------------------------
+	 */
+	@GetMapping("/FoodiFy/Restaurant/getFoodMenu")
+	public List<FoodMenu> getFoodResturanrMenuWithToken() {
+
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();	
+		return foodMenuRepo.findByuserName(userName);
+
+	}
+
+
 	/*
 	 * -------------------------------- Get Food Category
 	 * --------------------------------
 	 */
-	@GetMapping("/RegisteredUser/getFoodCategory/{menuId}")
-	public List<FoodCategory> getFoodMenu(@PathVariable String menuId) {
+	@GetMapping("/FoodiFy/AllUser/getFoodCategory/{menuId}")
+	public List<FoodCategory> getFoodMenuCategory(@PathVariable String menuId) {
 
 		return foodCategoryRepo.findBymenuId(menuId);
 
@@ -432,7 +457,7 @@ public class RestaurantController {
 	 * --------------------------------
 	 */
 	
-	@GetMapping("/RegisteredUser/deleteFoodCategory/{catId}")
+	@GetMapping("/FoodiFy/Restaurant/deleteFoodCategory/{catId}")
 	public ResponseEntity<?> deleteFoodCategory(@PathVariable String catId) {
 
 		try{
@@ -451,7 +476,7 @@ public class RestaurantController {
 	 * -------------------------------- Add Food Item
 	 * --------------------------------
 	 */
-	@PostMapping("/RegisteredUser/addFoodMenuCategoryItem")
+	@PostMapping("/FoodiFy/Restaurant/addFoodMenuCategoryItem")
 	public ResponseEntity<?> addFoodCategoryItem(
 
 			@RequestParam("Image") MultipartFile image,
