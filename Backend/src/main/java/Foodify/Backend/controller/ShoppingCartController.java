@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class ShoppingCartController {
 
     @Autowired
@@ -68,6 +68,23 @@ public class ShoppingCartController {
         }
 
 //        return null;
+    }
+
+    @GetMapping("/FooddiFy/Service/deleteCartItem/{index}")
+    public ResponseEntity<?> deleteCartItem(@PathVariable(value="index") int index){
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        try {
+
+            return new ResponseEntity<>(ShopCartService.deleteCartItem(userName,index), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
     }
 
 }
