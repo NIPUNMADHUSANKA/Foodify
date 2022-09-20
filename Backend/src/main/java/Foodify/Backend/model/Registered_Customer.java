@@ -32,6 +32,8 @@ public class Registered_Customer{
 	private String userName;
 	private String password;
 	private String accountState;
+
+	private Boolean blocked;
 	
 	private String location;
 	private String email;
@@ -103,6 +105,14 @@ public class Registered_Customer{
 
 	public String getResetPasswordToken() {
 		return resetPasswordToken;
+	}
+
+	public Boolean getBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
 	}
 
 	public void setResetPasswordToken(String resetPasswordToken) {

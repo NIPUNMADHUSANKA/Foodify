@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addRestaurantComment",
 				"/RegisteredUser/addFoodComment",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All","/FoodiFy/User/**")
+				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All")
 
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()

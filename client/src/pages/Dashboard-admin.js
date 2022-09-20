@@ -25,35 +25,32 @@ import AuthService from '../services/auth-service';
 import authHeader from '../services/auth-header';
 
 
-// function dataAccessTransaction(details){
-//     axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
-//     .then(data => {
-//         const details = data.data;
-//         setDetails({ ...details});
-//         console.log( ...details);
-//     })
-//     .catch(error => {
-//     if (error.response.data) {
-//         console.log(error.response.data);
-//     }
-//     });
-//     return details;
-// }
-
 
 const Dashboard = () => {
 
     useEffect(() => {
         document.title = "Dashboard";
-    })
-
-    const [details, setDetails] = React.useState({});
+    }) 
 
     /* ------------------------------------------------------------Data Intialization */
 
-    /* -----------------------------------------Transactions */
+    const [users, setUsers] = React.useState({});
     const [orders, setOrders] = React.useState({});
     useEffect((event) => {
+
+        /* -----------------------------------------Users */
+        axios.get("http://localhost:8072/Foodify/Admin/Users/All",{ headers: authHeader()})
+        .then(data => {
+            const users = data.data;
+            setUsers({ ...users});
+            // console.log(users);
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
+
         /* -----------------------------------------Orders */
         axios.get("http://localhost:8072/Foodify/Admin/Orders/All",{ headers: authHeader()})
         .then(data => {
@@ -70,7 +67,7 @@ const Dashboard = () => {
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(3);
+    const [value, setValue] = React.useState(1);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -171,13 +168,12 @@ const Dashboard = () => {
                     <SystemMain />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <UsersMain />
+                    <UsersMain users={users}/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <RestaurantMain />
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    {/* {console.log(transactions)} */}
                     <Transactions orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>

@@ -321,7 +321,7 @@ export default function PrimarySearchAppBar() {
 
             {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {(() => {
-              if (ROLE === "Admin") {
+              if (ROLE === "admin") {
                 return (<Button component={Link} to='/dashboard' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> DASHBOARD  </Button>);
               }
             }
@@ -368,7 +368,7 @@ export default function PrimarySearchAppBar() {
             {/*------------------------------START User Icons-------------------------------------------------*/}
             
             {(() => {
-              if (ROLE != null && ROLE != "Admin" && ROLE != "restaurant") {
+              if (ROLE != null && ROLE != "admin" && ROLE != "restaurant") {
                 return (<IconButton
                   size="large"
                   edge="end"

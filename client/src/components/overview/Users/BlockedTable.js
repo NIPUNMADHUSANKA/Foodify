@@ -192,20 +192,6 @@ function createData(userId,name ,type, location, telephone, email) {
 }
 
 
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2343','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2344','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2345','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2346','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2347','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2348','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2349','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2350','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2351','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-]
-
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -327,13 +313,27 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(blockedUsers) {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+  const users= blockedUsers.users;
+  console.log(users)
+
+  //----------------------------------------------------------Table Row Initialize and Sorting
+  var user;
+  const rowsdetails = [
+    Object.keys(users).map((key) => (
+      user= users[key],
+      createData(user.id, user.userName ,user.accountState,user.location, user.telephone, user.email)
+    ))
+  ];
+
+  const rows= rowsdetails["0"];
 
 
   //----------------------------------------------------------Empty Rows

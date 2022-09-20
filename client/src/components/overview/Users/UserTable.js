@@ -180,6 +180,7 @@ TablePaginationActions.propTypes = {
 //----------------------------------------------------------Table Row Define
 function createData(userId,name ,type, location, telephone, email) {
   const blockButton = <Button variant="outlined" color="error">Block</Button>
+  console.log("Came Here")
   return { 
     userId, 
     name,
@@ -191,20 +192,6 @@ function createData(userId,name ,type, location, telephone, email) {
   };
 }
 
-
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2343','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2344','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2345','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2346','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2347','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2348','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2349','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-  createData('B2350','Rachel Green','Regular','Colombo', '0715673783', "Green.Rachel@gmail.com"),  
-  createData('B2351','Robert Pattinson','Premium','None', '0714673743', "Pattinson.Robert@gmail.com"),  
-]
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -241,7 +228,7 @@ const columns = [
     id: 'userId', 
     label: 'User-Id',
     numeric: false, 
-    minWidth: 140},
+    minWidth: 180},
   { 
     id: 'name', 
     label: 'Name',
@@ -327,7 +314,7 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(normalUsers) {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -335,6 +322,21 @@ function TableActions() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
 
+  const users= normalUsers.users;
+  console.log(users)
+
+  //----------------------------------------------------------Table Row Initialize and Sorting
+  var user;
+  const rowsdetails = [
+    Object.keys(users).map((key) => (
+      user= users[key],
+      createData(user.id, user.userName ,user.accountState,user.location, user.telephone, user.email)
+    ))
+  ];
+
+  const rows= rowsdetails["0"];
+
+  // console.log(rows);
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
