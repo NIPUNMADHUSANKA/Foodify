@@ -63,6 +63,10 @@ const comments1 = [
 
 const OrderFood = () => {
 
+    const RestId = JSON.parse(localStorage.getItem('RestId'));
+
+    console.log(RestId);
+    
     // --------------to get the id------------------
     const location = useLocation();
 
@@ -85,7 +89,7 @@ const OrderFood = () => {
     var price = null;
     var Fid = null;
     var discount = null;
-    var Rid = location.state.id.Rid;
+    var Rid = RestId;
 
     // console.log(location.state);
 
@@ -132,7 +136,7 @@ const OrderFood = () => {
                 // console.log(totalG);
                 setTotal(totalG);
 
-                console.log(details);
+                // console.log(details);
                 // setItems([...items1]);
             } catch (err) {
                 // Handle Error Here

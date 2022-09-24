@@ -1,19 +1,13 @@
 package Foodify.Backend.service;
 
 
-import Foodify.Backend.model.FoodItem;
-import Foodify.Backend.model.OrderItem;
-import Foodify.Backend.model.ShoppingCart;
-import Foodify.Backend.repository.FoodItem_Repository;
-import Foodify.Backend.repository.ShoppingCart_Repository;
+import Foodify.Backend.model.*;
+import Foodify.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ShopCartServiceImp implements ShopCartService{
@@ -23,6 +17,16 @@ public class ShopCartServiceImp implements ShopCartService{
 
     @Autowired
     private FoodItem_Repository foodItem_repository;
+
+    @Autowired
+    private RestaurantRepository restaurantrepo;
+
+    @Autowired
+    private FoodCategoryRepo FoodCategory;
+
+    @Autowired
+    private FoodMenuRepo FoodMenu;
+
 
 //    ------------------for set up shopping cart---------------------------
     @Override
@@ -107,6 +111,7 @@ public class ShopCartServiceImp implements ShopCartService{
         return mapFinal;
     }
 
+//    --------------------update the shopping cart---------------------------------------
     @Override
     public Map deleteCartItem(String userName, int index1) {
 
@@ -152,6 +157,53 @@ public class ShopCartServiceImp implements ShopCartService{
         mapFinal.put("quantityList",quantityList);
         mapFinal.put("price",price2);
 
+
+        return mapFinal;
+    }
+//----------------------------------------final checkout----------------------------------------------
+    @Override
+    public Map finalCheckout(String userName) {
+
+        ShoppingCart shoppingCart = ShoppingCartRepo.findByuserName(userName);
+//        assigning item list
+        List<OrderItem> orderItems = shoppingCart.getItems();
+        List<FoodItem> foodItemList = new ArrayList<FoodItem>();
+        List<Integer> quantityList = new ArrayList<Integer>();
+        List<String> restaurantDetails = new ArrayList<String>();
+
+        String CatId = null;
+        String Rid = null;
+
+        for (OrderItem item : orderItems){
+
+            //        to get the restaurant id
+            Rid = item.getRestaurantId();
+
+            String foodId = item.getFoodId();
+            FoodItem foodItems = foodItem_repository.findByid(foodId);
+            foodItemList.add(foodItems);
+
+            int quantity = item.getQuantity();
+            quantityList.add(quantity);
+        }
+//----------------need to check general offers and set the new price--------------
+
+//--------------------------------------------------------------------------------
+        int price = shoppingCart.getPrice();
+//---------------setting restaurant details----------------------------
+        System.out.println(Rid);
+
+        Restaurant restaurant1 = restaurantrepo.findByid(Rid);
+        restaurantDetails.add(restaurant1.getRestaurantName());
+        restaurantDetails.add(restaurant1.getAddress());
+        restaurantDetails.add(restaurant1.getLocation());
+        System.out.println(restaurant1.getRestaurantName());
+
+        Map mapFinal = new HashMap();
+        mapFinal.put("foodItems",foodItemList);
+        mapFinal.put("quantityList",quantityList);
+        mapFinal.put("price",price);
+        mapFinal.put("restaurantDetails",restaurantDetails);
 
         return mapFinal;
     }

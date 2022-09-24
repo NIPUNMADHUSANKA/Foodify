@@ -85,6 +85,8 @@ const RestaurantMenu = (props) => {
   resId = props.rId;
   console.log(resId);
 
+  const RestId = props.RestId;
+
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
 
@@ -199,7 +201,7 @@ const RestaurantMenu = (props) => {
       )()}
 
 
-      <Carousel item={details} title={Title} count={itemcount} bgcolour={bgcolor1} />
+      <Carousel item={details} title={Title} count={itemcount} bgcolour={bgcolor1} RestId = {RestId} />
 
 
     </Box>

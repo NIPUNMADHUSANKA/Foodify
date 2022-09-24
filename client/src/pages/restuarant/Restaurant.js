@@ -59,6 +59,8 @@ const comments1 = [
 
 const Restaurant = () => {
 
+  const [RestId, setRestId] = useState(null);
+
   useEffect(() => {
     document.title = "Restaurant Page";
   })
@@ -69,37 +71,49 @@ const Restaurant = () => {
 
   // ----------------calling restaurant data------------------------------
 
+  var id = null;
+  // var Rid= location.state.id;
+  if (location.state != null) {
+    id = location.state.id;
+  } else {
+    id = JSON.parse(localStorage.getItem('RestId'));
+  }
+
   const [Data, setData] = useState([]);
 
   useEffect((event) => {
 
-    axois.get(`http://localhost:8072/FoodiFy/Service/GetRestaurantInfo/${location.state.id}`)
-        .then(data => {
-            // this part if sucess
-           // console.log(data.data);
-            setData(data.data)
-            
-        })
-        .catch(error => {
 
-        });
 
-}, []);
+    axois.get(`http://localhost:8072/FoodiFy/Service/GetRestaurantInfo/${id}`)
+      .then(data => {
+        // this part if sucess
+        // console.log(data.data);
+        setRestId(data.data.id)
+        setData(data.data)
 
-// console.log(Data)
+      })
+      .catch(error => {
 
-const details1 = {
-  "detail1": Data.about,
-  "detail2": "",
-  "detail3": " ",
-}
+      });
 
-const contactdetails1 = {
-  "Location": Data.location,
-  "Address": Data.address,
-  "TpNumber": Data.telephone,
-}
+  }, []);
 
+  // console.log(Data)
+
+  const details1 = {
+    "detail1": Data.about,
+    "detail2": "",
+    "detail3": " ",
+  }
+
+  const contactdetails1 = {
+    "Location": Data.location,
+    "Address": Data.address,
+    "TpNumber": Data.telephone,
+  }
+
+  localStorage.setItem("RestId", JSON.stringify(RestId));
 
   return (
     <Box>
@@ -110,7 +124,7 @@ const contactdetails1 = {
       </Fade>
 
       <Fade>
-        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName}/>
+        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName} />
       </Fade>
 
       <Fade left>
@@ -118,15 +132,15 @@ const contactdetails1 = {
       </Fade>
 
       <Fade right>
-        <RestaurantOffers rId={location.state.id}/>
+        <RestaurantOffers rId={id} />
       </Fade>
 
       <Fade bottom>
-        <RestaurantMenu  rId={location.state.id} />
+        <RestaurantMenu rId={id} />
       </Fade>
 
       <Fade big>
-        <RestaurantComment rId={location.state.id} comments={comments1}/>
+        <RestaurantComment rId={id} comments={comments1} />
       </Fade>
 
       <Fade left>

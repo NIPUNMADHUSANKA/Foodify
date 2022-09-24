@@ -70,9 +70,9 @@ const OrderSideDrawer = (anchor) => {
                 const price = details.price;
                 price1 = details.price;
 
-                console.log(details);
-                console.log(foodItems);
-                console.log(quantityList);
+                // console.log(details);
+                // console.log(foodItems);
+                // console.log(quantityList);
 
                 setDetails1([...foodItems]);
                 setDetails2([...quantityList]);
@@ -92,7 +92,7 @@ const OrderSideDrawer = (anchor) => {
 
     const deleteCartItem = (event, index) => {
 
-        console.log(index);
+        // console.log(index);
         
         // -----------------------------------to getting food item details------------------------------------------
         axios.get(`http://localhost:8072/FooddiFy/Service/deleteCartItem/${index}`,{ headers: authHeader() })
@@ -104,9 +104,9 @@ const OrderSideDrawer = (anchor) => {
                 const price = details.price;
                 price1 = details.price;
 
-                console.log(details);
-                console.log(foodItems);
-                console.log(quantityList);
+                // console.log(details);
+                // console.log(foodItems);
+                // console.log(quantityList);
 
                 setDetails1([...foodItems]);
                 setDetails2([...quantityList]);
@@ -149,7 +149,7 @@ const OrderSideDrawer = (anchor) => {
     };
     // ---------------------------------------------------------------------
 
-    console.log(price);
+    // console.log(price);
 
     return (
 
@@ -206,7 +206,7 @@ const OrderSideDrawer = (anchor) => {
             }}>
                 {
                     Array.from(details1).map((item, index) => {
-                        console.log(index);
+                        // console.log(index);
                         return (
                             <ListItem key={item.id}>
 

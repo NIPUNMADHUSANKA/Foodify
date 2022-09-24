@@ -25,7 +25,7 @@ const CarouselCard = (props) => {
 
     const handleDelete = () => {
 
-        console.log(categoryId);
+        // console.log(categoryId);
 
         axois.get("http://localhost:8072/FoodiFy/Restaurant/deleteFoodCategory" + categoryId, { headers: authHeader() })
             .then(data => {
@@ -104,7 +104,7 @@ const CarouselCard = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Button component={Link} to={"/Restaurant/Category"} state={{ id: category.id, name: category.foodMenuCategory }} size="small" sx={{
+                <Button component={Link} to={"/Restaurant/Category"} state={{ id: category.id, name: category.foodMenuCategory, RestId:props.RestId }} size="small" sx={{
                     margin: '6px',
                     background: Colours.green, '&:hover': {
                         backgroundColor: Colours.yellow,

@@ -14,4 +14,6 @@ public interface ShopCartService {
     public Map setCartitems(String userName);
 
     public  Map deleteCartItem(String userName,int index);
+
+    public Map finalCheckout(String userName);
 }

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import javax.validation.Valid;
 
 import Foodify.Backend.model.*;
+import Foodify.Backend.service.ShopCartServiceImp;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,9 @@ public class RestaurantController {
 
 	@Autowired
 	private FoodCategoryRepo foodCategoryRepo;
+
+	@Autowired
+	private ShopCartServiceImp ShopCartService;
 
 	
 	@Autowired
@@ -594,5 +598,23 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 
 	return restaurant;
 }
+//--------------------------for the final payment checkout---------------------------------------
+	@GetMapping("/FooddiFy/Service/finalCheckout")
+	public ResponseEntity<?> finalCheckout(){
+
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		try {
+
+			return new ResponseEntity<>(ShopCartService.finalCheckout(userName), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+
+	}
+
 
 }
