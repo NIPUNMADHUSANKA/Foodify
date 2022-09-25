@@ -12,6 +12,8 @@ import Foodify.Backend.model.RestaurantComments;
 public interface RestaurantCommentRepository extends MongoRepository<RestaurantComments,String> {
 	
 	RestaurantComments findByid(String id);
+
+	RestaurantComments findByrestaurantId(String restaurantId);
 	
 	List<RestaurantComments> findByuserName(String userName);
 

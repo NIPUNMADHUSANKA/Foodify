@@ -48,23 +48,23 @@ public class RestaurantCommentController {
 	}
 	
 	/* -------------------------------- Get Res Comments Customer view -------------------------------- */
-	@PostMapping("/FoodiFy/Service/getRestaurantCommentC")
-	public List<RestaurantComments> getRestaurantComment(@RequestParam("id") String id) {
+	@GetMapping("/FoodiFy/Service/getRestaurantCommentC")
+	public List<RestaurantComments> getRestaurantComment() {
 		
-		Restaurant restaurant = restaurantrepo.findByid(id);
-		String userName = restaurant.getUserName();
+//		Restaurant restaurant = restaurantrepo.findByid(id);
+//		String userName = restaurant.getUserName();
 
-		List<RestaurantComments> items = restaurantCommentRepository.findByuserName(userName);
-		List<RestaurantComments> restaurantCommentList = new ArrayList<RestaurantComments>();
+		List<RestaurantComments> restaurantComments = restaurantCommentRepository.findAll();
+//		List<RestaurantComments> restaurantCommentList = new ArrayList<RestaurantComments>();
 //		--------------------setting relevant data for output------------------------
-		for(int i = 0; i<items.size();i++) {
-			RestaurantComments restaurantComment = new RestaurantComments();			
-			restaurantComment.setUsername(items.get(i).getUsername());
-			restaurantComment.setCommentDescription(items.get(i).getCommentDescription());
-			restaurantComment.setId(items.get(i).getId());			
-			restaurantCommentList.add(restaurantComment);
-		}
-		return restaurantCommentList;
+//		for(int i = 0; i<items.size();i++) {
+//			RestaurantComments restaurantComment = new RestaurantComments();
+//			restaurantComment.setUsername(items.get(i).getUsername());
+//			restaurantComment.setCommentDescription(items.get(i).getCommentDescription());
+//			restaurantComment.setId(items.get(i).getId());
+//			restaurantCommentList.add(restaurantComment);
+//		}
+		return restaurantComments;
 	}
 	
 	/* -------------------------------- Get Res Comments restaurant view -------------------------------- */

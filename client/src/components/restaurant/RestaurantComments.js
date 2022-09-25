@@ -25,6 +25,7 @@ const RestaurantCemments = (props) => {
 
   const rId = props.rId;
 
+  // console.log(data);
   const currentUser = AuthService.getCurrentUser();
 
   {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
@@ -71,21 +72,21 @@ const RestaurantCemments = (props) => {
       itemData.append('restaurantId', id);
       setItemData(itemData);
       // --------------------------for customer view--------------------------------------
-      const sendGetRequest2 = async () => {
-        try {
-          const resp = await axios.post(`http://localhost:8072/FoodiFy/Service/getRestaurantCommentC`,itemData);
+      // const sendGetRequest2 = async () => {
+      //   try {
+      //     const resp = await axios.get(`http://localhost:8072/FoodiFy/Service/getRestaurantCommentC`,itemData);
 
-          const details = resp.data;
-          setDetails({ ...details });
+      //     const details = resp.data;
+      //     setDetails({ ...details });
 
-          // console.log(details);
-        } catch (err) {
-          // Handle Error Here
-          console.error(err);
-        }
-      };
+      //     // console.log(details);
+      //   } catch (err) {
+      //     // Handle Error Here
+      //     console.error(err);
+      //   }
+      // };
 
-      sendGetRequest2();
+      // sendGetRequest2();
 
     }
 
