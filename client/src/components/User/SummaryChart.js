@@ -40,6 +40,7 @@ export default class SummaryChart extends React.PureComponent {
             </Typography>
 
             <select id="select" style={{ width: '15%', margin: '10px', backgroundColor:"#ddd", border:"none", color:"#222", padding:"8px"}} onChange={this.changeData}>
+              <option>Daily</option>
               <option>Weekly</option>
               <option>Monthly</option>
               <option>Yearly</option>

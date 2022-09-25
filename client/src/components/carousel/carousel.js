@@ -7,34 +7,15 @@ import CarouselCard from './CarouselCardMenu';
 import theme, { Colours } from '../../assets/theme/theme';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 
-// ---------------css for carousel-------------------------
-
-// const carousel = ({ data })
-// eslint-disable-next-line no-lone-blocks
-{/* <div>
-      {data.map((item) => (
-
-        <Box
-          key = {item.id || item}
-        >
-          
-        </Box>
-      )
-      )}
-    </div> */}
-
 
 // -----------------arrows for the carousel------------
 
 const carousel = (props) => {
 
-
-
   const data = props.item;
 
-
   return (
-    <div sx={{ padding: 0, }}>
+    <div sx={{ padding: 0 }}>
       {/*------------------------- carousel area--------------------- */}
       <Box sx={{
         width: '100%',
@@ -49,6 +30,7 @@ const carousel = (props) => {
         <Box sx={{
           width: '100%',
         }}>
+
           <Typography variant="h4" gutterBottom component="div" sx={{
             width: '100%',
             textAlign: 'center',
@@ -58,6 +40,7 @@ const carousel = (props) => {
               padding: '2px',
             },
           }}>
+            
             Menu
 
           </Typography>
@@ -97,7 +80,6 @@ const carousel = (props) => {
 
 
         {/* </Box> */}
-
         {/* ---------------end of carousel area-------------------------- */}
 
       </Box>

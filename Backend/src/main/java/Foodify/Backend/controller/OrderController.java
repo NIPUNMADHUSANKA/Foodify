@@ -1,13 +1,9 @@
 package Foodify.Backend.controller;
 
 import Foodify.Backend.model.Order;
-import Foodify.Backend.repository.Order_Repository;
+//import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.service.Order_Service;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +15,9 @@ import java.util.List;
 @RestController
 public class OrderController {
 
-    @Autowired
+/*     @Autowired
     private Order_Repository order_repository;
-
+*/
     @Autowired(required = false) //error debugged by false
     private Order_Service order_service;
 

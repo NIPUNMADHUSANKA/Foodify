@@ -1,6 +1,6 @@
 import { Button, IconButton, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import styled from '@emotion/styled';
@@ -69,7 +69,7 @@ const OrderFoodForm = (props) => {
     let [num, setNum] = useState(1);
     var price = parseInt(props.orderdata.price);
 
-    console.log(props.Rid);
+    //console.log(props.Rid);
     var RID = props.Rid;
 
     let [amount, setAmount] = useState(1);

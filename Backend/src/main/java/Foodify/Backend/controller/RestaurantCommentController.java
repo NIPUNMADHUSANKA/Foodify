@@ -1,7 +1,6 @@
 package Foodify.Backend.controller;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.model.RestaurantComments;
 import Foodify.Backend.repository.RestaurantCommentRepository;
@@ -51,11 +49,12 @@ public class RestaurantCommentController {
 	@PostMapping("/FoodiFy/Service/getRestaurantCommentC")
 	public List<RestaurantComments> getRestaurantComment(@RequestParam("id") String id) {
 		
-		Restaurant restaurant = restaurantrepo.findByid(id);
-		String userName = restaurant.getUserName();
+		try {
+			Restaurant restaurant = restaurantrepo.findByid(id);
+			String userName = restaurant.getUserName();
 
-		List<RestaurantComments> items = restaurantCommentRepository.findByuserName(userName);
-		List<RestaurantComments> restaurantCommentList = new ArrayList<RestaurantComments>();
+			List<RestaurantComments> items = restaurantCommentRepository.findByuserName(userName);
+			List<RestaurantComments> restaurantCommentList = new ArrayList<RestaurantComments>();
 //		--------------------setting relevant data for output------------------------
 		for(int i = 0; i<items.size();i++) {
 			RestaurantComments restaurantComment = new RestaurantComments();			
@@ -65,6 +64,13 @@ public class RestaurantCommentController {
 			restaurantCommentList.add(restaurantComment);
 		}
 		return restaurantCommentList;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
+
+		
 	}
 	
 	/* -------------------------------- Get Res Comments restaurant view -------------------------------- */

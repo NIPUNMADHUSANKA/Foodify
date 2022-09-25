@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 import '../../assets/css/Profile.css';
-import Pickup from '../../assets/images/pickup.png';
-import Pickupmap from '../../assets/images/pickupmap.png';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Radio from '@mui/joy/Radio';

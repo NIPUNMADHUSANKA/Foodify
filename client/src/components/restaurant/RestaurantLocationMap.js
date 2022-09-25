@@ -22,7 +22,7 @@ function Map(props) {
   const center = useMemo(() => ({ lat:6.92 , lng: 79.86 }), []);
   
   // decode('9FFW84J9+XG')
-  console.log(props.location)
+ // console.log(props.location)
   return (
     <Box sx={{
       marginTop: '0%',

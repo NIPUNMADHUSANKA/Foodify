@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
-import java.time.LocalDate;
-
 
 import javax.validation.Valid;
 
@@ -141,7 +138,7 @@ public class RestaurantController {
 	public void updateContactDetails(@RequestBody Restaurant contactDetails) {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(userName);
+		//System.out.println(userName);
 		// System.out.println(contactDetails.getAddress());
 
 		Restaurant restaurant = restaurantrepo.findByuserName(userName);
@@ -419,9 +416,8 @@ public class RestaurantController {
 	@GetMapping("/FoodiFy/AllUser/getFoodMenu/{resId}")
 	public List<FoodMenu> getFoodResturanrMenu(@PathVariable String resId) {
 
-		Optional<Restaurant> resturant = restaurantrepo.findById(resId);
-
-		String userName = resturant.get().getUserName();
+		Restaurant restaurant = restaurantrepo.findByid(resId);
+		String userName = restaurant.getUserName();
 
 		return foodMenuRepo.findByuserName(userName);
 

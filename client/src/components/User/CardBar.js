@@ -13,19 +13,19 @@ const breakpoints = [
 
 function CardBar(details) {
   const X = details.details;
-  
+
+  var totalcount = [X.calaries,X.fat, X.protein, X.carbo  ]
+
   return (
 
       <div>
         <Carousel breakPoints={breakpoints} pagination={false} disableArrowsOnEnd={true} >
           
-        {Array.isArray(X)
-         ? 
-         X.map(Y=>
-              (<Summary_Card Title={Y[0]} Count={Y[1]} icon={Y[2]} /> ))
-         : null   
-        }
-        
+          <Summary_Card nutcount = {totalcount[0]} Title = {"Total Daily Calories(g)"} />
+          <Summary_Card nutcount = {totalcount[1]} Title = {"Total Daily Fat(g)"} />
+          <Summary_Card nutcount = {totalcount[2]} Title = {"Total Daily Protein(g)"} />
+          <Summary_Card nutcount = {totalcount[3]} Title = {"Total Daily Carbo(g)"} />
+
         </Carousel>
       </div>
 

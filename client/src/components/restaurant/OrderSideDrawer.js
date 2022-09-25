@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Avatar, Box, Button, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, Button, Divider, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 
 import FoodItem1 from '../../assets/images/profile_dash.png';

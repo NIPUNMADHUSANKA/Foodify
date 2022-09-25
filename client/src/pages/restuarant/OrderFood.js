@@ -1,8 +1,7 @@
 import { Box } from '@mui/system';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import axios from 'axios';
-import authHeader from "../../services/auth-header";
 
 import Background from '../../assets/images/pv4WkDi.webp';
 

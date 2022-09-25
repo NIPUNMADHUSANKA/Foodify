@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, TextField } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
@@ -100,11 +98,11 @@ export const BannerForm1 = () => {
     };
 
     //  --------------------for preview the image------------------
-    const [imagePreview, setImagePreview] = useState(null);
+   // const [imagePreview, setImagePreview] = useState(null);
     // ----------------sending image for the backend--------------
-    const [imageData, setImageData] = useState(null);
+   // const [imageData, setImageData] = useState(null);
 
-    const [imageName, setImageName] = useState("");
+    //const [imageName, setImageName] = useState("");
     // --------keep the image name from the back end--------------------
 
     return (
@@ -241,7 +239,7 @@ export const BannerForm2 = () => {
 export const AboutUsForm = () => {
     const initialValues = { about: "" };
     const [formValues, setFormValues] = React.useState(initialValues);
-    const [formErrors, setFormErrors] = React.useState({});
+    //const [formErrors, setFormErrors] = React.useState({});
     
     const [open, setOpen] = React.useState(false);
 
@@ -257,10 +255,10 @@ export const AboutUsForm = () => {
     };
 
 
-    const restaurantAbout ={
+   /* const restaurantAbout ={
         about:formValues.about,
     }
-
+*/
     
 
     const handleSubmit = (event) =>{
@@ -271,14 +269,14 @@ export const AboutUsForm = () => {
         }
 
         axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs",restaurantAbout,{ headers: authHeader() }).then(data=>{
-            console.log("Entry access sucessfull")
+          //  console.log("Entry access sucessfull")
             window.location.reload(false);
             setOpen(false);
 
     })
     .catch(error =>{
-        console.log(restaurantAbout)
-        console.log("There is an error")
+        //console.log(error)
+        console.log("There is an error", error)
 
     })
     }
@@ -350,7 +348,7 @@ export const AboutUsForm = () => {
 // ----------------contact details form----------------------------------
 export const ContactForm = () => {
 
-  const navigate = useNavigate();
+//  const navigate = useNavigate();
 
 
     const [open, setOpen] = React.useState(false);
@@ -392,13 +390,13 @@ export const ContactForm = () => {
 
         axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo,{ headers: authHeader() })
         .then(data=>{
-            console.log("Entry access sucessfull")
+            //console.log("Entry access sucessfull")
             window.location.reload(false);
             setOpen(false);
 
         })
         .catch(error =>{
-            console.log("There is an error")
+            console.log("There is an error", error)
 
         })
     };

@@ -2,12 +2,6 @@ import React, { useEffect } from "react";
 import { Box } from '@mui/material';
 import Carousel from '../carousel/carousel';
 
-import image1 from '../../assets/images/food categories/1.jpg';
-import image2 from '../../assets/images/food categories/2.jpg';
-import image3 from '../../assets/images/food categories/3.webp';
-import image4 from '../../assets/images/food categories/4.jpg';
-import image5 from '../../assets/images/food categories/5.jpg';
-
 import axois from "axios";
 import AuthService from '../../services/auth-service';
 
@@ -18,55 +12,7 @@ import authHeader from "../../services/auth-header";
 
 // ----------------------for the caousel----------------------
 
-const item1 = [
-  {
-    "id": "1",
-    "title": "All day breakfast",
-    "image": image1,
-    "decription": "",
-    "name": "view",
-    "name2": "Edit",
-    "name3": "Delete"
-  },
-  {
-    "id": "2",
-    "title": "Rise",
-    "image": image2,
-    "decription": "",
-    "name": "view",
-    "name2": "Edit",
-    "name3": "Delete"
-  },
-  {
-    "id": "3",
-    "title": "Sea Foods",
-    "image": image3,
-    "decription": "",
-    "name": "view",
-    "name2": "Edit",
-    "name3": "Delete"
-  },
-  {
-    "id": "4",
-    "title": "Drinks",
-    "image": image4,
-    "decription": "",
-    "name": "view",
-    "name2": "Edit",
-    "name3": "Delete",
-  },
-  {
-    "id": "5",
-    "title": "Soup",
-    "image": image5,
-    "decription": "",
-    "name": "view",
-    "name2": "Edit",
-    "name3": "Delete"
-  }
-]
 
-const title = "Menu";
 const itemcount = 4;
 const bgcolor1 = "theme.Colours.secondary";
 
@@ -83,8 +29,7 @@ var menuId = null;
 const RestaurantMenu = (props) => {
 
   resId = props.rId;
-  console.log(resId);
-
+  
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
 
@@ -97,8 +42,6 @@ const RestaurantMenu = (props) => {
 
 
   useEffect((event) => {
-
-    
 
     if (JSON.parse(localStorage.getItem('ROLE'))) {
       ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
@@ -124,6 +67,7 @@ const RestaurantMenu = (props) => {
           console.log(error);
 
         });
+        
 
     }
     else {

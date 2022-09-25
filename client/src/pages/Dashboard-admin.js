@@ -21,7 +21,6 @@ import '../assets/css/Dashboard-admin.css';
 
 import axios from 'axios';
 
-import AuthService from '../services/auth-service';
 import authHeader from '../services/auth-header';
 
 

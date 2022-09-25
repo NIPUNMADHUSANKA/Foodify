@@ -78,10 +78,10 @@ function RestaurantRatingForm() {
     const [formValues, setFormValues] = React.useState(initialValues);
 
     // ----------create state name form errors--------
-    const [formErrors, setFormErrors] = React.useState({});
+   // const [formErrors, setFormErrors] = React.useState({});
 
     // -------------usestate for submit form-----------
-    const [isSubmit, setIsSubmit] = React.useState(false);
+  //  const [isSubmit, setIsSubmit] = React.useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -96,12 +96,12 @@ function RestaurantRatingForm() {
 
         axios.post("http://localhost:8072/FoodiFy/User/addRestaurantComment", restaurantcomment, { headers: authHeader() })
         .then(data => {
-            console.log("Entry access sucessfull");
+            //console.log("Entry access sucessfull");
             window.location.reload(false);
         })
         .catch(error => {
              errors.exists = error.response.data;
-             setFormErrors(errors);
+           //  setFormErrors(errors);
 
         })
 

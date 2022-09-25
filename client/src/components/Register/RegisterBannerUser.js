@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
-import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -115,18 +114,18 @@ const RegisterBannerUser = () => {
           if (error.response.data) {
 
             error.response.data.fieldErrors.forEach(fieldError => {
-              console.log(error.response.data)
+              //console.log(error.response.data)
 
               if (fieldError.field == 'userName') {
-                console.log(fieldError.field)
+                //console.log(fieldError.field)
                 errors.userName = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+               // console.log(formErrors);
               } else if (fieldError.field == 'email') {
-                console.log(fieldError.field)
+               // console.log(fieldError.field)
                 errors.email = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+               // console.log(formErrors);
               }
 
 

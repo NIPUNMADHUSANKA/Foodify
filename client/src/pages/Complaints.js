@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
+import { Box } from '@mui/material';
 
 
 import PageTitle from '../components/User/PageTitle';

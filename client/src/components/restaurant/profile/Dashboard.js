@@ -58,7 +58,7 @@ const tableSx = {
   }
 }
 
-const theme = createTheme({
+/*const theme = createTheme({
   palette: {
     success:{
       main: '#95CD41'
@@ -70,7 +70,7 @@ const theme = createTheme({
       main: '#f44336'
     }
   },
-});
+});*/
 
 //----------------------------------------------------------Pagination function
 function TablePaginationActions(props) {

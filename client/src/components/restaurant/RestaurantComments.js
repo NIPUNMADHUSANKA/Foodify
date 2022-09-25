@@ -19,7 +19,7 @@ var ROLE = null;
 // -------using props to put random images using props------------------------
 const RestaurantCemments = (props) => {
 
-  console.log(props.comments)
+//  console.log(props.comments)
 
   const data = props.comments;
 

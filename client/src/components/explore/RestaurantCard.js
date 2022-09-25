@@ -1,7 +1,7 @@
 import image from '../../assets/images/foodimages/indian-food-served-on-table.jpg'
 
 import React, { useState } from 'react';
-import { ThemeProvider, Stack, Typography, Button, Badge, styled } from '@mui/material';
+import { ThemeProvider, Stack, Typography, Badge, styled } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

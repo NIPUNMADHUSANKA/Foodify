@@ -1,7 +1,6 @@
 package Foodify.Backend.service;
 
 
-import Foodify.Backend.model.FoodItem;
 import Foodify.Backend.model.OrderItem;
 import Foodify.Backend.model.ShoppingCart;
 import Foodify.Backend.repository.ShoppingCart_Repository;
@@ -29,7 +28,7 @@ public class ShopCartServiceImp implements ShopCartService{
 //        -----------------newly send food item---------------------
         OrderItem foodItem = orderItem;
         int price2 = 0;
-        int price3 = 0;
+        //int price3 = 0;
 
         if(shoppingCart == null){
             cart = new ShoppingCart();

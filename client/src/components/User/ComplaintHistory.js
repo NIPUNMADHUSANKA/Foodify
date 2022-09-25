@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+import List from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { FixedSizeList } from 'react-window';
 import authHeader from '../../services/auth-header';
 import axois from "axios";
-
+import { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 
 
 function ComplaintHistory() {
   const [complainhis, setData2] = useState([]);
-  console.log(complainhis);
+ // console.log(complainhis);
   const x = complainhis;
 
   useEffect((event) => {
@@ -25,7 +23,7 @@ function ComplaintHistory() {
         // this part if sucess
         const details = data.data;
         setData2({ ...details });
-        console.log(details);
+        //console.log(details);
         // details.array.forEach(element => {
         //   Object.entries(element).forEach(([key , value]) => 
 
