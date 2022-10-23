@@ -1,13 +1,10 @@
 package Foodify.Backend.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import Foodify.Backend.model.*;
+import Foodify.Backend.repository.*;
 import org.apache.commons.io.FilenameUtils;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
@@ -22,12 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import Foodify.Backend.exception.FoodMenuException;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.repository.FoodCategoryRepo;
-import Foodify.Backend.repository.FoodItem_Repository;
-import Foodify.Backend.repository.FoodMenuRepo;
-import Foodify.Backend.repository.OffersRepository;
-import Foodify.Backend.repository.Registered_Customer_Repository;
-import Foodify.Backend.repository.RestaurantCommentRepository;
 
 import java.io.Console;
 import java.io.IOException;
@@ -70,6 +61,10 @@ public class RestaurantService implements Restaurantserv{
 	
 	@Autowired
 	private RestaurantCommentRepository restaurantCommentRepository;
+
+	@Autowired
+	private RestaurantRepository restaurantRepository1;
+
 	
 	@Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
@@ -431,13 +426,40 @@ public class RestaurantService implements Restaurantserv{
 			return resComments;
 		}
 
-
+//-----------------------to get foodItem details to display in order page---------------------------
 	@Override
-	public FoodItem getOrderFood(String foodId) {
+	public Map getOrderFood(String foodId,String restId) {
 
+//		--------------get the food item--------------------------------
 		FoodItem food = foodItems.findByid(foodId);
+		LocalDate endDate = null;
+
+//		----------find restaurant user name----------------
+		Restaurant restaurant = restaurantRepository1.findByid(restId);
+		String restUsername = restaurant.getUserName();
+//		--------------get discount expire date-------------------------
+		List<Offers> offers = offersRepo.findByuserName(restUsername);
+
+//		looping offers
+		for(int i=0;i<offers.size();i++){
+			List<String> itemsList = offers.get(i).getItems();
+			LocalDate edate = offers.get(i).getEndDate();
+//			looping items in an offer
+			for(int j=0;j<itemsList.size();j++){
+				String itemId = itemsList.get(j);
+				if(Objects.equals(itemId, foodId)){
+					System.out.println(foodId);
+					endDate = edate;
+				}
+			}
+		}
+
+//		-----------------sending final data as map-------------------
+		Map mapFinal = new HashMap();
+		mapFinal.put("foodItems",food);
+		mapFinal.put("endDate",endDate);
 //		food.setImage(Base64.getEncoder().encodeToString(food.getImage().getData()));
-		return food;
+		return mapFinal;
 	}
 
 

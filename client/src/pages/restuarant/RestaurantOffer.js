@@ -141,7 +141,7 @@ const RestaurantOffer = () => {
     const eDate1 = new Date(Edate1);
 
     // console.log(date.toString());
-
+// 
     return (
 
         // ------main box----------------
