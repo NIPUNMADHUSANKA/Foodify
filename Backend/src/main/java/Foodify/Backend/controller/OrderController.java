@@ -19,9 +19,6 @@ import java.util.List;
 @RestController
 public class OrderController {
 
-    @Autowired
-    private Order_Repository order_repository;
-
     @Autowired(required = false) //error debugged by false
     private Order_Service order_service;
 
@@ -32,7 +29,7 @@ public class OrderController {
         return detailed;
     }
 
-    @GetMapping("Foodify/Admin/Orders/All")
+    @GetMapping("/Foodify/Admin/Orders/All")
     public List<Order> ordersAll(){
         List<Order> detailed =  order_service.getDetailedOrders();
 //        List<Order> detailed =  order_repository.findByUser(userId);

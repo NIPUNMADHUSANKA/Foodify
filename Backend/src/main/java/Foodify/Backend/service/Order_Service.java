@@ -1,6 +1,5 @@
 package Foodify.Backend.service;
 
-//import Foodify.Backend.model.Item;
 import Foodify.Backend.model.*;
 import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.Order_Repository;
@@ -14,7 +13,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
-//import static sun.nio.ch.DatagramChannelImpl.AbstractSelectableChannels.forEach;
 
 @Service
 public class Order_Service implements Order_Serv{
@@ -49,16 +47,14 @@ public class Order_Service implements Order_Serv{
 			double price = 0;
 			Restaurant res = restaurantRepository.findByid(order.getResId());
 			order.setResId(res.getRestaurantName());
-//			order.setUser(details.toString());
+
 			for (int i = 0; i < details.size(); i++){
 				LinkedHashMap x = (LinkedHashMap) details.get(i);
 				FoodItem item = foodItem_repository.findByid(x.get("item").toString());
 				x.put("name",item.getName());
 				x.put("price",item.getPrice());
 				x.put("discount",item.getDiscount());
-//				x.put("res", res);
 				price += (((double)x.get("price")) * ((int)x.get("quantity"))) - (int)x.get("discount");
-
 			}
 			order.setPrice((float) price);
 		}
@@ -76,7 +72,6 @@ public class Order_Service implements Order_Serv{
 			order.setResId(res.getRestaurantName());
 			Optional<Registered_Customer> user = registered_customer_repository.findById(order.getUser());
 			order.setUser(user.get().getuserName());
-//			order.setUser(details.toString());
 			for (int i = 0; i < details.size(); i++){
 				LinkedHashMap x = (LinkedHashMap) details.get(i);
 				FoodItem item = foodItem_repository.findByid(x.get("item").toString());
@@ -85,7 +80,6 @@ public class Order_Service implements Order_Serv{
 				x.put("discount",item.getDiscount());
 				x.put("res", user);
 				price += (((double)x.get("price")) * ((int)x.get("quantity"))) - (int)x.get("discount");
-
 			}
 			order.setPrice((float) price);
 		}

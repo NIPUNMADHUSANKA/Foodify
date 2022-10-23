@@ -1,4 +1,4 @@
- package Foodify.Backend.request;
+package Foodify.Backend.request;
 
 public class AuthenticationRequest {
 

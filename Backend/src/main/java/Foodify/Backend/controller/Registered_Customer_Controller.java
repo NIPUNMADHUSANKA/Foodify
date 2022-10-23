@@ -26,6 +26,8 @@ import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.service.Registered_Customer_Sev;
 
+import java.util.List;
+
 //using cross origin annotation to communicate with react.js and spring
 
 @RestController
@@ -56,11 +58,6 @@ public class Registered_Customer_Controller {
 //	----------to response entity, use response object----------
 	@PostMapping("/Register/Signupuser")
 	public ResponseEntity<?> createUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
-		
-//		RegCusRepo.save(registeredCustomer);
-		
-		
-//		RegCusServ service = new RegCusServ();
 		
 		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
 		
@@ -110,7 +107,14 @@ public class Registered_Customer_Controller {
 		return count;				
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
-	
+
+	@GetMapping("/Foodify/Admin/Users/All")
+	public List<Registered_Customer> usersAll(){
+		return RegCusRepo.findAll();
+	}
+
+//	@PostMapping("/Foodify/Admin/Block/{userId}")
+//	public Boolean Block(@PathVariable ("userId") String userId){ return RegCusRepo.blockUser(userId); }
 
 	
 
