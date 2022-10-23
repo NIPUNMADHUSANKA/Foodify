@@ -5,6 +5,14 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import { FixedSizeList } from 'react-window';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Typography from '@mui/material/Typography';
+import ListItem from '@mui/material/ListItem';
+import Avatar from '@mui/material/Avatar';
 
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -103,6 +111,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+// ---------------notifiation start---------------------
+function renderRow(props) {
+  const { index, style } = props;
+
+  return (
+    <ListItem style={style} key={index} component="div" sx={{backgroundColor:Colours.white}} disablePadding>
+
+    <ListItem alignItems="flex-start">
+      
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+       
+        <ListItemText
+          primary={"Food Hut "}
+          secondary={
+            <React.Fragment>
+             
+              <Typography fontFamily="Poppins" variant="h7" >
+                Your order has been started
+              </Typography>
+              <Typography fontFamily="Poppins" varient="h8">9.00 AM</Typography>
+              <Divider sx={{marginTop:'5%',width:'100%'}} />  
+      
+            </React.Fragment>
+            
+          }
+
+        />
+
+      </ListItem>
+      
+
+    </ListItem>
+    
+  );
+}
+// ---------------notifiation end---------------------
 
 // ---------------navigation bar beginin---------------------
 export default function PrimarySearchAppBar() {
@@ -235,7 +281,19 @@ export default function PrimarySearchAppBar() {
   };
   //   ------------------End of the side drawer--------------------------------------
 
+  //   ------------------Notifications--------------------------------------
 
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -389,15 +447,49 @@ export default function PrimarySearchAppBar() {
             {/*------------------------------START Notification Icons-------------------------------------------------*/}
             {(() => {
               if (ROLE != null) {
-                return (<IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
+                return (<>
+                  <IconButton
+                      size="large"
+                      aria-label="show 1 new notifications"
+                      color="inherit"
+                      backgroundColor="#FFFFFF"
+                    >
+                      <Badge badgeContent={1} color="error">
+                        <NotificationsIcon aria-describedby={id} variant="contained" style={{ color:Colours.white }} onClick={handleClick} />
+                      </Badge>
+                    </IconButton>
+            
+                  <Popover
+             
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+            
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                  >
+               <Box
+                 
                 >
-                  <Badge badgeContent={17} color="error">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>);
+                  <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={106}
+                    itemCount={100}
+                    overscanCount={5}
+                  >
+                    {renderRow}
+                  </FixedSizeList>
+                </Box>
+                  </Popover>
+                </>);
               }
             }
             )()}
