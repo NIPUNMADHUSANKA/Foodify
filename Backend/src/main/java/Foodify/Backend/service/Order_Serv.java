@@ -13,4 +13,6 @@ public interface Order_Serv {
 
 	List<Order> getDetailedOrders();
 
+	public String setOrder(Order order,String userName);
+
 }

@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import authHeader from "../../services/auth-header";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 
@@ -41,6 +42,8 @@ const Userorderform = (props) => {
   console.log(Date1);
   console.log(Time1);
 
+  const navigate = useNavigate();
+
   // ----------------------------end of time picker---------------------------------------
 
       // -----------------adding Order--------------------
@@ -54,10 +57,18 @@ const Userorderform = (props) => {
                 const orderData = new FormData();
                 orderData.append('date1', Date1);
                 orderData.append('time1', Time1);
+
+                const order = {
+                  "orderDate":datePickerValue,
+                  "orderTime":timePickerValue
+                }
+
+                console.log(orderData);
                 // setItemData(itemData);
 
-                const resp2 = await axios.post(`http://localhost:8072/FoodiFy/Service/getOfferItems`, orderData,{ headers: authHeader() });
-
+                const resp2 = await axios.post("http://localhost:8072/FoodiFy/User/setOrder", order,{ headers: authHeader() });
+                console.log("success");
+                navigate("/restaurant")
                 // const details2 = resp2.data;
                 // setDetails2({ ...details2 });
 
@@ -304,7 +315,7 @@ const Userorderform = (props) => {
           </Box>
 
           <Box display="flex">
-            <Button xs={12} sm={6} href='#' variant="contained" sx={{
+            <Button xs={12} sm={6} onClick={makeOrder} variant="contained" sx={{
               marginLeft: '30%',
               marginTop: '10%',
               background: Colours.green, '&:hover': {

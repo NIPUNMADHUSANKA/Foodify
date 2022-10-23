@@ -7,12 +7,12 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,6 +35,27 @@ public class OrderController {
 //        List<Order> detailed =  order_repository.findByUser(userId);
         return detailed;
     }
+
+//    ----------------------to make the order--------------------------------
+@PostMapping("/FoodiFy/User/setOrder")
+public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+    String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+    try {
+
+        return new ResponseEntity<>(order_service.setOrder(order,userName), HttpStatus.OK);
+
+    } catch (Exception e) {
+
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+    }
+
+//		return null;
+}
 
 
 

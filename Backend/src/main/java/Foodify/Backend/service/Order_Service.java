@@ -1,13 +1,11 @@
 package Foodify.Backend.service;
 
 import Foodify.Backend.model.*;
-import Foodify.Backend.repository.FoodItem_Repository;
-import Foodify.Backend.repository.Order_Repository;
-import Foodify.Backend.repository.Registered_Customer_Repository;
-import Foodify.Backend.repository.RestaurantRepository;
+import Foodify.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,6 +26,9 @@ public class Order_Service implements Order_Serv{
 
 	@Autowired
 	private Registered_Customer_Repository registered_customer_repository;
+
+	@Autowired
+	private ShoppingCart_Repository ShoppingCartRepo;
 
 	@Override
 	public List<Order> findByUser(String UserId){
@@ -84,5 +85,40 @@ public class Order_Service implements Order_Serv{
 			order.setPrice((float) price);
 		}
 		return undetailedOrders;
+	}
+
+//	------------------------setting up order------------------------------------
+	@Override
+	public String setOrder(Order order, String userName) {
+
+//		-----------------get the shopping cart and get the items----------------------
+		ShoppingCart shoppingCart = ShoppingCartRepo.findByuserName(userName);
+		List<OrderItem> items = shoppingCart.getItems();
+
+		String restaurantId = null;
+
+		System.out.println(order.getOrderDate());
+		System.out.println(order.getOrderTime());
+
+//		----------setting up RID----------------
+		for(OrderItem item : items){
+			restaurantId = item.getRestaurantId();
+		}
+
+//		--------setting up order details-----------------
+		order.setItems(items);
+		order.setResId(restaurantId);
+		order.setPrice(shoppingCart.getPrice());
+		order.setUserName1(userName);
+
+		order_repository.save(order);
+		items.clear();
+		shoppingCart.setItems(items);
+		shoppingCart.setPrice(0);
+		ShoppingCartRepo.save(shoppingCart);
+
+//		offers.setStartDate(LocalDate.parse(Bdate));
+//		offers.setEndDate(LocalDate.parse(Edate));
+		return null;
 	}
 }

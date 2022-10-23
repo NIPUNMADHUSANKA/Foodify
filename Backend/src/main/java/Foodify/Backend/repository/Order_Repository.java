@@ -27,7 +27,7 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 
 	Offers findByid(String id);
 
-	List<Offers> findByuserName(String user);
+	List<Offers> findByuserName1(String user);
 	
 }
 
