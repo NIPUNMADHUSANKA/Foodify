@@ -35,7 +35,7 @@ const logout = () => {
 
 
 const getCurrentUser = () => {
-  console.log(localStorage.getItem("TOKEN"));
+  //console.log(localStorage.getItem("TOKEN"));
   return JSON.parse(localStorage.getItem("TOKEN"));
 };
 

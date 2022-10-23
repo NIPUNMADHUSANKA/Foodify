@@ -4,12 +4,7 @@ import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { color } from '@mui/system';
-import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
-import AuthService from '../../services/auth-service';
-import UserService from '../../services/user-service';
+import { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 import axios from 'axios';
 import authHeader from "../../services/auth-header";
 
@@ -29,7 +24,7 @@ function ComplainAdd() {
     console.log(formValues);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    // console.log(date);
+    console.log(date);
     
     // const Imagedata = new FormData();
     
@@ -37,8 +32,8 @@ function ComplainAdd() {
       restauratId: formValues.Resturant_Name,
       complainTitle: formValues.Complaint_Title,
       complainDescription: formValues.Complaint,
-      complainStatus:"pending",
-      addedDate:"2022-04-05",
+      complainStatus:"accepted",
+      addedDate:date,
       // image:imageData
      
     }
@@ -48,7 +43,7 @@ function ComplainAdd() {
      imageData.append('complainTitle',formValues.Complaint_Title);
      imageData.append('complainDescription',formValues.Complaint);
      imageData.append('complainStatus',"pending");
-     imageData.append('addedDate',"2022-04-05");
+     imageData.append('addedDate',date);
      console.log(imageData);
 
     console.log(authHeader());

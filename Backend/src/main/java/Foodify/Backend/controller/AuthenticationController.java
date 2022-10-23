@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import Foodify.Backend.request.AuthenticationRequest;
 import Foodify.Backend.service.UserService;
 import Foodify.Backend.util.JwtUtil;
-import Foodify.Backend.service.Response.LoginResponse;
-import Foodify.Backend.service.Response.UserInfo;
+import Foodify.Backend.Response.LoginResponse;
+import Foodify.Backend.Response.UserInfo;
 import Foodify.Backend.repository.UserRepository;
 
 @RestController

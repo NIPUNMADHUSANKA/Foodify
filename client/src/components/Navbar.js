@@ -22,6 +22,12 @@ import Logo from '../assets/icons/foodify-logo.png';
 
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+// ------------------for the side drawer----------
+import Drawer from '@mui/material/Drawer';
+import OrderSideDrawer from '../components/restaurant/OrderSideDrawer';
+import { Colours } from '../assets/theme/theme';
 
 
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
@@ -45,7 +51,7 @@ const mobileMenu = {
 
 const userMenu = {
   marginTop: "55px",
-  '& .MuiMenuItem-root' : {
+  '& .MuiMenuItem-root': {
     fontSize: 12,
     color: 'White'
   },
@@ -98,7 +104,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
+// ---------------navigation bar beginin---------------------
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -114,7 +120,7 @@ export default function PrimarySearchAppBar() {
     localStorage.removeItem("ROLE");
 
     ROLE = null
-    
+
     navigate("/Explore");
 
   };
@@ -156,7 +162,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
       sx={userMenu}
     >
-      <MenuItem component={Link} to = "/myprofile">
+      <MenuItem component={Link} to="/myprofile">
         PROFILE
       </MenuItem>
 
@@ -206,9 +212,43 @@ export default function PrimarySearchAppBar() {
   );
 
 
+  // -----------------cutomise drawer-------------------------------------
+  const SideDrawer = styled(Drawer)({
+    '.MuiDrawer-paper': {
+      background: Colours.gray3,
+      borderRadius: "360px 0px 0px 360px",
+
+    }
+  });
+  // -------------------------------------------------------------------------
+
+  // --------------------for the side drawer----------------------------------------------
+  const [state, setState] = React.useState({ right: false });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  //   ------------------End of the side drawer--------------------------------------
+
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+
+      {/* ----------------for the side drawer-------------- */}
+      <SideDrawer
+        anchor={'right'}
+        open={state['right']}
+        onClose={toggleDrawer('right', false)}
+      >
+        <OrderSideDrawer />
+      </SideDrawer>
+      {/* ---------------end of ide drawer----------------- */}
       <AppBar position="static" style={{ background: '#000', boxShadow: '0 10 5 0 rgba(0,0,0,0.75)' }}>
         <Toolbar>
 
@@ -225,7 +265,7 @@ export default function PrimarySearchAppBar() {
           {(() => {
             if (JSON.parse(localStorage.getItem('ROLE'))) {
               ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-              console.log(ROLE)
+
             }
           }
           )()}
@@ -363,10 +403,24 @@ export default function PrimarySearchAppBar() {
             )()}
             {/*------------------------------END Notification Icons-------------------------------------------------*/}
 
+            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
+            {/* -------------------------shopping cart------------------------- */}
+            {(() => {
+              if (ROLE === "User" || ROLE === "premiumUser" || ROLE === "restaurant") {
+                return (
+                  <IconButton
+                    sx={{ my: 2, color: 'white', display: 'block', ml: 1 }} onClick={toggleDrawer('right', true)}>
+                    <ShoppingCartIcon />
+                  </IconButton>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Registered user and Premium Have this option-------------------------------------------------*/}
+
 
 
             {/*------------------------------START User Icons-------------------------------------------------*/}
-            
+
             {(() => {
               if (ROLE != null && ROLE != "admin" && ROLE != "restaurant") {
                 return (<IconButton
@@ -378,8 +432,8 @@ export default function PrimarySearchAppBar() {
                   color="inherit"
                   onClick={handleProfileMenuOpen}
 
-                  component = {Link} 
-                  to = "/myProfile"
+                  component={Link}
+                  to="/myProfile"
                 >
                   <AccountCircle />
                 </IconButton>);
@@ -398,7 +452,7 @@ export default function PrimarySearchAppBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <LogoutIcon onClick = {logout} />
+                  <LogoutIcon onClick={logout} />
                 </IconButton>);
               }
             }

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
+// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
@@ -81,11 +81,11 @@ export default function ScrollDialog(props) {
 
                 <DialogContent dividers={scroll === 'paper'} sx={{ background: Colours.primary }}>
                     {/* text area */}
-                    <DialogContentText
+                    {/* <DialogContentText
                         id="Nutrition_Content"
                         ref={descriptionElementRef}
                         tabIndex={-1}
-                    >
+                    > */}
                         {/* ---------------nutrition list----------------- */}
 
                         <Box sx={{
@@ -104,7 +104,7 @@ export default function ScrollDialog(props) {
                             <Typography variant='h6' sx={{
                                 color: Colours.green,
                                 textAlign: "center",
-                            }}>Nmber of servings</Typography>
+                            }}>Nmber of servings : 1</Typography>
 
                             {/* ---------------------------nutrition table------------------------ */}
                             <TableContainer component={Paper} sx={{
@@ -113,7 +113,7 @@ export default function ScrollDialog(props) {
                             }}>
 
                                 <Table sx={{ minWidth: "90%" }} aria-label="simple table">
-
+                                    {/* ----------------table head---------------- */}
                                     <TableHead>
                                         <TableRow>
                                             <TableCell style={rowstyle}>Type</TableCell>
@@ -122,6 +122,7 @@ export default function ScrollDialog(props) {
                                         </TableRow>
                                     </TableHead>
 
+                                    {/* -----------table body--------------------- */}
                                     <TableBody>
                                         {/* maping data */}
                                         {props.data.map((row) => (
@@ -129,22 +130,22 @@ export default function ScrollDialog(props) {
                                                 key={row.type}
                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             >
-                                                <TableCell component="th" scope="row" style={rowstyle}>
-                                                    {row.type}
-                                                </TableCell>
+                                                <TableCell component="th" scope="row" style={rowstyle}>{row.type}</TableCell>
                                                 <TableCell align="right" style={rowstyle}>{row.amount}</TableCell>
                                                 <TableCell align="right" style={rowstyle}>{row.percentage}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
+
                                 </Table>
+
                             </TableContainer>
                             {/* ------------------end of table------------------------------------- */}
 
 
                         </Box>
                         {/* ------------end of nitrition list-------------- */}
-                    </DialogContentText>
+                    {/* </DialogContentText> */}
 
                 </DialogContent>
                 {/* ---------end of content area---------------- */}

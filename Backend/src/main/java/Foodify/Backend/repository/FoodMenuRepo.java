@@ -13,9 +13,11 @@ import Foodify.Backend.model.FoodMenu;
 @Repository
 public interface FoodMenuRepo extends MongoRepository<FoodMenu,String>{
     
-    @Query("{'$and':[ {'userName': ?0}, {'foodMenuName':?1} ] }")
-	Optional<FoodMenu> findByResturantMenuExists(String userName, String foodMenuName);
+    @Query("{userName: ?0}")
+	Optional<FoodMenu> findByResturantMenuExists(String userName);
 
     List<FoodMenu> findByuserName(String userName);
+
+    FoodMenu findByid(String id);
     
 }

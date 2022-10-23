@@ -4,13 +4,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
-import EditIcon from '@mui/icons-material/Edit';
 import Slide from '@mui/material/Slide';
 import styled from '@emotion/styled';
-import UserService from '../../../services/user-service';
 
 import axios from "axios";
 import authHeader from "../../../services/auth-header";
+import { Link } from 'react-router-dom';
+
 
 
 // ----------for the transition of the form------------
@@ -91,9 +91,8 @@ function MenuForm() {
             foodMenuDes: formValues.foodMenuDes
         }
 
-        axios.post("http://localhost:8072/RegisteredUser/addFoodMenu", restaurantmenu, { headers: authHeader() })
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/addFoodMenu", restaurantmenu, { headers: authHeader() })
         .then(data => {
-            console.log("Entry access sucessfull");
             setFormValues(initialValues);
             setOpen(false);
         })
@@ -148,6 +147,28 @@ function MenuForm() {
             </Button>
 
 
+            <Button component={Link} to={'/AddFoodMenu'} sx={{
+                margin: '0.5rem',
+                marginBottom: 0,
+                marginTop: 4,
+                width: "15%",
+                background: Colours.yellow, '&:hover': {
+                    backgroundColor: Colours.green,
+                },
+                color: Colours.dark,
+                fontSize: '1rem',
+                hover: Colours.green,
+                borderRadius: "1rem",
+                Width: "20%",
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: '8px',
+                    padding: '2px',
+                    width: "25%",
+                },
+            }}>Add Food Category
+            </Button>
+
+
             {/* ---------------------------form------------------------- */}
             <Dialog
                 open={open}
@@ -169,8 +190,6 @@ function MenuForm() {
 
                         />
 
-
-                        <CustomTextField type="file" name='image' />
 
                         <CustomTextField
                             id="foodMenuName"
