@@ -32,7 +32,7 @@ const contactdetails = {
   "TpNumber": "011-2738920",
 }
 
-const comments1 = [
+const comments = [
   {
     "name": "Navod",
     "detail1": "This is a good restaurant",
@@ -101,6 +101,25 @@ const Restaurant = () => {
 
   // console.log(Data)
 
+  const [Data2, setData2] = useState([]);
+  
+  useEffect((event) => {
+
+
+
+    axois.get(`http://localhost:8072/FoodiFy/Service/getRestaurantCommentC`)
+      .then(data => {
+        // this part if sucess
+        // console.log(data.data);
+        // setRestId(data.data.id)
+        setData2(data.data)
+      })
+      .catch(error => {
+
+      });
+
+  }, []);
+
   const details1 = {
     "detail1": Data.about,
     "detail2": "",
@@ -113,7 +132,14 @@ const Restaurant = () => {
     "TpNumber": Data.telephone,
   }
 
+  const comments1 = {
+    "name": Data2.userName,
+    "detail1": Data2.commentDescription
+    ,
+  }
+
   localStorage.setItem("RestId", JSON.stringify(RestId));
+  console.log(Data2);
 
   return (
     <Box>
@@ -140,7 +166,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade big>
-        <RestaurantComment rId={id} comments={comments1} />
+        <RestaurantComment rId={id} comments={Data2} />
       </Fade>
 
       <Fade left>
