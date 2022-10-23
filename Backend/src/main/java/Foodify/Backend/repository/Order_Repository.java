@@ -1,6 +1,7 @@
 
 package Foodify.Backend.repository;
 
+import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Order;
 import Foodify.Backend.model.Registered_Customer;
 import org.bson.types.ObjectId;
@@ -23,6 +24,10 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 
 //	@Query(value ="{restaurant: ?0}")
 //	List<Order> findByRes(ObjectId RestaurantId);
+
+	Offers findByid(String id);
+
+	List<Offers> findByuserName(String user);
 	
 }
 

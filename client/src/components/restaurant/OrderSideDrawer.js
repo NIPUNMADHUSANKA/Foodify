@@ -52,7 +52,7 @@ const OrderSideDrawer = (anchor) => {
 
     // ----------------------for store price response data----------------------
     const [price, setPrice] = React.useState(0);
-
+// 
     var price1 = 0; 
 
     // -------------------to call shop cart data-----------------------------

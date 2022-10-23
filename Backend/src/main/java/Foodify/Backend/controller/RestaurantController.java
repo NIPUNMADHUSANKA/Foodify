@@ -364,12 +364,23 @@ public class RestaurantController {
 	}
 
 	/* -------------------------------- Get single food item for order view -------------------------------- */
-	@GetMapping("/FoodiFy/Service/getOrderFood/{id}")
-	public FoodItem getOrderFood(@PathVariable(value="id") String foodId) {
+	@PostMapping("/FoodiFy/Service/getOrderFood")
+	public ResponseEntity<?> getOrderFood(@RequestParam("foodId") String foodId,
+										  @RequestParam("restId") String restId) {
 
-		FoodItem food = foodItems.findByid(foodId);
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+		try {
 
-		return food;
+			return new ResponseEntity<>(service.getOrderFood(foodId,restId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+
+//		return null;
 	}
 
 	

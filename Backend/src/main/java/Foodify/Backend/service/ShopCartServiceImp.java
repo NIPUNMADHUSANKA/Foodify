@@ -134,7 +134,7 @@ public class ShopCartServiceImp implements ShopCartService{
         shoppingCart.setPrice(price);
         ShoppingCartRepo.save(shoppingCart);
 
-        System.out.println(price1);
+//        System.out.println(price1);
 
 //        -------------updated shop cart--------------
         ShoppingCart shoppingCart1 = ShoppingCartRepo.findByuserName(userName);
@@ -191,13 +191,13 @@ public class ShopCartServiceImp implements ShopCartService{
 //--------------------------------------------------------------------------------
         int price = shoppingCart.getPrice();
 //---------------setting restaurant details----------------------------
-        System.out.println(Rid);
+//        System.out.println(Rid);
 
         Restaurant restaurant1 = restaurantrepo.findByid(Rid);
         restaurantDetails.add(restaurant1.getRestaurantName());
         restaurantDetails.add(restaurant1.getAddress());
         restaurantDetails.add(restaurant1.getLocation());
-        System.out.println(restaurant1.getRestaurantName());
+//        System.out.println(restaurant1.getRestaurantName());
 
         Map mapFinal = new HashMap();
         mapFinal.put("foodItems",foodItemList);

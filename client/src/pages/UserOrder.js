@@ -102,9 +102,9 @@ const UserOrder = () => {
       </Backdrop>
       {/* -------------------back drop---------------------- */}
       <Box className='order-body-Style'>
-        <UserOrderBanner />
+        <UserOrderBanner details3={details3}/>
       </Box>
-      <UserOrderForm />
+      <UserOrderForm details1={details1} details2={details2} details3={details3} price={price}/>
 
 
     </Box>

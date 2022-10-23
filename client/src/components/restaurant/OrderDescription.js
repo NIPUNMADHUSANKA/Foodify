@@ -9,6 +9,9 @@ import {Link} from 'react-router-dom';
 const OrderDescription = (props) => {
 
     const details = props.details;
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = props.EndDate;
+    const eDate1 = new Date(Edate1);
     // console.log(details);
   return (
     
@@ -92,7 +95,26 @@ const OrderDescription = (props) => {
                 {details.description}
                 <br />
                 <br />
-                Discount: {details.discount}%
+                Discount: {(() => {
+                        if (todayDate < eDate1) {
+                            return (
+                                // num*price
+                                details.discount+"%"
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
+                    {(() => {
+                        if (todayDate > eDate1) {
+                            return (
+                                // num*price
+                                0+"%"
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
             </Typography>
 
         </Box>

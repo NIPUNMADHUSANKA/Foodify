@@ -76,7 +76,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const OrderFoodForm = (props) => {
 
-    // --------------------to show the message---------------
+    console.log(props)
+
+    // -------------------to show the message---------------
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -172,6 +174,10 @@ const OrderFoodForm = (props) => {
 
     };
 
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = props.EndDate;
+    const eDate1 = new Date(Edate1);
+
     return (
         // ------------main box------------------
         <Box sx={{
@@ -213,10 +219,20 @@ const OrderFoodForm = (props) => {
                 }}>
                     Amount to pay: Rs.
                     {(() => {
-                        if (num) {
+                        if (num && todayDate < eDate1) {
                             return (
                                 // num*price
                                 (num * props.orderdata.price) - (num * props.orderdata.price * (props.orderdata.discount / 100))
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
+                    {(() => {
+                        if (num && todayDate > eDate1) {
+                            return (
+                                // num*price
+                                (num * props.orderdata.price)
                                 // handleAmount(num*price)
                             );
                         }
