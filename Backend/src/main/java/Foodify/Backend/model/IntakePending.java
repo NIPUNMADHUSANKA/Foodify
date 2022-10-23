@@ -15,10 +15,10 @@ public class IntakePending {
     @Id
 	private String id;
     private String userName;
-
+    
     private String resturant;
     private String purches_time;
-    private String intake_time;
+    private String purches_date;
     
     private Double calaries;
     private Double fat;

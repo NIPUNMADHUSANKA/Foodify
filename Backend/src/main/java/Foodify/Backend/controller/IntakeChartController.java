@@ -2,6 +2,9 @@ package Foodify.Backend.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import Foodify.Backend.repository.IntakeChartRepository;
 import Foodify.Backend.repository.IntakeItemPending;
 import Foodify.Backend.repository.IntakePendingRepository;
 
+import Foodify.Backend.model.IntakePendingItem;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class IntakeChartController {
@@ -111,6 +115,126 @@ public class IntakeChartController {
 
         }
 
+	}
+
+
+    @GetMapping("/FoodiFy/Premium/removePendingItems/{id}")
+	public ResponseEntity<?> removePendingItems(@PathVariable(value="id") String removependingid) {
+		
+        Optional<IntakePendingItem> intakependingitem = intakePendingItemRepository.findById(removependingid);
+
+        List<IntakePendingItem> intakepending = intakePendingItemRepository.findBypending(intakependingitem.get().getPending());
+
+        if(intakepending.size()>1){
+            
+            Optional<IntakePending> pending = intakePendingRepository.findById(intakependingitem.get().getPending());
+
+             
+            //IntakePending pendingnew = new IntakePending();
+                
+            pending.get().setCalaries(pending.get().getCalaries() - intakependingitem.get().getCalaries());
+            pending.get().setCarbo(pending.get().getCarbo() - intakependingitem.get().getCarbo());
+            pending.get().setFat(pending.get().getFat() - intakependingitem.get().getFat());
+            pending.get().setProtein(pending.get().getProtein() - intakependingitem.get().getProtein());
+            pending.get().setPrice(pending.get().getPrice() - intakependingitem.get().getPrice());
+            
+            intakePendingRepository.save(pending.get());
+            intakePendingItemRepository.deleteById(removependingid);  
+            
+            return new ResponseEntity<>(pending, HttpStatus.OK);
+
+           //return null;
+            
+        }
+        else{
+            intakePendingRepository.deleteById(intakependingitem.get().getPending()); 
+            intakePendingItemRepository.deleteById(removependingid);  
+            return new ResponseEntity<>("Work", HttpStatus.OK);         
+        }
+
+        //System.out.println(intakepending.size());       
+        
+	}
+
+
+    @GetMapping("/FoodiFy/Premium/addPendingItems/{id}")
+	public ResponseEntity<?> acceptPendingItems(@PathVariable(value="id") String acceptpendingid) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        IntakeChart intakeChart = intakeChartRepository.findByuserName(userName);
+
+        Optional<IntakePendingItem> intakependingitem = intakePendingItemRepository.findById(acceptpendingid);
+        
+        intakeChart.setCalaries(intakeChart.getCalaries() + intakependingitem.get().getCalaries());
+        intakeChart.setFat(intakeChart.getFat() + intakependingitem.get().getFat());
+        intakeChart.setProtein(intakeChart.getProtein() + intakependingitem.get().getProtein());
+        intakeChart.setCarbo(intakeChart.getCarbo() + intakependingitem.get().getCarbo());
+        
+        intakeChartRepository.save(intakeChart);
+		
+
+        List<IntakePendingItem> intakepending = intakePendingItemRepository.findBypending(intakependingitem.get().getPending());
+
+        if(intakepending.size()>1){
+            
+            Optional<IntakePending> pending = intakePendingRepository.findById(intakependingitem.get().getPending());
+
+             
+            //IntakePending pendingnew = new IntakePending();
+                
+            pending.get().setCalaries(pending.get().getCalaries() - intakependingitem.get().getCalaries());
+            pending.get().setCarbo(pending.get().getCarbo() - intakependingitem.get().getCarbo());
+            pending.get().setFat(pending.get().getFat() - intakependingitem.get().getFat());
+            pending.get().setProtein(pending.get().getProtein() - intakependingitem.get().getProtein());
+            pending.get().setPrice(pending.get().getPrice() - intakependingitem.get().getPrice());
+            
+            intakePendingRepository.save(pending.get());
+            intakePendingItemRepository.deleteById(acceptpendingid);  
+            
+            return new ResponseEntity<>(pending, HttpStatus.OK);
+
+           //return null;
+            
+        }
+        else{
+            intakePendingRepository.deleteById(intakependingitem.get().getPending()); 
+            intakePendingItemRepository.deleteById(acceptpendingid);  
+            return new ResponseEntity<>("Work", HttpStatus.OK);         
+        }
+ 
+        
+	}
+
+    @PostMapping("/FoodiFy/Premium/editPendingItems")
+	public ResponseEntity<?> editPendingItems(@Valid @RequestBody IntakePendingItem foodItem) {
+
+        String ID = foodItem.getId();
+        Double Quantity = foodItem.getQuantity();
+
+        Optional<IntakePendingItem> intakependingitem = intakePendingItemRepository.findById(ID);
+
+        Double calaries = (double)Math.round((intakependingitem.get().getCalaries() * Quantity) / intakependingitem.get().getQuantity());
+        Double fat = (double)Math.round((intakependingitem.get().getFat() * Quantity) / intakependingitem.get().getQuantity());
+        Double protein = (double)Math.round((intakependingitem.get().getProtein() * Quantity) / intakependingitem.get().getQuantity());
+        Double carbo = (double)Math.round((intakependingitem.get().getCarbo() * Quantity) / intakependingitem.get().getQuantity());
+
+        intakependingitem.get().setQuantity(Quantity);
+        intakependingitem.get().setCalaries(calaries);
+        intakependingitem.get().setFat(fat);
+        intakependingitem.get().setCarbo(carbo);
+        intakependingitem.get().setProtein(protein);
+        intakePendingItemRepository.save(intakependingitem.get());
+
+        String List_ID = intakependingitem.get().getPending();
+        
+        Optional<IntakePending> intakepending = intakePendingRepository.findById(List_ID);
+
+        intakepending.get().setCalaries(intakepending.get().getCalaries() - calaries);
+        intakepending.get().setFat(intakepending.get().getFat() - fat);
+        intakepending.get().setProtein(intakepending.get().getProtein() - protein);
+        intakepending.get().setCarbo(intakepending.get().getCarbo() - carbo);
+        intakePendingRepository.save(intakepending.get());
+        return null;        
 	}
 
 

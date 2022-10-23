@@ -290,12 +290,12 @@ export default function PrimarySearchAppBar() {
 
 
             {/*------------------------------START Only Premium Have these option-------------------------------------------------*/}
-            {(() => {
+            {/*{(() => {
               if (ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Image_Upload' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> IMAGE </Button>);
               }
             }
-            )()}
+          )()}*/}
             {(() => {
               if (ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Intake' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> CHART </Button>);

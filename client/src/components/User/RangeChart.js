@@ -4,6 +4,13 @@ import { useTheme, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
@@ -94,6 +101,10 @@ function TablePaginationActions(props) {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
+
+
+
+
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton
@@ -137,30 +148,28 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(id, resturant, purches_time, intake_time, Cal, Fat, Protein, Carbo, Price) {
-
-  
+function createData(id, resturant, purches_date, purches_time, Cal, Fat, Protein, Carbo, Price) {
 
   var Items = [];
 
-  axios.get("http://localhost:8072/FoodiFy/Premium/getPendingItems/"+id ,{ headers: authHeader() })
-  .then(data => {
+  axios.get("http://localhost:8072/FoodiFy/Premium/getPendingItems/" + id, { headers: authHeader() })
+    .then(data => {
 
-    const X = data.data;
+      const X = data.data;
 
-    Object.keys(X).map((key,index)=>{
-      Items.push(X[key]);
+      Object.keys(X).map((key, index) => {
+        Items.push(X[key]);
+      })
+
+    })
+    .catch(error => {
+      console.log(error)
     })
 
-  })
-  .catch(error => {
-    console.log(error)
-  })
-
-  return {    
+  return {
     resturant,
+    purches_date,
     purches_time,
-    intake_time,
     Cal,
     Fat,
     Protein,
@@ -171,6 +180,28 @@ function createData(id, resturant, purches_time, intake_time, Cal, Fat, Protein,
   };
 }
 
+
+const handleRemoveButton = (id) => {
+  axios.get("http://localhost:8072/FoodiFy/Premium/removePendingItems/" + id, { headers: authHeader() })
+    .then(data => {
+      console.log(data);
+      window.location.reload(true);
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+const handleAcceptButton = (id) => {
+  axios.get("http://localhost:8072/FoodiFy/Premium/addPendingItems/" + id, { headers: authHeader() })
+    .then(data => {
+      console.log(data);
+      window.location.reload(true);
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
 
 //----------------------------------------------------------Table Row Initialize and Sorting
 
@@ -183,7 +214,7 @@ axios.get("http://localhost:8072/FoodiFy/Premium/getPending", { headers: authHea
 
     Object.keys(X).map((key, index) => {
 
-      rows.push(createData(X[key].id, X[key].resturant, X[key].purches_time, X[key].intake_time, X[key].calaries, X[key].fat, X[key].protein, X[key].carbo, X[key].price))
+      rows.push(createData(X[key].id, X[key].resturant, X[key].purches_date, X[key].purches_time, X[key].calaries, X[key].fat, X[key].protein, X[key].carbo, X[key].price))
 
     })
 
@@ -193,9 +224,55 @@ axios.get("http://localhost:8072/FoodiFy/Premium/getPending", { headers: authHea
   })
 
 
+
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+
+  const initialValues = { foodItemQuantity: 0 };
+
+  const [opendialog, setOpendialog] = React.useState(false);
+
+  // ----------create state name form values--------
+  const [formValues, setFormValues] = React.useState(initialValues);
+
+  // -------function to handle changes in the input fields and set it to formvalues----------
+  const handleChange = (e) => {
+
+    // destructuring inputfield
+    const { name, value } = e.target;
+    // get the relavant name as key and assign value to it
+    setFormValues({ ...formValues, [name]: value });
+
+}
+
+  const handleClickOpen = () => {
+    setOpendialog(true);
+  };
+
+  const handleClose = () => {
+    setOpendialog(false);
+  };
+
+  const handleUpdate = (id) => {
+    
+    const foodItem = {
+      id: id,
+      quantity: formValues.foodItemQuantity
+    }
+    
+    axios.post("http://localhost:8072/FoodiFy/Premium/editPendingItems", foodItem, { headers: authHeader() })
+    .then(data => {
+        setFormValues(initialValues);
+        window.location.reload(true);
+    })
+    .catch(error => {
+         console.log(error);
+    })
+
+    
+
+  }
 
   return (
     <React.Fragment>
@@ -211,8 +288,8 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell >{row.resturant}</TableCell>
+        <TableCell >{row.purches_date}</TableCell>
         <TableCell >{row.purches_time}</TableCell>
-        <TableCell >{row.intake_time}</TableCell>
         <TableCell >{row.Cal}</TableCell>
         <TableCell >{row.Fat}</TableCell>
         <TableCell >{row.Protein}</TableCell>
@@ -258,9 +335,37 @@ function Row(props) {
                       <TableCell align="right">{detailsRow.protein}</TableCell>
                       <TableCell align="right">{detailsRow.carbo}</TableCell>
 
-                      <TableCell><Button component={Link} to='/restaurantorder' variant="contained" color="success" size="small">Add</Button></TableCell>
-                      <TableCell><Button variant="contained" color="warning" size="small">Edit</Button></TableCell>
-                      <TableCell><Button variant="contained" color="error" size="small">Remove</Button></TableCell>
+                      <TableCell><Button variant="contained" color="success" size="small" onClick={() => handleAcceptButton(detailsRow.id)}>Add</Button></TableCell>
+                      <TableCell><Button variant="contained" color="warning" size="small" onClick={handleClickOpen}>Edit</Button></TableCell>
+
+                      <TableCell><Button variant="contained" color="error" size="small" onClick={() => handleRemoveButton(detailsRow.id)}> Remove</Button></TableCell>
+
+                      <Dialog open={opendialog} onClose={handleClose}>
+                        <DialogTitle>FoodiFy</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            You can change the quantity of each food item, please enter your intake quantity in here. We
+                            will send updates occasionally.
+                          </DialogContentText>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="foodItem"
+                            name="foodItemQuantity"
+                            label="Quantity"
+                            type="number"
+                            fullWidth
+                            variant="standard"
+                            onChange={handleChange}
+                            value={formValues.foodItemQuantity}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Cancel</Button>
+                          <Button onClick={() => handleUpdate(detailsRow.id)}>Update</Button>
+                        </DialogActions>
+                      </Dialog>
+
                     </TableRow>
                   ))}
                 </TableBody>
@@ -269,6 +374,10 @@ function Row(props) {
           </Collapse>
         </TableCell>
       </TableRow>
+
+
+
+
     </React.Fragment>
   );
 }
@@ -282,8 +391,8 @@ function TableActions() {
   const columns = [
     { id: 'details', label: "#", maxWidth: 10 },
     { id: 'resturant', label: 'Resturant', minWidth: 200 },
+    { id: 'purches_time', label: 'Purches Date', minWidth: 150 },
     { id: 'purches_time', label: 'Purches Time', minWidth: 150 },
-    { id: 'intake_time', label: 'Add Intake Time', minWidth: 150 },
 
     { id: 'Cal', label: 'Total Cal(g)', minWidth: 50 },
     { id: 'Fat', label: 'Total Fat(g)', minWidth: 50 },
