@@ -177,9 +177,18 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
+//----------------------------------------------------------Blocking function
+function block(userId){
+  // try {
+    
+  // } catch (error) {
+    
+  // }
+}
+
 //----------------------------------------------------------Table Row Define
 function createData(userId,name ,type, location, telephone, email) {
-  const blockButton = <Button variant="outlined" color="error">Block</Button>
+  const blockButton = <Button variant="outlined" color="error" onClick={block(userId)}>Block</Button>
   console.log("Came Here")
   return { 
     userId, 
@@ -191,7 +200,6 @@ function createData(userId,name ,type, location, telephone, email) {
     blockButton,
   };
 }
-
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {

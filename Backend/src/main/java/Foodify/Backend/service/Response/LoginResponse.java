@@ -1,4 +1,4 @@
-package Foodify.Backend.Response;
+package Foodify.Backend.service.Response;
 
 public class LoginResponse {
 

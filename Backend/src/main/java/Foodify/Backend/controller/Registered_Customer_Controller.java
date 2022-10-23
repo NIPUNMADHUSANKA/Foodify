@@ -59,11 +59,6 @@ public class Registered_Customer_Controller {
 	@PostMapping("/Register/Signupuser")
 	public ResponseEntity<?> createUser(@Valid @RequestBody Registered_Customer registeredCustomer) {
 		
-//		RegCusRepo.save(registeredCustomer);
-		
-		
-//		RegCusServ service = new RegCusServ();
-		
 		ResponseEntity<Object> count = RegCusServ.validate("userName", "email",registeredCustomer.getuserName() , registeredCustomer.getEmail());
 		
 		String userName = registeredCustomer.getuserName();
@@ -117,6 +112,9 @@ public class Registered_Customer_Controller {
 	public List<Registered_Customer> usersAll(){
 		return RegCusRepo.findAll();
 	}
+
+//	@PostMapping("/Foodify/Admin/Block/{userId}")
+//	public Boolean Block(@PathVariable ("userId") String userId){ return RegCusRepo.blockUser(userId); }
 
 	
 

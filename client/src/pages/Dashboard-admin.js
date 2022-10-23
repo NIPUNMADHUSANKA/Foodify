@@ -21,7 +21,6 @@ import '../assets/css/Dashboard-admin.css';
 
 import axios from 'axios';
 
-import AuthService from '../services/auth-service';
 import authHeader from '../services/auth-header';
 
 
@@ -43,7 +42,6 @@ const Dashboard = () => {
         .then(data => {
             const users = data.data;
             setUsers({ ...users});
-            // console.log(users);
         })
         .catch(error => {
             if (error.response.data) {
@@ -67,7 +65,7 @@ const Dashboard = () => {
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(1);
+    const [value, setValue] = React.useState(0);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {

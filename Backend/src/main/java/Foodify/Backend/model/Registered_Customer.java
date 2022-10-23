@@ -1,8 +1,5 @@
 package Foodify.Backend.model;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @Getter
 @AllArgsConstructor
-//@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
 public class Registered_Customer{
 

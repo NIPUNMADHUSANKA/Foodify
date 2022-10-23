@@ -6,10 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,10 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import Foodify.Backend.request.AuthenticationRequest;
 import Foodify.Backend.service.UserService;
 import Foodify.Backend.util.JwtUtil;
-import Foodify.Backend.Response.LoginResponse;
-import Foodify.Backend.Response.UserInfo;
-import Foodify.Backend.model.AuthenticationResponse;
-import Foodify.Backend.model.Registered_Customer;
+import Foodify.Backend.service.Response.LoginResponse;
+import Foodify.Backend.service.Response.UserInfo;
 import Foodify.Backend.repository.UserRepository;
 
 @RestController
