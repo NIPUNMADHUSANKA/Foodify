@@ -19,8 +19,10 @@ import FolderIcon from '@mui/icons-material/Folder';
 import  '../../assets/css/Profile.css';
 import { fontFamily } from '@mui/system';
 import authHeader from '../../services/auth-header';
-import axois from "axios";
-
+import axios from "axios";
+import { TextareaAutosize } from '@mui/material';
+// import MultiSelectComponent from './multiselect';
+import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerLogo, BannerTitle, BannerTitle2,Userprofilephoto } from '../../assets/theme/RBanner';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -78,61 +80,139 @@ const top100Films = [
 
 ////////////////////////////////////////////////////////////
 
+
 export default function AddressForm() {
 
-  const [profileData, setData] = useState([]);
+  const frontendFrameworks = [
+    'React',
+    'Vue',
+    'Angular',
+    'Svelte',
+    'Ember',
+    'Preact'
+  ];
+  const [selection, setSelection] = useState([]);
 
+  useEffect(() => {
+    // Let's select a random element from the array while mounting the element for the first time
+    let randomSingleFramework =
+      frontendFrameworks[Math.floor(Math.random() * frontendFrameworks.length)];
+    setSelection([randomSingleFramework]);
+  }, []);
 
-  useEffect((event) => {
+  const [imageData, setImageData] = useState(null);
 
-    axois.get(`http://localhost:8072/FoodiFy/User/editprofile`, {headers: authHeader()})
-        .then(data => {
-            // this part if sucess
-            setData(data.data)
-            
-        })
-        .catch(error => {
-            console.log("There is an error");
-        });
+  const initialValues = {Telephone_No:"",City:"",Complaint:""};
+
+  const [formValues,setFormValues] = React.useState(initialValues);
+  const[isSubmit,setIsSubmit]=React.useState(false);
+
+  //sending data to the backend
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    console.log(formValues);
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    console.log(date);
+    
+    // const Imagedata = new FormData();
+    
+    const complain = {
+      restauratId: formValues.Telephone_No,
+      complainTitle: formValues.City,
+      
+      // image:imageData
+     
+    }
+    console.log(typeof(complain));
+    console.log(complain);
+     imageData.append('Telephone_No',formValues.Telephone_No);
+     imageData.append('City',formValues.City);
+     console.log(imageData);
+
+    console.log(authHeader());
+    axios.post("http://localhost:8072/FoodiFy/User/addprofiledetails", imageData,{ headers: authHeader() })
+            .then(data => {
+                console.log("Entry access sucessfull")
+                window.location.reload(false);
+               
+                
+            })
+            .catch(error => {
+                  console.log(error)
+                //  console.log("There is an error")
+
+            })
+
+  };
+
+  const handleChange = (e) =>{
+    const {name,value} = e.target;
+    setFormValues({ ...formValues,[name]:value});
+  }
+
+//sending data to image data
+  const handleUploadClick = event => {
+    let file = event.target.files[0];
+    const imageData = new FormData();
+    imageData.append('Image', file);
+    setImageData(imageData);
+
+    const {name,value} = event.target;
+    setFormValues({ ...formValues,[name]:value})
+    // setImagePreview(URL.createObjectURL(file));
+}
+
+const [profileData, setData] = useState([]);
+const profileImage=profileData.bImage;
+
+useEffect((event) => {
+
+  axios.get(`http://localhost:8072/FoodiFy/User/editprofile`, {headers: authHeader()})
+      .then(data => {
+          // this part if sucess
+          setData(data.data)
+          
+      })
+      .catch(error => {
+          console.log("There is an error");
+      });
 
 }, []);
-console.log(profileData);
-console.log(profileData.userName);
-  return (
-    <Container 
-    sx={{
-      backgroundColor:Colours.dark ,
-      width:'60%',
-      marginTop:'4%',
-      marginBottom:'4%',
-      borderRadius:"33px" 
-      }}>
-    
-      <Box sx={{paddingTop:'2%'}} >
-      <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ 
-          width: 126, 
-          height: 126 ,
-         margin:'auto',
-         }}   
-      />
-      <Box sx={{position:'absolute',marginLeft:'30%',marginTop:'-2%'}}>
-      <Stack>
-      <Avatar>
-        <FolderIcon />
-      </Avatar>
-      </Stack>
-      </Box>
-      </Box>
-          
-      <Typography sx={{fontFamily:"Poppins",marginLeft:"1%",marginBottom:"5%", marginTop:"2%",color:Colours.formWhite,fontWeight:''}} variant="h6" gutterBottom >
+
+return(
+  <Container 
+  sx={{
+    backgroundColor:Colours.dark ,
+    width:'40%',
+    marginTop:'4%',
+    marginBottom:'4%',
+    borderRadius:"33px",
+    paddingBottom:"2%",
+    paddingTop:"2%"
+   
+    }}>
+
+  <form onSubmit={handleSubmit} sx={{ mt: 1 }}>
+  <Typography sx={{fontFamily:"Poppins",marginLeft:"35%",marginBottom:"5%", marginTop:"0%",color:Colours.formWhite,fontWeight:''}} variant="h6" gutterBottom >
         Profile Details
       </Typography>
-      <Grid container spacing={3} sx={{color:Colours.formWhite}} >
-        <Grid item xs={12} >
-        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+  <Grid container spacing={3} sx={{ input: { color: "#fff" }, "label": {color: "#fff"}, p:"1%" }} >
+  
+  <Userprofilephoto 
+       src={ `data:image/jpeg;base64,${profileImage}`}
+  />
+ 
+  <TextField sx={{marginLeft:'50%'}} type="file" name='Image' onChange={handleUploadClick} />
+
+{/* <Button variant="contained" sx={{color:'#FFFFFF',backgroundColor:"#3E3E3E", '&:hover': {
+    backgroundColor: Colours.darkgray,
+  }}}>
+  Add a photo
+</Button> */}
+</Grid> 
+  <Grid item xs={12} >
+        <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
           User Name
       </Typography>
           <TextField
@@ -144,7 +224,6 @@ console.log(profileData.userName);
             },backgroundColor:Colours.transparenceGrey,
           
             }}
-            required
             id="userName"
             name="userName"
             placeholder={profileData.userName}
@@ -154,29 +233,8 @@ console.log(profileData.userName);
            
           />
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            sx={{ input: 
-            { color: Colours.formWhite }, 
-            "label": {color: Colours.formWhite},
-            "& label.Mui-focused": {
-            color:Colours.formWhite
-            },backgroundColor:Colours.transparenceGrey
-        
-            }}
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            fullWidth
-            autoComplete="family-name"
-            defaultValue="Abesinghe"
-            variant="filled"
-          />
-          
-        </Grid> */}
-        
         <Grid item xs={12}>
-          <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+          <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
               Email
           </Typography>
            <TextField
@@ -196,11 +254,38 @@ console.log(profileData.userName);
             variant="filled"
           />
         </Grid>
-        <Grid item xs={12}>
-        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
+
+    <Grid item xs={12}>
+        <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
               Telephone No
           </Typography>
-          <TextField
+           <TextField
+          sx={{ input: 
+            { color: Colours.formWhite }, 
+            "label": {color: Colours.formWhite,  fontFamily:'Poppins'},
+            "& label.Mui-focused": {
+            color:Colours.formWhite
+            },backgroundColor:Colours.transparenceGrey,
+          
+            }}
+            required
+            id="userName"
+            name="Telephone_No"
+            placeholder={profileData.telephone}
+            onChange={handleChange}
+          
+            fullWidth
+            autoComplete="given-name"
+            variant="filled"
+           
+          />
+    </Grid>
+
+    <Grid item xs={12}>
+    <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
+              Home Town
+    </Typography>
+        <TextField
             sx={{ input: 
               { color: Colours.formWhite }, 
               "label": {color: Colours.formWhite,fontFamily:'Poppins'},
@@ -209,17 +294,30 @@ console.log(profileData.userName);
               },backgroundColor:Colours.transparenceGrey
           
               }}
-            id="Telephone no"
-            name="Telephone no"
+            id="City"
+            name="City"
+            value={formValues.City}
+            onChange={handleChange}
             placeholder={profileData.location}
             fullWidth
-            autoComplete="Telephone no"
+            autoComplete="City"
             variant="filled"
           />
-        </Grid>
-        <Grid item xs={12} >
-        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
-              Home Town
+    </Grid>
+    <Grid item xs={12} sm={6} >
+        <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
+              Prefered food items
+          </Typography>
+         <Typography sx={{color: Colours.formWhite,fontFamily:'Poppins',marginLeft:"0%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
+          <p>Pizza</p>
+          <p>Veg soup</p>
+          <p>Pizza</p>
+          <p>Veg soup</p>
+          </Typography>
+      </Grid>
+      {/* <Grid item xs={12} sm={6} >
+        <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
+              Add food items
           </Typography>
           <TextField
             sx={{ input: 
@@ -232,130 +330,57 @@ console.log(profileData.userName);
               }}
             id="City"
             name="City"
-            placeholder={profileData.location}
+            value={formValues.City}
+            onChange={handleChange}
+            // placeholder={profileData.location}
             fullWidth
             autoComplete="City"
             variant="filled"
           />
-        </Grid>
+      </Grid> */}
 
-        <Grid item xs={12} sm={6} >
-        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
-              Prefered food items
-          </Typography>
-         <Typography sx={{fontFamily:'Poppins',marginLeft:"2%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
-          <p>Pizza</p>
-          <p>Veg soup</p>
-          <p>Pizza</p>
-          <p>Veg soup</p>
-          </Typography>
-        </Grid>
+      {/* <MultiSelectComponent
+        getOptionLabel={options => options}
+        label="Your framework of choice"
+        value={selection}
+        options={frontendFrameworks}
+        onChange={handleChange}
+        limitTags={3} // limits number of chip to render while out of focus, useful for responsiveness
+        getLimitTagsText={count => `+${count}📦`} // modify the limit tag text, useful for translation too
+        // filterOptions={}
+      /> */}
 
-        <Grid item xs={12} sm={6}>
-        <Typography variant="h4" gutterBottom sx= {{fontSize:{lg:"100%",xs:"100%"} }} >
-              Select favourite food items
-          </Typography>
-          <Autocomplete
-            multiple
-            id="checkboxes-tags-demo"
-            options={top100Films}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8,color: "#00e676" }}
-                  checked={selected}
-                />
-                {option.title}
-              </li>
-            )}
-            style={{ width: '100%', backgroundColor:Colours.transparenceGrey }}
-            renderInput={(params) => (
-              <TextField sx={{  input: 
-                { color: Colours.formWhite }, 
-                "label": {color: Colours.formWhite},
-                "& label.Mui-focused": {
-                color:Colours.formWhite
-                }, 
-                
-                }}
-              {...params} label="Checkboxes" placeholder="Favorites" />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} marginBottom={'2%'}>
-        <Button xs={12} sm={6} href='#' variant="contained" sx={{
-             marginLeft:'75%',
-              background: Colours.green, '&:hover': {
-                backgroundColor: Colours.yellow,
-               
-              },
-              color: Colours.dark,
-              fontSize: '20px',
-              fontFamily:'Poppins',
-              hover: Colours.yellow,
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '18px',
-                marginLeft:'0%',
-                width:'100%',
-               
+    
+     
+    
+     <Grid item xs={12} md={4}>
+    
 
-               
-              },
-            }}>
-              SAVE
-            </Button>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-        <Button xs={12} sm={6} href='#' variant="contained" sx={{
-              
-              background: Colours.darkgray, '&:hover': {
-                backgroundColor: Colours.grayWhite, color: Colours.dark,
-               
-              },
-              color: Colours.grayWhite,
-              fontSize: '20px',
-              fontFamily:'Poppins',
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '18px',
-                width:'100%',
-                marginBottom:'7%',
-                
-              },
-            }}>
-              CANCEL
-            </Button>
-          
-        </Grid>
 
-        <Grid item xs={12} sm={6}>
-        <Button xs={12} sm={6} href='#' variant="contained" sx={{
-              
-              background: Colours.darkgray, '&:hover': {
-                backgroundColor: Colours.grayWhite, color: Colours.dark,
-               
-              },
-              color: Colours.grayWhite,
-              fontSize: '20px',
-              fontFamily:'Poppins',
-              marginLeft:'85%',
-              marginBottom:'10%',
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '18px',
-                width:'100%',
-                marginBottom:'7%',
-                
-              },
-            }}>
-              UPGRADE
-            </Button>
-          
-        </Grid>
-       
-      </Grid>
-    </Container>
-  );
+    <Box mt="8%" marginLeft="35%"  display="flex" flexDirextion="row" >
+
+          <Button type="submit" variant="outlined" style={{marginRight:"5%", color:'#95CD41',borderColor: "#95CD41"
+          ,"&:hover": {
+          backgroundColor: "#15e577",
+          borderColor:"#564345"
+          } }}>
+          Update
+          </Button>
+
+          <Button variant="outlined" style={{color:'#FAC213', borderColor: "#FAC213",
+          "&:hover": {
+          backgroundColor: "#15e577",
+          borderColor:"#564345"
+          } }}>
+          Clear
+          </Button>
+
+    </Box>
+
+
+  </Grid>
+  </form>
+  </Container>
+)
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -36,7 +37,8 @@ public class Registered_Customer{
 	private String location;
 	private String email;
 	private String telephone;
-	
+	private Binary image;
+	private String bImage;
 //	-----------1.15.22---this is for after logged in-----------
 	private Object authorities;
 
@@ -107,6 +109,19 @@ public class Registered_Customer{
 
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
+	}
+	public Binary getImage() {
+		return image;
+	}
+	public Binary setImage(Binary image) {
+		return this.image = image;
+	}
+	
+	public String getbImage() {
+		return bImage;
+	}
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
 
 	//	toString method for user

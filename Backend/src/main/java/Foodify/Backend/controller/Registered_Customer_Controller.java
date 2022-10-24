@@ -1,33 +1,29 @@
 
 package Foodify.Backend.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.exception.fieldErrorResponse;
+import Foodify.Backend.model.Complain;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.service.Registered_Customer_Sev;
@@ -149,7 +145,32 @@ public class Registered_Customer_Controller {
 		regcustomer.setEmail(regcustomer.getEmail());
 		regcustomer.settelephone(regcustomer.gettelephone());
 		regcustomer.setlocation(regcustomer.getlocation());
+		regcustomer.setbImage(Base64.getEncoder().encodeToString(regcustomer.getImage().getData()));
 		return regcustomer;
 
 	}
+	
+	@PostMapping("/FoodiFy/User/addprofiledetails")
+	public ResponseEntity<?> uploadprofiledetails(
+    		@RequestParam("Image")MultipartFile file,
+    		@RequestParam("Telephone_No") String name1,
+    		@RequestParam("City") String name2) throws IOException {
+
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//		System.out.println(complain);
+
+		System.out.println(userName);
+		Registered_Customer regcustomerdetails = RegCusRepo.findByuserName(userName);
+
+		regcustomerdetails.settelephone(name1);
+		regcustomerdetails.setlocation(name2);
+		regcustomerdetails.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+		RegCusRepo.save(regcustomerdetails);
+		return null;
+
+	}
+	
+
+	
+	
 }
