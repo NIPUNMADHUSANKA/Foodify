@@ -302,12 +302,6 @@ export default function PrimarySearchAppBar() {
               }
             }
             )()}
-            {(() => {
-              if (ROLE === "premiumUser") {
-                return (<Button component={Link} to='/userprofile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> HISTORY </Button>);
-              }
-            }
-            )()}
             {/*------------------------------END Only Premium Have these option-------------------------------------------------*/}
 
             {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}

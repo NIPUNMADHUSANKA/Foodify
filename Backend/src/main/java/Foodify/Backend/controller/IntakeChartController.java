@@ -1,6 +1,7 @@
 package Foodify.Backend.controller;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Foodify.Backend.model.IntakeChart;
+import Foodify.Backend.model.IntakeChartHistory;
 import Foodify.Backend.model.IntakePending;
 import Foodify.Backend.repository.IntakeChartRepository;
+import Foodify.Backend.repository.IntakeHistoryRepository;
 import Foodify.Backend.repository.IntakeItemPending;
 import Foodify.Backend.repository.IntakePendingRepository;
 
@@ -30,6 +33,9 @@ public class IntakeChartController {
     
     @Autowired
     private IntakeChartRepository intakeChartRepository;
+
+    @Autowired
+    private IntakeHistoryRepository intakeHistoryRepository;
 
     @Autowired
     private IntakePendingRepository intakePendingRepository;
@@ -70,6 +76,17 @@ public class IntakeChartController {
             }
             else{
 
+                IntakeChartHistory intakeChartHistory = new IntakeChartHistory();
+
+                intakeChartHistory.setUserName(userName);
+                intakeChartHistory.setDate(intakeChart.getLastUpdate());
+                intakeChartHistory.setCalaries(intakeChart.getCalaries());
+                intakeChartHistory.setFat(intakeChart.getFat());
+                intakeChartHistory.setProtein(intakeChart.getProtein());
+                intakeChartHistory.setCarbo(intakeChart.getCarbo());
+
+                intakeHistoryRepository.save(intakeChartHistory);
+                
                 intakeChart.setLastUpdate(LocalDate.now().toString());
                 intakeChart.setCalaries(0.0);
                 intakeChart.setFat(0.0);
@@ -77,6 +94,7 @@ public class IntakeChartController {
                 intakeChart.setCarbo(0.0);
                 intakeChartRepository.save(intakeChart);
                 return new ResponseEntity<>(intakeChart, HttpStatus.OK);
+
             }
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -236,6 +254,25 @@ public class IntakeChartController {
         intakePendingRepository.save(intakepending.get());
         return null;        
 	}
+
+
+    @GetMapping("/FoodiFy/Premium/searchbydateintake/{date}")
+	public ResponseEntity<?> intakeChartDate(@PathVariable(value="date") Date filterdate) {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+       
+        Integer Year = (filterdate.getYear()+1900);
+        Integer Month = filterdate.getMonth()+1;
+        Integer DateNo = filterdate.getDate();
+        String date = Year.toString() + "-" +Month.toString()  + "-" + DateNo.toString();
+
+        try {
+            return new ResponseEntity<>(intakeHistoryRepository.findByDate(date,userName), HttpStatus.OK);   
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);   
+        }
+
+    }
 
 
 }

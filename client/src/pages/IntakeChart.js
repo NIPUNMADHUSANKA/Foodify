@@ -48,7 +48,7 @@ function IntakeChart() {
         // this part if sucess
 
         const details = data.data;
-        //   console.log(data);
+        
         setDetails({ ...details });
 
       })
