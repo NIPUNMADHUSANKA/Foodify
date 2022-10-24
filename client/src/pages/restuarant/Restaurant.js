@@ -107,7 +107,7 @@ const Restaurant = () => {
 
 
 
-    axois.get(`http://localhost:8072/FoodiFy/Service/getRestaurantComment/${id}`)
+    axois.get(`http://localhost:8072/FoodiFy/AllUser/getRestaurantComment/${id}`)
       .then(data => {
         // this part if sucess
         // console.log(data.data);

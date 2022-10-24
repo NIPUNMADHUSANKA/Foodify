@@ -54,13 +54,13 @@ public class FoodCommentController {
 		return foodComments;
 	}
 
-	@GetMapping("/FoodiFy/Service/getFoodComment/{id}")
-	public FoodComments getFoodComments(@PathVariable(value="id") String id) {
+	@GetMapping("/FoodiFy/AllUser/getFoodComment/{id}")
+	public List<FoodComments> getFoodComments(@PathVariable(value="id") String id) {
 
-		FoodComments foodComments = foodCommentRepository.findByid(id);
+//		FoodComments foodComments = foodCommentRepository.findByid(id);
 
 
-		return foodComments;
+		return foodCommentRepository.findByfoodId(id);
 	}
 
 }

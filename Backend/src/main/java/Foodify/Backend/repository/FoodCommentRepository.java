@@ -12,7 +12,7 @@ import java.util.List;
 public interface FoodCommentRepository extends MongoRepository<FoodComments,String> {
     FoodComments findByid(String id);
 
-    FoodComments findByfoodId(String foodId);
+    List<FoodComments> findByfoodId(String foodId);
 
     List<FoodComments> findByuserName(String userName);
 }
