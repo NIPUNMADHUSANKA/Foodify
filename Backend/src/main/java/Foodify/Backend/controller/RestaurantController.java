@@ -23,6 +23,7 @@ import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
+import Foodify.Backend.repository.RestaurantIncomeRepository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
@@ -58,6 +59,8 @@ public class RestaurantController {
 	@Autowired
 	private FoodCategoryRepo foodCategoryRepo;
 
+	@Autowired
+	private RestaurantIncomeRepository restaurantincomeRepo;
 	
 	@Autowired
 	private FoodItem_Repository foodItem_Repository;
@@ -590,5 +593,18 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 
 	return restaurant;
 }
+
+
+
+//---------------------------------------------get restaurant Income from resturant view-------------------------------------------------------
+@GetMapping("/FoodiFy/Restaurant/GetRestaurantIncome")
+public ResponseEntity<?>  getRestaurantIncome() {
+	
+	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+	return new ResponseEntity<>(restaurantincomeRepo.findByuserName(userName), HttpStatus.OK);
+
+}
+
 
 }
