@@ -100,7 +100,7 @@ const OrderFood = () => {
     var Fid = null;
     var discount = null;
     var Rid = RestId;
-    var foodId =location.state.id.id;
+    // var foodId =location.state.id.id;
     console.log(location.state);
 
     if (details1.image) {
@@ -204,7 +204,7 @@ const OrderFood = () => {
 
     useEffect((event) => {
 
-        axois.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${foodId}`)
+        axois.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${location.state.id.id}`)
           .then(data => {
             // this part if sucess
             console.log(data.data);
