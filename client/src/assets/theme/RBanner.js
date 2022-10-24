@@ -149,3 +149,19 @@ export const BannerButtonRow = styled(Box)(({theme}) => ({
         alignitems:'center',
     },
 })); 
+
+export const Userprofilephoto = styled('img')(({src,theme}) => ({
+    src: `url(${src})`,
+    display:"flex",
+    borderRadius: '50%',
+    width: '100px',
+    height: '100px',
+    margin:'1%',
+    zIndex:1,
+    marginLeft:'40%',
+    [theme.breakpoints.down('sm')]: {
+        width: '12%',
+        marginBottom:'0',
+        margin:'4%',
+    },
+}));

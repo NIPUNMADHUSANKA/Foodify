@@ -627,5 +627,32 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 
 	}
 
+@GetMapping("/FoodiFy/Service/Showfoods")
+public List<FoodItem> showfoods() {
+
+	List<FoodItem> fooditems = foodItem_Repository.findAll();
+	List<FoodItem> fooditemsList = new ArrayList<FoodItem>();
+
+	// System.out.println(restaurants);
+	//
+	for (int i = 8; i < fooditems.size(); i++) {
+		FoodItem fooditem = new FoodItem();
+
+//		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
+		fooditem.setName(fooditems.get(i).getName());
+		fooditem.setPrice(fooditems.get(i).getPrice());
+//		restaurant.setId(fooditems.get(i).getId());
+
+		fooditemsList.add(fooditem);
+
+	}
+
+	System.out.println(fooditemsList);
+	return fooditemsList;
+
+}
+
+
 
 }

@@ -14,10 +14,13 @@ public class FoodItem {
     private String catId;
     private String resId;
     private Double calaries;
-    private Double fat;
+    
+
+	private Double fat;
     private Double protein;
     private Double carbo;
     private Binary image;
+    private String bImage;
     
     private int discount;
 
@@ -96,6 +99,14 @@ public class FoodItem {
 
 	public void setDiscount(int discount) {
 		this.discount = discount;
+	}
+	
+	public String getbImage() {
+		return bImage;
+	}
+
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
     
 }
