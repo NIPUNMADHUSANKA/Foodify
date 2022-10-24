@@ -267,7 +267,12 @@ public class IntakeChartController {
         String date = Year.toString() + "-" +Month.toString()  + "-" + DateNo.toString();
 
         try {
-            return new ResponseEntity<>(intakeHistoryRepository.findByDate(date,userName), HttpStatus.OK);   
+            if(intakeHistoryRepository.findByDate(date,userName) != null){
+                return new ResponseEntity<>(intakeHistoryRepository.findByDate(date,userName), HttpStatus.OK);   
+            }else{
+                return new ResponseEntity<>(intakeChartRepository.findByDate(date,userName), HttpStatus.OK);
+            }
+             
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);   
         }
