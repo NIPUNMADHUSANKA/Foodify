@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Box from '@mui/material/Box';
 import Carousel from 'react-elastic-carousel';
 
 import Summary_Card from './Summary_Card'
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+import { width } from '@mui/system';
 
 const breakpoints = [
   {width:1, itemsToShow: 1},
@@ -13,19 +16,19 @@ const breakpoints = [
 
 function CardBar(details) {
   const X = details.details;
-
-  var totalcount = [X.calaries,X.fat, X.protein, X.carbo  ]
-
+  
   return (
 
       <div>
         <Carousel breakPoints={breakpoints} pagination={false} disableArrowsOnEnd={true} >
           
-          <Summary_Card nutcount = {totalcount[0]} Title = {"Total Daily Calories(g)"} />
-          <Summary_Card nutcount = {totalcount[1]} Title = {"Total Daily Fat(g)"} />
-          <Summary_Card nutcount = {totalcount[2]} Title = {"Total Daily Protein(g)"} />
-          <Summary_Card nutcount = {totalcount[3]} Title = {"Total Daily Carbo(g)"} />
-
+        {Array.isArray(X)
+         ? 
+         X.map(Y=>
+              (<Summary_Card Title={Y[0]} Count={Y[1]} icon={Y[2]} /> ))
+         : null   
+        }
+        
         </Carousel>
       </div>
 

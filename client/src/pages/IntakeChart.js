@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import theme from '../assets/theme/theme'; //to use theme provider,need to import this
 
 import PageTitle from '../components/User/PageTitle';
-import CardBar from '../components/User/CardBar';
+import CardBarIntake from '../components/User/CardBarIntake';
 import SummaryChart from '../components/User/SummaryChart';
 import RangeChart from '../components/User/RangeChart';
 
@@ -32,19 +32,6 @@ const IntakeValues = [
 
 
 function IntakeChart() {
-
-  const ChartData = [
-    { Day: 'Mon', val: 2.525 },
-    { Day: 'Tue', val: 3.018 },
-    { Day: 'Wed', val: 3.682 },
-    { Day: 'Thu', val: 4.440 },
-    { Day: 'Fri', val: 5.310 },
-    { Day: 'Sat', val: 6.127 },
-    { Day: 'Sun', val: 6.930 },
-  ];
-
-  const Head = "Chart of Nutritions Summary";
-
 
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
@@ -84,7 +71,7 @@ function IntakeChart() {
 
       <Fade left>
         <Box sx={{ mt: "3%", mb: "2%" }}>
-          <CardBar details={details} />
+          <CardBarIntake details={details} />
         </Box>
       </Fade>
 
@@ -103,7 +90,7 @@ function IntakeChart() {
               width: "80vw"
             }
           }}>
-            <SummaryChart chartData={ChartData} Head={Head} />
+            <SummaryChart />
           </Box>
 
         </Box>
