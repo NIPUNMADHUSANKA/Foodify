@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.model.RestaurantComments;
 import Foodify.Backend.repository.RestaurantCommentRepository;
@@ -69,12 +68,12 @@ public class RestaurantCommentController {
 	
 	/* -------------------------------- Get Res Comments restaurant view -------------------------------- */
 	@GetMapping("/FoodiFy/Service/getRestaurantComment/{id}")
-	public RestaurantComments getRestaurantComments(@PathVariable(value="id") String id) {
+	public List<RestaurantComments> getRestaurantCommentsByRestaurantId(@PathVariable(value="id") String id) {
 
-		RestaurantComments restaurantComment = restaurantCommentRepository.findByid(id);
+//		RestaurantComments restaurantComment = restaurantCommentRepository.findByid(id);
 
 
-		return restaurantComment;
+		return restaurantCommentRepository.findByRestaurantId(id);
 	}
 	
 	/* -------------------------------- Get Res Comments view -------------------------------- */

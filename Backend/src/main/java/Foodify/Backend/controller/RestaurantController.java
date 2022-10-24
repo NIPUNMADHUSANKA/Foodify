@@ -131,6 +131,7 @@ public class RestaurantController {
 			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
 			restaurant.setAddress(restaurants.get(i).getAddress());
 			restaurant.setId(restaurants.get(i).getId());
+			// restaurant.setRating(restaurants.get(i).getRating());
 
 			restaurantsList.add(restaurant);
 
