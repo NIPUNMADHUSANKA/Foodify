@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import Foodify.Backend.model.*;
+import Foodify.Backend.model.RestaurantIncome;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -601,8 +602,9 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 public ResponseEntity<?>  getRestaurantIncome() {
 	
 	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+	List<RestaurantIncome> Income =restaurantincomeRepo.findByuserName(userName);
 
-	return new ResponseEntity<>(restaurantincomeRepo.findByuserName(userName), HttpStatus.OK);
+	return new ResponseEntity<>(Income, HttpStatus.OK);
 
 }
 

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { createTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -9,13 +8,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 
-import Collapse from '@mui/material/Collapse';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
 import axios from 'axios';
 import authHeader from '../../../services/auth-header';
 
@@ -84,7 +77,7 @@ axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantIncome", { head
     })
 
     console.log(rows);
-    
+
    //rows.push(X[key].resturant, X[key].date, X[key].items, X[key].total)
 
 
@@ -97,22 +90,15 @@ axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantIncome", { head
 
 function Row(props) {
   const { row } = props;
-  const [open, setOpen] = React.useState(false);
-
+  
   return (
     <React.Fragment>
 
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+          
         </TableCell>
-        <TableCell >{row.resturant}</TableCell>
+        <TableCell >{row.restaurantName}</TableCell>
         <TableCell >{row.date}</TableCell>
         <TableCell >{row.items}</TableCell>
         <TableCell >{row.total}</TableCell>
@@ -135,7 +121,7 @@ function Income() {
     { id: 'resturant', label: 'Resturant', minWidth: 200 },
     { id: 'date', label: 'Date', minWidth: 150 },
     { id: 'items', label: 'Items', minWidth: 150 },
-    { id: 'income', label: 'Total Income', minWidth: 50 },
+    { id: 'income', label: 'Total Income(Rs.)', minWidth: 50 },
     
   ];
 
