@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import {
   Chart,
@@ -36,19 +37,45 @@ const popperSx = {
 function SummaryChart() {
 
  
-  var chData = [
+  const chData = [
     { Nutrition: 'Cal.', val: 0},
     { Nutrition: 'Fat', val: 0 },
     { Nutrition: 'Prot.', val: 0 },
     { Nutrition: 'Carbo', val: 0},
   ];
-
   
   const chartHead = "Chart of Nutritions Summary";
 
   //------------------------------------------------------------handeling calender changing dates
   const [date, setDate] = React.useState(new Date());
   const [chartData, setchartData] = React.useState(chData);
+
+  useEffect(() => {
+
+    axios.get("http://localhost:8072/FoodiFy/Premium/getIntakeChart", { headers: authHeader() })
+      .then(data => {
+        // this part if sucess
+
+        const details = data.data;
+        
+        const chData = [
+          { Nutrition: 'Cal.', val: details.calaries },
+          { Nutrition: 'Fat', val: details.fat },
+          { Nutrition: 'Prot.', val: details.protein },
+          { Nutrition: 'Carbo', val: details.carbo },
+        ];
+
+        setchartData(chData);
+
+
+      })
+      .catch(error => {
+        console.log(error);
+
+      });
+    }, []);
+
+
   const handleChangeDate = (newValue) => {
 
     axios.get("http://localhost:8072/FoodiFy/Premium/searchbydateintake/"+newValue, { headers: authHeader() })
