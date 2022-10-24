@@ -36,10 +36,10 @@ const contactdetails = {
   "TpNumber": "Tp Number",
 }
 
-const comments = {
-  "name": "username",
-  "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-}
+// const comments = {
+//   "name": "username",
+//   "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+// }
 
 const comments1 = [
   {
