@@ -16,6 +16,16 @@ public class OrderItem {
 
         public String foodId;
 
+        public String preparedStatus;
+
+    public String getPreparedStatus() {
+        return preparedStatus;
+    }
+
+    public void setPreparedStatus(String preparedStatus) {
+        this.preparedStatus = preparedStatus;
+    }
+
     public String getFoodId() {
         return foodId;
     }

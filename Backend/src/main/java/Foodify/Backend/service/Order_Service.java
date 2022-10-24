@@ -95,6 +95,7 @@ public class Order_Service implements Order_Serv{
 		ShoppingCart shoppingCart = ShoppingCartRepo.findByuserName(userName);
 		List<OrderItem> items = shoppingCart.getItems();
 
+		List<OrderItem> foodItmes = new ArrayList<>();
 		String restaurantId = null;
 
 		System.out.println(order.getOrderDate());
@@ -103,6 +104,7 @@ public class Order_Service implements Order_Serv{
 //		----------setting up RID----------------
 		for(OrderItem item : items){
 			restaurantId = item.getRestaurantId();
+			item.setPreparedStatus("Queued");
 		}
 
 //		--------setting up order details-----------------

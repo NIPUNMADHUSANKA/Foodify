@@ -134,11 +134,22 @@ const OrderFoodForm = (props) => {
     };
     //   ------------------------------------------------------------------------------------
 
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = props.EndDate;
+    const eDate1 = new Date(Edate1);
+
     // --------------------------------sending data for cart-----------------------------
     const addToCart = () => {
 
         // ---------------item obj----------------------
-        const price = (num * props.orderdata.price) - (num * props.orderdata.price * (props.orderdata.discount / 100));
+        var price;
+        if(num && todayDate < eDate1){
+            price = (num * props.orderdata.price) - (num * props.orderdata.price * (props.orderdata.discount / 100));
+        }
+        else{
+            price = (num * props.orderdata.price)
+        }
+        
         const Rid = RID;
         const Fid = props.orderdata.Fid;
 
@@ -174,9 +185,7 @@ const OrderFoodForm = (props) => {
 
     };
 
-    var todayDate = new Date(); //Today Date    
-    const Edate1 = props.EndDate;
-    const eDate1 = new Date(Edate1);
+    
 
     return (
         // ------------main box------------------

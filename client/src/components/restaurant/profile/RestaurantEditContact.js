@@ -71,7 +71,7 @@ const RestaurantEditContact = (props) => {
             marginLeft: '20%',
           }
         }}>
-
+{/*  */}
           {/* ---------enter the map----------- */}
           <Gmap location={props.details.Location}/>
           
