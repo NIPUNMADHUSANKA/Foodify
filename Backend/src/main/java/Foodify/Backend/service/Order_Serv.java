@@ -15,4 +15,6 @@ public interface Order_Serv {
 
 	public String setOrder(Order order,String userName);
 
+	List<Order> callOrder(String userName1);
+
 }

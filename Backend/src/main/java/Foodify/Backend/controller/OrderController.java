@@ -58,5 +58,26 @@ public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
 }
 
 
+    //    ----------------------to make the order--------------------------------
+    @GetMapping("/FoodiFy/Restaurant/callOrder")
+    public ResponseEntity<?> callOrders() {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        System.out.println(userName);
+        try {
+
+            return new ResponseEntity<>(order_service.callOrder(userName), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
+//		return null;
+    }
+
 
 }

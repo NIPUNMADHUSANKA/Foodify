@@ -14,7 +14,7 @@ import authHeader from "../../../services/auth-header";
 import { useNavigate } from 'react-router-dom';
 
 // ---------------for map---------------------
-import LocationMapForm from '../LocationMapForm';
+// import LocationMapForm from '../LocationMapForm';
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -444,12 +444,12 @@ export const ContactForm = () => {
                 <DialogTitle>{"Update Contact details"}</DialogTitle>
                 <DialogContent>
 
-                    <LocationMapForm
+                    {/* <LocationMapForm
                         
                         center={{ lat:6.92 , lng: 79.86 }}
                         zoom={15}
                         sx={{height:"10rem"}}
-                    />
+                    /> */}
                     <Box component="form"
                         noValidate
                         autoComplete="off"
