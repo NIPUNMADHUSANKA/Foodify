@@ -112,6 +112,7 @@ public class Order_Service implements Order_Serv{
 		order.setResId(restaurantId);
 		order.setPrice(shoppingCart.getPrice());
 		order.setUserName1(userName);
+		order.setPreparedState("Queued");
 
 		order_repository.save(order);
 		items.clear();
@@ -122,5 +123,39 @@ public class Order_Service implements Order_Serv{
 //		offers.setStartDate(LocalDate.parse(Bdate));
 //		offers.setEndDate(LocalDate.parse(Edate));
 		return null;
+	}
+
+//	----------------------------to call relevant orders of the restaurant--------------------------
+	@Override
+	public List<Order> callOrder(String userName1) {
+
+		Restaurant restaurant = restaurantRepository.findByuserName(userName1);
+		System.out.println(restaurant.getId());
+//		getting the order list
+		List<Order> orders = order_repository.findByresId(restaurant.getId());
+
+		List<OrderItem> items = new ArrayList<>();
+
+//		loop orders
+		for (Order order : orders){
+			System.out.println(order.getResId()+"second");
+			List<OrderItem> items1 = order.getItems();
+
+//			looping items
+			for (OrderItem item : items1){
+
+//				setting names of order items
+				String foodId = item.getFoodId();
+
+//				taking the food item and assigning the name
+				FoodItem foodItem1 = foodItem_repository.findByid(foodId);
+				item.setFoodName(foodItem1.getName());
+				System.out.println(item.getFoodName());
+			}
+
+//			setting updated order items
+			order.setItems(items1);
+		}
+		return orders;
 	}
 }

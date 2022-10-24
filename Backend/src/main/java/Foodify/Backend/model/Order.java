@@ -33,6 +33,26 @@ public class Order {
 
     private String userName1;
 
+    private String paymentId;
+
+    private String preparedState;
+
+    public String getPreparedState() {
+        return preparedState;
+    }
+
+    public void setPreparedState(String preparedState) {
+        this.preparedState = preparedState;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
     public List<OrderItem> getItems() {
         return items;
     }
