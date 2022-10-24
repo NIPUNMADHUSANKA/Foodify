@@ -31,8 +31,8 @@ function FoodCard(data) {
   // console.log(data.data.bImage)
 
 
-  // const image1 = data.data.bImage
-
+  const foodimage = data.data.bImage
+ 
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,12 +58,10 @@ function FoodCard(data) {
           }
            }}
     >
-        {/* <StyledBadge color="secondary" badgeContent={"99+"}>
-          <img src={image1 !==null ? `data:image/jpeg;base64,${image1}` : image} alt="food" style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
-        </StyledBadge> */}
-        <StyledBadge color="secondary" badgeContent={4.9}>
-          <img src={image} alt="food" />
+        <StyledBadge color="secondary" badgeContent={"99+"}>
+          <img src={foodimage !==null ? `data:image/jpeg;base64,${foodimage}` : image} alt="food" style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
         </StyledBadge>
+       
 
 
         <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>

@@ -574,11 +574,11 @@ public List<FoodItem> showfoods() {
 
 	// System.out.println(restaurants);
 	//
-	for (int i = 0; i < fooditems.size(); i++) {
+	for (int i = 8; i < fooditems.size(); i++) {
 		FoodItem fooditem = new FoodItem();
 
 //		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
-//		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
+		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
 		fooditem.setName(fooditems.get(i).getName());
 		fooditem.setPrice(fooditems.get(i).getPrice());
 //		restaurant.setId(fooditems.get(i).getId());
