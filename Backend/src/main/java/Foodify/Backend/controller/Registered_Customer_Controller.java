@@ -20,10 +20,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
 import Foodify.Backend.exception.Registered_Customer_Exception;
 import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Complain;
+import Foodify.Backend.model.FoodCategory;
+import Foodify.Backend.model.FoodMenu;
+import Foodify.Backend.model.Order;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.service.Registered_Customer_Sev;
@@ -39,6 +43,9 @@ public class Registered_Customer_Controller {
 	
 	@Autowired
 	private Registered_Customer_Repository RegCusRepo;
+	
+	@Autowired
+	private Order_Repository orderRepo;
 	
 	
 	@GetMapping("/Foodify/{Username}/{Password}")
@@ -169,6 +176,9 @@ public class Registered_Customer_Controller {
 		return null;
 
 	}
+	
+	
+	
 	
 
 	
