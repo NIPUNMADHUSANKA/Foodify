@@ -2,6 +2,7 @@ import { Box } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import axios from 'axios';
+import axois from "axios";
 import authHeader from "../../services/auth-header";
 
 import Background from '../../assets/images/pv4WkDi.webp';
@@ -99,8 +100,8 @@ const OrderFood = () => {
     var Fid = null;
     var discount = null;
     var Rid = RestId;
-
-    // console.log(location.state);
+    var foodId =location.state.id.id;
+    console.log(location.state);
 
     if (details1.image) {
         image = details1.image.data;
@@ -199,6 +200,29 @@ const OrderFood = () => {
 
     // console.log(total);
 
+    const [Data3, setData3] = useState([]);
+
+    useEffect((event) => {
+
+        axois.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${foodId}`)
+          .then(data => {
+            // this part if sucess
+            console.log(data.data);
+            // setRestId(data.data.id)
+            setData3(data.data)
+          })
+          .catch(error => {
+    
+          });
+    
+      }, []);
+
+      const comments1 = {
+        "name": Data3.userName,
+        "detail1": Data3.commentDescription
+        ,
+    }
+    
     return (
 
         <div>
@@ -265,7 +289,7 @@ const OrderFood = () => {
                     </Fade>
 
                     <Fade big>
-                        <FoodComment comments={comments1} />
+                        <FoodComment comments={Data3} />
                     </Fade>
 
                 </Box>
