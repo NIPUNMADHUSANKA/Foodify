@@ -18,7 +18,6 @@ import Navbar from '../components/Navbar';
 
 
 import '../assets/css/Home.css';
-import axios from "axios";
 
 const Explore = () => {
 
@@ -127,7 +126,7 @@ const Explore = () => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
 
-                    {console.log(details)}
+                    {/* {console.log(details)} */}
                     <RestaurantScroll details={details} />
 
 

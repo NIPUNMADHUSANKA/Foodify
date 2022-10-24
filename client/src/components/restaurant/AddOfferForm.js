@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/system';
 import theme, { Colours } from '../../assets/theme/theme';
-import { Button,TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import styled from '@emotion/styled';
 import CategorySelection from './CategorySelection';
 import axios from 'axios';
@@ -118,8 +118,8 @@ const AddOfferForm = () => {
     // ----------------------for store response data of items----------------------
     const [details2, setDetails2] = React.useState({});
 
-    console.log(category)
-    console.log(checked)
+    // console.log(category)
+    // console.log(checked)
 
     // ------------send data if corrects---------
     React.useEffect((event) => {
@@ -140,7 +140,7 @@ const AddOfferForm = () => {
                 const details = resp.data;
                 setDetails({ ...details });
 
-                console.log(details);
+                // console.log(details);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -159,7 +159,7 @@ const AddOfferForm = () => {
             "catId": event.target.value
         }
 
-        console.log(items);
+        // console.log(items);
         const sendGetRequest2 = async () => {
             try {
                 const resp2 = await axios.post('http://localhost:8072/FoodiFy/Restaurant/getfoodItems1', items, { headers: authHeader() });
@@ -176,7 +176,7 @@ const AddOfferForm = () => {
 
     };
 
-    console.log(details2);
+    // console.log(details2);
 
     // --------to add category section--------
     const [components, addComponents] = useState(["Vegie"]); //use to render when new component added to page
@@ -209,24 +209,24 @@ const AddOfferForm = () => {
         setImageData(imageData);
     }
 
-    console.log(imageData)
+    // console.log(imageData)
 
     // ---------------------------for uploading the logo-----------------------------------------
     const uploadData = () => {
 
         const list1 = [category, checked]
 
-        console.log(list1)
+        // console.log(list1)
 
         imageData.append('name', formValues.name);
         imageData.append('description', formValues.description);
         imageData.append('Bdate', formValues.Bdate);
         imageData.append('Edate', formValues.Edate);
         imageData.append('discount', formValues.discount);
-        imageData.append('itemList',list1)
+        imageData.append('itemList', list1)
 
 
-        console.log(imageData)
+        // console.log(imageData)
 
         axios.post("http://localhost:8072/FoodiFy/Restaurant/uploadOffers", imageData, { headers: authHeader() })
             .then(data => {
@@ -331,7 +331,7 @@ const AddOfferForm = () => {
                                     return (
 
                                         Object.keys(details).map((keyName) => (
-                                            console.log(details[keyName]),
+                                            // console.log(details[keyName]),
                                             <MenuItem key={keyName} value={details[keyName].id} name="Category1">
                                                 {details[keyName].foodMenuCategory}
                                             </MenuItem>
@@ -373,25 +373,37 @@ const AddOfferForm = () => {
                                     if (details2 !== null) {
                                         return (
 
+
                                             Object.keys(details2).map((keyName2) => (
-                                                console.log(details2[keyName2]),
+                                                // -------------------loop-----------------------------
+                                                // console.log(details2[keyName2]),
 
-                                                <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                }}>
+                                                (() => {
+                                                    if (details2[keyName2].discount === 0) {
+                                                        return (
+                                                            <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
+                                                                display: "flex",
+                                                                flexDirection: "row",
+                                                            }}>
 
-                                                    <Checkbox
-                                                        id="begin date"
-                                                        type="checkbox"
-                                                        value={details2[keyName2].id}
-                                                        name={details2[keyName2].name}
-                                                        variant="standard"
-                                                        onChange={checklisthandle}
-                                                    />
-                                                    <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+                                                                <Checkbox
+                                                                    id="begin date"
+                                                                    type="checkbox"
+                                                                    value={details2[keyName2].id}
+                                                                    name={details2[keyName2].name}
+                                                                    variant="standard"
+                                                                    onChange={checklisthandle}
+                                                                />
 
-                                                </Grid>
+                                                                <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+
+                                                            </Grid>
+                                                        );
+                                                    }
+                                                }
+                                                )()
+
+                                                // -------------------------loop-------------------------------------
                                             ))
                                         );
                                     }

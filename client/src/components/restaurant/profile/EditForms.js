@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -12,6 +12,9 @@ import styled from '@emotion/styled';
 import axios from 'axios';
 import authHeader from "../../../services/auth-header";
 import { useNavigate } from 'react-router-dom';
+
+// ---------------for map---------------------
+import LocationMapForm from '../LocationMapForm';
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -53,9 +56,9 @@ export const CancelButton = styled(Button)(({ theme }) => ({
 
 // -----------Single Line Textfield------------------------------
 export const CustomTextField = styled(TextField)(({ theme }) => ({
-    margin:"auto",
-    marginTop:"0.6rem",
-    width:"95%",
+    margin: "auto",
+    marginTop: "0.6rem",
+    width: "95%",
     '& 	.MuiInputLabel-root': {
         color: Colours.primary,
     },
@@ -137,7 +140,7 @@ export const BannerForm1 = () => {
             {/* ---------------------------form------------------------- */}
             <Dialog
                 open={open}
-                
+
                 keepMounted
                 TransitionComponent={Transition}
 
@@ -178,7 +181,7 @@ export const BannerForm2 = () => {
         setOpen(false);
     };
 
-    
+
 
     return (
 
@@ -242,7 +245,7 @@ export const AboutUsForm = () => {
     const initialValues = { about: "" };
     const [formValues, setFormValues] = React.useState(initialValues);
     const [formErrors, setFormErrors] = React.useState({});
-    
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = (e) => {
@@ -257,33 +260,33 @@ export const AboutUsForm = () => {
     };
 
 
-    const restaurantAbout ={
-        about:formValues.about,
+    const restaurantAbout = {
+        about: formValues.about,
     }
 
-    
 
-    const handleSubmit = (event) =>{
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const data=new FormData(event.currentTarget);
-        const restaurantAbout ={
-            about:data.get('about_description')
+        const data = new FormData(event.currentTarget);
+        const restaurantAbout = {
+            about: data.get('about_description')
         }
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs",restaurantAbout,{ headers: authHeader() }).then(data=>{
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/editAboutUs", restaurantAbout, { headers: authHeader() }).then(data => {
             console.log("Entry access sucessfull")
             window.location.reload(false);
             setOpen(false);
 
-    })
-    .catch(error =>{
-        console.log(restaurantAbout)
-        console.log("There is an error")
+        })
+            .catch(error => {
+                console.log(restaurantAbout)
+                console.log("There is an error")
 
-    })
+            })
     }
 
-    
+
 
     return (
 
@@ -325,12 +328,12 @@ export const AboutUsForm = () => {
                         noValidate
                         autoComplete="off">
 
-                        <CustomTextField 
-                        id="about_description" 
-                        label="about_description" 
-                        name="about_description" 
-                        variant="outlined" 
-                        multiline rows={8} />
+                        <CustomTextField
+                            id="about_description"
+                            label="about_description"
+                            name="about_description"
+                            variant="outlined"
+                            multiline rows={8} />
 
                         <Box>
                             <UpdateButton type='submit'>Update</UpdateButton>
@@ -347,10 +350,10 @@ export const AboutUsForm = () => {
 };
 
 
-// ----------------contact details form----------------------------------
+// ----------------contact details form-------------------------------------------------------------------------------------
 export const ContactForm = () => {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const [open, setOpen] = React.useState(false);
@@ -365,7 +368,7 @@ export const ContactForm = () => {
 
     //------------------assign input values to the variables
     const handleClickOpen = (e) => {
-        setRestaurant({...restaurant, [e.target.location]:e.target.value});
+        setRestaurant({ ...restaurant, [e.target.location]: e.target.value });
         setOpen(true);
     };
 
@@ -378,7 +381,7 @@ export const ContactForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data=new FormData(e.currentTarget);
+        const data = new FormData(e.currentTarget);
 
         const restaurantInfo = {
             location: data.get('location'),
@@ -390,17 +393,17 @@ export const ContactForm = () => {
             restaurantInfo
         });
 
-        axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo,{ headers: authHeader() })
-        .then(data=>{
-            console.log("Entry access sucessfull")
-            window.location.reload(false);
-            setOpen(false);
+        axios.post("http://localhost:8072/FoodiFy/Restaurant/editContact", restaurantInfo, { headers: authHeader() })
+            .then(data => {
+                console.log("Entry access sucessfull")
+                window.location.reload(false);
+                setOpen(false);
 
-        })
-        .catch(error =>{
-            console.log("There is an error")
+            })
+            .catch(error => {
+                console.log("There is an error")
 
-        })
+            })
     };
 
     return (
@@ -408,10 +411,10 @@ export const ContactForm = () => {
         <Box sx={{
             width: "10%",
             marginTop: 1,
-            marginLeft:"92%",
+            marginLeft: "92%",
             [theme.breakpoints.down('sm')]: {
                 marginTop: 0.4,
-                marginLeft:"88%",
+                marginLeft: "88%",
             },
         }} >
             <IconButton sx={{
@@ -440,6 +443,13 @@ export const ContactForm = () => {
             >
                 <DialogTitle>{"Update Contact details"}</DialogTitle>
                 <DialogContent>
+
+                    <LocationMapForm
+                        
+                        center={{ lat:6.92 , lng: 79.86 }}
+                        zoom={15}
+                        sx={{height:"10rem"}}
+                    />
                     <Box component="form"
                         noValidate
                         autoComplete="off"

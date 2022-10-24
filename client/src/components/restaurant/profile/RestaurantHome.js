@@ -36,10 +36,10 @@ const contactdetails = {
   "TpNumber": "Tp Number",
 }
 
-const comments = {
-  "name": "username",
-  "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
-}
+// const comments = {
+//   "name": "username",
+//   "detail1": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eumquasi quidem quibusdam.",
+// }
 
 const comments1 = [
   {
@@ -68,6 +68,8 @@ const RestaurantHome = () => {
 
   const [AboutUs, setAboutUs] = useState(null);
 
+  const [RestId, setRestId] = useState(null);
+
   const [ContactDetails, setContactDetails] = useState(null);
 
   // ---------------for get restaurant data------------------------
@@ -75,7 +77,9 @@ const RestaurantHome = () => {
 
     axios.get("http://localhost:8072/FoodiFy/Restaurant/GetRestaurantInfo", { headers: authHeader() })
       .then(data => {
-        console.log(data)
+        // console.log(data)
+
+        setRestId(data.data.id)
 
         if(data.data.about !== null){
 
@@ -106,6 +110,8 @@ const RestaurantHome = () => {
       }).catch(err => console.log(err));
   }, []);
 
+  localStorage.setItem("RestId", JSON.stringify(RestId));
+
 
   return (
     <Box>
@@ -119,7 +125,7 @@ const RestaurantHome = () => {
       </Fade>
 
       <Fade bottom>
-        <RestaurantMenu/>
+        <RestaurantMenu RestId = {RestId}/>
       </Fade>
 
       <Fade big>

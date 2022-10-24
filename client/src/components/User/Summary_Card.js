@@ -9,8 +9,6 @@ import theme from '../../assets/theme/theme'; //to use theme provider,need to im
 function Summary_Card(props) {
   return (
 
-    
-   
     <Box color="#fff" bgcolor="#171717" opacity="10%" width="300px" height="127px" sx={{ borderRadius: '15px',
     [theme.breakpoints.down('lg')]: {
       width:"250px"

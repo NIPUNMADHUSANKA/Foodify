@@ -51,6 +51,8 @@ import Navbar from './components/Navbar'
 import PurchaseHistory from './pages/PurchaseHistory';
 import AddFoodMenuItem from './pages/AddFoodMenuItem';
 
+import UpdateOfferForm from './components/restaurant/UpdateOfferForm';
+
 
 function App() {
   return (
@@ -92,6 +94,7 @@ function App() {
           <Route path="/Restaurant/Category/Orderfood" element={<OrderFood />} />
           <Route path="/Restaurant/AddOffers" element={<AddOffers />} />
           <Route path="/RestaurantProfile" element={<RestaurantProfile />} />
+          <Route path="/RestaurantProfile/Offer/UpdateOffer" element={<UpdateOfferForm />} />
 
           <Route path="/register/Signup" element={<Signup />} />
           <Route path="/register/Signupuser" element={<Signupuser />} />

@@ -64,18 +64,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RestaurantInfo/editContact", 
 				"/RestaurantInfo/editAbout",
 				"/RegisteredUser/addComplains",
-				"/RegisteredUser/addFoodMenu",
-				"/RegisteredUser/getFoodMenu",
-				"/RegisteredUser/addFoodMenuCategory",
-				"/RegisteredUser/getFoodCategory",
-				"/FoodiFy/RegisteredUser/getFoodCategoryItem",
-				"/RegisteredUser/deleteFoodCategory",
-				"/RegisteredUser/addFoodMenuCategoryItem",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All",
+
+				"/FoodiFy/AllUser/getFoodMenu/**",
+				"/FoodiFy/AllUser/getFoodCategory/**",
+				"/FoodiFy/AllUser/getFoodCategoryItem/**",
+				
+				"/RestaurantInfo/editContact",
+				"/RestaurantInfo/editAbout",
+				"/Orders/All",
+				"/FoodItems/All",
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addRestaurantComment",
 				"/RegisteredUser/addFoodComment",
-				"/RestaurantInfo/editContact", "/RestaurantInfo/editAbout","/Orders/All", "/FoodItems/All","/FoodiFy/User/**")
+				"/FoodiFy/User/**")
 
 		.permitAll()
 		.antMatchers("/FoodiFy/Service/**").permitAll()
@@ -83,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
-		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
+		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("Admin");
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);

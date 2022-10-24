@@ -5,6 +5,14 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import { FixedSizeList } from 'react-window';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Typography from '@mui/material/Typography';
+import ListItem from '@mui/material/ListItem';
+import Avatar from '@mui/material/Avatar';
 
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
@@ -22,6 +30,12 @@ import Logo from '../assets/icons/foodify-logo.png';
 
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+// ------------------for the side drawer----------
+import Drawer from '@mui/material/Drawer';
+import OrderSideDrawer from '../components/restaurant/OrderSideDrawer';
+import { Colours } from '../assets/theme/theme';
 
 
 const pages = ['HOME', 'EXPLORE', 'ABOUT US', 'CONTACT US'];
@@ -45,7 +59,7 @@ const mobileMenu = {
 
 const userMenu = {
   marginTop: "55px",
-  '& .MuiMenuItem-root' : {
+  '& .MuiMenuItem-root': {
     fontSize: 12,
     color: 'White'
   },
@@ -97,8 +111,46 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+// ---------------notifiation start---------------------
+function renderRow(props) {
+  const { index, style } = props;
 
+  return (
+    <ListItem style={style} key={index} component="div" sx={{backgroundColor:Colours.white}} disablePadding>
 
+    <ListItem alignItems="flex-start">
+      
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+       
+        <ListItemText
+          primary={"Food Hut "}
+          secondary={
+            <React.Fragment>
+             
+              <Typography fontFamily="Poppins" variant="h7" >
+                Your order has been started
+              </Typography>
+              <Typography fontFamily="Poppins" varient="h8">9.00 AM</Typography>
+              <Divider sx={{marginTop:'5%',width:'100%'}} />  
+      
+            </React.Fragment>
+            
+          }
+
+        />
+
+      </ListItem>
+      
+
+    </ListItem>
+    
+  );
+}
+// ---------------notifiation end---------------------
+
+// ---------------navigation bar beginin---------------------
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -114,7 +166,7 @@ export default function PrimarySearchAppBar() {
     localStorage.removeItem("ROLE");
 
     ROLE = null
-    
+
     navigate("/Explore");
 
   };
@@ -156,7 +208,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
       sx={userMenu}
     >
-      <MenuItem component={Link} to = "/myprofile">
+      <MenuItem component={Link} to="/myprofile">
         PROFILE
       </MenuItem>
 
@@ -206,9 +258,55 @@ export default function PrimarySearchAppBar() {
   );
 
 
+  // -----------------cutomise drawer-------------------------------------
+  const SideDrawer = styled(Drawer)({
+    '.MuiDrawer-paper': {
+      background: Colours.gray3,
+      borderRadius: "360px 0px 0px 360px",
+
+    }
+  });
+  // -------------------------------------------------------------------------
+
+  // --------------------for the side drawer----------------------------------------------
+  const [state, setState] = React.useState({ right: false });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  //   ------------------End of the side drawer--------------------------------------
+
+  //   ------------------Notifications--------------------------------------
+
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+
+      {/* ----------------for the side drawer-------------- */}
+      <SideDrawer
+        anchor={'right'}
+        open={state['right']}
+        onClose={toggleDrawer('right', false)}
+      >
+        <OrderSideDrawer />
+      </SideDrawer>
+      {/* ---------------end of ide drawer----------------- */}
       <AppBar position="static" style={{ background: '#000', boxShadow: '0 10 5 0 rgba(0,0,0,0.75)' }}>
         <Toolbar>
 
@@ -225,7 +323,7 @@ export default function PrimarySearchAppBar() {
           {(() => {
             if (JSON.parse(localStorage.getItem('ROLE'))) {
               ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-             
+
             }
           }
           )()}
@@ -321,7 +419,7 @@ export default function PrimarySearchAppBar() {
 
             {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {(() => {
-              if (ROLE === "Admin") {
+              if (ROLE === "admin") {
                 return (<Button component={Link} to='/dashboard' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> DASHBOARD  </Button>);
               }
             }
@@ -349,26 +447,74 @@ export default function PrimarySearchAppBar() {
             {/*------------------------------START Notification Icons-------------------------------------------------*/}
             {(() => {
               if (ROLE != null) {
-                return (<IconButton
-                  size="large"
-                  aria-label="show 17 new notifications"
-                  color="inherit"
+                return (<>
+                  <IconButton
+                      size="large"
+                      aria-label="show 1 new notifications"
+                      color="inherit"
+                      backgroundColor="#FFFFFF"
+                    >
+                      <Badge badgeContent={1} color="error">
+                        <NotificationsIcon aria-describedby={id} variant="contained" style={{ color:Colours.white }} onClick={handleClick} />
+                      </Badge>
+                    </IconButton>
+            
+                  <Popover
+             
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+            
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                  >
+               <Box
+                 
                 >
-                  <Badge badgeContent={17} color="error">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>);
+                  <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={106}
+                    itemCount={100}
+                    overscanCount={5}
+                  >
+                    {renderRow}
+                  </FixedSizeList>
+                </Box>
+                  </Popover>
+                </>);
               }
             }
             )()}
             {/*------------------------------END Notification Icons-------------------------------------------------*/}
 
+            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
+            {/* -------------------------shopping cart------------------------- */}
+            {(() => {
+              if (ROLE === "User" || ROLE === "premiumUser" || ROLE === "restaurant") {
+                return (
+                  <IconButton
+                    sx={{ my: 2, color: 'white', display: 'block', ml: 1 }} onClick={toggleDrawer('right', true)}>
+                    <ShoppingCartIcon />
+                  </IconButton>);
+              }
+            }
+            )()}
+            {/*------------------------------END Only Registered user and Premium Have this option-------------------------------------------------*/}
+
 
 
             {/*------------------------------START User Icons-------------------------------------------------*/}
-            
+
             {(() => {
-              if (ROLE != null && ROLE != "Admin" && ROLE != "restaurant") {
+              if (ROLE != null && ROLE != "admin" && ROLE != "restaurant") {
                 return (<IconButton
                   size="large"
                   edge="end"
@@ -378,8 +524,8 @@ export default function PrimarySearchAppBar() {
                   color="inherit"
                   onClick={handleProfileMenuOpen}
 
-                  component = {Link} 
-                  to = "/myProfile"
+                  component={Link}
+                  to="/myProfile"
                 >
                   <AccountCircle />
                 </IconButton>);
@@ -398,7 +544,7 @@ export default function PrimarySearchAppBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <LogoutIcon onClick = {logout} />
+                  <LogoutIcon onClick={logout} />
                 </IconButton>);
               }
             }

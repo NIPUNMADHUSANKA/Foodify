@@ -6,7 +6,6 @@ import CardImage1 from '../../assets/images/offer1.jpg';
 
 const CarouselCardOffers = (props) => {
 
-    console.log(props.data.id)
     const image1 = props.data.tempImage
 
     return (

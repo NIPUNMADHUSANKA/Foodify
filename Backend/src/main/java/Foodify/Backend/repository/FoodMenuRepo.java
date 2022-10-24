@@ -17,5 +17,7 @@ public interface FoodMenuRepo extends MongoRepository<FoodMenu,String>{
 	Optional<FoodMenu> findByResturantMenuExists(String userName);
 
     List<FoodMenu> findByuserName(String userName);
+
+    FoodMenu findByid(String id);
     
 }

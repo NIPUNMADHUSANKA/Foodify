@@ -1,11 +1,13 @@
 package Foodify.Backend.service;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
-
+import Foodify.Backend.model.*;
+import Foodify.Backend.repository.*;
 import org.apache.commons.io.FilenameUtils;
+import org.bson.BsonBinarySubType;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -17,15 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import Foodify.Backend.exception.FoodMenuException;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
-import Foodify.Backend.model.FoodCategory;
-import Foodify.Backend.model.FoodItem;
-import Foodify.Backend.model.FoodMenu;
-import Foodify.Backend.model.Registered_Customer;
-import Foodify.Backend.repository.FoodCategoryRepo;
-import Foodify.Backend.repository.FoodItem_Repository;
-import Foodify.Backend.repository.FoodMenuRepo;
-import Foodify.Backend.repository.OffersRepository;
-import Foodify.Backend.repository.Registered_Customer_Repository;
 
 import java.io.Console;
 import java.io.IOException;
@@ -66,6 +59,13 @@ public class RestaurantService implements Restaurantserv{
 	@Autowired
 	private OffersRepository offersRepo;
 	
+	@Autowired
+	private RestaurantCommentRepository restaurantCommentRepository;
+
+	@Autowired
+	private RestaurantRepository restaurantRepository1;
+
+	
 	@Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
 		String error;
@@ -74,9 +74,9 @@ public class RestaurantService implements Restaurantserv{
 //		---------------to check the userName-------------------------------------------------
 		if(name == "userName") {
 			
-			System.out.println(username);
+//			System.out.println(username);
 			Integer count1 = restaurantRepository.findByUserName(username); 
-			System.out.println(email);
+//			System.out.println(email);
 			if(count1 > 0) {
 				error = "UserName already exists";
 //				--------------call error response and add errors to custom field error list-----------
@@ -98,7 +98,7 @@ public class RestaurantService implements Restaurantserv{
 		}
 		if(name2 == "email"){
 			Integer count2 = restaurantRepository.findByUserEmail(email); 
-			System.out.println(count2);
+//			System.out.println(count2);
 			if(count2 > 0) {
 				error = "Email already exists";
 //				--------------call error response and add errors to custom field error list-----------
@@ -136,7 +136,7 @@ public class RestaurantService implements Restaurantserv{
 		user.setaccountState(accountStatus);
 		
 		restaurantRepository.save(user);
-		System.out.println(epassword);
+//		System.out.println(epassword);
 		return null;
 	}
 
@@ -270,12 +270,197 @@ public class RestaurantService implements Restaurantserv{
 		return itemNames;
 	}
 
+	@Override
+	public ResponseEntity<?> uploadOffer(String name, String description, String Bdate, String Edate, String discount, String itemList, MultipartFile file,String userName) throws IOException {
+
+		//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+		Offers offers = new Offers();
+
+//    	-----------------converting string into array to get category and food items------------------------
+		String[] arr = null;
+		//converting using String.split() method with "," as a delimiter
+		arr = itemList.split(",");
+
+		offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+		offers.setName(name);
+		offers.setDescription(description);
+
+		offers.setStartDate(LocalDate.parse(Bdate));
+		offers.setEndDate(LocalDate.parse(Edate));
+
+		offers.setDiscount(Integer.parseInt(discount));
+		offers.setUserName(userName);
+		offers.setCategory(arr[0]);
+
+		List<String> itemIds = new ArrayList<String>();
 
 
+//        ----------------setting discounts for relevant food items----------------------------
+		for (int i = 1; i< arr.length; i++)
+		{
+			FoodItem food = foodItems.findByid(arr[i]);
+			food.setDiscount(Integer.parseInt(discount));
+			foodItems.save(food);
+
+			itemIds.add(arr[i]);
+//			System.out.println(arr[i]);
+		}
+
+		offers.setItems(itemIds);
+
+//		System.out.println(arr[0]);
+
+		offersRepo.save(offers);
+		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);
+	}
+
+	@Override
+	public ResponseEntity<?> updateOffer(String name, String description, String Bdate, String Edate, String discount, String itemList, MultipartFile file, String userName,String offerId,String foodItems1) throws IOException {
+
+//    	-----------------------store image in binary, BSON type in MongoDB(files less than 16MB)--------------------
+		Offers offers = offersRepo.findByid(offerId);
+
+//    	-----------------converting string into array to get category and food items------------------------
+		String[] arr = null;
+		String[] arr2 = null;
+		//converting using String.split() method with "," as a delimiter
+		arr = itemList.split(",");
+		arr2 = foodItems1.split(",");
+
+		offers.setImage(new Binary(BsonBinarySubType.BINARY, file.getBytes()));
+		offers.setName(name);
+		offers.setDescription(description);
+
+		offers.setStartDate(LocalDate.parse(Bdate));
+		offers.setEndDate(LocalDate.parse(Edate));
+
+		offers.setDiscount(Integer.parseInt(discount));
+		offers.setUserName(userName);
+
+		offers.setCategory(arr[0]);
+
+		List<String> itemIds = new ArrayList<String>();
+
+//		-----------resetting discount values of previous food items-------------------
+		List<String> offerList = offers.getItems();
+
+		for (int i = 0; i< arr2.length; i++)
+		{
+			FoodItem food = foodItems.findByid(arr2[i]);
+			food.setDiscount(0);
+			foodItems.save(food);
+		}
 
 
+//        ----------------setting discounts for relevant food items----------------------------
+		for (int i = 1; i< arr.length; i++)
+		{
+			FoodItem food = foodItems.findByid(arr[i]);
+			food.setDiscount(Integer.parseInt(discount));
+			foodItems.save(food);
 
+			itemIds.add(arr[i]);
+//			System.out.println(arr[i]);
+		}
+
+		offers.setItems(itemIds);
+
+//		System.out.println(arr[0]);
+
+		offersRepo.save(offers);
+		return new ResponseEntity<>("sucessfully created", HttpStatus.CREATED);
+
+	}
+
+//	--------------------------for get filtered food items for offer update form----------------------------
+	@Override
+	public List<FoodItem> getOfferFoods(String catId, String offerId) {
+
+//		get relevant offer
+		Offers offer = offersRepo.findByid(offerId);
+//		get the item list from offer
+		List<String> items = offer.getItems();
+//		get the list that belong to this category
+		List<FoodItem> items2 = foodItems.findBycatId(catId);
+//		final food item list
+		List<FoodItem> foodList = new ArrayList<FoodItem>();
+//		creating new empty list
+		List<String> List1 = new ArrayList<String>();
+
+		for(int i = 0; i<items2.size();i++) {
+			List1.add(items2.get(i).getId());
+		}
+//		get the common food items
+		List1.retainAll(items);
+
+		for(int i = 0; i<items2.size();i++) {
+			if(items2.get(i).getDiscount() == 0){
+				List1.add(items2.get(i).getId());
+			}
+		}
+//		returning the final loop
+		for(int i = 0; i<List1.size();i++) {
+			foodList.add(foodItems.findByid(List1.get(i)));
+		}
+//		System.out.println("l3 == "+List1);
+
+		return foodList;
+	}
 	
-	
-	
+	//---------------------------------to get the res comments--------------------------------------------
+		@Override
+		public List<String> getResComments(String rescomments) {
+			// TODO Auto-generated method stub
+			List<String> resComments = new ArrayList<String>();
+
+			String[] arr = null;
+			//converting using String.split() method with "," as a delimiter  
+	        arr = rescomments.split(",");
+
+	        for (int i = 0; i< arr.length; i++)
+	        {  
+	        	RestaurantComments rescomment = restaurantCommentRepository.findByid(arr[i]);
+	        	resComments.add(rescomment.getUsername());
+	            System.out.println(arr[i]);  
+	        }
+			return resComments;
+		}
+
+//-----------------------to get foodItem details to display in order page---------------------------
+	@Override
+	public Map getOrderFood(String foodId,String restId) {
+
+//		--------------get the food item--------------------------------
+		FoodItem food = foodItems.findByid(foodId);
+		LocalDate endDate = null;
+
+//		----------find restaurant user name----------------
+		Restaurant restaurant = restaurantRepository1.findByid(restId);
+		String restUsername = restaurant.getUserName();
+//		--------------get discount expire date-------------------------
+		List<Offers> offers = offersRepo.findByuserName(restUsername);
+
+//		looping offers
+		for(int i=0;i<offers.size();i++){
+			List<String> itemsList = offers.get(i).getItems();
+			LocalDate edate = offers.get(i).getEndDate();
+//			looping items in an offer
+			for(int j=0;j<itemsList.size();j++){
+				String itemId = itemsList.get(j);
+				if(Objects.equals(itemId, foodId)){
+					System.out.println(foodId);
+					endDate = edate;
+				}
+			}
+		}
+
+//		-----------------sending final data as map-------------------
+		Map mapFinal = new HashMap();
+		mapFinal.put("foodItems",food);
+		mapFinal.put("endDate",endDate);
+//		food.setImage(Base64.getEncoder().encodeToString(food.getImage().getData()));
+		return mapFinal;
+	}
+
+
 }

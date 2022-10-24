@@ -5,46 +5,10 @@ import authHeader from "../../services/auth-header";
 import Carousel from '../carousel/carouselOffers';
 import { Link } from 'react-router-dom';
 
-import CardImage1 from '../../assets/images/offer1.jpg';
-import CardImage2 from '../../assets/images/offer2.jpg';
-import CardImage3 from '../../assets/images/offer5.jpg';
-import CardImage4 from '../../assets/images/offer6.jpg';
-
-
 import BackgroundImage from '../../assets/images/pv4WkDi.webp';
 import theme, { Colours } from '../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 
-const item1 = [
-  {
-    "id": "1",
-    "title": "",
-    "image": CardImage1,
-    "decription": "",
-    "name": "view"
-  },
-  {
-    "id": "2",
-    "title": "",
-    "image": CardImage2,
-    "decription": "",
-    "name": "view"
-  },
-  {
-    "id": "3",
-    "title": "",
-    "image": CardImage3,
-    "decription": "",
-    "name": "view"
-  },
-  {
-    "id": "4",
-    "title": "",
-    "image": CardImage4,
-    "decription": "",
-    "name": "view"
-  }
-]
 
 // use when giving separate button name
 
@@ -54,8 +18,6 @@ const itemcount = 3;
 
 var ROLE = null;
 
-var ROLE2 = null;
-
 const RestaurantOffers = (props) => {
 
   {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
@@ -63,7 +25,7 @@ const RestaurantOffers = (props) => {
     (() => {
       if (JSON.parse(localStorage.getItem('ROLE'))) {
         ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-        console.log(ROLE)
+        // console.log(ROLE)
       }
     }
     )()
@@ -85,7 +47,7 @@ const RestaurantOffers = (props) => {
         const details = resp.data;
         setDetails({ ...details });
 
-        console.log(details);
+        // console.log(details);
       } catch (err) {
         // Handle Error Here
         console.error(err);
@@ -109,7 +71,7 @@ const RestaurantOffers = (props) => {
           const details = resp.data;
           setDetails({ ...details });
 
-          console.log(details);
+          // console.log(details);
         } catch (err) {
           // Handle Error Here
           console.error(err);
@@ -134,6 +96,9 @@ const RestaurantOffers = (props) => {
         if (JSON.parse(localStorage.getItem('ROLE'))) {
           ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
          // console.log(ROLE)
+        }
+        else{
+          ROLE = null;
         }
       }
       )()}

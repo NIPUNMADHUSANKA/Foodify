@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import authHeader from "../../services/auth-header";
+// import authHeader from "../../services/auth-header";
 import theme, { Colours } from '../../assets/theme/theme';
 
 import Background from '../../assets/images/pv4WkDi.webp';
@@ -27,12 +27,13 @@ var ROLE = null;
 
 const RestaurantOffer = () => {
 
+
     {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
     {
         (() => {
             if (JSON.parse(localStorage.getItem('ROLE'))) {
                 ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-                console.log(ROLE)
+                // console.log(ROLE)
             }
         }
         )()
@@ -60,7 +61,7 @@ const RestaurantOffer = () => {
     const itemlisthandle = (item) => {
 
         var items = item;
-        console.log(items);
+        // console.log(items);
 
         const sendGetRequest2 = async () => {
             try {
@@ -85,7 +86,7 @@ const RestaurantOffer = () => {
 
     };
 
-    console.log(details2);
+    // console.log(details2);
     // ---------------------------getting customer view-----------------------------------
     useEffect((event) => {
 
@@ -100,7 +101,7 @@ const RestaurantOffer = () => {
                 itemlisthandle(items1)
 
                 setDetails({ ...details });
-                console.log(items1);
+                // console.log(details);
                 // setItems([...items1]);
 
                 if (image1 !== null) {
@@ -116,7 +117,7 @@ const RestaurantOffer = () => {
 
         sendGetRequest();
 
-        console.log(items);
+        // console.log(items);
 
     }, []);
 
@@ -127,13 +128,20 @@ const RestaurantOffer = () => {
         (() => {
             if (JSON.parse(localStorage.getItem('ROLE'))) {
                 ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-                console.log(ROLE)
+                // console.log(ROLE)
             }
         }
         )()
     }
     {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
 
+    // -------------------------------------getting the end date and convert into date format----------------------------
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = details.endDate;
+    const eDate1 = new Date(Edate1);
+
+    // console.log(date.toString());
+// 
     return (
 
         // ------main box----------------
@@ -290,8 +298,8 @@ const RestaurantOffer = () => {
                                 }
                             }}>
                                 {Object.keys(details2).map((keyName) => (
-                                    console.log(details2[keyName]),
-                                    <ListItem>
+                                    // console.log(details2[keyName]),
+                                    <ListItem key={details2[keyName].id} >
                                         <ListItemText sx={{ color: Colours.green, }}
                                             primary={details2[keyName]}
                                         />
@@ -299,9 +307,41 @@ const RestaurantOffer = () => {
                                 ))}
                             </List>
                             <br />
-                            <b>From:{details.startDate} to:{details.endDate}</b>
-
+                            {(() => {
+                                if (todayDate < eDate1) {
+                                    return (
+                                        <b>From:{details.startDate} to:{details.endDate}</b>
+                                    );
+                                }
+                            }
+                            )()}
+                            {(() => {
+                            if (todayDate > eDate1) {
+                                return (
+                                    <Typography variant="body1" gutterBottom sx={{
+                                        color: '#ff0000',
+                                        justifyContent: 'center',
+                                        textAlign: 'center',
+                                        fontSize: '1rem',
+                                        padding: '1%',
+                                        width: "80%",
+                                        margin: "auto",
+                                        transition: 'transform .2s', '&:hover': {
+                                            transform: 'scale(1.04)',
+                                            opacity: 4,
+                                        },
+                                        [theme.breakpoints.down('sm')]: {
+                                            fontSize: '14px',
+                                            marginRight: "10%",
+                                        }
+                                    }}>Expired</Typography>
+                                );
+                            }
+                        }
+                        )()}
                         </Typography>
+
+
                     </Fade>
 
                 </Box>
@@ -317,7 +357,7 @@ const RestaurantOffer = () => {
                                 display: 'flex',
                                 flexDirection: 'row'
                             }}>
-                                <Button size="small" sx={{
+                                <Button size="small" component={Link} to={"/RestaurantProfile/Offer/UpdateOffer"} state={{id:details.id}} sx={{
                                     margin: '6px',
                                     background: Colours.green, '&:hover': {
                                         backgroundColor: Colours.yellow,
