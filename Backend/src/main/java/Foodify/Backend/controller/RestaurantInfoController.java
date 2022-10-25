@@ -25,4 +25,11 @@ public class RestaurantInfoController {
         return true;
     }
 
+    @GetMapping("/resturantName/{id}")
+    public String name(@PathVariable(value="id") String pendingid) {
+        
+        return resRepo.findByid(pendingid).getRestaurantName();
+    }
+
+
 }

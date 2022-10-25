@@ -1,6 +1,13 @@
 package Foodify.Backend.controller;
 
+import Foodify.Backend.model.FoodItem;
+import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Order;
+import Foodify.Backend.model.OrderItem;
+import Foodify.Backend.model.Restaurant;
+import Foodify.Backend.repository.FoodItem_Repository;
+import Foodify.Backend.repository.Order_Repository;
+import Foodify.Backend.repository.RestaurantRepository;
 //import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.service.Order_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,67 +15,108 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class OrderController {
 
-    @Autowired(required = false) //error debugged by false
+    @Autowired(required = false) // error debugged by false
     private Order_Service order_service;
 
-    @GetMapping("/FoodiFy/User/Orders/{userId}")
-    public List<Order> ordersByUser(@PathVariable String userId){
-        List<Order> detailed =  order_service.getDetailedOrders(userId);
-//        List<Order> detailed =  order_repository.findByUser(userId);
-        return detailed;
+    @Autowired
+    private Order_Repository order_Repository;
+
+    @Autowired
+    private FoodItem_Repository foodItem_repository;
+
+    @Autowired
+    private RestaurantRepository resRepo;
+
+    @GetMapping("/FoodiFy/Orders/pucheshistory")
+    public List<Order> ordersByUser() {
+
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        List<Order> orders = order_Repository.findByuserName1(userName);
+
+        for (Order order : orders) {
+
+            //System.out.println(order.getId());
+            String ID = order.getResId();
+
+
+            Restaurant resturantname = resRepo.findByid(ID);
+
+
+            order.setResName(resturantname.getRestaurantName());
+            
+            List<OrderItem> items1 = order.getItems();
+            // System.out.println(items1);
+
+            for (OrderItem item : items1) {
+                // setting names of order items
+                String foodId = item.getFoodId();
+                
+                // taking the food item and assigning the name
+                try {
+                    FoodItem foodItem1 = foodItem_repository.findByid(foodId);
+                    item.setFoodName(foodItem1.getName());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                //
+            }
+            order.setItems(items1);
+
+        }
+
+        return orders;
     }
 
     @GetMapping("/Foodify/Admin/Orders/All")
-    public List<Order> ordersAll(){
-        List<Order> detailed =  order_service.getDetailedOrders();
-//        List<Order> detailed =  order_repository.findByUser(userId);
+    public List<Order> ordersAll() {
+        List<Order> detailed = order_service.getDetailedOrders();
+        // List<Order> detailed = order_repository.findByUser(userId);
         return detailed;
     }
 
-//    ----------------------to make the order--------------------------------
-@PostMapping("/FoodiFy/User/setOrder")
-public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
+    // ----------------------to make the order--------------------------------
+    @PostMapping("/FoodiFy/User/setOrder")
+    public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
 
-//		String foodId = null;
-//		FoodItem food = foodItems.findByid(foodId);
-    String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        // String foodId = null;
+        // FoodItem food = foodItems.findByid(foodId);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    try {
+        try {
 
-        return new ResponseEntity<>(order_service.setOrder(order,userName), HttpStatus.OK);
+            return new ResponseEntity<>(order_service.setOrder(order, userName), HttpStatus.OK);
 
-    } catch (Exception e) {
+        } catch (Exception e) {
 
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
+        }
+
+        // return null;
     }
 
-//		return null;
-}
-
-
-    //    ----------------------to make the order--------------------------------
+    // ----------------------to make the order--------------------------------
     @GetMapping("/FoodiFy/Restaurant/callOrder")
     public ResponseEntity<?> callOrders() {
 
-//		String foodId = null;
-//		FoodItem food = foodItems.findByid(foodId);
+        // String foodId = null;
+        // FoodItem food = foodItems.findByid(foodId);
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(userName);
+        //System.out.println(userName);
         try {
 
             return new ResponseEntity<>(order_service.callOrder(userName), HttpStatus.OK);
@@ -79,8 +127,7 @@ public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
 
         }
 
-//		return null;
+        // return null;
     }
-
 
 }

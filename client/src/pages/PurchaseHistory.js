@@ -18,7 +18,7 @@ function IntakeChart() {
   useEffect((event) => {
 
     //to do:initialize the user id and pass to the url
-    axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
+    axios.get("http://localhost:8072/FoodiFy/Orders/pucheshistory",{ headers: authHeader()})
         .then(data => {
           // console.log(data);
           const details = data.data;
@@ -32,7 +32,6 @@ function IntakeChart() {
         });
 
 }, []);
-// console.log(details);
   return (
     <Box>
 
