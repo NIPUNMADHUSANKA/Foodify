@@ -12,79 +12,16 @@ import Fade from 'react-reveal/Fade';
 import axois from "axios";
 import { Link } from 'react-router-dom';
 
-import AuthService from '../../services/auth-service';
 import { useLocation } from 'react-router-dom';
 
 // ---------------css for carousel-------------------------
 
 // -----------------------------for the carousel-------------------
 
-/*const item = {
-  "id": "1",
-  "title": "Boneless Diang na Bangus",
-  "image": image1,
-  "name2": "Bojun Hut",
-  "price": "Rs.280",
-  "name": "Order Now",
-}
-
-const data = [
-  {
-    "id": "1",
-    "title": "Boneless Diang",
-    "image": image1,
-    "name2": "Bojun Hut",
-    "price": "Rs.280",
-    "name": "Order Now",
-  },
-  {
-    "id": "2",
-    "title": "Tilapia in Tausi",
-    "image": image2,
-    "name2": "Bojun Hut",
-    "price": "Rs.280",
-    "name": "Order Now",
-  },
-  {
-    "id": "3",
-    "title": "Buttered Shrimp",
-    "image": image3,
-    "name2": "Bojun Hut",
-    "price": "Rs.300",
-    "name": "Order Now",
-  },
-  {
-    "id": "4",
-    "title": "Tulingan Sa Gata",
-    "image": image4,
-    "name2": "Bojun Hut",
-    "price": "Rs.220",
-    "name": "Order Now",
-  },
-  {
-    "id": "5",
-    "title": "Fried Tawilis",
-    "image": image5,
-    "name2": "Bojun Hut",
-    "price": "Rs.125",
-    "name": "Order Now",
-  },
-  {
-    "id": "6",
-    "title": "Pinangat",
-    "image": image6,
-    "name2": "Bojun Hut",
-    "price": "Rs.200",
-    "name": "Order Now",
-  }
-]
-*/
 const itemcount = 4;
 
 // ------------------------------------------------------
-//console.log(data)
 
-//const data2 = data;
 var ROLE = null;
 
 const FoodCategory = () => {
@@ -122,11 +59,10 @@ const FoodCategory = () => {
 
   useEffect((event) => {
 
- axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/"+Id)
-        .then(data => {
-            
-          setDetails(data.data);  
-          setisgetItem(true);
+    axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/" + Id)
+      .then(data => {
+        setDetails(data.data);
+        setisgetItem(true);
       })
       .catch(error => {
         console.log(error);
@@ -135,11 +71,9 @@ const FoodCategory = () => {
 
   }, [isgetItem]);
 
-// console.log(details);
+console.log(details);
 
   return (
-
-
 
     <Box sx={{
       width: '100%',

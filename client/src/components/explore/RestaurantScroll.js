@@ -1,10 +1,8 @@
 import React from 'react';
-import { ThemeProvider, Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Carousel from 'react-elastic-carousel';
 
 import RestaurantCard from './RestaurantCard'
-import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
-import { width } from '@mui/system';
 
 const breakpoints = [
   { width: 1, itemsToShow: 1 },

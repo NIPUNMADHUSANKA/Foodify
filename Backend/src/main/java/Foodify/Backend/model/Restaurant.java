@@ -1,10 +1,7 @@
 package Foodify.Backend.model;
 
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 
-import java.util.List;
-import java.util.Arrays;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;

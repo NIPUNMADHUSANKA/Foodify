@@ -19,8 +19,9 @@ import java.util.List;
 @CrossOrigin
 public class ShoppingCartController {
 
-    @Autowired
+    /*@Autowired
     private ShoppingCart_Repository ShoppingCartRepo;
+    */
 
     @Autowired
     private ShopCartServiceImp ShopCartService;

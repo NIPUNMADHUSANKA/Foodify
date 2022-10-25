@@ -81,10 +81,10 @@ function RestaurantRatingForm() {
     const [formValues, setFormValues] = React.useState(initialValues);
 
     // ----------create state name form errors--------
-    const [formErrors, setFormErrors] = React.useState({});
+   // const [formErrors, setFormErrors] = React.useState({});
 
     // -------------usestate for submit form-----------
-    const [isSubmit, setIsSubmit] = React.useState(false);
+  //  const [isSubmit, setIsSubmit] = React.useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -106,7 +106,7 @@ function RestaurantRatingForm() {
         })
         .catch(error => {
              errors.exists = error.response.data;
-             setFormErrors(errors);
+           //  setFormErrors(errors);
 
         })
 
