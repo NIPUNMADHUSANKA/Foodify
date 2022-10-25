@@ -14,6 +14,10 @@ public class OrderItem {
 
         public int price;
 
+        public int total;
+
+        public int discount;
+
         public String foodId;
 
         public String preparedStatus;
@@ -25,6 +29,7 @@ public class OrderItem {
     }
 
     public void setFoodName(String foodName) {
+
         this.foodName = foodName;
     }
 
@@ -48,39 +53,62 @@ public class OrderItem {
             return price;
         }
 
-        public void setPrice(int price) {
-            this.price = price;
-        }
 
-        public String getRestaurantId() {
-            return restaurantId;
-        }
+    public String getRestaurantId() {
+        return restaurantId;
+    }
 
-        public void setRestaurantId(String restaurantId) {
-            this.restaurantId = restaurantId;
-        }
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
-        public ObjectId getItem() {
-            return item;
-        }
+    public ObjectId getItem() {
+        return item;
+    }
 
-        public void setItem(ObjectId item) {
-            this.item = item;
-        }
+    public void setItem(ObjectId item) {
+        this.item = item;
+    }
 
-        public String getFoodItem() {
-            return foodItem;
-        }
+    public String getFoodItem() {
+        return foodItem;
+    }
 
-        public void setFoodItem(FoodItem foodItem) {
-            this.foodItem = foodItem.toString();
-        }
+    public void setFoodItem(FoodItem foodItem) {
+        this.foodItem = foodItem.toString();
+    }
 
-        public Integer getQuantity() {
-            return quantity;
-        }
+    public Integer getQuantity() {
+        return quantity;
+    }
 
-        public void setQuantity(Integer quantity) {
-            this.quantity = quantity;
-        }
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setFoodItem(String foodItem) {
+        this.foodItem = foodItem;
+    }
+
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }
