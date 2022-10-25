@@ -3,6 +3,7 @@ import { Typography } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import Brightness1Icon from '@mui/icons-material/Brightness1';
+import { useState, useEffect } from "react";
 
 const ToggleB = styled('div')(({ theme }) => ({
     display: 'flex', 
@@ -20,8 +21,14 @@ const ToggleB = styled('div')(({ theme }) => ({
     },
 }));
 
+
+
 function Nearme(){
     const [Color, setColor] = React.useState('#fff');
+    
+    
+        
+    
     
     function handleLocation(){
         // console.log(Color)
@@ -30,6 +37,33 @@ function Nearme(){
         }else{
         setColor('#fff')
         }
+
+        const success = (position) => {
+            console.log(position)
+            // const latitude = position.coords.latitude;
+            // const longitude = position.coords.longitude;
+            const latitude = 6.902274;
+            const longitude = 79.861185;
+            console.log(latitude + ' ' + longitude)
+
+            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+
+            fetch(geoApiUrl)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
+
+            
+
+            
+        }
+
+       
+        navigator.geolocation.getCurrentPosition(success);
+      
+
+
     }
     return(
         <ToggleB>
