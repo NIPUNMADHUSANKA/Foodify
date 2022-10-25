@@ -88,5 +88,28 @@ public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
 //		return null;
     }
 
+    //    ----------------------to make the order--------------------------------
+    @PutMapping("/FoodiFy/Restaurant/updateOrderItem")
+    public ResponseEntity<?> updateOrderItem(@RequestParam("itemId") String itemId,
+                                             @RequestParam("orderId") String orderId) {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+
+        System.out.println(itemId+"Controller");
+        System.out.println(orderId+"Controller");
+        try {
+            System.out.println("Controller");
+            return new ResponseEntity<>(order_service.updateOrderItem(itemId,orderId), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
+//		return null;
+    }
+
 
 }

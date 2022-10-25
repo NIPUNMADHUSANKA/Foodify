@@ -5,10 +5,15 @@ import Foodify.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDate;
+import java.util.*;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
+
 
 
 @Service
@@ -196,6 +201,7 @@ public class Order_Service implements Order_Serv{
 //				taking the food item and assigning the name
 				FoodItem foodItem1 = foodItem_repository.findByid(foodId);
 				item.setFoodName(foodItem1.getName());
+				item.setImage(foodItem1.getImage());
 //				System.out.println(item.getFoodName());
 			}
 
@@ -203,5 +209,50 @@ public class Order_Service implements Order_Serv{
 			order.setItems(items1);
 		}
 		return orders;
+	}
+
+	@Override
+	public String updateOrderItem(String itemId, String orderId) {
+
+		System.out.println("order service");
+		System.out.println(orderId);
+
+		Order orders = order_repository.findByid(orderId);
+
+		System.out.println(orders);
+		List<OrderItem> items = orders.getItems();
+
+//		for(Order order : orders)
+
+		int count = 0;
+		for(OrderItem item : items){
+			System.out.println(item.getFoodId()+"order service");
+			System.out.println(itemId+"order service");
+
+			if(Objects.equals(item.getFoodId(), itemId)){
+
+				if(Objects.equals(item.getPreparedStatus(), "Queued")){item.setPreparedStatus("Preparing");}
+				else if(Objects.equals(item.getPreparedStatus(), "Preparing")){item.setPreparedStatus("Finished");}
+			}
+
+			if(Objects.equals(item.getPreparedStatus(), "Preparing")){
+
+				System.out.println("order service");
+				orders.setPreparedState("Preparing");
+			}
+			else if(Objects.equals(item.getPreparedStatus(), "Finished")){
+
+				System.out.println("order service");
+				count++;
+				if(count == items.size()){
+					orders.setPreparedState("Finished");
+				}
+
+			}
+		}
+
+		orders.setItems(items);
+		order_repository.save(orders);
+		return null;
 	}
 }

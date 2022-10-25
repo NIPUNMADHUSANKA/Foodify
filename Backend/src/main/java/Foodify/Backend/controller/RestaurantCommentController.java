@@ -32,16 +32,24 @@ public class RestaurantCommentController {
 	public RestaurantComments createComment(@RequestBody RestaurantComments Rescomment) {
 		
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(Rescomment);
-
-//		System.out.println(userName);
+		System.out.println(Rescomment.getRestaurantId());
+		Restaurant restaurant = restaurantrepo.findByid(Rescomment.getRestaurantId());
+		System.out.println(userName);
 //		String restauratId=commentRes.getRestaurantId();
 //		String commentDescription=complain.getCommentDescription();
 //		Date addedDate=complain.getAddedDate();
-		
+//		float rating0 = 0;
+//		Rescomment.setRating(rating0);
 		Rescomment.setUsername(userName);
-		
-		
+		Double rating1 = Rescomment.getRating();
+		Double rating2 = restaurant.getRating();
+		if(rating2==null){
+			rating2=0.0;
+		}
+		Double rating = (rating1 + rating2)/2;
+
+		restaurant.setRating(rating);
+		restaurantrepo.save(restaurant);
 		return restaurantCommentRepository.save(Rescomment);
 	}
 	
