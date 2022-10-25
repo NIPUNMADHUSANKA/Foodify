@@ -45,7 +45,7 @@ const mobileMenu = {
 
 const userMenu = {
   marginTop: "55px",
-  '& .MuiMenuItem-root' : {
+  '& .MuiMenuItem-root': {
     fontSize: 12,
     color: 'White'
   },
@@ -114,7 +114,7 @@ export default function PrimarySearchAppBar() {
     localStorage.removeItem("ROLE");
 
     ROLE = null
-    
+
     navigate("/Explore");
 
   };
@@ -156,7 +156,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
       sx={userMenu}
     >
-      <MenuItem component={Link} to = "/myprofile">
+      <MenuItem component={Link} to="/myprofile">
         PROFILE
       </MenuItem>
 
@@ -225,7 +225,7 @@ export default function PrimarySearchAppBar() {
           {(() => {
             if (JSON.parse(localStorage.getItem('ROLE'))) {
               ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
-             
+
             }
           }
           )()}
@@ -307,6 +307,13 @@ export default function PrimarySearchAppBar() {
             {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {(() => {
               if (ROLE === "User" || ROLE === "premiumUser") {
+                return (<Button component={Link} to='/PurchaseHistory' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> PURCHASE  </Button>);
+              }
+            }
+            )()}
+
+            {(() => {
+              if (ROLE === "User" || ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Complaints' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> COMPLAIN  </Button>);
               }
             }
@@ -360,7 +367,7 @@ export default function PrimarySearchAppBar() {
 
 
             {/*------------------------------START User Icons-------------------------------------------------*/}
-            
+
             {(() => {
               if (ROLE != null && ROLE != "Admin" && ROLE != "restaurant") {
                 return (<IconButton
@@ -372,8 +379,8 @@ export default function PrimarySearchAppBar() {
                   color="inherit"
                   onClick={handleProfileMenuOpen}
 
-                  component = {Link} 
-                  to = "/myProfile"
+                  component={Link}
+                  to="/myProfile"
                 >
                   <AccountCircle />
                 </IconButton>);
@@ -392,7 +399,7 @@ export default function PrimarySearchAppBar() {
                   aria-haspopup="true"
                   color="inherit"
                 >
-                  <LogoutIcon onClick = {logout} />
+                  <LogoutIcon onClick={logout} />
                 </IconButton>);
               }
             }
