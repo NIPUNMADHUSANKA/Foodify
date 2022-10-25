@@ -176,7 +176,7 @@ public class Order_Service implements Order_Serv{
 	public List<Order> callOrder(String userName1) {
 
 		Restaurant restaurant = restaurantRepository.findByuserName(userName1);
-		System.out.println(restaurant.getId());
+//		System.out.println(restaurant.getId());
 //		getting the order list
 		List<Order> orders = order_repository.findByresId(restaurant.getId());
 
@@ -184,7 +184,7 @@ public class Order_Service implements Order_Serv{
 
 //		loop orders
 		for (Order order : orders){
-			System.out.println(order.getResId()+"second");
+//			System.out.println(order.getResId()+"second");
 			List<OrderItem> items1 = order.getItems();
 
 //			looping items
@@ -196,7 +196,7 @@ public class Order_Service implements Order_Serv{
 //				taking the food item and assigning the name
 				FoodItem foodItem1 = foodItem_repository.findByid(foodId);
 				item.setFoodName(foodItem1.getName());
-				System.out.println(item.getFoodName());
+//				System.out.println(item.getFoodName());
 			}
 
 //			setting updated order items

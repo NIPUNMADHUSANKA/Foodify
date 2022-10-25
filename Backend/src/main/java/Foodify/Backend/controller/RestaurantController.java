@@ -669,5 +669,10 @@ public ResponseEntity<?>  getRestaurantIncome() {
 
 }
 
+	@GetMapping("/FoodiFy/Admin/Restaurants/All")
+	public List<Restaurant> getRestaurants(){
+		List<Restaurant> allRes = restaurantrepo.findAll();
+		return allRes;
+	}
 
 }
