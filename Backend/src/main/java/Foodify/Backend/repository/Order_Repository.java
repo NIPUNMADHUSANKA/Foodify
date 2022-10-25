@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface Order_Repository extends MongoRepository<Order, String> {
@@ -26,7 +27,9 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 
 	List<Order> findByresId(String restId);
 
-	Optional<Order> findById(String restId);
+	Order findByid(String orderId);
+
+//	Optional<Order> findById(String restId);
 }
 
 

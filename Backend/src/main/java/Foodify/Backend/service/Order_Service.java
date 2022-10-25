@@ -181,7 +181,7 @@ public class Order_Service implements Order_Serv{
 	public List<Order> callOrder(String userName1) {
 
 		Restaurant restaurant = restaurantRepository.findByuserName(userName1);
-		System.out.println(restaurant.getId());
+//		System.out.println(restaurant.getId());
 //		getting the order list
 		List<Order> orders = order_repository.findByresId(restaurant.getId());
 
@@ -189,7 +189,7 @@ public class Order_Service implements Order_Serv{
 
 //		loop orders
 		for (Order order : orders){
-			System.out.println(order.getResId()+"second");
+//			System.out.println(order.getResId()+"second");
 			List<OrderItem> items1 = order.getItems();
 
 //			looping items
@@ -202,7 +202,7 @@ public class Order_Service implements Order_Serv{
 				FoodItem foodItem1 = foodItem_repository.findByid(foodId);
 				item.setFoodName(foodItem1.getName());
 				item.setImage(foodItem1.getImage());
-				System.out.println(item.getFoodName());
+//				System.out.println(item.getFoodName());
 			}
 
 //			setting updated order items
@@ -215,10 +215,12 @@ public class Order_Service implements Order_Serv{
 	public String updateOrderItem(String itemId, String orderId) {
 
 		System.out.println("order service");
+		System.out.println(orderId);
 
-		Optional<Order> orders = order_repository.findById(orderId);
+		Order orders = order_repository.findByid(orderId);
 
-		List<OrderItem> items = orders.get().getItems();
+		System.out.println(orders);
+		List<OrderItem> items = orders.getItems();
 
 //		for(Order order : orders)
 
@@ -229,12 +231,12 @@ public class Order_Service implements Order_Serv{
 			if(Objects.equals(item.getFoodId(), itemId)){
 				System.out.println("order service");
 				if(Objects.equals(item.getPreparedStatus(), "Queued")){item.setPreparedStatus("Preparing");}
-				if(Objects.equals(item.getPreparedStatus(), "Preparing")){item.setPreparedStatus("Finished");}
+				else if(Objects.equals(item.getPreparedStatus(), "Preparing")){item.setPreparedStatus("Finished");}
 			}
 		}
 
-		orders.get().setItems(items);
-		order_repository.save(orders.get());
+		orders.setItems(items);
+		order_repository.save(orders);
 		return null;
 	}
 }
