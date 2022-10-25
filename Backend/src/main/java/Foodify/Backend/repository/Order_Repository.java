@@ -20,11 +20,13 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 //	@Query(value ="{restaurant: ?0}")
 //	List<Order> findByRes(ObjectId RestaurantId);
 
-	Offers findByid(String id);
+//	Offers findByid(String id);
 
 	List<Offers> findByuserName1(String user);
 
 	List<Order> findByresId(String restId);
+
+	Optional<Order> findById(String restId);
 }
 
 

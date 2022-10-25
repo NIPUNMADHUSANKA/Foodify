@@ -1,5 +1,6 @@
 package Foodify.Backend.model;
 
+import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,6 +24,16 @@ public class OrderItem {
         public String preparedStatus;
 
         public String foodName;
+
+        public Binary image;
+
+    public Binary getImage() {
+        return image;
+    }
+
+    public void setImage(Binary image) {
+        this.image = image;
+    }
 
     public String getFoodName() {
         return foodName;
