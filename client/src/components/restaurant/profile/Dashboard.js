@@ -143,7 +143,7 @@ TablePaginationActions.propTypes = {
 
 var details = [];
 var viewBtn = [];
-var orderId1;
+var orderId1 =[];
 
 // const [status, setstatus] = React.useState(false);
 
@@ -186,7 +186,7 @@ function createData(orderId, user, type, amount, date, time, restaurant) {
 
   let OTime = setTime.toString();
 
-  orderId1 = orderId;
+  orderId1.push(orderId);
   // var OT = date.getHours();
   // console.log(time);
   // console.log(setTime);
@@ -237,6 +237,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
+  const orderId1 = row.orderId;
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>

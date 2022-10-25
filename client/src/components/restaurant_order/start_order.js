@@ -9,6 +9,15 @@ import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';
 import axios from 'axios';
 import authHeader from "../../services/auth-header";
 
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+// ---------------for the add to cart message-------------------
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function OrderwithS(props) {
 
   // ---order item------
@@ -21,7 +30,17 @@ export default function OrderwithS(props) {
 
   // function callData() {
 
-    
+  // -------------------to show the message---------------
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   // };
 
@@ -34,8 +53,9 @@ export default function OrderwithS(props) {
       ItemData.append('orderId', oID);
 
       try {
-        const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`,ItemData, { headers: authHeader() });
+        const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`, ItemData, { headers: authHeader() });
 
+        handleClickOpen();
         // const details = resp.data;
 
         // setDetails1({ ...details });
@@ -52,48 +72,62 @@ export default function OrderwithS(props) {
     getOfferDetails();
 
     // --------calling items for cart---------------
-};
+  };
 
-return (
-<Box sx={{backgroundColor:Colours.transparenceGrey,padding:'3%'}} >
-            
-            <Box display="flex">
-            <Skeleton  sx={{ backgroundColor:Colours.white,marginLeft:'40%' }} variant="circular" width={100} height={100}/>
-            <DoneAllRoundedIcon sx={{backgroundColor:'none',marginTop:'2.5%',position:'absolute',marginLeft:'16.5%',
-            
-                [theme.breakpoints.down('sm')]: {
-                  marginLeft: '43%',
-                  marginTop:'8%',
-                  
-                },
+  return (
+    <Box sx={{ backgroundColor: Colours.transparenceGrey, padding: '3%' }} >
 
-              }}/>
-            </Box>
+      <Box display="flex">
+        <Skeleton sx={{ backgroundColor: Colours.white, marginLeft: '40%' }} variant="circular" width={100} height={100} />
+        <DoneAllRoundedIcon sx={{
+          backgroundColor: 'none', marginTop: '2.5%', position: 'absolute', marginLeft: '16.5%',
 
-            <Grid item xs={12} sm={6}>
-            <Button xs={12} sm={6} variant="contained" onClick={callData} sx={{
-              marginLeft:'80%',marginTop:'10%',
-              background: Colours.darkgray, '&:hover': {
-                backgroundColor: Colours.grayWhite, color: Colours.dark,
-              },
-              color: Colours.grayWhite,
-              fontSize: '20px',
-              fontFamily:'Poppins',
+          [theme.breakpoints.down('sm')]: {
+            marginLeft: '43%',
+            marginTop: '8%',
 
-              [theme.breakpoints.down('sm')]: {
-                fontSize: '18px',
-                width:'100%',
-                marginBottom:'7%',
-                marginLeft:'0%',
-                
-              },
-            }}>
-              START
-            </Button>
-          
-        </Grid>
+          },
+
+        }} />
+      </Box>
+
+      {/* -----------------add to cart message---------------- */}
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Preparing status recorded!"}</DialogTitle>
+      </Dialog>
+      {/* -------------end of add to cart message------------- */}
 
 
-        </Box>
-    )
+      <Grid item xs={12} sm={6}>
+        <Button xs={12} sm={6} variant="contained" onClick={callData} sx={{
+          marginLeft: '80%', marginTop: '10%',
+          background: Colours.darkgray, '&:hover': {
+            backgroundColor: Colours.grayWhite, color: Colours.dark,
+          },
+          color: Colours.grayWhite,
+          fontSize: '20px',
+          fontFamily: 'Poppins',
+
+          [theme.breakpoints.down('sm')]: {
+            fontSize: '18px',
+            width: '100%',
+            marginBottom: '7%',
+            marginLeft: '0%',
+
+          },
+        }}>
+          START
+        </Button>
+
+      </Grid>
+
+
+    </Box>
+  )
 }
