@@ -25,7 +25,7 @@ public class RestaurantComments {
 	
 	public RestaurantComments() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public String getId() {

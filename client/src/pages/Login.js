@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 
 import LoginBanner from '../components/login/LoginBanner';
-import LoginNavbar from '../components/login/LoginNavbar';
 import '../assets/css/Login.css';
 import theme, { Colours } from '../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';

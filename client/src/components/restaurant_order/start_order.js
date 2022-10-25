@@ -2,7 +2,6 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import theme, { Colours } from '../../assets/theme/theme';
-import Discountpng from '../../assets/images/discount_group.png';
 import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';

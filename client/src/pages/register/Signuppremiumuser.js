@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material';
 import RegisterBannerPremiumUser from '../../components/Register/RegisterBannerPremiumUser';
-import RegisterNavbar from '../../components/Register/RegisterNavbar';
 import '../../assets/css/Registeruser.css';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';

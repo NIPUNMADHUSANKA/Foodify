@@ -38,7 +38,7 @@ const Dashboard = () => {
     useEffect((event) => {
 
         /* -----------------------------------------Users */
-        axios.get("http://localhost:8072/Foodify/Admin/Users/All",{ headers: authHeader()})
+        axios.get("http://localhost:8072/FoodiFy/Admin/Users/All",{ headers: authHeader()})
         .then(data => {
             const users = data.data;
             setUsers({ ...users});
@@ -50,10 +50,11 @@ const Dashboard = () => {
         });
 
         /* -----------------------------------------Orders */
-        axios.get("http://localhost:8072/Foodify/Admin/Orders/All",{ headers: authHeader()})
+        axios.get("http://localhost:8072/FoodiFy/Admin/Orders/All",{ headers: authHeader()})
         .then(data => {
             const orders = data.data;
             setOrders({ ...orders});
+            console.log(orders);
         })
         .catch(error => {
             if (error.response.data) {
@@ -65,7 +66,7 @@ const Dashboard = () => {
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(3);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {

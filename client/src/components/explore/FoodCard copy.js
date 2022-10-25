@@ -4,7 +4,6 @@ import React from 'react'
 import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Box } from '@mui/system';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Link} from 'react-router-dom';
 // import LatestIcon from '../assets/images/latest_food.png';
 
@@ -25,7 +24,15 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }
 }));
 
-function FoodCard() {
+function FoodCard(data) {
+  console.log(data.data.id);
+  console.log(data.data.name)
+  // console.log(data.data.bImage)
+
+
+  const foodimage = data.data.bImage
+ 
+
   return (
     <ThemeProvider theme={theme}>
     <Stack
@@ -50,17 +57,20 @@ function FoodCard() {
           }
            }}
     >
-        <StyledBadge color="secondary" badgeContent={4.9}>
-          <img src={image} alt="food" />
+        <StyledBadge color="secondary" badgeContent={"99+"}>
+          <img src={foodimage !==null ? `data:image/jpeg;base64,${foodimage}` : image} alt="food" style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
         </StyledBadge>
+       
 
-        <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>Boneless Diang</Typography>
+
+        <Typography fontSize="24px" fontWeight="400" mt="-45px" sx={{[theme.breakpoints.down('sm')]: {fontSize: "20px", mt:"-30px"}}}>
+                 {data.data.name}
+        </Typography>
         <Typography textAlign="center" mt="-45px" mb="-30px" fontWeight="200" fontSize="15px" sx={{[theme.breakpoints.down('sm')]: { mt:"-30px"}}}>
-                 Rs.1000.00
+                 Rs.{data.data.price}
         </Typography>
 
         <Typography textAlign="center" mt="-25px" mb="-30px" fontWeight="200" sx={{[theme.breakpoints.down('sm')]: {mt:"0px", mb:"-20px"}}}>
-                 Restaurant Name
         </Typography>
 
         <Box

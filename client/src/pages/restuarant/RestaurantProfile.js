@@ -15,6 +15,7 @@ import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
 import RestaurantEditableBanner from '../../components/restaurant/profile/RestaurantEditableBanner';
 import RestaurantDashboard from '../../components/restaurant/profile/Dashboard';
+import RestaurantIncome from '../../components/restaurant/profile/Income';
 
 
 import Navbar from './../../components/Navbar';
@@ -99,7 +100,7 @@ const RestaurantProfile = () => {
                     <RestaurantDashboard />
                 </RTabPanel>
                 <RTabPanel value={value} index={2} >
-                    volet
+                    <RestaurantIncome />
                 </RTabPanel>
             </Box>
 

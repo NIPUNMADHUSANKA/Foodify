@@ -68,7 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/FoodiFy/AllUser/getFoodMenu/**",
 				"/FoodiFy/AllUser/getFoodCategory/**",
 				"/FoodiFy/AllUser/getFoodCategoryItem/**",
-				
+				"/FoodiFy/AllUser/getFoodComment/{id}/**",
+				"/FoodiFy/AllUser/getRestaurantComment/{id}/**",
+
 				"/RestaurantInfo/editContact",
 				"/RestaurantInfo/editAbout",
 				"/Orders/All",
@@ -84,11 +86,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
-		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("Admin");
+		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
-		// TODO Auto-generated method stub
+		
 //		http.authorizeRequests().anyRequest().authenticated();
 //		http.formLogin();
 	}
@@ -153,7 +155,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //@Bean
 //@Override
 //public AuthenticationManager authenticationManagerBean() throws Exception {
-//	// TODO Auto-generated method stub
+//	
 //	return super.authenticationManagerBean();
 //}
 //

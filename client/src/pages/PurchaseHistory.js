@@ -1,11 +1,8 @@
 import React from 'react';
-import { useEffect,useState} from 'react';
-
+import { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import PageTitle from '../components/User/PageTitle';
-
-import AuthService from '../services/auth-service';
 import authHeader from '../services/auth-header';
 
 import Navbar from '../components/Navbar';
@@ -14,8 +11,6 @@ import axios from "axios";
 
 
 const MainHeader = "Purchase History";
-const currentUser = AuthService.getCurrentUser(); // to do : this gives the user token, make it get 
-// console.log(currentUser);
 
 function IntakeChart() {
   const [details, setDetails] = React.useState({});
@@ -26,7 +21,6 @@ function IntakeChart() {
     axios.get("http://localhost:8072/FoodiFy/User/Orders/6304a23912a75f64555969d8",{ headers: authHeader()})
         .then(data => {
           // console.log(data);
-          // console.log(currentUser);
           const details = data.data;
           setDetails({ ...details});
           // console.log(details);

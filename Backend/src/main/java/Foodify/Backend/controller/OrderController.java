@@ -1,10 +1,13 @@
 package Foodify.Backend.controller;
 
 import Foodify.Backend.model.Order;
-import Foodify.Backend.repository.Order_Repository;
+//import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.service.Order_Service;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -29,11 +31,18 @@ public class OrderController {
         return detailed;
     }
 
-    @GetMapping("/Foodify/Admin/Orders/All")
-    public List<Order> ordersAll(){
-        List<Order> detailed =  order_service.getDetailedOrders();
-//        List<Order> detailed =  order_repository.findByUser(userId);
-        return detailed;
+    @GetMapping("/FoodiFy/Admin/Orders/All")
+    public ResponseEntity<?> ordersAll(){
+        try {
+
+            ResponseEntity<List<Order>> detailed = new ResponseEntity<>(order_service.detailedOrders(), HttpStatus.OK);
+            return detailed;
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
 //    ----------------------to make the order--------------------------------
