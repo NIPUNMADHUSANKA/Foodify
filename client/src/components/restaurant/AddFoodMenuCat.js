@@ -1,14 +1,10 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import { Colours } from '../../assets/theme/theme';
-import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
-import { Checkbox, FormControl, FormControlLabel, FormGroup } from '@mui/material';
-import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 
 // ---------------------------------text fied css style-----------------------
-const InputArea = styled(TextField)({
+/*const InputArea = styled(TextField)({
     color: Colours.grayWhite,
     '&:fielset': {
         backgroundColor: Colours.primary,
@@ -40,16 +36,16 @@ const InputArea = styled(TextField)({
     },
 });
 // ---------------------------------------------------------------------
-
+*/
 
 
 function AddFoodMenuCat() {
     
-    const [currency, setCurrency] = React.useState('category');
+   // const [currency, setCurrency] = React.useState('category');
 
-    const handleChange = (event) => {
+   /* const handleChange = (event) => {
         setCurrency(event.target.value);
-    };
+    };*/
   return (
    <div></div>
   )

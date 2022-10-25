@@ -8,10 +8,8 @@ import theme, { Colours } from '../../assets/theme/theme';
 import order_food from '../../assets/images/order_food.png'; 
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import Button from '@mui/material/Button';
 import OrderwithD from './orderwithDiscount';
 import OrderwithS from './start_order';
-import PhoneIcon from '@mui/icons-material/Phone';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import MailIcon from '@mui/icons-material/Mail';
 
