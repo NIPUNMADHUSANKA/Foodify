@@ -45,7 +45,6 @@ function Complaints() {
 
 }, []);
 
-console.log(Datapending)
 
 const [Dataaccepted, setData1] = useState([]);
 
@@ -63,7 +62,6 @@ useEffect((event) => {
 
 }, []);
 
-console.log(Dataaccepted)
 
 
 const [Datarejected, setData2] = useState([]);
@@ -82,7 +80,6 @@ useEffect((event) => {
 
 }, []);
 
-console.log(Datarejected)
 
 const sum = Datapending + Dataaccepted + Datarejected;
 
@@ -98,9 +95,6 @@ const sum = Datapending + Dataaccepted + Datarejected;
     [ "Rejected Complaints",  Datarejected, Reject ]
   
   ];
-
-  
-
    
   return (
 

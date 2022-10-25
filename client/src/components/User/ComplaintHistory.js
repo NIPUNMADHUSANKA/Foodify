@@ -66,7 +66,7 @@ function ComplaintHistory() {
      
           <List dense={true} >
             {Object.keys(complainhis).map((keyName) => (
-              console.log(complainhis[keyName]),
+             
               <ListItem key={complainhis[keyName].id}>
                 <ListItemText sx={{ color: Colours.green,height:"5%" }}
                   primary={complainhis[keyName].complainTitle} 

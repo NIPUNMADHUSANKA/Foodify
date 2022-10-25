@@ -16,6 +16,7 @@ const breakpoints = [
 
 function CardBar(details) {
   const X = details.details;
+
   
   return (
 
@@ -25,7 +26,7 @@ function CardBar(details) {
         {Array.isArray(X)
          ? 
          X.map(Y=>
-              (<Summary_Card Title={Y[0]} Count={Y[1]} icon={Y[2]} /> ))
+              (<Summary_Card Title={Y[0]} nutcount={Y[1]} icon={Y[2]} />))
          : null   
         }
         
