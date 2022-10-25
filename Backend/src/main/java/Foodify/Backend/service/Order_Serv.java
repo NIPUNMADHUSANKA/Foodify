@@ -17,4 +17,6 @@ public interface Order_Serv {
 
 	List<Order> callOrder(String userName1);
 
+	String updateOrderItem(String itemId,String orderId);
+
 }

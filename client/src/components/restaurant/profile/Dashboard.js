@@ -140,20 +140,68 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(payment, user, type, amount, date, time, restaurant, details) {
+
+var details = [];
+var viewBtn = [];
+var orderId1;
+
+// const [status, setstatus] = React.useState(false);
+
+function createData(orderId, user, type, amount, date, time, restaurant) {
 
   const view = <Button component={Link} to='/restaurantorder' variant="contained" color="success" size="small">View</Button>
   const done = <Button variant="contained" color="success" size="small">Completed</Button>
   const prepare = <Button variant="contained" color="warning" size="small">Start</Button>
   const abort = <Button variant="contained" color="error" size="small">Abort</Button>
   const cancel = <Button variant="contained" color="error" size="small">Cancel</Button>
+
+  const time1 = Date.parse(time);
+  let date1 = new Date(time);
+
+  let T1 = new Date(time).getHours() + 5;
+  let T2 = new Date(time).getMinutes() + 30;
+  let T3;
+
+  if (T2 > 60) {
+    T1 = T1 + 1;
+    T2 = T2 - 60;
+    T3 = T2;
+    if (T2 < 10) {
+      T3 = "0" + T2
+    }
+  }
+  if (T2 > 10 && T2 < 60) {
+    T3 = T2
+  }
+  if (T2 > 120) {
+    T1 = T1 + 2;
+    T2 = T2 - 120;
+    T3 = T2;
+    if (T2 < 10) {
+      T3 = "0" + T2
+    }
+  }
+
+  let setTime = [T1, T3].join(':');
+
+  let OTime = setTime.toString();
+
+  orderId1 = orderId;
+  // var OT = date.getHours();
+  // console.log(time);
+  // console.log(setTime);
+  // console.log(date);
+
+
+console.log(viewBtn);
+
   return {
-    payment,
+    orderId,
     user,
     type,
     amount,
     date,
-    time,
+    OTime,
     restaurant,
     done,
     cancel,
@@ -200,14 +248,17 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">{row.payment}</TableCell>
+        <TableCell component="th" scope="row">{row.orderId}</TableCell>
+
+        {/* ---------------------outer data------------------- */}
         <TableCell >{row.user}</TableCell>
         <TableCell >{row.type}</TableCell>
         <TableCell >{row.amount}</TableCell>
         <TableCell >{row.date}</TableCell>
-        <TableCell >{row.time}</TableCell>
+        <TableCell >{row.OTime}</TableCell>
         <TableCell >{row.done}</TableCell>
         <TableCell >{row.cancel}</TableCell>
+        {/* ----------------end of outer table row------------- */}
       </TableRow>
       <TableRow>
 
@@ -228,14 +279,14 @@ function Row(props) {
                     <TableCell align="right">Price</TableCell>
                     <TableCell align="right">Currunt Status</TableCell>
                     <TableCell ></TableCell>
-                    <TableCell ></TableCell>
+                    {/* <TableCell ></TableCell> */}
                   </TableRow>
                 </TableHead>
                 {/* ------------------------end of inner table table head---------------------- */}
 
                 {/* -------------------------------inner table details------------------------- */}
                 <TableBody>
-                  {row.details.map((detailsRow) => (
+                  {row.details.map((detailsRow,index) => (
                     <TableRow key={detailsRow.item}>
                       <TableCell component="th" scope="row">
                         {detailsRow.foodName}
@@ -243,8 +294,10 @@ function Row(props) {
                       <TableCell align="right">{detailsRow.quantity}</TableCell>
                       <TableCell align="right">{detailsRow.price}</TableCell>
                       <TableCell>{detailsRow.preparedStatus}</TableCell>
-                      {/* <TableCell>{detailsRow.view}</TableCell>
-                      <TableCell>{detailsRow.statusButton}</TableCell> */}
+                      <TableCell>
+                        <Button component={Link} to={"/restaurantorder"} state={{ detailsRow,orderId1 }} variant="contained" color="success" size="small">View</Button>
+                      </TableCell>
+                      {/* <TableCell>{detailsRow.statusButton}</TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -296,13 +349,17 @@ Row.propTypes = {
 // ]
 
 var rows = [];
-var details = [];
+
 
 function TableActions() {
+
+  // ----------------------for store response data----------------------
+  const [details1, setDetails1] = React.useState([]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const [num1, setNum1] = React.useState(0);
   const [rows1, setRows1] = React.useState([]);
 
   //----------------------------------------------------------Column Define 
@@ -341,15 +398,13 @@ function TableActions() {
     setOpen(!open);
   };
 
-  // ----------------------for store response data----------------------
-  const [details1, setDetails1] = React.useState([]);
-
+  var orderData = {};
 
   // --------------------------calling orders---------------------------------------------
-  useEffect(() => {
 
-    // --------calling backdrop-------------
-    handleToggle()
+  const callData = () => {
+
+    details1.length = 0;
 
     // -----------------------------------to getting food item details------------------------------------------
     const getOfferDetails = async () => {
@@ -361,12 +416,10 @@ function TableActions() {
         const resp = await axios.get(`http://localhost:8072/FoodiFy/Restaurant/callOrder`, { headers: authHeader() });
 
         const details = resp.data;
+
         setDetails1({ ...details });
 
         console.log(details);
-
-        // ---------------closing backdrop---------------------
-        handleClose();
 
         // setItems([...items1]);
       } catch (err) {
@@ -379,6 +432,13 @@ function TableActions() {
 
     // --------calling items for cart---------------
 
+  };
+
+
+  useEffect(() => {
+
+    rows.length = 0;
+    callData();
 
   }, []);
 
@@ -386,8 +446,11 @@ function TableActions() {
   console.log(rows1);
   {
     Object.keys(details1).map((item) => (
+
       // console.log(x[keyName]),
       // setRows1({ ...formValues, [name]: value }),
+      details = details1[item].items,
+
       rows.push(createData(
         details1[item].id,
         details1[item].userName1,
@@ -395,8 +458,9 @@ function TableActions() {
         details1[item].price,
         details1[item].orderDate,
         details1[item].orderTime,
-        details1[item].items
-        )),
+        // details1[item].items
+      )),
+
       console.log(details1[item].items)
 
     ))
@@ -429,7 +493,7 @@ function TableActions() {
 
 
           {/* ----------------------------main table body------------------------------- */}
-          {/* <TableBody>
+          <TableBody>
             {(rowsPerPage > 0
               ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : rows
@@ -442,7 +506,7 @@ function TableActions() {
                 <TableCell colSpan={6} />
               </TableRow>
             )}
-          </TableBody> */}
+          </TableBody>
           {/* --------------------------end of main table body------------------------- */}
 
           {/* ----------------------------main table footer---------------------------- */}

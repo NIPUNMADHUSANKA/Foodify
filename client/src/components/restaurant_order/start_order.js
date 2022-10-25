@@ -7,21 +7,57 @@ import Button from '@mui/material/Button';
 import Skeleton from '@mui/material/Skeleton';
 import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';
 
-export default function OrderwithS() {
+import axios from 'axios';
+import authHeader from "../../services/auth-header";
+
+export default function OrderwithS(props) {
+
+  // ---order item------
+  const order = props.order
+  const itemId = order.foodId;
+  console.log(order);
+
+  // ---order id ---------------
+  const oID = props.oId
+
+  // function callData() {
+
+    
+
+  // };
+
+  let callData = () => {
+    // -----------------------------------to getting food item details------------------------------------------
+    const getOfferDetails = async () => {
+
+      const ItemData = new FormData();
+      ItemData.append('itemId', itemId);
+      ItemData.append('orderId', oID);
+
+      try {
+        const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`,ItemData, { headers: authHeader() });
+
+        // const details = resp.data;
+
+        // setDetails1({ ...details });
+
+        // console.log(details);
+
+        // setItems([...items1]);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+
+    getOfferDetails();
+
+    // --------calling items for cart---------------
+};
 
 return (
 <Box sx={{backgroundColor:Colours.transparenceGrey,padding:'3%'}} >
-            <Box display="flex" justifyContent="space-between">
-            <p>Order Time :</p>
-            <p>8.00 AM</p>
-            </Box>
-            <Box display="flex" justifyContent="space-between">
-            <p>Promo Code :</p>
-            <p>34Qjsdnd567</p>
-            </Box>
-            <Box display="flex" justifyContent="space-between">
-            <p>Payment :</p>
-            </Box>
+            
             <Box display="flex">
             <Skeleton  sx={{ backgroundColor:Colours.white,marginLeft:'40%' }} variant="circular" width={100} height={100}/>
             <DoneAllRoundedIcon sx={{backgroundColor:'none',marginTop:'2.5%',position:'absolute',marginLeft:'16.5%',
@@ -36,7 +72,7 @@ return (
             </Box>
 
             <Grid item xs={12} sm={6}>
-            <Button xs={12} sm={6} href='#' variant="contained" sx={{
+            <Button xs={12} sm={6} variant="contained" onClick={callData} sx={{
               marginLeft:'80%',marginTop:'10%',
               background: Colours.darkgray, '&:hover': {
                 backgroundColor: Colours.grayWhite, color: Colours.dark,
