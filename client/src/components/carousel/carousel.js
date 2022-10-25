@@ -13,6 +13,9 @@ import Carousel from 'react-elastic-carousel'; //for the carousel
 const carousel = (props) => {
 
   const data = props.item;
+  // const resId = props.resId;
+  const RestId = props.RestId;
+  // console.log(props);
 
   return (
     <div sx={{ padding: 0 }}>
@@ -65,7 +68,7 @@ const carousel = (props) => {
           {Object.keys(data).map((key, index) => (
 
             
-            <CarouselCard item={data[index]} />
+            <CarouselCard item={data[index]} RestId={RestId}/>
 
           ))}
 

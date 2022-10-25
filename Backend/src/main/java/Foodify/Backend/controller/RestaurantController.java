@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import Foodify.Backend.model.*;
+import Foodify.Backend.service.ShopCartServiceImp;
 import Foodify.Backend.model.RestaurantIncome;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
@@ -33,7 +34,7 @@ import Foodify.Backend.exception.fieldErrorResponse;
 //@RequestMapping("/Restaurant")
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class RestaurantController {
 
 	@Autowired
@@ -59,6 +60,9 @@ public class RestaurantController {
 
 	@Autowired
 	private FoodCategoryRepo foodCategoryRepo;
+
+	@Autowired
+	private ShopCartServiceImp ShopCartService;
 
 	@Autowired
 	private RestaurantIncomeRepository restaurantincomeRepo;
@@ -128,6 +132,7 @@ public class RestaurantController {
 			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
 			restaurant.setAddress(restaurants.get(i).getAddress());
 			restaurant.setId(restaurants.get(i).getId());
+			// restaurant.setRating(restaurants.get(i).getRating());
 
 			restaurantsList.add(restaurant);
 
@@ -361,12 +366,23 @@ public class RestaurantController {
 	}
 
 	/* -------------------------------- Get single food item for order view -------------------------------- */
-	@GetMapping("/FoodiFy/Service/getOrderFood/{id}")
-	public FoodItem getOrderFood(@PathVariable(value="id") String foodId) {
+	@PostMapping("/FoodiFy/Service/getOrderFood")
+	public ResponseEntity<?> getOrderFood(@RequestParam("foodId") String foodId,
+										  @RequestParam("restId") String restId) {
 
-		FoodItem food = foodItems.findByid(foodId);
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+		try {
 
-		return food;
+			return new ResponseEntity<>(service.getOrderFood(foodId,restId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+
+//		return null;
 	}
 
 	
@@ -594,6 +610,65 @@ private Restaurant getRestaurantDetails(@PathVariable(value="id") String id) {
 
 	return restaurant;
 }
+//--------------------------for the final payment checkout---------------------------------------
+	@GetMapping("/FooddiFy/Service/finalCheckout")
+	public ResponseEntity<?> finalCheckout(){
+
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		try {
+
+			return new ResponseEntity<>(ShopCartService.finalCheckout(userName), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+
+	}
+
+@GetMapping("/FoodiFy/Service/Showfoods")
+public List<FoodItem> showfoods() {
+
+	List<FoodItem> fooditems = foodItem_Repository.findAll();
+	List<FoodItem> fooditemsList = new ArrayList<FoodItem>();
+
+	// System.out.println(restaurants);
+	//
+	for (int i = 8; i < fooditems.size(); i++) {
+		FoodItem fooditem = new FoodItem();
+
+//		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
+		fooditem.setName(fooditems.get(i).getName());
+		fooditem.setPrice(fooditems.get(i).getPrice());
+//		restaurant.setId(fooditems.get(i).getId());
+
+		fooditemsList.add(fooditem);
+
+	}
+
+	System.out.println(fooditemsList);
+	return fooditemsList;
+
+}
+
+
+
+
+
+//---------------------------------------------get restaurant Income from resturant view-------------------------------------------------------
+@GetMapping("/FoodiFy/Restaurant/GetRestaurantIncome")
+public ResponseEntity<?>  getRestaurantIncome() {
+	
+	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+	List<RestaurantIncome> Income =restaurantincomeRepo.findByuserName(userName);
+
+	return new ResponseEntity<>(Income, HttpStatus.OK);
+
+}
+
 
 
 

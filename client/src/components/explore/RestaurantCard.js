@@ -28,6 +28,7 @@ function ResCard(data) {
 
   // console.log(data.data.restaurantName);
   // console.log(data.data.bImage);
+  // console.log(data.data.rating);
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,7 +51,7 @@ function ResCard(data) {
           paddingBottom: '5%',
         }}
       >
-        <StyledBadge color="secondary" badgeContent={"99+"}>
+        <StyledBadge color="secondary" badgeContent={"5.0"}>
           <img src={image1 !== null ? `data:image/jpeg;base64,${image1}` : image}
             alt="food"
             style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />

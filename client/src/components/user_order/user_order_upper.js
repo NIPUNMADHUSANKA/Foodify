@@ -7,7 +7,7 @@ import Gmap from '../../components/user_order/order_google_map';
 
 
 
-const RestaurantOrder = () => {
+const RestaurantOrder = (props) => {
 
 
   return (
@@ -26,7 +26,7 @@ const RestaurantOrder = () => {
         marginLeft:'2%',
       },
       }}
-      >Salad Hut - Colombo</Box>
+      >{props.details3[0]}</Box>
 
 
       {/* map */}

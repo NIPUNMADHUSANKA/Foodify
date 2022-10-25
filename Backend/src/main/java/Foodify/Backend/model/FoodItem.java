@@ -1,19 +1,9 @@
 package Foodify.Backend.model;
 
 import org.bson.types.Binary;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Document(collection="FoodItems")
 public class FoodItem {
     @Id
@@ -22,12 +12,15 @@ public class FoodItem {
     private Double price;
     private String description;
     private String catId;
-
+    private String resId;
     private Double calaries;
-    private Double fat;
+    
+
+	private Double fat;
     private Double protein;
     private Double carbo;
     private Binary image;
+    private String bImage;
     
     private int discount;
 
@@ -106,6 +99,14 @@ public class FoodItem {
 
 	public void setDiscount(int discount) {
 		this.discount = discount;
+	}
+	
+	public String getbImage() {
+		return bImage;
+	}
+
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
     
 }

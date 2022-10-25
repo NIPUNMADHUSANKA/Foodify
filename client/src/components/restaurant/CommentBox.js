@@ -5,12 +5,13 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 
 const CommentBox = (props) => {
+    // console.log(props.comments);
     return (
         // ------------------------------main box of the comments---------------------------
         <ListItem>
             <Box>
-                <ListItemText>{props.comments.name}</ListItemText>
-                <ListItemText>{props.comments.detail1}</ListItemText>
+                <ListItemText>{props.comments.username}</ListItemText>
+                <ListItemText>{props.comments.commentDescription}</ListItemText>
             </Box>
         </ListItem>
         //   -------------------------------------end of main box of comments-------------------------

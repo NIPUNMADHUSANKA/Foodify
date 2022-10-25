@@ -68,7 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/FoodiFy/AllUser/getFoodMenu/**",
 				"/FoodiFy/AllUser/getFoodCategory/**",
 				"/FoodiFy/AllUser/getFoodCategoryItem/**",
-				
+				"/FoodiFy/AllUser/getFoodComment/{id}/**",
+				"/FoodiFy/AllUser/getRestaurantComment/{id}/**",
+
 				"/RestaurantInfo/editContact",
 				"/RestaurantInfo/editAbout",
 				"/Orders/All",
@@ -76,10 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				"/RegisteredUser/addComplains",
 				"/RegisteredUser/addRestaurantComment",
 				"/RegisteredUser/addFoodComment",
-				"/RestaurantInfo/editContact",
-				"/RestaurantInfo/editAbout",
-				"/Orders/All",
-				"/FoodItems/All",
 				"/FoodiFy/User/**")
 
 		.permitAll()

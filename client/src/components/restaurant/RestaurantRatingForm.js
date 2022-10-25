@@ -8,6 +8,8 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import authHeader from "../../services/auth-header";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+
 
 
 // --------------------------------rating values---------------------------
@@ -66,7 +68,8 @@ const CommentArea = styled(TextField)({
 // ---------------------------------------------------------------------
 
 function RestaurantRatingForm() {
-
+    const location = useLocation();
+    // console.log(location.state.rid);
     // ----------------for star rating-----------------------------
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
@@ -91,13 +94,15 @@ function RestaurantRatingForm() {
         // creating comment object
         const restaurantcomment = {
             commentDescription: formValues.commentDescription,
-            rating: formValues.rating
+            rating: formValues.rating,
+            restaurantId: location.state.rid
         }
 
+        console.log(restaurantcomment);
         axios.post("http://localhost:8072/FoodiFy/User/addRestaurantComment", restaurantcomment, { headers: authHeader() })
         .then(data => {
-            //console.log("Entry access sucessfull");
-            window.location.reload(false);
+            console.log("Entry access sucessfull");
+            // window.location.reload(false);
         })
         .catch(error => {
              errors.exists = error.response.data;

@@ -14,10 +14,24 @@ const breakpoints = [
 
 const foodCards = <div><FoodCard /> <FoodCard2 /></div>;
 
-function FoodScroll(details) {
+function FoodScroll(fooddetails) {
+
+
+const x = fooddetails.fooddetails;
+
+const firstFood = Array.isArray(x) && x.length ? x[0] : {};
+const headers = Object.keys(firstFood);
+
+console.log(x);
+console.log(headers);
+
+
+    // const X = [1,2,3,4,5,6,7,8,9,10,11,12,];
+    // console.log(X)
 
   
-    const X = [1,2,3,4,5,6,7,8,9,10,11,12,];
+    //const X = [1,2,3,4,5,6,7,8,9,10,11,12,];
+
     return (
   
         <Box
@@ -35,14 +49,21 @@ function FoodScroll(details) {
            : null   
           } */}
 
-          <FoodCard />
+          {/* <FoodCard />
           <FoodCard2 />
           <FoodCard />
           <FoodCard2 />
           <FoodCard />
           <FoodCard2 />
           <FoodCard />
-          <FoodCard2 />
+          <FoodCard2 /> */}
+
+          {Object.keys(x).map((keyName) => (
+          console.log(x[keyName]),
+          
+          <FoodCard data={x[keyName]} />
+          
+        ))}
           
           </Carousel>
         </Box>

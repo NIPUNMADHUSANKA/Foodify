@@ -2,6 +2,7 @@ import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import axios from 'axios';
+import authHeader from "../../services/auth-header";
 
 import Background from '../../assets/images/pv4WkDi.webp';
 
@@ -23,11 +24,11 @@ import Drawer from '@mui/material/Drawer';
 import OrderSideDrawer from '../../components/restaurant/OrderSideDrawer';
 import styled from '@emotion/styled';
 
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 // ----------------this is tem until data call--------
-const details = {
-    "detail": "Daing na Bangus refers to milkfish that is marinated in a mixture composed of vinegar, crushed peppercorn, garlic, and salt. Hot pepper such as cayenne pepper powder can be added to make it spicy. It is usually marinated overnight for best results, and then fried until crispy.",
-}
 
 function createData(type, amount, percentage) {
     return { type, amount, percentage };
@@ -62,6 +63,19 @@ const comments1 = [
 
 const OrderFood = () => {
 
+    const RestId = JSON.parse(localStorage.getItem('RestId'));
+
+    console.log(RestId);
+
+    // -------------------------for the backdrop------------------------------
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(!open);
+    };
+
     // --------------to get the id------------------
     const location = useLocation();
 
@@ -84,8 +98,8 @@ const OrderFood = () => {
     var price = null;
     var Fid = null;
     var discount = null;
-    var Rid = location.state.id.Rid;
-
+    var Rid = RestId;
+    // var foodId =location.state.id.id;
     console.log(location.state);
 
     if (details1.image) {
@@ -114,16 +128,26 @@ const OrderFood = () => {
         "discount": discount,
     }
 
+    // ----------------------to save date------------
+    var EndDate = null;
 
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
 
+        // --------calling backdrop-------------
+        handleToggle()
+
         // -----------------------------------to getting food item details------------------------------------------
         const getOfferDetails = async () => {
-            try {
-                const respOffer = await axios.get(`http://localhost:8072/FoodiFy/Service/getOrderFood/${location.state.id.id}`);
+            const ItemData = new FormData();
+            ItemData.append('foodId', location.state.id.id);
+            ItemData.append('restId', Rid);
 
-                const details = respOffer.data;
+            try {
+                const respOffer = await axios.post(`http://localhost:8072/FoodiFy/Service/getOrderFood`, ItemData);
+
+                const details = respOffer.data.foodItems;
+                EndDate = respOffer.data.endDate;
                 setDetails1({ ...details });
 
                 // ----------------------setting up nutrition count----------------------------
@@ -131,7 +155,11 @@ const OrderFood = () => {
                 // console.log(totalG);
                 setTotal(totalG);
 
-                console.log(details);
+                console.log(respOffer.data);
+
+                // ---------------closing backdrop---------------------
+                handleClose();
+
                 // setItems([...items1]);
             } catch (err) {
                 // Handle Error Here
@@ -142,7 +170,7 @@ const OrderFood = () => {
         getOfferDetails();
 
         // --------calling items for cart---------------
-        
+
 
     }, []);
 
@@ -156,7 +184,7 @@ const OrderFood = () => {
     });
     // -------------------------------------------------------------------------
 
-    // --------------------for the side drawe----------------------------------------------
+    // --------------------for the side drawer----------------------------------------------
     const [state, setState] = React.useState({ right: false });
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -167,17 +195,39 @@ const OrderFood = () => {
 
         setState({ ...state, [anchor]: open });
     };
-    //   ------------------------------------------------------------------------------------
+    //   ------------------End of the side drawer--------------------------------------
 
     // console.log(total);
 
+    const [Data3, setData3] = useState([]);
+
+    useEffect((event) => {
+
+        axois.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${location.state.id.id}`)
+          .then(data => {
+            // this part if sucess
+            console.log(data.data);
+            // setRestId(data.data.id)
+            setData3(data.data)
+          })
+          .catch(error => {
+    
+          });
+    
+      }, []);
+
+      const comments1 = {
+        "name": Data3.userName,
+        "detail1": Data3.commentDescription
+        ,
+    }
+    
     return (
 
         <div>
 
             <Fade top>
                 <Navbar />
-                <button onClick={toggleDrawer('right', true)}>cart</button>
             </Fade>
 
             {/* ---------------side drawer------------ */}
@@ -189,6 +239,15 @@ const OrderFood = () => {
                 <OrderSideDrawer />
             </SideDrawer>
             {/* ------------end of side drawer-------- */}
+
+            {/* ----------------back drop------------------- */}
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            {/* -------------------back drop---------------------- */}
 
             <Box sx={{
                 margin: 0,
@@ -217,7 +276,7 @@ const OrderFood = () => {
 
                     {/* ----description--- */}
                     <Fade left>
-                        <OrderDescription details={details1} />
+                        <OrderDescription details={details1} EndDate={EndDate} />
                     </Fade>
 
                     <Fade top>
@@ -225,11 +284,11 @@ const OrderFood = () => {
                     </Fade>
 
                     <Fade bottom>
-                        <OrderFoodForm orderdata={orderdata} Rid={Rid} />
+                        <OrderFoodForm orderdata={orderdata} Rid={Rid} EndDate={EndDate} />
                     </Fade>
 
                     <Fade big>
-                        <FoodComment comments={comments1} />
+                        <FoodComment comments={Data3} />
                     </Fade>
 
                 </Box>

@@ -14,6 +14,11 @@ import axios from 'axios';
 import Drawer from '@mui/material/Drawer';
 import OrderSideDrawer from './OrderSideDrawer';
 
+// ----------------for teh add to cart message-----------------
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
 
 // ---------------------------------text fied css style-----------------------
 const AmountArea = styled(TextField)({
@@ -63,16 +68,35 @@ const iconbutton = {
         background: Colours.yellow,
     },
 }
+
+// ---------------for the add to cart message-------------------
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const OrderFoodForm = (props) => {
+
+    console.log(props)
+
+    // -------------------to show the message---------------
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     // --------------to setting up food count--------------------
     let [num, setNum] = useState(1);
-    var price = parseInt(props.orderdata.price);
+    // var price = parseInt(props.orderdata.price);
 
-    //console.log(props.Rid);
+    // console.log(props.Rid);
     var RID = props.Rid;
 
-    let [amount, setAmount] = useState(1);
+    // let [amount, setAmount] = useState(1);
 
     // console.log(amount);
     // to increment
@@ -92,10 +116,10 @@ const OrderFoodForm = (props) => {
         setNum(e.target.value);
     }
 
-    let handleAmount = (amount) => {
-        // console.log(amount);
-        setAmount(amount);
-    }
+    // let handleAmount = (amount) => {
+    //     // console.log(amount);
+    //     setAmount(amount);
+    // }
 
     // --------------------for the side drawe----------------------------------------------
     const [state, setState] = React.useState({ right: false });
@@ -110,32 +134,44 @@ const OrderFoodForm = (props) => {
     };
     //   ------------------------------------------------------------------------------------
 
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = props.EndDate;
+    const eDate1 = new Date(Edate1);
+
     // --------------------------------sending data for cart-----------------------------
     const addToCart = () => {
 
         // ---------------item obj----------------------
-        const price = (num*props.orderdata.price)-(num*props.orderdata.price*(props.orderdata.discount/100));
+        var price;
+        if(num && todayDate < eDate1){
+            price = (num * props.orderdata.price) - (num * props.orderdata.price * (props.orderdata.discount / 100));
+        }
+        else{
+            price = (num * props.orderdata.price)
+        }
+        
         const Rid = RID;
         const Fid = props.orderdata.Fid;
 
 
         const orderItem = {
-            "foodId" : Fid,
-            "quantity":num,
-            "restaurantId":Rid,
-            "price":price
+            "foodId": Fid,
+            "quantity": num,
+            "restaurantId": Rid,
+            "price": price
         }
 
         const OrderData = new FormData();
         OrderData.append('item', orderItem);
         OrderData.append('price', price);
         OrderData.append('Rid', Rid);
-         // -----------------------------------to getting food item details------------------------------------------
-         const setOrderItem = async () => {
+        // -----------------------------------to getting food item details------------------------------------------
+        const setOrderItem = async () => {
             try {
-                const resp = await axios.post(`http://localhost:8072/FoodiFy/Service/setShoppingCart`,orderItem,{ headers: authHeader() });
+                const resp = await axios.post(`http://localhost:8072/FoodiFy/Service/setShoppingCart`, orderItem, { headers: authHeader() });
 
-                const details = resp.data;
+                // const details = resp.data;
+                handleClickOpen();
 
                 console.log("Entry Successful");
                 // setItems([...items1]);
@@ -148,6 +184,8 @@ const OrderFoodForm = (props) => {
         setOrderItem();
 
     };
+
+    
 
     return (
         // ------------main box------------------
@@ -190,10 +228,20 @@ const OrderFoodForm = (props) => {
                 }}>
                     Amount to pay: Rs.
                     {(() => {
-                        if (num) {
+                        if (num && todayDate < eDate1) {
                             return (
                                 // num*price
-                                (num*props.orderdata.price)-(num*props.orderdata.price*(props.orderdata.discount/100))
+                                (num * props.orderdata.price) - (num * props.orderdata.price * (props.orderdata.discount / 100))
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
+                    {(() => {
+                        if (num && todayDate > eDate1) {
+                            return (
+                                // num*price
+                                (num * props.orderdata.price)
                                 // handleAmount(num*price)
                             );
                         }
@@ -239,7 +287,7 @@ const OrderFoodForm = (props) => {
                             },
                         }} endIcon={<ShoppingBagIcon />} onClick={addToCart}>Add to cart</Button>
 
-{/* onClick={toggleDrawer('right', true)} */}
+                        {/* onClick={toggleDrawer('right', true)} */}
 
                         {/* ---------------side drawer------------ */}
                         <SideDrawer
@@ -254,6 +302,18 @@ const OrderFoodForm = (props) => {
                     </React.Fragment>
 
                     {/* ------------------------end of side drawer------------------------ */}
+
+                    {/* -----------------add to cart message---------------- */}
+                    <Dialog
+                        open={open}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={handleClose}
+                        aria-describedby="alert-dialog-slide-description"
+                    >
+                        <DialogTitle>{"Item added to the cart Successfully!"}</DialogTitle>
+                    </Dialog>
+                    {/* -------------end of add to cart message------------- */}
 
                     <Button variant="contained" component={Link} to={"/Restaurant/Category"} sx={{
                         margin: '0.5rem',

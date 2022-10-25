@@ -27,6 +27,8 @@ const Explore = () => {
 
     // ----------store restaurant values--------
     const [details, setDetails] = React.useState({});
+    const [fooddetails, setfoodDetails] = React.useState({});
+
 
     const [value, setValue] = React.useState(0);
 
@@ -51,6 +53,24 @@ const Explore = () => {
                 const details = data.data;
 
                 setDetails({ ...details});
+            })
+            .catch(error => {
+
+            });
+
+    }, []);
+
+    useEffect((event) => {
+
+        axois.get("http://localhost:8072/FoodiFy/Service/Showfoods")
+            .then(data => {
+                // this part if sucess
+                console.log(data);
+                console.log(currentUser);
+
+                const fooddetails = data.data;
+
+                setfoodDetails({ ...fooddetails});
             })
             .catch(error => {
 
@@ -101,7 +121,7 @@ const Explore = () => {
                 <TabPanel value={value} index={0}>
 
 
-                    <FoodScroll />
+                    <FoodScroll fooddetails={fooddetails} />
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>

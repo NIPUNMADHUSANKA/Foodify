@@ -39,9 +39,13 @@ const FoodCategory = () => {
   }
   {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
 
+  
   const location = useLocation();
   const Id = location.state.id;
   const name = location.state.name;
+  const RestId = localStorage.getItem('RestId');
+
+  // console.log(location);
 
   // ----------store restaurant values--------
   const [details, setDetails] = React.useState({});
@@ -67,6 +71,7 @@ const FoodCategory = () => {
 
   }, [isgetItem]);
 
+console.log(details);
 
   return (
 
@@ -174,7 +179,7 @@ const FoodCategory = () => {
                 Array.from(details).map((item) => {
 
                   return (
-                    <CarouselCard2 item={item} Rid={location.state.id} />
+                    <CarouselCard2 item={item} Rid={RestId} />
                   )
 
                 })

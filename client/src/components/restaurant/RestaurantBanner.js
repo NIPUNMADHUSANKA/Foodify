@@ -15,7 +15,9 @@ const RestaurantBanner = (props) => {
   const cover = props.cover
   const logo = props.logo
   const name = props.name
+  // const rating = props.rating
 
+  // console.log(props.rating);
   return (
     <ThemeProvider theme={theme}>
 

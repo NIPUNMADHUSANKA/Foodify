@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,5 +44,6 @@ public interface Restaurantserv {
 	
 	public List<String> getResComments(String rescomments);
 
-	public FoodItem getOrderFood(String foodId);
+	public Map getOrderFood(String foodId,String restId);
+
 }
