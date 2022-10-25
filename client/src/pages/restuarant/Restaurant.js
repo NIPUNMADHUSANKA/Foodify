@@ -150,7 +150,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade>
-        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName} />
+        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName} rating={Data.rating} />
       </Fade>
 
       <Fade left>
