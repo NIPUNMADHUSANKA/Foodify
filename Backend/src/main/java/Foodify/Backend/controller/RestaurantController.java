@@ -670,18 +670,4 @@ public ResponseEntity<?>  getRestaurantIncome() {
 }
 
 
-
-
-//---------------------------------------------get restaurant Income from resturant view-------------------------------------------------------
-@GetMapping("/FoodiFy/Restaurant/GetRestaurantIncome")
-public ResponseEntity<?>  getRestaurantIncome() {
-	
-	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-	List<RestaurantIncome> Income =restaurantincomeRepo.findByuserName(userName);
-
-	return new ResponseEntity<>(Income, HttpStatus.OK);
-
-}
-
-
 }

@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import axios from 'axios';
 import authHeader from "../../services/auth-header";
@@ -203,7 +203,7 @@ const OrderFood = () => {
 
     useEffect((event) => {
 
-        axois.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${location.state.id.id}`)
+        axios.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${location.state.id.id}`)
           .then(data => {
             // this part if sucess
             console.log(data.data);
