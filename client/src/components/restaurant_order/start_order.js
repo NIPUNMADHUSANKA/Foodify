@@ -13,12 +13,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import { useNavigate } from 'react-router-dom';
+
 // ---------------for the add to cart message-------------------
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function OrderwithS(props) {
+
+  const navigate = useNavigate();
 
   // ---order item------
   const order = props.order
@@ -56,6 +60,7 @@ export default function OrderwithS(props) {
         const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`, ItemData, { headers: authHeader() });
 
         handleClickOpen();
+        navigate("/Restaurantprofile")
         // const details = resp.data;
 
         // setDetails1({ ...details });

@@ -4,17 +4,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import theme, { Colours } from '../../assets/theme/theme';
-import order_food from '../../assets/images/order_food.png';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import OrderwithD from './orderwithDiscount';
-import OrderwithS from './start_order';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import MailIcon from '@mui/icons-material/Mail';
+import { Colours } from '../../assets/theme/theme';
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+import OrderwithS from './start_order';
+;
+
 
 export default function restaurantOrder(props) {
 

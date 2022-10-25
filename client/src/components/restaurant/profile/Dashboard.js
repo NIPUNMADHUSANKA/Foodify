@@ -232,6 +232,39 @@ console.log(viewBtn);
 
 }
 
+let completeStatus = () => {
+  // -----------------------------------to getting food item details------------------------------------------
+
+  console.log("Order completeted")
+
+  // const getOfferDetails = async () => {
+
+  //   const ItemData = new FormData();
+  //   ItemData.append('itemId', itemId);
+  //   ItemData.append('orderId', oID);
+
+  //   try {
+  //     const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`, ItemData, { headers: authHeader() });
+
+  //     handleClickOpen();
+  //     navigate("/Restaurantprofile")
+  //     // const details = resp.data;
+
+  //     // setDetails1({ ...details });
+
+  //     // console.log(details);
+
+  //     // setItems([...items1]);
+  //   } catch (err) {
+  //     // Handle Error Here
+  //     console.error(err);
+  //   }
+  // };
+
+  // getOfferDetails();
+
+  // --------calling items for cart---------------
+};
 function Row(props) {
   console.log(props);
   const { row } = props;
@@ -258,7 +291,7 @@ function Row(props) {
         <TableCell >{row.amount}</TableCell>
         <TableCell >{row.date}</TableCell>
         <TableCell >{row.OTime}</TableCell>
-        <TableCell >{row.done}</TableCell>
+        <TableCell ><Button variant="contained" color="success" size="small" onClick={completeStatus}>Completed</Button></TableCell>
         <TableCell >{row.cancel}</TableCell>
         {/* ----------------end of outer table row------------- */}
       </TableRow>
@@ -278,8 +311,8 @@ function Row(props) {
                   <TableRow>
                     <TableCell>Item</TableCell>
                     <TableCell>Quantity</TableCell>
-                    <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Currunt Status</TableCell>
+                    <TableCell align="center">Price</TableCell>
+                    <TableCell align="center">Currunt Status</TableCell>
                     <TableCell ></TableCell>
                     {/* <TableCell ></TableCell> */}
                   </TableRow>
@@ -293,8 +326,8 @@ function Row(props) {
                       <TableCell component="th" scope="row">
                         {detailsRow.foodName}
                       </TableCell>
-                      <TableCell align="right">{detailsRow.quantity}</TableCell>
-                      <TableCell align="right">{detailsRow.price}</TableCell>
+                      <TableCell align="center">{detailsRow.quantity}</TableCell>
+                      <TableCell align="center">{detailsRow.price}</TableCell>
                       <TableCell>{detailsRow.preparedStatus}</TableCell>
                       <TableCell>
                         <Button component={Link} to={"/restaurantorder"} state={{ detailsRow,orderId1 }} variant="contained" color="success" size="small">View</Button>

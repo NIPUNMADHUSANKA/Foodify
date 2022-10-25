@@ -224,14 +224,30 @@ public class Order_Service implements Order_Serv{
 
 //		for(Order order : orders)
 
+		int count = 0;
 		for(OrderItem item : items){
 			System.out.println(item.getFoodId()+"order service");
 			System.out.println(itemId+"order service");
 
 			if(Objects.equals(item.getFoodId(), itemId)){
-				System.out.println("order service");
+
 				if(Objects.equals(item.getPreparedStatus(), "Queued")){item.setPreparedStatus("Preparing");}
 				else if(Objects.equals(item.getPreparedStatus(), "Preparing")){item.setPreparedStatus("Finished");}
+			}
+
+			if(Objects.equals(item.getPreparedStatus(), "Preparing")){
+
+				System.out.println("order service");
+				orders.setPreparedState("Preparing");
+			}
+			else if(Objects.equals(item.getPreparedStatus(), "Finished")){
+
+				System.out.println("order service");
+				count++;
+				if(count == items.size()){
+					orders.setPreparedState("Finished");
+				}
+
 			}
 		}
 
