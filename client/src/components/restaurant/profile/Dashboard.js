@@ -185,6 +185,7 @@ function createData(payment, user, type, amount, date, time, restaurant, details
 }
 
 function Row(props) {
+  console.log(props);
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 

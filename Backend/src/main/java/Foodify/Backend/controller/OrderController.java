@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -32,11 +31,18 @@ public class OrderController {
         return detailed;
     }
 
-    @GetMapping("/Foodify/Admin/Orders/All")
-    public List<Order> ordersAll(){
-        List<Order> detailed =  order_service.getDetailedOrders();
-//        List<Order> detailed =  order_repository.findByUser(userId);
-        return detailed;
+    @GetMapping("/FoodiFy/Admin/Orders/All")
+    public ResponseEntity<?> ordersAll(){
+        try {
+
+            ResponseEntity<List<Order>> detailed = new ResponseEntity<>(order_service.detailedOrders(), HttpStatus.OK);
+            return detailed;
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
 //    ----------------------to make the order--------------------------------
