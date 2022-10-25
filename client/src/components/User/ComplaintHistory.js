@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 
 import ListItem from '@mui/material/ListItem';
-import List from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import authHeader from '../../services/auth-header';
 import axois from "axios";

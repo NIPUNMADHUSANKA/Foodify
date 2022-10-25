@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 import '../assets/css/Profile.css';
-import Unavbar from '../components/Navbar';
+import navbar from '../components/Navbar';
 import UserOrderBanner from '../components/user_order/user_order_upper';
 import UserOrderForm from '../components/user_order/user_order_form';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
