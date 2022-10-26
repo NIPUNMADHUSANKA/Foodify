@@ -67,7 +67,55 @@ export default function MultilineTextFields() {
     // ----------------for star rating-----------------------------
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
-    // ------------------------------------------------------------
+ // ------------------------------------------------------------
+    // -------------initial states for fields---------------------------
+    const initialValues = { commentDescription: "", foodRating: 2 };
+
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+    // ----------create state name form errors--------
+    const [formErrors, setFormErrors] = React.useState({});
+
+    // -------------usestate for submit form-----------
+    const [isSubmit, setIsSubmit] = React.useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const errors = {};
+
+        // creating comment object
+        const foodcomment = {
+            commentDescription: formValues.commentDescription,
+            foodRating: formValues.foodRating,
+            foodId: location.state.food
+        }
+
+        console.log(foodcomment);
+        axios.post("http://localhost:8072/FoodiFy/User/addFoodComment", foodcomment, { headers: authHeader() })
+        .then(data => {
+            console.log("Entry access sucessfull");
+            // window.location.reload(false);
+        })
+        .catch(error => {
+             errors.exists = error.response.data;
+             setFormErrors(errors);
+
+        })
+
+    }
+
+    // -------function to handle changes in the input fields and set it to formvalues----------
+    const handleChange = (e) => {
+
+        // destructuring inputfield
+        const { name, value } = e.target;
+        // get the relavant name as key and assign value to it
+        setFormValues({ ...formValues, [name]: value });
+
+
+    }
     return (
 
         // ------------main box------------------
@@ -154,8 +202,14 @@ export default function MultilineTextFields() {
                         }}
                     >
                         <Rating
+<<<<<<< HEAD
                             name="rating"
                             value={value}
+=======
+                            id="foodRating"
+                            name="foodRating"
+                            value={formValues.foodRating}
+>>>>>>> 8886b5f5a7d5b64c93894faeec41c4e2fd2eeb7b
                             precision={0.5}
                             getLabelText={getLabelText}
                             onChange={(event, newValue) => {
@@ -179,7 +233,7 @@ export default function MultilineTextFields() {
                 <Box sx={{
                     marginTop: "1rem"
                 }}>
-                    <Button type='submit' variant="contained" sx={{
+                    <Button onClick={handleSubmit} type='submit' variant="contained" sx={{
                         margin: '0.5rem',
                         background: Colours.green, '&:hover': {
                             backgroundColor: Colours.yellow,

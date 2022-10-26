@@ -239,7 +239,7 @@ function RestaurantRatingForm() {
                 <Box sx={{
                     marginTop: "1rem"
                 }}>
-                    <Button onClick={handleSubmit} type='submit' variant="contained" sx={{
+                    <Button onClick={handleSubmit} component={Link} to={'/Restaurant'} type='submit' variant="contained" sx={{
                         margin: '0.5rem',
                         background: Colours.green, '&:hover': {
                             backgroundColor: Colours.yellow,

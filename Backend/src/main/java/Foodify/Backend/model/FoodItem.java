@@ -14,7 +14,7 @@ public class FoodItem {
     private String catId;
     private String resId;
     private Double calaries;
-    
+    private Double foodRating;
 
 	private Double fat;
     private Double protein;
@@ -47,7 +47,16 @@ public class FoodItem {
     public void setProtein(Double protein) {
         this.protein = protein;
     }
-    
+
+    public Double getFoodRating() {
+        return foodRating;
+    }
+
+    public void setFoodRating(Double foodRating) {
+        this.foodRating = foodRating;
+    }
+
+
     public Double getCarbo() {
         return carbo;
     }

@@ -21,7 +21,13 @@ public class FoodComment {
 	private String foodId;
 	private String commentDescription;
 	private Date addedDate;
-	
+	private Double foodRating;
+
+	public FoodComments() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -52,8 +58,20 @@ public class FoodComment {
 	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
+<<<<<<< HEAD:Backend/src/main/java/Foodify/Backend/model/FoodComment.java
 	
 	
+=======
+	public Double getFoodRating() {
+		return foodRating;
+	}
+
+	public void setFoodRating(Double foodRating) {
+		this.foodRating = foodRating;
+	}
+
+
+>>>>>>> 8886b5f5a7d5b64c93894faeec41c4e2fd2eeb7b:Backend/src/main/java/Foodify/Backend/model/FoodComments.java
 //	private File image;
 	
 		
