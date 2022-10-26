@@ -19,12 +19,13 @@ var ROLE = null;
 // -------using props to put random images using props------------------------
 const RestaurantCemments = (props) => {
 
-  console.log(props.comments)
+//  console.log(props.comments)
 
   const data = props.comments;
 
   const rId = props.rId;
 
+  const restaurantName = props.name;
   // console.log(data);
   const currentUser = AuthService.getCurrentUser();
 
@@ -148,9 +149,9 @@ const RestaurantCemments = (props) => {
         {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
 
         {(() => {
-          if (ROLE === "User") {
+          if (ROLE === "User" || ROLE ==="premiumUser") {
             return (
-            <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId }} sx={{
+            <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId , resName: restaurantName}} sx={{
               margin: '0.5rem',
               marginBottom: 0,
               marginTop: 4,

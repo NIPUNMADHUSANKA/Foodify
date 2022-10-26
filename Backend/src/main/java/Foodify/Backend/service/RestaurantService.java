@@ -1,6 +1,8 @@
 package Foodify.Backend.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import java.util.*;
 
 import Foodify.Backend.model.*;
@@ -20,19 +22,10 @@ import Foodify.Backend.exception.FoodMenuException;
 import Foodify.Backend.exception.customFieldError;
 import Foodify.Backend.exception.fieldErrorResponse;
 
-import java.io.Console;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 
 @Service
@@ -124,7 +117,6 @@ public class RestaurantService implements Restaurantserv{
 
 	@Override
 	public String passwordEncorder(String userName, String email, String password, String accountStatus) {
-		// TODO Auto-generated method stub
 		
 		String epassword = passwordEncoder.encode(password);
 		
@@ -144,7 +136,6 @@ public class RestaurantService implements Restaurantserv{
 
 	@Override
 	public void updateContactDetails(String username) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -152,7 +143,6 @@ public class RestaurantService implements Restaurantserv{
 //---------------------for upload cover image-------------------------------
 	@Override
 	public void init(String userName) {
-		// TODO Auto-generated method stub
 		
 			
 	}
@@ -161,10 +151,9 @@ public class RestaurantService implements Restaurantserv{
 
 	@Override
 	public void saveBanner(MultipartFile file, String username) {
-		// TODO Auto-generated method stub
 		
 		String imageDirectory = System.getProperty("user.dir") + "/uploads/restaurantBanners/"+username;
-		final Path root = Paths.get("uploads");
+		//final Path root = Paths.get("uploads");
 		final Path fileNamePath = Paths.get(imageDirectory,username.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
 		
 		try {
@@ -254,7 +243,6 @@ public class RestaurantService implements Restaurantserv{
 	//---------------------------------to get the food items--------------------------------------------
 	@Override
 	public List<String> getItems(String items) {
-		// TODO Auto-generated method stub
 		List<String> itemNames = new ArrayList<String>();
 		
 		String[] arr = null;
@@ -342,7 +330,7 @@ public class RestaurantService implements Restaurantserv{
 		List<String> itemIds = new ArrayList<String>();
 
 //		-----------resetting discount values of previous food items-------------------
-		List<String> offerList = offers.getItems();
+		//List<String> offerList = offers.getItems();
 
 		for (int i = 0; i< arr2.length; i++)
 		{
@@ -410,7 +398,6 @@ public class RestaurantService implements Restaurantserv{
 	//---------------------------------to get the res comments--------------------------------------------
 		@Override
 		public List<String> getResComments(String rescomments) {
-			// TODO Auto-generated method stub
 			List<String> resComments = new ArrayList<String>();
 
 			String[] arr = null;

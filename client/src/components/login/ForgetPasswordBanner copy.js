@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios';
@@ -35,8 +35,8 @@ const ForgetPasswordBanner = () => {
     
     axios.post("http://localhost:8072/Foodify/forgot_password", email)
     .then(response => {
-      console.log(response);
-        console.log(response.data);
+      //console.log(response);
+        //console.log(response.data);
         window.location = "http://localhost:3000" //This line of code will redirect you once the submission is succeed
     })
 

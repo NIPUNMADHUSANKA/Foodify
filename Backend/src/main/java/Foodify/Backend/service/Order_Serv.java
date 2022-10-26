@@ -15,4 +15,10 @@ public interface Order_Serv {
 
 	public String setOrder(Order order,String userName);
 
+	List<Order> callOrder(String userName1);
+
+	String updateOrderItem(String itemId,String orderId);
+
+	String updateOrderStatus(String orderId);
+
 }

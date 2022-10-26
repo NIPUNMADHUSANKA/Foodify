@@ -67,7 +67,6 @@ public class FoodComment {
 		this.foodRating = foodRating;
 	}
 
-
 //	private File image;
 	
 		

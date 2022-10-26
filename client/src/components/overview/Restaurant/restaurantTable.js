@@ -185,6 +185,7 @@ function createData(resId,name ,location) {
   const viewButton = <Button component={Link} to='/Restaurant' variant="outlined" color="success" >View Restaurant</Button>
   const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
   const deleteButton = <Button variant="outlined" color="error">Block</Button>
+  console.log(resId, name, location);
   return { 
     resId, 
     name,
@@ -194,36 +195,6 @@ function createData(resId,name ,location) {
     deleteButton,
   };
 }
-
-//----------------------------------------------------------warning level icons
-// function Warning(props){
-
-//   const stars = []
-
-//   for (var i = 0; i < props.value; i++) {
-//     stars.push(<WarningAmberIcon />);
-//   }
-
-//   return (
-//     <div>
-//       {stars}
-//     </div>
-//   )
-// }
-
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Rasa Bojun','Colombo'),  
-  createData('B2343','KFC', 'Kegalle'),  
-  createData('B2344','MacDonalds','Colombo'),  
-  createData('B2345','Chandler Bing', 'Kegalle'),  
-  createData('B2346','Joey Tribbiyani','Colombo'),  
-  createData('B2347','Pheobe Buffay', 'Kegalle'),  
-  createData('B2348','Rachel\'s Kitchen','Colombo'),  
-  createData('B2349','Green Hut', 'Kegalle'),  
-  createData('B2350','Rachel\'s Kitchen','Colombo'),  
-  createData('B2351','Green Hut', 'Kegalle'),  
-]
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -336,13 +307,28 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(props) {
+
+  const data = props.data;
+  console.log(data);
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+//----------------------------------------------------------Table Row Initialize and Sorting
+  var res;
+  const rows = 
+    // createData('B2342','Rasa Bojun','Colombo'),  
+    Object.keys(data).map((key) => (
+      res = data[key],
+      // console.log(res),
+      createData(res.id,res.restaurantName,res.location)
+    ));
+
+  console.log(rows)
 
 
   //----------------------------------------------------------Empty Rows
@@ -398,6 +384,7 @@ function TableActions() {
 
         {/* ------------------------------------------------------------------------TableBody with sorting*/}
         <TableBody>
+        
         {stableSort(rows, getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((row, index) => {

@@ -1,7 +1,7 @@
 import image from '../../assets/images/foodimages/indian-food-served-on-table.jpg'
 
 import React, { useState } from 'react';
-import { ThemeProvider, Stack, Typography, Button, Badge, styled } from '@mui/material';
+import { ThemeProvider, Stack, Typography, Badge, styled } from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -27,7 +27,8 @@ function ResCard(data) {
   const image1 = data.data.bImage
 
   // console.log(data.data.restaurantName);
-  //  console.log(data.data.latitude);
+  // console.log(data.data.bImage);
+  // console.log(data.data.rating);
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,7 +51,7 @@ function ResCard(data) {
           paddingBottom: '5%',
         }}
       >
-        <StyledBadge color="secondary" badgeContent={"99+"}>
+        <StyledBadge color="secondary" badgeContent={"5.0"}>
           <img src={image1 !== null ? `data:image/jpeg;base64,${image1}` : image}
             alt="food"
             style={{ width: '252px', height: '150px', border: "5px solid #fff" }} />
