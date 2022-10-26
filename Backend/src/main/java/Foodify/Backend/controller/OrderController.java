@@ -95,13 +95,23 @@ public class OrderController {
         }
     }
 
-    // ----------------------to make the order--------------------------------
-    @PostMapping("/FoodiFy/User/setOrder")
-    public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
 
-        // String foodId = null;
-        // FoodItem food = foodItems.findByid(foodId);
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//    ----------------------to make the order--------------------------------
+@PostMapping("/FoodiFy/User/setOrder")
+public ResponseEntity<?> getOrderFood(@RequestParam("date1") String date1,
+                                      @RequestParam("time1") String time1) {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+    String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+//    setting order
+    Order order = new Order();
+    order.setOrderTime(time1);
+    order.setOrderDate(date1);
+
+    try {
+
 
         try {
 
@@ -137,7 +147,7 @@ public class OrderController {
         // return null;
     }
 
-    //    ----------------------to make the order--------------------------------
+    //    ----------------------to update the order--------------------------------
     @PutMapping("/FoodiFy/Restaurant/updateOrderItem")
     public ResponseEntity<?> updateOrderItem(@RequestParam("itemId") String itemId,
                                              @RequestParam("orderId") String orderId) {
@@ -150,6 +160,27 @@ public class OrderController {
         try {
             System.out.println("Controller");
             return new ResponseEntity<>(order_service.updateOrderItem(itemId,orderId), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
+//		return null;
+    }
+
+    //    ----------------------to update the order--------------------------------
+    @PutMapping("/FoodiFy/Restaurant/updateOrderStatus")
+    public ResponseEntity<?> updateOrderStatus(@RequestParam("orderId") String orderId) {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+
+        System.out.println(orderId+"Controller");
+        try {
+            System.out.println("Controller");
+            return new ResponseEntity<>(order_service.updateOrderStatus(orderId), HttpStatus.OK);
 
         } catch (Exception e) {
 

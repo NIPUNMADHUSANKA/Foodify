@@ -86,9 +86,9 @@ const Userorderform = (props) => {
         console.log(orderData);
         // setItemData(itemData);
 
-        const resp2 = await axios.post("http://localhost:8072/FoodiFy/User/setOrder", order, { headers: authHeader() });
+        const resp2 = await axios.post("http://localhost:8072/FoodiFy/User/setOrder", orderData, { headers: authHeader() });
         console.log("success");
-        // navigate("/restaurant")
+        navigate("/restaurant")
         // const details2 = resp2.data;
         // setDetails2({ ...details2 });
 
