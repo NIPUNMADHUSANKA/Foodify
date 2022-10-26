@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import Foodify.Backend.model.*;
+import Foodify.Backend.service.RestaurantService;
 import Foodify.Backend.service.ShopCartServiceImp;
 import Foodify.Backend.model.RestaurantIncome;
 import org.bson.BsonBinarySubType;
@@ -39,6 +40,8 @@ public class RestaurantController {
 
 	@Autowired
 	private Registered_Customer_Repository restaurantRepository;
+	@Autowired
+	Registered_Customer_Controller RegCusServ;
 
 	@Autowired
 	private Restaurantserv service;
@@ -673,6 +676,21 @@ public ResponseEntity<?>  getRestaurantIncome() {
 	public List<Restaurant> getRestaurants(){
 		List<Restaurant> allRes = restaurantrepo.findAll();
 		return allRes;
+	}
+
+	@PutMapping("/FoodiFy/Admin/BlockRestaurant")
+	public ResponseEntity<?> blockRes(@RequestParam("resId") String resId) {
+
+		System.out.println("Controller");
+		try {
+
+			return new ResponseEntity<>(RestaurantService.blockRes(resId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
 	}
 
 }

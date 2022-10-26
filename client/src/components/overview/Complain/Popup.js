@@ -169,16 +169,13 @@ export default function CustomizedDialogs(props) {
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
-            Black List Restaurant
+            Block Restaurant
           </Button>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
             Block User
           </Button>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
             Ignore Complaint
-          </Button>
-          <Button variant="outlined" autoFocus onClick={handleClose} color="error">
-            Add to Compalint List
           </Button>
         </DialogActions>
       </BootstrapDialog>

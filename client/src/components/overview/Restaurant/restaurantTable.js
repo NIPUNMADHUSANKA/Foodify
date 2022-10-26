@@ -29,6 +29,9 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+import authHeader from "../../../services/auth-header";
+
 // const navigate = useNavigate()
 
 //----------------------------------------------------------styles for table
@@ -116,6 +119,24 @@ const topNames = [
   "McDonald's",
   "Subway"
 ];
+
+function block(resId){
+  const blockRes = async() => {
+    const data = new FormData();
+    data.append('resId', resId);
+    try {
+      // console.log(user);
+      const resp = await axios.put(`http://localhost:8072/FoodiFy/Admin/BlockRestaurant`, data, { headers: authHeader() });
+
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  }
+
+  blockRes();
+
+}
 
 //----------------------------------------------------------Pagination function
 function TablePaginationActions(props) {
@@ -407,7 +428,7 @@ function TableActions(props) {
                     <TableCell >{row.location}</TableCell>
                     <TableCell >{row.viewButton}</TableCell>
                     {/* <TableCell >{row.viewComplaints}</TableCell> */}
-                    <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell ><Button variant="outlined" color="error" onClick={()=>block(row.resId)}>Block</Button></TableCell>
                     {/* <TableCell ></TableCell> */}
                   </TableRow>
                 );

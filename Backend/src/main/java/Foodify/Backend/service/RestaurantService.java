@@ -56,10 +56,20 @@ public class RestaurantService implements Restaurantserv{
 	private RestaurantCommentRepository restaurantCommentRepository;
 
 	@Autowired
-	private RestaurantRepository restaurantRepository1;
+	private static RestaurantRepository restaurantRepository1;
 
-	
-	@Override
+    public static Object blockRes(String resId) {
+		Restaurant user = restaurantRepository1.findByid(resId);
+
+		System.out.println(user);
+		user.setStatus("Blocked");
+		restaurantRepository1.save(user);
+
+		return null;
+    }
+
+
+    @Override
 	public ResponseEntity<Object> validate(String name, String name2, String username, String email) {
 		String error;
 //		Integer count1 = 0;
