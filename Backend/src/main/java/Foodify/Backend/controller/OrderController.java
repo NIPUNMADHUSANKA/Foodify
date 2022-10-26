@@ -2,6 +2,7 @@ package Foodify.Backend.controller;
 
 import Foodify.Backend.model.Order;
 //import Foodify.Backend.repository.Order_Repository;
+import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.service.Order_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -109,6 +111,19 @@ public ResponseEntity<?> getOrderFood(@RequestBody Order order) {
         }
 
 //		return null;
+    }
+
+    @GetMapping("/FoodiFy/Admin/OrderRange")
+    public ResponseEntity<?> getDataOfRange(@RequestBody Date startDate, @RequestBody Date endDate){
+        try {
+
+            return new ResponseEntity<>(order_service.getRangedOrders(startDate,endDate), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
 
