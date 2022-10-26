@@ -55,25 +55,25 @@ function Nearme(){
         setColor('#fff')
         }
 
-        // const success = (position) => {
-        //     console.log(position)
-        //     // const latitude = position.coords.latitude;
-        //     // const longitude = position.coords.longitude;
-        //     const latitude = 6.902274;
-        //     const longitude = 79.861185;
-        //     console.log(latitude + ' ' + longitude)
+        const success = (position) => {
+            console.log(position)
+            // const latitude = position.coords.latitude;
+            // const longitude = position.coords.longitude;
+            const latitude = 6.902274;
+            const longitude = 79.861185;
+            console.log(latitude + ' ' + longitude)
 
-        //     const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+            const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
 
-        //     fetch(geoApiUrl)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             console.log(data)
-        //         })
+            fetch(geoApiUrl)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
             
-        // }
+        }
 
-        // navigator.geolocation.getCurrentPosition(success);
+        navigator.geolocation.getCurrentPosition(success);
 
        
        
