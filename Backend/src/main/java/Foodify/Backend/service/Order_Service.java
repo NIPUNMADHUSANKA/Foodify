@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -321,6 +323,10 @@ public class Order_Service implements Order_Serv{
 		return null;
 	}
 
+    public List<Order> getRangedOrders(Date startDate, Date endDate) {
+
+		List<Order> orders = order_repository.findByDateRange(startDate,endDate);
+		return orders;
 	@Override
 	public String updateOrderStatus(String orderId) {
 
@@ -335,5 +341,6 @@ public class Order_Service implements Order_Serv{
 		order_repository.save(orders);
 
 		return null;
+
 	}
 }

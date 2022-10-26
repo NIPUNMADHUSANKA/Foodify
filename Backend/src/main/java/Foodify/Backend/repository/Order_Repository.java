@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,9 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 	List<Order> findByresId(String restId);
 
 	Order findByid(String orderId);
+
+	@Query(value = "{orderedDate:{$gte:?0,$lt:?1}")
+    List<Order> findByDateRange(Date startDate, Date endDate);
 
 //	Optional<Order> findById(String restId);
 }

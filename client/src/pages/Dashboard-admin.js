@@ -75,12 +75,13 @@ const Dashboard = () => {
                 console.log(error.response.data);
             }
         });
+    
     }, []);
 
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(0);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -178,7 +179,7 @@ const Dashboard = () => {
                 </ThemeProvider>
 
                 <TabPanel value={value} index={0}>
-                    <SystemMain />
+                    <SystemMain orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <UsersMain users={users}/>

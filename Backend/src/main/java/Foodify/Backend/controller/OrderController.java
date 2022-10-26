@@ -9,6 +9,7 @@ import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.Order_Repository;
 import Foodify.Backend.repository.RestaurantRepository;
 //import Foodify.Backend.repository.Order_Repository;
+import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.service.Order_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -167,6 +169,13 @@ public ResponseEntity<?> getOrderFood(@RequestParam("date1") String date1,
 //		return null;
     }
 
+
+    @GetMapping("/FoodiFy/Admin/OrderRange")
+    public ResponseEntity<?> getDataOfRange(@RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
+        try {
+
+            return new ResponseEntity<>(order_service.getRangedOrders(startDate,endDate), HttpStatus.OK);
+
     //    ----------------------to update the order--------------------------------
     @PutMapping("/FoodiFy/Restaurant/updateOrderStatus")
     public ResponseEntity<?> updateOrderStatus(@RequestParam("orderId") String orderId) {
@@ -179,13 +188,13 @@ public ResponseEntity<?> getOrderFood(@RequestParam("date1") String date1,
             System.out.println("Controller");
             return new ResponseEntity<>(order_service.updateOrderStatus(orderId), HttpStatus.OK);
 
+
         } catch (Exception e) {
 
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }
 
-//		return null;
     }
 
 
