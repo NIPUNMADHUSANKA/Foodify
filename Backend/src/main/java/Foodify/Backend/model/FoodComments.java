@@ -21,7 +21,7 @@ public class FoodComments {
 	private String foodId;
 	private String commentDescription;
 	private Date addedDate;
-	private Float foodRating;
+	private Double foodRating;
 
 	public FoodComments() {
 		super();
@@ -58,11 +58,11 @@ public class FoodComments {
 	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
-	public Float getFoodRating() {
+	public Double getFoodRating() {
 		return foodRating;
 	}
 
-	public void setFoodRating(Float foodRating) {
+	public void setFoodRating(Double foodRating) {
 		this.foodRating = foodRating;
 	}
 
