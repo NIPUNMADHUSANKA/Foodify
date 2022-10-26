@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Hidden } from '@mui/material';
 
 import FoodBanner from '../components/FoodufyBanner';
 import AboutUs from '../components/AboutUs2';

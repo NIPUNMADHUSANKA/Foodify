@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.time.LocalDate;
+
 
 import javax.validation.Valid;
 
 import Foodify.Backend.model.*;
 import Foodify.Backend.service.ShopCartServiceImp;
-import Foodify.Backend.model.RestaurantIncome;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ import Foodify.Backend.repository.FoodItem_Repository;
 import Foodify.Backend.repository.FoodMenuRepo;
 import Foodify.Backend.repository.OffersRepository;
 import Foodify.Backend.repository.Registered_Customer_Repository;
-import Foodify.Backend.repository.RestaurantIncomeRepository;
 import Foodify.Backend.repository.RestaurantRepository;
 import Foodify.Backend.service.Restaurantserv;
 import Foodify.Backend.exception.fieldErrorResponse;
@@ -64,8 +65,6 @@ public class RestaurantController {
 	@Autowired
 	private ShopCartServiceImp ShopCartService;
 
-	@Autowired
-	private RestaurantIncomeRepository restaurantincomeRepo;
 	
 	@Autowired
 	private FoodItem_Repository foodItem_Repository;
@@ -132,17 +131,13 @@ public class RestaurantController {
 			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
 			restaurant.setAddress(restaurants.get(i).getAddress());
 			restaurant.setId(restaurants.get(i).getId());
-
 			restaurant.setLatitude(restaurants.get(i).getLatitude());
 		    restaurant.setLongitude(restaurants.get(i).getLongitude());
-
-			restaurant.setRating(restaurants.get(i).getRating());
-
 			restaurantsList.add(restaurant);
 
 		}
 
-//		System.out.println(restaurantsList);
+		System.out.println(restaurantsList);
 		return restaurantsList;
 
 	}
@@ -151,7 +146,7 @@ public class RestaurantController {
 	public void updateContactDetails(@RequestBody Restaurant contactDetails) {
 
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		//System.out.println(userName);
+		System.out.println(userName);
 		// System.out.println(contactDetails.getAddress());
 
 		Restaurant restaurant = restaurantrepo.findByuserName(userName);
@@ -440,8 +435,9 @@ public class RestaurantController {
 	@GetMapping("/FoodiFy/AllUser/getFoodMenu/{resId}")
 	public List<FoodMenu> getFoodResturanrMenu(@PathVariable String resId) {
 
-		Restaurant restaurant = restaurantrepo.findByid(resId);
-		String userName = restaurant.getUserName();
+		Optional<Restaurant> resturant = restaurantrepo.findById(resId);
+
+		String userName = resturant.get().getUserName();
 
 		return foodMenuRepo.findByuserName(userName);
 
@@ -646,7 +642,7 @@ public List<FoodItem> showfoods() {
 //		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
 		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
 		fooditem.setName(fooditems.get(i).getName());
-		fooditem.setPrice(Double.valueOf(Math.round(fooditems.get(i).getPrice())));
+		fooditem.setPrice(fooditems.get(i).getPrice());
 //		restaurant.setId(fooditems.get(i).getId());
 
 		fooditemsList.add(fooditem);
@@ -687,24 +683,5 @@ public List<Restaurant> restaurantlocation () {
 }
 
 
-
-
-
-//---------------------------------------------get restaurant Income from resturant view-------------------------------------------------------
-@GetMapping("/FoodiFy/Restaurant/GetRestaurantIncome")
-public ResponseEntity<?>  getRestaurantIncome() {
-	
-	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-	List<RestaurantIncome> Income =restaurantincomeRepo.findByuserName(userName);
-
-	return new ResponseEntity<>(Income, HttpStatus.OK);
-
-}
-
-	@GetMapping("/FoodiFy/Admin/Restaurants/All")
-	public List<Restaurant> getRestaurants(){
-		List<Restaurant> allRes = restaurantrepo.findAll();
-		return allRes;
-	}
 
 }

@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Document(collection="FoodComments")
-public class FoodComments {
+public class FoodComment {
 	
 	@Id
 	private String id;
@@ -21,13 +21,7 @@ public class FoodComments {
 	private String foodId;
 	private String commentDescription;
 	private Date addedDate;
-	private Float foodRating;
-
-	public FoodComments() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	public String getId() {
 		return id;
 	}
@@ -58,15 +52,8 @@ public class FoodComments {
 	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
-	public Float getFoodRating() {
-		return foodRating;
-	}
-
-	public void setFoodRating(Float foodRating) {
-		this.foodRating = foodRating;
-	}
-
-
+	
+	
 //	private File image;
 	
 		

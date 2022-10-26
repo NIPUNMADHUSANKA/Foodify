@@ -36,9 +36,6 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 	
 	Registered_Customer findByuserName(String userName);
 
-//	@Query("{'id': ?0}")
-	Registered_Customer findByid(String userId);
-
 }
 
 

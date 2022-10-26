@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Box, List } from '@mui/material';
 import { useEffect, useState } from 'react';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { FixedSizeList } from 'react-window';
 import authHeader from '../../services/auth-header';
 import axois from "axios";
 import { Colours } from '../../assets/theme/theme';
@@ -13,7 +16,7 @@ import { Colours } from '../../assets/theme/theme';
 
 function ComplaintHistory() {
   const [complainhis, setData2] = useState([]);
- // console.log(complainhis);
+  console.log(complainhis);
   const x = complainhis;
 
   useEffect((event) => {
@@ -23,7 +26,7 @@ function ComplaintHistory() {
         // this part if sucess
         const details = data.data;
         setData2({ ...details });
-        //console.log(details);
+        console.log(details);
         // details.array.forEach(element => {
         //   Object.entries(element).forEach(([key , value]) => 
 
@@ -66,7 +69,7 @@ function ComplaintHistory() {
      
           <List dense={true} >
             {Object.keys(complainhis).map((keyName) => (
-             
+              console.log(complainhis[keyName]),
               <ListItem key={complainhis[keyName].id}>
                 <ListItemText sx={{ color: Colours.green,height:"5%" }}
                   primary={complainhis[keyName].restaurantId+'  -  '+complainhis[keyName].complainTitle} 

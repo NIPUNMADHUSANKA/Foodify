@@ -118,7 +118,7 @@ public class Registered_Customer_Controller {
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
 
-	@GetMapping("/FoodiFy/Admin/Users/All")
+	@GetMapping("/Foodify/Admin/Users/All")
 	public List<Registered_Customer> usersAll(){
 		return RegCusRepo.findAll();
 	}

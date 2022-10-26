@@ -4,6 +4,7 @@ import React from 'react'
 import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Box } from '@mui/system';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Link} from 'react-router-dom';
 // import LatestIcon from '../assets/images/latest_food.png';
 

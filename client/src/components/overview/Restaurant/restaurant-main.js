@@ -13,24 +13,6 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 
 function SystemMain(props){
-
-    const restaurants = props.restaurants;
-
-    const blocked = [];
-    const active = [];
-
-    Object.keys(restaurants).map(key=> {
-        if (restaurants[key].status == 'blocked'){
-            blocked.push(restaurants[key]);
-        }
-        else{
-            active.push(restaurants[key]);
-        }
-    })
-
-    // console.log(blocked)
-    // console.log(active)
-
     return(
         <Container maxWidth="false">
         <Grid container spacing={3} width="1200px">
@@ -77,7 +59,7 @@ function SystemMain(props){
                 xl={12}
                 xs={12}
             >
-                <RestaurantTable data={active}/>
+                <RestaurantTable/>
             </Grid>
             <Grid item
                 lg={12}
@@ -86,7 +68,7 @@ function SystemMain(props){
                 xs={12}
             >
                 <Typography variant='h4' sx={{fontFamily: 'Poppins', fontWeight: '200', color: 'white'}}>Blocked Restaurants</Typography>
-                <RestaurantTableBlocked data={blocked}/>
+                <RestaurantTableBlocked/>
             </Grid>
         </Grid>
         </Container>

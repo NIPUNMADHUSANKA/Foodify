@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import Box from '@mui/material/Box';
 import Carousel from 'react-elastic-carousel';
 
 import Summary_Card from './profile_summary_card';
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+import { width } from '@mui/system';
 
 const breakpoints = [
   {width:1, itemsToShow: 1},
@@ -16,6 +19,7 @@ function CardBar(details) {
   
   
   const X = details.details;
+  console.log(X)
   return (
 
       <div >

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import {ThemeProvider, createTheme } from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -14,6 +15,7 @@ import Typography from '@mui/material/Typography';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { margin } from '@mui/system';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

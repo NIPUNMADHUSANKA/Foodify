@@ -24,15 +24,15 @@ import Foodify.Backend.service.UserService;
 import Foodify.Backend.util.JwtUtil;
 import Foodify.Backend.Response.LoginResponse;
 import Foodify.Backend.Response.UserInfo;
-//import Foodify.Backend.repository.UserRepository;
+import Foodify.Backend.repository.UserRepository;
 
 @RestController
 @RequestMapping("/FoodiFy")
 @CrossOrigin (origins = "http://localhost:3000")
 public class AuthenticationController {
 
-	//@Autowired
-	//private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 //	@Autowired
 //	private UserRepository userRepository;

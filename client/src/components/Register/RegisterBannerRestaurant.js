@@ -114,18 +114,18 @@ const RegisterBannerRestaurant = () => {
           if (error.response.data) {
 
             error.response.data.fieldErrors.forEach(fieldError => {
-              //console.log(error.response.data)
+              console.log(error.response.data)
 
               if (fieldError.field == 'userName') {
-                //console.log(fieldError.field)
+                console.log(fieldError.field)
                 errors.userName = fieldError.message;
                 setFormErrors(errors);
-                //console.log(formErrors);
+                console.log(formErrors);
               } else if (fieldError.field == 'email') {
-                //console.log(fieldError.field)
+                console.log(fieldError.field)
                 errors.email = fieldError.message;
                 setFormErrors(errors);
-                //console.log(formErrors);
+                console.log(formErrors);
               }
 
 

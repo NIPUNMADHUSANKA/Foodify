@@ -12,7 +12,7 @@ import List from '@mui/material/List';
 // -------using props to put random images using props------------------------
 const FoodComment = (props) => {
 
-  //console.log(props.comments)
+  console.log(props.comments)
 
   const data = props.comments;
   
