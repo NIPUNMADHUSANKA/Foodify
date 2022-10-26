@@ -19,4 +19,6 @@ public interface Order_Serv {
 
 	String updateOrderItem(String itemId,String orderId);
 
+	String updateOrderStatus(String orderId);
+
 }
