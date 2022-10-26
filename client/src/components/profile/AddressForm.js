@@ -307,11 +307,11 @@ return(
         <Typography variant="h4" gutterBottom sx= {{color: Colours.formWhite,fontSize:{lg:"100%",xs:"100%"} }} >
               Prefered food items
           </Typography>
-         <Typography sx={{color: Colours.formWhite,fontFamily:'Poppins',marginLeft:"0%",backgroundColor:Colours.transparenceGrey,paddingLeft:"2%"}} >
-          <p>Pizza</p>
-          <p>Veg soup</p>
-          <p>Pizza</p>
-          <p>Veg soup</p>
+         <Typography sx={{color: Colours.formWhite,fontFamily:'Poppins',marginLeft:"0%",backgroundColor:Colours.grey,paddingLeft:"2%",fontColor:Colours.gray1}} >
+          <p>Bonelass Daing</p>
+          <p>Tulingan Sa </p>
+          <p>Tilapia in Tausi</p>
+          <p>Tulingan Sa</p>
           </Typography>
       </Grid>
       {/* <Grid item xs={12} sm={6} >

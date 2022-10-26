@@ -214,7 +214,7 @@ function Row(props) {
                       <TableCell align="right">{detailsRow.viewItem}</TableCell>
                       <TableCell>{
                         
-                        <Button variant="outlined" disabled={today!=date ? true : false} color="success" size="small" state={{food:detailsRow.foodId }} component={Link} to="../FoodRating" >Rate Item</Button>
+                        <Button variant="outlined" disabled={today!=date ? true : false} color="success" size="small" state={{food:detailsRow.foodId, food2:detailsRow.foodName }} component={Link} to="../FoodRating" >Rate Item</Button>
 
                         }</TableCell>
                       <TableCell>{detailsRow.createComplaint}</TableCell>
