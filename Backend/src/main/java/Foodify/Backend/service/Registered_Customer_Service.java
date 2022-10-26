@@ -199,5 +199,31 @@ public class Registered_Customer_Service implements Registered_Customer_Sev{
 		return null;
 	}
 
+	@Override
+	public Object blockUser(String userId){
+
+		Registered_Customer user = RegCusRepo.findByid(userId);
+
+		System.out.println(user);
+		user.setBlocked("Blocked");
+		RegCusRepo.save(user);
+
+		return null;
+
+	}
+
+	@Override
+	public Object unblockUser(String userId){
+
+		Registered_Customer user = RegCusRepo.findByid(userId);
+
+		System.out.println(user);
+		user.setBlocked("");
+		RegCusRepo.save(user);
+
+		return null;
+
+	}
+
 	
 }

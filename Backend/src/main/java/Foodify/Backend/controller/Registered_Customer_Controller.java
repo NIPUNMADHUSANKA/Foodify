@@ -86,7 +86,34 @@ public class Registered_Customer_Controller {
 		return count;				
 	}
 //	----------------end of create method-----------------------------------------------------------------------------------------
-	
+
+	@PutMapping("/FoodiFy/Admin/BlockUser")
+	public ResponseEntity<?> blockUser(@RequestParam("userId") String userId) {
+
+		System.out.println("Controller");
+		try {
+			return new ResponseEntity<>(RegCusServ.blockUser(userId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
+
+	@PutMapping("/FoodiFy/Admin/UnblockUser")
+	public ResponseEntity<?> unblockUser(@RequestParam("userId") String userId) {
+
+		System.out.println("Controller");
+		try {
+			return new ResponseEntity<>(RegCusServ.unblockUser(userId), HttpStatus.OK);
+
+		} catch (Exception e) {
+
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+		}
+	}
 
 //	-----------------------------------------create method-------------------------------------------------------------------
 //	----------to response entity, use response object----------

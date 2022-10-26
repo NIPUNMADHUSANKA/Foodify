@@ -158,7 +158,7 @@ function createData(amount, date, time, restaurant, user,type, billItems) {
   ))
 
   var details = billItems;
-  console.log(details);
+  // console.log(details);
 
     return {  
     date, 
@@ -228,7 +228,7 @@ function Row(props) {
                       <TableCell align="right">
                         {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discount}
                       </TableCell>
-                      <TableCell align="right">{detailsRow.viewItem}</TableCell>
+                      {/* <TableCell align="right">{detailsRow.viewItem}</TableCell> */}
                       <TableCell>{detailsRow.rateItem}</TableCell>
                       <TableCell>{detailsRow.createComplaint}</TableCell>
                     </TableRow>
@@ -274,7 +274,7 @@ function TableActions(details) {
     Object.keys(orders).map((key, index) => (
 
       datetime = orders[key].orderDate.split("T"),
-      console.log(datetime),
+      // console.log(datetime),
       date = datetime[0],
       time = datetime[1].slice(0,8),
 

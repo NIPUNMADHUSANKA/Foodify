@@ -28,6 +28,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+import axios from 'axios';
+import authHeader from "../../../services/auth-header";
+
 //----------------------------------------------------------styles for table
 const paperSx = {
     width: '100%', 
@@ -178,17 +181,27 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Blocking function
-function block(userId){
-  // try {
-    
-  // } catch (error) {
-    
-  // }
+function block(user){
+  const blockUser = async() => {
+    const data = new FormData();
+    data.append('userId', user);
+    try {
+      console.log(user);
+      const resp = await axios.put(`http://localhost:8072/FoodiFy/Admin/BlockUser`, data, { headers: authHeader() });
+
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  }
+
+  blockUser();
+
 }
 
 //----------------------------------------------------------Table Row Define
 function createData(userId,name ,type, location, telephone, email) {
-  const blockButton = <Button variant="outlined" color="error" onClick={block(userId)}>Block</Button>
+  // const blockButton = <Button variant="outlined" color="error" onClick={block(userId)}>Block</Button>
   // console.log("Came Here")
   return { 
     userId, 
@@ -197,7 +210,7 @@ function createData(userId,name ,type, location, telephone, email) {
     location,
     telephone,
     email,
-    blockButton,
+    // blockButton,
   };
 }
 
@@ -247,11 +260,11 @@ const columns = [
     label: 'Type',
     numeric: true, 
     minWidth: 140 },
-  { 
-    id: 'location', 
-    label: 'Location',
-    numeric: false, 
-    minWidth: 120 },
+  // { 
+  //   id: 'location', 
+  //   label: 'Location',
+  //   numeric: false, 
+  //   minWidth: 120 },
 
   { 
     id: 'telephone', 
@@ -262,7 +275,7 @@ const columns = [
     id: 'email', 
     label: 'Email',
     numeric: false, 
-    minWidth: 130 },
+    minWidth: 100 },
   { 
     id: 'block', 
     label: '',
@@ -366,6 +379,8 @@ function TableActions(normalUsers) {
     setPage(0);
   };
 
+  
+
   return (
     <ThemeProvider theme={theme}>
     <Paper sx={paperSx}>
@@ -419,10 +434,11 @@ function TableActions(normalUsers) {
                     </TableCell> */}
                     <TableCell >{row.name}</TableCell>
                     <TableCell >{row.type}</TableCell>
-                    <TableCell >{row.location}</TableCell>
+                    {/* <TableCell >{row.location}</TableCell> */}
                     <TableCell >{row.telephone}</TableCell>
                     <TableCell >{row.email}</TableCell>
-                    <TableCell >{row.blockButton}</TableCell>
+                    <TableCell ><Button variant="outlined" color="error" onClick={()=>block(row.userId)}>Block</Button></TableCell>
+                    {/* <TableCell ><Button variant="outlined" color="error" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(block(row.userId)) } }>Block</Button></TableCell> */}
                     <TableCell ></TableCell>
                   </TableRow>
                 );
@@ -458,4 +474,4 @@ function TableActions(normalUsers) {
   );
 }
 
-export default TableActions;
+export default TableActions; 

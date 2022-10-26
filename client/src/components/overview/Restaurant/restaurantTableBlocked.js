@@ -421,7 +421,7 @@ function TableActions(props) {
                     <TableCell >{row.name}</TableCell>
                     <TableCell >{row.location}</TableCell>
                     <TableCell >{row.viewButton}</TableCell>
-                    <TableCell >{row.viewComplaints}</TableCell>
+                    {/* <TableCell >{row.viewComplaints}</TableCell> */}
                     <TableCell >{row.deleteButton}</TableCell>
                     {/* <TableCell ></TableCell> */}
                   </TableRow>

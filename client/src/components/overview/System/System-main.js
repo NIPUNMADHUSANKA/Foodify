@@ -39,7 +39,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Order Count" value="102" icon={FastfoodIcon} type="down" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Order Count" value="12" icon={FastfoodIcon} type="down" percentage="2%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}

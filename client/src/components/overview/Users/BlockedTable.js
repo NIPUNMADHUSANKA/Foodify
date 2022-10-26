@@ -28,6 +28,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+import axios from 'axios';
+import authHeader from "../../../services/auth-header";
+
 //----------------------------------------------------------styles for table
 const paperSx = {
     width: '100%', 
@@ -179,7 +182,7 @@ TablePaginationActions.propTypes = {
 
 //----------------------------------------------------------Table Row Define
 function createData(userId,name ,type, location, telephone, email) {
-  const unblockButton = <Button variant="outlined" color="error">Unblock</Button>
+  // const unblockButton = <Button variant="outlined" color="error">Unblock</Button>
   return { 
     userId, 
     name,
@@ -187,10 +190,28 @@ function createData(userId,name ,type, location, telephone, email) {
     location,
     telephone,
     email,
-    unblockButton,
+    // unblockButton,
   };
 }
 
+//----------------------------------------------------------Blocking function
+function unblock(user){
+  const unblockUser = async() => {
+    const data = new FormData();
+    data.append('userId', user);
+    try {
+      console.log(user);
+      const resp = await axios.put(`http://localhost:8072/FoodiFy/Admin/UnblockUser`, data, { headers: authHeader() });
+
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  }
+
+  unblockUser();
+
+}
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -238,11 +259,11 @@ const columns = [
     label: 'Type',
     numeric: true, 
     minWidth: 140 },
-  { 
-    id: 'location', 
-    label: 'Location',
-    numeric: false, 
-    minWidth: 120 },
+  // { 
+  //   id: 'location', 
+  //   label: 'Location',
+  //   numeric: false, 
+  //   minWidth: 120 },
 
   { 
     id: 'telephone', 
@@ -409,10 +430,10 @@ function TableActions(blockedUsers) {
                     </TableCell>
                     <TableCell >{row.name}</TableCell>
                     <TableCell >{row.type}</TableCell>
-                    <TableCell >{row.location}</TableCell>
+                    {/* <TableCell >{row.location}</TableCell> */}
                     <TableCell >{row.telephone}</TableCell>
                     <TableCell >{row.email}</TableCell>
-                    <TableCell >{row.unblockButton}</TableCell>
+                    <TableCell ><Button variant="outlined" color="error" onClick={()=>unblock(row.userId)}>Unblock</Button></TableCell>
                     <TableCell ></TableCell>
                   </TableRow>
                 );

@@ -14,7 +14,7 @@ import '../../../assets/css/Dashboard-admin.css';
 // import { width } from '@mui/system';
 // import { useParams } from 'react-router-dom';
 
-import IncomeChart from './IncomeChart';
+import IncomeChart from './IncomeChart2';
 import SignupChart from './SignupChart';
 import AccountUpgradeChart from './AccountUpgrade';
 
