@@ -13,8 +13,6 @@ import java.util.Optional;
 @Repository
 public interface Order_Repository extends MongoRepository<Order, String> {
 
-
-	
 	@Query(value ="{user: ObjectId(?0)}")
 	List<Order> findByUser(String UserId);
 
@@ -23,7 +21,7 @@ public interface Order_Repository extends MongoRepository<Order, String> {
 
 //	Offers findByid(String id);
 
-	List<Offers> findByuserName1(String user);
+	List<Order> findByuserName1(String user);
 
 	List<Order> findByresId(String restId);
 
