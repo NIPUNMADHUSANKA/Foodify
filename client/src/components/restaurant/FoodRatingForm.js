@@ -202,9 +202,14 @@ export default function MultilineTextFields() {
                         }}
                     >
                         <Rating
+<<<<<<< HEAD
+                            name="rating"
+                            value={value}
+=======
                             id="foodRating"
                             name="foodRating"
                             value={formValues.foodRating}
+>>>>>>> 8886b5f5a7d5b64c93894faeec41c4e2fd2eeb7b
                             precision={0.5}
                             getLabelText={getLabelText}
                             onChange={(event, newValue) => {
