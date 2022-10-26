@@ -29,9 +29,9 @@ public class Order {
 
     private List<OrderItem> items;
 
-    private LocalDate orderDate;
+    private String orderDate;
 
-    private LocalDateTime orderTime;
+    private String orderTime;
 
     private String userName1;
 
@@ -63,19 +63,19 @@ public class Order {
         this.items = items;
     }
 
-    public LocalDate getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDateTime getOrderTime() {
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(LocalDateTime orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 

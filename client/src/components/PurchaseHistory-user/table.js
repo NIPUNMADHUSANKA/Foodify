@@ -131,7 +131,7 @@ TablePaginationActions.propTypes = {
 //----------------------------------------------------------Table Row Define
 function createData(amount, date, time, resturnatname, billItems) {
   const viewItem = <Button variant="outlined" color="success" size="small" component={Link} to="../Restaurant/Category/Orderfood">View Item</Button>
-  const rateItem = <Button variant="outlined" color="success" size="small" component={Link} to="../FoodRating">Rate Item</Button>
+  const rateItem = <Button variant="outlined" color="success" size="small" component={Link} to="../FoodRating" >Rate Item</Button>
   const createComplaint = <Button variant="outlined" color="error" size="small" component={Link} to="../Complaints">Create Complaint</Button>
 
   
@@ -190,8 +190,6 @@ function Row(props) {
                     <TableCell>Item</TableCell>
                     <TableCell align="right">Quantity</TableCell>
                     <TableCell align="right">Price</TableCell>
-
-                    <TableCell align="right">Total price</TableCell>
                     <TableCell align="right"></TableCell>
                     <TableCell align="right"></TableCell>
                     <TableCell align="right"></TableCell>
@@ -201,19 +199,19 @@ function Row(props) {
                   {row.details.map((detailsRow) => (
                     // console.log(typeof(detailsRow)),
 
-
-
                     <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
                         {detailsRow.foodName}
                       </TableCell>
                       <TableCell align="right">{detailsRow.quantity}</TableCell>
                       <TableCell align="right">{detailsRow.price}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(detailsRow.quantity * detailsRow.price * 100) / 100 - detailsRow.discount}
-                      </TableCell>
+                      
                       <TableCell align="right">{detailsRow.viewItem}</TableCell>
-                      <TableCell>{detailsRow.rateItem}</TableCell>
+                      <TableCell>{
+                        
+                        <Button variant="outlined" color="success" size="small" state={{food:detailsRow.foodId }} component={Link} to="../FoodRating" >Rate Item</Button>
+
+                        }</TableCell>
                       <TableCell>{detailsRow.createComplaint}</TableCell>
                     </TableRow>
                   ))}
@@ -257,8 +255,8 @@ function TableActions(details) {
 
     Object.keys(info).map((key, index) => (
 
-      date = info[key].orderDate,
-      time = info[key].orderTime.substring(11,16),
+      date = info[key].orderDate.substring(0,10),
+      time = info[key].orderTime.substring(11,),
 
       price = info[key].price,
       restaurant = info[key].resName,
