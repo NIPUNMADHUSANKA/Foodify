@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, IconButton, Rating, TextField, ThemeProvider, Typography } from '@mui/material';
+import { Box, IconButton, Rating, TextField, ThemeProvider } from '@mui/material';
 import Button from '@mui/material/Button';
 import '../../../assets/css/App.css';
 import ArrowIcon from '@mui/icons-material/ArrowForward';
@@ -18,8 +18,6 @@ import axios from 'axios';
 import authHeader from "../../../services/auth-header";
 import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerLogo, BannerTitle, BannerTitle2 } from '../../../assets/theme/RBanner';
 
-// -------to import forms------------
-import { BannerForm1, BannerForm2 } from './EditForms';
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -133,8 +131,10 @@ const RestaurantEditableBanner = () => {
 
     const [Logo1, setLogo] = useState(null);
 
+    const [rating, setRating] = useState(0);
+
     // ---------------set response data ----------------------------------------------
-    const [image, setImage] = useState(null);
+    //const [image, setImage] = useState(null);
     // console.log(data);
 
     // -------------initial states for fields---------------------------
@@ -147,7 +147,7 @@ const RestaurantEditableBanner = () => {
     // ----------create state name form values--------
     const [RestaurantName, setName] = React.useState(initialValues2);
 
-    const blob = null;
+    //const blob = null;
 
     useEffect(() => {
 
@@ -190,6 +190,9 @@ const RestaurantEditableBanner = () => {
                 // if (data.data.restaurantName == null) {
                 //     setName("Restaurant_Name")
                 // }
+                const rating = data.data.rating;
+                setRating(rating);
+
             }).catch(err => {
                 console.log(err)
 
@@ -265,7 +268,7 @@ const RestaurantEditableBanner = () => {
     }
     
 
-    const showCoverImage = () => {
+/*    const showCoverImage = () => {
 
 
 
@@ -279,6 +282,7 @@ const RestaurantEditableBanner = () => {
         // }
         // imagePreview !== null ? imagePreview : image;
     }
+    */
 
     return (
         <ThemeProvider theme={theme}>
@@ -413,10 +417,10 @@ const RestaurantEditableBanner = () => {
                         </BannerTitle>
 
                         <BannerTitle2>
-                            Rating: {rating}
+                            Rating
 
                         </BannerTitle2>
-                        <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
+                        <Rating name="rating" value={rating} precision={0.5} size="small" readOnly sx={{
                             [theme.breakpoints.down('sm')]: {
                                 fontSize: '8px',
                             },

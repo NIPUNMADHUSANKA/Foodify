@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeProvider, Box, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 import Carousel from 'react-elastic-carousel';
 
 import FoodCard from './FoodCard copy'

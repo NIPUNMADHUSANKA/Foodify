@@ -14,7 +14,7 @@ public class FoodItem {
     private String catId;
     private String resId;
     private Double calaries;
-    private Double foodRating;
+    
 
 	private Double fat;
     private Double protein;
@@ -23,6 +23,8 @@ public class FoodItem {
     private String bImage;
     
     private int discount;
+
+    private int total;
 
     public Double getCalaries() {
         return calaries;
@@ -47,16 +49,7 @@ public class FoodItem {
     public void setProtein(Double protein) {
         this.protein = protein;
     }
-
-    public Double getFoodRating() {
-        return foodRating;
-    }
-
-    public void setFoodRating(Double foodRating) {
-        this.foodRating = foodRating;
-    }
-
-
+    
     public Double getCarbo() {
         return carbo;
     }
@@ -77,9 +70,11 @@ public class FoodItem {
 
 	public String getName() { return name; }
 
-    public void setName(String name) { this.name = name;}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Double getPrice() { return price; }
+    public Integer getPrice() { return Math.toIntExact(Math.round(price)); }
 
     public void setPrice(Double price) { this.price = price; }
 
@@ -117,5 +112,12 @@ public class FoodItem {
 	public void setbImage(String bImage) {
 		this.bImage = bImage;
 	}
-    
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }
