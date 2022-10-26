@@ -15,12 +15,6 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 	
 	@Query("{'$and':[ {'userName': ?0}, {'password':?1} ] }")
 	Optional<Registered_Customer> findByUser(String UserName, String Password);
-
-	//Reset Password
-//	@Query("{'email': {'$regex':?0,$options: i}}")
-//	Registered_Customer findByEmail(String email);
-//
-//	Registered_Customer findByResetPasswordToken(String token);
 	
 	@Query(value = "{ 'status' : ?0 }", fields = "{ 'item' : 1, 'status' : 1 }")
     List<Registered_Customer> findByStatusIncludeItemAndStatusFields(String status);
@@ -40,6 +34,11 @@ public interface Registered_Customer_Repository extends MongoRepository<Register
 
 	Registered_Customer findByResetPasswordToken(String token);
 	
+	Registered_Customer findByuserName(String userName);
+
+//	@Query("{'id': ?0}")
+	Registered_Customer findByid(String userId);
+
 }
 
 

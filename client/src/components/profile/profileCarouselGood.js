@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
-import Skeleton from '@mui/material/Skeleton';
+import { Box } from '@mui/material';
 import PageTitle from '../../components/User/PageTitle';
 import CardBar from './profile_card_bar';
 import dash from '../../assets/images/profile_dash.png';
 
 
-const MainHeader = "Good Foods";
-const MainHeader2 = "Bad Foods";
+const MainHeader = "Healthy Foods";
+const MainHeader2 = "Unhealthy Foods";
 // const MainHeader3 = "My Details";
 
 

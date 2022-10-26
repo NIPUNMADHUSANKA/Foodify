@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 // to import necessacry components of the restuarant page
-import Navbar from '../../components/Navbar';
 import RestaurantHome from '../../components/restaurant/profile/RestaurantHome';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -15,6 +14,13 @@ import Fade from 'react-reveal/Fade';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
 import RestaurantEditableBanner from '../../components/restaurant/profile/RestaurantEditableBanner';
+import RestaurantDashboard from '../../components/restaurant/profile/Dashboard';
+import RestaurantIncome from '../../components/restaurant/profile/Income';
+
+import DashboardCTable from "../../components/restaurant/profile/DashboardCTable";
+
+
+import Navbar from './../../components/Navbar';
 
 // styles for profile tabs----------
 const mIcons = {
@@ -24,27 +30,27 @@ const mIcons = {
 // ---------------------------------text fied css style-----------------------
 const CustomTabs = styled(Tabs)({
     '& button': {
-        color:Colours.yellow,
+        color: Colours.yellow,
     },
     '& button:hover': {
-        color:Colours.green,
-        '& svg':{
-            color:Colours.green,
+        color: Colours.green,
+        '& svg': {
+            color: Colours.green,
         },
     },
     '& button:active': {
-        color:Colours.grayWhite,
-        '& svg':{
-            color:Colours.grayWhite,
+        color: Colours.grayWhite,
+        '& svg': {
+            color: Colours.grayWhite,
         },
     },
-    '& button.Mui-selected':{
-        color:Colours.green,
-        '& svg':{
-            color:Colours.green,
+    '& button.Mui-selected': {
+        color: Colours.green,
+        '& svg': {
+            color: Colours.green,
         },
     }
-    
+
 });
 // ---------------------------------------------------------------------
 
@@ -63,7 +69,10 @@ const RestaurantProfile = () => {
 
     return (
         <Box>
-            <Navbar />
+
+            <Fade top>
+                <Navbar />
+            </Fade>
 
             <Fade>
                 <RestaurantEditableBanner />
@@ -75,12 +84,12 @@ const RestaurantProfile = () => {
                     value={value}
                     onChange={changing}
                     variant="fullWidth"
-                    TabIndicatorProps={{sx : {background:Colours.green}}}
+                    TabIndicatorProps={{ sx: { background: Colours.green } }}
                     aria-label="resturantProfile"
                 >
-                    <Tab icon={<HomeIcon sx={{ color: Colours.yellow }} />} label="HOME" value={0}/>
-                    <Tab icon={<DashboardIcon sx={{ color: Colours.yellow }} />} label="DASHBOARD" value={1}/>
-                    <Tab icon={<AccountBalanceWalletIcon sx={{ color: Colours.yellow }} />} label="INCOME" value={2}/>
+                    <Tab icon={<HomeIcon sx={{ color: Colours.yellow }} />} label="HOME" value={0} />
+                    <Tab icon={<DashboardIcon sx={{ color: Colours.yellow }} />} label="DASHBOARD" value={1} />
+                    <Tab icon={<AccountBalanceWalletIcon sx={{ color: Colours.yellow }} />} label="INCOME" value={2} />
                 </CustomTabs>
 
             </Fade>
@@ -90,10 +99,23 @@ const RestaurantProfile = () => {
                     <RestaurantHome />
                 </RTabPanel>
                 <RTabPanel value={value} index={1} >
-                    Dashboard
+                    <Box>
+                        <RestaurantDashboard />
+
+                        <Box sx={{ top: "10%" }}>
+                            <Typography sx={{
+                                color: '#fff',
+                                fontFamily: "Poppins",
+                                fontSize: "2rem"
+                            }}>
+                                Completed Orders
+                            </Typography>
+                            <DashboardCTable />
+                        </Box>
+                    </Box>
                 </RTabPanel>
                 <RTabPanel value={value} index={2} >
-                    volet
+                    <RestaurantIncome />
                 </RTabPanel>
             </Box>
 

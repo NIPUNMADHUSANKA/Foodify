@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../../assets/theme/theme';
+import theme from '../../assets/theme/theme';
 import ButtonBase from '@mui/material/ButtonBase';
 import Userimage from '../../assets/icons/ant-design_user-outlined.png';
 import Resimage from '../../assets/icons/clarity_store-solid.png';
@@ -11,7 +11,7 @@ const images = [
     url: Userimage,
     title: 'User',
     width: '50%',
-    url2: 'signupuser'
+    url2: 'UserPackage'
   },
   {
     url: Resimage,

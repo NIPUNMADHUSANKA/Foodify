@@ -4,7 +4,6 @@ import {  Grid, Container } from '@mui/material';
 import DashboardCard from '../DashboardCard'
 import Chart from './charts.js'
 import Orders from './FrequenltyOrderedFoods'
-import RecentTransactions from './RecentTransactions' 
 
 import AttachMoneyRounded from '@mui/icons-material/AttachMoneyRounded';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -13,6 +12,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 
 
 function SystemMain(props){
+    console.log(props.orders)
     return(
         <Container padding="0" sx={{boxSizing: 'content-box'}}>
         <Grid container spacing={2}>
@@ -70,14 +70,6 @@ function SystemMain(props){
             >
                 <Orders />
             </Grid> 
-            <Grid item
-                lg={12}
-                md={12}
-                xl={12}
-                xs={12}
-            >
-                <RecentTransactions />
-            </Grid>
         </Grid>
         </Container>
     );

@@ -11,6 +11,7 @@ import SystemMain from '../components/overview/System/System-main';
 import UsersMain from '../components/overview/Users/Users-main';
 import RestaurantMain from '../components/overview/Restaurant/restaurant-main';
 import Complains from '../components/overview/Complain/Complains-main';
+import Transactions from '../components/overview/Transactions/TransactionsMain';
 
 import TabPanel from '../components/TabPanel';
 
@@ -18,17 +19,69 @@ import TabPanel from '../components/TabPanel';
 import theme from '../assets/theme/theme';
 import '../assets/css/Dashboard-admin.css';
 
+import axios from 'axios';
+
+import authHeader from '../services/auth-header';
+
+
 
 const Dashboard = () => {
 
     useEffect(() => {
         document.title = "Dashboard";
-    })
+    }) 
 
-    const drawerWidth = 240;
+    /* ------------------------------------------------------------Data Intialization */
+
+    const [users, setUsers] = React.useState({});
+    const [orders, setOrders] = React.useState({});
+    const [restaurants, setRestaurants] = React.useState({});
+    useEffect((event) => {
+
+        /* -----------------------------------------Users */
+        axios.get("http://localhost:8072/FoodiFy/Admin/Users/All",{ headers: authHeader()})
+        .then(data => {
+            const users = data.data;
+            setUsers({ ...users});
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
+
+        /* -----------------------------------------Orders */
+        axios.get("http://localhost:8072/FoodiFy/Admin/Orders/All",{ headers: authHeader()})
+        .then(data => {
+            const orders = data.data;
+            setOrders({ ...orders});
+            // console.log(orders);
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
+
+        /*-----------------------------------------Restaurants */
+        axios.get("http://localhost:8072/FoodiFy/Admin/Restaurants/All",{ headers: authHeader()})
+        .then(data => {
+            const restaurants = data.data;
+            setRestaurants({ ...restaurants});
+            // console.log(restaurants);
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
+    
+    }, []);
+
 
     /* ------------------------------------------------------------Drawer functions */
-    const [value, setValue] = React.useState(4);
+    const drawerWidth = 240;
+    const [value, setValue] = React.useState(0);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -53,7 +106,7 @@ const Dashboard = () => {
                 <Tab value={0} label={<Typography fontSize="18px" fontWeight="300" color="primary">System</Typography>}/>
                 <Tab value={1} label={<Typography fontSize="18px" fontWeight="300" color="primary">Users</Typography>}/>
                 <Tab value={2} label={<Typography fontSize="18px" fontWeight="300" color="primary">Restaurants</Typography>}/>
-                {/* <Tab value={3} label={<Typography fontSize="18px" fontWeight="300" color="primary">Orders</Typography>}/> */}
+                <Tab value={3} label={<Typography fontSize="18px" fontWeight="300" color="primary">Transactions</Typography>}/>
                 <Tab value={4} label={<Typography fontSize="18px" fontWeight="300" color="primary">Complaints</Typography>}/>
             </Tabs>
     
@@ -126,13 +179,16 @@ const Dashboard = () => {
                 </ThemeProvider>
 
                 <TabPanel value={value} index={0}>
-                    <SystemMain />
+                    <SystemMain orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <UsersMain />
+                    <UsersMain users={users}/>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <RestaurantMain />
+                    <RestaurantMain restaurants={restaurants}/>
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    <Transactions orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
                     <Complains />

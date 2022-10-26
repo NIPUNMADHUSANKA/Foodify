@@ -11,6 +11,11 @@ import List from '@mui/material/List';
 
 // -------using props to put random images using props------------------------
 const FoodComment = (props) => {
+
+  //console.log(props.comments)
+
+  const data = props.comments;
+  
   return (
 
     // About us main box-----------------------------------------------
@@ -25,17 +30,17 @@ const FoodComment = (props) => {
         background: Colours.gray2,
         padding: '0rem',
         hieght: '5vh',
-        margin:"auto",
-        marginRight:"22%",
+        margin: "auto",
+        marginRight: "22%",
         marginTop: '1rem',
-        borderRadius:"1rem",
+        borderRadius: "1rem",
         [theme.breakpoints.down('sm')]: {
           fontSize: '10px',
           padding: '2px',
           flexDirection: 'column',
           justifyContent: 'center',
           justifyItems: 'center',
-          margin:"auto",
+          margin: "auto",
           marginTop: '1rem',
         }
       }}>
@@ -59,17 +64,31 @@ const FoodComment = (props) => {
             width: '100%',
             maxWidth: '95%',
             margin: 'auto',
-            marginBottom:'1rem',
-            marginTop:'1rem',
+            marginBottom: '1rem',
+            marginTop: '1rem',
             bgcolor: Colours.gray1,
             position: 'relative',
             overflow: 'auto',
             maxHeight: '40vh',
-            borderRadius:'1rem',
-            color:Colours.grayWhite,
+            borderRadius: '1rem',
+            color: Colours.grayWhite,
             '& ul': { padding: 0 },
           }}>
-            <li>
+
+          {data.map((items, index) => {
+            return (
+
+              <li>
+                <ul>
+                  <CommentBox comments={items} sx={{ margin: 'auto', padding: 0 }} />
+                </ul>
+              </li>
+
+
+            );
+          })}
+
+          {/* <li>
               <ul>
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
@@ -79,7 +98,7 @@ const FoodComment = (props) => {
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               <CommentBox comments={props.comments} sx={{ margin: 'auto', padding: 0 }} />
               </ul>
-            </li>
+            </li> */}
         </List>
         {/* -----------------beginin of the comments----------------- */}
 

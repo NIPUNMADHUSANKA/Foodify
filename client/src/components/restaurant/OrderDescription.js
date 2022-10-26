@@ -3,9 +3,16 @@ import React from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import { IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import {Link} from 'react-router-dom';
 
 
 const OrderDescription = (props) => {
+
+    const details = props.details;
+    var todayDate = new Date(); //Today Date    
+    const Edate1 = props.EndDate;
+    const eDate1 = new Date(Edate1);
+    // console.log(details);
   return (
     
     <Box sx={{
@@ -31,7 +38,7 @@ const OrderDescription = (props) => {
                 flexDirection: "row",
                 padding: "1rem",
             }}>
-                <IconButton>
+                <IconButton component={Link} to={"/Restaurant/Category"} state={{id:details.catId}} >
                     <ArrowBackIosIcon sx={{
                         color: Colours.green, '&:hover': {
                             color: Colours.yellow,
@@ -53,7 +60,7 @@ const OrderDescription = (props) => {
                         marginTop:"12px",
                     }
                 }}>
-                    Name Of The Food
+                    {details.name}
                 </Typography>
 
             </Box>
@@ -85,10 +92,29 @@ const OrderDescription = (props) => {
                     marginRight: "10%",
                 }
             }}>
-                {props.details.detail}
+                {details.description}
                 <br />
-                {props.details.detail}
-
+                <br />
+                Discount: {(() => {
+                        if (todayDate < eDate1) {
+                            return (
+                                // num*price
+                                details.discount+"%"
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
+                    {(() => {
+                        if (todayDate > eDate1) {
+                            return (
+                                // num*price
+                                0+"%"
+                                // handleAmount(num*price)
+                            );
+                        }
+                    }
+                    )()}
             </Typography>
 
         </Box>

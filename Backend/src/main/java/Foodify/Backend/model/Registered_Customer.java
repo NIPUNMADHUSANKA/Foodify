@@ -1,26 +1,20 @@
 package Foodify.Backend.model;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Setter
 @Getter
 @AllArgsConstructor
-//@NoArgsConstructor
 @Document(collection="RegisteredCustomer")
 public class Registered_Customer{
 
@@ -32,11 +26,14 @@ public class Registered_Customer{
 	private String userName;
 	private String password;
 	private String accountState;
+
+	private Boolean blocked;
 	
 	private String location;
 	private String email;
 	private String telephone;
-	
+	private Binary image;
+	private String bImage;
 //	-----------1.15.22---this is for after logged in-----------
 	private Object authorities;
 
@@ -105,8 +102,29 @@ public class Registered_Customer{
 		return resetPasswordToken;
 	}
 
+	public Boolean getBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
+	}
+
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
+	}
+	public Binary getImage() {
+		return image;
+	}
+	public Binary setImage(Binary image) {
+		return this.image = image;
+	}
+	
+	public String getbImage() {
+		return bImage;
+	}
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
 
 	//	toString method for user

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import {ThemeProvider, createTheme } from '@mui/material/styles';
-import {useTheme} from '@mui/material/styles';
 
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -15,7 +14,6 @@ import Typography from '@mui/material/Typography';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { margin } from '@mui/system';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -171,13 +169,16 @@ export default function CustomizedDialogs(props) {
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
-            Black List the Restaurant
+            Black List Restaurant
           </Button>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
-            Ignore the Complaint
+            Block User
           </Button>
           <Button variant="outlined" autoFocus onClick={handleClose} color="error">
-            Add to the Compalint List
+            Ignore Complaint
+          </Button>
+          <Button variant="outlined" autoFocus onClick={handleClose} color="error">
+            Add to Compalint List
           </Button>
         </DialogActions>
       </BootstrapDialog>

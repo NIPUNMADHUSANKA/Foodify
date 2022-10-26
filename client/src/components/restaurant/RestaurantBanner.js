@@ -10,9 +10,14 @@ import Cover from '../../assets/images/indian-food-served-on-table.jpg';
 import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 import { BannerContainer, BannerContainer2, BannerContent, BannerContent2, BannerLogo, BannerTitle, BannerTitle2 } from '../../assets/theme/RBanner';
 
-const RestaurantBanner = () => {
+const RestaurantBanner = (props) => {
 
+  const cover = props.cover
+  const logo = props.logo
+  const name = props.name
+  const rating = props.rating
 
+  console.log(rating);
   return (
     <ThemeProvider theme={theme}>
 
@@ -20,7 +25,7 @@ const RestaurantBanner = () => {
       <BannerContainer>
 
         {/* upper part of the banner */}
-        <BannerContent src={Cover}>
+        <BannerContent src={cover !== null ? `data:image/jpeg;base64,${cover}`: Cover}>
 
           <Box sx={{ marginTop: '10%' }}>
 
@@ -73,17 +78,17 @@ const RestaurantBanner = () => {
 
         {/* lower part of the banner */}
         <BannerContainer2>
-          <BannerLogo src={Logo} />
+          <BannerLogo src={logo !== null ? `data:image/jpeg;base64,${logo}`: Logo} />
           <BannerContent2>
             <BannerTitle>
-              Reastaurant Name
+            {name !== null ?name:"name"}
             </BannerTitle>
 
             <BannerTitle2>
               Rating
 
             </BannerTitle2>
-            <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
+            <Rating name="rating" value={rating != null ?rating:0} precision={0.5} size="small" readOnly sx={{
               [theme.breakpoints.down('sm')]: {
                 fontSize: '8px',
               },

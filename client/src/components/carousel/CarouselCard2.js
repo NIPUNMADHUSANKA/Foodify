@@ -1,8 +1,26 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
-import theme, { Colours } from '../../assets/theme/theme'
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import React from 'react';
+import theme, { Colours } from '../../assets/theme/theme';
+import {Link} from 'react-router-dom';
 
 const CarouselCard2 = (props) => {
+
+    const itemdata = props.item;
+    const Rid = props.Rid;
+
+    const IDs = {
+        "id": itemdata.id,
+        "Rid":Rid
+    }
+    // console.log(itemdata);
+
+    var image = null;
+
+    if (itemdata.image) {
+        image = itemdata.image.data;
+    }
+
+
     return (
         // ---------main card area------------
         <Card sx={{
@@ -25,8 +43,8 @@ const CarouselCard2 = (props) => {
                 <CardMedia
                     component="img"
                     height="235vh"
-                    image={props.item.image}
-                    alt="green iguana"
+                    src={`data:image/jpeg;base64,${image}`}
+                    alt={itemdata.name}
                     overflow="visible"
                     
                 />
@@ -42,7 +60,7 @@ const CarouselCard2 = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.title}
+                        {itemdata.name}
                     </Typography>
 
                     {/* title2 */}
@@ -55,7 +73,9 @@ const CarouselCard2 = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.name2}
+                        
+                        {itemdata.description.substring(0, 30)}
+                        ...
                     </Typography>
 
                     {/* price, if any */}
@@ -68,7 +88,8 @@ const CarouselCard2 = (props) => {
                             padding: '2px',
                         },
                     }}>
-                        {props.item.price}
+                        Rs.
+                        {itemdata.price}
                     </Typography>
 
                 </CardContent>
@@ -82,7 +103,7 @@ const CarouselCard2 = (props) => {
                 justifyContent:'center',
                 alignItems:'center',
             }}>
-                <Button size="small" sx={{
+                <Button size="small" component={Link} to={"/Restaurant/Category/Orderfood"} state={{id:IDs}} sx={{
                     margin: '6px',
                     padding:"0.5rem",
                     background: Colours.green, '&:hover': {
@@ -95,7 +116,7 @@ const CarouselCard2 = (props) => {
                         padding: '2px',
                     },
                 }}>
-                    {props.item.name}
+                    Order
                 </Button>
             </CardActions>
             {/* -------------------------end of card button area---------------------- */}

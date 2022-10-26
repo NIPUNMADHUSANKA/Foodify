@@ -7,10 +7,9 @@ import theme from '../../assets/theme/theme'; //to use theme provider,need to im
 
 
 function Summary_Card(props) {
+  
   return (
 
-    
-   
     <Box color="#fff" bgcolor="#171717" opacity="10%" width="300px" height="127px" sx={{ borderRadius: '15px',
     [theme.breakpoints.down('lg')]: {
       width:"250px"
@@ -36,24 +35,9 @@ function Summary_Card(props) {
       <Grid display="flex" flex-direction="row">
         
         <Typography sx={{ mb: 1.5, fontSize:"150%" }} color="#fff" fontWeight="bold">
-        {props.Count}
+        {props.nutcount}
         </Typography>
 
-        <Typography color="#fff" sx={{mb: 1.5, ml:25,
-          [theme.breakpoints.down('lg')]: {
-            ml:19
-           },
-           [theme.breakpoints.down('md')]: {
-            ml:18
-           },
-           [theme.breakpoints.down('sm')]: {
-            ml:13
-           }
-        }}  
-        >
-          <img src={props.icon} />
-        </Typography>
-      
         
       </Grid>
       

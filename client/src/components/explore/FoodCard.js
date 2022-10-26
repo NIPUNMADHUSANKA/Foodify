@@ -4,8 +4,7 @@ import React from 'react'
 import {ThemeProvider,Stack, Typography, Button, Badge, styled} from '@mui/material';
 import theme, { Colours } from '../../assets/theme/theme';
 import { Box } from '@mui/system';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import {Link} from 'react-router-dom';
 // import LatestIcon from '../assets/images/latest_food.png';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -72,7 +71,7 @@ function FoodCard() {
               rowGap: '10px',
             }
         }}>
-          <Button variant='contained' 
+          <Button component={Link} to="/Restaurant/Category/Orderfood" variant='contained' 
           style={{
             borderRadius: 10,
             backgroundColor: "#95CD41",
@@ -83,7 +82,7 @@ function FoodCard() {
           >
           Order Now
           </Button>
-          <Button variant='contained' 
+          {/* <Button variant='contained' 
           style={{
               borderRadius: 10,
               backgroundColor: "#95CD41",
@@ -95,7 +94,7 @@ function FoodCard() {
           >
           View 
           <ArrowForwardIosIcon fontSize='8px' sx={{color:"#272727", marginLeft:"2px"}}/>
-          </Button>
+          </Button> */}
         </Box>
 
     </Stack>

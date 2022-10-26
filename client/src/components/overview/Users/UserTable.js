@@ -177,35 +177,29 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-//----------------------------------------------------------Table Row Define
-function createData(userId,fname,lname ,location, type) {
-  const viewButton = <Button variant="outlined" color="success" >View</Button>
-  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
-  return { 
-    userId, 
-    fname,
-    lname, 
-    location,
-    type,
-    viewButton,
-    deleteButton,
-  };
+//----------------------------------------------------------Blocking function
+function block(userId){
+  // try {
+    
+  // } catch (error) {
+    
+  // }
 }
 
-
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Rachel','Green','Colombo','Regular'),  
-  createData('B2343','Robert','Pattinson', 'None','Premium'),  
-  createData('B2344','Rachel','Green','Colombo','Regular'),  
-  createData('B2345','Robert','Pattinson', 'None','Premium'),  
-  createData('B2346','Rachel','Green','Colombo','Regular'),  
-  createData('B2347','Robert','Pattinson', 'None','Premium'),  
-  createData('B2348','Rachel','Green','Colombo','Regular'),  
-  createData('B2349','Robert','Pattinson', 'None','Premium'),  
-  createData('B2350','Rachel','Green','Colombo','Regular'),  
-  createData('B2351','Robert','Pattinson', 'None','Premium'),  
-]
+//----------------------------------------------------------Table Row Define
+function createData(userId,name ,type, location, telephone, email) {
+  const blockButton = <Button variant="outlined" color="error" onClick={block(userId)}>Block</Button>
+  // console.log("Came Here")
+  return { 
+    userId, 
+    name,
+    type,
+    location,
+    telephone,
+    email,
+    blockButton,
+  };
+}
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -238,42 +232,42 @@ function stableSort(array, comparator) {
 
 //----------------------------------------------------------Column Define 
 const columns = [
+  // { 
+  //   id: 'userId', 
+  //   label: 'User-Id',
+  //   numeric: false, 
+  //   minWidth: 180},
   { 
-    id: 'userId', 
-    label: 'User-Id',
+    id: 'name', 
+    label: 'Name',
     numeric: false, 
     minWidth: 140},
-  { 
-    id: 'fname', 
-    label: 'First Name',
-    numeric: false, 
-    minWidth: 140},
-  { 
-    id: 'lname', 
-    label: 'Last Name',
-    numeric: false, 
-    minWidth: 140},
-  { 
-    id: 'location', 
-    label: 'Location',
-    numeric: false, 
-    minWidth: 120 },
   { 
     id: 'type', 
     label: 'Type',
     numeric: true, 
     minWidth: 140 },
+  { 
+    id: 'location', 
+    label: 'Location',
+    numeric: false, 
+    minWidth: 120 },
 
   { 
-    id: 'view', 
-    label: '',
+    id: 'telephone', 
+    label: 'Telephone',
     numeric: false, 
     minWidth: 130 },
   { 
-    id: 'delete', 
+    id: 'email', 
+    label: 'Email',
+    numeric: false, 
+    minWidth: 130 },
+  { 
+    id: 'block', 
     label: '',
     numeric: false, 
-    minWidth: 100 },
+    minWidth: 50 },
   
 ];
 
@@ -328,7 +322,7 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(normalUsers) {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -336,6 +330,21 @@ function TableActions() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
 
+  const users= normalUsers.users;
+  // console.log(users)
+
+  //----------------------------------------------------------Table Row Initialize and Sorting
+  var user;
+  const rowsdetails = [
+    Object.keys(users).map((key) => (
+      user= users[key],
+      createData(user.id, user.userName ,user.accountState,user.location, user.telephone, user.email)
+    ))
+  ];
+
+  const rows= rowsdetails["0"];
+
+  // console.log(rows);
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
@@ -400,20 +409,20 @@ function TableActions() {
                     tabIndex={-1}
                     key={row.userId}
                   >
-                    <TableCell
+                    {/* <TableCell
                       component="th"
                       id={labelId}
                       scope="row" 
                       
                     >
                       {row.userId}
-                    </TableCell>
-                    <TableCell >{row.fname}</TableCell>
-                    <TableCell >{row.lname}</TableCell>
-                    <TableCell >{row.location}</TableCell>
+                    </TableCell> */}
+                    <TableCell >{row.name}</TableCell>
                     <TableCell >{row.type}</TableCell>
-                    <TableCell >{row.viewButton}</TableCell>
-                    <TableCell >{row.deleteButton}</TableCell>
+                    <TableCell >{row.location}</TableCell>
+                    <TableCell >{row.telephone}</TableCell>
+                    <TableCell >{row.email}</TableCell>
+                    <TableCell >{row.blockButton}</TableCell>
                     <TableCell ></TableCell>
                   </TableRow>
                 );

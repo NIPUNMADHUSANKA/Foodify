@@ -22,25 +22,32 @@ const tiers = [
     price: '0',
     description: [
       'Monthly Subscription free',
-      'Charge 2% from the orders',
+      'Charge 6% from the orders',
+      '.',
+      '.',
+      '.'
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
     buttonColor:'success',
+    url: 'signupuser',
     image: Freeimage,
 
   },
   {
     title: 'Premium',
     // subheader: 'Most popular',
-    price: '750',
+    price: '500',
     description: [
-      'Monthly Subscription  Rs. 750',
+      'Monthly Subscription  Rs. 500',
       'No percentage from the orders',
+      'Displaying nutrients values by image uploading',
+      'Displaying intake chart'
     ],
     buttonText: 'Subscribe Now',
     buttonVariant: 'contained',
     buttonColor:'success',
+    url: 'signuppremiumuser',
     image: Premiumimage,
   },
   // {
@@ -64,7 +71,7 @@ function PricingContent() {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
       <ThemeProvider theme={theme}>
-      <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+      <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 5, pb: 4 }}>
         <Typography color="#95CD41" fontWeight="400" variant="h2" fontSize="300%"
           align="center"
         >
@@ -135,7 +142,8 @@ function PricingContent() {
                   </ul>
                 </CardContent>
                 <CardActions sx={{ backgroundColor:Colours.darkgray }}>
-                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor}>
+                  <Button fullWidth variant={tier.buttonVariant} color={tier.buttonColor} onClick={() => {
+    window.location.href = `${tier.url}`}}>
                     {tier.buttonText}
                   </Button>
                 </CardActions>

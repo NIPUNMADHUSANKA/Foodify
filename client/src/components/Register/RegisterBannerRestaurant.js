@@ -10,16 +10,17 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
 import Skeleton from '@mui/material/Skeleton';
+import { useNavigate } from 'react-router-dom';
 
 import axois from "axios";
-import { Navigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 
 const theme1 = createTheme();
 
 const RegisterBannerRestaurant = () => {
+
+  const navigate = useNavigate();
 
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
@@ -28,7 +29,7 @@ const RegisterBannerRestaurant = () => {
   const [formValues, setFormValues] = React.useState(initialValues);
 
   // ----------create state name form errors--------
-  const [formErrors, setFormErrors] = React.useState({});
+  const [formErrors, setFormErrors] = React.useState({}); 
 
   // -------------usestate for submit form-----------
   const [isSubmit, setIsSubmit] = React.useState(false);
@@ -106,25 +107,25 @@ const RegisterBannerRestaurant = () => {
       // here we put the url and the restaurant object that in @requestbody in backend
       axois.post("http://localhost:8072/Restaurant/Register/Signuprestaurant", registeredCustomer)
         .then(data => {
-          // this part if sucess
+          navigate("/login")
         })
         .catch(error => {
 
           if (error.response.data) {
 
             error.response.data.fieldErrors.forEach(fieldError => {
-              console.log(error.response.data)
+              //console.log(error.response.data)
 
               if (fieldError.field == 'userName') {
-                console.log(fieldError.field)
+                //console.log(fieldError.field)
                 errors.userName = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+                //console.log(formErrors);
               } else if (fieldError.field == 'email') {
-                console.log(fieldError.field)
+                //console.log(fieldError.field)
                 errors.email = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+                //console.log(formErrors);
               }
 
 
@@ -305,22 +306,22 @@ const RegisterBannerRestaurant = () => {
               fontSize:{lg:'15px', xs:'10px'},
               textAlign:"center",
               marginTop:'5%',
-              marginBottom:'5%'
+              marginBottom:'3%'
               }}>
             ---Or Signup with---
             </Typography>
             
             <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
+              <Grid item xs  marginLeft="45%">
                 <Link href="#" variant="body2">
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
+              {/* <Grid item xs marginRight="35%">
+                <Link href="#" variant="body2">
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
+                </Link>
+              </Grid> */}
             </Grid>
 
             <Typography

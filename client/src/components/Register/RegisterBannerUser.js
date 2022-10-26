@@ -10,17 +10,19 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
-import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import Skeleton from '@mui/material/Skeleton';
 
 import axois from "axios";
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme1 = createTheme();
 
 const RegisterBannerUser = () => {
+
+  const navigate = useNavigate();
+
   // -------------initial states for fields---------------------------
   const initialValues = { userName: "", email: "", password: "" };
 
@@ -99,31 +101,31 @@ const RegisterBannerUser = () => {
         userName: formValues.userName,
         email: formValues.email,
         password: formValues.password,
-        accountState: "registeredUser",
+        accountState: "User",
       }
 
       // here we put the url and the user object that in @requestbody in backend
-      axois.post("http://localhost:8072/register/Signupuser", registeredCustomer)
+      axois.post("http://localhost:8072/Register/Signupuser", registeredCustomer)
         .then(data => {
-          // this part if sucess
+          navigate("/Login")
         })
         .catch(error => {
 
           if (error.response.data) {
 
             error.response.data.fieldErrors.forEach(fieldError => {
-              console.log(error.response.data)
+              //console.log(error.response.data)
 
               if (fieldError.field == 'userName') {
-                console.log(fieldError.field)
+                //console.log(fieldError.field)
                 errors.userName = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+               // console.log(formErrors);
               } else if (fieldError.field == 'email') {
-                console.log(fieldError.field)
+               // console.log(fieldError.field)
                 errors.email = fieldError.message;
                 setFormErrors(errors);
-                console.log(formErrors);
+               // console.log(formErrors);
               }
 
 
@@ -303,22 +305,22 @@ const RegisterBannerUser = () => {
               fontSize:{lg:'15px', xs:'10px'},
               textAlign:"center",
               marginTop:'5%',
-              marginBottom:'5%'
+              marginBottom:'3%'
               }}>
             ---Or Signup with---
             </Typography>
             
             <Grid container xs >
-              <Grid item xs  marginLeft="35%">
-                <Link href="#" variant="body2">
-                <img src={Facebook} alt="Logo" className='social-icons-fb' />
-                </Link>
-              </Grid>
-              <Grid item xs marginRight="35%">
+              <Grid item xs  marginLeft="45%">
                 <Link href="#" variant="body2">
                 <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
+              {/* <Grid item xs marginRight="35%">
+                <Link href="#" variant="body2">
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
+                </Link>
+              </Grid> */}
             </Grid>
             <Typography
             sx={{
@@ -329,10 +331,10 @@ const RegisterBannerUser = () => {
               marginBottom:'5%'
               }}>
                 Already have an account? &nbsp;
-                                    <Link href="#" >
-                                        Sign In 
-                                </Link>
-                                </Typography>
+                <Link href="../login" >
+                  Sign In 
+                </Link>
+              </Typography>
           </Box>
           {/* <Box 
           sx={{mt:{lg:'90px', xs:'10px'},ml:{sm:'40px'}}}

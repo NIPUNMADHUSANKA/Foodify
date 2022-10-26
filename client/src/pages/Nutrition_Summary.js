@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import Carousel from 'react-elastic-carousel';
 
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
+import { Box } from '@mui/material';
 
-import Navbar from '../components/Navbar';
 import PageTitle from '../components/User/PageTitle';
 import Nutrition_Card from '../components/User/Nutrition_Card';
 import Nutrition_Card_Summary from '../components/User/Nutrition_Card_Summary';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
-
+import Navbar from '../components/Navbar';
 
 const MainHeader = "Nutritions";
 

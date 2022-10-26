@@ -47,20 +47,51 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
+		/*
+		 * "/FoodiFy/Service/**" for services that use without token
+		 * "/FoodiFy/User/**" for functions that use by logged in normal user
+		 * "/FoodiFy/Restaurant/**" for functions that use by logged in Restaurant
+		 * "/FoodiFy/Premium/**" for functions that use by logged in premium user
+		 * "/FoodiFy/Admin/**" for functions that use by logged in admin
+		 * 
+		 * */
+		
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers(
-				"/register/Signupuser",
+         "/Register/Signupuser",
+				"/Register/Signuppremiumuser",
 				"/FoodiFy/auth/login",
-				"/Restaurant/Register/Signuprestaurant")
+				"/Restaurant/Register/Signuprestaurant",
+				"/RestaurantInfo/editContact", 
+				"/RestaurantInfo/editAbout",
+				"/RegisteredUser/addComplains",
+
+				"/FoodiFy/AllUser/getFoodMenu/**",
+				"/FoodiFy/AllUser/getFoodCategory/**",
+				"/FoodiFy/AllUser/getFoodCategoryItem/**",
+				"/FoodiFy/AllUser/getFoodComment/{id}/**",
+				"/FoodiFy/AllUser/getRestaurantComment/{id}/**",
+
+				"/RestaurantInfo/editContact",
+				"/RestaurantInfo/editAbout",
+				"/Orders/All",
+				"/Orders/pucheshistory",
+				"/FoodItems/All",
+				"/RegisteredUser/addComplains",
+				"/RegisteredUser/addRestaurantComment",
+				"/RegisteredUser/addFoodComment",
+				"/FoodiFy/User/**")
+
 		.permitAll()
-		.antMatchers("/FoodiFy/auth/userinfo").hasAnyAuthority("admin","user","restaurant","premium_user","admin")
-		.antMatchers("/FoodiFy/User/**").hasAnyAuthority("user")
-		.antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant")
-		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premium_user")
-		.antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("admin")
-		.anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.antMatchers("/FoodiFy/Service/**").permitAll()
+		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
+		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
+		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
+		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
+		http.authorizeRequests().anyRequest().authenticated();
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
-		// TODO Auto-generated method stub
+		
 //		http.authorizeRequests().anyRequest().authenticated();
 //		http.formLogin();
 	}
@@ -125,7 +156,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //@Bean
 //@Override
 //public AuthenticationManager authenticationManagerBean() throws Exception {
-//	// TODO Auto-generated method stub
+//	
 //	return super.authenticationManagerBean();
 //}
 //

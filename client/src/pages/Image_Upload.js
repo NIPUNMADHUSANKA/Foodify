@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
-import Carousel from 'react-elastic-carousel';
 
-import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
-import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
+import { Box } from '@mui/material';
 
-import Navbar from '../components/Navbar';
 import PageTitle from '../components/User/PageTitle';
 
 // for scroll reveals
-import Fade from 'react-reveal/Fade';
 import ImageDetails from '../components/UploadImage/ImageDetails';
+
+// for scroll reveals
+import Fade from 'react-reveal/Fade';
+import Navbar from '../components/Navbar';
 
 
 const MainHeader = "Image Upload";

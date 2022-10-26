@@ -2,8 +2,6 @@ import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -11,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import theme, { Colours } from '../../assets/theme/theme';
-import Facebook from '../../assets/images/facebook.png';
 import Google from '../../assets/images/google.png';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/auth-service';
@@ -100,16 +97,28 @@ export default function SignIn() {
 
       UserService.getUserInfo().then(
         (response) => {
-            console.log(response.data.roles);
+            
             localStorage.setItem("ROLE", JSON.stringify(response.data.roles));
+            
+            localStorage.setItem("USERNAME", JSON.stringify(response.data.userName));
+
+            const ROLE = JSON.parse(localStorage.getItem('ROLE'));
+            const CHECKROLE = ROLE[0].authority;
+      
+            if(CHECKROLE!="restaurant")
+            {
+              navigate("/")
+            }
+            else{
+              navigate("/Restaurantprofile")
+            }
+
+
         },
         (error) => {
           console.log(error);
         }
       );
-      navigate("/Explore")
-
-
      },(error)=>{
       errors.NotFound = error.response.data;
       setFormErrors(errors);
@@ -205,13 +214,6 @@ export default function SignIn() {
 
             />
 
-
-            <FormControlLabel
-              style={{ color: Colours.formWhite, fontFamily: 'Poppins' }}
-              control={<Checkbox value="remember" sx={{ color: Colours.formWhite }} />}
-              label="Remember me"
-            />
-
             <Button
               type="submit"
               fullWidth
@@ -248,16 +250,16 @@ export default function SignIn() {
             </Typography>
 
             <Grid container xs >
-              <Grid item xs marginLeft="42%">
+              <Grid item xs  marginLeft="49%">
                 <Link href="#" variant="body2">
-                  <img src={Facebook} alt="Logo" className='social-icons-fb' />
+                <img src={Google} alt="Logo" className='social-icons-gg' />
                 </Link>
               </Grid>
-              <Grid item xs marginRight="37%">
+              {/* <Grid item xs marginRight="35%">
                 <Link href="#" variant="body2">
-                  <img src={Google} alt="Logo" className='social-icons-gg' />
+                <img src={Facebook} alt="Logo" className='social-icons-gg' />
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
 
           </form>

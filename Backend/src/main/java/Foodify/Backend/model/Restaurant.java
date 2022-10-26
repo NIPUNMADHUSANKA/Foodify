@@ -2,6 +2,8 @@ package Foodify.Backend.model;
 
 import java.time.LocalDateTime;
 
+
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,18 +25,22 @@ public class Restaurant {
 	@Id
 	private String id;
 	private String userId;
+	private String userName;
 	private String restaurantName;
 	private Double rating;
-	private String aboutUS;
+	private String about;
 	private String address;
-	private int telephone;
+	private String telephone;
 	private String location;
 	private String openHours;
 	private LocalDateTime starttime;
 	private LocalDateTime closeHour;
-	private String logo;
-	private String bannerImage;
-	
+	private Binary logo;
+	private Binary bannerImage;
+	private String bImage;
+	private String tempLogo;
+
+	private String status;
 	
 	public String getId() {
 		return id;
@@ -48,6 +54,12 @@ public class Restaurant {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getRestaurantName() {
 		return restaurantName;
 	}
@@ -60,22 +72,25 @@ public class Restaurant {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
-	public String getAboutUS() {
-		return aboutUS;
+
+	public String getAbout() {
+		return about;
 	}
-	public void setAboutUS(String aboutUS) {
-		this.aboutUS = aboutUS;
+
+	public void setAbout(String about) {
+		this.about = about;
 	}
+
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	public String getLocation() {
@@ -102,23 +117,47 @@ public class Restaurant {
 	public void setCloseHour(LocalDateTime closeHour) {
 		this.closeHour = closeHour;
 	}
-	public String getLogo() {
+	public Binary getLogo() {
 		return logo;
 	}
-	public void setLogo(String logo) {
+	public void setLogo(Binary logo) {
 		this.logo = logo;
 	}
-	public String getBannerImage() {
+	public Binary getBannerImage() {
 		return bannerImage;
 	}
-	public void setBannerImage(String bannerImage) {
-		this.bannerImage = bannerImage;
+	public void setBannerImage(Binary binary) {
+		this.bannerImage = binary;
+	}
+	public String getbImage() {
+		return bImage;
+	}
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
 	
-	
+	public String getTempLogo() {
+		return tempLogo;
+	}
+	public void setTempLogo(String tempLogo) {
+		this.tempLogo = tempLogo;
+	}
 
+	public String getStatus() {
+		return status;
+	}
 
-	
-	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="
+				+ restaurantName + ", rating=" + rating + ", about=" + about + ", address=" + address + ", telephone="
+				+ telephone + ", location=" + location + ", openHours=" + openHours + ", starttime=" + starttime
+				+ ", closeHour=" + closeHour + ", logo=" + logo + ", bannerImage=" + bannerImage + ", bImage=" + bImage
+				+ "]";
+	}
 	
 }

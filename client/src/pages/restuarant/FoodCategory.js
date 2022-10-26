@@ -1,31 +1,77 @@
 import { Box, IconButton, Typography } from '@mui/material'
-import React from 'react'
-
+import React, { useEffect } from "react";
 import Background from '../../assets/images/categoryBackground.png'
 import theme, { Colours } from '../../assets/theme/theme'
 
-import CardImage from '../../assets/images/plate1.jpg';
 import CarouselCard2 from '../../components/carousel/CarouselCard2';
 import Carousel from 'react-elastic-carousel'; //for the carousel
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Navbar from './../../components/Navbar';
+import Fade from 'react-reveal/Fade';
+
+import axois from "axios";
+import { Link } from 'react-router-dom';
+
+import { useLocation } from 'react-router-dom';
 
 // ---------------css for carousel-------------------------
 
 // -----------------------------for the carousel-------------------
-const item = {
-  "id": "1",
-  "title": "Name of the food",
-  "image": CardImage,
-  "name2": "Yoe foods",
-  "price": "Rs.200",
-  "name": "Order Now",
-}
 
 const itemcount = 4;
 
 // ------------------------------------------------------
 
+var ROLE = null;
+
 const FoodCategory = () => {
+
+
+  {/*------------------------------START SET USERTOLE-------------------------------------------------*/ }
+  {
+    (() => {
+      if (JSON.parse(localStorage.getItem('ROLE'))) {
+        ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+        // console.log(ROLE)
+      }
+    }
+    )()
+  }
+  {/*------------------------------END SET USERTOLE-------------------------------------------------*/ }
+
+  
+  const location = useLocation();
+  const Id = location.state.id;
+  const name = location.state.name;
+  const RestId = localStorage.getItem('RestId');
+
+  // console.log(location);
+
+  // ----------store restaurant values--------
+  const [details, setDetails] = React.useState({});
+
+  // ----------Get Category --------
+  const [isgetItem, setisgetItem] = React.useState(false);
+
+
+  ///-- Get Token UserName--///
+  // const currentUser = AuthService.getCurrentUser();
+
+  useEffect((event) => {
+
+    axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategoryItem/" + Id)
+      .then(data => {
+        setDetails(data.data);
+        setisgetItem(true);
+      })
+      .catch(error => {
+        console.log(error);
+
+      });
+
+  }, [isgetItem]);
+
+console.log(details);
 
   return (
 
@@ -48,8 +94,12 @@ const FoodCategory = () => {
 
       }}>
 
+        <Fade top>
+          <Navbar />
+        </Fade>
+
         <Box sx={{
-          marginTop: "14%",
+          marginTop: "8%",
           [theme.breakpoints.down('sm')]: {
             marginTop: "40%",
           },
@@ -57,27 +107,49 @@ const FoodCategory = () => {
           {/* ---------title area------------ */}
           <Box sx={{
             width: '100%',
-            display:"flex",
-            flexDirection:"row",
+            display: "flex",
+            flexDirection: "row",
           }}>
-            <IconButton>
-              <ArrowBackIcon sx={{
-                color:Colours.green,
-                fontSize:"2rem",
-              }}/>
-            </IconButton>
+
+            {(() => {
+              if (ROLE === "User") {
+                return (
+                  <IconButton component={Link} to={"/Restaurant"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
+            {(() => {
+              if (ROLE === "restaurant") {
+                return (
+                  <IconButton component={Link} to={"/Restaurantprofile"}>
+                    <ArrowBackIcon sx={{
+                      color: Colours.green,
+                      fontSize: "2rem",
+                    }} />
+                  </IconButton>
+                );
+              }
+            }
+            )()}
             <Typography variant="h4" gutterBottom component="div" sx={{
               width: '100%',
               textAlign: 'left',
               color: Colours.green,
-              padding:"1rem",
-              margin:0,
+              padding: "1rem",
+              margin: 0,
               [theme.breakpoints.down('sm')]: {
                 fontSize: '30px',
                 padding: '2px',
               },
             }}>
-              Sea Food
+              {name}
+
             </Typography>
           </Box>
           {/* ---------end of title area------------ */}
@@ -86,8 +158,9 @@ const FoodCategory = () => {
           {/* ---------------carousel area-------------------------- */}
 
           <Box sx={{
-            padding:"1rem",
+            padding: "1rem",
           }}>
+
             <Carousel
               itemsToShow={itemcount}
               easing={"ease"}
@@ -98,15 +171,27 @@ const FoodCategory = () => {
                 { width: 1450, itemsToShow: 5 },
                 { width: 1750, itemsToShow: 6 },
               ]}
-
             >
               {/* <Box> */}
+
+
+              {
+                Array.from(details).map((item) => {
+
+                  return (
+                    <CarouselCard2 item={item} Rid={RestId} />
+                  )
+
+                })
+              }
+
+
+              {/* <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />
               <CarouselCard2 item={item} />
-              <CarouselCard2 item={item} />
-              <CarouselCard2 item={item} />
+              <CarouselCard2 item={item} /> */}
 
             </Carousel>
           </Box>

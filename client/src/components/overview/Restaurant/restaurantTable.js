@@ -26,14 +26,17 @@ import { visuallyHidden } from '@mui/utils';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+
+import { Link } from 'react-router-dom';
+
+// const navigate = useNavigate()
 
 //----------------------------------------------------------styles for table
 const paperSx = {
     width: '100%', 
     // overflow: 'hidden', 
     backgroundColor: 'rgba(23, 23, 23, 0.8)',
-    marginBottom: '40px',
+    marginBottom: '20px',
 
   "& .MuiTableCell-stickyHeader":{
     fontFamily: 'Poppins',
@@ -178,48 +181,20 @@ TablePaginationActions.propTypes = {
 };
 
 //----------------------------------------------------------Table Row Define
-function createData(resId,name ,location, level) {
-  const viewButton = <Button variant="outlined" color="success" >View</Button>
-  const deleteButton = <Button variant="outlined" color="error">Remove</Button>
+function createData(resId,name ,location) {
+  const viewButton = <Button component={Link} to='/Restaurant' variant="outlined" color="success" >View Restaurant</Button>
+  const viewComplaints = <Button variant="outlined" color="error" >View Complaints</Button>
+  const deleteButton = <Button variant="outlined" color="error">Block</Button>
+  console.log(resId, name, location);
   return { 
     resId, 
     name,
     location,
-    level,
     viewButton,
+    viewComplaints,
     deleteButton,
   };
 }
-
-//----------------------------------------------------------warning level icons
-function Warning(props){
-
-  const stars = []
-
-  for (var i = 0; i < props.value; i++) {
-    stars.push(<WarningAmberIcon />);
-  }
-
-  return (
-    <div>
-      {stars}
-    </div>
-  )
-}
-
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Rachel\'s Kitchen',0,'Colombo'),  
-  createData('B2343','Green Hut',2, 'Kegalle'),  
-  createData('B2344','Rachel\'s Kitchen',0,'Colombo'),  
-  createData('B2345','Green Hut',2, 'Kegalle'),  
-  createData('B2346','Rachel\'s Kitchen',3,'Colombo'),  
-  createData('B2347','Green Hut',2, 'Kegalle'),  
-  createData('B2348','Rachel\'s Kitchen',0,'Colombo'),  
-  createData('B2349','Green Hut',2, 'Kegalle'),  
-  createData('B2350','Rachel\'s Kitchen',3,'Colombo'),  
-  createData('B2351','Green Hut',2, 'Kegalle'),  
-]
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -263,16 +238,11 @@ const columns = [
     numeric: false, 
     minWidth: 140},
   { 
-    id: 'location', 
+    id: 'location',  
     label: 'Location',
     numeric: false, 
     minWidth: 120 },
-  { 
-    id: 'level', 
-    label: 'Warnings',
-    numeric: true, 
-    minWidth: 140 },
-
+  
   { 
     id: 'view', 
     label: '',
@@ -337,13 +307,28 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(props) {
+
+  const data = props.data;
+  console.log(data);
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+//----------------------------------------------------------Table Row Initialize and Sorting
+  var res;
+  const rows = 
+    // createData('B2342','Rasa Bojun','Colombo'),  
+    Object.keys(data).map((key) => (
+      res = data[key],
+      // console.log(res),
+      createData(res.id,res.restaurantName,res.location)
+    ));
+
+  console.log(rows)
 
 
   //----------------------------------------------------------Empty Rows
@@ -399,6 +384,7 @@ function TableActions() {
 
         {/* ------------------------------------------------------------------------TableBody with sorting*/}
         <TableBody>
+        
         {stableSort(rows, getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((row, index) => {
@@ -418,11 +404,11 @@ function TableActions() {
                       {row.resId}
                     </TableCell>
                     <TableCell >{row.name}</TableCell>
-                    <TableCell >{row.level}</TableCell>
-                    <TableCell ><Warning value={row.location} /></TableCell>
-                    <TableCell >{row.protein}</TableCell>
+                    <TableCell >{row.location}</TableCell>
                     <TableCell >{row.viewButton}</TableCell>
+                    <TableCell >{row.viewComplaints}</TableCell>
                     <TableCell >{row.deleteButton}</TableCell>
+                    {/* <TableCell ></TableCell> */}
                   </TableRow>
                 );
               })}

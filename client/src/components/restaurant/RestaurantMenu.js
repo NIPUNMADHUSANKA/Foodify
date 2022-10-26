@@ -1,59 +1,154 @@
-import { Box, Button } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from "react";
+import { Box } from '@mui/material';
 import Carousel from '../carousel/carousel';
 
-import CardImage from '../../assets/images/cardfood.png';
-import theme, { Colours } from '../../assets/theme/theme';
-import EditIcon from '@mui/icons-material/Edit';
+import axois from "axios";
+import AuthService from '../../services/auth-service';
+
+// -------to import forms------------
+import MenuForm from './profile/MenuForm';
+import authHeader from "../../services/auth-header";
+
 
 // ----------------------for the caousel----------------------
-const item = {
-  "id": "1",
-  "title": "",
-  "image":CardImage,
-  "decription":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. deleniti? Eumquasi quidem quibusdam.",
-  "name": "view",
-}
 
-const title = "Menu";
+
 const itemcount = 4;
 const bgcolor1 = "theme.Colours.secondary";
+
+var ROLE = null;
+
 // ------------------------------------------------------------------------------
 
-const RestaurantMenu = () => {
+
+var Title = "Resturant Menu";
+var resId = null;
+var menuId = null;
+
+
+const RestaurantMenu = (props) => {
+
+  resId = props.rId;
+  console.log(resId);
+
+  const RestId = props.RestId;
+
+  // ----------store restaurant values--------
+  const [details, setDetails] = React.useState({});
+
+  // ----------Get Category --------
+  const [getCat, setgetCat] = React.useState(false);
+
+
+  ///-- Get Token UserName--///
+  const currentUser = AuthService.getCurrentUser();
+
+
+  useEffect((event) => {
+
+    if (JSON.parse(localStorage.getItem('ROLE'))) {
+      ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+      //console.log(ROLE)
+    }
+    else{
+      ROLE = null;
+    }
+  
+    if (ROLE === "restaurant") {
+
+      axois.get("http://localhost:8072/FoodiFy/Restaurant/getFoodMenu", { headers: authHeader() })
+        .then(data => {
+          // this part if sucess
+          //console.log(data.data[0].foodMenuName);
+          //console.log(item1.foodMenuName);
+          Title = data.data[0].foodMenuName;
+          menuId = data.data[0].id;
+          setgetCat(true);
+        })
+        .catch(error => {
+
+          console.log(error);
+
+        });
+        
+
+    }
+    else {
+
+      axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodMenu/" + resId)
+        .then(data => {
+          // this part if sucess
+          //console.log(data.data[0].foodMenuName);
+          //console.log(item1.foodMenuName);
+          Title = data.data[0].foodMenuName;
+          menuId = data.data[0].id;
+          setgetCat(true);
+        })
+        .catch(error => {
+
+          console.log(error);
+
+        });
+
+    }
+
+
+
+  }, []);
+
+
+ if(getCat){
+
+    axois.get("http://localhost:8072/FoodiFy/AllUser/getFoodCategory/" + menuId)
+      .then(data => {
+        //  console.log("work");
+        const details = data.data;
+        //   console.log(data);
+        setDetails({ ...details });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      setgetCat(false);
+
+  }
+
+
+
   return (
     <Box sx={{
-      position:'relative',
-      width:'100%',
-      p:'0px',
+      position: 'relative',
+      width: '100%',
+      p: '0px',
     }}>
-      <Button sx={{
-        margin: '0.5rem',
-        marginBottom:0,
-        marginTop:4,
-        width:"15%",
-        background: Colours.yellow, '&:hover': {
-          backgroundColor: Colours.green,
-        },
-        color: Colours.dark,
-        fontSize: '1rem',
-        hover: Colours.green,
-        borderRadius: "1rem",
-        Width: "20%",
-        [theme.breakpoints.down('sm')]: {
-          fontSize: '8px',
-          padding: '2px',
-          width:"25%",
-        },
-      }} endIcon={<EditIcon sx={{
-        color:Colours.primary,
-        [theme.breakpoints.down('sm')]: {
-          '& svg': {
-              fontSize: "15px",
-          }
-      },
-        }}/>}>Edit Menu</Button>
-      <Carousel item = {item} title={title} count={itemcount} bgcolour = {bgcolor1}/>
+
+      {/*------------------------------START SET USERTOLE-------------------------------------------------*/}
+      {(() => {
+        if (JSON.parse(localStorage.getItem('ROLE'))) {
+          ROLE = JSON.parse(localStorage.getItem('ROLE'))[0].authority;
+          //console.log(ROLE)
+        }
+        else{
+          ROLE = null;
+        }
+      }
+      )()}
+      {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
+
+      {(() => {
+        if (ROLE === "restaurant") {
+          return (
+            <MenuForm />
+          );
+        }
+      }
+      )()}
+
+
+      <Carousel item={details} title={Title} count={itemcount} bgcolour={bgcolor1} RestId = {RestId} />
+
+
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
+
 import Box from '@mui/material/Box';
 
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -11,7 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { FixedSizeList } from 'react-window';
 import Button from '@mui/material/Button';
 
-import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
+import theme from '../../assets/theme/theme';//to use theme provider,need to import this
 
 //Import image
 import Image from "../../assets/images/closeup-roasted-meat-with-sauce-vegetables-fries-plate-table.jpg";
@@ -76,7 +76,7 @@ function Nutrition_Card() {
                     <img src={Image} width="65%" style={{borderRadius : "10px"}}/>
                     
                     <Typography color="#95CD41" fontSize="200%" fontWeight="bold">
-                        Healthy Zoon
+                    Healthy Zone
                     </Typography>
 
                     

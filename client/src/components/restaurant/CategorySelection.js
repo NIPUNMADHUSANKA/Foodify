@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
 import { Checkbox, FormControl, FormGroup, Grid, Typography } from '@mui/material';
+import authHeader from "../../services/auth-header";
 
 // ---------------------------------text fied css style-----------------------
 const InputArea = styled(TextField)({
@@ -48,27 +50,27 @@ const InputArea = styled(TextField)({
 const foods1 = [
     {
         id: "0",
-        name: "Food1",
+        name: "Vegie Masala",
     },
     {
         id: "1",
-        name: "Food2",
+        name: "Vegie onion pizza",
     },
     {
         id: "2",
-        name: "Food3",
+        name: "Vegie Those",
     },
     {
         id: "3",
-        name: "Food4",
+        name: "Burger",
     },
     {
         id: "4",
-        name: "Food5",
+        name: "Samosha",
     },
     {
         id: "5",
-        name: "Food6",
+        name: "Noodles",
     }
 ];
 
@@ -94,11 +96,81 @@ const CategorySelection = (props) => {
 
     //   ---------------------------------
 
-    const [category, setCurrency] = React.useState('category');
+    const [category, setCategory] = React.useState('category');
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
+    // ----------------------for store response data----------------------
+    const [details, setDetails] = React.useState({});
+
+    // ----------------------for store response data of items----------------------
+    const [details2, setDetails2] = React.useState({});
+
+    // -------------initial states for fields---------------------------
+    const initialValues = { category: "" };
+    // ----------create state name form values--------
+    const [formValues, setFormValues] = React.useState(initialValues);
+
+   // console.log(category)
+    //console.log(checked)
+
+    const list1 = [category,checked]
+
+    //console.log(list1)
+
+       // ------------send data if corrects---------
+       React.useEffect((event) => {
+
+        if (checked !== null) {
+
+        }
+
+    }, [])
+
+    // ------------------------calling category values---------------------------------------------------
+    useEffect(() => {
+
+        const sendGetRequest = async () => {
+            try {
+                const resp = await axios.get('http://localhost:8072/FoodiFy/Restaurant/getCategories', { headers: authHeader() });
+
+                const details = resp.data;
+                setDetails({ ...details });
+
+              //  console.log(details);
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        sendGetRequest();
+
+    }, []);
+
+    const handleChange = event => {
+        setCategory(event.target.value);
+
+        var items = {
+            "catId": event.target.value
+        }
+
+     //   console.log(items);
+        const sendGetRequest2 = async () => {
+            try {
+                const resp2 = await axios.post('http://localhost:8072/FoodiFy/Restaurant/getfoodItems1', items, { headers: authHeader() });
+
+                const details2 = resp2.data;
+                setDetails2({ ...details2 });
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        sendGetRequest2();
+
     };
+
+   // console.log(details2);
 
     return (
 
@@ -110,37 +182,98 @@ const CategorySelection = (props) => {
                 label="Category"
                 value={category}
                 onChange={handleChange}
-                helperText="Add the food Category"
+                helperText="Add food Category"
             >
-                {props.category.map((option) => (
+                {/* ------------------------give categories if available-------------------------------------- */}
+                {(() => {
+                    if (details !== null) {
+                        return (
+
+                            Object.keys(details).map((keyName) => (
+                                console.log(details[keyName]),
+                                <MenuItem key={keyName} value={details[keyName].id} name="Category1">
+                                    {details[keyName].foodMenuCategory}
+                                </MenuItem>
+
+                            ))
+                        );
+                    }
+                }
+                )()}
+
+                {/* ---------------------------------default when categories are not availble-------------------------------- */}
+                {(() => {
+                    if (details == null) {
+                        return (
+
+                            <MenuItem value={0} name="none">
+                                there is no categories
+                            </MenuItem>
+
+                        );
+                    }
+                }
+                )()}
+
+                {/* {props.category.map((option) => (
                     <MenuItem key={option.value} value={option.value} name={option.value}>
                         {option.label}
                     </MenuItem>
-                ))}
+                ))} */}
             </InputArea>
 
             {/* ------------------to select food items------------------ */}
             <FormGroup>
 
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {foods1.map((item) => (
+
+                    {/* ------------------------give food items if available-------------------------------------- */}
+                    {(() => {
+                        if (details2 !== null) {
+                            return (
+
+                                Object.keys(details2).map((keyName2) => (
+                                    console.log(details2[keyName2]),
+
+                                    <Grid item xs={2} sm={4} md={4} key={details2[keyName2].id} sx={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                    }}>
+
+                                        <Checkbox
+                                            id="begin date"
+                                            type="checkbox"
+                                            value={details2[keyName2].id}
+                                            name={details2[keyName2].name}
+                                            variant="standard"
+                                            onChange={checklisthandle}
+                                        />
+                                        <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{details2[keyName2].name}</Typography>
+
+                                    </Grid>
+                                ))
+                            );
+                        }
+                    }
+                    )()}
+                    {/* {foods1.map((item) => (
                         <Grid item xs={2} sm={4} md={4} key={item.id} sx={{
-                            display:"flex",
-                            flexDirection:"row",
+                            display: "flex",
+                            flexDirection: "row",
                         }}>
 
-                            <Checkbox 
-                            id="begin date" 
-                            type="checkbox" 
-                            value={item.name}
-                            name={item.name} 
-                            variant="standard" 
-                            onChange={checklisthandle}
+                            <Checkbox
+                                id="begin date"
+                                type="checkbox"
+                                value={item.name}
+                                name={item.name}
+                                variant="standard"
+                                onChange={checklisthandle}
                             />
-                            <Typography variant='body' sx={{color:Colours.grayWhite,marginTop:"2%"}}>{item.name}</Typography>
+                            <Typography variant='body' sx={{ color: Colours.grayWhite, marginTop: "2%" }}>{item.name}</Typography>
 
                         </Grid>
-                    ))}
+                    ))} */}
                 </Grid>
 
             </FormGroup>

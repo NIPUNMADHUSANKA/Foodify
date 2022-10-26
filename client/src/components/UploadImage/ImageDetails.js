@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
@@ -11,15 +9,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { FixedSizeList } from 'react-window';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
-import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
+import theme from '../../assets/theme/theme';//to use theme provider,need to import this
 
 import Button from '@mui/material/Button';
 
-//Import image
-import Image from "../../assets/images/closeup-roasted-meat-with-sauce-vegetables-fries-plate-table.jpg";
 
 import Typography from '@mui/material/Typography';
-import { textAlign } from '@mui/system';
+
+import { Link } from 'react-router-dom';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -144,23 +141,16 @@ function ImageDetails() {
                     <Fade right>
                         <Box  style={{color:'#ccc', fontSize:"100%", marginBottom:"1%", marginTop:"5%", display:"flex", flexDirection:"row"}}>
 
-                            <Box>
-                              <select id="select" style={{backgroundColor:"#2E2E2E", borderRadius:"5px", marginRight:"20px"  ,border:"none", color:"#E0E0E0", padding:"8px"}}>
-                                <option>Breakfast</option>
-                                <option>Lunch</option>
-                                <option>Dinner</option>
-                                <option>Other</option>
-                              </select>
-                            </Box>
+                            
                             
                             <Box>
-                              <Typography color='#95CD41' mt="3%">
+                              <Typography color='#95CD41' mt="3%" ml="5%">
                                   Add New Food
                               </Typography>
                             </Box>
 
                             <Box>
-                                <Button variant="outlined" style={{mt:"3%", color:'#95CD41', marginLeft:"50%", borderColor: "#95CD41",
+                                <Button component={Link} to='/Nutrition_Summary' variant="outlined" style={{mt:"3%", color:'#95CD41', marginLeft:"50%", borderColor: "#95CD41",
                                 "&:hover": {
                                 backgroundColor: "#15e577",
                                 borderColor:"#564345"
