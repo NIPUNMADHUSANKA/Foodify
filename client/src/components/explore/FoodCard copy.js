@@ -33,9 +33,6 @@ function FoodCard(data) {
 
   const foodimage = data.data.bImage
  
-  const IDs = {
-    "id": data.data.id,
-}
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,7 +83,7 @@ function FoodCard(data) {
               rowGap: '10px',
             }
         }}>
-          <Button component={Link} to="/Restaurant/Category/Orderfood" state= {{ id:IDs }} variant='contained' 
+          <Button component={Link} to="/Restaurant/Category/Orderfood" variant='contained' 
           style={{
             borderRadius: 10,
             backgroundColor: "#95CD41",

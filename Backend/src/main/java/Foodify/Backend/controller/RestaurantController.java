@@ -642,8 +642,7 @@ public List<FoodItem> showfoods() {
 //		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
 		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
 		fooditem.setName(fooditems.get(i).getName());
-		fooditem.setPrice(Double.valueOf(Math.round(fooditems.get(i).getPrice())));
-		fooditem.setId(fooditems.get(i).getId());
+		fooditem.setPrice(fooditems.get(i).getPrice());
 //		restaurant.setId(fooditems.get(i).getId());
 
 		fooditemsList.add(fooditem);

@@ -105,67 +105,6 @@ public class Order_Service implements Order_Serv{
 		for(OrderItem item : items){
 			restaurantId = item.getRestaurantId();
 			item.setPreparedStatus("Queued");
-
-//			-------------------setting up values for intake pending------------------
-			FoodItem foodItem1 = foodItem_repository.findByid(item.getFoodId());
-			calaries = calaries + foodItem1.getCalaries();
-			fat = fat + foodItem1.getFat();
-			protein = protein + foodItem1.getProtein();
-			carbo = carbo + foodItem1.getCarbo();
-			price = price + item.getPrice();
-		}
-
-//		--------------------create new intake pending----------------------
-		String rName = restaurantRepository.findByid(restaurantId).getRestaurantName();
-
-		IntakePending intakePending = new IntakePending();
-		intakePending.setCarbo(carbo);
-		intakePending.setProtein(protein);
-		intakePending.setFat(fat);
-		intakePending.setCalaries(calaries);
-		intakePending.setPrice(price);
-		intakePending.setUserName(userName);
-		intakePending.setResturant(rName);
-
-////		-------------converting date & time to string-----------------
-		intakePending.setPurches_date(order.getOrderDate());
-		intakePending.setPurches_time(order.getOrderTime());
-
-//		----------------saving intake pending----------------------------
-		intakePendingRepository.save(intakePending);
-
-
-//			--------------calling relevant intake pending--------------
-		IntakePending intakePending1 =
-				intakePendingRepository.getIntakePendingByUserNameAndPurches_dateAndPurches_time(
-						userName,order.getOrderDate(),order.getOrderTime()
-				);
-
-		System.out.println(intakePending1.getId()+"order service 1");
-
-//		-----------------------------setting up intake pending item ------------------------
-		for(OrderItem item1 : items){
-
-//			--------------for the intake pending item----------------------
-			IntakePendingItem intakePendingItem = new IntakePendingItem();
-			FoodItem foodItem1 = foodItem_repository.findByid(item1.getFoodId());
-
-//			--------settingup individual values------------------
-//			-------nutrition-------
-			intakePendingItem.setCalaries(foodItem1.getCalaries());
-			intakePendingItem.setProtein(foodItem1.getProtein());
-			intakePendingItem.setFat(foodItem1.getFat());
-			intakePendingItem.setCarbo(foodItem1.getCarbo());
-
-//			----------setting other values-------------
-			intakePendingItem.setQuantity((double) (item1.getQuantity()));
-			intakePendingItem.setPrice((double) (item1.getPrice()));
-			intakePendingItem.setItem(foodItem1.getName());
-
-			intakePendingItem.setPending(intakePending1.getId());
-
-//			----------save intake pending item----------
-			intakeItemPendingRepository.save(intakePendingItem);
 		}
 
 //		--------setting up order details-----------------
