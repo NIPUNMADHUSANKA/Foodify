@@ -85,6 +85,7 @@ export default function MultilineTextFields() {
 
     // -------------usestate for submit form-----------
     const [isSubmit, setIsSubmit] = React.useState(false);
+    const [name, setName] = React.useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -170,7 +171,7 @@ export default function MultilineTextFields() {
                         padding: '2px',
                     },
                 }}>
-                    Food Name
+                    Food Name: {location.state.food2}
                 </Typography>
 
                 {/* ---------------text area----------------- */}
