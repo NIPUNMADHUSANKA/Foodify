@@ -41,7 +41,7 @@ const popperSx = {
 };
 
 
-function Charts() {
+function Charts(props) {
 
     var startDate1 = new Date();
     startDate1.setMonth(startDate1.getMonth() - 3);
@@ -50,8 +50,20 @@ function Charts() {
     var endDate1 = new Date();
     const[endDate, setEndDate] = React.useState(endDate);
     // console.log(endDate1.getTime()-startDate1.getTime());
-    console.log(startDate)
-    console.log(endDate1)
+    // console.log(startDate)
+    // console.log(endDate1)
+    // console.log(props.orders);
+
+    const orders = props.orders;
+    const validOrders = [];
+
+    var datetime,orderDate;
+
+    Object.keys(orders).map((key, index) => (
+        datetime = orders[key].orderDate.split("T"),
+        orderDate = new Date(datetime[0]),
+        ((orderDate > startDate1) && (orderDate < endDate1))? validOrders.push(orders[key]):false
+    ))
 
 
     //------------------------------------------------------------handeling tabs    
@@ -68,13 +80,13 @@ function Charts() {
             newValue = startDate;
         }
         setStartDate(newValue);
-        console.log("startDate"+ startDate)
+        // console.log("startDate"+ startDate)
     };
     
     const handleChangeEndDate = (newValue) => {
         endDate1 = newValue;
         setEndDate(endDate1);
-        console.log(endDate)
+        // console.log(endDate)
     };
     
     
@@ -171,7 +183,7 @@ function Charts() {
 
             {/* ------------------------------------------------------------graphs changes with tabs */}
             <TabPanel value={value} index={0}>
-                <IncomeChart />
+                <IncomeChart data={validOrders}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <SignupChart />
