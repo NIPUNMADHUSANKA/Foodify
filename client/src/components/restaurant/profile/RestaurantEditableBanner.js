@@ -412,10 +412,10 @@ const RestaurantEditableBanner = () => {
                             {RestaurantName.restaurant_name}
                         </BannerTitle>
 
-                        <BannerTitle2>
+                        {/* <BannerTitle2>
                             Rating: {rating}
 
-                        </BannerTitle2>
+                        </BannerTitle2> */}
                         <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
                             [theme.breakpoints.down('sm')]: {
                                 fontSize: '8px',
