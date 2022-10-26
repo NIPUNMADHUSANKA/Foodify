@@ -148,7 +148,7 @@ const RestaurantCemments = (props) => {
         {/*------------------------------END SET USERTOLE-------------------------------------------------*/}
 
         {(() => {
-          if (ROLE === "User") {
+          if (ROLE === "User" || ROLE ==="premiumUser") {
             return (
             <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId }} sx={{
               margin: '0.5rem',
