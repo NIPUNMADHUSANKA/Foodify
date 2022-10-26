@@ -25,6 +25,7 @@ const RestaurantCemments = (props) => {
 
   const rId = props.rId;
 
+  const restaurantName = props.name;
   // console.log(data);
   const currentUser = AuthService.getCurrentUser();
 
@@ -150,7 +151,7 @@ const RestaurantCemments = (props) => {
         {(() => {
           if (ROLE === "User" || ROLE ==="premiumUser") {
             return (
-            <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId }} sx={{
+            <Button component={Link} to={"/Restaurant/RestaurantRating"} state={{ rid: rId , resName: restaurantName}} sx={{
               margin: '0.5rem',
               marginBottom: 0,
               marginTop: 4,
