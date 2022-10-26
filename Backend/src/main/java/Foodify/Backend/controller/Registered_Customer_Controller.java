@@ -27,6 +27,7 @@ import Foodify.Backend.exception.fieldErrorResponse;
 import Foodify.Backend.model.Complain;
 import Foodify.Backend.model.FoodCategory;
 import Foodify.Backend.model.FoodMenu;
+import Foodify.Backend.model.Offers;
 import Foodify.Backend.model.Order;
 import Foodify.Backend.model.Registered_Customer;
 import Foodify.Backend.model.Restaurant;
@@ -180,6 +181,20 @@ public class Registered_Customer_Controller {
 		return null;
 
 	}
+	
+//	@GetMapping("/FoodiFy/User/showOrders")
+//    public List<Order> showOrders() {
+//
+//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//        List<Order> orders = orderRepo.findByuserName1(userName);
+//        return orders;
+//
+//    }
+	
+	
+	
+	
+    
 	
 	
 	
