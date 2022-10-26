@@ -211,19 +211,6 @@ function createData(resId,name ,location) {
 //   )
 // }
 
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2392','Rachel Green','Colombo'),  
-  createData('B2393','Ross Geller', 'Kegalle'),  
-  createData('B2394','Monica Geller','Colombo'),  
-  createData('B2395','Chandler Bing', 'Kegalle'),  
-  createData('B2396','Joey Tribbiyani','Colombo'),  
-  createData('B2397','Pheobe Buffay', 'Kegalle'),  
-  createData('B2398','Rachel\'s Kitchen','Colombo'),  
-  createData('B2399','Green Hut', 'Kegalle'),  
-  createData('B2400','Rachel\'s Kitchen','Colombo'),  
-  createData('B2401','Green Hut', 'Kegalle'),  
-]
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -336,13 +323,28 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(props) {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+  const data = props.data;
+  console.log(data);
+
+  //----------------------------------------------------------Table Row Initialize and Sorting
+  var res;
+  const rows = 
+    // createData('B2342','Rasa Bojun','Colombo'),  
+    Object.keys(data).map((key) => (
+      res = data[key],
+      // console.log(res),
+      createData(res.id,res.restaurantName,res.location)
+    ));
+
+  console.log(rows)
 
 
   //----------------------------------------------------------Empty Rows

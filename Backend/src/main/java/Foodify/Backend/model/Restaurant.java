@@ -39,6 +39,8 @@ public class Restaurant {
 	private Binary bannerImage;
 	private String bImage;
 	private String tempLogo;
+
+	private String status;
 	
 	public String getId() {
 		return id;
@@ -140,6 +142,15 @@ public class Restaurant {
 	public void setTempLogo(String tempLogo) {
 		this.tempLogo = tempLogo;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="

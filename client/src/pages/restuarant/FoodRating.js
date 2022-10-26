@@ -11,8 +11,14 @@ import { Avatar } from '@mui/material';
 import Navbar from './../../components/Navbar';
 import Fade from 'react-reveal/Fade';
 
+import { useLocation } from 'react-router-dom';
 
 const FoodRating = () => {
+
+    const location = useLocation();
+
+    console.log(location);
+
     return (
 
         <div>

@@ -25,6 +25,8 @@ public class Order {
 
     private String resId;
 
+    private String resname;
+
     private List<OrderItem> items;
 
     private String orderDate;
@@ -91,6 +93,14 @@ public class Order {
 
     public void setResId(String resId) {
         this.resId = resId;
+    }
+
+    public String getResName() {
+        return resname;
+    }
+
+    public void setResName(String resname) {
+        this.resname = resname;
     }
 
     public String getId() {
