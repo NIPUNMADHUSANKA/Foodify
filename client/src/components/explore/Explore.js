@@ -25,7 +25,7 @@ function Explore() {
             }}>
         
         <Typography color="#EFEAEA" fontWeight="200" fontSize="55px" fontFamily='Poppins' paddingRight="30px" sx={{[theme.breakpoints.down('sm')]: {fontSize: '35px', paddingLeft:"10px"}}}>
-          Explore
+          Discover
         </Typography>
 
         

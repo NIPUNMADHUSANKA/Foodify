@@ -214,7 +214,8 @@ axios.get("http://localhost:8072/FoodiFy/Premium/getPending", { headers: authHea
 
     Object.keys(X).map((key, index) => {
 
-      rows.push(createData(X[key].id, X[key].resturant, X[key].purches_date, X[key].purches_time, X[key].calaries, X[key].fat, X[key].protein, X[key].carbo, X[key].price))
+      // rows.push(createData(X[key].id, X[key].resturant, X[key].purches_date, X[key].purches_time, X[key].calaries, X[key].fat, X[key].protein, X[key].carbo, X[key].price))
+      rows.push(createData(X[key].id, X[key].resturant, X[key].purches_date.substring(0,10), X[key].purches_time.substring(11,), X[key].calaries, X[key].fat, X[key].protein, X[key].carbo, X[key].price))
 
     })
 

@@ -28,6 +28,8 @@ const Explore = () => {
     // ----------store restaurant values--------
     const [details, setDetails] = React.useState({});
     const [fooddetails, setfoodDetails] = React.useState({});
+    const [nearmerestaurant, setnearresDetails] = React.useState({});
+
 
 
     const [value, setValue] = React.useState(0);
@@ -78,6 +80,24 @@ const Explore = () => {
 
     }, []);
 
+    useEffect((event) => {
+
+        axois.get("http://localhost:8072/FoodiFy/Service/nearmerestaurant")
+            .then(data => {
+                // this part if sucess
+                console.log(data);
+                console.log(currentUser);
+
+                const nearmerestaurant = data.data;
+
+                setnearresDetails({ ...nearmerestaurant});
+            })
+            .catch(error => {
+
+            });
+
+    }, []);
+
 
 
     return (
@@ -113,8 +133,11 @@ const Explore = () => {
                         <Tab value={1} label={
                             <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
                         } />
+                         <Tab value={2} label={
+                            <Typography color="primary" fontWeight="200" fontSize="18px"><Nearme /></Typography>
+                        } />
                     </Tabs>
-                    <Nearme />
+               
                 </ThemeProvider>
             </Box >
             <Box minHeight="50vh">
@@ -128,6 +151,13 @@ const Explore = () => {
 
                     {/* {console.log(details)} */}
                     <RestaurantScroll details={details} />
+
+
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+
+                {/* {console.log(details)} */}
+                <RestaurantScroll details={nearmerestaurant} />
 
 
                 </TabPanel>
