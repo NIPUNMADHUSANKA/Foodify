@@ -44,7 +44,7 @@ public class RestaurantCommentController {
 		Double rating1 = Rescomment.getRating();
 		Double rating2 = restaurant.getRating();
 		if(rating2==null){
-			rating2=0.0;
+			rating2=rating1;
 		}
 		Double rating = (rating1 + rating2)/2;
 
