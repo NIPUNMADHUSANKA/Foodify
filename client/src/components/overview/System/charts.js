@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ThemeProvider, Box, Typography, Tab, Tabs, TextField} from '@mui/material';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -42,7 +42,18 @@ const popperSx = {
 
 
 function Charts() {
-    
+
+    var startDate1 = new Date();
+    startDate1.setMonth(startDate1.getMonth() - 3);
+    const[startDate, setStartDate] = React.useState(startDate1);
+    // startDate.setMonth(startDate.getMonth() - 3);
+    var endDate1 = new Date();
+    const[endDate, setEndDate] = React.useState(endDate);
+    // console.log(endDate1.getTime()-startDate1.getTime());
+    console.log(startDate)
+    console.log(endDate1)
+
+
     //------------------------------------------------------------handeling tabs    
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -50,11 +61,21 @@ function Charts() {
     };
 
     //------------------------------------------------------------handeling calender changing dates
-    const [date, setDate] = React.useState(new Date());
-    const handleChangeDate = (newValue) => {
-        setDate(newValue);
+    const handleChangeStartDate = (newValue) => {
+        startDate1 = newValue;
+        if(endDate1.getTime()-startDate1.getTime() < 7948800000){
+            alert("Minimum date range must be 3 months");
+            newValue = startDate;
+        }
+        setStartDate(newValue);
+        console.log("startDate"+ startDate)
     };
     
+    const handleChangeEndDate = (newValue) => {
+        endDate1 = newValue;
+        setEndDate(endDate1);
+        console.log(endDate)
+    };
     
     
     
@@ -94,8 +115,8 @@ function Charts() {
                         <LocalizationProvider dateAdapter={AdapterDateFns} sx={{color:"#fff"}}>
                             <DatePicker 
                                 // views={[range]}
-                                value={date}
-                                onChange={handleChangeDate}
+                                value = {startDate}
+                                onChange={handleChangeStartDate}
                                 renderInput = {(params) => <TextField {...params} />}
                                 PopperProps={{
                                     sx: popperSx
@@ -114,8 +135,8 @@ function Charts() {
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker 
                                 // views={[range]}
-                                value={date}
-                                onChange={handleChangeDate}
+                                selected={endDate}
+                                onChange={handleChangeEndDate}
                                 renderInput = {(params) => <TextField {...params} />}
                                 PopperProps={{
                                     sx: popperSx
@@ -150,7 +171,7 @@ function Charts() {
 
             {/* ------------------------------------------------------------graphs changes with tabs */}
             <TabPanel value={value} index={0}>
-                <IncomeChart/>
+                <IncomeChart />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <SignupChart />

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material';
-import SOCIAL_ICONS from '../assets/images/Social media links.png'
+import { Box } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';

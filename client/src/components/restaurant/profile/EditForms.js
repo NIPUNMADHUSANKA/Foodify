@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Button, IconButton, TextField } from '@mui/material';
 import theme, { Colours } from '../../../assets/theme/theme';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from '@emotion/styled';
@@ -14,7 +12,7 @@ import authHeader from "../../../services/auth-header";
 import { useNavigate } from 'react-router-dom';
 
 // ---------------for map---------------------
-import LocationMapForm from '../LocationMapForm';
+// import LocationMapForm from '../LocationMapForm';
 
 // ----------for the transition of the form------------
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -103,11 +101,11 @@ export const BannerForm1 = () => {
     };
 
     //  --------------------for preview the image------------------
-    const [imagePreview, setImagePreview] = useState(null);
+   // const [imagePreview, setImagePreview] = useState(null);
     // ----------------sending image for the backend--------------
-    const [imageData, setImageData] = useState(null);
+   // const [imageData, setImageData] = useState(null);
 
-    const [imageName, setImageName] = useState("");
+    //const [imageName, setImageName] = useState("");
     // --------keep the image name from the back end--------------------
 
     return (
@@ -444,12 +442,12 @@ export const ContactForm = () => {
                 <DialogTitle>{"Update Contact details"}</DialogTitle>
                 <DialogContent>
 
-                    <LocationMapForm
+                    {/* <LocationMapForm
                         
                         center={{ lat:6.92 , lng: 79.86 }}
                         zoom={15}
                         sx={{height:"10rem"}}
-                    />
+                    /> */}
                     <Box component="form"
                         noValidate
                         autoComplete="off"

@@ -107,7 +107,7 @@ const Restaurant = () => {
 
 
 
-    axois.get(`http://localhost:8072/FoodiFy/Service/getRestaurantCommentC`)
+    axois.get(`http://localhost:8072/FoodiFy/AllUser/getRestaurantComment/${id}`)
       .then(data => {
         // this part if sucess
         // console.log(data.data);
@@ -150,7 +150,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade>
-        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName} />
+        <RestaurantBanner cover={Data.bImage} logo={Data.tempLogo} name={Data.restaurantName} rating={Data.rating} />
       </Fade>
 
       <Fade left>

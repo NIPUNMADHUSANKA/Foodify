@@ -189,7 +189,7 @@ function block(userId){
 //----------------------------------------------------------Table Row Define
 function createData(userId,name ,type, location, telephone, email) {
   const blockButton = <Button variant="outlined" color="error" onClick={block(userId)}>Block</Button>
-  console.log("Came Here")
+  // console.log("Came Here")
   return { 
     userId, 
     name,
@@ -232,11 +232,11 @@ function stableSort(array, comparator) {
 
 //----------------------------------------------------------Column Define 
 const columns = [
-  { 
-    id: 'userId', 
-    label: 'User-Id',
-    numeric: false, 
-    minWidth: 180},
+  // { 
+  //   id: 'userId', 
+  //   label: 'User-Id',
+  //   numeric: false, 
+  //   minWidth: 180},
   { 
     id: 'name', 
     label: 'Name',
@@ -331,7 +331,7 @@ function TableActions(normalUsers) {
   const [orderBy, setOrderBy] = React.useState('calories');
 
   const users= normalUsers.users;
-  console.log(users)
+  // console.log(users)
 
   //----------------------------------------------------------Table Row Initialize and Sorting
   var user;
@@ -409,14 +409,14 @@ function TableActions(normalUsers) {
                     tabIndex={-1}
                     key={row.userId}
                   >
-                    <TableCell
+                    {/* <TableCell
                       component="th"
                       id={labelId}
                       scope="row" 
                       
                     >
                       {row.userId}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell >{row.name}</TableCell>
                     <TableCell >{row.type}</TableCell>
                     <TableCell >{row.location}</TableCell>

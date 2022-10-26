@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Grid, Container, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 
 import ComplainsNew from './Complain-new';
 import ComplainsOld from './Complain-old';

@@ -15,7 +15,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    private String Id;
+    private String id;
 
     private Date datetime;
     private ArrayList details;
@@ -25,13 +25,35 @@ public class Order {
 
     private String resId;
 
+    private String resname;
+
     private List<OrderItem> items;
 
-    private LocalDate orderDate;
+    private String orderDate;
 
-    private LocalDateTime orderTime;
+    private String orderTime;
 
     private String userName1;
+
+    private String paymentId;
+
+    private String preparedState;
+
+    public String getPreparedState() {
+        return preparedState;
+    }
+
+    public void setPreparedState(String preparedState) {
+        this.preparedState = preparedState;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
 
     public List<OrderItem> getItems() {
         return items;
@@ -41,19 +63,19 @@ public class Order {
         this.items = items;
     }
 
-    public LocalDate getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDateTime getOrderTime() {
+    public String getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(LocalDateTime orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -73,9 +95,21 @@ public class Order {
         this.resId = resId;
     }
 
-    public String getId() { return Id.toString(); }
+    public String getResName() {
+        return resname;
+    }
 
-    public void setId(String id) { Id = id; }
+    public void setResName(String resname) {
+        this.resname = resname;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Date getDatetime() { return datetime; }
 
