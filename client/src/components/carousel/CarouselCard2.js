@@ -8,6 +8,7 @@ const CarouselCard2 = (props) => {
     const itemdata = props.item;
     const Rid = props.Rid;
 
+    console.log(itemdata)
     const IDs = {
         "id": itemdata.id,
         "Rid":Rid

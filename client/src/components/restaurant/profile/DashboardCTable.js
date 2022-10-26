@@ -147,7 +147,7 @@ var orderId1 = [];
 
 // const [status, setstatus] = React.useState(false);
 
-function createData(orderId, user, type, amount, date, time, restaurant) {
+function createData(orderId, user, type, amount, date1, time, restaurant) {
 
   const view = <Button component={Link} to='/restaurantorder' variant="contained" color="success" size="small">View</Button>
   const done = <Button variant="contained" color="success" size="small">Completed</Button>
@@ -156,7 +156,7 @@ function createData(orderId, user, type, amount, date, time, restaurant) {
   const cancel = <Button variant="contained" color="error" size="small">Cancel</Button>
 
   const time1 = Date.parse(time);
-  let date1 = new Date(time);
+  // let date1 = new Date(time);
 
   let T1 = new Date(time).getHours() + 5;
   let T2 = new Date(time).getMinutes() + 30;

@@ -199,6 +199,18 @@ public class Order_Service implements Order_Serv{
 		intakePending.setPurches_date(order.getOrderDate());
 		intakePending.setPurches_time(order.getOrderTime());
 
+//		----------------saving intake pending----------------------------
+		intakePendingRepository.save(intakePending);
+
+
+//			--------------calling relevant intake pending--------------
+		IntakePending intakePending1 =
+				intakePendingRepository.getIntakePendingByUserNameAndPurches_dateAndPurches_time(
+						userName,order.getOrderDate(),order.getOrderTime()
+				);
+
+		System.out.println(intakePending1.getId()+"order service 1");
+
 //		-----------------------------setting up intake pending item ------------------------
 		for(OrderItem item1 : items){
 
@@ -217,6 +229,8 @@ public class Order_Service implements Order_Serv{
 			intakePendingItem.setQuantity((double) (item1.getQuantity()));
 			intakePendingItem.setPrice((double) (item1.getPrice()));
 			intakePendingItem.setItem(foodItem1.getName());
+
+			intakePendingItem.setPending(intakePending1.getId());
 
 //			----------save intake pending item----------
 			intakeItemPendingRepository.save(intakePendingItem);

@@ -12,7 +12,7 @@ public interface IntakePendingRepository extends MongoRepository<IntakePending,S
 
     List<IntakePending> findAllByuserName(String userName);
 
-    @Query("{$and :[{userName: ?0},{purches_date: ?1},{purches_time: ?3}] }")
+    @Query("{$and :[{'userName': ?0},{'purches_date': ?1},{'purches_time': ?2}] }")
     IntakePending getIntakePendingByUserNameAndPurches_dateAndPurches_time(String userName, String purches_date,String purches_time);
 
    
