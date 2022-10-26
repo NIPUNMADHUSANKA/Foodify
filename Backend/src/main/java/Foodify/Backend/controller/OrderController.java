@@ -110,9 +110,6 @@ public ResponseEntity<?> getOrderFood(@RequestParam("date1") String date1,
     order.setOrderTime(time1);
     order.setOrderDate(date1);
 
-    try {
-
-
         try {
 
             return new ResponseEntity<>(order_service.setOrder(order, userName), HttpStatus.OK);
