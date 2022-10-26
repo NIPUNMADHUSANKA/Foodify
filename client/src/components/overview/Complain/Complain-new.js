@@ -165,34 +165,6 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-//----------------------------------------------------------Table Row Define
-function createData(complaintId,title,user ,Restaurant,image,description) {
-  // const viewButton = <Button variant="outlined" color="success" onClick={Popup}>View</Button> 
-  return { 
-    complaintId, 
-    title,
-    user, 
-    Restaurant,
-    //give the complain popup data too
-    image,
-    description
-  };
-}
-
-
-//----------------------------------------------------------Table Row Initialize and Sorting
-const rows = [
-  createData('B2342','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2343','Quality of the food is not good','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2344','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2345','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2346','Quality of the food is not good','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2347','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2348','Quality of the food is not good','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2349','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2350','Customer Service is really bad','Rachel Green','Restaurant Z',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-  createData('B2351','Customer Service is really bad','Robert Pattinson', 'Restaurant ABC',image1,"Cras mattis consectetur purus sit amet fermentum. Cras justo odio dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros."),  
-]
 
 //----------------------------------------------------------sorting functions - 3
 function descendingComparator(a, b, orderBy) {
@@ -229,12 +201,12 @@ const columns = [
     id: 'complaintId', 
     label: 'Complaint-Id',
     numeric: false, 
-    minWidth: 100},
+    minWidth: 50},
   { 
     id: 'title', 
     label: 'Title',
     numeric: false, 
-    minWidth: 250},
+    minWidth: 200},
   { 
     id: 'user', 
     label: 'User',
@@ -244,13 +216,13 @@ const columns = [
     id: 'Restaurant', 
     label: 'Restaurent',
     numeric: false, 
-    minWidth: 120 },
+    minWidth: 100 },
 
   { 
     id: 'view', 
     label: '',
     numeric: false, 
-    minWidth: 150 }
+    minWidth: 100 }
   
 ];
 
@@ -305,13 +277,16 @@ EnhancedTableHead.propTypes = {
 };
 
 //----------------------------------------------------------Main function
-function TableActions() {
+function TableActions(props) {
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+
+  const data = props.data;
+ 
 
   //----------------------------------------------------------Empty Rows
   const emptyRows =
@@ -332,6 +307,40 @@ function TableActions() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  //----------------------------------------------------------Table Row Define
+function createData(complaintId,title,user ,Restaurant,image,description) {
+  // const viewButton = <Button variant="outlined" color="success" onClick={Popup}>View</Button> 
+  // console.log(complaintId);
+  return { 
+    complaintId, 
+    title,
+    user, 
+    Restaurant,
+    //give the complain popup data too
+    image,
+    description
+  };
+}
+
+var id,description,title,user,restaurant;
+var image = [];
+
+//----------------------------------------------------------Table Row Initialize and Sorting
+const rows = [  
+  Object.keys(data).map((key,index) => (
+    id = data[key].id.substring(0, 6),
+    description = data[key].complainDescription,
+    title = data[key].complainTitle,
+    user = data[key].userName,
+    restaurant = data[key].restaurantId,
+    image = data[key].image,
+    createData(id,title,user,restaurant,image,description)  
+  ))
+];
+
+const rowsData = rows[0];
+
 
   return (
     <Paper sx={paperSx}>
@@ -365,7 +374,7 @@ function TableActions() {
 
         {/* ------------------------------------------------------------------------TableBody with sorting*/}
         <TableBody>
-        {stableSort(rows, getComparator(order, orderBy))
+        {stableSort(rowsData, getComparator(order, orderBy))
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((row, index) => {
             const labelId = `enhanced-table-checkbox-${index}`;
@@ -382,6 +391,7 @@ function TableActions() {
                       
                     >
                       {row.complaintId}
+                      {/* {console.log(row)} */}
                     </TableCell>
                     <TableCell >{row.title}</TableCell>
                     <TableCell >{row.user}</TableCell>

@@ -200,7 +200,7 @@ function unblock(user){
     const data = new FormData();
     data.append('userId', user);
     try {
-      console.log(user);
+      // console.log(user);
       const resp = await axios.put(`http://localhost:8072/FoodiFy/Admin/UnblockUser`, data, { headers: authHeader() });
 
     } catch (err) {

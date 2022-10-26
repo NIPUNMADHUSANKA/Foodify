@@ -163,7 +163,7 @@ export default function CustomizedDialogs(props) {
                     </ImageListItem>
                 ))}
             </ImageList>
-          <Typography gutterBottom>
+          <Typography gutterBottom textAlign='center'>
             {props.description}
           </Typography>
         </DialogContent>

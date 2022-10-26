@@ -36,6 +36,8 @@ const Dashboard = () => {
     const [users, setUsers] = React.useState({});
     const [orders, setOrders] = React.useState({});
     const [restaurants, setRestaurants] = React.useState({});
+    const [complaints, setComplaints] = React.useState({});
+    
     useEffect((event) => {
 
         /* -----------------------------------------Users */
@@ -75,13 +77,26 @@ const Dashboard = () => {
                 console.log(error.response.data);
             }
         });
+
+        /*-----------------------------------------Complaints */
+        axios.get("http://localhost:8072/FoodiFy/Admin/Complaints/All",{ headers: authHeader()})
+        .then(data => {
+            const com = data.data;
+            setComplaints({ ...com});
+            // console.log(complaints);
+        })
+        .catch(error => {
+            if (error.response.data) {
+                console.log(error.response.data);
+            }
+        });
     
     }, []);
 
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(4);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
@@ -111,7 +126,7 @@ const Dashboard = () => {
             </Tabs>
     
     );
-    
+    // console.log(complaints);
 
     return (
         
@@ -177,7 +192,7 @@ const Dashboard = () => {
                 {drawer}
                 </Drawer>
                 </ThemeProvider>
-
+                
                 <TabPanel value={value} index={0}>
                     <SystemMain orders={orders}/>
                 </TabPanel>
@@ -191,7 +206,7 @@ const Dashboard = () => {
                     <Transactions orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
-                    <Complains />
+                    <Complains complaints={complaints}/>
                 </TabPanel>
                     
             </Box>

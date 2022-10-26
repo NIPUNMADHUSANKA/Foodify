@@ -91,11 +91,11 @@ public class ComplainController {
 		return complains;
 	}
 
-//	@GetMapping("/FoodiFy/Admin/complaints")
-//	public List<Complain> complainhistory() {
-//		List<Complain> complains = complainRepository.findAll();
-//
-//		return complains;
-//	}
+	@GetMapping("/FoodiFy/Admin/Complaints/All")
+	public List<Complain> getAllComplaints() {
+		List<Complain> complains = complainRepository.findAll();
+//		System.out.println(complains.size());
+		return complains;
+	}
 
 }
