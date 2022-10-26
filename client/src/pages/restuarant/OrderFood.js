@@ -102,6 +102,26 @@ const OrderFood = () => {
     // var foodId =location.state.id.id;
     console.log(location.state);
 
+    var itemId = null;
+    
+    {(() => {
+        if (location.state.id.id) {
+          return (
+            itemId = location.state.id.id
+          );
+        }
+      }
+      )()}
+      
+      {(() => {
+        if (location.state.id) {
+          return (
+            itemId = location.state.id
+          );
+        }
+      }
+      )()}
+
     if (details1.image) {
         image = details1.image.data;
     }

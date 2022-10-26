@@ -79,6 +79,11 @@ export default function OrderwithS(props) {
     // --------calling items for cart---------------
   };
 
+  console.log(order.preparedStatus)
+
+  var start = "START";
+  var finish = "FINISH";
+
   return (
     <Box sx={{ backgroundColor: Colours.transparenceGrey, padding: '3%' }} >
 
@@ -127,7 +132,23 @@ export default function OrderwithS(props) {
 
           },
         }}>
-          START
+          {(() => {
+            if (order.preparedStatus == "Preparing") {
+              return (
+                finish
+              );
+            }
+          }
+          )()}
+
+          {(() => {
+            if (order.preparedStatus == "Queued") {
+              return (
+                start
+              );
+            }
+          }
+          )()}
         </Button>
 
       </Grid>

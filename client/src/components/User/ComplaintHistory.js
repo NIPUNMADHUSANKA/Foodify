@@ -69,10 +69,11 @@ function ComplaintHistory() {
              
               <ListItem key={complainhis[keyName].id}>
                 <ListItemText sx={{ color: Colours.green,height:"5%" }}
-                  primary={complainhis[keyName].complainTitle} 
-                  secondary={ 
-                    complainhis[keyName].complainStatus}
+                  primary={complainhis[keyName].complainTitle + " "+"-"+ " " + complainhis[keyName].restaurantId}
                 />
+                {/* <ListItemText sx={{ color: Colours.formWhite,height:"5%" }}
+                  primary={complainhis[keyName].restaurantId} 
+                /> */}
               </ListItem>
             ))}
           </List>
