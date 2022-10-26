@@ -31,8 +31,6 @@ import axios from 'axios';
 import authHeader from "../../../services/auth-header";
 
 
-
-
 const tableSx = {
   width: '100%',
   overflow: 'hidden',
@@ -149,7 +147,7 @@ var orderId1 = [];
 
 // const [status, setstatus] = React.useState(false);
 
-function createData(orderId, user, type, amount, date1, time, restaurant) {
+function createData(orderId, user, type, amount, date, time, restaurant) {
 
   const view = <Button component={Link} to='/restaurantorder' variant="contained" color="success" size="small">View</Button>
   const done = <Button variant="contained" color="success" size="small">Completed</Button>
@@ -158,31 +156,11 @@ function createData(orderId, user, type, amount, date1, time, restaurant) {
   const cancel = <Button variant="contained" color="error" size="small">Cancel</Button>
 
   const time1 = Date.parse(time);
-  // let date1 = new Date(date);
+  let date1 = new Date(time);
 
-  let T1 = new Date(time).getHours();
-  let T2 = new Date(time).getMinutes();
+  let T1 = new Date(time).getHours() + 5;
+  let T2 = new Date(time).getMinutes() + 30;
   let T3;
-
-  // if (T2 > 60) {
-  //   T1 = T1 + 1;
-  //   T2 = T2 - 60;
-  //   T3 = T2;
-  //   if (T2 < 10) {
-  //     T3 = "0" + T2
-  //   }
-  // }
-  // if (T2 > 10 && T2 < 60) {
-  //   T3 = T2
-  // }
-  // if (T2 > 120) {
-  //   T1 = T1 + 2;
-  //   T2 = T2 - 120;
-  //   T3 = T2;
-  //   if (T2 < 10) {
-  //     T3 = "0" + T2
-  //   }
-  // }
 
   var date2 = date1
   var date3 = date2.split("T");
@@ -191,10 +169,6 @@ function createData(orderId, user, type, amount, date1, time, restaurant) {
   var time2 = time
   var time3 = time2.split("T");
   var OTime = time3[1];
-
-  // let setTime = [T1, T2].join(':');
-
-  // let OTime = setTime.toString();
 
   orderId1.push(orderId);
   // var OT = date.getHours();
@@ -242,36 +216,38 @@ function createData(orderId, user, type, amount, date1, time, restaurant) {
 
 }
 
-let completeStatus = (oID) => {
+let completeStatus = () => {
   // -----------------------------------to getting food item details------------------------------------------
 
   console.log("Order completeted")
 
-  const getOfferDetails = async () => {
+  // const getOfferDetails = async () => {
 
-    const ItemData = new FormData();
-    ItemData.append('orderId', oID);
+  //   const ItemData = new FormData();
+  //   ItemData.append('itemId', itemId);
+  //   ItemData.append('orderId', oID);
 
-    try {
-      const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderStatus`, ItemData, { headers: authHeader() });
+  //   try {
+  //     const resp = await axios.put(`http://localhost:8072/FoodiFy/Restaurant/updateOrderItem`, ItemData, { headers: authHeader() });
 
-      TableActions().callData();
-      // navigate("/Restaurantprofile")
-      // const details = resp.data;
+  //     handleClickOpen();
+  //     navigate("/Restaurantprofile")
+  //     // const details = resp.data;
 
-      // setDetails1({ ...details });
+  //     // setDetails1({ ...details });
 
-      // console.log(details);
+  //     // console.log(details);
 
-      // setItems([...items1]);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
+  //     // setItems([...items1]);
+  //   } catch (err) {
+  //     // Handle Error Here
+  //     console.error(err);
+  //   }
+  // };
 
-  getOfferDetails();
+  // getOfferDetails();
 
+  // --------calling items for cart---------------
 };
 function Row(props) {
   console.log(props);
@@ -281,8 +257,9 @@ function Row(props) {
   const orderId1 = row.orderId;
   return (
     <React.Fragment>
+
       {(() => {
-        if (row.type != "Completed") {
+        if (row.type == "Completed") {
           return (
             <React.Fragment>
               <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -303,8 +280,6 @@ function Row(props) {
                 <TableCell >{row.amount}</TableCell>
                 <TableCell >{row.date}</TableCell>
                 <TableCell >{row.OTime}</TableCell>
-                <TableCell ><Button variant="contained" color="success" size="small" onClick={() => completeStatus(row.orderId)}>Completed</Button></TableCell>
-                <TableCell >{row.cancel}</TableCell>
                 {/* ----------------end of outer table row------------- */}
               </TableRow>
               <TableRow>
@@ -325,8 +300,6 @@ function Row(props) {
                             <TableCell>Quantity</TableCell>
                             <TableCell align="center">Price</TableCell>
                             <TableCell align="center">Currunt Status</TableCell>
-                            <TableCell ></TableCell>
-                            {/* <TableCell ></TableCell> */}
                           </TableRow>
                         </TableHead>
                         {/* ------------------------end of inner table table head---------------------- */}
@@ -340,11 +313,7 @@ function Row(props) {
                               </TableCell>
                               <TableCell align="center">{detailsRow.quantity}</TableCell>
                               <TableCell align="center">{detailsRow.price}</TableCell>
-                              <TableCell>{detailsRow.preparedStatus}</TableCell>
-                              <TableCell>
-                                <Button component={Link} to={"/restaurantorder"} state={{ detailsRow, orderId1 }} variant="contained" color="success" size="small">View</Button>
-                              </TableCell>
-                              {/* <TableCell>{detailsRow.statusButton}</TableCell> */}
+                              <TableCell align="center">{detailsRow.preparedStatus}</TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
@@ -360,6 +329,7 @@ function Row(props) {
         }
       }
       )()}
+
     </React.Fragment>
   );
 }
@@ -423,8 +393,6 @@ function TableActions() {
     { id: 'amount', label: 'Amount', minWidth: 100 },
     { id: 'date', label: 'Date', minWidth: 100 },
     { id: 'time', label: 'Time', minWidth: 100 },
-    { id: 'done', label: '', minWidth: 100 },
-    { id: 'cancel', label: '', minWidth: 100 },
   ];
 
   //----------------------------------------------------------Empty Rows
@@ -489,7 +457,7 @@ function TableActions() {
 
   useEffect(() => {
 
-    rows.length = 0;
+    details1.length = 0;
     callData();
 
   }, []);
@@ -521,79 +489,73 @@ function TableActions() {
   console.log(rows);
 
   return (
-    <Box>
-      <Paper sx={tableSx}>
-        <TableContainer sx={{ maxHeight: 800 }}>
-          {/* ----------------------------main outer table------------------------------- */}
-          <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
+    <Paper sx={tableSx}>
+      <TableContainer sx={{ maxHeight: 800 }}>
+        {/* ----------------------------main outer table------------------------------- */}
+        <Table stickyHeader sx={{ minWidth: 500 }} aria-label="custom pagination table">
 
-            {/* --------------------------main table head---------------------------------- */}
-            <TableHead>
+          {/* --------------------------main table head---------------------------------- */}
+          <TableHead>
 
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            {/* ---------------------end of main table head------------------------------- */}
-
-
-            {/* ----------------------------main table body------------------------------- */}
-            <TableBody>
-              {(rowsPerPage > 0
-                ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : rows
-              ).map((row) => (
-                <Row key={row.payment} row={row} />
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
               ))}
+            </TableRow>
+          </TableHead>
+          {/* ---------------------end of main table head------------------------------- */}
 
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-            {/* --------------------------end of main table body------------------------- */}
 
-            {/* ----------------------------main table footer---------------------------- */}
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[10, 15, 25, { label: 'All', value: -1 }]}
-                  colSpan={7}
-                  count={rows.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: {
-                      'aria-label': 'rows per page',
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
+          {/* ----------------------------main table body------------------------------- */}
+          <TableBody>
+            {(rowsPerPage > 0
+              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : rows
+            ).map((row) => (
+              <Row key={row.payment} row={row} />
+            ))}
+
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
               </TableRow>
-            </TableFooter>
-            {/* ------------------------end of main table footer----------------------- */}
+            )}
+          </TableBody>
+          {/* --------------------------end of main table body------------------------- */}
 
-          </Table>
-          {/* -----------------------end of main table--------------------------------- */}
-        </TableContainer>
+          {/* ----------------------------main table footer---------------------------- */}
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[10, 15, 25, { label: 'All', value: -1 }]}
+                colSpan={7}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: {
+                    'aria-label': 'rows per page',
+                  },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+          {/* ------------------------end of main table footer----------------------- */}
 
-      </Paper>
-
-
-    </Box>
-
+        </Table>
+        {/* -----------------------end of main table--------------------------------- */}
+      </TableContainer>
+    </Paper>
   );
 }
 

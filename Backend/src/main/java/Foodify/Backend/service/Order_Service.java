@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -34,6 +37,12 @@ public class Order_Service implements Order_Serv{
 
 	@Autowired
 	private ShoppingCart_Repository ShoppingCartRepo;
+
+	@Autowired
+	private IntakePendingRepository intakePendingRepository;
+
+	@Autowired
+	private IntakeItemPending intakeItemPendingRepository;
 
 	@Override
 	public List<Order> findByUser(String UserId){
@@ -153,10 +162,66 @@ public class Order_Service implements Order_Serv{
 		System.out.println(order.getOrderDate());
 		System.out.println(order.getOrderTime());
 
+//		-----------------for item pending------------
+		Double calaries = 0.0;
+		Double fat = 0.0;
+		Double protein = 0.0;
+		Double carbo = 0.0;
+		Double price = 0.0;
+
 //		----------setting up RID----------------
+//		setting-up intake pending---------------
 		for(OrderItem item : items){
+
 			restaurantId = item.getRestaurantId();
 			item.setPreparedStatus("Queued");
+
+//			-------------------setting up values for intake pending------------------
+			FoodItem foodItem1 = foodItem_repository.findByid(item.getFoodId());
+			calaries = calaries + foodItem1.getCalaries();
+			fat = fat + foodItem1.getFat();
+			protein = protein + foodItem1.getProtein();
+			carbo = carbo + foodItem1.getCarbo();
+			price = price + item.getPrice();
+		}
+
+//		--------------------create new intake pending----------------------
+		String rName = restaurantRepository.findByid(restaurantId).getRestaurantName();
+
+		IntakePending intakePending = new IntakePending();
+		intakePending.setCarbo(carbo);
+		intakePending.setProtein(protein);
+		intakePending.setFat(fat);
+		intakePending.setCalaries(calaries);
+		intakePending.setPrice(price);
+		intakePending.setUserName(userName);
+		intakePending.setResturant(rName);
+
+////		-------------converting date & time to string-----------------
+		intakePending.setPurches_date(order.getOrderDate());
+		intakePending.setPurches_time(order.getOrderTime());
+
+//		-----------------------------setting up intake pending item ------------------------
+		for(OrderItem item1 : items){
+
+//			--------------for the intake pending item----------------------
+			IntakePendingItem intakePendingItem = new IntakePendingItem();
+			FoodItem foodItem1 = foodItem_repository.findByid(item1.getFoodId());
+
+//			--------settingup individual values------------------
+//			-------nutrition-------
+			intakePendingItem.setCalaries(foodItem1.getCalaries());
+			intakePendingItem.setProtein(foodItem1.getProtein());
+			intakePendingItem.setFat(foodItem1.getFat());
+			intakePendingItem.setCarbo(foodItem1.getCarbo());
+
+//			----------setting other values-------------
+			intakePendingItem.setQuantity((double) (item1.getQuantity()));
+			intakePendingItem.setPrice((double) (item1.getPrice()));
+			intakePendingItem.setItem(foodItem1.getName());
+
+//			----------save intake pending item----------
+			intakeItemPendingRepository.save(intakePendingItem);
 		}
 
 //		--------setting up order details-----------------
@@ -188,6 +253,7 @@ public class Order_Service implements Order_Serv{
 
 		List<OrderItem> items = new ArrayList<>();
 
+//		updating items in the orders
 //		loop orders
 		for (Order order : orders){
 //			System.out.println(order.getResId()+"second");
@@ -261,5 +327,20 @@ public class Order_Service implements Order_Serv{
 
 		List<Order> orders = order_repository.findByDateRange(startDate,endDate);
 		return orders;
+	@Override
+	public String updateOrderStatus(String orderId) {
+
+		System.out.println("order service");
+		System.out.println(orderId);
+
+		Order orders = order_repository.findByid(orderId);
+
+		System.out.println(orders);
+
+		orders.setPreparedState("Completed");
+		order_repository.save(orders);
+
+		return null;
+
 	}
 }
