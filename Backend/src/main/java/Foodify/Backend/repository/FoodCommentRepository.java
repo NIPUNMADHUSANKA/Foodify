@@ -1,6 +1,5 @@
 package Foodify.Backend.repository;
 
-import Foodify.Backend.model.RestaurantComments;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
