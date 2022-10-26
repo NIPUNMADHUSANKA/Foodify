@@ -201,6 +201,18 @@ public class Order_Service implements Order_Serv{
 		intakePending.setPurches_date(order.getOrderDate());
 		intakePending.setPurches_time(order.getOrderTime());
 
+		intakePendingRepository.save(intakePending);
+
+		System.out.println("Intake pending set");
+
+		IntakePending intakePending1 =
+				intakePendingRepository.getIntakePendingByUserNameAndPurches_dateAndPurches_time(
+						userName,order.getOrderDate(),order.getOrderTime()
+				);
+
+//		IntakePending intakePending1 = intakePendingRepository.getIntakePendingByUserNameAndPurches_dateAndPurches_time(userName,order.getOrderDate(),order.getOrderTime());
+
+
 //		-----------------------------setting up intake pending item ------------------------
 		for(OrderItem item1 : items){
 
@@ -220,8 +232,13 @@ public class Order_Service implements Order_Serv{
 			intakePendingItem.setPrice((double) (item1.getPrice()));
 			intakePendingItem.setItem(foodItem1.getName());
 
+			System.out.println(intakePending1.getId());
+			intakePendingItem.setPending(intakePending1.getId());
+
+			System.out.println(intakePending1.getId());
 //			----------save intake pending item----------
 			intakeItemPendingRepository.save(intakePendingItem);
+			System.out.println("save correctly intake items");
 		}
 
 //		--------setting up order details-----------------
@@ -236,6 +253,8 @@ public class Order_Service implements Order_Serv{
 		shoppingCart.setItems(items);
 		shoppingCart.setPrice(0);
 		ShoppingCartRepo.save(shoppingCart);
+
+		System.out.println("save correctly");
 
 //		offers.setStartDate(LocalDate.parse(Bdate));
 //		offers.setEndDate(LocalDate.parse(Edate));
