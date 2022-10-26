@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import theme, { Colours } from '../../assets/theme/theme';
 import axios from 'axios';
 import authHeader from "../../services/auth-header";
@@ -60,7 +60,7 @@ const comments1 = [
     }
 ]
 
-
+var itemId = "null";
 
 const OrderFood = () => {
 
@@ -136,16 +136,42 @@ const OrderFood = () => {
     // ----------------------to save date------------
     var EndDate = null;
 
+    
+    console.log(location.state.id.id);
+
+    
+
+    {
+        (() => {
+            if (location.state.id) {
+                console.log(location.state.id);
+                return (itemId = toString(location.state.id));
+            }
+        }
+        )()
+    }
+    
+    {
+        (() => {
+            if (location.state.id.id) {
+                return (itemId = location.state.id.id);
+            }
+        }
+        )()
+    }
+
     // ------------------------calling category values---------------------------------------------------
     useEffect(() => {
 
         // --------calling backdrop-------------
         handleToggle()
 
+        console.log(itemId+" saved id")
         // -----------------------------------to getting food item details------------------------------------------
         const getOfferDetails = async () => {
             const ItemData = new FormData();
-            ItemData.append('foodId', location.state.id.id);
+
+            ItemData.append('foodId', itemId)
             ItemData.append('restId', Rid);
 
             try {
@@ -205,6 +231,29 @@ const OrderFood = () => {
     //   ------------------End of the side drawer--------------------------------------
 
     // console.log(total);
+
+    const [Data3, setData3] = useState([]);
+
+    useEffect((event) => {
+
+        axios.get(`http://localhost:8072/FoodiFy/AllUser/getFoodComment/${location.state.id.id}`)
+            .then(data => {
+                // this part if sucess
+                console.log(data.data);
+                // setRestId(data.data.id)
+                setData3(data.data)
+            })
+            .catch(error => {
+
+            });
+
+    }, []);
+
+    const comments1 = {
+        "name": Data3.userName,
+        "detail1": Data3.commentDescription
+        ,
+    }
 
     return (
 
