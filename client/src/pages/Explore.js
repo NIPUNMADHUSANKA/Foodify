@@ -28,6 +28,7 @@ const Explore = () => {
     // ----------store restaurant values--------
     const [details, setDetails] = React.useState({});
     const [fooddetails, setfoodDetails] = React.useState({});
+    const [neardetails, setnearDetails] = React.useState({});
 
 
     const [value, setValue] = React.useState(0);
@@ -79,6 +80,26 @@ const Explore = () => {
     }, []);
 
 
+    useEffect((event) => {
+
+        axois.get("http://localhost:8072/FoodiFy/Service/restaurantlocation")
+            .then(data => {
+                // this part if sucess
+                console.log(data);
+             
+
+                const neardetails = data.data;
+
+                setnearDetails({ ...neardetails});
+            })
+            .catch(error => {
+
+            });
+
+    }, []);    
+    console.log(neardetails);
+
+
 
     return (
         <Box className='bg' sx={{ display: "flex", flexDirection: 'column', margin: 0 }}>
@@ -113,8 +134,11 @@ const Explore = () => {
                         <Tab value={1} label={
                             <Typography color="primary" fontWeight="200" fontSize="18px">Restaurant</Typography>
                         } />
+                         <Tab value={2} label={
+                            <Typography  fontWeight="200" fontSize="18px"><Nearme /></Typography>
+                        } />
                     </Tabs>
-                    <Nearme />
+                    
                 </ThemeProvider>
             </Box >
             <Box minHeight="50vh">
@@ -131,6 +155,13 @@ const Explore = () => {
 
 
                 </TabPanel>
+                <TabPanel value={value} index={2}>
+
+
+                <RestaurantScroll details={neardetails} />
+
+
+</TabPanel>
             </Box>
         </Box >
 

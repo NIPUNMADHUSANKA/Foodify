@@ -186,7 +186,7 @@ return(
     backgroundColor:Colours.dark ,
     width:'40%',
     marginTop:'4%',
-    marginBottom:'4%',
+    marginBottom:'5%',
     borderRadius:"33px",
     paddingBottom:"2%",
     paddingTop:"2%"
@@ -375,6 +375,16 @@ return(
           Clear
           </Button>
 
+    </Box>
+
+    <Box mt="8%" marginLeft="45%"  display="flex" flexDirextion="row" >
+    <Button variant="outlined" style={{color:'#95CD41', borderColor: "#FAC213",
+          "&:hover": {
+          backgroundColor: "#15e577",
+          borderColor:"#564345"
+          } }}>
+          Upgrade
+    </Button>
     </Box>
 
 

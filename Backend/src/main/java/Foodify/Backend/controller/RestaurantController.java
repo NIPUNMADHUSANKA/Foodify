@@ -131,7 +131,8 @@ public class RestaurantController {
 			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
 			restaurant.setAddress(restaurants.get(i).getAddress());
 			restaurant.setId(restaurants.get(i).getId());
-
+			restaurant.setLatitude(restaurants.get(i).getLatitude());
+		    restaurant.setLongitude(restaurants.get(i).getLongitude());
 			restaurantsList.add(restaurant);
 
 		}
@@ -650,6 +651,34 @@ public List<FoodItem> showfoods() {
 
 	System.out.println(fooditemsList);
 	return fooditemsList;
+
+}
+
+@GetMapping("/FoodiFy/Service/restaurantlocation")
+public List<Restaurant> restaurantlocation () {
+
+    List<Restaurant> restaurants1 = restaurantrepo.findAll();
+    List<Restaurant> restaurantsList = new ArrayList<Restaurant>();
+
+    // System.out.println(restaurants);
+    //
+    for(int i = 1; i < restaurants1.size(); i++) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants1.get(i).getBannerImage().getData()));
+        restaurant.setRestaurantName(restaurants1.get(i).getRestaurantName());
+        restaurant.setAddress(restaurants1.get(i).getAddress());
+        restaurant.setId(restaurants1.get(i).getId());
+        restaurant.setLatitude(restaurants1.get(i).getLatitude());
+        restaurant.setLongitude(restaurants1.get(i).getLongitude());
+        restaurantsList.add(restaurant);
+        
+
+        
+
+    }
+
+    System.out.println(restaurantsList);
+    return restaurantsList;
 
 }
 

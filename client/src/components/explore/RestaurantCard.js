@@ -27,7 +27,7 @@ function ResCard(data) {
   const image1 = data.data.bImage
 
   // console.log(data.data.restaurantName);
-  // console.log(data.data.bImage);
+  //  console.log(data.data.latitude);
 
   return (
     <ThemeProvider theme={theme}>

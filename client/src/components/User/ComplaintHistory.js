@@ -72,11 +72,12 @@ function ComplaintHistory() {
               console.log(complainhis[keyName]),
               <ListItem key={complainhis[keyName].id}>
                 <ListItemText sx={{ color: Colours.green,height:"5%" }}
-                  primary={complainhis[keyName].complainTitle} 
-                  secondary={ 
-                    complainhis[keyName].complainStatus}
+                  primary={complainhis[keyName].restaurantId+'  -  '+complainhis[keyName].complainTitle} 
+                 
                 />
-              </ListItem>
+           
+              
+          </ListItem>
             ))}
           </List>
 
