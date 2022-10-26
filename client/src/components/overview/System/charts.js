@@ -50,8 +50,8 @@ function Charts() {
     var endDate1 = new Date();
     const[endDate, setEndDate] = React.useState(endDate);
     // console.log(endDate1.getTime()-startDate1.getTime());
-    // console.log(startDate)
-    // console.log(endDate)
+    console.log(startDate)
+    console.log(endDate1)
 
 
     //------------------------------------------------------------handeling tabs    
@@ -61,9 +61,6 @@ function Charts() {
     };
 
     //------------------------------------------------------------handeling calender changing dates
-
-    
-
     const handleChangeStartDate = (newValue) => {
         startDate1 = newValue;
         if(endDate1.getTime()-startDate1.getTime() < 7948800000){
@@ -71,7 +68,7 @@ function Charts() {
             newValue = startDate;
         }
         setStartDate(newValue);
-        console.log("startDate"+startDate)
+        console.log("startDate"+ startDate)
     };
     
     const handleChangeEndDate = (newValue) => {

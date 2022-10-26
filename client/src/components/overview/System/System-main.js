@@ -12,6 +12,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 
 
 function SystemMain(props){
+    console.log(props.orders)
     return(
         <Container padding="0" sx={{boxSizing: 'content-box'}}>
         <Grid container spacing={2}>

@@ -179,7 +179,7 @@ const Dashboard = () => {
                 </ThemeProvider>
 
                 <TabPanel value={value} index={0}>
-                    <SystemMain />
+                    <SystemMain orders={orders}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <UsersMain users={users}/>
