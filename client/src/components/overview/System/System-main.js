@@ -23,7 +23,7 @@ function SystemMain(props){
                 xs={12}
                 
             >
-                <DashboardCard title="Total Income Today" value="Rs.24129" icon={AttachMoneyRounded} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Total Income Today" value="Rs.5129" icon={AttachMoneyRounded} type="up" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -31,7 +31,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Income by Orders" value="Rs.14129" icon={ReceiptIcon} type="down" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Income by Orders" value="Rs.5129" icon={ReceiptIcon} type="down" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -47,7 +47,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Premiums" value="Rs.10000" icon={GroupAddIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Premiums" value="Rs.0" icon={GroupAddIcon} type="up" percentage="12%" since="yesterday"/>
             </Grid>
         </Grid>
         <Grid

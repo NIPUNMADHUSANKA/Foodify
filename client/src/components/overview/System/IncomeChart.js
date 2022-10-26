@@ -45,110 +45,56 @@ const chartSx = {
 
 function IncomeChart(props) {
 
+  console.log(props.data);
+
+  const data = props.data;
+
+  const chData = [];
+  // const [chartData, setchartData] = React.useState(chData);
+
+  Object.keys(data).map(key => {
+    chData.push({Key:key, Value: data[key]})
+  })
+  // setchartData(chData)
  
-  const chData = [
-    { Nutrition: 'Cal.', val: 0},
-    { Nutrition: 'Fat', val: 0 },
-    { Nutrition: 'Prot.', val: 0 },
-    { Nutrition: 'Carbo', val: 0},
-  ];
-
-  console.log(props.data)
-
-  // const [data, setData] = React.useState[props.data];
-
-  // var groupedByYear = _.groupBy(data, function(item) {
-  //   return item.date.substring(0,4);
-  // });
-
-  // const groupByYear = data.groupByToMap(order => {
-  //   return order.order.category;
-  // });
-
-  // console.log(groupByCategory); 
-
   
 
 
   //------------------------------------------------------------handeling calender changing dates
-  const [date, setDate] = React.useState(new Date());
-  const [chartData, setchartData] = React.useState(chData);
+  // const [date, setDate] = React.useState(new Date());
 
-  useEffect(() => {
-
-    axios.get("http://localhost:8072/FoodiFy/Premium/getIntakeChart", { headers: authHeader() })
-      .then(data => {
-        // this part if sucess
-
-        const details = data.data;
-        
-        const chData = [
-          { Nutrition: 'Cal.', val: details.calaries },
-          { Nutrition: 'Fat', val: details.fat },
-          { Nutrition: 'Prot.', val: details.protein },
-          { Nutrition: 'Carbo', val: details.carbo },
-        ];
-
-        setchartData(chData);
-
-
-      })
-      .catch(error => {
-        console.log(error);
-
-      });
-    }, []);
-
-
-  const handleChangeDate = (newValue) => {
-
-    axios.get("http://localhost:8072/FoodiFy/Premium/searchbydateintake/"+newValue, { headers: authHeader() })
-      .then(data => {
-        // this part if sucess
-
-        const details = data.data;
-
-        const chData = [
-          { Nutrition: 'Cal.', val: details.calaries },
-          { Nutrition: 'Fat', val: details.fat },
-          { Nutrition: 'Prot.', val: details.protein },
-          { Nutrition: 'Carbo', val: details.carbo },
-        ];
-
-        setchartData(chData);
-
-      })
-      .catch(error => {
-        console.log(error);
-
-      });
+//   // const details = data.data;
   
+//   const chData = [
+//     { Nutrition: 'Cal.', val: details.calaries },
+//     { Nutrition: 'Fat', val: details.fat },
+//     { Nutrition: 'Prot.', val: details.protein },
+//     { Nutrition: 'Carbo', val: details.carbo },
+//   ];
 
-
-  setDate(newValue);
-
-};
-
-return (
+//   setchartData(chData);
+      
+      
+  return (
 
     <Chart
-      data={chartData}
+      data={chData}
       style={{ backgroundColor: "rgba(23, 23, 23, 0.8)", minWidth: "110vh" }}
       sx = {chartSx}
     >
 
-      <ArgumentAxis fill="#fff !import" />
-      <ValueAxis max={10} fill="#fff !import" />
+      <ArgumentAxis fill="#333 !import" />
+      <ValueAxis max={10} fill="#333 !import" />
 
       <BarSeries
-        valueField="val"
-        argumentField="Nutrition"
-        fill={"#fff"}
+        valueField="Value"
+        argumentField="Key"
+        fill={"rgb(149, 205, 65)"}
       />
 
       <Animation />
     </Chart>
-)
+  )
 }
 
 export default IncomeChart

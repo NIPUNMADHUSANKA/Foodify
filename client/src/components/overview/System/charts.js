@@ -14,7 +14,7 @@ import '../../../assets/css/Dashboard-admin.css';
 // import { width } from '@mui/system';
 // import { useParams } from 'react-router-dom';
 
-import IncomeChart from './IncomeChart2';
+import IncomeChart from './IncomeChart';
 import SignupChart from './SignupChart';
 import AccountUpgradeChart from './AccountUpgrade';
 
@@ -44,27 +44,40 @@ const popperSx = {
 function Charts(props) {
 
     var startDate1 = new Date();
-    startDate1.setMonth(startDate1.getMonth() - 3);
+    // startDate1.setMonth(startDate1.getMonth() - 3);
     const[startDate, setStartDate] = React.useState(startDate1);
+    const[valid,setValid] = React.useState();
     // startDate.setMonth(startDate.getMonth() - 3);
-    var endDate1 = new Date();
-    const[endDate, setEndDate] = React.useState(endDate);
+    // var endDate1 = new Date();
+    // const[endDate, setEndDate] = React.useState(endDate);
     // console.log(endDate1.getTime()-startDate1.getTime());
     // console.log(startDate)
     // console.log(endDate1)
     // console.log(props.orders);
 
     const orders = props.orders;
-    const validOrders = [];
+    const validOrders = new Array(31).fill(0);
 
-    var datetime,orderDate;
+    var datetime,orderDate,total;
 
-    Object.keys(orders).map((key, index) => (
-        datetime = orders[key].orderDate.split("T"),
-        orderDate = new Date(datetime[0]),
-        ((orderDate > startDate1) && (orderDate < endDate1))? validOrders.push(orders[key]):false
-    ))
+    Object.keys(orders).map(key => {
+        datetime = orders[key].orderDate.split("T")
+        orderDate = new Date(datetime[0])
+        if(orderDate.getMonth==startDate.getMonth){
+            for(let i=1; i<32; i++){
+                // console.log(orderDate.getDate()).slice(-2);
+                if((orderDate.getDate()) == i){
+                    // console.log(typeof(orders[key].price))
+                    validOrders[i] += orders[key].price
+                }
+            }
+            
+        } 
+    })
 
+    // setValid(validOrders)
+
+    // console.log(validOrders)
 
     //------------------------------------------------------------handeling tabs    
     const [value, setValue] = React.useState(0);
@@ -75,19 +88,23 @@ function Charts(props) {
     //------------------------------------------------------------handeling calender changing dates
     const handleChangeStartDate = (newValue) => {
         startDate1 = newValue;
-        if(endDate1.getTime()-startDate1.getTime() < 7948800000){
-            alert("Minimum date range must be 3 months");
+        // if(endDate1.getTime()-startDate1.getTime() < 7948800000){
+        //     alert("Minimum date range must be 3 months");
+        //     newValue = startDate;
+        // }
+        if(startDate1 > new Date()){
+            alert("Add a valid value");
             newValue = startDate;
         }
         setStartDate(newValue);
         // console.log("startDate"+ startDate)
     };
     
-    const handleChangeEndDate = (newValue) => {
-        endDate1 = newValue;
-        setEndDate(endDate1);
-        // console.log(endDate)
-    };
+    // const handleChangeEndDate = (newValue) => {
+    //     endDate1 = newValue;
+    //     setEndDate(endDate1);
+    //     // console.log(endDate)
+    // };
     
     
     
@@ -136,7 +153,7 @@ function Charts(props) {
                             />
                         </LocalizationProvider>
                 </Box>
-                <Typography color="primary">To</Typography>
+                {/* <Typography color="primary">To</Typography>
                 <Box
                 sx={{
                     width:"20%",
@@ -144,7 +161,7 @@ function Charts(props) {
                     border: '1px solid rgba(255, 255, 255,0.6)',
                     borderRadius: '5px',
                 }}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker 
                                 // views={[range]}
                                 selected={endDate}
@@ -154,8 +171,8 @@ function Charts(props) {
                                     sx: popperSx
                                 }}
                             />
-                        </LocalizationProvider>
-                </Box>
+                        </LocalizationProvider> */}
+                {/* </Box> */} 
             </Box>
             
             {/* ------------------------------------------------------------tabs */}

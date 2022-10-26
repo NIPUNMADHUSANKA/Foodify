@@ -40,7 +40,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Restaurant Count" value="654" icon={StoreIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Restaurant Count" value="4" icon={StoreIcon} type="up" percentage="100%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -48,7 +48,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Restaurant Income" value="45483" icon={PriceCheckIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Restaurant Income" value="8548" icon={PriceCheckIcon} type="up" percentage="12%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -56,7 +56,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Order Count" value="200" icon={ShoppingBasketIcon} type="down" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Order Count" value="20" icon={ShoppingBasketIcon} type="down" percentage="1%" since="yesterday"/>
             </Grid>
             <Grid item
                 lg={3}
@@ -64,7 +64,7 @@ function SystemMain(props){
                 xl={3}
                 xs={12}
             >
-                <DashboardCard title="Complain Count" value="100" icon={LocalPoliceIcon} type="up" percentage="12%" since="yesterday"/>
+                <DashboardCard title="Complain Count" value="7" icon={LocalPoliceIcon} type="up" percentage="50%" since="yesterday"/>
             </Grid>
         </Grid>
         <Grid

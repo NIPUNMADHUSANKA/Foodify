@@ -96,7 +96,7 @@ const Dashboard = () => {
 
     /* ------------------------------------------------------------Drawer functions */
     const drawerWidth = 240;
-    const [value, setValue] = React.useState(4);
+    const [value, setValue] = React.useState(0);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     
     const handleDrawerToggle = () => {
