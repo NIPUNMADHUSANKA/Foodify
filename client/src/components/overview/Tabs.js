@@ -1,11 +1,12 @@
 import React from 'react';
-import {ThemeProvider, Typography, Tab, Tabs} from '@mui/material';
+import {ThemeProvider, Box, Typography, Tab, Tabs} from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from '@mui/material/IconButton';
 
-import theme from '../../assets/theme/theme'; //to use theme provider,need to import this
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
+import zIndex from '@mui/material/styles/zIndex';
 
 const drawerWidth = 240;
 

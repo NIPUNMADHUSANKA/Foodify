@@ -158,8 +158,6 @@ function createData(amount, date, time, restaurant, user,type, billItems) {
   ))
 
   var details = billItems;
-  console.log(details);
-
     return {  
     date, 
     time,
@@ -218,9 +216,9 @@ function Row(props) {
                 <TableBody>
                   {row.details.map((detailsRow) => (
                     // console.log(typeof(detailsRow)),
-                    <TableRow key={detailsRow.foodName}>
+                    <TableRow key={detailsRow.name}>
                       <TableCell component="th" scope="row">
-                        {detailsRow.foodName}
+                        {detailsRow.name}
                       </TableCell>
                       <TableCell align="right">{detailsRow.quantity}</TableCell>
                       <TableCell align="right">{detailsRow.price}</TableCell>
@@ -273,17 +271,14 @@ function TableActions(details) {
   const rows = [
     Object.keys(orders).map((key, index) => (
 
-
-      datetime = orders[key].orderTime.split("T"),
-      // date = datetime[0],
+      datetime = orders[key].datetime.split("T"),
+      date = datetime[0],
       time = datetime[1].slice(0,8),
 
-      date = orders[key].orderDate,
-      // time = orders[key].orderTime,
       price = orders[key].price,
       restaurant = orders[key].resId,
-      details = orders[key].items,
-      user = orders[key].userName1,
+      details = orders[key].details,
+      user = orders[key].user,
       type = "Order",
       createData(price, date, time, restaurant, user, type, details)
       ))

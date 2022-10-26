@@ -22,6 +22,7 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import ReplayIcon from "@mui/icons-material/Replay";
 
@@ -110,7 +111,7 @@ class ImageUpload extends React.Component {
   };
 
   handleUploadClick = event => {
-    
+    console.log();
     var file = event.target.files[0];
     const reader = new FileReader();
     var url = reader.readAsDataURL(file);
@@ -120,7 +121,7 @@ class ImageUpload extends React.Component {
         selectedFile: [reader.result]
       });
     }.bind(this);
-    //console.log(url); // Would see a path?
+    console.log(url); // Would see a path?
 
     this.setState({
       mainState: "uploaded",
@@ -177,7 +178,7 @@ class ImageUpload extends React.Component {
   }
 
   handleSearchURL = event => {
-    
+    console.log();
     var file = event.target.files[0];
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
@@ -187,7 +188,7 @@ class ImageUpload extends React.Component {
         selectedFile: [reader.result]
       });
     }.bind(this);
-    //console.log(url); // Would see a path?
+    console.log(url); // Would see a path?
 
     this.setState({
       selectedFile: event.target.files[0],
@@ -197,7 +198,7 @@ class ImageUpload extends React.Component {
 
   handleImageSearch(url) {
     var filename = url.substring(url.lastIndexOf("/") + 1);
-    //console.log(filename);
+    console.log(filename);
     this.setState({
       mainState: "uploaded",
       imageUploaded: true,
@@ -241,7 +242,7 @@ class ImageUpload extends React.Component {
 
   handleAvatarClick(value) {
     var filename = value.url.substring(value.url.lastIndexOf("/") + 1);
-    //console.log(filename);
+    console.log(filename);
     this.setState({
       mainState: "uploaded",
       imageUploaded: true,
@@ -311,7 +312,7 @@ class ImageUpload extends React.Component {
   }
 
   imageResetHandler = event => {
-    //console.log("Click!");
+    console.log("Click!");
     this.setState({
       mainState: "initial",
       selectedFile: null,

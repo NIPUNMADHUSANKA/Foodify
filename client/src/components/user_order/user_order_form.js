@@ -39,69 +39,49 @@ const Userorderform = (props) => {
 
   const Date1 = new Date(datePickerValue);
   const Time1 = new Date(timePickerValue);
-
+  console.log(Date1);
+  console.log(Time1);
 
   const navigate = useNavigate();
 
   // ----------------------------end of time picker---------------------------------------
 
-  // -----------------adding Order--------------------
-  const makeOrder = () => {
+      // -----------------adding Order--------------------
+      const makeOrder = () => {
 
-    // console.log(items);
+        // console.log(items);
 
-    var d = new Date,
-      dformat = [Time1.getFullYear(),
-      Time1.getMonth() + 1,
-      Time1.getDate()].join('-') + 'T' +
-        [Time1.getHours(),
-        Time1.getMinutes(),
-        Time1.getSeconds()].join(':');
+        const setOrder = async () => {
+            try {
 
-    // for the time
-    var d1 = new Date,
-      dDate = [Date1.getFullYear(),
-      Date1.getMonth() + 1,
-      Date1.getDate()].join('-') + 'T' +
-        [Date1.getHours(),
-        Date1.getMinutes(),
-        Date1.getSeconds()].join(':');
+                const orderData = new FormData();
+                orderData.append('date1', Date1);
+                orderData.append('time1', Time1);
 
-    console.log(dformat);
+                const order = {
+                  "orderDate":datePickerValue,
+                  "orderTime":timePickerValue
+                }
 
-    const setOrder = async () => {
-      try {
+                console.log(orderData);
+                // setItemData(itemData);
 
-        const orderData = new FormData();
-        orderData.append('date1', dDate);
-        orderData.append('time1', dformat);
-
-        const order = {
-          "orderDate": Date1,
-          "orderTime": Time1
-        }
-
-        console.log(Date1);
-        console.log(Time1);
-        console.log(orderData);
-        // setItemData(itemData);
-
-        const resp2 = await axios.post("http://localhost:8072/FoodiFy/User/setOrder", orderData, { headers: authHeader() });
-        console.log("success");
-        navigate("/restaurant")
-        // const details2 = resp2.data;
-        // setDetails2({ ...details2 });
+                const resp2 = await axios.post("http://localhost:8072/FoodiFy/User/setOrder", order,{ headers: authHeader() });
+                console.log("success");
+                navigate("/restaurant")
+                // const details2 = resp2.data;
+                // setDetails2({ ...details2 });
 
 
-      } catch (err) {
-        // Handle Error Here
-        console.error(err);
-      }
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+            }
+        };
+
+        setOrder();
+
     };
-
-    setOrder();
-
-  };
 
   return (
 

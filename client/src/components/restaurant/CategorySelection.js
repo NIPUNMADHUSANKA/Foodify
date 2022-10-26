@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -109,12 +109,12 @@ const CategorySelection = (props) => {
     // ----------create state name form values--------
     const [formValues, setFormValues] = React.useState(initialValues);
 
-   // console.log(category)
-    //console.log(checked)
+    console.log(category)
+    console.log(checked)
 
     const list1 = [category,checked]
 
-    //console.log(list1)
+    console.log(list1)
 
        // ------------send data if corrects---------
        React.useEffect((event) => {
@@ -135,7 +135,7 @@ const CategorySelection = (props) => {
                 const details = resp.data;
                 setDetails({ ...details });
 
-              //  console.log(details);
+                console.log(details);
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
@@ -153,7 +153,7 @@ const CategorySelection = (props) => {
             "catId": event.target.value
         }
 
-     //   console.log(items);
+        console.log(items);
         const sendGetRequest2 = async () => {
             try {
                 const resp2 = await axios.post('http://localhost:8072/FoodiFy/Restaurant/getfoodItems1', items, { headers: authHeader() });
@@ -170,7 +170,7 @@ const CategorySelection = (props) => {
 
     };
 
-   // console.log(details2);
+    console.log(details2);
 
     return (
 

@@ -15,7 +15,6 @@ const RestaurantBanner = (props) => {
   const cover = props.cover
   const logo = props.logo
   const name = props.name
-  const rating = props.rating
 
   console.log(name);
   return (
@@ -88,7 +87,7 @@ const RestaurantBanner = (props) => {
               Rating: {rating}
 
             </BannerTitle2>
-            <Rating name="rating" value={rating != null ?rating:0} precision={0.5} size="small" readOnly sx={{
+            <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
               [theme.breakpoints.down('sm')]: {
                 fontSize: '8px',
               },

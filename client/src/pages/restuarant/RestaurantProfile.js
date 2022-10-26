@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 
 // to import necessacry components of the restuarant page
 import RestaurantHome from '../../components/restaurant/profile/RestaurantHome';
@@ -15,9 +15,6 @@ import { Colours } from '../../assets/theme/theme';
 import styled from '@emotion/styled';
 import RestaurantEditableBanner from '../../components/restaurant/profile/RestaurantEditableBanner';
 import RestaurantDashboard from '../../components/restaurant/profile/Dashboard';
-import RestaurantIncome from '../../components/restaurant/profile/Income';
-
-import DashboardCTable from "../../components/restaurant/profile/DashboardCTable";
 
 
 import Navbar from './../../components/Navbar';
@@ -99,23 +96,10 @@ const RestaurantProfile = () => {
                     <RestaurantHome />
                 </RTabPanel>
                 <RTabPanel value={value} index={1} >
-                    <Box>
-                        <RestaurantDashboard />
-
-                        <Box sx={{ top: "10%" }}>
-                            <Typography sx={{
-                                color: '#fff',
-                                fontFamily: "Poppins",
-                                fontSize: "2rem"
-                            }}>
-                                Completed Orders
-                            </Typography>
-                            <DashboardCTable />
-                        </Box>
-                    </Box>
+                    <RestaurantDashboard />
                 </RTabPanel>
                 <RTabPanel value={value} index={2} >
-                    <RestaurantIncome />
+                    volet
                 </RTabPanel>
             </Box>
 

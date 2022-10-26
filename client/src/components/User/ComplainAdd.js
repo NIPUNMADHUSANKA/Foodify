@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box,TextareaAutosize,Button } from '@mui/material';
+import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -16,14 +16,15 @@ function ComplainAdd() {
   const initialValues = {Resturant_Name:"",Complaint_Title:"",Complaint:""};
 
   const [formValues,setFormValues] = React.useState(initialValues);
-  
+  const[isSubmit,setIsSubmit]=React.useState(false);
+
   //sending data to the backend
   const handleSubmit = (e) =>{
     e.preventDefault();
-    //console.log(formValues);
+    console.log(formValues);
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    //console.log(date);
+    console.log(date);
     
     // const Imagedata = new FormData();
     
@@ -36,16 +37,16 @@ function ComplainAdd() {
       // image:imageData
      
     }
-    //console.log(typeof(complain));
-    //console.log(complain);
+    console.log(typeof(complain));
+    console.log(complain);
      imageData.append('restauratId',formValues.Resturant_Name);
      imageData.append('complainTitle',formValues.Complaint_Title);
      imageData.append('complainDescription',formValues.Complaint);
      imageData.append('complainStatus',"pending");
      imageData.append('addedDate',date);
-     //console.log(imageData);
+     console.log(imageData);
 
-    //console.log(authHeader());
+    console.log(authHeader());
     axios.post("http://localhost:8072/FoodiFy/User/addComplains", imageData,{ headers: authHeader() })
             .then(data => {
                 console.log("Entry access sucessfull")

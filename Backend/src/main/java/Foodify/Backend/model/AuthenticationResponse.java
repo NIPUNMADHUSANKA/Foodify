@@ -9,7 +9,7 @@ public class AuthenticationResponse {
 
 	public AuthenticationResponse() {
 
-		
+		// TODO Auto-generated constructor stub
 	}
 	
 	

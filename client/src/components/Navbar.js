@@ -388,28 +388,27 @@ export default function PrimarySearchAppBar() {
 
 
             {/*------------------------------START Only Premium Have these option-------------------------------------------------*/}
-            {/*{(() => {
+            {(() => {
               if (ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Image_Upload' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> IMAGE </Button>);
               }
             }
-          )()}*/}
+            )()}
             {(() => {
               if (ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Intake' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> CHART </Button>);
               }
             }
             )()}
-            {/*------------------------------END Only Premium Have these option-------------------------------------------------*/}
-
-            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {(() => {
-              if (ROLE === "User" || ROLE === "premiumUser") {
-                return (<Button component={Link} to='/PurchaseHistory' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> PURCHASE  </Button>);
+              if (ROLE === "premiumUser") {
+                return (<Button component={Link} to='/userprofile' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> HISTORY </Button>);
               }
             }
             )()}
+            {/*------------------------------END Only Premium Have these option-------------------------------------------------*/}
 
+            {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {(() => {
               if (ROLE === "User" || ROLE === "premiumUser") {
                 return (<Button component={Link} to='/Complaints' sx={{ my: 2, color: 'white', display: 'block', ml: 10 }}> COMPLAIN  </Button>);

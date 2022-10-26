@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
@@ -9,12 +11,15 @@ import ListItemButton from '@mui/material/ListItemButton';
 import { FixedSizeList } from 'react-window';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
-import theme from '../../assets/theme/theme';//to use theme provider,need to import this
+import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 
 import Button from '@mui/material/Button';
 
+//Import image
+import Image from "../../assets/images/closeup-roasted-meat-with-sauce-vegetables-fries-plate-table.jpg";
 
 import Typography from '@mui/material/Typography';
+import { textAlign } from '@mui/system';
 
 import { Link } from 'react-router-dom';
 

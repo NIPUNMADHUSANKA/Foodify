@@ -20,12 +20,12 @@ public class RestaurantComments {
 	private String userName;
 	private String restaurantId;
 	private String commentDescription;
-	private Double rating;
+	private Float rating;
 	private Date addedDate;
 	
 	public RestaurantComments() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 	
 	public String getId() {
@@ -59,11 +59,11 @@ public class RestaurantComments {
 		this.restaurantId = restaurantId;
 	}
 
-	public Double getRating() {
+	public Float getRating() {
 		return rating;
 	}
 
-	public void setRating(Double rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 	

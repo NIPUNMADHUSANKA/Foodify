@@ -1,15 +1,18 @@
 package Foodify.Backend.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
@@ -35,7 +38,7 @@ public class Offers {
 	
 	public Offers() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
 

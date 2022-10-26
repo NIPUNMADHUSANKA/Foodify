@@ -6,11 +6,6 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import authHeader from "../../services/auth-header";
-import axios from "axios";
-import { useLocation } from 'react-router-dom';
-
-
 
 // --------------------------------rating values---------------------------
 const labels = {
@@ -68,8 +63,7 @@ const CommentArea = styled(TextField)({
 // ---------------------------------------------------------------------
 
 export default function MultilineTextFields() {
-    const location = useLocation();
-    // console.log(location.state.rid);
+
     // ----------------for star rating-----------------------------
     const [value, setValue] = React.useState(2);
     const [hover, setHover] = React.useState(-1);
@@ -175,14 +169,11 @@ export default function MultilineTextFields() {
 
                 {/* ---------------text area----------------- */}
                 <CommentArea
-                    id="commentDescription"
-                    name="commentDescription"
+                    name='comment'
                     label="Add Comment"
                     multiline
                     rows={6}
                     placeholder="Comment"
-                    value={formValues.commentDescription}
-                    onChange={handleChange}
                 />
 
                 {/* ---------------star rating area-------------- */}
@@ -211,15 +202,19 @@ export default function MultilineTextFields() {
                         }}
                     >
                         <Rating
+<<<<<<< HEAD
+                            name="rating"
+                            value={value}
+=======
                             id="foodRating"
                             name="foodRating"
                             value={formValues.foodRating}
+>>>>>>> 8886b5f5a7d5b64c93894faeec41c4e2fd2eeb7b
                             precision={0.5}
                             getLabelText={getLabelText}
-                            // onChange={(event, newValue) => {
-                            //     setValue(newValue);
-                            // }}
-                            onChange={handleChange}
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
                             onChangeActive={(event, newHover) => {
                                 setHover(newHover);
                             }}
