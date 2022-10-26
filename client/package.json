@@ -40,7 +40,8 @@
     "react-useanimations": "^2.0.8",
     "react-window": "^1.8.7",
     "source-map-loader": "^4.0.0",
-    "style-loader": "^3.3.1"
+    "style-loader": "^3.3.1",
+    "underscore": "^1.13.6"
   },
   "scripts": {
     "start": "react-scripts start",

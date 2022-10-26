@@ -22,5 +22,6 @@ public interface Registered_Customer_Sev {
 	public void updatePassword(Registered_Customer RegCus, String newPassword);
 
 
-	
+    Object blockUser(String userId);
+	Object unblockUser(String userId);
 }
