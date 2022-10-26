@@ -6,14 +6,12 @@ import RestaurantOffers from '../RestaurantOffers';
 import RestaurantMenu from '../RestaurantMenu';
 import RestaurantEditContact from './RestaurantEditContact';
 import RestaurantComment from '../RestaurantComments';
-import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 import authHeader from "../../../services/auth-header";
 
 import AboutImage from '../../../assets/images/golden-cutlery.jpg';//exporting the image for about section
 import Map from '../../../assets/images/GoogleMapTA.webp';
-import axois from "axios";
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -67,20 +65,13 @@ const comments1 = [
 ]
 
 const RestaurantHome = () => {
-  const location = useLocation();
-  var id = null;
-  // var Rid= location.state.id;
-  if (location.state != null) {
-    id = location.state.id;
-  } else {
-    id = JSON.parse(localStorage.getItem('RestId'));
-  }
+
   const [AboutUs, setAboutUs] = useState(null);
 
   const [RestId, setRestId] = useState(null);
 
   const [ContactDetails, setContactDetails] = useState(null);
-  const [Data2, setData2] = useState([]);
+
   // ---------------for get restaurant data------------------------
   useEffect(() => {
 
@@ -119,27 +110,9 @@ const RestaurantHome = () => {
       }).catch(err => console.log(err));
   }, []);
 
-  useEffect((event) => {
-    axois.get(`http://localhost:8072/FoodiFy/AllUser/getRestaurantComment/${id}`)
-      .then(data => {
-        // this part if sucess
-        // console.log(data.data);
-        // setRestId(data.data.id)
-        setData2(data.data)
-      })
-      .catch(error => {
-
-      });
-
-  }, []);
-
   localStorage.setItem("RestId", JSON.stringify(RestId));
 
-  const comments1 = {
-    "name": Data2.userName,
-    "detail1": Data2.commentDescription
-    ,
-  }
+
   return (
     <Box>
 
@@ -156,7 +129,7 @@ const RestaurantHome = () => {
       </Fade>
 
       <Fade big>
-        <RestaurantComment comments={Data2} />
+        <RestaurantComment comments={comments1} />
       </Fade>
 
       <Fade left>

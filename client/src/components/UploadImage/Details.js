@@ -1,5 +1,6 @@
 import { Box, Grid } from '@material-ui/core'
 import React,{useState} from 'react';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -13,6 +14,7 @@ import LunchDiningIcon from '@mui/icons-material/LunchDining';
 
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
+import theme, { Colours } from '../../assets/theme/theme'; //to use theme provider,need to import this
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };

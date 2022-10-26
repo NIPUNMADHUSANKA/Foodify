@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { Box } from '@mui/material';
+import { Box, Container, Paper, ThemeProvider, Typography } from '@mui/material';
+import theme, { Colours } from '../assets/theme/theme'; //to use theme provider,need to import this
 
 
 import PageTitle from '../components/User/PageTitle';
@@ -45,6 +46,7 @@ function Complaints() {
 
 }, []);
 
+console.log(Datapending)
 
 const [Dataaccepted, setData1] = useState([]);
 
@@ -62,6 +64,7 @@ useEffect((event) => {
 
 }, []);
 
+console.log(Dataaccepted)
 
 
 const [Datarejected, setData2] = useState([]);
@@ -80,6 +83,7 @@ useEffect((event) => {
 
 }, []);
 
+console.log(Datarejected)
 
 const sum = Datapending + Dataaccepted + Datarejected;
 
@@ -95,6 +99,9 @@ const sum = Datapending + Dataaccepted + Datarejected;
     [ "Rejected Complaints",  Datarejected, Reject ]
   
   ];
+
+  
+
    
   return (
 

@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Document(collection="FoodComments")
-public class FoodComments {
+public class FoodComment {
 	
 	@Id
 	private String id;
@@ -21,7 +21,7 @@ public class FoodComments {
 	private String foodId;
 	private String commentDescription;
 	private Date addedDate;
-	private Float foodRating;
+	private Double foodRating;
 
 	public FoodComments() {
 		super();
@@ -58,15 +58,20 @@ public class FoodComments {
 	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
-	public Float getFoodRating() {
+<<<<<<< HEAD:Backend/src/main/java/Foodify/Backend/model/FoodComment.java
+	
+	
+=======
+	public Double getFoodRating() {
 		return foodRating;
 	}
 
-	public void setFoodRating(Float foodRating) {
+	public void setFoodRating(Double foodRating) {
 		this.foodRating = foodRating;
 	}
 
 
+>>>>>>> 8886b5f5a7d5b64c93894faeec41c4e2fd2eeb7b:Backend/src/main/java/Foodify/Backend/model/FoodComments.java
 //	private File image;
 	
 		

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import { Box } from '@mui/material';
+import Footer from './components/Footer';
 
 
 import './assets/css/Main_App.css';
@@ -24,8 +25,8 @@ import IntakeChart from './pages/IntakeChart';
 // import Home from './pages/Explore';
 import AddFoodMenu from './pages/AddFoodMenu';
 
-//import Image_Upload from './pages/Image_Upload';
-//import Nutrition_Summary from './pages/Nutrition_Summary';
+import Image_Upload from './pages/Image_Upload';
+import Nutrition_Summary from './pages/Nutrition_Summary';
 
 import Login from './pages/Login';
 import UserProfile from './pages/UserProfile';
@@ -69,9 +70,9 @@ function App() {
           <Route path="/restaurant" element = {<Restaurant/>} />
           <Route path="/AddFoodMenu" element = {<AddFoodMenu/>} />
           <Route path="/AddFoodMenuItem" element = {<AddFoodMenuItem/>} />
-         {/* <Route path="/Image_Upload" element = {<Image_Upload/>} />
+          <Route path="/Image_Upload" element = {<Image_Upload/>} />
           <Route path="/Nutrition_Summary" element = {<Nutrition_Summary/>} />
-         */}
+          
      
           <Route path="/Complaints" element={<Complaints />} />
           <Route path="/Intake" element={<IntakeChart />} />

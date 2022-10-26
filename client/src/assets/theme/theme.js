@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { Components } from "react";
 
 export const Colours = {
     primary: "#3A3A3A",

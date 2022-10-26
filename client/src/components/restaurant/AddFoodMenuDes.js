@@ -4,8 +4,16 @@ import { Box,TextareaAutosize,Button, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { color } from '@mui/system';
+import theme, { Colours } from '../../assets/theme/theme';//to use theme provider,need to import this
 
+import Avatar from '@mui/material/Avatar';
+
+
+import PAGE1 from '../../assets/icons/page01.png'
+import PAGE2 from '../../assets/icons/page02.png'
 
 
 function AddFoodMenuDes() {

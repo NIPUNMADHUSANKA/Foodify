@@ -1,7 +1,10 @@
 package Foodify.Backend.model;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 
+import java.util.List;
+import java.util.Arrays;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
@@ -36,12 +39,12 @@ public class Restaurant {
 	private LocalDateTime starttime;
 	private LocalDateTime closeHour;
 	private Binary logo;
-	private Binary bannerImage;
+    private Binary bannerImage;
 	private String bImage;
 	private String tempLogo;
+	private float latitude;
+	private float longitude;
 
-	private String status;
-	
 	public String getId() {
 		return id;
 	}
@@ -142,15 +145,18 @@ public class Restaurant {
 	public void setTempLogo(String tempLogo) {
 		this.tempLogo = tempLogo;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
+	public float getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+    public float getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
 	@Override
 	public String toString() {
 		return "Restaurant [id=" + id + ", userId=" + userId + ", userName=" + userName + ", restaurantName="

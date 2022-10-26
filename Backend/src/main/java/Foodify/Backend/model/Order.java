@@ -15,7 +15,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    private String id;
+    private String Id;
 
     private Date datetime;
     private ArrayList details;
@@ -25,35 +25,13 @@ public class Order {
 
     private String resId;
 
-    private String resname;
-
     private List<OrderItem> items;
 
-    private String orderDate;
+    private LocalDate orderDate;
 
-    private String orderTime;
+    private LocalDateTime orderTime;
 
     private String userName1;
-
-    private String paymentId;
-
-    private String preparedState;
-
-    public String getPreparedState() {
-        return preparedState;
-    }
-
-    public void setPreparedState(String preparedState) {
-        this.preparedState = preparedState;
-    }
-
-    public String getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
 
     public List<OrderItem> getItems() {
         return items;
@@ -63,19 +41,19 @@ public class Order {
         this.items = items;
     }
 
-    public String getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
-    public String getOrderTime() {
+    public LocalDateTime getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(String orderTime) {
+    public void setOrderTime(LocalDateTime orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -95,21 +73,9 @@ public class Order {
         this.resId = resId;
     }
 
-    public String getResName() {
-        return resname;
-    }
+    public String getId() { return Id.toString(); }
 
-    public void setResName(String resname) {
-        this.resname = resname;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { Id = id; }
 
     public Date getDatetime() { return datetime; }
 

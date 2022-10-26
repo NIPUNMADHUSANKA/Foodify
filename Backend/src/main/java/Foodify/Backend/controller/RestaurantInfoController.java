@@ -2,6 +2,7 @@ package Foodify.Backend.controller;
 
 import Foodify.Backend.model.Restaurant;
 import Foodify.Backend.repository.RestaurantRepository;
+import Foodify.Backend.service.Restaurantserv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +25,5 @@ public class RestaurantInfoController {
         resRepo.save(restaurantAbout);
         return true;
     }
-
-    @GetMapping("/resturantName/{id}")
-    public String name(@PathVariable(value="id") String pendingid) {
-        
-        return resRepo.findByid(pendingid).getRestaurantName();
-    }
-
 
 }

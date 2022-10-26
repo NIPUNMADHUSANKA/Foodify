@@ -1,7 +1,9 @@
 import React from 'react'
-import { Box, Typography, Button, ThemeProvider } from '@mui/material';
+import { Box, Typography, Button, ThemeProvider, Stack } from '@mui/material';
 
-import theme from './../assets/theme/theme';//to use theme provider,need to import this
+import FOODIFY_BANNER from '../assets/images/foodify-banner.png';
+
+import theme, { Colours } from './../assets/theme/theme';//to use theme provider,need to import this
 
 import Zoom from '@mui/material/Zoom'; //Zoom text
 

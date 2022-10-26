@@ -5,17 +5,11 @@ import Foodify.Backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
-
 
 
 @Service
@@ -35,12 +29,6 @@ public class Order_Service implements Order_Serv{
 
 	@Autowired
 	private ShoppingCart_Repository ShoppingCartRepo;
-
-	@Autowired
-	private IntakePendingRepository intakePendingRepository;
-
-	@Autowired
-	private IntakeItemPending intakeItemPendingRepository;
 
 	@Override
 	public List<Order> findByUser(String UserId){
@@ -99,53 +87,6 @@ public class Order_Service implements Order_Serv{
 		return undetailedOrders;
 	}
 
-	//	------------------------detailed order set------------------------------------
-	public List<Order> detailedOrders(){
-
-//		getting the order list
-		List<Order> orders = order_repository.findAll();
-
-		List<OrderItem> items = new ArrayList<>();
-
-		int amount = 0;
-
-//		loop orders
-		for (Order order : orders){
-
-//			System.out.println(order.getResId()+"second");
-			List<OrderItem> items1 = order.getItems();
-			//get res name
-			String resId = order.getResId();
-			Restaurant restaurant = restaurantRepository.findByid(resId);
-			order.setResId(restaurant.getRestaurantName());
-
-//			looping items
-			for (OrderItem item : items1){
-
-//				setting names of order items
-				String foodId = item.getFoodId();
-//				System.out.println("FoodId :"+ foodId);
-
-//				taking the food item and assigning the name
-				if(foodId != null){
-					FoodItem foodItem1 = foodItem_repository.findByid(foodId);
-					item.setFoodName(foodItem1.getName());
-					item.setPrice(foodItem1.getPrice());
-					item.setDiscount(foodItem1.getDiscount());
-					item.setTotal(Math.round(item.getQuantity()* item.getPrice()- item.getDiscount()));
-					amount += item.getTotal();
-//					item.setFoodName(foodItem1.getName());
-				}
-//
-			}
-
-//			setting updated order items
-			order.setItems(items1);
-			order.setPrice(amount);
-		}
-		return orders;
-	}
-
 //	------------------------setting up order------------------------------------
 	@Override
 	public String setOrder(Order order, String userName) {
@@ -160,17 +101,8 @@ public class Order_Service implements Order_Serv{
 		System.out.println(order.getOrderDate());
 		System.out.println(order.getOrderTime());
 
-//		-----------------for item pending------------
-		Double calaries = 0.0;
-		Double fat = 0.0;
-		Double protein = 0.0;
-		Double carbo = 0.0;
-		Double price = 0.0;
-
 //		----------setting up RID----------------
-//		setting-up intake pending---------------
 		for(OrderItem item : items){
-
 			restaurantId = item.getRestaurantId();
 			item.setPreparedStatus("Queued");
 
@@ -241,7 +173,6 @@ public class Order_Service implements Order_Serv{
 		order.setResId(restaurantId);
 		order.setPrice(shoppingCart.getPrice());
 		order.setUserName1(userName);
-		order.setPreparedState("Queued");
 
 		order_repository.save(order);
 		items.clear();
@@ -251,103 +182,6 @@ public class Order_Service implements Order_Serv{
 
 //		offers.setStartDate(LocalDate.parse(Bdate));
 //		offers.setEndDate(LocalDate.parse(Edate));
-		return null;
-	}
-
-//	----------------------------to call relevant orders of the restaurant--------------------------
-	@Override
-	public List<Order> callOrder(String userName1) {
-
-		Restaurant restaurant = restaurantRepository.findByuserName(userName1);
-//		System.out.println(restaurant.getId());
-//		getting the order list
-		List<Order> orders = order_repository.findByresId(restaurant.getId());
-
-		List<OrderItem> items = new ArrayList<>();
-
-//		updating items in the orders
-//		loop orders
-		for (Order order : orders){
-//			System.out.println(order.getResId()+"second");
-			List<OrderItem> items1 = order.getItems();
-
-//			looping items
-			for (OrderItem item : items1){
-
-//				setting names of order items
-				String foodId = item.getFoodId();
-
-//				taking the food item and assigning the name
-				FoodItem foodItem1 = foodItem_repository.findByid(foodId);
-				item.setFoodName(foodItem1.getName());
-				item.setImage(foodItem1.getImage());
-//				System.out.println(item.getFoodName());
-			}
-
-//			setting updated order items
-			order.setItems(items1);
-		}
-		return orders;
-	}
-
-	@Override
-	public String updateOrderItem(String itemId, String orderId) {
-
-		System.out.println("order service");
-		System.out.println(orderId);
-
-		Order orders = order_repository.findByid(orderId);
-
-		System.out.println(orders);
-		List<OrderItem> items = orders.getItems();
-
-//		for(Order order : orders)
-
-		int count = 0;
-		for(OrderItem item : items){
-			System.out.println(item.getFoodId()+"order service");
-			System.out.println(itemId+"order service");
-
-			if(Objects.equals(item.getFoodId(), itemId)){
-
-				if(Objects.equals(item.getPreparedStatus(), "Queued")){item.setPreparedStatus("Preparing");}
-				else if(Objects.equals(item.getPreparedStatus(), "Preparing")){item.setPreparedStatus("Finished");}
-			}
-
-			if(Objects.equals(item.getPreparedStatus(), "Preparing")){
-
-				System.out.println("order service");
-				orders.setPreparedState("Preparing");
-			}
-			else if(Objects.equals(item.getPreparedStatus(), "Finished")){
-
-				System.out.println("order service");
-				count++;
-				if(count == items.size()){
-					orders.setPreparedState("Finished");
-				}
-
-			}
-		}
-
-		orders.setItems(items);
-		order_repository.save(orders);
-		return null;
-	}
-
-	@Override
-	public String updateOrderStatus(String orderId) {
-
-		System.out.println("order service");
-		System.out.println(orderId);
-
-		Order orders = order_repository.findByid(orderId);
-
-		System.out.println(orders);
-
-		orders.setPreparedState("Completed");
-		order_repository.save(orders);
-
 		return null;
 	}
 }
