@@ -132,13 +132,13 @@ public class RestaurantController {
 			restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
 			restaurant.setAddress(restaurants.get(i).getAddress());
 			restaurant.setId(restaurants.get(i).getId());
-			// restaurant.setRating(restaurants.get(i).getRating());
+			restaurant.setRating(restaurants.get(i).getRating());
 
 			restaurantsList.add(restaurant);
 
 		}
 
-		System.out.println(restaurantsList);
+//		System.out.println(restaurantsList);
 		return restaurantsList;
 
 	}
@@ -642,7 +642,7 @@ public List<FoodItem> showfoods() {
 //		restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
 		fooditem.setbImage(Base64.getEncoder().encodeToString(fooditems.get(i).getImage().getData()));
 		fooditem.setName(fooditems.get(i).getName());
-		fooditem.setPrice(fooditems.get(i).getPrice());
+		fooditem.setPrice(Double.valueOf(Math.round(fooditems.get(i).getPrice())));
 //		restaurant.setId(fooditems.get(i).getId());
 
 		fooditemsList.add(fooditem);
@@ -669,5 +669,10 @@ public ResponseEntity<?>  getRestaurantIncome() {
 
 }
 
+	@GetMapping("/FoodiFy/Admin/Restaurants/All")
+	public List<Restaurant> getRestaurants(){
+		List<Restaurant> allRes = restaurantrepo.findAll();
+		return allRes;
+	}
 
 }

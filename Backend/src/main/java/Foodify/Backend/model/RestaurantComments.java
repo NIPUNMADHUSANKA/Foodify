@@ -20,7 +20,7 @@ public class RestaurantComments {
 	private String userName;
 	private String restaurantId;
 	private String commentDescription;
-	private Float rating;
+	private Double rating;
 	private Date addedDate;
 	
 	public RestaurantComments() {
@@ -59,11 +59,11 @@ public class RestaurantComments {
 		this.restaurantId = restaurantId;
 	}
 
-	public Float getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Float rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 	

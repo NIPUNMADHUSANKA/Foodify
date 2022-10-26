@@ -81,11 +81,18 @@ public class OrderController {
         return orders;
     }
 
-    @GetMapping("/Foodify/Admin/Orders/All")
-    public List<Order> ordersAll() {
-        List<Order> detailed = order_service.getDetailedOrders();
-        // List<Order> detailed = order_repository.findByUser(userId);
-        return detailed;
+    @GetMapping("/FoodiFy/Admin/Orders/All")
+    public ResponseEntity<?> ordersAll(){
+        try {
+
+            ResponseEntity<List<Order>> detailed = new ResponseEntity<>(order_service.detailedOrders(), HttpStatus.OK);
+            return detailed;
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
     }
 
     // ----------------------to make the order--------------------------------
@@ -129,5 +136,29 @@ public class OrderController {
 
         // return null;
     }
+
+    //    ----------------------to make the order--------------------------------
+    @PutMapping("/FoodiFy/Restaurant/updateOrderItem")
+    public ResponseEntity<?> updateOrderItem(@RequestParam("itemId") String itemId,
+                                             @RequestParam("orderId") String orderId) {
+
+//		String foodId = null;
+//		FoodItem food = foodItems.findByid(foodId);
+
+        System.out.println(itemId+"Controller");
+        System.out.println(orderId+"Controller");
+        try {
+            System.out.println("Controller");
+            return new ResponseEntity<>(order_service.updateOrderItem(itemId,orderId), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+
+        }
+
+//		return null;
+    }
+
 
 }

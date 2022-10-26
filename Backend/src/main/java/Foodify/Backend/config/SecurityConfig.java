@@ -87,7 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/FoodiFy/User/**").hasAnyAuthority("User");
 		http.authorizeRequests().antMatchers("/FoodiFy/Restaurant/**").hasAnyAuthority("restaurant");
 		http.authorizeRequests().antMatchers("/FoodiFy/Premium/**").hasAnyAuthority("premiumUser");
-		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("Admin");
+		http.authorizeRequests().antMatchers("/FoodiFy/Admin/**").hasAnyAuthority("admin");
 		http.authorizeRequests().anyRequest().authenticated();
 		
 		http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);

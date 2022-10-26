@@ -131,6 +131,8 @@ const RestaurantEditableBanner = () => {
 
     const [Logo1, setLogo] = useState(null);
 
+    const [rating, setRating] = useState(0);
+
     // ---------------set response data ----------------------------------------------
     //const [image, setImage] = useState(null);
     // console.log(data);
@@ -188,6 +190,9 @@ const RestaurantEditableBanner = () => {
                 // if (data.data.restaurantName == null) {
                 //     setName("Restaurant_Name")
                 // }
+                const rating = data.data.rating;
+                setRating(rating);
+
             }).catch(err => {
                 console.log(err)
 
@@ -415,7 +420,7 @@ const RestaurantEditableBanner = () => {
                             Rating
 
                         </BannerTitle2>
-                        <Rating name="rating" value={4.5} precision={0.5} size="small" readOnly sx={{
+                        <Rating name="rating" value={rating} precision={0.5} size="small" readOnly sx={{
                             [theme.breakpoints.down('sm')]: {
                                 fontSize: '8px',
                             },

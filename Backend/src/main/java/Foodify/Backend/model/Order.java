@@ -15,7 +15,7 @@ import java.util.List;
 public class Order {
 
     @Id
-    private String Id;
+    private String id;
 
     private Date datetime;
     private ArrayList details;
@@ -103,9 +103,13 @@ public class Order {
         this.resname = resname;
     }
 
-    public String getId() { return Id.toString(); }
+    public String getId() {
+        return id;
+    }
 
-    public void setId(String id) { Id = id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Date getDatetime() { return datetime; }
 
