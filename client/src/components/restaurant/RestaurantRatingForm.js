@@ -171,7 +171,7 @@ function RestaurantRatingForm() {
                         padding: '2px',
                     },
                 }}>
-                    Restaurant Name
+                    Restaurant Name: {location.state.resName}
                 </Typography>
 
                 {/* ---------------text area----------------- */}

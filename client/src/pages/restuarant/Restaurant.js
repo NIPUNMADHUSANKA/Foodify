@@ -166,7 +166,7 @@ const Restaurant = () => {
       </Fade>
 
       <Fade big>
-        <RestaurantComment rId={id} comments={Data2} />
+        <RestaurantComment rId={id} comments={Data2} name={Data.restaurantName}/>
       </Fade>
 
       <Fade left>
