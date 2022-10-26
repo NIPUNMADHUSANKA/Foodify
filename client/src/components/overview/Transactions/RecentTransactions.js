@@ -273,12 +273,12 @@ function TableActions(details) {
   const rows = [
     Object.keys(orders).map((key, index) => (
 
-
-      datetime = orders[key].orderTime.split("T"),
-      // date = datetime[0],
+      datetime = orders[key].orderDate.split("T"),
+      console.log(datetime),
+      date = datetime[0],
       time = datetime[1].slice(0,8),
 
-      date = orders[key].orderDate,
+      // date = orders[key].orderDate,
       // time = orders[key].orderTime,
       price = orders[key].price,
       restaurant = orders[key].resId,
@@ -301,7 +301,7 @@ function TableActions(details) {
   const columns = [
     { id: 'details', label: '', maxWidth: 10},
     // { id: 'payment', label: 'Payment-ID', minWidth: 100},
-    { id: 'date', label: 'Date', minWidth: 100 },
+    { id: 'date', label: 'Date', minWidth: 150 },
     { id: 'time', label: 'Time', minWidth: 100},
     { id: 'user', label: 'User', minWidth: 150},
     { id: 'type', label: 'Type', minWidth: 100 },

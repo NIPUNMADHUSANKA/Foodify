@@ -170,11 +170,7 @@ public ResponseEntity<?> getOrderFood(@RequestParam("date1") String date1,
     }
 
 
-//    @GetMapping("/FoodiFy/Admin/OrderRange")
-//    public ResponseEntity<?> getDataOfRange(@RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate){
-//        try {
-//
-//            return new ResponseEntity<>(order_service.getRangedOrders(startDate,endDate), HttpStatus.OK);
+
 
     //    ----------------------to update the order--------------------------------
     @PutMapping("/FoodiFy/Restaurant/updateOrderStatus")

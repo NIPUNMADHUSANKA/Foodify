@@ -323,10 +323,7 @@ public class Order_Service implements Order_Serv{
 		return null;
 	}
 
-//    public List<Order> getRangedOrders(Date startDate, Date endDate) {
-//
-//		List<Order> orders = order_repository.findByDateRange(startDate,endDate);
-//		return orders;
+
 	@Override
 	public String updateOrderStatus(String orderId) {
 
