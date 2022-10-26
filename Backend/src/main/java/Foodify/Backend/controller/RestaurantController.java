@@ -674,5 +674,31 @@ public ResponseEntity<?>  getRestaurantIncome() {
 		List<Restaurant> allRes = restaurantrepo.findAll();
 		return allRes;
 	}
+	
+	   @GetMapping("/FoodiFy/Service/nearmerestaurant")
+	    public List<Restaurant> nearmerestaurant() {
+
+	        List<Restaurant> restaurants = restaurantrepo.findAll();
+	        List<Restaurant> restaurantsList = new ArrayList<Restaurant>();
+
+	        // System.out.println(restaurants);
+	        //
+	        for(int i = 1; i < restaurants.size(); i++) {
+	            Restaurant restaurant = new Restaurant();
+
+	            restaurant.setbImage(Base64.getEncoder().encodeToString(restaurants.get(i).getBannerImage().getData()));
+	            restaurant.setRestaurantName(restaurants.get(i).getRestaurantName());
+	            restaurant.setAddress(restaurants.get(i).getAddress());
+	            restaurant.setId(restaurants.get(i).getId());
+	            restaurant.setRating(restaurants.get(i).getRating());
+
+	            restaurantsList.add(restaurant);
+
+	        }
+
+//	      System.out.println(restaurantsList);
+	        return restaurantsList;
+
+	    }
 
 }
