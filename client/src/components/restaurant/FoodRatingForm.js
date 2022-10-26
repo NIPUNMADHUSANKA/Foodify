@@ -75,7 +75,7 @@ export default function MultilineTextFields() {
     const [hover, setHover] = React.useState(-1);
  // ------------------------------------------------------------
     // -------------initial states for fields---------------------------
-    const initialValues = { commentDescription: "", rating: 2 };
+    const initialValues = { commentDescription: "", foodRating: 2 };
 
     // ----------create state name form values--------
     const [formValues, setFormValues] = React.useState(initialValues);
@@ -95,8 +95,8 @@ export default function MultilineTextFields() {
         // creating comment object
         const foodcomment = {
             commentDescription: formValues.commentDescription,
-            rating: formValues.rating,
-            foodId: location.state.rid
+            foodRating: formValues.foodRating,
+            foodId: location.state.food
         }
 
         console.log(foodcomment);
@@ -212,9 +212,9 @@ export default function MultilineTextFields() {
                         }}
                     >
                         <Rating
-                            id="rating"
-                            name="rating"
-                            value={formValues.rating}
+                            id="foodRating"
+                            name="foodRating"
+                            value={formValues.foodRating}
                             precision={0.5}
                             getLabelText={getLabelText}
                             // onChange={(event, newValue) => {
@@ -239,7 +239,7 @@ export default function MultilineTextFields() {
                 <Box sx={{
                     marginTop: "1rem"
                 }}>
-                    <Button type='submit' variant="contained" sx={{
+                    <Button onClick={handleSubmit} type='submit' variant="contained" sx={{
                         margin: '0.5rem',
                         background: Colours.green, '&:hover': {
                             backgroundColor: Colours.yellow,

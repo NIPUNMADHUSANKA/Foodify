@@ -17,7 +17,7 @@ const RestaurantBanner = (props) => {
   const name = props.name
   const rating = props.rating
 
-  console.log(rating);
+  console.log(name);
   return (
     <ThemeProvider theme={theme}>
 
@@ -85,7 +85,7 @@ const RestaurantBanner = (props) => {
             </BannerTitle>
 
             <BannerTitle2>
-              Rating
+              Rating: {rating}
 
             </BannerTitle2>
             <Rating name="rating" value={rating != null ?rating:0} precision={0.5} size="small" readOnly sx={{

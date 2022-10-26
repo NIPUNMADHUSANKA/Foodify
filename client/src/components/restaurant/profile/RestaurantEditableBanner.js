@@ -417,7 +417,7 @@ const RestaurantEditableBanner = () => {
                         </BannerTitle>
 
                         <BannerTitle2>
-                            Rating
+                            Rating: {rating}
 
                         </BannerTitle2>
                         <Rating name="rating" value={rating} precision={0.5} size="small" readOnly sx={{

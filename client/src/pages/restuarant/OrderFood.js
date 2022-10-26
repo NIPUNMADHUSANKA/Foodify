@@ -13,6 +13,7 @@ import FoodNutrition from '../../components/restaurant/FoodNutrition';
 import FoodComment from '../../components/restaurant/FoodCooment';
 import OrderFoodForm from '../../components/restaurant/OrderFoodForm';
 import StarIcon from '@mui/icons-material/Star';
+import { Rating } from '@mui/material';
 
 // for scroll reveals
 import Fade from 'react-reveal/Fade';
@@ -92,6 +93,10 @@ const OrderFood = () => {
         createData('Protein', details1.protein, ((details1.protein / total) * 100).toFixed(1)),
     ];
 
+    //-------for food rating------
+    const [rating, setRating] = React.useState(0);
+    
+
     // ----------------setting up image--------------------
     var image = null;
     var name = null;
@@ -156,7 +161,9 @@ const OrderFood = () => {
                 setTotal(totalG);
 
                 console.log(respOffer.data);
-
+                const rating = respOffer.data.foodItems.foodRating;
+                setRating(rating);
+                console.log(respOffer.data.foodItems.foodRating);
                 // ---------------closing backdrop---------------------
                 handleClose();
 
@@ -370,10 +377,15 @@ const OrderFood = () => {
                                 justifyContent: "center",
                                 margin: "auto",
                             }}>
-                                <StarIcon fontSize='medium' sx={{
+                                {/* <StarIcon fontSize='medium' sx={{
                                     color: Colours.yellow,
                                     [theme.breakpoints.down('sm')]: {
                                         fontSize: "12px",
+                                    },
+                                }} /> */}
+                                <Rating name="rating" value={rating} precision={0.5} size="small" readOnly sx={{
+                                    [theme.breakpoints.down('sm')]: {
+                                        fontSize: '8px',
                                     },
                                 }} />
                                 <Typography variant='h5' sx={{
@@ -381,7 +393,8 @@ const OrderFood = () => {
                                     [theme.breakpoints.down('sm')]: {
                                         fontSize: "12px",
                                     },
-                                }}>4.2</Typography>
+                                }}>{rating}</Typography>
+                                
                             </Box>
                         </Box>
                     </Box>
