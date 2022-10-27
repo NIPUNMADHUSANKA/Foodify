@@ -235,6 +235,7 @@ public class RestaurantController {
 	@PostMapping("/FoodiFy/Restaurant/offerFoodItems")
 	public ResponseEntity<?> offerFoodItems(@RequestParam("catId") String catId,@RequestParam("offerId") String offerId) {
 
+		System.out.println(catId+" "+"Offer");
 		try {
 
 			return new ResponseEntity<>(service.getOfferFoods(catId,offerId), HttpStatus.OK);

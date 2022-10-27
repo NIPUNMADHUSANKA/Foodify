@@ -499,7 +499,7 @@ export default function PrimarySearchAppBar() {
             {/*------------------------------START Only Registered user and Premium Have this option-------------------------------------------------*/}
             {/* -------------------------shopping cart------------------------- */}
             {(() => {
-              if (ROLE === "User" || ROLE === "premiumUser" || ROLE === "restaurant") {
+              if (ROLE === "User" || ROLE === "premiumUser") {
                 return (
                   <IconButton
                     sx={{ my: 2, color: 'white', display: 'block', ml: 1 }} onClick={toggleDrawer('right', true)}>
